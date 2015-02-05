@@ -15,7 +15,7 @@ Imagine also being able to play/pause movies you are watching from the web using
 ### System integration 
 Allow web applications to integrate with system media players, such as the one on iOS's lock screen. This will allow the software buttons on the lock screen to control the media playback. We also want to enable the ability to seek media.
 
-Further, we want to make sure cover art, as well as other media-related metadata, shows up where appropriate - to provide the riches media control experience possible on any OS.  
+Further, we want to make sure cover art, as well as other media-related metadata, shows up where appropriate - to provide the richest media control experience possible on any OS.  
 
 ### Extensibility
 Our goal is to provide developers with low-level primitives that both help explain the platform, while also allowing developers to build rich multimedia experiences that leverage media-key events. Keeping to our commitment to the [extensible web manifesto](https://extensiblewebmanifesto.org/), we want to allow the media-key events to be routed to wherever you need them in your web application. For instance, to allow you to control a conference presentation with a remote control. At the same time, we want to make sure that whatever solution we come up with is easy to use - by possibly extending existing HTML elements or APIs. 
