@@ -21,4 +21,4 @@ Further, we want to make sure cover art, as well as other media-related metadata
 Our goal is to provide developers with low-level primitives that both help explain the platform, while also allowing developers to build rich multimedia experiences that leverage media-key events. Keeping to our commitment to the [extensible web manifesto](https://extensiblewebmanifesto.org/), we want to allow the media-key events to be routed to wherever you need them in your web application. For instance, to allow you to control a conference presentation with a remote control. At the same time, we want to make sure that whatever solution we come up with is easy to use - by possibly extending existing HTML elements or APIs.
 
 ## Contribute
-Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENCSE).
+Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
