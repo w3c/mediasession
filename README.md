@@ -19,8 +19,11 @@ Allow web applications to integrate with system media players, such as the one o
 
 Further, we want to make sure cover art, as well as other media-related metadata, shows up where appropriate - to provide the richest media control experience possible on any OS.
 
-### Extensibility
-Our goal is to provide developers with low-level primitives that both help explain the platform, while also allowing developers to build rich multimedia experiences that leverage media-key events. Keeping to our commitment to the [extensible web manifesto](https://extensiblewebmanifesto.org/), we want to allow the media-key events to be routed to wherever you need them in your web application. For instance, to allow you to control a conference presentation with a remote control. At the same time, we want to make sure that whatever solution we come up with is easy to use - by possibly extending existing HTML elements or APIs.
+## Extensibility
+Our goal is to provide developers with low-level primitives that both help explain the platform, while also allowing developers to build rich multimedia experiences that leverage media-key events. Keeping to our commitment to the [extensible web manifesto](https://extensiblewebmanifesto.org/), we want to allow the media-key events to be routed to wherever you need them in your web application. At the same time, we want to make sure that whatever solution we come up with is easy to use - by possibly extending existing HTML elements or APIs.
+
+## Limitations
+Access to media keys and lock screen UI will only be granted when audio playback begins, ensuring that audio focus is not taken from another application prematurely and that lock screen UI is only shown when it can be used. This matches the [iOS model](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Remote-ControlEvents/Remote-ControlEvents.html).
 
 ## Contribute
 Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
