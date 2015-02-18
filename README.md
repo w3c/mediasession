@@ -41,7 +41,7 @@ The audio focus or audio session system is what controls access to media keys an
 * While listening to music, start watching a movie instead. The music automatically pauses.
 * While listening to music, a message is received. The music volume is lowered (ducking) for the notification sound to be clearly heard.
 * While listening to music, there is an incoming call. The music pauses while the call is ongoing and then resumes.
-* While listening to a podcast, there is a messagage or incoming call. The podcast pauses, and eventually resumes playback slightly before where it paused, so that nothing is missed.
+* While listening to a podcast, there is a message or incoming call. The podcast pauses, and eventually resumes playback slightly before where it paused, so that nothing is missed.
 * Join a video chat in the browser. Any other audio playback on the system stops.
 
 ## Extensibility
