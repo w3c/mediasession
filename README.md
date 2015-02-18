@@ -1,5 +1,7 @@
-# Media Keys
-This standardization project aims to add support for media-key events to the Web (play, pause, fast-forward, rewind, etc.). Media keys include hardware keys found on keyboards, headsets, remote controls, and software media keys found on lock-screens of mobile devices.
+# Media Keys and Audio Focus/Session
+This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast-forward, rewind and volume. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock-screens of mobile devices.
+
+Only one application at a time can be the recipient of media keys, and access is mediated by a system of [Audio Focus](http://developer.android.com/training/managing-audio/audio-focus.html) or [Audio Sessions](https://developer.apple.com/library/prerelease/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/index.html). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
 
 ## What are we enabling?
 
