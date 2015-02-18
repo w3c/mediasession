@@ -1,7 +1,7 @@
-# Media Keys and Audio Focus/Session
+# Media Keys and Audio Focus
 This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast-forward, rewind and volume. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock-screens of mobile devices.
 
-Only one application at a time can be the recipient of media keys, and access is mediated by a system of [Audio Focus](http://developer.android.com/training/managing-audio/audio-focus.html) or [Audio Sessions](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
+Only one application at a time can be the recipient of media keys, and access is mediated by an audio focus system (see below). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
 
 ## Use cases
 
@@ -33,11 +33,9 @@ The play/pause button should function like a keyboard's play/pause key. Where su
 * Background image, e.g. album art.
 * Any additional buttons, e.g. like/favorite.
 
-### Audio Focus/Session
+### Audio Focus / Audio Session
 
-([Android](http://developer.android.com/training/managing-audio/audio-focus.html), [iOS](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html))
-
-The audio focus or audio session system is what controls access to media keys and lock screen UI. However, it also controls behavior when multiple applications compete for audio playback:
+The audio focus (([Android](http://developer.android.com/training/managing-audio/audio-focus.html)) or audio session ([iOS](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html)) system is what controls access to media keys and lock screen UI. However, it also controls behavior when multiple applications compete for audio playback:
 * While listening to music, start watching a movie instead. The music automatically pauses.
 * While listening to music, a message is received. The music volume is lowered (ducking) for the notification sound to be clearly heard.
 * While listening to music, there is an incoming call. The music pauses while the call is ongoing and then resumes.
