@@ -1,7 +1,7 @@
 # Media Keys and Audio Focus/Session
 This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast-forward, rewind and volume. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock-screens of mobile devices.
 
-Only one application at a time can be the recipient of media keys, and access is mediated by a system of [Audio Focus](http://developer.android.com/training/managing-audio/audio-focus.html) or [Audio Sessions](https://developer.apple.com/library/prerelease/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/index.html). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
+Only one application at a time can be the recipient of media keys, and access is mediated by a system of [Audio Focus](http://developer.android.com/training/managing-audio/audio-focus.html) or [Audio Sessions](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
 
 ## Use cases
 
@@ -35,7 +35,7 @@ The play/pause button should function like a keyboard's play/pause key. Where su
 
 ### Audio Focus/Session
 
-([Android](http://developer.android.com/training/managing-audio/audio-focus.html), [iOS](https://developer.apple.com/library/prerelease/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/index.html))
+([Android](http://developer.android.com/training/managing-audio/audio-focus.html), [iOS](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html))
 
 The audio focus or audio session system is what controls access to media keys and lock screen UI. However, it also controls behavior when multiple applications compete for audio playback:
 * While listening to music, start watching a movie instead. The music automatically pauses.
