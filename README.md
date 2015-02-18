@@ -50,5 +50,10 @@ Our goal is to provide developers with low-level primitives that both help expla
 ## Limitations
 Access to media keys and lock screen UI will only be granted when audio playback begins, ensuring that audio focus is not taken from another application prematurely and that lock screen UI is only shown when it can be used. This matches the [iOS model](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Remote-ControlEvents/Remote-ControlEvents.html).
 
+## Proposals
+
+* [HTML Media Focus](https://github.com/richtr/html-media-focus) - a simple API scoped to a single `HTMLMediaElement`
+* [Media Session API](MediaSession.md) - a not-so-simple API for multiple `HTMLMediaElement` or `AudioContext` objects
+
 ## Contribute
 Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
