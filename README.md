@@ -1,5 +1,5 @@
 # Media Keys and Audio Focus
-This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast-forward, rewind and volume. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock-screens of mobile devices.
+This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast forward, rewind and volume. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock screens of mobile devices.
 
 Only one application at a time can be the recipient of media keys, and access is mediated by an audio focus system (see below). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
 
@@ -43,15 +43,15 @@ The audio focus (([Android](http://developer.android.com/training/managing-audio
 * Join a video chat in the browser. Any other audio playback on the system stops.
 
 ## Extensibility
-Our goal is to provide developers with low-level primitives that both help explain the platform, while also allowing developers to build rich multimedia experiences that leverage media-key events. Keeping to our commitment to the [extensible web manifesto](https://extensiblewebmanifesto.org/), we want to allow the media-key events to be routed to wherever you need them in your web application. At the same time, we want to make sure that whatever solution we come up with is easy to use - by possibly extending existing HTML elements or APIs.
+Our goal is to provide developers with low-level primitives that both help explain the platform, while also allowing developers to build rich multimedia experiences that leverage media key events. Keeping to our commitment to the [extensible web manifesto](https://extensiblewebmanifesto.org/), we want to allow the media key events to be routed to wherever you need them in your web application. At the same time, we want to make sure that whatever solution we come up with is easy to use &ndash; by possibly extending existing HTML elements or APIs.
 
 ## Limitations
 Access to media keys and lock screen UI will only be granted when audio playback begins, ensuring that audio focus is not taken from another application prematurely and that lock screen UI is only shown when it can be used. This matches the [iOS model](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Remote-ControlEvents/Remote-ControlEvents.html).
 
 ## Proposals
 
-* [HTML Media Focus](https://github.com/richtr/html-media-focus) - a simple API scoped to a single `HTMLMediaElement`
-* [Media Session API](MediaSession.md) - a not-so-simple API for multiple `HTMLMediaElement` or `AudioContext` objects
+* [HTML Media Focus](https://github.com/richtr/html-media-focus) &ndash; a simple API scoped to a single `HTMLMediaElement`
+* [Media Session API](MediaSession.md) &ndash; a not-so-simple API for multiple `HTMLMediaElement` or `AudioContext` objects
 
 ## Contribute
 Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
