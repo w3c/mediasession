@@ -1,34 +1,39 @@
 # Media Session API
 
-A media session is required in order to receive events from media key events and lock screen media controls. Each session can have one or several `AudioContext` or `HTMLMediaElement` objects as its members, and at least one of these must reach a playing state for the session to become active.
+A media session represents a source of media playback on the system, typically an application although more fine-grained control is possible.
 
-When a session has only one member, many of the events fired on it have a default action that acts on that single member. When there are multiple members, event handlers must be used to implement the desired behavior, as there is no sane default.
+An active media session is required in order to receive events from media key events and lock screen media controls.
 
-ISSUE: What measures should be taken to guarantee that pausing works even for a misbehaving user of `MediaSession`?
+When a media session becomes active, all other media sessions are either deactivated or interrupted, depending on kind of session.
 
 ## The `MediaSession` Interface
 
 ```WebIDL
-enum MediaSessionState { "idle", "playing", "paused", "ducking", "suspended" };
-typedef (HTMLMediaElement or AudioContext) MediaSessionMember;
+enum MediaSessionKind { "ambient", "main", "voice" };
+
+enum MediaSessionState { "inactive", "active", "suspended" };
 
 [Constructor()]
 interface MediaSession : EventTarget {
+    readonly attribute MediaSessionKind kind;
     readonly attribute MediaSessionState state;
 
-    // the objects which have this session as object.session
-    readonly attribute MediaSessionMember[] members;
+    // Try to activate the session. The promise is rejected if the session is
+    // suspended or would be immediately suspended if activated.
+    Promise<void> activate();
 
-    // events with default actions when preventDefault() is not called
-    attribute EventHandler onidle; // * -> idle
-    attribute EventHandler onplay; // idle/paused -> playing
-    attribute EventHandler onpause; // playing -> paused
-    attribute EventHandler onduckstart; // playing -> ducking
-    attribute EventHandler onduckend; // ducking -> playing
-    attribute EventHandler onsuspend; // playing -> suspended
-    attribute EventHandler onresume; // suspended -> playing
+    // Deactivate the session.
+    Promise<void> deactivate();
 
-    // events with no default action
+    // events for state transitions
+    attribute EventHandler onactive; // inactive -> active
+    attribute EventHandler oninactive; // active/suspended -> inactive
+    attribute EventHandler onsuspend; // active -> suspended
+    attribute EventHandler onresume; // suspended -> active
+
+    // events for media keys
+    attribute EventHandler onplay; // play/pause button pressed while inactive
+    attribute EventHandler onpause; // play/pause button pressed while active
     attribute EventHandler onprevious; // previous track or rewind
     attribute EventHandler onnext; // next track or fast forward
 
@@ -36,13 +41,16 @@ interface MediaSession : EventTarget {
     attribute DOMString title;
     attribute DOMString poster;
     // TODO: figure out how to test support for and request additional buttons
-
-    // end the media session, transitioning it to the idle state
-    void end();
 };
 ```
 
-## Extensions to the `HTMLMediaElement` Interface
+## Integration with `AudioContext` and `HTMLMediaElement`
+
+```WebIDL
+partial interface AudioContext {
+    attribute MediaSession session;
+};
+```
 
 ```WebIDL
 partial interface HTMLMediaElement {
@@ -50,13 +58,9 @@ partial interface HTMLMediaElement {
 };
 ```
 
-## Extensions to the `AudioContext` Interface
+When an `AudioContext` or `HTMLMediaElement` is connected to a `MediaSession`, starting playback will implicitly call `MediaSession.activate()`.
 
-```WebIDL
-partial interface AudioContext {
-    attribute MediaSession session;
-};
-```
+ISSUE: Should an active `MediaSession` be required to start playback? This could explain the [media playback restrictions in Blink](http://blog.foolip.org/2014/02/10/media-playback-restrictions-in-blink/), and the similar system in WebKit.
 
 ## Examples
 
@@ -86,7 +90,14 @@ function selectTrack(index) {
     selectedTrack = index;
 }
 
-// default actions used for all events that have them
+// ISSUE: This is going to be very boilerplatey, think about defaults.
+session.addEventListener('play', function() {
+    audio.play();
+});
+
+session.addEventListener('pause', function() {
+    audio.pause();
+});
 
 session.addEventListener('previous', function() {
     selectTrack(selectedTrack - 1);
@@ -97,6 +108,10 @@ session.addEventListener('next', function() {
 });
 
 selectTrack(0);
-audio.autoplay = true; // session will become active if/when audio plays
+
+// activate the session and then start playing
+session.activate().then(function() {
+    audio.play();
+});
 </script>
 ```
