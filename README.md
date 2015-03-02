@@ -1,5 +1,5 @@
 # Media Keys and Audio Focus
-This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast forward, rewind and volume. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock screens of mobile devices.
+This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast forward, and rewind. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock screens of mobile devices.
 
 Only one application at a time can be the recipient of media keys, and access is mediated by an audio focus system (see below). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
 
