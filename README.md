@@ -37,7 +37,7 @@ The play/pause button should function like a keyboard's play/pause key. Where su
 
 The audio focus ([Android](http://developer.android.com/training/managing-audio/audio-focus.html)) or audio session ([iOS](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html)) system is what controls access to media keys and lock screen UI. However, it also controls behavior when multiple applications compete for audio playback:
 * While listening to music, start watching a movie instead. The music automatically pauses.
-* While listening to music, a message is received. The music volume is lowered (ducking) for the notification sound to be clearly heard.
+* While listening to music, a message is received. The music volume is lowered (i.e., "ducked") for the notification sound to be clearly heard.
 * While listening to music, there is an incoming call. The music pauses while the call is ongoing and then resumes.
 * While listening to a podcast, there is a message or incoming call. The podcast pauses, and eventually resumes playback slightly before where it paused, so that nothing is missed.
 * Join a video chat in the browser. Any other audio playback on the system stops.
