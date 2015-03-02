@@ -9,11 +9,11 @@ When a media session becomes active, all other media sessions are either deactiv
 ## The `MediaSession` Interface
 
 ```WebIDL
-enum MediaSessionKind { "ambient", "main", "voice" };
+enum MediaSessionKind { "ambient", "default", "voice" };
 
 enum MediaSessionState { "inactive", "active", "suspended" };
 
-[Constructor()]
+[Constructor(optional MediaSessionKind kind = "default")]
 interface MediaSession : EventTarget {
     readonly attribute MediaSessionKind kind;
     readonly attribute MediaSessionState state;
