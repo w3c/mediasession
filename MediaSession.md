@@ -1,6 +1,6 @@
 # Media Session API
 
-A media session is required in order to recieve events from media key events and lock screen media controls. Each session can have one or several `AudioContext` or `HTMLMediaElement` objects as its members, and at least one of these must reach a playing state for the session to become active.
+A media session is required in order to receive events from media key events and lock screen media controls. Each session can have one or several `AudioContext` or `HTMLMediaElement` objects as its members, and at least one of these must reach a playing state for the session to become active.
 
 When a session has only one member, many of the events fired on it have a default action that acts on that single member. When there are multiple members, event handlers must be used to implement the desired behavior, as there is no sane default.
 
