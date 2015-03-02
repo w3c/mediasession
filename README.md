@@ -21,7 +21,7 @@ Headphones may have a multi-purpose button and volume buttons. ([Apple](http://s
 
 The headphone button should mostly function like a keyboard's play/pause key. Additionally:
 * While watching a video, turn off the screen. The audio continues to play and can be paused and resumed with the headphone button.
-* Double tab and other key sequences may follow platform-specific conventions. ([iPhone](http://www.cnet.com/how-to/ten-hidden-controls-of-the-iphone-headphones/))
+* Double tap and other key sequences may follow platform-specific conventions. ([iPhone](http://www.cnet.com/how-to/ten-hidden-controls-of-the-iphone-headphones/))
 
 ### Lock screen and notification area
 
