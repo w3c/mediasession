@@ -1,12 +1,10 @@
 # Media Session API
 
-A media session represents a source of media playback on the system, typically an application although more fine-grained control is possible.
+A media session represents a source of media playback on the system. Typically an application needs only one session, but more fine-grained control is possible.
 
-An active media session is required in order to receive events from media key events and lock screen media controls.
+Note: This corresponds roughly to [audio focus on Android](http://developer.android.com/training/managing-audio/audio-focus.html) and [audio session on iOS](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html).
 
 When a media session becomes active, all other media sessions are either deactivated or interrupted, depending on kind of session.
-
-## The `MediaSession` Interface
 
 ```WebIDL
 enum MediaSessionKind { "ambient", "default", "voice" };
@@ -30,39 +28,25 @@ interface MediaSession : EventTarget {
     attribute EventHandler oninactive; // active/suspended -> inactive
     attribute EventHandler onsuspend; // active -> suspended
     attribute EventHandler onresume; // suspended -> active
+};
+```
 
-    // events for media keys
+## Handling media keys
+
+An active media session is required in order to receive media key events.
+
+Note: This corresponds roughly to [media session on Android](http://developer.android.com/training/managing-audio/audio-focus.html) and [remote control events on iOS](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Remote-ControlEvents/Remote-ControlEvents.html).
+
+```WebIDL
+partial interface MediaSession {
     attribute EventHandler onplay; // play/pause button pressed while inactive
     attribute EventHandler onpause; // play/pause button pressed while active
     attribute EventHandler onprevious; // previous track or rewind
     attribute EventHandler onnext; // next track or fast forward
-
-    // metadata for lock screen UI
-    attribute DOMString title;
-    attribute DOMString poster;
-    // TODO: figure out how to test support for and request additional buttons
 };
 ```
 
-## Integration with `AudioContext` and `HTMLMediaElement`
-
-```WebIDL
-partial interface AudioContext {
-    attribute MediaSession session;
-};
-```
-
-```WebIDL
-partial interface HTMLMediaElement {
-    attribute MediaSession session;
-};
-```
-
-When an `AudioContext` or `HTMLMediaElement` is connected to a `MediaSession`, starting playback will implicitly call `MediaSession.activate()`.
-
-ISSUE: Should an active `MediaSession` be required to start playback? This could explain the [media playback restrictions in Blink](http://blog.foolip.org/2014/02/10/media-playback-restrictions-in-blink/), and the similar system in WebKit.
-
-## Examples
+### Example
 
 In this example, a `MediaSession` is used to control a playlist.
 
@@ -115,3 +99,45 @@ session.activate().then(function() {
 });
 </script>
 ```
+
+ISSUE: [Why can't keyboard events be used here?](https://github.com/whatwg/media-keys/issues/21).
+
+## Providing lock screen controls
+
+An active media session is required in order to get lock screen controls.
+
+```WebIDL
+partial interface MediaSession {
+    attribute DOMString title;
+    attribute DOMString poster;
+    // TODO: figure out how to test support for and request additional buttons
+};
+```
+
+## Integration with `AudioContext` and `HTMLMediaElement`
+
+There are three ways in which `MediaSession` could be connected to `AudioContext` and `HTMLMediaElement`:
+ 1. An active `MediaSession` is required in order to start playing audio.
+ 2. Playing audio is required for a `MediaSession` to become active.
+ 3. Two-way coupling, such that beginning playback and becoming the active `MediaSession` is a transaction.
+
+Every `AudioContext` or `HTMLMediaElement` could be associated with a `MediaSession`.
+
+```WebIDL
+partial interface AudioContext {
+    attribute MediaSession session;
+};
+```
+
+```WebIDL
+partial interface HTMLMediaElement {
+    attribute MediaSession session;
+};
+```
+
+The behavior would be as follows for each case:
+ 1. Trying to play with an inactive session first tries to activate that session and then starts playing.
+ 2. Trying to activate a session which is not connected to any playing media fails with no further action.
+ 3. Like 1, but trying to begin playback would be the *only* way to activate a session, so `MediaSession.activate()` would not be needed.
+
+ISSUE: [Figure out the coupling between audio focus/session, audio playback and remote control events](https://github.com/whatwg/media-keys/issues/9)
