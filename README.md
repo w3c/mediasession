@@ -50,8 +50,7 @@ Access to media keys and lock screen UI will only be granted when audio playback
 
 ## Proposals
 
-* [HTML Media Focus](https://github.com/richtr/html-media-focus) &ndash; a simple API scoped to a single `HTMLMediaElement`
-* [HTMLMediaElement.kind](https://github.com/richtr/html-media-focus/issues/6) &ndash; implicitly provide the most appropriate remote control access and interaction per platform between different 'kinds' of HTML media.
+* [Implicit media focus, key binding, events and overrides](ImplicitMediaControls.md) &ndash; a default and declaritive proposal that reuses existing features of `HTMLMediaElement` objects
 * [Media Session API](MediaSession.md) &ndash; a not-so-simple API for multiple `HTMLMediaElement` or `AudioContext` objects
 * [MediaRemoteControl](MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
 
