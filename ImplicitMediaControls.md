@@ -30,11 +30,11 @@ j.) enable web developers to [intercept remote control events to drive any other
 
 ## <a name="sectionA"></a>A. Granting implicit remote control access to media content
 
-When a `playing` event is fired toward any **focusable media element** (i.e. any `HTMLMediaElement`-based object) it will implicitly obtain OS-level _media focus_ and will now be called the **focused media element**.
+On mobile devices, when a `playing` event is fired toward any `HTMLMediaElement`-based object (i.e. &lt;video&gt; or &lt;audio&gt; elements) it will implicitly obtain OS-level _media focus_ and will now be the **focused media element**.
 
-Only one _focusable media element_ can hold _media focus_ at any given time. If another _focusable media element_ currently holds the _media focus_ then the user agent must actively pause that other _focusable media element_ before making the new element the _focused media element_.
+Only one HTML media element can hold _media focus_ at any given time on mobile (see [(B)](#sectionB) for desktop). If another HTML media element currently holds the _media focus_ then the user agent must actively pause that element before making the current element the _focused media element_.
 
-Any _focusable media element_ can re-gain _media focus_ whenever a `playing` event is fired toward that element (i.e. whenever `.play()` is called by in-page JavaScript or by the user via HTML media controls against that _focusable media element_).
+Any HTML media element can re-gain _media focus_ whenever a `playing` event is fired toward that element (i.e. whenever `.play()` is called by in-page JavaScript or by the user via HTML media controls against that HTML media element).
 
 ## B. <a name="sectionB"></a>Platform-agnostic media focus handling
 
@@ -54,7 +54,7 @@ Many remote control interfaces also provide 'Previous' and 'Next' controls that 
 
 Web applications do not currently have any way to access these media key events.
 
-To handle these keys we propose firing `next` and `previous` events toward the _focused media element_ whenever these remote control interface keys are pressed. This then allows web developers to handle these events if they want to and respond appropriately by seeking within the current track, transitioning to the next track by changing the `.src` of the current _focused media element_ or, pass media focus to another HTML media element by calling '.play' on that other element (thereby transferring media focus to that other element).
+To handle these keys we propose firing `next` and `previous` events toward the _focused media element_ whenever these remote control interface keys are pressed. This then allows web developers to handle these events if they want to and respond appropriately by seeking within the current track, transitioning to the next track by changing the `.src` of the current _focused media element_ or, pass media focus to another HTML media element by calling '.play()' on that other element (thereby transferring media focus to that other element).
 
 ## E. <a name="sectionE"></a>Automatically reflecting state changes between in-page media content and remote control interfaces
 
