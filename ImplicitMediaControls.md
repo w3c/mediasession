@@ -1,5 +1,7 @@
 # Implicit media focus, key binding, events and overrides
 
+`HTMLMediaElement` can be used to play out various types of audio or video-based media such as music, notification sounds, WebRTC streams and alarms.
+
 If we improve the default handling of HTML media within user agents and allow web developers to classify and differentiate between different kinds of media usage then web applications will gain powerful and overridable integration options to any attached hardware or software-based remote control interfaces.
 
 By creating a strong binding between HTML media elements and remote control keys and interfaces, user agents would be able to:
