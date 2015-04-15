@@ -50,7 +50,8 @@ Access to media keys and lock screen UI will only be granted when audio playback
 
 ## Proposals
 
-* [Implicit media focus, key binding, events and overrides](ImplicitMediaControls.md) &ndash; a default and declaritive proposal that reuses existing features of `HTMLMediaElement` objects
+* [Implicit media focus, key binding, events and overrides](ImplicitMediaControls.md) &ndash; a default and declarative proposal that reuses existing features of `HTMLMediaElement` objects.
+* [Media focus with channels support, metadata additions and media category overrides](https://github.com/mounirlamouri/media-focus/blob/master/explainer.md) &ndash; improve default media handling and provide channels for both `HTMLMediaElement` and `AudioContext` objects.
 * [Media Session API](MediaSession.md) &ndash; a not-so-simple API for multiple `HTMLMediaElement` or `AudioContext` objects
 * [MediaRemoteControl](MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
 
