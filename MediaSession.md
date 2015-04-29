@@ -2,7 +2,7 @@
 
 A media session represents a source of media playback on the system. Typically an application needs only one session, but more fine-grained control is possible.
 
-Note: This corresponds roughly to [audio focus on Android](http://developer.android.com/training/managing-audio/audio-focus.html) and [audio session on iOS](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html).
+Note: This corresponds roughly to [audio focus](https://developer.android.com/training/managing-audio/audio-focus.html) + [media session](https://developer.android.com/reference/android/media/session/MediaSession.html) on Android, and [audio session](https://developer.apple.com/library/ios/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html) on iOS.
 
 When a media session becomes active, all other media sessions are either deactivated or interrupted, depending on kind of session.
 
