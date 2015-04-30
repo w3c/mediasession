@@ -55,5 +55,21 @@ Access to media keys and lock screen UI will only be granted when audio playback
 * [Media Session API](MediaSession.md) &ndash; a not-so-simple API for multiple `HTMLMediaElement` or `AudioContext` objects
 * [MediaRemoteControl](MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
 
+## Building the spec
+
+This spec is built using [Bikeshed](https://github.com/tabatkins/bikeshed).
+
+### Bikeshed
+
+To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/master/docs/install.md) and then run `bikeshed spec` in the working directory to build the spec.
+
+Alternately, you can use the command
+
+```
+curl https://api.csswg.org/bikeshed/ -F file=@index.bs > index.tmp.html
+```
+
+to use Bikeshed's web interface without installing anything.
+
 ## Contribute
 Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
