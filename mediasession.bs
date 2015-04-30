@@ -1,7 +1,7 @@
 <pre class="metadata">
-Title: Media Sessions
+Title: Media Session Standard
 Group: WHATWG
-H1: Media Sessions
+H1: Media Session
 Shortname: mediasession
 Status: LS
 No Editor: true
