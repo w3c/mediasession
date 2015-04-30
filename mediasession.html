@@ -1,988 +1,159 @@
-<!doctype html>
-<html lang="en">
- <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Media Sessions</title>
-  
-  
-  <link href="https://www.whatwg.org/style/specification" rel="stylesheet">
-  
-  
-  <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
-  
-  
-  <link href="https://resources.whatwg.org/logo.svg" rel="icon">
-  
+<pre class="metadata">
+Title: Media Sessions
+Group: WHATWG
+H1: Media Sessions
+Shortname: mediasession
+Status: LS
+No Editor: true
+Logo: https://resources.whatwg.org/logo.svg
+Abstract: This specifications adds support for media keys to Web content. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock screens of mobile devices.
+!Participate: <a href="https://github.com/whatwg/media-keys/issues/new">File an issue</a> (<a href="https://github.com/whatwg/media-keys/issues?state=open">open issues</a>)
+!Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+!Version History: <a href="https://github.com/whatwg/media-keys/commits">https://github.com/whatwg/media-keys/commits</a>
+Boilerplate: omit conformance
+</pre>
 
-  <meta content="Bikeshed 1.0.0" name="generator">
-  <style>/* http://prismjs.com/download.html?themes=prism&languages=clike */
-/**
- * prism.js default theme for JavaScript, CSS and HTML
- * Based on dabblet (http://dabblet.com)
- * @author Lea Verou
- */
+<pre class='anchors'>
+type: interface
+    url: https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement
+        text: HTMLMediaElement
+</pre>
 
-code[class*="language-"],
-pre[class*="language-"] {
-	color: black;
-	text-shadow: 0 1px white;
-	font-family: Consolas, Monaco, 'Andale Mono', monospace;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	line-height: 1.5;
+<h2 id="intro">Introduction</h2>
 
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
+<em>This section is non-normative.</em>
 
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
+This specification provides a way for web developers to categorize different sources of media used within web pages. User agents are then able to prescribe suitable interaction and inter-operation behavior between different types of web media.
 
-pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-	text-shadow: none;
-	background: #b3d4fc;
-}
+<p class="note">@TBW</p>
 
-pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
-code[class*="language-"]::selection, code[class*="language-"] ::selection {
-	text-shadow: none;
-	background: #b3d4fc;
-}
-
-@media print {
-	code[class*="language-"],
-	pre[class*="language-"] {
-		text-shadow: none;
-	}
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #f5f2f0;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: slategray;
-}
-
-.token.punctuation {
-	color: #999;
-}
-
-.namespace {
-	opacity: .7;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-	color: #905;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #690;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-	color: #a67f59;
-	background: hsla(0, 0%, 100%, .5);
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-	color: #07a;
-}
-
-.token.function {
-	color: #DD4A68;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-	color: #e90;
-}
-
-.token.important {
-	font-weight: bold;
-}
-
-.token.entity {
-	cursor: help;
-}
-</style>
- </head>
- <body class="h-entry status-LS">
-
-  <div class="head">
-  
-   <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/">
-    <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo.svg">
-</a>
-</p>
-  
-   <h1 class="p-name no-ref" id="title">Media Sessions</h1>
-  
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-04-30">30 April 2015</time></span></h2>
-  
-   <div data-fill-with="spec-metadata">
-    <dl>
-     <dt>Participate:
-     <dd><span><a href="https://github.com/whatwg/media-keys/issues/new">File an issue</a> (<a href="https://github.com/whatwg/media-keys/issues?state=open">open issues</a>)</span>
-     <dd><span><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a></span>
-     <dt>Version History:
-     <dd><span><a href="https://github.com/whatwg/media-keys/commits">https://github.com/whatwg/media-keys/commits</a></span>
-    </dl>
-   </div>
-  
-   <div data-fill-with="warning"></div>
-</div>
-  
-
-
-  <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-  
-
-  <div class="p-summary" data-fill-with="abstract">
-   <p>This specifications adds support for media keys to Web content. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock screens of mobile devices.</p>
-
-</div>
-  
-
-  <div data-fill-with="at-risk"></div>
-  
-
-
-  <h2 class="no-num no-toc no-ref heading settled" id="contents"><span class="content">Table of Contents</span></h2>
-  
-
-  <div data-fill-with="table-of-contents" role="navigation">
-   <ul class="toc" role="directory">
-    <li><a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
-    <li><a href="#conformance"><span class="secno">2</span> <span class="content">
-Conformance</span></a>
-    <li><a href="#dependencies"><span class="secno">3</span> <span class="content">
-Dependencies</span></a>
-    <li><a href="#example"><span class="secno">4</span> <span class="content">Example Usage</span></a>
-    <li><a href="#model"><span class="secno">5</span> <span class="content">Model</span></a>
-     <ul class="toc">
-      <li><a href="#html-media-element-additions"><span class="secno">5.1</span> <span class="content">Additions to <code class="idl"><span>HTMLMediaElement</span></code></span></a>
-      <li><a href="#video-element-additions"><span class="secno">5.2</span> <span class="content">Additions to the <code class="idl"><span>video</span></code> element</span></a>
-      <li><a href="#audio-element-additions"><span class="secno">5.3</span> <span class="content">Additions to the <code class="idl"><span>audio</span></code> element</span></a>
-     </ul>
-    <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
-     <ul class="toc">
-      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
-      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
-     </ul>
-    <li><a href="#references"><span class="secno"></span> <span class="content">References</span></a>
-     <ul class="toc">
-      <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
-     </ul>
-    <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
-   </ul></div>
-  
-
-  <main>
-
-
-
-
-
-   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-
-
-   <p><em>This section is non-normative.</em></p>
-
-
-   <p>This specification provides a way for web developers to categorize different sources media used within web pages. User agents are then able to prescribe suitable interaction and inter-operation behavior between different types of web media.</p>
-
-
-   <p class="note" role="note">@TBW</p>
-
-
-   <h2 class="heading settled" data-level="2" id="conformance"><span class="secno">2. </span><span class="content">
-Conformance</span><a class="self-link" href="#conformance"></a></h2>
+<h2 id='conformance'>
+Conformance</h2>
 All diagrams, examples, and notes in this specification are
 non-normative, as are all sections explicitly marked non-normative.
 Everything else in this specification is normative.
 
-
-   <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
 "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
 For readability, these words do not appear in all uppercase letters in this
-specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a></p>
+specification. [[!RFC2119]]
 
-
-   <p>Requirements phrased in the imperative as part of algorithms
+Requirements phrased in the imperative as part of algorithms
 (such as "strip any leading space characters" or "return false and
 terminate these steps") are to be interpreted with the meaning of the
 key word ("must", "should", "may", etc) used in introducing the
-algorithm.</p>
+algorithm.
 
-
-   <p>Conformance requirements phrased as algorithms or specific steps
+Conformance requirements phrased as algorithms or specific steps
 may be implemented in any manner, so long as the end result is
 equivalent. (In particular, the algorithms defined in this
 specification are intended to be easy to follow, and not intended to
-be performant.)</p>
+be performant.)
 
-
-   <p id="hardwareLimitations">User agents may impose
+<p id="hardwareLimitations">User agents may impose
 implementation-specific limits on otherwise unconstrained inputs,
 e.g. to prevent denial of service attacks, to guard against running
 out of memory, or to work around platform-specific limitations.
 
-</p>
-   <p>When a method or an attribute is said to call another method or attribute, the user agent must invoke its internal API for that attribute or method so that e.g. the author can’t change the behavior by overriding attributes or methods with custom properties or functions in JavaScript.</p>
+When a method or an attribute is said to call another method or attribute, the user agent must invoke its internal API for that attribute or method so that e.g. the author can't change the behavior by overriding attributes or methods with custom properties or functions in JavaScript.
 
+Unless otherwise stated, string comparisons are done in a <a>case-sensitive</a> manner.
 
-   <p>Unless otherwise stated, string comparisons are done in a <a data-link-type="dfn" href="http://dev.w3.org/csswg/css-syntax-3/#case-sensitive">case-sensitive</a> manner.</p>
+<h2 id='dependencies'>
+Dependencies</h2>
 
-
-   <h2 class="heading settled" data-level="3" id="dependencies"><span class="secno">3. </span><span class="content">
-Dependencies</span><a class="self-link" href="#dependencies"></a></h2>
-
-
-   <p>The IDL fragments in this specification must be interpreted as
+The IDL fragments in this specification must be interpreted as
 required for conforming IDL fragments, as described in the Web IDL
-specification. <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a></p>
+specification. [[!WEBIDL]]
 
+<h2 id="example">Example Usage</h2>
 
-   <h2 class="heading settled" data-level="4" id="example"><span class="secno">4. </span><span class="content">Example Usage</span><a class="self-link" href="#example"></a></h2>
+A media element's <a attribute>kind</a> content attribute can be declared in HTML:
 
-
-   <p>A media element’s <a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a> content attribute can be declared in HTML:</p>
-
-
-   <pre class="lang-markup">&lt;video src="short_ping.webm" kind="transient">
+<pre class='lang-markup'>
+&lt;video src="short_ping.webm" kind="transient">
 </pre>
 
+Alternatively, a media element's <a attribute>kind</a> attribute can be set in JavaScript:
 
-   <p>Alternatively, a media element’s <a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a> attribute can be set in JavaScript:</p>
-
-
-   <pre class="lang-javascript">var myAudio = document.createElement('audio');
+<pre class='lang-javascript'>
+var myAudio = document.createElement('audio');
 console.log(myAudio.kind) // --> ""
 myAudio.src = "music.mp3";
 myAudio.kind = "content";
 // myAudio.outerHTML === "&lt;audio src="music.mp3" kind="content">&lt;/audio>" === true
 </pre>
 
+<h2 id="model">Model</h2>
 
-   <h2 class="heading settled" data-level="5" id="model"><span class="secno">5. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
+<h3 id="html-media-element-additions">Additions to {{HTMLMediaElement}}</h3>
 
-
-   <h3 class="heading settled" data-level="5.1" id="html-media-element-additions"><span class="secno">5.1. </span><span class="content">Additions to <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code></span><a class="self-link" href="#html-media-element-additions"></a></h3>
-
-
-   <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
-  attribute DOMString <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-type="DOMString " id="dom-htmlmediaelement-kind">kind<a class="self-link" href="#dom-htmlmediaelement-kind"></a></dfn>;
+<pre class="idl">
+partial interface HTMLMediaElement {
+  attribute DOMString kind;
 };
 </pre>
 
-
-   <dl class="domintro">
- 
-    <dt><code> <var>media</var> . <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code>
- 
-    <dd>Returns the category the given media falls into. The <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are given below.
+<dl class=domintro>
+ <dt><code> <var>media</var> . {{HTMLMediaElement/kind}}</code>
+ <dd>Returns the category the given media falls into. The <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are given below.
 </dl>
 
+The <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute, along with the <dfn id="attr-media-kind"><code class="idl">kind</code></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an <a href="https://html.spec.whatwg.org/#enumerated-attribute">enumerated attribute</a> and must return the category of the track, if it has one, or the empty string otherwise.
 
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">HTMLMediaElement.kind</a></code> attribute, along with the <dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind"><code class="idl">kind</code><a class="self-link" href="#attr-media-kind"></a></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an enumerated attribute and must return the category of the track, if it has one, or the empty string otherwise.</p>
+The <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute must <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the content attribute of the same name, <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited to only known values</a>.
 
+The following table lists the keywords and states for the attribute — the keywords in the left column map to the states in the cell in the second column on the same row as the keyword. The attribute should be set based on the preferred definitions in the table's third and fourth columns.
 
-   <p>The category of a media element is the string given in the first column of the table below that is the most appropriate for the media based on the definitions in the table’s third and fourth columns, as determined by the intended usage of the media resource within the current browsing context.</p>
-
-
-   <p>The keyword given in the first cell of each row maps to the state given in the second cell.</p>
-
-
-   <table id="dom-HTMLMediaElement-kind-categories">
-  
-    <caption>Return values for <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">HTMLMediaElement.kind</a></code></caption>
-   
-    <tbody>
-     <tr>
-    
-      <th>Category
-    
-      <th>State
-    
-      <th>Definition
-    
-      <th>Examples
-  
-     <tr>
-   
-      <td>
-     <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-content">
-       <code>"content"</code>
-     <a class="self-link" href="#value-media-kind-content"></a></dfn>
-    
-      <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-content">Content<a class="self-link" href="#attr-media-kind-content"></a></dfn>
-   
-      <td>description here...
-   
-      <td>Music, podcasts, radio
-  
-     <tr>
-   
-      <td>
-     <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-transient">
-       <code>"transient"</code>
-     <a class="self-link" href="#value-media-kind-transient"></a></dfn>
-    
-      <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-transient">Transient<a class="self-link" href="#attr-media-kind-transient"></a></dfn>
-   
-      <td>description here...
-   
-      <td>Short notification sounds
-  
-     <tr>
-   
-      <td>
-     <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-ambient">
-       <code>"ambient"</code>
-     <a class="self-link" href="#value-media-kind-ambient"></a></dfn>
-     
-      <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-ambient">Ambient<a class="self-link" href="#attr-media-kind-ambient"></a></dfn>
-   
-      <td>description here...
-   
-      <td>...
-  
-     <tr>
-    
-      <td>
-      <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-none"><code>""</code><a class="self-link" href="#value-media-kind-none"></a></dfn> (empty string)
-    
-      <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-default">Default<a class="self-link" href="#attr-media-kind-default"></a></dfn>
-    
-      <td>No explicit kind, or the kind given by the track’s metadata is not recognised by the user agent.
-    
-      <td>
+<table id="dom-HTMLMediaElement-kind-categories">
+  <caption>Return values for <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code></caption>
+   <tr>
+    <th>Category
+    <th>State
+    <th>Definition
+    <th>Examples
+  <tr>
+   <td>
+     <dfn id="value-media-kind-content">
+       <code>&quot;content&quot;</code>
+     </dfn>
+    <td><dfn id="attr-media-kind-content">Content</dfn>
+   <td>description here...
+   <td>Music, podcasts, radio
+  <tr>
+   <td>
+     <dfn id="value-media-kind-transient">
+       <code>&quot;transient&quot;</code>
+     </dfn>
+    <td><dfn id="attr-media-kind-transient">Transient</dfn>
+   <td>description here...
+   <td>Short notification sounds
+  <tr>
+   <td>
+     <dfn id="value-media-kind-ambient">
+       <code>&quot;ambient&quot;</code>
+     </dfn>
+     <td><dfn id="attr-media-kind-ambient">Ambient</dfn>
+   <td>description here...
+   <td>...
+  <tr>
+    <td>
+      <dfn id="value-media-kind-none"><code>&quot;&quot;</code></dfn> (empty string)
+    <td><dfn id="attr-media-kind-default">Default</dfn>
+    <td>No explicit kind, or the kind given by the track's metadata is not recognised by the user agent.
+    <td>
 </table>
 
+<h3 id="video-element-additions">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> element</h3>
 
-   <h3 class="heading settled" data-level="5.2" id="video-element-additions"><span class="secno">5.2. </span><span class="content">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> element</span><a class="self-link" href="#video-element-additions"></a></h3>
-
-
-   <dl class="element">
-  
-    <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:
-  
-    <dd><code id="the-video-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of video
+<dl class="element">
+  <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:</dt>
+  <dd><code id="the-video-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of video</dd>
 </dl>
 
+<h3 id="audio-element-additions">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> element</h3>
 
-   <h3 class="heading settled" data-level="5.3" id="audio-element-additions"><span class="secno">5.3. </span><span class="content">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> element</span><a class="self-link" href="#audio-element-additions"></a></h3>
-
-
-   <dl class="element">
-  
-    <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:
-    <dd><code id="the-audio-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of audio
+<dl class="element">
+  <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:</dt><dd><code id="the-audio-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of audio</dd>
 </dl>
-
-
-</main>
-  
-
-
-  <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
-  <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
-  <ul class="indexlist">
-   <li>"", <a href="#value-media-kind-none">5.1</a>
-   <li>"ambient", <a href="#value-media-kind-ambient">5.1</a>
-   <li>Ambient, <a href="#attr-media-kind-ambient">5.1</a>
-   <li>"content", <a href="#value-media-kind-content">5.1</a>
-   <li>Content, <a href="#attr-media-kind-content">5.1</a>
-   <li>Default, <a href="#attr-media-kind-default">5.1</a>
-   <li>kind
-    <ul>
-     <li>attribute for HTMLMediaElement, <a href="#dom-htmlmediaelement-kind">5.1</a>
-     <li>definition of, <a href="#attr-media-kind">5.1</a>
-    </ul>
-   <li>Transient, <a href="#attr-media-kind-transient">5.1</a>
-   <li>"transient", <a href="#value-media-kind-transient">5.1</a></ul>
-  <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
-  <ul class="indexlist">
-   <li><a data-link-type="biblio" href="#biblio-css-syntax-3">[css-syntax-3]</a> defines the following terms:
-    <ul>
-     <li><a href="http://dev.w3.org/csswg/css-syntax-3/#case-sensitive">case-sensitive</a>
-    </ul></ul>
-  <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
-  <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
-  <dl>
-   <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WebIDL]
-   <dd>Cameron McCormack. <a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a>. 19 April 2012. CR. URL: <a href="http://dev.w3.org/2006/webapi/WebIDL/">http://dev.w3.org/2006/webapi/WebIDL/</a>
-   <dt id="biblio-css-syntax-3"><a class="self-link" href="#biblio-css-syntax-3"></a>[CSS-SYNTAX-3]
-   <dd>Tab Atkins Jr.; Simon Sapin. <a href="http://dev.w3.org/csswg/css-syntax/">CSS Syntax Module Level 3</a>. 20 February 2014. CR. URL: <a href="http://dev.w3.org/csswg/css-syntax/">http://dev.w3.org/csswg/css-syntax/</a>
-   <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
-   <dd>S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a></dl>
-  <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
-  attribute DOMString <a data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
-};
-
-</pre>
-  <script>self = (typeof window !== 'undefined')
-	? window   // if in browser
-	: (
-		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
-		? self // if in worker
-		: {}   // if in node js
-	);
-
-/**
- * Prism: Lightweight, robust, elegant syntax highlighting
- * MIT license http://www.opensource.org/licenses/mit-license.php/
- * @author Lea Verou http://lea.verou.me
- */
-
-var Prism = (function(){
-
-// Private helper vars
-var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
-
-var _ = self.Prism = {
-	util: {
-		encode: function (tokens) {
-			if (tokens instanceof Token) {
-				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
-			} else if (_.util.type(tokens) === 'Array') {
-				return tokens.map(_.util.encode);
-			} else {
-				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
-			}
-		},
-
-		type: function (o) {
-			return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
-		},
-
-		// Deep clone a language definition (e.g. to extend it)
-		clone: function (o) {
-			var type = _.util.type(o);
-
-			switch (type) {
-				case 'Object':
-					var clone = {};
-
-					for (var key in o) {
-						if (o.hasOwnProperty(key)) {
-							clone[key] = _.util.clone(o[key]);
-						}
-					}
-
-					return clone;
-
-				case 'Array':
-					return o.slice();
-			}
-
-			return o;
-		}
-	},
-
-	languages: {
-		extend: function (id, redef) {
-			var lang = _.util.clone(_.languages[id]);
-
-			for (var key in redef) {
-				lang[key] = redef[key];
-			}
-
-			return lang;
-		},
-
-		// Insert a token before another token in a language literal
-		insertBefore: function (inside, before, insert, root) {
-			root = root || _.languages;
-			var grammar = root[inside];
-			var ret = {};
-
-			for (var token in grammar) {
-
-				if (grammar.hasOwnProperty(token)) {
-
-					if (token == before) {
-
-						for (var newToken in insert) {
-
-							if (insert.hasOwnProperty(newToken)) {
-								ret[newToken] = insert[newToken];
-							}
-						}
-					}
-
-					ret[token] = grammar[token];
-				}
-			}
-
-			return root[inside] = ret;
-		},
-
-		// Traverse a language definition with Depth First Search
-		DFS: function(o, callback, type) {
-			for (var i in o) {
-				if (o.hasOwnProperty(i)) {
-					callback.call(o, i, o[i], type || i);
-
-					if (_.util.type(o[i]) === 'Object') {
-						_.languages.DFS(o[i], callback);
-					} else if (_.util.type(o[i]) === 'Array') {
-						_.languages.DFS(o[i], callback, i);
-					}
-				}
-			}
-		}
-	},
-
-	highlightAll: function(async, callback) {
-		var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
-		for (var i=0, element; element = elements[i++];) {
-			if (element.classList.contains("idl")) {
-				// Bikeshed handles IDL blocks already.
-				continue;
-			}
-			_.highlightElement(element, async === true, callback);
-		}
-
-		var elements = document.querySelectorAll('pre[class*="language-"], [class*="language-"] pre, pre[class*="lang-"], [class*="lang-"] pre');
-		for (var i=0, element; element = elements[i++];) {
-			if (element.firstElementChild && element.firstElementChild.tagName.toLowerCase() == "code") {
-				// Already handled by the previous loop
-				continue;
-			}
-			if (element.classList.contains("idl")) {
-				// Bikeshed handles IDL blocks already.
-				continue;
-			}
-			_.highlightElement(element, async === true, callback);
-		}
-	},
-
-	highlightElement: function(element, async, callback) {
-		// Find language
-		var language, grammar, parent = element;
-
-		while (parent && !lang.test(parent.className)) {
-			parent = parent.parentNode;
-		}
-
-		if (parent) {
-			language = (parent.className.match(lang) || [,''])[1];
-			grammar = _.languages[language];
-		}
-
-		if (!grammar) {
-			return;
-		}
-
-		// Set language on the element, if not present
-		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-
-		// Set language on the parent, for styling
-		parent = element.parentNode;
-
-		if (/pre/i.test(parent.nodeName)) {
-			parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-		}
-
-		var code = element.textContent;
-
-		if(!code) {
-			return;
-		}
-
-		var env = {
-			element: element,
-			language: language,
-			grammar: grammar,
-			code: code
-		};
-
-		_.hooks.run('before-highlight', env);
-
-		if (async && self.Worker) {
-			var worker = new Worker(_.filename);
-
-			worker.onmessage = function(evt) {
-				env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
-
-				_.hooks.run('before-insert', env);
-
-				env.element.innerHTML = env.highlightedCode;
-
-				callback && callback.call(env.element);
-				_.hooks.run('after-highlight', env);
-			};
-
-			worker.postMessage(JSON.stringify({
-				language: env.language,
-				code: env.code
-			}));
-		}
-		else {
-			env.highlightedCode = _.highlight(env.code, env.grammar, env.language)
-
-			_.hooks.run('before-insert', env);
-
-			env.element.innerHTML = env.highlightedCode;
-
-			callback && callback.call(element);
-
-			_.hooks.run('after-highlight', env);
-		}
-	},
-
-	highlight: function (text, grammar, language) {
-		var tokens = _.tokenize(text, grammar);
-		return Token.stringify(_.util.encode(tokens), language);
-	},
-
-	tokenize: function(text, grammar, language) {
-		var Token = _.Token;
-
-		var strarr = [text];
-
-		var rest = grammar.rest;
-
-		if (rest) {
-			for (var token in rest) {
-				grammar[token] = rest[token];
-			}
-
-			delete grammar.rest;
-		}
-
-		tokenloop: for (var token in grammar) {
-			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
-				continue;
-			}
-
-			var patterns = grammar[token];
-			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
-
-			for (var j = 0; j < patterns.length; ++j) {
-				var pattern = patterns[j],
-					inside = pattern.inside,
-					lookbehind = !!pattern.lookbehind,
-					lookbehindLength = 0,
-					alias = pattern.alias;
-
-				pattern = pattern.pattern || pattern;
-
-				for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
-
-					var str = strarr[i];
-
-					if (strarr.length > text.length) {
-						// Something went terribly wrong, ABORT, ABORT!
-						break tokenloop;
-					}
-
-					if (str instanceof Token) {
-						continue;
-					}
-
-					pattern.lastIndex = 0;
-
-					var match = pattern.exec(str);
-
-					if (match) {
-						if(lookbehind) {
-							lookbehindLength = match[1].length;
-						}
-
-						var from = match.index - 1 + lookbehindLength,
-							match = match[0].slice(lookbehindLength),
-							len = match.length,
-							to = from + len,
-							before = str.slice(0, from + 1),
-							after = str.slice(to + 1);
-
-						var args = [i, 1];
-
-						if (before) {
-							args.push(before);
-						}
-
-						var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias);
-
-						args.push(wrapped);
-
-						if (after) {
-							args.push(after);
-						}
-
-						Array.prototype.splice.apply(strarr, args);
-					}
-				}
-			}
-		}
-
-		return strarr;
-	},
-
-	hooks: {
-		all: {},
-
-		add: function (name, callback) {
-			var hooks = _.hooks.all;
-
-			hooks[name] = hooks[name] || [];
-
-			hooks[name].push(callback);
-		},
-
-		run: function (name, env) {
-			var callbacks = _.hooks.all[name];
-
-			if (!callbacks || !callbacks.length) {
-				return;
-			}
-
-			for (var i=0, callback; callback = callbacks[i++];) {
-				callback(env);
-			}
-		}
-	}
-};
-
-var Token = _.Token = function(type, content, alias) {
-	this.type = type;
-	this.content = content;
-	this.alias = alias;
-};
-
-Token.stringify = function(o, language, parent) {
-	if (typeof o == 'string') {
-		return o;
-	}
-
-	if (Object.prototype.toString.call(o) == '[object Array]') {
-		return o.map(function(element) {
-			return Token.stringify(element, language, o);
-		}).join('');
-	}
-
-	var env = {
-		type: o.type,
-		content: Token.stringify(o.content, language, parent),
-		tag: 'span',
-		classes: ['token', o.type],
-		attributes: {},
-		language: language,
-		parent: parent
-	};
-
-	if (env.type == 'comment') {
-		env.attributes['spellcheck'] = 'true';
-	}
-
-	if (o.alias) {
-		var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
-		Array.prototype.push.apply(env.classes, aliases);
-	}
-
-	_.hooks.run('wrap', env);
-
-	var attributes = '';
-
-	for (var name in env.attributes) {
-		attributes += name + '="' + (env.attributes[name] || '') + '"';
-	}
-
-	return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
-
-};
-
-if (!self.document) {
-	if (!self.addEventListener) {
-		// in Node.js
-		return self.Prism;
-	}
- 	// In worker
-	self.addEventListener('message', function(evt) {
-		var message = JSON.parse(evt.data),
-		    lang = message.language,
-		    code = message.code;
-
-		self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
-		self.close();
-	}, false);
-
-	return self.Prism;
-}
-
-// Get current script and highlight
-var script = document.getElementsByTagName('script');
-
-script = script[script.length - 1];
-
-if (script) {
-	_.filename = script.src;
-
-	if (document.addEventListener && !script.hasAttribute('data-manual')) {
-		document.addEventListener('DOMContentLoaded', _.highlightAll);
-	}
-}
-
-return self.Prism;
-
-})();
-
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = Prism;
-}
-;
-Prism.languages.clike = {
-	'comment': [
-		{
-			pattern: /(^|[^\\])\/\*[\w\W]*?\*\//g,
-			lookbehind: true
-		},
-		{
-			pattern: /(^|[^\\:])\/\/.*?(\r?\n|$)/g,
-			lookbehind: true
-		}
-	],
-	'string': /("|')(\\?.)*?\1/g,
-	'class-name': {
-		pattern: /((?:(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/ig,
-		lookbehind: true,
-		inside: {
-			punctuation: /(\.|\\)/
-		}
-	},
-	'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/g,
-	'boolean': /\b(true|false)\b/g,
-	'function': {
-		pattern: /[a-z0-9_]+\(/ig,
-		inside: {
-			punctuation: /\(/
-		}
-	},
-	'number': /\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?)\b/g,
-	'operator': /[-+]{1,2}|!|<=?|>=?|={1,3}|&{1,2}|\|?\||\?|\*|\/|\~|\^|\%/g,
-	'ignore': /&(lt|gt|amp);/gi,
-	'punctuation': /[{}[\];(),.:]/g
-};
-;
-Prism.languages.markup = {
-	'comment': /<!--[\w\W]*?-->/g,
-	'prolog': /<\?.+?\?>/,
-	'doctype': /<!DOCTYPE.+?>/,
-	'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
-	'tag': {
-		pattern: /<\/?[\w:-]+\s*(?:\s+[\w:-]+(?:=(?:("|')(\\?[\w\W])*?\1|[^\s'">=]+))?\s*)*\/?>/gi,
-		inside: {
-			'tag': {
-				pattern: /^<\/?[\w:-]+/i,
-				inside: {
-					'punctuation': /^<\/?/,
-					'namespace': /^[\w-]+?:/
-				}
-			},
-			'attr-value': {
-				pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/gi,
-				inside: {
-					'punctuation': /=|>|"/g
-				}
-			},
-			'punctuation': /\/?>/g,
-			'attr-name': {
-				pattern: /[\w:-]+/g,
-				inside: {
-					'namespace': /^[\w-]+?:/
-				}
-			}
-
-		}
-	},
-	'entity': /\&#?[\da-z]{1,8};/gi
-};
-
-// Plugin to make entity title show the real entity, idea by Roman Komarov
-Prism.hooks.add('wrap', function(env) {
-
-	if (env.type === 'entity') {
-		env.attributes['title'] = env.content.replace(/&amp;/, '&');
-	}
-});
-;
-Prism.languages.javascript = Prism.languages.extend('clike', {
-	'keyword': /\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|get|if|implements|import|in|instanceof|interface|let|new|null|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/g,
-	'number': /\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?|NaN|-?Infinity)\b/g
-});
-
-Prism.languages.insertBefore('javascript', 'keyword', {
-	'regex': {
-		pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,
-		lookbehind: true
-	}
-});
-
-if (Prism.languages.markup) {
-	Prism.languages.insertBefore('markup', 'tag', {
-		'script': {
-			pattern: /<script[\w\W]*?>[\w\W]*?<\/script>/ig,
-			inside: {
-				'tag': {
-					pattern: /<script[\w\W]*?>|<\/script>/ig,
-					inside: Prism.languages.markup.tag.inside
-				},
-				rest: Prism.languages.javascript
-			}
-		}
-	});
-}
-;
-</script>
- </body>
-</html>

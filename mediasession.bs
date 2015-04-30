@@ -23,7 +23,7 @@ type: interface
 
 <em>This section is non-normative.</em>
 
-This specification provides a way for web developers to categorize different sources media used within web pages. User agents are then able to prescribe suitable interaction and inter-operation behavior between different types of web media.
+This specification provides a way for web developers to categorize different sources of media used within web pages. User agents are then able to prescribe suitable interaction and inter-operation behavior between different types of web media.
 
 <p class="note">@TBW</p>
 
@@ -100,11 +100,11 @@ partial interface HTMLMediaElement {
  <dd>Returns the category the given media falls into. The <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are given below.
 </dl>
 
-The <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code> attribute, along with the <dfn id="attr-media-kind"><code class="idl">kind</code></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an enumerated attribute and must return the category of the track, if it has one, or the empty string otherwise.
+The <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute, along with the <dfn id="attr-media-kind"><code class="idl">kind</code></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an <a href="https://html.spec.whatwg.org/#enumerated-attribute">enumerated attribute</a> and must return the category of the track, if it has one, or the empty string otherwise.
 
-The category of a media element is the string given in the first column of the table below that is the most appropriate for the media based on the definitions in the table's third and fourth columns, as determined by the intended usage of the media resource within the current browsing context.
+The <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute must <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the content attribute of the same name, <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited to only known values</a>.
 
-The keyword given in the first cell of each row maps to the state given in the second cell.
+The following table lists the keywords and states for the attribute — the keywords in the left column map to the states in the cell in the second column on the same row as the keyword. The attribute should be set based on the preferred definitions in the table's third and fourth columns.
 
 <table id="dom-HTMLMediaElement-kind-categories">
   <caption>Return values for <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code></caption>
@@ -157,4 +157,3 @@ The keyword given in the first cell of each row maps to the state given in the s
 <dl class="element">
   <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:</dt><dd><code id="the-audio-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of audio</dd>
 </dl>
-
