@@ -183,7 +183,9 @@ pre[class*="language-"] {
   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
   
 
-  <div class="p-summary" data-fill-with="abstract">[ABSTRACT]
+  <div class="p-summary" data-fill-with="abstract">
+   <p>This specifications adds support for media keys to Web content. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock screens of mobile devices.</p>
+
 </div>
   
 
@@ -206,7 +208,7 @@ Dependencies</span></a>
      <ul class="toc">
       <li><a href="#html-media-element-additions"><span class="secno">5.1</span> <span class="content">Additions to <code class="idl"><span>HTMLMediaElement</span></code></span></a>
       <li><a href="#video-element-additions"><span class="secno">5.2</span> <span class="content">Additions to the <code class="idl"><span>video</span></code> element</span></a>
-      <li><a href="#video-element-additions0"><span class="secno">5.3</span> <span class="content">Additions to the <code class="idl"><span>audio</span></code> element</span></a>
+      <li><a href="#audio-element-additions"><span class="secno">5.3</span> <span class="content">Additions to the <code class="idl"><span>audio</span></code> element</span></a>
      </ul>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ul class="toc">
@@ -329,7 +331,7 @@ myAudio.kind = "content";
 </dl>
 
 
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind" id="dom-htmlmediaelement-kind1">HTMLMediaElement.kind</a></code>, along with the <dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind"><code class="idl">kind</code><a class="self-link" href="#attr-media-kind"></a></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an <a data-link-type="dfn">enumerated attribute</a> and must return the category of the track, if it has one, or the empty string otherwise.</p>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">HTMLMediaElement.kind</a></code> attribute, along with the <dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind"><code class="idl">kind</code><a class="self-link" href="#attr-media-kind"></a></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an enumerated attribute and must return the category of the track, if it has one, or the empty string otherwise.</p>
 
 
    <p>The category of a media element is the string given in the first column of the table below that is the most appropriate for the media based on the definitions in the table’s third and fourth columns, as determined by the intended usage of the media resource within the current browsing context.</p>
@@ -340,7 +342,7 @@ myAudio.kind = "content";
 
    <table id="dom-HTMLMediaElement-kind-categories">
   
-    <caption>Return values for <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind" id="dom-htmlmediaelement-kind0">HTMLMediaElement.kind</a></code></caption>
+    <caption>Return values for <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">HTMLMediaElement.kind</a></code></caption>
    
     <tbody>
      <tr>
@@ -356,9 +358,9 @@ myAudio.kind = "content";
      <tr>
    
       <td>
-     "<dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-content">
-       <code>content</code>
-     <a class="self-link" href="#value-media-kind-content"></a></dfn>"
+     <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-content">
+       <code>"content"</code>
+     <a class="self-link" href="#value-media-kind-content"></a></dfn>
     
       <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-content">Content<a class="self-link" href="#attr-media-kind-content"></a></dfn>
    
@@ -369,9 +371,9 @@ myAudio.kind = "content";
      <tr>
    
       <td>
-     "<dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-transient">
-       <code>transient</code>
-     <a class="self-link" href="#value-media-kind-transient"></a></dfn>"
+     <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-transient">
+       <code>"transient"</code>
+     <a class="self-link" href="#value-media-kind-transient"></a></dfn>
     
       <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-transient">Transient<a class="self-link" href="#attr-media-kind-transient"></a></dfn>
    
@@ -382,9 +384,9 @@ myAudio.kind = "content";
      <tr>
    
       <td>
-     "<dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-ambient">
-       <code>ambient</code>
-     <a class="self-link" href="#value-media-kind-ambient"></a></dfn>"
+     <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-ambient">
+       <code>"ambient"</code>
+     <a class="self-link" href="#value-media-kind-ambient"></a></dfn>
      
       <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-ambient">Ambient<a class="self-link" href="#attr-media-kind-ambient"></a></dfn>
    
@@ -395,8 +397,7 @@ myAudio.kind = "content";
      <tr>
     
       <td>
-      <dfn id="value-media-kind-none"><code></code><a class="self-link" href="#value-media-kind-none"></a></dfn>
-      "" (empty string)
+      <dfn data-dfn-type="dfn" data-noexport="" id="value-media-kind-none"><code>""</code><a class="self-link" href="#value-media-kind-none"></a></dfn> (empty string)
     
       <td><dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind-default">Default<a class="self-link" href="#attr-media-kind-default"></a></dfn>
     
@@ -417,7 +418,7 @@ myAudio.kind = "content";
 </dl>
 
 
-   <h3 class="heading settled" data-level="5.3" id="video-element-additions0"><span class="secno">5.3. </span><span class="content">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> element</span><a class="self-link" href="#video-element-additions0"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id="audio-element-additions"><span class="secno">5.3. </span><span class="content">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> element</span><a class="self-link" href="#audio-element-additions"></a></h3>
 
 
    <dl class="element">
@@ -426,6 +427,7 @@ myAudio.kind = "content";
     <dd><code id="the-audio-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of audio
 </dl>
 
+
 </main>
   
 
@@ -433,10 +435,11 @@ myAudio.kind = "content";
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
+   <li>"", <a href="#value-media-kind-none">5.1</a>
+   <li>"ambient", <a href="#value-media-kind-ambient">5.1</a>
    <li>Ambient, <a href="#attr-media-kind-ambient">5.1</a>
-   <li>ambient, <a href="#value-media-kind-ambient">5.1</a>
+   <li>"content", <a href="#value-media-kind-content">5.1</a>
    <li>Content, <a href="#attr-media-kind-content">5.1</a>
-   <li>content, <a href="#value-media-kind-content">5.1</a>
    <li>Default, <a href="#attr-media-kind-default">5.1</a>
    <li>kind
     <ul>
@@ -444,7 +447,7 @@ myAudio.kind = "content";
      <li>definition of, <a href="#attr-media-kind">5.1</a>
     </ul>
    <li>Transient, <a href="#attr-media-kind-transient">5.1</a>
-   <li>transient, <a href="#value-media-kind-transient">5.1</a></ul>
+   <li>"transient", <a href="#value-media-kind-transient">5.1</a></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
    <li><a data-link-type="biblio" href="#biblio-css-syntax-3">[css-syntax-3]</a> defines the following terms:
