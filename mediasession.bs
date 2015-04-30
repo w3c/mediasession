@@ -1,0 +1,159 @@
+<pre class="metadata">
+Title: Media Sessions
+Group: WHATWG
+H1: Media Sessions
+Shortname: mediasession
+Status: LS
+No Editor: true
+Logo: https://resources.whatwg.org/logo.svg
+!Participate: <a href="https://github.com/whatwg/media-keys/issues/new">File an issue</a> (<a href="https://github.com/whatwg/media-keys/issues?state=open">open issues</a>)
+!Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+!Version History: <a href="https://github.com/whatwg/media-keys/commits">https://github.com/whatwg/media-keys/commits</a>
+Boilerplate: omit conformance
+</pre>
+
+<pre class='anchors'>
+type: interface
+    url: https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement
+        text: HTMLMediaElement
+</pre>
+
+<h2 id="intro">Introduction</h2>
+
+<em>This section is non-normative.</em>
+
+This specification provides a way for web developers to categorize different sources media used within web pages. User agents are then able to prescribe suitable interaction and inter-operation behavior between different types of web media.
+
+<p class="note">@TBW</p>
+
+<h2 id='conformance'>
+Conformance</h2>
+All diagrams, examples, and notes in this specification are
+non-normative, as are all sections explicitly marked non-normative.
+Everything else in this specification is normative.
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+"OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+For readability, these words do not appear in all uppercase letters in this
+specification. [[!RFC2119]]
+
+Requirements phrased in the imperative as part of algorithms
+(such as "strip any leading space characters" or "return false and
+terminate these steps") are to be interpreted with the meaning of the
+key word ("must", "should", "may", etc) used in introducing the
+algorithm.
+
+Conformance requirements phrased as algorithms or specific steps
+may be implemented in any manner, so long as the end result is
+equivalent. (In particular, the algorithms defined in this
+specification are intended to be easy to follow, and not intended to
+be performant.)
+
+<p id="hardwareLimitations">User agents may impose
+implementation-specific limits on otherwise unconstrained inputs,
+e.g. to prevent denial of service attacks, to guard against running
+out of memory, or to work around platform-specific limitations.
+
+When a method or an attribute is said to call another method or attribute, the user agent must invoke its internal API for that attribute or method so that e.g. the author can't change the behavior by overriding attributes or methods with custom properties or functions in JavaScript.
+
+Unless otherwise stated, string comparisons are done in a <a>case-sensitive</a> manner.
+
+<h2 id='dependencies'>
+Dependencies</h2>
+
+The IDL fragments in this specification must be interpreted as
+required for conforming IDL fragments, as described in the Web IDL
+specification. [[!WEBIDL]]
+
+<h2 id="example">Example Usage</h2>
+
+A media element's <a attribute>kind</a> content attribute can be declared in HTML:
+
+<pre class='lang-markup'>
+&lt;video src="short_ping.webm" kind="transient">
+</pre>
+
+Alternatively, a media element's <a attribute>kind</a> attribute can be set in JavaScript:
+
+<pre class='lang-javascript'>
+var myAudio = document.createElement('audio');
+console.log(myAudio.kind) // --> ""
+myAudio.src = "music.mp3";
+myAudio.kind = "content";
+// myAudio.outerHTML === "&lt;audio src="music.mp3" kind="content">&lt;/audio>" === true
+</pre>
+
+<h2 id="model">Model</h2>
+
+<h3 id="html-media-element-additions">Additions to {{HTMLMediaElement}}</h3>
+
+<pre class="idl">
+partial interface HTMLMediaElement {
+  attribute DOMString kind;
+};
+</pre>
+
+<dl class=domintro>
+ <dt><code> <var>media</var> . {{HTMLMediaElement/kind}}</code>
+ <dd>Returns the category the given media falls into. The <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are given below.
+</dl>
+
+The <code class="idl"><a id="dom-htmlmediaelement-kind" attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code>, along with the <dfn id="attr-media-kind"><code class="idl">kind</code></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an <a>enumerated attribute</a> and must return the category of the track, if it has one, or the empty string otherwise.
+
+The category of a media element is the string given in the first column of the table below that is the most appropriate for the media based on the definitions in the table's third and fourth columns, as determined by the intended usage of the media resource within the current browsing context.
+
+The keyword given in the first cell of each row maps to the state given in the second cell.
+
+<table id="dom-HTMLMediaElement-kind-categories">
+  <caption>Return values for <code class="idl"><a id="dom-htmlmediaelement-kind" attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code></caption>
+   <tr>
+    <th>Category
+    <th>State
+    <th>Definition
+    <th>Examples
+  <tr>
+   <td>
+     &quot;<dfn id="value-media-kind-content">
+       <code>content</code>
+     </dfn>&quot;
+    <td><dfn id="attr-media-kind-content">Content</dfn>
+   <td>description here...
+   <td>Music, podcasts, radio
+  <tr>
+   <td>
+     &quot;<dfn id="value-media-kind-transient">
+       <code>transient</code>
+     </dfn>&quot;
+    <td><dfn id="attr-media-kind-transient">Transient</dfn>
+   <td>description here...
+   <td>Short notification sounds
+  <tr>
+   <td>
+     &quot;<dfn id="value-media-kind-ambient">
+       <code>ambient</code>
+     </dfn>&quot;
+     <td><dfn id="attr-media-kind-ambient">Ambient</dfn>
+   <td>description here...
+   <td>...
+  <tr>
+    <td>
+      <dfn id="value-media-kind-none"><code></code></dfn>
+      &quot;&quot; (empty string)
+    <td><dfn id="attr-media-kind-default">Default</dfn>
+    <td>No explicit kind, or the kind given by the track's metadata is not recognised by the user agent.
+    <td>
+</table>
+
+<h3 id="video-element-additions">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> element</h3>
+
+<dl class="element">
+  <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:</dt>
+  <dd><code id="the-video-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of video</dd>
+</dl>
+
+<h3 id="video-element-additions">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> element</h3>
+
+<dl class="element">
+  <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:</dt><dd><code id="the-audio-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of audio</dd>
+</dl>
