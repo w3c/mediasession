@@ -115,32 +115,26 @@ The following table lists the keywords and states for the attribute — the keyw
     <th>Examples
   <tr>
    <td>
-     <dfn id="value-media-kind-content">
-       <code>&quot;content&quot;</code>
-     </dfn>
-    <td><dfn id="attr-media-kind-content">Content</dfn>
+     &quot;<dfn id="value-media-kind-content" lt="content media attribute value"><code>content</code></dfn>&quot;
+    <td><dfn id="attr-media-kind-content" lt="content media state">Content</dfn>
    <td>description here...
    <td>Music, podcasts, radio
   <tr>
    <td>
-     <dfn id="value-media-kind-transient">
-       <code>&quot;transient&quot;</code>
-     </dfn>
-    <td><dfn id="attr-media-kind-transient">Transient</dfn>
+     &quot;<dfn id="value-media-kind-transient" lt="transient media attribute value"><code>transient</code></dfn>&quot;
+    <td><dfn id="attr-media-kind-transient" lt="transient media state">Transient</dfn>
    <td>description here...
    <td>Short notification sounds
   <tr>
    <td>
-     <dfn id="value-media-kind-ambient">
-       <code>&quot;ambient&quot;</code>
-     </dfn>
-     <td><dfn id="attr-media-kind-ambient">Ambient</dfn>
+     &quot;<dfn id="value-media-kind-ambient" lt="ambient media attribute value"><code>ambient</code></dfn>&quot;
+     <td><dfn id="attr-media-kind-ambient" lt="ambient media state">Ambient</dfn>
    <td>description here...
    <td>...
   <tr>
     <td>
-      <dfn id="value-media-kind-none"><code>&quot;&quot;</code></dfn> (empty string)
-    <td><dfn id="attr-media-kind-default">Default</dfn>
+      &quot;<strong id="value-media-kind-none"><code></code></strong>&quot; (empty string)
+    <td><dfn id="attr-media-kind-default" lt="default media state">Default</dfn>
     <td>No explicit kind, or the kind given by the track's metadata is not recognised by the user agent.
     <td>
 </table>
