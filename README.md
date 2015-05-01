@@ -66,7 +66,7 @@ To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshe
 Alternately, you can use the command
 
 ```
-curl https://api.csswg.org/bikeshed/ -F file=@index.bs > index.tmp.html
+curl https://api.csswg.org/bikeshed/ -F file=@mediasession.bs > mediasession.html
 ```
 
 to use Bikeshed's web interface without installing anything.
