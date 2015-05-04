@@ -318,7 +318,7 @@ myAudio.kind = "content";
    <h2 class="heading settled" data-level="5" id="categories"><span class="secno">5. </span><span class="content">Media Categories</span><a class="self-link" href="#categories"></a></h2>
 
 
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-category">Media Category<a class="self-link" href="#media-category"></a></dfn> is a keyword that maps to a well-defined interaction state for a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> that SHOULD be enforced by user agents on the underlying platform on which the user agent is currently running.</p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-category">Media Category<a class="self-link" href="#media-category"></a></dfn> is a keyword that maps to a well-defined interaction state for a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> that should be enforced by user agents on the underlying platform on which the user agent is currently running.</p>
 
 
    <p>The following table lists the available <a data-link-type="dfn" href="#media-category">media categories</a> keywords and states — the keywords in the left column map to the states in the cell in the second column on the same row as the keyword. The attribute should be set based on the preferred definitions in the table’s third and fourth columns.</p>
@@ -470,10 +470,10 @@ myAudio.kind = "content";
         <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a> all other <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">Media Sessions</a> within the user agent.
         
           
-        <li>Optionally, based on platform conventions, show an ongoing media interface in the underlying platform’s notifications area and/or show an ongoing media interface in the underlying platform’s lock screen area.
+        <li>Optionally, based on platform conventions, the user agent may show an ongoing media interface in the underlying platform’s notifications area and/or show an ongoing media interface in the underlying platform’s lock screen area.
         
           
-        <li>Optionally, based on platform conventions, allow hardware and/or software media keys to control playback of <var>current media element</var>.
+        <li>Optionally, based on platform conventions, the user agent may allow hardware and/or software media keys to control playback of <var>current media element</var>.
         
         
        </ol>
@@ -492,7 +492,7 @@ myAudio.kind = "content";
 
             
         <p class="note" role="note">
-              Transient media elements do not provide user access to any hardware or software media keys and do not display any ongoing media interface in the underlying platform’s notifications area or show any ongoing media interface in the underlying platform’s lock screen area.
+              The user agent should not provide user access to any hardware or software media keys and not display any ongoing media interface in the underlying platform’s notifications area or show any ongoing media interface in the underlying platform’s lock screen area for <code><a href="#attr-media-kind-transient">Transient</a></code>-based media elements.
             </p>
         
           
@@ -506,6 +506,8 @@ myAudio.kind = "content";
        
       <dd class="note" role="note">
         @TBW
+        <br><br>
+        Different platforms (e.g. desktop vs. mobile) currently enforce different platform-level default behavior for media elements. Should we define a consistent behavior across platforms or keep the existing defaults per platform? Do the existing defaults continue to make sense given the presence of the kind attribute? Can we say something here without being overly prescriptive about platform-level default conventions?
        
       
     
