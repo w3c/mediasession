@@ -23,7 +23,10 @@ type: interface
 
 <em>This section is non-normative.</em>
 
-This specification provides a way for web developers to categorize different sources of media used within web pages. User agents are then able to prescribe suitable interaction and inter-operation behavior between different types of web media.
+This specification provides a way for web developers to categorize different
+sources of media used within web pages. User agents are then able to prescribe
+suitable interaction and inter-operation behavior between different types of web
+media.
 
 <p class="note">@TBW</p>
 
@@ -56,9 +59,13 @@ implementation-specific limits on otherwise unconstrained inputs,
 e.g. to prevent denial of service attacks, to guard against running
 out of memory, or to work around platform-specific limitations.
 
-When a method or an attribute is said to call another method or attribute, the user agent must invoke its internal API for that attribute or method so that e.g. the author can't change the behavior by overriding attributes or methods with custom properties or functions in JavaScript.
+When a method or an attribute is said to call another method or attribute, the
+user agent must invoke its internal API for that attribute or method so that
+e.g. the author can't change the behavior by overriding attributes or methods
+with custom properties or functions in JavaScript.
 
-Unless otherwise stated, string comparisons are done in a <a>case-sensitive</a> manner.
+Unless otherwise stated, string comparisons are done in a <a>case-sensitive</a>
+manner.
 
 <h2 id='dependencies'>
 Dependencies</h2>
@@ -69,30 +76,42 @@ specification. [[!WEBIDL]]
 
 <h2 id="example">Example Usage</h2>
 
-A media element's <a attribute>kind</a> content attribute can be declared in HTML:
+A media element's <a attribute>kind</a> content attribute can be declared in
+HTML:
 
 <pre class='lang-markup'>
 &lt;video src="short_ping.webm" kind="transient">
 </pre>
 
-Alternatively, a media element's <a attribute>kind</a> attribute can be set in JavaScript:
+Alternatively, a media element's <a attribute>kind</a> attribute can be set in
+JavaScript:
 
 <pre class='lang-javascript'>
 var myAudio = document.createElement('audio');
 console.log(myAudio.kind) // --> ""
 myAudio.src = "music.mp3";
 myAudio.kind = "content";
-// myAudio.outerHTML === "&lt;audio src="music.mp3" kind="content">&lt;/audio>" === true
+// myAudio.outerHTML === "&lt;audio src="music.mp3" kind="content">&lt;/audio>"
+=== true
 </pre>
 
 <h2 id="categories">Media Categories</h2>
 
- A <dfn>Media Category</dfn> is a keyword that maps to a well-defined interaction state for a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> that should be enforced by user agents on the underlying platform on which the user agent is currently running.
+ A <dfn>Media Category</dfn> is a keyword that maps to a well-defined
+interaction state for a <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+element</a> that should be enforced by user agents on the underlying platform on
+which the user agent is currently running.
 
-The following table lists the available <a lt="media category">media categories</a> keywords and states — the keywords in the left column map to the states in the cell in the second column on the same row as the keyword. The attribute should be set based on the preferred definitions in the table’s third and fourth columns.
+The following table lists the available <a lt="media category">media
+categories</a> keywords and states — the keywords in the left column map to the
+states in the cell in the second column on the same row as the keyword. The
+attribute should be set based on the preferred definitions in the table’s third
+and fourth columns.
 
 <table id="dom-HTMLMediaElement-kind-categories">
-  <caption>Return values for <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code></caption>
+  <caption>Return values for <code class="idl"><a attribute lt="kind"
+data-link-type="idl">HTMLMediaElement.kind</a></code></caption>
    <tr>
     <th>Category
     <th>State
@@ -100,33 +119,66 @@ The following table lists the available <a lt="media category">media categories<
     <th>Examples
   <tr>
    <td>
-     &quot;<dfn id="value-media-kind-content" lt="content media attribute value"><code>content</code></dfn>&quot;
+     &quot;<dfn id="value-media-kind-content" lt="content media attribute
+value"><code>content</code></dfn>&quot;
     <td><dfn id="attr-media-kind-content" lt="content media state">Content</dfn>
-   <td>Pauses all other media content. Uses the default volume stream. Displays lock-screen and notification area user interfaces and reacts to changes in both hardware and software-based media key buttons.
+   <td>Pauses all other media content. Uses the default volume stream. Displays
+lock-screen and notification area user interfaces and reacts to changes in both
+hardware and software-based media key buttons.
    <td>Music, podcasts, radio
   <tr>
    <td>
-     &quot;<dfn id="value-media-kind-transient" lt="transient media attribute value"><code>transient</code></dfn>&quot;
-    <td><dfn id="attr-media-kind-transient" lt="transient media state">Transient</dfn>
-   <td>Does not pause other media content. Ducks other content currently playing out. Uses the notification volume stream. Does not display lock-screen or notification area user interfaces and does not react to changes in both hardware and software-based media key buttons.
+     &quot;<dfn id="value-media-kind-transient" lt="transient media attribute
+value"><code>transient</code></dfn>&quot;
+    <td><dfn id="attr-media-kind-transient" lt="transient media
+state">Transient</dfn>
+   <td>Does not pause other media content. Ducks other content currently playing
+out. Uses the notification volume stream. Does not display lock-screen or
+notification area user interfaces and does not react to changes in both hardware
+and software-based media key buttons.
    <td>Notification sounds. Spoken driving directions.
   <tr>
     <td>
-      &quot;<strong id="value-media-kind-none"><code></code></strong>&quot; (empty string)
+      &quot;<strong id="value-media-kind-none"><code></code></strong>&quot;
+(empty string)
     <td><dfn id="attr-media-kind-default" lt="default media state">Default</dfn>
-    <td>No explicit kind, or the kind of the media given is not recognized by the user agent.
+    <td>No explicit kind, or the kind of the media given is not recognized by
+the user agent.
     <td>Legacy media content
 </table>
 
 <h2 id="sessions">Media Sessions</h2>
 
-A <dfn>Media Session</dfn> represents one or more <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> within the same <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that share the same <a href="#dom-HTMLMediaElement-kind-categories">media category state</a>. Each <a>media session</a> then defines the interactions of those <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> with both the underlying platform and other <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> belonging to other <a lt="Media Session">Media Sessions</a> within the user agent.
+A <dfn>Media Session</dfn> represents one or more <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> within the same <a
+href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
+browsing context</a> that share the same <a
+href="#dom-HTMLMediaElement-kind-categories">media category state</a>. Each
+<a>media session</a> then defines the interactions of those <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> with both the underlying platform and other <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> belonging to other <a lt="Media Session">Media Sessions</a> within
+the user agent.
 
- A <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> can contain one <a>media session</a> for each available <a>media category</a>. A <a>media session</a> is created when the first <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a lt="Media Session">Media Session's</a> <a>media category</a> begins playback. A <a>media session</a> is destroyed when the last <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a lt="Media Session">Media Session's</a> <a>media category</a> ends playback (i.e. the media stream finishes).
+ A <a
+href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
+browsing context</a> can contain one <a>media session</a> for each available
+<a>media category</a>. A <a>media session</a> is created when the first <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+element</a> matching the <a lt="Media Session">Media Session's</a> <a>media
+category</a> begins playback. A <a>media session</a> is destroyed when the last
+<a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+element</a> matching the <a lt="Media Session">Media Session's</a> <a>media
+category</a> ends playback (i.e. the media stream finishes).
 
- <p class="note">TBD: Improve description of <a>Media Session</a> lifecycle in above paragraph.</p>
+ <p class="note">TBD: Improve description of <a>Media Session</a> lifecycle in
+above paragraph.</p>
 
-<h2 id="setting-media-category">Assigning a Media Category to Media Elements</h2>
+<h2 id="setting-media-category">Assigning a Media Category to Media
+Elements</h2>
 
 <h3 id="html-media-element-additions">Additions to {{HTMLMediaElement}}</h3>
 
@@ -138,67 +190,154 @@ partial interface HTMLMediaElement {
 
 <dl class=domintro>
  <dt><code> <var>media</var> . {{HTMLMediaElement/kind}}</code>
- <dd>Returns the category the given media falls into. The <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are defined above.
+ <dd>Returns the category the given media falls into. The <a
+href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are
+defined above.
 </dl>
 
-The <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute, along with the <dfn id="attr-media-kind"><code class="idl">kind</code></dfn> content attribute on <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> and <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> elements, is an <a href="https://html.spec.whatwg.org/#enumerated-attribute">enumerated attribute</a> and must return the <a lt="media category">category of the media resource</a>, if it has one, or the empty string otherwise.
+The <code class="idl"><a attribute lt="kind"
+data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute, along with
+the <dfn id="attr-media-kind"><code class="idl">kind</code></dfn> content
+attribute on <code class="idl"><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code>
+and <code class="idl"><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code>
+elements, is an <a
+href="https://html.spec.whatwg.org/#enumerated-attribute">enumerated
+attribute</a> and must return the <a lt="media category">category of the media
+resource</a>, if it has one, or the empty string otherwise.
 
-The <code class="idl"><a attribute lt="kind" data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute must <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the content attribute of the same name, <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited to only known values</a>.
+The <code class="idl"><a attribute lt="kind"
+data-link-type="idl">HTMLMediaElement.kind</a></code> IDL attribute must <a
+href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a>
+the content attribute of the same name, <a
+href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited
+to only known values</a>.
 
-<h3 id="video-element-additions">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code> element</h3>
+<h3 id="video-element-additions">Additions to the <code class="idl"><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element">video</a></code>
+element</h3>
 
 <dl class="element">
-  <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:</dt>
-  <dd><code id="the-video-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of video</dd>
+  <dt>Additional <a
+href="https://html.spec.whatwg.org/#concept-element-attributes">content
+attributes</a>:</dt>
+  <dd><code id="the-video-element:attr-media-kind-2"><a
+href="#attr-media-kind">kind</a></code> — The type of video</dd>
 </dl>
 
-<h3 id="audio-element-additions">Additions to the <code class="idl"><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code> element</h3>
+<h3 id="audio-element-additions">Additions to the <code class="idl"><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-audio-element">audio</a></code>
+element</h3>
 
 <dl class="element">
-  <dt>Additional <a href="https://html.spec.whatwg.org/#concept-element-attributes">content attributes</a>:</dt><dd><code id="the-audio-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of audio</dd>
+  <dt>Additional <a
+href="https://html.spec.whatwg.org/#concept-element-attributes">content
+attributes</a>:</dt><dd><code id="the-audio-element:attr-media-kind-2"><a
+href="#attr-media-kind">kind</a></code> — The type of audio</dd>
 </dl>
 
 <h2 id="invoking-media-session">Invoking a Media Session</h2>
 
-When a <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a></code> event has been queued on a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> and when that <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>'s <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a></code> attribute has the value <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a></code> or <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a></code>, the user agent must run the following steps, passing in the <var>current media element</var>.
+When a <code><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a></code>
+event has been queued on a <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+element</a> and when that <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+element</a>'s <code><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a></code>
+attribute has the value <code><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a></code>
+or <code><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a></code>,
+the user agent must run the following steps, passing in the <var>current media
+element</var>.
 
 <ol>
-  <li>Let <var>media category state</var> be the <var>current media element</var>'s {{kind}} attribute's state value as defined in the list of <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a>. If no known category match is found, let <var>media category state</var> be <code><a href="#attr-media-kind-default">Default</a></code>.</li>
+  <li>Let <var>media category state</var> be the <var>current media
+element</var>'s {{kind}} attribute's state value as defined in the list of <a
+href="#dom-HTMLMediaElement-kind-categories">possible media categories</a>. If
+no known category match is found, let <var>media category state</var> be
+<code><a href="#attr-media-kind-default">Default</a></code>.</li>
   <li>Return and run the remaining steps asynnchronously.</li>
-  <li>Let <var>media session</var> be the current <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s <a>media session</a> object that matches <var>media category state</var>. If no <var>media session</var> is available in the <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that matches <var>media category state</var> then, let <var>media session</var> be a new <a>Media Session</a> with a <a>media category</a> set to the value of <var>media category state</var>.
+  <li>Let <var>media session</var> be the current <a
+href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
+browsing context</a>'s <a>media session</a> object that matches <var>media
+category state</var>. If no <var>media session</var> is available in the <a
+href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
+browsing context</a> that matches <var>media category state</var> then, let
+<var>media session</var> be a new <a>Media Session</a> with a <a>media
+category</a> set to the value of <var>media category state</var>.
   <br><br>
-  Optionally, based on platform conventions, when creating a new <var>media session</var>, also request the most appropriate platform-level media focus for the <var>media session</var> based on the current <var>media category state</var>.
+  Optionally, based on platform conventions, when creating a new <var>media
+session</var>, also request the most appropriate platform-level media focus for
+the <var>media session</var> based on the current <var>media category
+state</var>.
 
   </li>
-  <li>Add a reference to the <var>current media element</var> to <var>media session</var>.
+  <li>Add a reference to the <var>current media element</var> to <var>media
+session</var>.
   </li>
   <li>Run these substeps:
     <dl class=switch>
-       <dt>If <var>media category state</var> is <code><a href="#attr-media-kind-content">Content</a></code>
+       <dt>If <var>media category state</var> is <code><a
+href="#attr-media-kind-content">Content</a></code>
        <dd>
         <ol>
-          <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a> all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in <var>media session</var>.</li>
-          <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a> all other <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a lt="Media Session">Media Sessions</a> within the user agent.</li>
-          <li>Optionally, based on platform conventions, the user agent may show an ongoing media interface in the underlying platform's notifications area and/or show an ongoing media interface in the underlying platform's lock screen area.</li>
-          <li>Optionally, based on platform conventions, the user agent may allow hardware and/or software media keys to control playback of <var>current media element</var>.</li>
+          <li><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a>
+all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> in <var>media session</var>.</li>
+          <li><a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a>
+all other <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> in all other <code><a
+href="#attr-media-kind-content">Content</a></code>-based <a lt="Media
+Session">Media Sessions</a> within the user agent.</li>
+          <li>Optionally, based on platform conventions, the user agent may show
+an ongoing media interface in the underlying platform's notifications area
+and/or show an ongoing media interface in the underlying platform's lock screen
+area.</li>
+          <li>Optionally, based on platform conventions, the user agent may
+allow hardware and/or software media keys to control playback of <var>current
+media element</var>.</li>
         </ol>
        </dd>
-       <dt>If <var>media category state</var> is <code><a href="#attr-media-kind-content">Transient</a></code>
+       <dt>If <var>media category state</var> is <code><a
+href="#attr-media-kind-content">Transient</a></code>
        <dd>
         <ol>
-          <li>For the duration of the <var>current media element</var> duck all other <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a lt="Media Session">Media Sessions</a> within the user agent.</li>
+          <li>For the duration of the <var>current media element</var> duck all
+other <a
+href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> in all other <code><a
+href="#attr-media-kind-content">Content</a></code>-based <a lt="Media
+Session">Media Sessions</a> within the user agent.</li>
 
             <p class="note">
-              The user agent should not provide user access to any hardware or software media keys and not display any ongoing media interface in the underlying platform's notifications area or show any ongoing media interface in the underlying platform's lock screen area for <code><a href="#attr-media-kind-transient">Transient</a></code>-based media elements.
+              The user agent should not provide user access to any hardware or
+software media keys and not display any ongoing media interface in the
+underlying platform's notifications area or show any ongoing media interface in
+the underlying platform's lock screen area for <code><a
+href="#attr-media-kind-transient">Transient</a></code>-based media elements.
             </p>
           </li>
         </ol>
        </dd>
-       <dt>Otherwise, <var>media category state</var> is <code><a href="#attr-media-kind-content">Default</a></code>
+       <dt>Otherwise, <var>media category state</var> is <code><a
+href="#attr-media-kind-content">Default</a></code>
        <dd class="note">
         @TBW
         <br><br>
-        Different platforms (e.g. desktop vs. mobile) currently enforce different platform-level default behavior for media elements. Should we define a consistent behavior across platforms or keep the existing defaults per platform? Do the existing defaults continue to make sense given the presence of the kind attribute? Can we say something here without being overly prescriptive about platform-level default conventions?
+        Different platforms (e.g. desktop vs. mobile) currently enforce
+different platform-level default behavior for media elements. Should we define a
+consistent behavior across platforms or keep the existing defaults per platform?
+Do the existing defaults continue to make sense given the presence of the kind
+attribute? Can we say something here without being overly prescriptive about
+platform-level default conventions?
        </dd>
     </dl>
   </li>
