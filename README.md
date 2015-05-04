@@ -1,7 +1,8 @@
-# Media Keys and Audio Focus
-This standardization project aims to add support for media keys to the Web, e.g. play, pause, fast forward, and rewind. Media keys include hardware keys found on keyboards, headsets, remote controls, and software keys found on lock screens of mobile devices.
+# Media Session Standard
 
-Only one application at a time can be the recipient of media keys, and access is mediated by an audio focus system (see below). Where appropriate, this also allows applications to pause when another application begins playback, or to duck (lower volume) for a short notification.
+https://mediasession.spec.whatwg.org/
+
+This standardization project aims to add support for media keys and audio focus to the Web. Media keys, like play, pause, fast forward and rewind, are found on keyboards, headsets, remote controls, and on lock screens of mobile devices. Audio focus is the system which ensures that application do not play over each other and that only one application at a time responds to media key events. It allows one application to pause when another application begins playback, or to duck (lower volume) for a short notification.
 
 ## Use cases
 
@@ -48,13 +49,6 @@ Our goal is to provide developers with low-level primitives that both help expla
 ## Limitations
 Access to media keys and lock screen UI will only be granted when audio playback begins, ensuring that audio focus is not taken from another application prematurely and that lock screen UI is only shown when it can be used. This matches the [iOS model](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Remote-ControlEvents/Remote-ControlEvents.html).
 
-## Proposals
-
-* [Implicit media focus, key binding, events and overrides](ImplicitMediaControls.md) &ndash; a default and declarative proposal that reuses existing features of `HTMLMediaElement` objects.
-* [Media focus with channels support, metadata additions and media category overrides](https://github.com/mounirlamouri/media-focus/blob/master/explainer.md) &ndash; improve default media handling and provide channels for both `HTMLMediaElement` and `AudioContext` objects.
-* [Media Session API](MediaSession.md) &ndash; a not-so-simple API for multiple `HTMLMediaElement` or `AudioContext` objects
-* [MediaRemoteControl](MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
-
 ## Building the spec
 
 This spec is built using [Bikeshed](https://github.com/tabatkins/bikeshed).
@@ -66,10 +60,16 @@ To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshe
 Alternately, you can use the command
 
 ```
-curl https://api.csswg.org/bikeshed/ -F file=@index.bs > index.tmp.html
+curl https://api.csswg.org/bikeshed/ -F file=@mediasession.bs > mediasession.html
 ```
 
 to use Bikeshed's web interface without installing anything.
+
+## Other Proposals
+
+* [Implicit media focus, key binding, events and overrides](ImplicitMediaControls.md) &ndash; a default and declarative proposal that reuses existing features of `HTMLMediaElement` objects.
+* [Media focus with channels support, metadata additions and media category overrides](https://github.com/mounirlamouri/media-focus/blob/master/explainer.md) &ndash; improve default media handling and provide channels for both `HTMLMediaElement` and `AudioContext` objects.
+* [MediaRemoteControl](MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
 
 ## Contribute
 Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
