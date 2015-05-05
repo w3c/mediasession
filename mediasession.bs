@@ -332,6 +332,19 @@ platform-level default conventions?
 
 <p class="note">@TBW</p>
 
+<!--
+An active <a>media session</a> may be interrupted at any time when the <a>media
+session invocation algorithm</a> is run against a <a>media element</a> not
+under its control.
+
+Additionally, an active <a>media session</a> may be interrupted by another
+application on the underlying platform when that application requests and is
+granted platform-level media focus.
+
+When a <a>media session</a> is to be interrupted the user agent must be directly
+notified that an interruption has occurred. When the user agent receives an interruption notification then it must run the <dfn>media session interruption algorithm</dfn> against every active <a>media session</a> under its control, consisting of the following steps, passing in each active <a>media session</a> as <var>active media session</var>.
+-->
+
 <h2 id="terminating-media-session">Media Session Termination</h2>
 
 When a <a>media element</a> transitions to no longer be <a
