@@ -10,7 +10,7 @@ Abstract: This specifications adds the primitives required to integrate Web-base
 !Participate: <a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)
 !Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 !Version History: <a href="https://github.com/whatwg/mediasession/commits">https://github.com/whatwg/mediasession/commits</a>
-Boilerplate: omit conformance
+Boilerplate: omit conformance, omit idl-index
 </pre>
 
 <pre class='anchors'>
