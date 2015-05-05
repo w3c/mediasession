@@ -221,7 +221,6 @@ element</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ul class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
-      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
      </ul>
     <li><a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ul class="toc">
@@ -316,7 +315,7 @@ e.g. the author can’t change the behavior by overriding attributes or methods
 with custom properties or functions in JavaScript.</p>
 
 
-   <p>Unless otherwise stated, string comparisons are done in a <a data-link-type="dfn" href="http://dev.w3.org/csswg/css-syntax-3/#case-sensitive">case-sensitive</a>
+   <p>Unless otherwise stated, string comparisons are done in a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#case_sensitive">case-sensitive</a>
 manner.</p>
 
 
@@ -435,15 +434,15 @@ elements</a> within the same <a href="https://html.spec.whatwg.org/multipage/bro
 browsing context</a> that share the same <a href="#dom-HTMLMediaElement-kind-categories">media category state</a>. Each
 <a data-link-type="dfn" href="#media-session">media session</a> then defines the interactions of those <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> with both the underlying platform and other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-elements</a> belonging to other <a data-link-type="dfn" href="#media-session">Media Sessions</a> within
+elements</a> belonging to other <a data-link-type="dfn" href="#media-session">media sessions</a> within
 the user agent.</p>
 
 
    <p>A <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a> can contain one <a data-link-type="dfn" href="#media-session">media session</a> for each available
-<a data-link-type="dfn" href="#media-category">media category</a>. A <a data-link-type="dfn" href="#media-session">media session</a> is created when the first <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">Media Session’s</a> <a data-link-type="dfn" href="#media-category">media
+<a data-link-type="dfn" href="#media-category">media category</a>. A <a data-link-type="dfn" href="#media-session">media session</a> is created when the first <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-category">media
 category</a> begins playback. A <a data-link-type="dfn" href="#media-session">media session</a> is destroyed when the last
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">Media Session’s</a> <a data-link-type="dfn" href="#media-category">media
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-category">media
 category</a> ends playback (i.e. the media stream finishes).</p>
 
  
@@ -575,7 +574,7 @@ elements</a> in <var>media session</var>.
           
         <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a>
 all other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">Media Sessions</a> within the user agent.
+elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.
         
           
         <li>Optionally, based on platform conventions, the user agent may show
@@ -602,7 +601,7 @@ media element</var>.
           
         <li>For the duration of the <var>current media element</var> duck all
 other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">Media Sessions</a> within the user agent.
+elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.
         
 
             
@@ -720,21 +719,13 @@ value, <a href="#value-media-kind-content">5</a>
 value, <a href="#value-media-kind-transient">5</a>
    <li>transient media
 state, <a href="#attr-media-kind-transient">5</a></ul>
-  <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
-  <ul class="indexlist">
-   <li><a data-link-type="biblio" href="#biblio-css-syntax-3">[css-syntax-3]</a> defines the following terms:
-    <ul>
-     <li><a href="http://dev.w3.org/csswg/css-syntax-3/#case-sensitive">case-sensitive</a>
-    </ul></ul>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WebIDL]
-   <dd>Cameron McCormack. <a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a>. 19 April 2012. CR. URL: <a href="http://dev.w3.org/2006/webapi/WebIDL/">http://dev.w3.org/2006/webapi/WebIDL/</a>
-   <dt id="biblio-css-syntax-3"><a class="self-link" href="#biblio-css-syntax-3"></a>[CSS-SYNTAX-3]
-   <dd>Tab Atkins Jr.; Simon Sapin. <a href="http://dev.w3.org/csswg/css-syntax/">CSS Syntax Module Level 3</a>. 20 February 2014. CR. URL: <a href="http://dev.w3.org/csswg/css-syntax/">http://dev.w3.org/csswg/css-syntax/</a>
+   <dd>Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 19 April 2012. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
-   <dd>S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a></dl>
+   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dl>
   <script>self = (typeof window !== 'undefined')
 	? window   // if in browser
 	: (

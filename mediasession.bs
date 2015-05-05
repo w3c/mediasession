@@ -14,12 +14,15 @@ Boilerplate: omit conformance, omit idl-index
 </pre>
 
 <pre class='anchors'>
-type: interface
-    url: https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement
-        text: HTMLMediaElement
-type: dfn
-    url: https://html.spec.whatwg.org/multipage/embedded-content.html#media-element
-        text: media element
+urlPrefix: https://html.spec.whatwg.org/multipage/
+    type: dfn
+        urlPrefix: infrastructure.html
+            text: case-sensitive
+        urlPrefix: embedded-content.html
+            text: media element
+    type: interface
+        urlPrefix: embedded-content.html
+            text: HTMLMediaElement
 </pre>
 
 <h2 id="intro">Introduction</h2>
@@ -179,15 +182,15 @@ browsing context</a> that share the same <a
 href="#dom-HTMLMediaElement-kind-categories">media category state</a>. Each
 <a>media session</a> then defines the interactions of those <a lt="media element">media
 elements</a> with both the underlying platform and other <a lt="media element">media
-elements</a> belonging to other <a lt="Media Session">Media Sessions</a> within
+elements</a> belonging to other <a lt="media session">media sessions</a> within
 the user agent.
 
  A <a
 href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a> can contain one <a>media session</a> for each available
-<a>media category</a>. A <a>media session</a> is created when the first <a>media element</a> matching the <a lt="Media Session">Media Session's</a> <a>media
+<a>media category</a>. A <a>media session</a> is created when the first <a>media element</a> matching the <a>media session</a>'s <a>media
 category</a> begins playback. A <a>media session</a> is destroyed when the last
-<a>media element</a> matching the <a lt="Media Session">Media Session's</a> <a>media
+<a>media element</a> matching the <a>media session</a>'s <a>media
 category</a> ends playback (i.e. the media stream finishes).
 
  <p class="note">TBD: Improve description of <a>media session</a> lifecycle in
@@ -305,8 +308,8 @@ elements</a> in <var>media session</var>.</li>
 href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a>
 all other <a lt="media element">media
 elements</a> in all other <code><a
-href="#attr-media-kind-content">Content</a></code>-based <a lt="Media
-Session">Media Sessions</a> within the user agent.</li>
+href="#attr-media-kind-content">Content</a></code>-based <a lt="media
+session">media sessions</a> within the user agent.</li>
           <li>Optionally, based on platform conventions, the user agent may show
 an ongoing media interface in the underlying platform's notifications area
 and/or show an ongoing media interface in the underlying platform's lock screen
@@ -323,8 +326,8 @@ href="#attr-media-kind-content">Transient</a></code>
           <li>For the duration of the <var>current media element</var> duck all
 other <a lt="media element">media
 elements</a> in all other <code><a
-href="#attr-media-kind-content">Content</a></code>-based <a lt="Media
-Session">Media Sessions</a> within the user agent.</li>
+href="#attr-media-kind-content">Content</a></code>-based <a lt="media
+session">media sessions</a> within the user agent.</li>
 
             <p class="note">
               The user agent should not provide user access to any hardware or
