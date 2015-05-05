@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-05-04">4 May 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-05-05">5 May 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -215,8 +215,9 @@ element</span></a>
       <li><a href="#audio-element-additions"><span class="secno">7.3</span> <span class="content">Additions to the <code class="idl"><span>audio</span></code>
 element</span></a>
      </ul>
-    <li><a href="#invoking-media-session"><span class="secno">8</span> <span class="content">Invoking a Media Session</span></a>
-    <li><a href="#terminating-media-session"><span class="secno">9</span> <span class="content">Terminating a Media Session</span></a>
+    <li><a href="#invoking-media-session"><span class="secno">8</span> <span class="content">Media Session Invocation</span></a>
+    <li><a href="#interrupting-media-session"><span class="secno">9</span> <span class="content">Media Session Interruption</span></a>
+    <li><a href="#terminating-media-session"><span class="secno">10</span> <span class="content">Media Session Termination</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ul class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
@@ -332,8 +333,7 @@ myAudio.kind = "content";
 
 
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-category">Media Category<a class="self-link" href="#media-category"></a></dfn> is a keyword that maps to a well-defined
-interaction state for a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-element</a> that should be enforced by user agents on the underlying platform on
+interaction state for a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> that should be enforced by user agents on the underlying platform on
 which the user agent is currently running.</p>
 
 
@@ -407,27 +407,31 @@ the user agent.
    <h2 class="heading settled" data-level="6" id="sessions"><span class="secno">6. </span><span class="content">Media Sessions</span><a class="self-link" href="#sessions"></a></h2>
 
 
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session">Media Session<a class="self-link" href="#media-session"></a></dfn> represents one or more <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session">Media Session<a class="self-link" href="#media-session"></a></dfn> represents one or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> within the same <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a> that share the same <a href="#dom-HTMLMediaElement-kind-categories">media category state</a>. Each
-<a data-link-type="dfn" href="#media-session">media session</a> then defines the interactions of those <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-elements</a> with both the underlying platform and other <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+<a data-link-type="dfn" href="#media-session">media session</a> then defines the interactions of those <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> with both the underlying platform and other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> belonging to other <a data-link-type="dfn" href="#media-session">Media Sessions</a> within
 the user agent.</p>
 
 
    <p>A <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a> can contain one <a data-link-type="dfn" href="#media-session">media session</a> for each available
-<a data-link-type="dfn" href="#media-category">media category</a>. A <a data-link-type="dfn" href="#media-session">media session</a> is created when the first <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-element</a> matching the <a data-link-type="dfn" href="#media-session">Media Session’s</a> <a data-link-type="dfn" href="#media-category">media
-category</a> begins playback. A <a data-link-type="dfn" href="#media-session">media session</a> is destroyed when the last</p>
-<a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-element</a> matching the <a data-link-type="dfn" href="#media-session">Media Session’s</a> <a data-link-type="dfn" href="#media-category">media
-category</a> ends playback (i.e. the media stream finishes).
+<a data-link-type="dfn" href="#media-category">media category</a>. A <a data-link-type="dfn" href="#media-session">media session</a> is created when the first <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">Media Session’s</a> <a data-link-type="dfn" href="#media-category">media
+category</a> begins playback. A <a data-link-type="dfn" href="#media-session">media session</a> is destroyed when the last
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">Media Session’s</a> <a data-link-type="dfn" href="#media-category">media
+category</a> ends playback (i.e. the media stream finishes).</p>
 
  
    <p class="note" role="note">TBD: Improve description of <a data-link-type="dfn" href="#media-session">Media Session</a> lifecycle in
 above paragraph.</p>
+
+
+   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> can have a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session">current media session<a class="self-link" href="#current-media-session"></a></dfn>, which is a <a data-link-type="dfn" href="#media-session">media session</a> object. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created it does not have a <a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
+
+
+   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> obtains a <a data-link-type="dfn" href="#current-media-session">current media session</a> object only when it first reaches a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a data-link-type="dfn" href="#media-session-invocation-algorithm">Media Session Invocation algorithm</a> below. A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> is removed when it subsequently reaches a non-<a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a data-link-type="dfn" href="#media-session-termination-algorithm">Media Session Termination algorithm</a> below.</p>
 
 
    <h2 class="heading settled" data-level="7" id="setting-media-category"><span class="secno">7. </span><span class="content">Assigning a Media Category to Media
@@ -491,17 +495,10 @@ attributes</a>:
 </dl>
 
 
-   <h2 class="heading settled" data-level="8" id="invoking-media-session"><span class="secno">8. </span><span class="content">Invoking a Media Session</span><a class="self-link" href="#invoking-media-session"></a></h2>
+   <h2 class="heading settled" data-level="8" id="invoking-media-session"><span class="secno">8. </span><span class="content">Media Session Invocation</span><a class="self-link" href="#invoking-media-session"></a></h2>
 
 
-   <p>When a <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a></code>
-event has been queued on a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-element</a> and when that <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-element</a>’s <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a></code>
-attribute has the value <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a></code>
-or <code><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a></code>,
-the user agent must run the following steps, passing in the <var>current media
-element</var>.</p>
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> transitions to <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> then the user agent must run the <dfn data-dfn-type="dfn" data-noexport="" id="media-session-invocation-algorithm">media session invocation algorithm<a class="self-link" href="#media-session-invocation-algorithm"></a></dfn> which consists of the following steps, passing in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> as <var>current media element</var>.</p>
 
 
    <ol>
@@ -511,7 +508,7 @@ element</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmedia
 no known category match is found, let <var>media category state</var> be
 <code><a href="#attr-media-kind-default">Default</a></code>.
   
-    <li>Return and run the remaining steps asynnchronously.
+    <li>Return and run the remaining steps asynchronously.
   
     <li>Let <var>media session</var> be the current <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> object that matches <var>media
@@ -531,6 +528,10 @@ state</var>.
 session</var>.
   
   
+    <li>Set <var>current media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to <var>media session</var>.
+session.
+  
+  
     <li>Run these substeps:
     
      <dl class="switch">
@@ -542,12 +543,12 @@ session</var>.
        <ol>
           
         <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a>
-all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> in <var>media session</var>.
         
           
         <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">Pause</a>
-all other <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+all other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">Media Sessions</a> within the user agent.
         
           
@@ -574,7 +575,7 @@ media element</var>.
        <ol>
           
         <li>For the duration of the <var>current media element</var> duck all
-other <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">Media Sessions</a> within the user agent.
         
 
@@ -613,10 +614,56 @@ platform-level default conventions?
 </ol>
 
 
-   <h2 class="heading settled" data-level="9" id="terminating-media-session"><span class="secno">9. </span><span class="content">Terminating a Media Session</span><a class="self-link" href="#terminating-media-session"></a></h2>
+   <h2 class="heading settled" data-level="9" id="interrupting-media-session"><span class="secno">9. </span><span class="content">Media Session Interruption</span><a class="self-link" href="#interrupting-media-session"></a></h2>
 
 
    <p class="note" role="note">@TBW</p>
+
+
+   <h2 class="heading settled" data-level="10" id="terminating-media-session"><span class="secno">10. </span><span class="content">Media Session Termination</span><a class="self-link" href="#terminating-media-session"></a></h2>
+
+
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> transitions to no longer be <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a>
+ nor <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>
+ then the user agent must run the <dfn data-dfn-type="dfn" data-noexport="" id="media-session-termination-algorithm">media session termination algorithm<a class="self-link" href="#media-session-termination-algorithm"></a></dfn>
+ which consists of the following steps, passing in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> as
+ <var>current media element</var>.</p>
+
+
+   <ol>
+  
+    <li>
+    Let <var>media session</var> be the value of <var>current media
+    element</var>’s' <a data-link-type="dfn" href="#current-media-session">current media session</a>. If <var>current media
+    element</var> does not have a <a data-link-type="dfn" href="#current-media-session">current media session</a>, then abort any
+    remaining steps and return.
+  
+  
+    <li>
+    Return and run the remaining steps asynchronously.
+  
+  
+    <li>Remove the reference for the <var>current media element</var> from <var>media
+session</var>.
+  
+  
+    <li>
+  Optionally, based on platform conventions, remove any previously obtained
+  platform-level media focus for <var>media session</var> based on the current
+  <var>media category state</var>.
+  
+  
+    <li>Optionally, based on platform conventions, the user agent must remove any
+  previously established ongoing media interface in the underlying platform’s
+  notifications area and any ongoing media interface in the underlying
+  platform’s lock screen area, if any.
+  
+    <li>Optionally, based on platform conventions, the user agent must prevent
+  any hardware and/or software media keys from controlling playback of
+  <var>current media element</var>.
+  
+    <li>Remove <a data-link-type="dfn" href="#current-media-session">current media session</a> from <var>current media element</var>.
+</ol>
 
 </main>
   
@@ -628,6 +675,7 @@ platform-level default conventions?
    <li>content media attribute
 value, <a href="#value-media-kind-content">5</a>
    <li>content media state, <a href="#attr-media-kind-content">5</a>
+   <li>current media session, <a href="#current-media-session">6</a>
    <li>default media state, <a href="#attr-media-kind-default">5</a>
    <li>kind
     <ul>
@@ -636,6 +684,8 @@ value, <a href="#value-media-kind-content">5</a>
     </ul>
    <li>Media Category, <a href="#media-category">5</a>
    <li>Media Session, <a href="#media-session">6</a>
+   <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">8</a>
+   <li>media session termination algorithm, <a href="#media-session-termination-algorithm">10</a>
    <li>transient media attribute
 value, <a href="#value-media-kind-transient">5</a>
    <li>transient media
