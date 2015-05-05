@@ -125,7 +125,7 @@ myAudio.kind = "content";
 
 <h2 id="categories">Media Categories</h2>
 
- A <dfn>Media Category</dfn> is a keyword that maps to a well-defined
+ A <dfn>media category</dfn> is a keyword that maps to a well-defined
 interaction state for a <a>media element</a> that should be enforced by user agents on the underlying platform on
 which the user agent is currently running.
 
@@ -175,7 +175,7 @@ the user agent.
 
 <h2 id="sessions">Media Sessions</h2>
 
-A <dfn>Media Session</dfn> represents one or more <a lt="media element">media
+A <dfn>media session</dfn> represents one or more <a lt="media element">media
 elements</a> within the same <a
 href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a> that share the same <a
