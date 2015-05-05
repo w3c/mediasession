@@ -168,12 +168,14 @@ category</a> begins playback. A <a>media session</a> is destroyed when the last
 <a>media element</a> matching the <a lt="Media Session">Media Session's</a> <a>media
 category</a> ends playback (i.e. the media stream finishes).
 
- <p class="note">TBD: Improve description of <a>Media Session</a> lifecycle in
+ <p class="note">TBD: Improve description of <a>media session</a> lifecycle in
 above paragraph.</p>
 
 A <a>media element</a> can have a <dfn>current media session</dfn>, which is a <a>media session</a> object. When a <a>media element</a> is created it does not have a <a>current media session</a>.
 
-A <a>media element</a> obtains a <a>current media session</a> object only when it first reaches a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a>Media Session Invocation algorithm</a> below. A <a>media element</a>'s <a>current media session</a> is removed when it subsequently reaches a non-<a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a>Media Session Termination algorithm</a> below.
+A <a>media element</a> obtains a <a>current media session</a> object only when it first reaches a <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a>media session invocation algorithm</a> below. A <a>media element</a>'s <a>current media session</a> is removed when it subsequently reaches a non-<a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a>media session termination algorithm</a> below.
+
+The <dfn>session media elements</dfn> of a <a>media session</a> object are the <a>media elements</a> whose <a>current media session</a> is that <a>media session</a> object.
 
 <h2 id="setting-media-category">Assigning a Media Category to Media
 Elements</h2>
@@ -252,7 +254,7 @@ browsing context</a>'s <a>media session</a> object that matches <var>media
 category state</var>. If no <var>media session</var> is available in the <a
 href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a> that matches <var>media category state</var> then, let
-<var>media session</var> be a new <a>Media Session</a> with a <a>media
+<var>media session</var> be a new <a>media session</a> with a <a>media
 category</a> set to the value of <var>media category state</var>.
   <br><br>
   Optionally, based on platform conventions, when creating a new <var>media
@@ -262,7 +264,7 @@ state</var>.
 
   </li>
   <li>Add a reference to the <var>current media element</var> to <var>media
-session</var>.
+session</var>'s <a>session media elements</a>.
   </li>
   <li>Set <var>current media element</var>'s <a>current media session</a> to <var>media session</var>.
 session</var>.
@@ -366,8 +368,9 @@ href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pau
     Return and run the remaining steps asynchronously.
   </li>
   <li>Remove the reference for the <var>current media element</var> from <var>media
-session</var>.
+session</var>'s <a>session media elements</a>.
   </li>
+  <li>Remove <a>current media session</a> from <var>current media element</var>.
   <li>
   Optionally, based on platform conventions, remove any previously obtained
   platform-level media focus for <var>media session</var> based on the current
@@ -380,5 +383,4 @@ session</var>.
   <li>Optionally, based on platform conventions, the user agent must prevent
   any hardware and/or software media keys from controlling playback of
   <var>current media element</var>.</li>
-  <li>Remove <a>current media session</a> from <var>current media element</var>.
 </ol>
