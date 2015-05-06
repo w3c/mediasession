@@ -104,7 +104,7 @@ equivalent. (In particular, the algorithms defined in this
 specification are intended to be easy to follow, and not intended to
 be performant.)
 
-<p id="hardwareLimitations">User agents may impose
+User agents may impose
 implementation-specific limits on otherwise unconstrained inputs,
 e.g. to prevent denial of service attacks, to guard against running
 out of memory, or to work around platform-specific limitations.
