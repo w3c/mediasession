@@ -184,7 +184,12 @@ pre[class*="language-"] {
   
 
   <div class="p-summary" data-fill-with="abstract">
-   <p>This specifications adds the primitives required to integrate Web-based media with platform media keys such as hardware keys found on keyboards, headsets, remote controls, and software keys found in notification areas and on lock screens of mobile devices.</p>
+   <p>This specification adds the primitives required to obtain different
+
+levels of platform media focus and access to platform media keys such
+as hardware keys found on keyboards, headsets, remote controls, and
+software keys found in notification areas and on lock screens of
+mobile devices.</p>
 
 </div>
   
@@ -241,36 +246,35 @@ element</span></a>
    <p><em>This section is non-normative.</em></p>
 
 
-   <p>Web media is used extensively today on the web to play a variety of different
+   <p>Media is used extensively today on the web to play a variety of different
 types of media. It is often used to play music, podcasts and radio content. At
 other times media elements are used to provide background music, sound effects,
 notification sounds and to render WebRTC media stream content.</p>
 
 
    <p>When playing media on the web, developers are currently forced to adopt a
-single default platform modality for playing Web media content. On the other
+single default platform modality for playing web media content. On the other
 hand, native applications can access much richer media integration options with
 an underlying platform. On mobile devices, native application developers can
 request many different forms of media integration with the underlying platform
 to obtain access to headphone buttons, lock screens and notification areas as
-needed. On desktop devices, native application can request access to keyboard
-media key events. Native application developers can specify the parameters in
+needed. On desktop devices, native applications have access to keyboard
+media key events. Native application developers can specify the conditions in
 which media content should pause or duck on audio interruptions (i.e. pause or
 lower the volume for the duration of the interruption), continue playing out
-when the device screen is switched off, pause when page visibility is lost and
+when application focus is lost or the device screen is switched off and
 interface with internal and external remote controllers.</p>
 
 
-   <p>This specification provides these powerful media integration features for Web
-media. By allowing web developers to express the intended usage of their Web
-media, user agents can supply the most suitable platform-level interactions for
+   <p>This specification provides these powerful media integration features for web
+media. By allowing web developers to express the intended usage of their media, user agents can supply the most suitable platform-level interactions for
 that media and enforce logical inter-operation behavior on the current platform
-between any number of different sources of Web media.</p>
+between any number of different sources of media.</p>
 
 
    <p>The specification details the mechanism that allows web developers to specify
-the most appropriate category for their Web media and for user agents to then
-use these supplied hints to enforce how different Web media sources should
+the most appropriate category for their media and for user agents to then
+use these supplied hints to enforce how different sources of web media should
 interact with each other, other native media content and the underlying
 platform.</p>
 
@@ -550,7 +554,6 @@ session</var>’s <a data-link-type="dfn" href="#session-media-elements">session
   
   
     <li>Set <var>current media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to <var>media session</var>.
-session.
   
   
     <li>Run these substeps:
