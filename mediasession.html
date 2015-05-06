@@ -472,15 +472,10 @@ defined above.
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be changed even once the media resource is being played; but it is only read by the platform at the point that the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run against a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>. Thus, changing this attribute once the media element is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change the <a data-link-type="dfn" href="#media-session">media session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs.</p>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute must <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the content attribute of the same name, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited
-to only known values</a>.</p>
-
-
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind"><code>kind</code><a class="self-link" href="#attr-media-kind"></a></dfn> content
-attribute on a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> or
-<code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element, is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
-and must return the element’s <a data-link-type="dfn" href="#media-category">media category</a>, if it has one,
-or the empty string otherwise.</p>
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute must
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> and
+<code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element content attribute of the same name,
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited to only known values</a>.</p>
 
 
    <h3 class="heading settled" data-level="7.2" id="video-element-additions"><span class="secno">7.2. </span><span class="content">Additions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
@@ -492,8 +487,14 @@ element</span><a class="self-link" href="#video-element-additions"></a></h3>
     <dt>Additional content
 attributes:
   
-    <dd><code id="the-video-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of video
+    <dd><dfn data-dfn-type="dfn" data-lt="video kind" data-noexport="" id="video-kind"><code>kind</code> — The type of video<a class="self-link" href="#video-kind"></a></dfn>
 </dl>
+
+
+   <p>The <code><a data-link-type="dfn" href="#video-kind">kind</a></code> content attribute on a
+<code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element, is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
+and must return the video element’s <a data-link-type="dfn" href="#media-category">media category</a>, if it has one,
+or the empty string otherwise.</p>
 
 
    <h3 class="heading settled" data-level="7.3" id="audio-element-additions"><span class="secno">7.3. </span><span class="content">Additions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code>
@@ -504,8 +505,15 @@ element</span><a class="self-link" href="#audio-element-additions"></a></h3>
   
     <dt>Additional content
 attributes:
-    <dd><code id="the-audio-element:attr-media-kind-2"><a href="#attr-media-kind">kind</a></code> — The type of audio
+  
+    <dd><dfn data-dfn-type="dfn" data-lt="audio kind" data-noexport="" id="audio-kind"><code>kind</code> — The type of audio<a class="self-link" href="#audio-kind"></a></dfn>
 </dl>
+
+
+   <p>The <code><a data-link-type="dfn" href="#audio-kind">kind</a></code> content
+attribute on an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element, is an
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a> and must return the audio element’s
+<a data-link-type="dfn" href="#media-category">media category</a>, if it has one, or the empty string otherwise.</p>
 
 
    <h2 class="heading settled" data-level="8" id="invoking-media-session"><span class="secno">8. </span><span class="content">Media Session Invocation</span><a class="self-link" href="#invoking-media-session"></a></h2>
@@ -687,16 +695,13 @@ session</var>’s <a data-link-type="dfn" href="#session-media-elements">session
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
+   <li>audio kind, <a href="#audio-kind">7.3</a>
    <li>content media attribute
 value, <a href="#value-media-kind-content">5</a>
    <li>content media state, <a href="#attr-media-kind-content">5</a>
    <li>current media session, <a href="#current-media-session">6</a>
    <li>default media state, <a href="#attr-media-kind-default">5</a>
-   <li>kind
-    <ul>
-     <li>attribute for HTMLMediaElement, <a href="#dom-htmlmediaelement-kind">7.1</a>
-     <li>definition of, <a href="#attr-media-kind">7.1</a>
-    </ul>
+   <li>kind, <a href="#dom-htmlmediaelement-kind">7.1</a>
    <li>media category, <a href="#media-category">5</a>
    <li>media session, <a href="#media-session">6</a>
    <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">8</a>
@@ -705,7 +710,8 @@ value, <a href="#value-media-kind-content">5</a>
    <li>transient media attribute
 value, <a href="#value-media-kind-transient">5</a>
    <li>transient media
-state, <a href="#attr-media-kind-transient">5</a></ul>
+state, <a href="#attr-media-kind-transient">5</a>
+   <li>video kind, <a href="#video-kind">7.2</a></ul>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
