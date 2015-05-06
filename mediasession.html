@@ -308,12 +308,12 @@ specification are intended to be easy to follow, and not intended to
 be performant.)</p>
 
 
-   <p id="hardwareLimitations">User agents may impose
+   <p>User agents may impose
 implementation-specific limits on otherwise unconstrained inputs,
 e.g. to prevent denial of service attacks, to guard against running
-out of memory, or to work around platform-specific limitations.
+out of memory, or to work around platform-specific limitations.</p>
 
-</p>
+
    <p>When a method or an attribute is said to call another method or attribute, the
 user agent must invoke its internal API for that attribute or method so that
 e.g. the author can’t change the behavior by overriding attributes or methods
@@ -377,42 +377,62 @@ and fourth columns.</p>
      <tr>
     
       <th>Category
+      
     
       <th>State
+      
     
       <th>Definition
+      
     
       <th>Examples
+      
+  
+     
   
      <tr>
    
       <td>
      "<dfn data-dfn-type="dfn" data-lt="content media attribute
 value" data-noexport="" id="value-media-kind-content"><code>content</code><a class="self-link" href="#value-media-kind-content"></a></dfn>"
+   
+      
     
       <td><dfn data-dfn-type="dfn" data-lt="content media state" data-noexport="" id="attr-media-kind-content">Content<a class="self-link" href="#attr-media-kind-content"></a></dfn>
+      
    
       <td>Pauses all other media content. Displays
 lock-screen and notification area user interfaces and reacts to changes in both
 hardware and software-based media key buttons.
+      
    
       <td>Music, podcasts, radio
+      
+  
+     
   
      <tr>
    
       <td>
      "<dfn data-dfn-type="dfn" data-lt="transient media attribute
 value" data-noexport="" id="value-media-kind-transient"><code>transient</code><a class="self-link" href="#value-media-kind-transient"></a></dfn>"
+   
+      
     
       <td><dfn data-dfn-type="dfn" data-lt="transient media
 state" data-noexport="" id="attr-media-kind-transient">Transient<a class="self-link" href="#attr-media-kind-transient"></a></dfn>
+      
    
       <td>Does not pause other media content. Ducks other content currently playing
 out. Does not display lock-screen or
 notification area user interfaces and does not react to changes in both hardware
 and software-based media key buttons.
+      
    
       <td>Notification sounds. Spoken driving directions.
+      
+  
+     
   
      <tr>
     
@@ -420,12 +440,19 @@ and software-based media key buttons.
       "<strong id="value-media-kind-none"><code></code></strong>"
 (empty string)
     
+      
+    
       <td><dfn data-dfn-type="dfn" data-lt="default media state" data-noexport="" id="attr-media-kind-default">Default<a class="self-link" href="#attr-media-kind-default"></a></dfn>
+      
     
       <td>No explicit kind, or the kind of the media given is not recognized by
 the user agent.
+      
     
       <td>Legacy media content
+      
+   
+     
 </table>
 
 
@@ -511,7 +538,7 @@ element</span><a class="self-link" href="#video-element-additions"></a></h3>
     <dt>Additional content
 attributes:
   
-    <dd><dfn data-dfn-type="dfn" data-lt="video kind" data-noexport="" id="video-kind"><code>kind</code> — The type of video<a class="self-link" href="#video-kind"></a></dfn>
+    <dd><dfn data-dfn-type="dfn" data-lt="video kind" data-noexport="" id="video-kind"><code>kind</code><a class="self-link" href="#video-kind"></a></dfn> — The type of video
 </dl>
 
 
@@ -530,7 +557,7 @@ element</span><a class="self-link" href="#audio-element-additions"></a></h3>
     <dt>Additional content
 attributes:
   
-    <dd><dfn data-dfn-type="dfn" data-lt="audio kind" data-noexport="" id="audio-kind"><code>kind</code> — The type of audio<a class="self-link" href="#audio-kind"></a></dfn>
+    <dd><dfn data-dfn-type="dfn" data-lt="audio kind" data-noexport="" id="audio-kind"><code>kind</code><a class="self-link" href="#audio-kind"></a></dfn> — The type of audio
 </dl>
 
 
@@ -584,6 +611,7 @@ session</var>’s <a data-link-type="dfn" href="#session-media-elements">session
      <dl class="switch">
        
       <dt>If <var>media category state</var> is <code><a href="#attr-media-kind-content">Content</a></code>
+      
        
       <dd>
         
@@ -615,25 +643,27 @@ media element</var>.
       
        
       <dt>If <var>media category state</var> is <code><a href="#attr-media-kind-content">Transient</a></code>
+      
        
       <dd>
         
        <ol>
           
-        <li>For the duration of the <var>current media element</var> duck all
+        <li>
+            For the duration of the <var>current media element</var> duck all
 other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.
-        
 
             
-        <p class="note" role="note">
+         <p class="note" role="note">
               The user agent should not provide user access to any hardware or
 software media keys and not display any ongoing media interface in the
 underlying platform’s notifications area or show any ongoing media interface in
 the underlying platform’s lock screen area for <code><a href="#attr-media-kind-transient">Transient</a></code>-based media elements.
             </p>
-        
+         
           
+        
         
        </ol>
        
@@ -641,6 +671,7 @@ the underlying platform’s lock screen area for <code><a href="#attr-media-kind
       
        
       <dt>Otherwise, <var>media category state</var> is <code><a href="#attr-media-kind-content">Default</a></code>
+      
        
       <dd class="note" role="note">
         @TBW
