@@ -293,7 +293,7 @@ element>video</a></code> element</h3>
 </dl>
 
 The <code><a lt="video kind">kind</a></code> content attribute on a
-<code><a element>video</a></code> element, is an <a>enumerated attribute</a>
+<code><a element>video</a></code> element is an <a>enumerated attribute</a>
 and must return the video element's <a>media category</a>, if it has one, or the
 empty string otherwise.
 
@@ -310,7 +310,7 @@ element>audio</a></code> element</h3>
 </dl>
 
 The <code><a lt="audio kind">kind</a></code> content attribute on an <code><a
-element>audio</a></code> element, is an <a>enumerated attribute</a> and must
+element>audio</a></code> element is an <a>enumerated attribute</a> and must
 return the audio element's <a>media category</a>, if it has one, or the empty
 string otherwise.
 
