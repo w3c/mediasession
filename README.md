@@ -49,27 +49,24 @@ Our goal is to provide developers with low-level primitives that both help expla
 ## Limitations
 Access to media keys and lock screen UI will only be granted when audio playback begins, ensuring that audio focus is not taken from another application prematurely and that lock screen UI is only shown when it can be used. This matches the [iOS model](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Remote-ControlEvents/Remote-ControlEvents.html).
 
-## Building the spec
+## Contribute
 
 This spec is built using [Bikeshed](https://github.com/tabatkins/bikeshed).
 
-### Bikeshed
-
-To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/master/docs/install.md) and then run `bikeshed spec` in the working directory to build the spec.
-
-Alternately, you can use the command
+Update `mediasession.bs`, then run
 
 ```
-curl https://api.csswg.org/bikeshed/ -F file=@mediasession.bs > mediasession.html
+make
 ```
 
-to use Bikeshed's web interface without installing anything.
+to format `mediasession.bs` and generate `mediasession.html` using [Bikeshed's web interface](https://api.csswg.org/bikeshed/).
+
+To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/master/docs/install.md) and then run `bikeshed spec` in the working directory.
+
+Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
 
 ## Other Proposals
 
 * [Implicit media focus, key binding, events and overrides](ImplicitMediaControls.md) &ndash; a default and declarative proposal that reuses existing features of `HTMLMediaElement` objects.
 * [Media focus with channels support, metadata additions and media category overrides](https://github.com/mounirlamouri/media-focus/blob/master/explainer.md) &ndash; improve default media handling and provide channels for both `HTMLMediaElement` and `AudioContext` objects.
 * [MediaRemoteControl](MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
-
-## Contribute
-Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
