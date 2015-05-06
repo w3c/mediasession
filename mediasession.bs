@@ -259,7 +259,7 @@ element</h3>
 <dl class="element">
   <dt>Additional content
 attributes:</dt>
-  <dd><dfn lt="video kind"><code>kind</code></a> — The type of video</dd>
+  <dd><dfn lt="video kind"><code>kind</code></dfn> — The type of video</dd>
 </dl>
 
 The <code><a lt="video kind">kind</a></code> content attribute on a
@@ -273,7 +273,7 @@ element</h3>
 <dl class="element">
   <dt>Additional content
 attributes:</dt>
-  <dd><dfn lt="audio kind"><code>kind</code></a> — The type of audio</dd>
+  <dd><dfn lt="audio kind"><code>kind</code></dfn> — The type of audio</dd>
 </dl>
 
 The <code><a lt="audio kind">kind</a></code> content
