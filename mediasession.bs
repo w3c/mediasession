@@ -243,7 +243,7 @@ The <dfn>session media elements</dfn> of a <a>media session</a> object are the
 <h2 id="setting-media-category">Assigning a media category to media
 elements</h2>
 
-<h3 id="html-media-element-additions">Additions to {{HTMLMediaElement}}</h3>
+<h3>Extensions to the {{HTMLMediaElement}} interface</h3>
 
 <pre class="idl">
 partial interface HTMLMediaElement {
@@ -280,8 +280,7 @@ The <code>{{HTMLMediaElement/kind}}</code> IDL attribute must
 element>audio</a></code> element content attribute of the same name, <a>limited
 to only known values</a>.
 
-<h3 id="video-element-additions">Additions to the <code><a
-element>video</a></code> element</h3>
+<h3>Extensions to the <code><a element>video</a></code> element</h3>
 
 <dl class="element">
   <dt>
@@ -297,8 +296,7 @@ The <code><a lt="video kind">kind</a></code> content attribute on a
 and must return the video element's <a>media category</a>, if it has one, or the
 empty string otherwise.
 
-<h3 id="audio-element-additions">Additions to the <code><a
-element>audio</a></code> element</h3>
+<h3>Extensions to the <code><a element>audio</a></code> element</h3>
 
 <dl class="element">
   <dt>
