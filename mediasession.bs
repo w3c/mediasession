@@ -158,38 +158,45 @@ and fourth columns.
 
 <table id="valid-media-categories">
    <tr>
-    <th>Category
-    <th>State
-    <th>Definition
-    <th>Examples
+    <th>Category</th>
+    <th>State</th>
+    <th>Definition</th>
+    <th>Examples</th>
+  </tr>
   <tr>
    <td>
      &quot;<dfn id="value-media-kind-content" lt="content media attribute
 value"><code>content</code></dfn>&quot;
-    <td><dfn id="attr-media-kind-content" lt="content media state">Content</dfn>
+   </td>
+    <td><dfn id="attr-media-kind-content" lt="content media state">Content</dfn></td>
    <td>Pauses all other media content. Displays
 lock-screen and notification area user interfaces and reacts to changes in both
-hardware and software-based media key buttons.
-   <td>Music, podcasts, radio
+hardware and software-based media key buttons.</td>
+   <td>Music, podcasts, radio</td>
+  </tr>
   <tr>
    <td>
      &quot;<dfn id="value-media-kind-transient" lt="transient media attribute
 value"><code>transient</code></dfn>&quot;
+   </td>
     <td><dfn id="attr-media-kind-transient" lt="transient media
-state">Transient</dfn>
+state">Transient</dfn></td>
    <td>Does not pause other media content. Ducks other content currently playing
 out. Does not display lock-screen or
 notification area user interfaces and does not react to changes in both hardware
-and software-based media key buttons.
-   <td>Notification sounds. Spoken driving directions.
+and software-based media key buttons.</td>
+   <td>Notification sounds. Spoken driving directions.</td>
+  </tr>
   <tr>
     <td>
       &quot;<strong id="value-media-kind-none"><code></code></strong>&quot;
 (empty string)
-    <td><dfn id="attr-media-kind-default" lt="default media state">Default</dfn>
+    </td>
+    <td><dfn id="attr-media-kind-default" lt="default media state">Default</dfn></td>
     <td>No explicit kind, or the kind of the media given is not recognized by
-the user agent.
-    <td>Legacy media content
+the user agent.</td>
+    <td>Legacy media content</td>
+   </tr>
 </table>
 
 <h2 id="sessions">Media Sessions</h2>
@@ -229,10 +236,10 @@ partial interface HTMLMediaElement {
 </pre>
 
 <dl class=domintro>
- <dt><code> <var>media</var> . {{HTMLMediaElement/kind}}</code>
+ <dt><code> <var>media</var> . {{HTMLMediaElement/kind}}</code></dt>
  <dd>Returns the category the given media falls into. The <a
 href="#valid-media-categories">possible media categories</a> are
-defined above.
+defined above.</dd>
 </dl>
 
 The <code><a attribute lt="kind">kind</a></code> attribute is intended to
@@ -316,7 +323,7 @@ session</var>'s <a>session media elements</a>.
   <li>Run these substeps:
     <dl class=switch>
        <dt>If <var>media category state</var> is <code><a
-href="#attr-media-kind-content">Content</a></code>
+href="#attr-media-kind-content">Content</a></code></dt>
        <dd>
         <ol>
           <li>{{pause()}}
@@ -336,7 +343,7 @@ media element</var>.</li>
         </ol>
        </dd>
        <dt>If <var>media category state</var> is <code><a
-href="#attr-media-kind-content">Transient</a></code>
+href="#attr-media-kind-content">Transient</a></code></dt>
        <dd>
         <ol>
           <li>For the duration of the <var>current media element</var> duck all
@@ -356,7 +363,7 @@ href="#attr-media-kind-transient">Transient</a></code>-based media elements.
         </ol>
        </dd>
        <dt>Otherwise, <var>media category state</var> is <code><a
-href="#attr-media-kind-content">Default</a></code>
+href="#attr-media-kind-content">Default</a></code></dt>
        <dd class="note">
         @TBW
         <br><br>
@@ -412,7 +419,7 @@ steps, passing in the <a>media element</a> as <var>current media element</var>.
   <li>Remove the reference for the <var>current media element</var> from
   <var>media session</var>'s <a>session media elements</a>.
   </li>
-  <li>Remove <a>current media session</a> from <var>current media element</var>.
+  <li>Remove <a>current media session</a> from <var>current media element</var>.</li>
   <li>
   Optionally, based on platform conventions, remove any previously obtained
   platform-level media focus for <var>media session</var> based on the current
