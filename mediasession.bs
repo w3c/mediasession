@@ -33,7 +33,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage/
             text: paused; url: #dom-media-paused
         urlPrefix: infrastructure.html
             text: enumerated attribute
-    type: dfn
         urlPrefix: browsers.html
             text: top-level browsing context; url: #top-level-browsing-context
     type: method
@@ -144,8 +143,7 @@ myAudio.kind = "content";
 <h2 id="categories">Media Categories</h2>
 
  A <dfn>media category</dfn> is a keyword that maps to a well-defined
-interaction state for a <a>media element</a> that should be enforced by user agents on the underlying platform on
-which the user agent is currently running.
+interaction state for a <a>media element</a> that user agents use to enforce platform-specific interaction and interoperation between web media.
 
 The following table lists the available <a lt="media category">media
 categories</a> keywords and states — the keywords in the left column map to the
@@ -153,8 +151,7 @@ states in the cell in the second column on the same row as the keyword. The
 attribute should be set based on the preferred definitions in the table’s third
 and fourth columns.
 
-<table id="dom-HTMLMediaElement-kind-categories">
-  <caption>Return values for {{HTMLMediaElement}}.{{HTMLMediaElement/kind}}</caption>
+<table id="valid-media-categories">
    <tr>
     <th>Category
     <th>State
@@ -165,7 +162,7 @@ and fourth columns.
      &quot;<dfn id="value-media-kind-content" lt="content media attribute
 value"><code>content</code></dfn>&quot;
     <td><dfn id="attr-media-kind-content" lt="content media state">Content</dfn>
-   <td>Pauses all other media content. Uses the default volume stream. Displays
+   <td>Pauses all other media content. Displays
 lock-screen and notification area user interfaces and reacts to changes in both
 hardware and software-based media key buttons.
    <td>Music, podcasts, radio
@@ -176,7 +173,7 @@ value"><code>transient</code></dfn>&quot;
     <td><dfn id="attr-media-kind-transient" lt="transient media
 state">Transient</dfn>
    <td>Does not pause other media content. Ducks other content currently playing
-out. Uses the notification volume stream. Does not display lock-screen or
+out. Does not display lock-screen or
 notification area user interfaces and does not react to changes in both hardware
 and software-based media key buttons.
    <td>Notification sounds. Spoken driving directions.
@@ -200,16 +197,6 @@ elements</a> with both the underlying platform and other <a lt="media element">m
 elements</a> belonging to other <a lt="media session">media sessions</a> within
 the user agent.
 
- A <a>top-level
-browsing context</a> can contain one <a>media session</a> for each available
-<a>media category</a>. A <a>media session</a> is created when the first <a>media element</a> matching the <a>media session</a>'s <a>media
-category</a> begins playback. A <a>media session</a> is destroyed when the last
-<a>media element</a> matching the <a>media session</a>'s <a>media
-category</a> ends playback (i.e. the media stream finishes).
-
- <p class="note">TBD: Improve description of <a>media session</a> lifecycle in
-above paragraph.</p>
-
 A <a>media element</a> can have a <dfn>current media session</dfn>, which is a <a>media session</a> object. When a <a>media element</a> is created it does not have a <a>current media session</a>.
 
 A <a>media element</a> obtains a <a>current media session</a> object only when it first reaches a <a>potentially playing</a> state per the <a>media session invocation algorithm</a> below. A <a>media element</a>'s <a>current media session</a> is removed when it subsequently reaches a non-<a>potentially playing</a> state per the <a>media session termination algorithm</a> below.
@@ -230,21 +217,22 @@ partial interface HTMLMediaElement {
 <dl class=domintro>
  <dt><code> <var>media</var> . {{HTMLMediaElement/kind}}</code>
  <dd>Returns the category the given media falls into. The <a
-href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are
+href="#valid-media-categories">possible media categories</a> are
 defined above.
 </dl>
 
-The <code><a attribute lt="kind">HTMLMediaElement.kind</a></code> IDL attribute, along with
-the <dfn id="attr-media-kind"><code>kind</code></dfn> content
-attribute on <code><a element>video</a></code>
-and <code><a element>audio</a></code>
-elements, is an <a>enumerated attribute</a>
-and must return the <a lt="media category">category of the media
-resource</a>, if it has one, or the empty string otherwise.
+The <code><a attribute lt="kind">kind</a></code> attribute is intended to provide a hint to the user agent about what the author thinks will lead to the best user experience for media playback. The attribute may be ignored altogether, for example based on explicit user preferences or based on the capabilities of the underlying platform.
 
-The <code><a attribute lt="kind">HTMLMediaElement.kind</a></code> IDL attribute must <a>reflect</a>
-the content attribute of the same name, <a>limited
+The <code><a attribute lt="kind">kind</a></code> attribute can be changed even once the media resource is being played; but it is only read by the platform at the point that the <a>media session invocation algorithm</a> is run against a <a>media element</a>. Thus, changing this attribute once the media element is <a>potentially playing</a> does not dynamically change the <a>media session</a> to which the <a>media element</a> belongs.
+
+The <code><a attribute lt="kind">kind</a></code> IDL attribute must <a>reflect</a> the content attribute of the same name, <a>limited
 to only known values</a>.
+
+The <dfn id="attr-media-kind"><code>kind</code></dfn> content
+attribute on a <code><a element>video</a></code> or
+<code><a element>audio</a></code> element, is an <a>enumerated attribute</a>
+and must return the element's <a>media category</a>, if it has one,
+or the empty string otherwise.
 
 <h3 id="video-element-additions">Additions to the <code><a element>video</a></code>
 element</h3>
@@ -272,7 +260,7 @@ When a <a>media element</a> transitions to <a>potentially playing</a> then the u
 <ol>
   <li>Let <var>media category state</var> be the <var>current media
 element</var>'s {{kind}} attribute's state value as defined in the list of <a
-href="#dom-HTMLMediaElement-kind-categories">possible media categories</a>. If
+href="#valid-media-categories">possible media categories</a>. If
 no known category match is found, let <var>media category state</var> be
 <code><a href="#attr-media-kind-default">Default</a></code>.</li>
   <li>Return and run the remaining steps asynchronously.</li>

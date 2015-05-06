@@ -355,8 +355,7 @@ myAudio.kind = "content";
 
 
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-category">media category<a class="self-link" href="#media-category"></a></dfn> is a keyword that maps to a well-defined
-interaction state for a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> that should be enforced by user agents on the underlying platform on
-which the user agent is currently running.</p>
+interaction state for a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> that user agents use to enforce platform-specific interaction and interoperation between web media.</p>
 
 
    <p>The following table lists the available <a data-link-type="dfn" href="#media-category">media
@@ -366,9 +365,7 @@ attribute should be set based on the preferred definitions in the table’s thir
 and fourth columns.</p>
 
 
-   <table id="dom-HTMLMediaElement-kind-categories">
-  
-    <caption>Return values for <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code>.<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></caption>
+   <table id="valid-media-categories">
    
     <tbody>
      <tr>
@@ -389,7 +386,7 @@ value" data-noexport="" id="value-media-kind-content"><code>content</code><a cla
     
       <td><dfn data-dfn-type="dfn" data-lt="content media state" data-noexport="" id="attr-media-kind-content">Content<a class="self-link" href="#attr-media-kind-content"></a></dfn>
    
-      <td>Pauses all other media content. Uses the default volume stream. Displays
+      <td>Pauses all other media content. Displays
 lock-screen and notification area user interfaces and reacts to changes in both
 hardware and software-based media key buttons.
    
@@ -405,7 +402,7 @@ value" data-noexport="" id="value-media-kind-transient"><code>transient</code><a
 state" data-noexport="" id="attr-media-kind-transient">Transient<a class="self-link" href="#attr-media-kind-transient"></a></dfn>
    
       <td>Does not pause other media content. Ducks other content currently playing
-out. Uses the notification volume stream. Does not display lock-screen or
+out. Does not display lock-screen or
 notification area user interfaces and does not react to changes in both hardware
 and software-based media key buttons.
    
@@ -438,18 +435,6 @@ elements</a> belonging to other <a data-link-type="dfn" href="#media-session">me
 the user agent.</p>
 
 
-   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
-browsing context</a> can contain one <a data-link-type="dfn" href="#media-session">media session</a> for each available
-<a data-link-type="dfn" href="#media-category">media category</a>. A <a data-link-type="dfn" href="#media-session">media session</a> is created when the first <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-category">media
-category</a> begins playback. A <a data-link-type="dfn" href="#media-session">media session</a> is destroyed when the last
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> matching the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-category">media
-category</a> ends playback (i.e. the media stream finishes).</p>
-
- 
-   <p class="note" role="note">TBD: Improve description of <a data-link-type="dfn" href="#media-session">media session</a> lifecycle in
-above paragraph.</p>
-
-
    <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> can have a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session">current media session<a class="self-link" href="#current-media-session"></a></dfn>, which is a <a data-link-type="dfn" href="#media-session">media session</a> object. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created it does not have a <a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
 
 
@@ -476,23 +461,26 @@ Elements</span><a class="self-link" href="#setting-media-category"></a></h2>
  
     <dt><code> <var>media</var> . <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code>
  
-    <dd>Returns the category the given media falls into. The <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a> are
+    <dd>Returns the category the given media falls into. The <a href="#valid-media-categories">possible media categories</a> are
 defined above.
 </dl>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">HTMLMediaElement.kind</a></code> IDL attribute, along with
-the <dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind"><code>kind</code><a class="self-link" href="#attr-media-kind"></a></dfn> content
-attribute on <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code>
-elements, is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
-and must return the <a data-link-type="dfn" href="#media-category">category of the media
-resource</a>, if it has one, or the empty string otherwise.</p>
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> attribute is intended to provide a hint to the user agent about what the author thinks will lead to the best user experience for media playback. The attribute may be ignored altogether, for example based on explicit user preferences or based on the capabilities of the underlying platform.</p>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">HTMLMediaElement.kind</a></code> IDL attribute must <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a>
-the content attribute of the same name, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be changed even once the media resource is being played; but it is only read by the platform at the point that the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run against a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>. Thus, changing this attribute once the media element is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change the <a data-link-type="dfn" href="#media-session">media session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs.</p>
+
+
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute must <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the content attribute of the same name, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited
 to only known values</a>.</p>
+
+
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="attr-media-kind"><code>kind</code><a class="self-link" href="#attr-media-kind"></a></dfn> content
+attribute on a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> or
+<code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element, is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
+and must return the element’s <a data-link-type="dfn" href="#media-category">media category</a>, if it has one,
+or the empty string otherwise.</p>
 
 
    <h3 class="heading settled" data-level="7.2" id="video-element-additions"><span class="secno">7.2. </span><span class="content">Additions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
@@ -529,7 +517,7 @@ attributes:
    <ol>
   
     <li>Let <var>media category state</var> be the <var>current media
-element</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute’s state value as defined in the list of <a href="#dom-HTMLMediaElement-kind-categories">possible media categories</a>. If
+element</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute’s state value as defined in the list of <a href="#valid-media-categories">possible media categories</a>. If
 no known category match is found, let <var>media category state</var> be
 <code><a href="#attr-media-kind-default">Default</a></code>.
   
