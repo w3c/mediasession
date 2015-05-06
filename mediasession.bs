@@ -346,11 +346,12 @@ media element</var>.</li>
 href="#attr-media-kind-content">Transient</a></code></dt>
        <dd>
         <ol>
-          <li>For the duration of the <var>current media element</var> duck all
+          <li>
+            For the duration of the <var>current media element</var> duck all
 other <a lt="media element">media
 elements</a> in all other <code><a
 href="#attr-media-kind-content">Content</a></code>-based <a lt="media
-session">media sessions</a> within the user agent.</li>
+session">media sessions</a> within the user agent.
 
             <p class="note">
               The user agent should not provide user access to any hardware or
