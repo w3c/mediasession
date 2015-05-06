@@ -80,7 +80,7 @@ these supplied hints to enforce how different sources of web media should
 interact with each other, other native media content and the underlying
 platform.
 
-<h2 id="conformance">Conformance</h2>
+<h2>Conformance</h2>
 
 All diagrams, examples, and notes in this specification are non-normative, as
 are all sections explicitly marked non-normative. Everything else in this
@@ -113,7 +113,7 @@ with custom properties or functions in JavaScript.
 Unless otherwise stated, string comparisons are done in a <a>case-sensitive</a>
 manner.
 
-<h2 id="dependencies">Dependencies</h2>
+<h2>Dependencies</h2>
 
 The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
