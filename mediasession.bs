@@ -457,7 +457,7 @@ steps, passing in the <a>media element</a> as <var>current media element</var>.
 <ol>
   <li>
     Let <var>media session</var> be the value of <var>current media
-    element</var>'s' <a>current media session</a>. If <var>current media
+    element</var>'s <a>current media session</a>. If <var>current media
     element</var> does not have a <a>current media session</a>, then abort any
     remaining steps and return.
   </li>
