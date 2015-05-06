@@ -445,8 +445,8 @@ third and fourth columns.</p>
      <tr>
     
       <td>
-      "<strong id="default-media-value"><code></code></strong>"
-      (empty string)
+      "<strong id="default-media-value"><code></code></strong>" (empty
+      string)
     
       
     
@@ -531,12 +531,12 @@ may be ignored altogether, for example based on explicit user preferences or
 based on the capabilities of the underlying platform.</p>
 
 
-   <p>The <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> IDL attribute can be changed
-even once the media resource is being played; but it is only read by the
-platform at the point that the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run
-against a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>. Thus, changing this attribute once the media
-element is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change the <a data-link-type="dfn" href="#media-session">media
-session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs.</p>
+   <p>The <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> IDL attribute can be changed even
+once the media resource is being played; but it is only read by the platform at
+the point that the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run against a
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>. Thus, changing this attribute once the media element is
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change the <a data-link-type="dfn" href="#media-session">media session</a>
+to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs.</p>
 
 
    <p>The <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> IDL attribute must
@@ -561,8 +561,8 @@ to only known values</a>.</p>
 
    <p>The <code><a data-link-type="dfn" href="#video-kind">kind</a></code> content attribute on a
 <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element, is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
-and must return the video element’s <a data-link-type="dfn" href="#media-category">media category</a>, if it has one,
-or the empty string otherwise.</p>
+and must return the video element’s <a data-link-type="dfn" href="#media-category">media category</a>, if it has one, or the
+empty string otherwise.</p>
 
 
    <h3 class="heading settled" data-level="7.3" id="audio-element-additions"><span class="secno">7.3. </span><span class="content">Additions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element</span><a class="self-link" href="#audio-element-additions"></a></h3>
@@ -664,16 +664,15 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
         <li>
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform’s
-            notifications
-            area and/or show an ongoing media interface in the underlying
-            platform’s lock screen area.
+            notifications area and/or show an ongoing media interface in the
+            underlying platform’s lock screen area.
           
         
           
         <li>
-            Optionally, based on platform
-            conventions, the user agent may allow hardware and/or software media
-            keys to control playback of <var>current media element</var>.
+            Optionally, based on platform conventions, the user agent may allow
+            hardware and/or software media keys to control playback of
+            <var>current media element</var>.
           
         
         
@@ -698,15 +697,12 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
 
             
          <p class="note" role="note">
-              The user
-              agent should not provide user access to any hardware or software
-              media keys
-              and not display any ongoing media interface in the underlying
-              platform’s
-              notifications area or show any ongoing media interface in the
-              underlying
-              platform’s lock screen area for <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>-based media
-              elements.
+              The user agent should not provide user access to any hardware or
+              software media keys and not display any ongoing media interface in
+              the underlying platform’s notifications area or show any ongoing
+              media interface in the underlying platform’s lock screen area for
+              <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>-based
+              media elements.
             </p>
          
           
@@ -726,15 +722,11 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
         @TBW
 
 
-       <p>Different platforms (e.g. desktop vs.
-        mobile)
-        currently enforce different platform-level default behavior for media
-        elements. Should we define a consistent behavior across platforms or
-        keep the
-        existing defaults per platform? Do the existing defaults continue to
-        make
-        sense given the presence of the kind attribute? Can we say something
-        here
+       <p>Different platforms (e.g. desktop vs. mobile) currently enforce
+        different platform-level default behavior for media elements. Should we
+        define a consistent behavior across platforms or keep the existing
+        defaults per platform? Do the existing defaults continue to make sense
+        given the presence of the kind attribute? Can we say something here
         without being overly prescriptive about platform-level default
         conventions?</p>
        

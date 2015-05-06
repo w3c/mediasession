@@ -201,8 +201,8 @@ third and fourth columns.
   </tr>
   <tr>
     <td>
-      &quot;<strong id="default-media-value"><code></code></strong>&quot;
-      (empty string)
+      &quot;<strong id="default-media-value"><code></code></strong>&quot; (empty
+      string)
     </td>
     <td>
       <dfn lt="default media state">Default</dfn>
@@ -268,12 +268,12 @@ thinks will lead to the best user experience for media playback. The attribute
 may be ignored altogether, for example based on explicit user preferences or
 based on the capabilities of the underlying platform.
 
-The <code>{{HTMLMediaElement/kind}}</code> IDL attribute can be changed
-even once the media resource is being played; but it is only read by the
-platform at the point that the <a>media session invocation algorithm</a> is run
-against a <a>media element</a>. Thus, changing this attribute once the media
-element is <a>potentially playing</a> does not dynamically change the <a>media
-session</a> to which the <a>media element</a> belongs.
+The <code>{{HTMLMediaElement/kind}}</code> IDL attribute can be changed even
+once the media resource is being played; but it is only read by the platform at
+the point that the <a>media session invocation algorithm</a> is run against a
+<a>media element</a>. Thus, changing this attribute once the media element is
+<a>potentially playing</a> does not dynamically change the <a>media session</a>
+to which the <a>media element</a> belongs.
 
 The <code>{{HTMLMediaElement/kind}}</code> IDL attribute must
 <a>reflect</a> the <code><a element>video</a></code> and <code><a
@@ -294,8 +294,8 @@ element>video</a></code> element</h3>
 
 The <code><a lt="video kind">kind</a></code> content attribute on a
 <code><a element>video</a></code> element, is an <a>enumerated attribute</a>
-and must return the video element's <a>media category</a>, if it has one,
-or the empty string otherwise.
+and must return the video element's <a>media category</a>, if it has one, or the
+empty string otherwise.
 
 <h3 id="audio-element-additions">Additions to the <code><a
 element>audio</a></code> element</h3>
@@ -376,14 +376,13 @@ consists of the following steps, passing in the <a>media element</a> as
           <li>
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform's
-            notifications
-            area and/or show an ongoing media interface in the underlying
-            platform's lock screen area.
+            notifications area and/or show an ongoing media interface in the
+            underlying platform's lock screen area.
           </li>
           <li>
-            Optionally, based on platform
-            conventions, the user agent may allow hardware and/or software media
-            keys to control playback of <var>current media element</var>.
+            Optionally, based on platform conventions, the user agent may allow
+            hardware and/or software media keys to control playback of
+            <var>current media element</var>.
           </li>
         </ol>
       </dd>
@@ -401,16 +400,12 @@ consists of the following steps, passing in the <a>media element</a> as
             session">media sessions</a> within the user agent.
 
             <p class="note">
-              The user
-              agent should not provide user access to any hardware or software
-              media keys
-              and not display any ongoing media interface in the underlying
-              platform's
-              notifications area or show any ongoing media interface in the
-              underlying
-              platform's lock screen area for <code><a lt="transient media
-              state">Transient</a></code>-based media
-              elements.
+              The user agent should not provide user access to any hardware or
+              software media keys and not display any ongoing media interface in
+              the underlying platform's notifications area or show any ongoing
+              media interface in the underlying platform's lock screen area for
+              <code><a lt="transient media state">Transient</a></code>-based
+              media elements.
             </p>
           </li>
         </ol>
@@ -422,15 +417,11 @@ consists of the following steps, passing in the <a>media element</a> as
       <dd class="note">
         @TBW
 
-        Different platforms (e.g. desktop vs.
-        mobile)
-        currently enforce different platform-level default behavior for media
-        elements. Should we define a consistent behavior across platforms or
-        keep the
-        existing defaults per platform? Do the existing defaults continue to
-        make
-        sense given the presence of the kind attribute? Can we say something
-        here
+        Different platforms (e.g. desktop vs. mobile) currently enforce
+        different platform-level default behavior for media elements. Should we
+        define a consistent behavior across platforms or keep the existing
+        defaults per platform? Do the existing defaults continue to make sense
+        given the presence of the kind attribute? Can we say something here
         without being overly prescriptive about platform-level default
         conventions?
       </dd>

@@ -127,12 +127,27 @@ def normalize(path, source, tokens):
         if preservespace() or didpreservespace:
             lw.verbatim(data, depth())
         elif token == 'text' and not merging():
+            # when merging() everything is mangled, but even when not merging(),
+            # consecutive non-empty lines of text are merged together into as
+            # few lines as possible.
+            mergelines = False
             while len(data) > 0:
                 line, ending, data = data.partition('\n')
+                emptyline = len(line) == 0 or line.isspace()
+                lastline = len(data) == 0
+                if mergelines:
+                    if emptyline:
+                        lw.newline(depth())
+                    else:
+                        lw.append(' ')
+                    mergelines = False
                 if line:
                     lw.append(line)
                 if ending:
-                    lw.newline(depth())
+                    if emptyline or lastline:
+                        lw.newline(depth())
+                    else:
+                        mergelines = True
         else:
             lw.append(data)
 
