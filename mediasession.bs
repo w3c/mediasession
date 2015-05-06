@@ -120,15 +120,23 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 <h2 id="example">Example Usage</h2>
 
-A media element's <a attribute>kind</a> content attribute can be declared in
-HTML:
+A <code><a element>video</a></code> element's <code><a lt="audio
+kind">kind</a></code> content attribute can be declared in HTML:
 
 <pre class='lang-markup'>
 &lt;video src="short_ping.webm" kind="transient">
 </pre>
 
-Alternatively, a media element's <a attribute>kind</a> attribute can be set in
-JavaScript:
+Similarly, an <code><a element>audio</a></code> element's <code><a lt="audio
+kind">kind</a></code> content attribute can be declared in HTML:
+
+<pre class='lang-markup'>
+&lt;audio src="track1.ogg" kind="content">
+</pre>
+
+As both <code><a element>audio</a></code> and <code><a element>video</a></code>
+elements implement the {{HTMLMediaElement}} interface, these element's
+{{HTMLMediaElement/kind}} IDL attribute can also be set via JavaScript:
 
 <pre class='lang-javascript'>
 var myAudio = document.createElement('audio');
@@ -260,14 +268,14 @@ thinks will lead to the best user experience for media playback. The attribute
 may be ignored altogether, for example based on explicit user preferences or
 based on the capabilities of the underlying platform.
 
-The <code><a attribute lt="kind">kind</a></code> IDL attribute can be changed
+The <code>{{HTMLMediaElement/kind}}</code> IDL attribute can be changed
 even once the media resource is being played; but it is only read by the
 platform at the point that the <a>media session invocation algorithm</a> is run
 against a <a>media element</a>. Thus, changing this attribute once the media
 element is <a>potentially playing</a> does not dynamically change the <a>media
 session</a> to which the <a>media element</a> belongs.
 
-The <code><a attribute lt="kind">kind</a></code> IDL attribute must
+The <code>{{HTMLMediaElement/kind}}</code> IDL attribute must
 <a>reflect</a> the <code><a element>video</a></code> and <code><a
 element>audio</a></code> element content attribute of the same name, <a>limited
 to only known values</a>.

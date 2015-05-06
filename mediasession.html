@@ -327,16 +327,23 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <h2 class="heading settled" data-level="4" id="example"><span class="secno">4. </span><span class="content">Example Usage</span><a class="self-link" href="#example"></a></h2>
 
 
-   <p>A media element’s <a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a> content attribute can be declared in
-HTML:</p>
+   <p>A <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element’s <code><a data-link-type="dfn" href="#audio-kind">kind</a></code> content attribute can be declared in HTML:</p>
 
 
    <pre class="lang-markup">&lt;video src="short_ping.webm" kind="transient">
 </pre>
 
 
-   <p>Alternatively, a media element’s <a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a> attribute can be set in
-JavaScript:</p>
+   <p>Similarly, an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element’s <code><a data-link-type="dfn" href="#audio-kind">kind</a></code> content attribute can be declared in HTML:</p>
+
+
+   <pre class="lang-markup">&lt;audio src="track1.ogg" kind="content">
+</pre>
+
+
+   <p>As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
+<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute can also be set via JavaScript:</p>
 
 
    <pre class="lang-javascript">var myAudio = document.createElement('audio');
@@ -524,7 +531,7 @@ may be ignored altogether, for example based on explicit user preferences or
 based on the capabilities of the underlying platform.</p>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute can be changed
+   <p>The <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> IDL attribute can be changed
 even once the media resource is being played; but it is only read by the
 platform at the point that the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run
 against a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>. Thus, changing this attribute once the media
@@ -532,7 +539,7 @@ element is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/
 session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs.</p>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute must
+   <p>The <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> IDL attribute must
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element content attribute of the same name, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited
 to only known values</a>.</p>
 
