@@ -384,13 +384,12 @@ third and fourth columns.</p>
      <tr>
     
       <td>
-      "<dfn data-dfn-type="dfn" data-lt="content media attribute
-      value" data-noexport="" id="value-media-kind-content"><code>content</code><a class="self-link" href="#value-media-kind-content"></a></dfn>"
+      "<dfn data-dfn-type="dfn" data-lt="content attribute value" data-noexport="" id="content-attribute-value"><code>content</code><a class="self-link" href="#content-attribute-value"></a></dfn>"
     
       
     
       <td>
-      <dfn data-dfn-type="dfn" data-lt="content media state" data-noexport="" id="attr-media-kind-content">Content<a class="self-link" href="#attr-media-kind-content"></a></dfn>
+      <dfn data-dfn-type="dfn" data-lt="content media state" data-noexport="" id="content-media-state">Content<a class="self-link" href="#content-media-state"></a></dfn>
     
       
     
@@ -411,14 +410,13 @@ third and fourth columns.</p>
      <tr>
     
       <td>
-      "<dfn data-dfn-type="dfn" data-lt="transient media attribute
-      value" data-noexport="" id="value-media-kind-transient"><code>transient</code><a class="self-link" href="#value-media-kind-transient"></a></dfn>"
+      "<dfn data-dfn-type="dfn" data-lt="transient attribute
+      value" data-noexport="" id="transient-attribute-value"><code>transient</code><a class="self-link" href="#transient-attribute-value"></a></dfn>"
     
       
     
       <td>
-      <dfn data-dfn-type="dfn" data-lt="transient media
-      state" data-noexport="" id="attr-media-kind-transient">Transient<a class="self-link" href="#attr-media-kind-transient"></a></dfn>
+      <dfn data-dfn-type="dfn" data-lt="transient media state" data-noexport="" id="transient-media-state">Transient<a class="self-link" href="#transient-media-state"></a></dfn>
     
       
     
@@ -440,13 +438,13 @@ third and fourth columns.</p>
      <tr>
     
       <td>
-      "<strong id="value-media-kind-none"><code></code></strong>"
+      "<strong id="default-media-value"><code></code></strong>"
       (empty string)
     
       
     
       <td>
-      <dfn data-dfn-type="dfn" data-lt="default media state" data-noexport="" id="attr-media-kind-default">Default<a class="self-link" href="#attr-media-kind-default"></a></dfn>
+      <dfn data-dfn-type="dfn" data-lt="default media state" data-noexport="" id="default-media-state">Default<a class="self-link" href="#default-media-state"></a></dfn>
     
       
     
@@ -501,7 +499,7 @@ Elements</span><a class="self-link" href="#setting-media-category"></a></h2>
 
 
    <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
-  attribute DOMString <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-type="DOMString " id="dom-htmlmediaelement-kind">kind<a class="self-link" href="#dom-htmlmediaelement-kind"></a></dfn>;
+  attribute DOMString <a class="idl-code" data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
 };
 </pre>
 
@@ -519,25 +517,24 @@ Elements</span><a class="self-link" href="#setting-media-category"></a></h2>
 </dl>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> attribute is intended to
-provide a hint to the user agent about what the author thinks will lead to the
-best user experience for media playback. The attribute may be ignored
-altogether, for example based on explicit user preferences or based on the
-capabilities of the underlying platform.</p>
+   <p>The <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" id="dom-htmlmediaelement-kind"><code>kind</code><a class="self-link" href="#dom-htmlmediaelement-kind"></a></dfn> IDL
+attribute is intended to provide a hint to the user agent about what the author
+thinks will lead to the best user experience for media playback. The attribute
+may be ignored altogether, for example based on explicit user preferences or
+based on the capabilities of the underlying platform.</p>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be changed even
-once the media resource is being played; but it is only read by the platform at
-the point that the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run against a
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>. Thus, changing this attribute once the media element is
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change the <a data-link-type="dfn" href="#media-session">media session</a>
-to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs.</p>
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute can be changed
+even once the media resource is being played; but it is only read by the
+platform at the point that the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run
+against a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>. Thus, changing this attribute once the media
+element is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change the <a data-link-type="dfn" href="#media-session">media
+session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs.</p>
 
 
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute must
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> and
-<code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element content attribute of the same name,
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited to only known values</a>.</p>
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element content attribute of the same name, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited
+to only known values</a>.</p>
 
 
    <h3 class="heading settled" data-level="7.2" id="video-element-additions"><span class="secno">7.2. </span><span class="content">Additions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element</span><a class="self-link" href="#video-element-additions"></a></h3>
@@ -596,7 +593,7 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
     Let <var>media category state</var> be the <var>current media
     element</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute’s state value as defined in the list of
     <a href="#valid-media-categories">possible media categories</a>. If no known
-    category match is found, let <var>media category state</var> be <code><a href="#attr-media-kind-default">Default</a></code>.
+    category match is found, let <var>media category state</var> be <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
   
   
     <li>
@@ -636,7 +633,7 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
      <dl class="switch">
       
       <dt>
-        If <var>media category state</var> is <code><a href="#attr-media-kind-content">Content</a></code>
+        If <var>media category state</var> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
       
       
       
@@ -645,13 +642,15 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
        <ol>
           
         <li>
-            <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in <var>media session</var>.
+            <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> all other <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+            elements</a> in <var>media session</var>.
           
         
           
         <li>
             <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> all other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in
-            all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.
+            all other <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based
+            <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.
           
         
           
@@ -677,7 +676,7 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
       
       
       <dt>
-        If <var>media category state</var> is <code><a href="#attr-media-kind-content">Transient</a></code>
+        If <var>media category state</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>
       
       
       
@@ -688,7 +687,7 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
         <li>
             For the duration of the <var>current media element</var> duck all
             other
-            <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in all other <code><a href="#attr-media-kind-content">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.
+            <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> in all other <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.
 
             
          <p class="note" role="note">
@@ -699,7 +698,7 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
               platform’s
               notifications area or show any ongoing media interface in the
               underlying
-              platform’s lock screen area for <code><a href="#attr-media-kind-transient">Transient</a></code>-based media
+              platform’s lock screen area for <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>-based media
               elements.
             </p>
          
@@ -712,7 +711,7 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
       
       
       <dt>
-        Otherwise, <var>media category state</var> is <code><a href="#attr-media-kind-content">Default</a></code>
+        Otherwise, <var>media category state</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
       
       
       
@@ -810,21 +809,19 @@ steps, passing in the <a data-link-type="dfn" href="https://html.spec.whatwg.org
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li>audio kind, <a href="#audio-kind">7.3</a>
-   <li>content media attribute
-      value, <a href="#value-media-kind-content">5</a>
-   <li>content media state, <a href="#attr-media-kind-content">5</a>
+   <li>content attribute value, <a href="#content-attribute-value">5</a>
+   <li>content media state, <a href="#content-media-state">5</a>
    <li>current media session, <a href="#current-media-session">6</a>
-   <li>default media state, <a href="#attr-media-kind-default">5</a>
+   <li>default media state, <a href="#default-media-state">5</a>
    <li>kind, <a href="#dom-htmlmediaelement-kind">7.1</a>
    <li>media category, <a href="#media-category">5</a>
    <li>media session, <a href="#media-session">6</a>
    <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">8</a>
    <li>media session termination algorithm, <a href="#media-session-termination-algorithm">10</a>
    <li>session media elements, <a href="#session-media-elements">6</a>
-   <li>transient media attribute
-      value, <a href="#value-media-kind-transient">5</a>
-   <li>transient media
-      state, <a href="#attr-media-kind-transient">5</a>
+   <li>transient attribute
+      value, <a href="#transient-attribute-value">5</a>
+   <li>transient media state, <a href="#transient-media-state">5</a>
    <li>video kind, <a href="#video-kind">7.2</a></ul>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>

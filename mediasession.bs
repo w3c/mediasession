@@ -159,11 +159,10 @@ third and fourth columns.
   </tr>
   <tr>
     <td>
-      &quot;<dfn id="value-media-kind-content" lt="content media attribute
-      value"><code>content</code></dfn>&quot;
+      &quot;<dfn lt="content attribute value"><code>content</code></dfn>&quot;
     </td>
     <td>
-      <dfn id="attr-media-kind-content" lt="content media state">Content</dfn>
+      <dfn lt="content media state">Content</dfn>
     </td>
     <td>
       Pauses all other media content. Displays lock-screen and notification area
@@ -176,12 +175,11 @@ third and fourth columns.
   </tr>
   <tr>
     <td>
-      &quot;<dfn id="value-media-kind-transient" lt="transient media attribute
+      &quot;<dfn lt="transient attribute
       value"><code>transient</code></dfn>&quot;
     </td>
     <td>
-      <dfn id="attr-media-kind-transient" lt="transient media
-      state">Transient</dfn>
+      <dfn lt="transient media state">Transient</dfn>
     </td>
     <td>
       Does not pause other media content. Ducks other content currently playing
@@ -195,11 +193,11 @@ third and fourth columns.
   </tr>
   <tr>
     <td>
-      &quot;<strong id="value-media-kind-none"><code></code></strong>&quot;
+      &quot;<strong id="default-media-value"><code></code></strong>&quot;
       (empty string)
     </td>
     <td>
-      <dfn id="attr-media-kind-default" lt="default media state">Default</dfn>
+      <dfn lt="default media state">Default</dfn>
     </td>
     <td>
       No explicit kind, or the kind of the media given is not recognized by the
@@ -256,23 +254,23 @@ partial interface HTMLMediaElement {
   </dd>
 </dl>
 
-The <code><a attribute lt="kind">kind</a></code> attribute is intended to
-provide a hint to the user agent about what the author thinks will lead to the
-best user experience for media playback. The attribute may be ignored
-altogether, for example based on explicit user preferences or based on the
-capabilities of the underlying platform.
+The <dfn attribute for="HTMLMediaElement" lt="kind"><code>kind</code></dfn> IDL
+attribute is intended to provide a hint to the user agent about what the author
+thinks will lead to the best user experience for media playback. The attribute
+may be ignored altogether, for example based on explicit user preferences or
+based on the capabilities of the underlying platform.
 
-The <code><a attribute lt="kind">kind</a></code> attribute can be changed even
-once the media resource is being played; but it is only read by the platform at
-the point that the <a>media session invocation algorithm</a> is run against a
-<a>media element</a>. Thus, changing this attribute once the media element is
-<a>potentially playing</a> does not dynamically change the <a>media session</a>
-to which the <a>media element</a> belongs.
+The <code><a attribute lt="kind">kind</a></code> IDL attribute can be changed
+even once the media resource is being played; but it is only read by the
+platform at the point that the <a>media session invocation algorithm</a> is run
+against a <a>media element</a>. Thus, changing this attribute once the media
+element is <a>potentially playing</a> does not dynamically change the <a>media
+session</a> to which the <a>media element</a> belongs.
 
 The <code><a attribute lt="kind">kind</a></code> IDL attribute must
-<a>reflect</a> the <code><a element>video</a></code> and
-<code><a element>audio</a></code> element content attribute of the same name,
-<a>limited to only known values</a>.
+<a>reflect</a> the <code><a element>video</a></code> and <code><a
+element>audio</a></code> element content attribute of the same name, <a>limited
+to only known values</a>.
 
 <h3 id="video-element-additions">Additions to the <code><a
 element>video</a></code> element</h3>
@@ -321,7 +319,7 @@ consists of the following steps, passing in the <a>media element</a> as
     element</var>'s {{kind}} attribute's state value as defined in the list of
     <a href="#valid-media-categories">possible media categories</a>. If no known
     category match is found, let <var>media category state</var> be <code><a
-    href="#attr-media-kind-default">Default</a></code>.
+    lt="default media state">Default</a></code>.
   </li>
   <li>
     Return and run the remaining steps asynchronously.
@@ -352,21 +350,20 @@ consists of the following steps, passing in the <a>media element</a> as
 
     <dl class=switch>
       <dt>
-        If <var>media category state</var> is <code><a
-        href="#attr-media-kind-content">Content</a></code>
+        If <var>media category state</var> is <code><a lt="content media
+        state">Content</a></code>
       </dt>
       <dd>
         <ol>
           <li>
-            {{pause()}} all other <code><a
-            href="#attr-media-kind-content">Content</a></code>-based <a
-            lt="media element">media elements</a> in <var>media session</var>.
+            {{pause()}} all other <code><a lt="content media
+            state">Content</a></code>-based <a lt="media element">media
+            elements</a> in <var>media session</var>.
           </li>
           <li>
             {{pause()}} all other <a lt="media element">media elements</a> in
-            all other <code><a
-            href="#attr-media-kind-content">Content</a></code>-based <a
-            lt="media session">media sessions</a> within the user agent.
+            all other <code><a lt="content media state">Content</a></code>-based
+            <a lt="media session">media sessions</a> within the user agent.
           </li>
           <li>
             Optionally, based on platform conventions, the user agent may show
@@ -383,8 +380,8 @@ consists of the following steps, passing in the <a>media element</a> as
         </ol>
       </dd>
       <dt>
-        If <var>media category state</var> is <code><a
-        href="#attr-media-kind-content">Transient</a></code>
+        If <var>media category state</var> is <code><a lt="transient media
+        state">Transient</a></code>
       </dt>
       <dd>
         <ol>
@@ -392,8 +389,8 @@ consists of the following steps, passing in the <a>media element</a> as
             For the duration of the <var>current media element</var> duck all
             other
             <a lt="media element">media elements</a> in all other <code><a
-            href="#attr-media-kind-content">Content</a></code>-based <a
-            lt="media session">media sessions</a> within the user agent.
+            lt="content media state">Content</a></code>-based <a lt="media
+            session">media sessions</a> within the user agent.
 
             <p class="note">
               The user
@@ -403,16 +400,16 @@ consists of the following steps, passing in the <a>media element</a> as
               platform's
               notifications area or show any ongoing media interface in the
               underlying
-              platform's lock screen area for <code><a
-              href="#attr-media-kind-transient">Transient</a></code>-based media
+              platform's lock screen area for <code><a lt="transient media
+              state">Transient</a></code>-based media
               elements.
             </p>
           </li>
         </ol>
       </dd>
       <dt>
-        Otherwise, <var>media category state</var> is <code><a
-        href="#attr-media-kind-content">Default</a></code>
+        Otherwise, <var>media category state</var> is <code><a lt="default media
+        state">Default</a></code>
       </dt>
       <dd class="note">
         @TBW
