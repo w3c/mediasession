@@ -51,12 +51,12 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
 <em>This section is non-normative.</em>
 
 Media is used extensively today on the web to play a variety of different types
-of media content. It is often used to play music, podcasts and radio content. At
-other times media elements are used to provide background music, sound effects,
+of content. It is often used to play music, podcasts and radio content. At other
+times media elements are used to provide background music, sound effects,
 notification sounds and to render WebRTC media stream content.
 
 When playing media on the web, developers are currently forced to adopt a single
-default platform modality for playing web media content. On the other hand,
+default platform modality for playing all media content. On the other hand,
 native applications can access much richer media integration options with an
 underlying platform. On mobile devices, native application developers can
 request many different forms of media integration with the underlying platform
@@ -64,20 +64,20 @@ to obtain access to headphone buttons, lock screens and notification areas as
 needed. On desktop devices, native applications have access to keyboard media
 key events. Native application developers can specify the conditions in which
 media content should pause or duck on audio interruptions (i.e. pause or lower
-the volume for the duration of the interruption), continue playing out when
+the volume for the duration of an interruption), continue playing out when
 application focus is lost or the device screen is switched off and interface
 with internal and external remote controllers.
 
-This specification provides these powerful media integration features for web
-media. By allowing web developers to express the intended usage of their media,
-user agents can supply the most suitable platform-level interactions for that
-media and enforce logical inter-operation behavior on the current platform
-between any number of different sources of media.
+This specification provides these platform media integration features for web
+media. By allowing web developers to express the intended usage of their media
+content, user agents can supply the most suitable platform-level interactions
+for that content and enforce logical inter-operation behavior on the current
+platform between any number of different sources of media.
 
 The specification details the mechanism that allows web developers to specify
-the most appropriate category for their media and for user agents to then use
-these supplied hints to enforce how different sources of web media should
-interact with each other, other native media content and the underlying
+the most appropriate category for their media content and for user agents to
+then use these supplied hints to enforce how different sources of web media
+should interact with each other, other native media content and the underlying
 platform.
 
 <h2 id="conformance">Conformance</h2>
