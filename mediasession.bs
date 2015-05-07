@@ -53,7 +53,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: HAVE_ENOUGH_DATA; for: HTMLMediaElement; url: #dom-media-have_enough_data
 </pre>
 
-<h2 id="intro">Introduction</h2>
+<h2 id="introduction">Introduction</h2>
 
 <em>This section is non-normative.</em>
 
@@ -125,7 +125,7 @@ manner.
 The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
-<h2 id="categories">Media categories</h2>
+<h2 id="media-categories">Media categories</h2>
 
 A <dfn>media category</dfn> is a keyword that maps to a well-defined interaction
 state for a <a>media element</a> that user agents use to enforce
@@ -196,7 +196,7 @@ third and fourth columns.
   </tr>
 </table>
 
-<h2 id="sessions">Media sessions</h2>
+<h2 id="media-sessions">Media sessions</h2>
 
 A <dfn>media session</dfn> represents one or more <a lt="media element">media
 elements</a> within the same <a>top-level browsing context</a> that share the
@@ -220,8 +220,8 @@ platform-level media focus and is used extensively in the <a>media session
 invocation algorithm</a>, <a>media session interruption algorithm</a> and
 <a>media session release algorithm</a>.
 
-<h2 id="setting-media-category">Assigning a media category to media
-elements</h2>
+<h2 id="assigning-a-media-category-to-media-elements">Assigning a media category
+to media elements</h2>
 
 <h3 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
 {{HTMLMediaElement}} interface</h3>
@@ -328,7 +328,7 @@ string otherwise.
   </pre>
 </div>
 
-<h2 id="invoking-media-session">Media session invocation</h2>
+<h2 id="media-session-invocation">Media session invocation</h2>
 
 When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
 element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
@@ -431,7 +431,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-<h2 id="interrupting-media-session">Media session interruption</h2>
+<h2 id="media-session-interruption">Media session interruption</h2>
 
 A <a>media session</a> may be interrupted at any time after its
 <a>media session invocation algorithm</a> has been run. This typically occurs
@@ -485,7 +485,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-<h2 id="releasing-media-session">Media session release</h2>
+<h2 id="media-session-release">Media session release</h2>
 
 Once a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, run
 the <a>media session release algorithm</a> passing in the
