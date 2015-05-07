@@ -206,20 +206,19 @@ mobile devices.</p>
     <li><a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
     <li><a href="#conformance"><span class="secno">2</span> <span class="content">Conformance</span></a>
     <li><a href="#dependencies"><span class="secno">3</span> <span class="content">Dependencies</span></a>
-    <li><a href="#example"><span class="secno">4</span> <span class="content">Example usage</span></a>
-    <li><a href="#categories"><span class="secno">5</span> <span class="content">Media categories</span></a>
-    <li><a href="#sessions"><span class="secno">6</span> <span class="content">Media sessions</span></a>
-    <li><a href="#setting-media-category"><span class="secno">7</span> <span class="content">Assigning a media category to media
+    <li><a href="#categories"><span class="secno">4</span> <span class="content">Media categories</span></a>
+    <li><a href="#sessions"><span class="secno">5</span> <span class="content">Media sessions</span></a>
+    <li><a href="#setting-media-category"><span class="secno">6</span> <span class="content">Assigning a media category to media
 elements</span></a>
      <ul class="toc">
-      <li><a href="#extensions-to-the-htmlmediaelement-interface"><span class="secno">7.1</span> <span class="content">Extensions to the
+      <li><a href="#extensions-to-the-htmlmediaelement-interface"><span class="secno">6.1</span> <span class="content">Extensions to the
 <code class="idl"><span>HTMLMediaElement</span></code> interface</span></a>
-      <li><a href="#extensions-to-the-video-element"><span class="secno">7.2</span> <span class="content">Extensions to the <code><span>video</span></code> element</span></a>
-      <li><a href="#extensions-to-the-audio-element"><span class="secno">7.3</span> <span class="content">Extensions to the <code><span>audio</span></code> element</span></a>
+      <li><a href="#extensions-to-the-video-element"><span class="secno">6.2</span> <span class="content">Extensions to the <code><span>video</span></code> element</span></a>
+      <li><a href="#extensions-to-the-audio-element"><span class="secno">6.3</span> <span class="content">Extensions to the <code><span>audio</span></code> element</span></a>
      </ul>
-    <li><a href="#invoking-media-session"><span class="secno">8</span> <span class="content">Media session invocation</span></a>
-    <li><a href="#interrupting-media-session"><span class="secno">9</span> <span class="content">Media session interruption</span></a>
-    <li><a href="#terminating-media-session"><span class="secno">10</span> <span class="content">Media session termination</span></a>
+    <li><a href="#invoking-media-session"><span class="secno">7</span> <span class="content">Media session invocation</span></a>
+    <li><a href="#interrupting-media-session"><span class="secno">8</span> <span class="content">Media session interruption</span></a>
+    <li><a href="#terminating-media-session"><span class="secno">9</span> <span class="content">Media session termination</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ul class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
@@ -326,37 +325,7 @@ manner.</p>
 conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a></p>
 
 
-   <h2 class="heading settled" data-level="4" id="example"><span class="secno">4. </span><span class="content">Example usage</span><a class="self-link" href="#example"></a></h2>
-
-
-   <p>A <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element’s <code><a data-link-type="dfn" href="#audio-kind">kind</a></code> content attribute can be declared in HTML:</p>
-
-
-   <pre class="lang-markup">&lt;video src="short_ping.webm" kind="transient">
-</pre>
-
-
-   <p>Similarly, an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element’s <code><a data-link-type="dfn" href="#audio-kind">kind</a></code> content attribute can be declared in HTML:</p>
-
-
-   <pre class="lang-markup">&lt;audio src="track1.ogg" kind="content">
-</pre>
-
-
-   <p>As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
-<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute can also be set via JavaScript:</p>
-
-
-   <pre class="lang-javascript">var myAudio = document.createElement("audio");
-console.log(myAudio.kind) // --> ""
-myAudio.src = "music.mp3";
-myAudio.kind = "content";
-// myAudio.outerHTML === "&lt;audio src="music.mp3" kind="content">&lt;/audio>" === true
-</pre>
-
-
-   <h2 class="heading settled" data-level="5" id="categories"><span class="secno">5. </span><span class="content">Media categories</span><a class="self-link" href="#categories"></a></h2>
+   <h2 class="heading settled" data-level="4" id="categories"><span class="secno">4. </span><span class="content">Media categories</span><a class="self-link" href="#categories"></a></h2>
 
 
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-category">media category<a class="self-link" href="#media-category"></a></dfn> is a keyword that maps to a well-defined interaction
@@ -472,7 +441,7 @@ third and fourth columns.</p>
 </table>
 
 
-   <h2 class="heading settled" data-level="6" id="sessions"><span class="secno">6. </span><span class="content">Media sessions</span><a class="self-link" href="#sessions"></a></h2>
+   <h2 class="heading settled" data-level="5" id="sessions"><span class="secno">5. </span><span class="content">Media sessions</span><a class="self-link" href="#sessions"></a></h2>
 
 
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session">media session<a class="self-link" href="#media-session"></a></dfn> represents one or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
@@ -500,11 +469,11 @@ the <a data-link-type="dfn" href="#media-session-termination-algorithm">media se
 <a data-link-type="dfn" href="#media-session">media session</a>.</p>
 
 
-   <h2 class="heading settled" data-level="7" id="setting-media-category"><span class="secno">7. </span><span class="content">Assigning a media category to media
+   <h2 class="heading settled" data-level="6" id="setting-media-category"><span class="secno">6. </span><span class="content">Assigning a media category to media
 elements</span><a class="self-link" href="#setting-media-category"></a></h2>
 
 
-   <h3 class="heading settled" data-level="7.1" id="extensions-to-the-htmlmediaelement-interface"><span class="secno">7.1. </span><span class="content">Extensions to the
+   <h3 class="heading settled" data-level="6.1" id="extensions-to-the-htmlmediaelement-interface"><span class="secno">6.1. </span><span class="content">Extensions to the
 <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface</span><a class="self-link" href="#extensions-to-the-htmlmediaelement-interface"></a></h3>
 
 
@@ -547,7 +516,22 @@ to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipag
 to only known values</a>.</p>
 
 
-   <h3 class="heading settled" data-level="7.2" id="extensions-to-the-video-element"><span class="secno">7.2. </span><span class="content">Extensions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element</span><a class="self-link" href="#extensions-to-the-video-element"></a></h3>
+   <div class="example" id="example-30f38a54"><a class="self-link" href="#example-30f38a54"></a>
+  As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+  elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
+  <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute can be set via JavaScript:
+
+  
+    <pre class="lang-javascript">var myAudio = document.createElement("audio");
+console.log(myAudio.kind) // --> ""
+myAudio.src = "music.mp3";
+myAudio.kind = "content";
+// myAudio.outerHTML === "&lt;audio src="music.mp3" kind="content">&lt;/audio>" === true
+</pre>
+</div>
+
+
+   <h3 class="heading settled" data-level="6.2" id="extensions-to-the-video-element"><span class="secno">6.2. </span><span class="content">Extensions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element</span><a class="self-link" href="#extensions-to-the-video-element"></a></h3>
 
 
    <dl class="element">
@@ -568,7 +552,16 @@ and must return the video element’s <a data-link-type="dfn" href="#media-categ
 empty string otherwise.</p>
 
 
-   <h3 class="heading settled" data-level="7.3" id="extensions-to-the-audio-element"><span class="secno">7.3. </span><span class="content">Extensions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element</span><a class="self-link" href="#extensions-to-the-audio-element"></a></h3>
+   <div class="example" id="example-bf865495"><a class="self-link" href="#example-bf865495"></a>
+  A <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element’s <code><a data-link-type="dfn" href="#audio-kind">kind</a></code> content attribute can be declared in as follows HTML:
+
+  
+    <pre class="lang-markup">&lt;video src="short_ping.webm" kind="transient">
+</pre>
+</div>
+
+
+   <h3 class="heading settled" data-level="6.3" id="extensions-to-the-audio-element"><span class="secno">6.3. </span><span class="content">Extensions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element</span><a class="self-link" href="#extensions-to-the-audio-element"></a></h3>
 
 
    <dl class="element">
@@ -588,7 +581,16 @@ return the audio element’s <a data-link-type="dfn" href="#media-category">medi
 string otherwise.</p>
 
 
-   <h2 class="heading settled" data-level="8" id="invoking-media-session"><span class="secno">8. </span><span class="content">Media session invocation</span><a class="self-link" href="#invoking-media-session"></a></h2>
+   <div class="example" id="example-bdfb2d3d"><a class="self-link" href="#example-bdfb2d3d"></a>
+  An <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element’s <code><a data-link-type="dfn" href="#audio-kind">kind</a></code> content attribute can be declared as follows in HTML:
+
+  
+    <pre class="lang-markup">&lt;audio src="track1.ogg" kind="content">
+</pre>
+</div>
+
+
+   <h2 class="heading settled" data-level="7" id="invoking-media-session"><span class="secno">7. </span><span class="content">Media session invocation</span><a class="self-link" href="#invoking-media-session"></a></h2>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> transitions to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
@@ -737,7 +739,7 @@ which consists of the following steps, passing in the <a data-link-type="dfn" hr
 </ol>
 
 
-   <h2 class="heading settled" data-level="9" id="interrupting-media-session"><span class="secno">9. </span><span class="content">Media session interruption</span><a class="self-link" href="#interrupting-media-session"></a></h2>
+   <h2 class="heading settled" data-level="8" id="interrupting-media-session"><span class="secno">8. </span><span class="content">Media session interruption</span><a class="self-link" href="#interrupting-media-session"></a></h2>
 
 
    <p class="note" role="note">
@@ -747,7 +749,7 @@ which consists of the following steps, passing in the <a data-link-type="dfn" hr
 
 
 
-   <h2 class="heading settled" data-level="10" id="terminating-media-session"><span class="secno">10. </span><span class="content">Media session termination</span><a class="self-link" href="#terminating-media-session"></a></h2>
+   <h2 class="heading settled" data-level="9" id="terminating-media-session"><span class="secno">9. </span><span class="content">Media session termination</span><a class="self-link" href="#terminating-media-session"></a></h2>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> transitions to no longer be
@@ -800,21 +802,21 @@ steps, passing in the <a data-link-type="dfn" href="https://html.spec.whatwg.org
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
-   <li>audio kind, <a href="#audio-kind">7.3</a>
-   <li>content attribute value, <a href="#content-attribute-value">5</a>
-   <li>content media state, <a href="#content-media-state">5</a>
-   <li>current media session, <a href="#current-media-session">6</a>
-   <li>default media state, <a href="#default-media-state">5</a>
-   <li>kind, <a href="#dom-htmlmediaelement-kind">7.1</a>
-   <li>media category, <a href="#media-category">5</a>
-   <li>media session, <a href="#media-session">6</a>
-   <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">8</a>
-   <li>media session termination algorithm, <a href="#media-session-termination-algorithm">10</a>
-   <li>participating media elements, <a href="#participating-media-elements">6</a>
+   <li>audio kind, <a href="#audio-kind">6.3</a>
+   <li>content attribute value, <a href="#content-attribute-value">4</a>
+   <li>content media state, <a href="#content-media-state">4</a>
+   <li>current media session, <a href="#current-media-session">5</a>
+   <li>default media state, <a href="#default-media-state">4</a>
+   <li>kind, <a href="#dom-htmlmediaelement-kind">6.1</a>
+   <li>media category, <a href="#media-category">4</a>
+   <li>media session, <a href="#media-session">5</a>
+   <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">7</a>
+   <li>media session termination algorithm, <a href="#media-session-termination-algorithm">9</a>
+   <li>participating media elements, <a href="#participating-media-elements">5</a>
    <li>transient attribute
-      value, <a href="#transient-attribute-value">5</a>
-   <li>transient media state, <a href="#transient-media-state">5</a>
-   <li>video kind, <a href="#video-kind">7.2</a></ul>
+      value, <a href="#transient-attribute-value">4</a>
+   <li>transient media state, <a href="#transient-media-state">4</a>
+   <li>video kind, <a href="#video-kind">6.2</a></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
