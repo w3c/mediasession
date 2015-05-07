@@ -131,11 +131,10 @@ A <dfn>media category</dfn> is a keyword that maps to a well-defined interaction
 state for a <a>media element</a> that user agents use to enforce
 platform-specific interaction and interoperation between web media.
 
-The following table lists the available <a lt="media category">media
-categories</a> keywords and states — the keywords in the left column map to
-the states in the cell in the second column on the same row as the keyword. The
-attribute should be set based on the preferred definitions in the table’s
-third and fourth columns.
+The following table lists the available <a>media categories</a> keywords and
+states — the keywords in the left column map to the states in the cell in the
+second column on the same row as the keyword. The attribute should be set based
+on the preferred definitions in the table’s third and fourth columns.
 
 <table id="valid-media-categories">
   <tr>
@@ -198,12 +197,11 @@ third and fourth columns.
 
 <h2 id="sessions">Media sessions</h2>
 
-A <dfn>media session</dfn> represents one or more <a lt="media element">media
-elements</a> within the same <a>top-level browsing context</a> that share the
-same <a>media category</a>. Each <a>media session</a> then defines the
-interactions of those <a lt="media element">media elements</a> with both the
-underlying platform and other <a lt="media element">media elements</a> belonging
-to other <a lt="media session">media sessions</a> within the user agent.
+A <dfn>media session</dfn> represents one or more <a>media elements</a> within
+the same <a>top-level browsing context</a> that share the same <a>media
+category</a>. Each <a>media session</a> then defines the interactions of those
+<a>media elements</a> with both the underlying platform and other <a>media
+elements</a> belonging to other <a>media sessions</a> within the user agent.
 
 A <a>media element</a> can have a <dfn>current media session</dfn>, which is a
 <a>media session</a>. When a <a>media element</a> is created it does not have a
