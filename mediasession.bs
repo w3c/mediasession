@@ -236,7 +236,7 @@ algorithm</a> below. A <a>media element</a>'s <a>current media session</a> is
 removed when it subsequently reaches a non-<a>potentially playing</a> state per
 the <a>media session termination algorithm</a> below.
 
-The <dfn>session media elements</dfn> of a <a>media session</a> are the
+The <dfn>participating media elements</dfn> of a <a>media session</a> are the
 <a>media elements</a> whose <a>current media session</a> is that
 <a>media session</a>.
 
@@ -344,10 +344,6 @@ consists of the following steps, passing in the <a>media element</a> as
     session</var>, also request the most appropriate platform-level media focus
     for the <var>media session</var> based on the current <var>media category
     state</var>.
-  </li>
-  <li>
-    Add a reference to the <var>current media element</var> to <var>media
-    session</var>'s <a>session media elements</a>.
   </li>
   <li>
     Set <var>current media element</var>'s <a>current media session</a> to
@@ -463,10 +459,6 @@ steps, passing in the <a>media element</a> as <var>current media element</var>.
   </li>
   <li>
     Return and run the remaining steps asynchronously.
-  </li>
-  <li>
-    Remove the reference for the <var>current media element</var> from
-    <var>media session</var>'s <a>session media elements</a>.
   </li>
   <li>
     Remove <a>current media session</a> from <var>current media element</var>.
