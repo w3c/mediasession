@@ -731,8 +731,21 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
 
 
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its
-<a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> has been run. When a <a data-link-type="dfn" href="#media-session">media
-session</a> receives an interruption notification from the platform, run the
+<a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> has been run. This typically occurs
+when another application or <a data-link-type="dfn" href="#media-session">media session</a> requests and is granted
+platform-level media focus.</p>
+
+
+   <p>Interruptions can be both transient or permanent. A transient interruption means
+we can choose to either continue playing out our content at a reduced volume for
+the duration of the interruption or we can pause our content for the duration of
+the interruption and then, optionally, resume playback when the interruption
+ends. A permanent interruption means we must pause our media content
+indefinitely.</p>
+
+
+   <p>When a <a data-link-type="dfn" href="#media-session">media session</a> receives an interruption notification from the
+platform, run the
 <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> passing in the <a data-link-type="dfn" href="#media-session">media session</a>
 as <var>current media session</var>.</p>
 

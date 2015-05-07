@@ -434,8 +434,19 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
 <h2 id="interrupting-media-session">Media session interruption</h2>
 
 A <a>media session</a> may be interrupted at any time after its
-<a>media session invocation algorithm</a> has been run. When a <a>media
-session</a> receives an interruption notification from the platform, run the
+<a>media session invocation algorithm</a> has been run. This typically occurs
+when another application or <a>media session</a> requests and is granted
+platform-level media focus.
+
+Interruptions can be both transient or permanent. A transient interruption means
+we can choose to either continue playing out our content at a reduced volume for
+the duration of the interruption or we can pause our content for the duration of
+the interruption and then, optionally, resume playback when the interruption
+ends. A permanent interruption means we must pause our media content
+indefinitely.
+
+When a <a>media session</a> receives an interruption notification from the
+platform, run the
 <a>media session interruption algorithm</a> passing in the <a>media session</a>
 as <var>current media session</var>.
 
