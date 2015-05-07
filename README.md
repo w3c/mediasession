@@ -53,13 +53,7 @@ Access to media keys and lock screen UI will only be granted when audio playback
 
 This spec is built using [Bikeshed](https://github.com/tabatkins/bikeshed).
 
-Update `mediasession.bs`, then run
-
-```
-make
-```
-
-to format `mediasession.bs` and generate `mediasession.html` using [Bikeshed's web interface](https://api.csswg.org/bikeshed/).
+Update `mediasession.bs`, then run `make` to format `mediasession.bs` and generate `mediasession.html` using [Bikeshed's web interface](https://api.csswg.org/bikeshed/).
 
 To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/master/docs/install.md) and then run `bikeshed spec` in the working directory.
 
