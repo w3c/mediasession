@@ -80,7 +80,7 @@ these supplied hints to enforce how different sources of web media should
 interact with each other, other native media content and the underlying
 platform.
 
-<h2>Conformance</h2>
+<h2 id="conformance">Conformance</h2>
 
 All diagrams, examples, and notes in this specification are non-normative, as
 are all sections explicitly marked non-normative. Everything else in this
@@ -113,7 +113,7 @@ with custom properties or functions in JavaScript.
 Unless otherwise stated, string comparisons are done in a <a>case-sensitive</a>
 manner.
 
-<h2>Dependencies</h2>
+<h2 id="dependencies">Dependencies</h2>
 
 The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
@@ -243,7 +243,8 @@ The <dfn>participating media elements</dfn> of a <a>media session</a> are the
 <h2 id="setting-media-category">Assigning a media category to media
 elements</h2>
 
-<h3>Extensions to the {{HTMLMediaElement}} interface</h3>
+<h3 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
+{{HTMLMediaElement}} interface</h3>
 
 <pre class="idl">
 partial interface HTMLMediaElement {
@@ -280,7 +281,8 @@ The <code>{{HTMLMediaElement/kind}}</code> IDL attribute must
 element>audio</a></code> element content attribute of the same name, <a>limited
 to only known values</a>.
 
-<h3>Extensions to the <code><a element>video</a></code> element</h3>
+<h3 id="extensions-to-the-video-element">Extensions to the <code><a
+element>video</a></code> element</h3>
 
 <dl class="element">
   <dt>
@@ -296,7 +298,8 @@ The <code><a lt="video kind">kind</a></code> content attribute on a
 and must return the video element's <a>media category</a>, if it has one, or the
 empty string otherwise.
 
-<h3>Extensions to the <code><a element>audio</a></code> element</h3>
+<h3 id="extensions-to-the-audio-element">Extensions to the <code><a
+element>audio</a></code> element</h3>
 
 <dl class="element">
   <dt>
@@ -314,9 +317,9 @@ string otherwise.
 
 <h2 id="invoking-media-session">Media session invocation</h2>
 
-When a <a>media element</a> transitions to <a>potentially playing</a> then the
-user agent must run the <dfn>media session invocation algorithm</dfn> which
-consists of the following steps, passing in the <a>media element</a> as
+When a <a>media element</a> transitions to <a>potentially playing</a> [[!HTML]]
+then the user agent must run the <dfn>media session invocation algorithm</dfn>
+which consists of the following steps, passing in the <a>media element</a> as
 <var>current media element</var>.
 
 <ol>
