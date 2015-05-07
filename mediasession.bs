@@ -33,7 +33,9 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: limited to only known values
         urlPrefix: embedded-content.html
             text: media element
+            text: media element load algorithm
             text: potentially playing
+            text: ended playback
             text: paused; url: #dom-media-paused
         urlPrefix: infrastructure.html
             text: enumerated attribute
@@ -43,7 +45,12 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
         urlPrefix: embedded-content.html
             text: play(); for: HTMLMediaElement; url: #dom-media-play
             text: pause(); for: HTMLMediaElement; url: #dom-media-pause
-
+    type: attribute
+        urlPrefix: embedded-content.html
+            text: paused; for: HTMLMediaElement; url: #dom-media-paused
+            text: readyState; for: HTMLMediaElement; url: #dom-media-readystate
+            text: HAVE_FUTURE_DATA; for: HTMLMediaElement; url: #dom-media-have_future_data
+            text: HAVE_ENOUGH_DATA; for: HTMLMediaElement; url: #dom-media-have_enough_data
 </pre>
 
 <h2 id="intro">Introduction</h2>
@@ -202,15 +209,16 @@ A <a>media element</a> can have a <dfn>current media session</dfn>, which is a
 <a>media session</a>. When a <a>media element</a> is created it does not have a
 <a>current media session</a>.
 
-A <a>media element</a> obtains a <a>current media session</a> only when it first
-reaches a <a>potentially playing</a> state per the <a>media session invocation
-algorithm</a> below. A <a>media element</a>'s <a>current media session</a> is
-removed when it subsequently reaches a non-<a>potentially playing</a> state per
-the <a>media session termination algorithm</a> below.
-
 The <dfn>participating media elements</dfn> of a <a>media session</a> are the
 <a>media elements</a> whose <a>current media session</a> is that
 <a>media session</a>.
+
+Each <a>media session</a> maintains a <dfn>has media focus flag</dfn> that is
+initially set to false on creation. The <a>has media focus flag</a> is used
+internally to determine whether the <a>media session</a> currently holds
+platform-level media focus and is used extensively in the <a>media session
+invocation algorithm</a>, <a>media session interruption algorithm</a> and
+<a>media session release algorithm</a>.
 
 <h2 id="setting-media-category">Assigning a media category to media
 elements</h2>
@@ -322,10 +330,15 @@ string otherwise.
 
 <h2 id="invoking-media-session">Media session invocation</h2>
 
-When a <a>media element</a> transitions to <a>potentially playing</a> [[!HTML]]
-then the user agent must run the <dfn>media session invocation algorithm</dfn>
-which consists of the following steps, passing in the <a>media element</a> as
-<var>current media element</var>.
+When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
+element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
+{{readyState}} attribute has the value {{HAVE_FUTURE_DATA}} or
+{{HAVE_ENOUGH_DATA}}, then the user agent must run the <a>media session
+invocation algorithm</a>, passing in the <a>media element</a> as
+<var>current media element</var>. [[HTML]]
+
+The <dfn>media session invocation algorithm</dfn> takes one argument,
+<var>current media element</var>, and consists of the following steps:
 
 <ol>
   <li>
@@ -339,21 +352,30 @@ which consists of the following steps, passing in the <a>media element</a> as
     Return and run the remaining steps asynchronously.
   </li>
   <li>
-    Let <var>media session</var> be the current <a>top-level browsing
-    context</a>'s <a>media session</a> that matches <var>media category
-    state</var>. If no <var>media session</var> is available in the <a>top-level
-    browsing context</a> that matches <var>media category state</var> then, let
-    <var>media session</var> be a new <a>media session</a> with a <a>media
-    category</a> set to the value of <var>media category state</var>.
-
-    Optionally, based on platform conventions, when creating a new <var>media
-    session</var>, also request the most appropriate platform-level media focus
-    for the <var>media session</var> based on the current <var>media category
-    state</var>.
+    If <var>media category state</var> is <code><a lt="default media
+    state">Default</a></code> then let <var>media session</var> be the current
+    <a>top-level browsing context</a>'s <a>media session</a>. Otherwise, let
+    <var>media session</var> be a new <a>media session</a> with <var>media
+    category state</var> characteristics.
   </li>
   <li>
     Set <var>current media element</var>'s <a>current media session</a> to
     <var>media session</var>.
+  </li>
+  <li>
+    If <var>media session</var>'s <a>has media focus flag</a> is true abort any
+    remaining steps and return.
+  </li>
+  <li>
+    Optionally, based on platform conventions, request the most appropriate
+    platform-level media focus for <var>media session</var> based on the current
+    <var>media category state</var>.
+
+    If this step is run and platform-level media focus can not be obtained for
+    any reason then this algorithm must stall on this step.
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>has media focus flag</a> to true.
   </li>
   <li>
     Run these substeps:
@@ -365,16 +387,6 @@ which consists of the following steps, passing in the <a>media element</a> as
       </dt>
       <dd>
         <ol>
-          <li>
-            {{pause()}} all other <code><a lt="content media
-            state">Content</a></code>-based <a lt="media element">media
-            elements</a> in <var>media session</var>.
-          </li>
-          <li>
-            {{pause()}} all other <a lt="media element">media elements</a> in
-            all other <code><a lt="content media state">Content</a></code>-based
-            <a lt="media session">media sessions</a> within the user agent.
-          </li>
           <li>
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform's
@@ -392,25 +404,13 @@ which consists of the following steps, passing in the <a>media element</a> as
         If <var>media category state</var> is <code><a lt="transient media
         state">Transient</a></code>
       </dt>
-      <dd>
-        <ol>
-          <li>
-            For the duration of the <var>current media element</var> duck all
-            other
-            <a lt="media element">media elements</a> in all other <code><a
-            lt="content media state">Content</a></code>-based <a lt="media
-            session">media sessions</a> within the user agent.
-
-            <p class="note">
-              The user agent should not provide user access to any hardware or
-              software media keys and not display any ongoing media interface in
-              the underlying platform's notifications area or show any ongoing
-              media interface in the underlying platform's lock screen area for
-              <code><a lt="transient media state">Transient</a></code>-based
-              media elements.
-            </p>
-          </li>
-        </ol>
+      <dd class="note">
+        The user agent should not provide user access to any hardware or
+        software media keys and not display any ongoing media interface in the
+        underlying platform's notifications area or show any ongoing media
+        interface in the underlying platform's lock screen area for
+        <code><a lt="transient media state">Transient</a></code>-based media
+        elements.
       </dd>
       <dt>
         Otherwise, <var>media category state</var> is <code><a lt="default media
@@ -433,46 +433,75 @@ which consists of the following steps, passing in the <a>media element</a> as
 
 <h2 id="interrupting-media-session">Media session interruption</h2>
 
-<p class="note">
-  @TBW
-</p>
+A <a>media session</a> may be interrupted at any time after its
+<a>media session invocation algorithm</a> has been run. When a <a>media
+session</a> receives an interruption notification from the platform, run the
+<a>media session interruption algorithm</a> passing in the <a>media session</a>
+as <var>current media session</var>.
 
-<!-- An active <a>media session</a> may be interrupted at any time when the
-<a>media session invocation algorithm</a> is run against a <a>media element</a>
-not under its control. Additionally, an active <a>media session</a> may be
-interrupted by another application on the underlying platform when that
-application requests and is granted platform-level media focus. When a <a>media
-session</a> is to be interrupted the user agent must be directly notified that
-an interruption has occurred. When the user agent receives an interruption
-notification then it must run the <dfn>media session interruption
-algorithm</dfn> against every active <a>media session</a> under its control,
-consisting of the following steps, passing in each active <a>media session</a>
-as <var>active media session</var>. -->
-
-<h2 id="terminating-media-session">Media session termination</h2>
-
-When a <a>media element</a> transitions to no longer be
-<a>potentially playing</a> nor <a>paused</a> then the user agent must run the
-<dfn>media session termination algorithm</dfn> which consists of the following
-steps, passing in the <a>media element</a> as <var>current media element</var>.
+The <dfn>media session interruption algorithm</dfn> takes one argument,
+<var>current media session</var>, and consists of running the following steps.
 
 <ol>
   <li>
-    Let <var>media session</var> be the value of <var>current media
-    element</var>'s <a>current media session</a>. If <var>current media
-    element</var> does not have a <a>current media session</a>, then abort any
-    remaining steps and return.
+    If this is not a transient interruption then {{pause()}} all of <var>current
+    media session</var>'s <a>participating media elements</a>. Otherwise, if the
+    duration of the transient interruption is provided in the notification then
+    reduce each <var>current media session</var>'s <a>participating media
+    elements</a> volume by XX% for the duration of the interruption and restore
+    the original volume at the end of the interruption.
   </li>
   <li>
-    Return and run the remaining steps asynchronously.
+    Set <var>current media session</var>'s <a>has media focus flag</a> to false.
+
+    <p class="note">
+      This implies that the next time a <a>media element</a> in <a>media
+      session</a> runs and the <a>media session invocation algorithm</a> is also
+      run that we will re-request media focus according to the steps defined in
+      that algorithm.
+    </p>
   </li>
   <li>
-    Remove <a>current media session</a> from <var>current media element</var>.
+    Optionally, based on platform conventions, the user agent must remove any
+    previously established ongoing media interface in the underlying platform's
+    notifications area and any ongoing media interface in the underlying
+    platform's lock screen area, if any.
   </li>
   <li>
-    Optionally, based on platform conventions, remove any previously obtained
-    platform-level media focus for <var>media session</var> based on the current
-    <var>media category state</var>.
+    Optionally, based on platform conventions, the user agent must prevent any
+    hardware and/or software media keys from controlling playback of
+    <var>current media element</var>.
+  </li>
+</ol>
+
+<h2 id="releasing-media-session">Media session release</h2>
+
+Once a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, run
+the <a>media session release algorithm</a> passing in the
+<a>media element</a> as <var>current media element</var>.
+
+Additionally, whenever a <a>media element</a>'s <a lt="media element load
+algorithm">load algorithm</a> is run, also run the <a>media session release
+algorithm</a> passing in the
+<a>media element</a> as <var>current media element</var>.
+
+The <dfn>media session release algorithm</dfn> takes one argument,
+<var>current media element</var>, and consists of running the following steps.
+
+<ol>
+  <li>
+    Set <var>current media session</var> to <var>current media element</var>'s
+    <a>current media session</a>, if any.
+  </li>
+  <li>
+    If <var>current media session</var> is empty then abort any remaining steps.
+  </li>
+  <li>
+    Set <var>current media session</var>'s <a>has media focus flag</a> to false.
+  </li>
+  <li>
+    Optionally, based on platform conventions, the user agent must release any
+    currently held platform media focus.
   </li>
   <li>
     Optionally, based on platform conventions, the user agent must remove any
