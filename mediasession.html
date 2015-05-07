@@ -482,20 +482,20 @@ to other <a data-link-type="dfn" href="#media-session">media sessions</a> within
 
 
    <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> can have a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session">current media session<a class="self-link" href="#current-media-session"></a></dfn>, which is a
-<a data-link-type="dfn" href="#media-session">media session</a> object. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created it does not
-have a <a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
+<a data-link-type="dfn" href="#media-session">media session</a>. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created it does not have a
+<a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
 
 
-   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> obtains a <a data-link-type="dfn" href="#current-media-session">current media session</a> object only when
-it first reaches a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session
-invocation algorithm</a> below. A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media
-session</a> is removed when it subsequently reaches a non-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially
-playing</a> state per the <a data-link-type="dfn" href="#media-session-termination-algorithm">media session termination algorithm</a> below.</p>
+   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> obtains a <a data-link-type="dfn" href="#current-media-session">current media session</a> only when it first
+reaches a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
+algorithm</a> below. A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> is
+removed when it subsequently reaches a non-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> state per
+the <a data-link-type="dfn" href="#media-session-termination-algorithm">media session termination algorithm</a> below.</p>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="session-media-elements">session media elements<a class="self-link" href="#session-media-elements"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> object are the
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="session-media-elements">session media elements<a class="self-link" href="#session-media-elements"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> are the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> whose <a data-link-type="dfn" href="#current-media-session">current media session</a> is that
-<a data-link-type="dfn" href="#media-session">media session</a> object.</p>
+<a data-link-type="dfn" href="#media-session">media session</a>.</p>
 
 
    <h2 class="heading settled" data-level="7" id="setting-media-category"><span class="secno">7. </span><span class="content">Assigning a media category to media
@@ -609,7 +609,7 @@ consists of the following steps, passing in the <a data-link-type="dfn" href="ht
   
     <li>
     Let <var>media session</var> be the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing
-    context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> object that matches <var>media category
+    context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> that matches <var>media category
     state</var>. If no <var>media session</var> is available in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
     browsing context</a> that matches <var>media category state</var> then, let
     <var>media session</var> be a new <a data-link-type="dfn" href="#media-session">media session</a> with a <a data-link-type="dfn" href="#media-category">media
