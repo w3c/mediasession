@@ -822,12 +822,21 @@ algorithm</a> passing in the
   
   
     <li>
-    Set <var>current media session</var>’s <a data-link-type="dfn" href="#has-media-focus-flag">has media focus flag</a> to false.
+    Optionally, based on platform conventions, the user agent must release any
+    currently held platform media focus.
   
   
     <li>
-    Optionally, based on platform conventions, the user agent must release any
-    currently held platform media focus.
+    Set <var>current media session</var>’s <a data-link-type="dfn" href="#has-media-focus-flag">has media focus flag</a> to false.
+
+    
+     <p class="note" role="note">
+      This implies that the next time a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> in <a data-link-type="dfn" href="#media-session">media
+      session</a> runs and the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is also
+      run that we will re-request media focus according to the steps defined in
+      that algorithm.
+    </p>
+     
   
   
     <li>

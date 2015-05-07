@@ -508,11 +508,18 @@ The <dfn>media session release algorithm</dfn> takes one argument,
     If <var>current media session</var> is empty then abort any remaining steps.
   </li>
   <li>
-    Set <var>current media session</var>'s <a>has media focus flag</a> to false.
-  </li>
-  <li>
     Optionally, based on platform conventions, the user agent must release any
     currently held platform media focus.
+  </li>
+  <li>
+    Set <var>current media session</var>'s <a>has media focus flag</a> to false.
+
+    <p class="note">
+      This implies that the next time a <a>media element</a> in <a>media
+      session</a> runs and the <a>media session invocation algorithm</a> is also
+      run that we will re-request media focus according to the steps defined in
+      that algorithm.
+    </p>
   </li>
   <li>
     Optionally, based on platform conventions, the user agent must remove any
