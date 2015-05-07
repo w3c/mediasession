@@ -18,7 +18,7 @@ Boilerplate: omit conformance, omit idl-index
 </pre>
 
 <pre class="anchors">
-urlPrefix: https://html.spec.whatwg.org/multipage/
+urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
     type: interface
         urlPrefix: embedded-content.html
             text: HTMLMediaElement
