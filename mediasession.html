@@ -203,22 +203,22 @@ mobile devices.</p>
 
   <div data-fill-with="table-of-contents" role="navigation">
    <ul class="toc" role="directory">
-    <li><a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
+    <li><a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
     <li><a href="#conformance"><span class="secno">2</span> <span class="content">Conformance</span></a>
     <li><a href="#dependencies"><span class="secno">3</span> <span class="content">Dependencies</span></a>
-    <li><a href="#categories"><span class="secno">4</span> <span class="content">Media categories</span></a>
-    <li><a href="#sessions"><span class="secno">5</span> <span class="content">Media sessions</span></a>
-    <li><a href="#setting-media-category"><span class="secno">6</span> <span class="content">Assigning a media category to media
-elements</span></a>
+    <li><a href="#media-categories"><span class="secno">4</span> <span class="content">Media categories</span></a>
+    <li><a href="#media-sessions"><span class="secno">5</span> <span class="content">Media sessions</span></a>
+    <li><a href="#assigning-a-media-category-to-media-elements"><span class="secno">6</span> <span class="content">Assigning a media category
+to media elements</span></a>
      <ul class="toc">
       <li><a href="#extensions-to-the-htmlmediaelement-interface"><span class="secno">6.1</span> <span class="content">Extensions to the
 <code class="idl"><span>HTMLMediaElement</span></code> interface</span></a>
       <li><a href="#extensions-to-the-video-element"><span class="secno">6.2</span> <span class="content">Extensions to the <code><span>video</span></code> element</span></a>
       <li><a href="#extensions-to-the-audio-element"><span class="secno">6.3</span> <span class="content">Extensions to the <code><span>audio</span></code> element</span></a>
      </ul>
-    <li><a href="#invoking-media-session"><span class="secno">7</span> <span class="content">Media session invocation</span></a>
-    <li><a href="#interrupting-media-session"><span class="secno">8</span> <span class="content">Media session interruption</span></a>
-    <li><a href="#releasing-media-session"><span class="secno">9</span> <span class="content">Media session release</span></a>
+    <li><a href="#media-session-invocation"><span class="secno">7</span> <span class="content">Media session invocation</span></a>
+    <li><a href="#media-session-interruption"><span class="secno">8</span> <span class="content">Media session interruption</span></a>
+    <li><a href="#media-session-release"><span class="secno">9</span> <span class="content">Media session release</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ul class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
@@ -237,7 +237,7 @@ elements</span></a>
 
 
 
-   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
+   <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
 
 
    <p><em>This section is non-normative.</em></p>
@@ -325,7 +325,7 @@ manner.</p>
 conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a></p>
 
 
-   <h2 class="heading settled" data-level="4" id="categories"><span class="secno">4. </span><span class="content">Media categories</span><a class="self-link" href="#categories"></a></h2>
+   <h2 class="heading settled" data-level="4" id="media-categories"><span class="secno">4. </span><span class="content">Media categories</span><a class="self-link" href="#media-categories"></a></h2>
 
 
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-category">media category<a class="self-link" href="#media-category"></a></dfn> is a keyword that maps to a well-defined interaction
@@ -440,7 +440,7 @@ on the preferred definitions in the table’s third and fourth columns.</p>
 </table>
 
 
-   <h2 class="heading settled" data-level="5" id="sessions"><span class="secno">5. </span><span class="content">Media sessions</span><a class="self-link" href="#sessions"></a></h2>
+   <h2 class="heading settled" data-level="5" id="media-sessions"><span class="secno">5. </span><span class="content">Media sessions</span><a class="self-link" href="#media-sessions"></a></h2>
 
 
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session">media session<a class="self-link" href="#media-session"></a></dfn> represents one or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> within
@@ -468,8 +468,8 @@ invocation algorithm</a>, <a data-link-type="dfn" href="#media-session-interrupt
 <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a>.</p>
 
 
-   <h2 class="heading settled" data-level="6" id="setting-media-category"><span class="secno">6. </span><span class="content">Assigning a media category to media
-elements</span><a class="self-link" href="#setting-media-category"></a></h2>
+   <h2 class="heading settled" data-level="6" id="assigning-a-media-category-to-media-elements"><span class="secno">6. </span><span class="content">Assigning a media category
+to media elements</span><a class="self-link" href="#assigning-a-media-category-to-media-elements"></a></h2>
 
 
    <h3 class="heading settled" data-level="6.1" id="extensions-to-the-htmlmediaelement-interface"><span class="secno">6.1. </span><span class="content">Extensions to the
@@ -589,7 +589,7 @@ string otherwise.</p>
 </div>
 
 
-   <h2 class="heading settled" data-level="7" id="invoking-media-session"><span class="secno">7. </span><span class="content">Media session invocation</span><a class="self-link" href="#invoking-media-session"></a></h2>
+   <h2 class="heading settled" data-level="7" id="media-session-invocation"><span class="secno">7. </span><span class="content">Media session invocation</span><a class="self-link" href="#media-session-invocation"></a></h2>
 
 
    <p>When the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is invoked and the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
@@ -725,7 +725,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
 </ol>
 
 
-   <h2 class="heading settled" data-level="8" id="interrupting-media-session"><span class="secno">8. </span><span class="content">Media session interruption</span><a class="self-link" href="#interrupting-media-session"></a></h2>
+   <h2 class="heading settled" data-level="8" id="media-session-interruption"><span class="secno">8. </span><span class="content">Media session interruption</span><a class="self-link" href="#media-session-interruption"></a></h2>
 
 
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its
@@ -791,7 +791,7 @@ as <var>current media session</var>.</p>
 </ol>
 
 
-   <h2 class="heading settled" data-level="9" id="releasing-media-session"><span class="secno">9. </span><span class="content">Media session release</span><a class="self-link" href="#releasing-media-session"></a></h2>
+   <h2 class="heading settled" data-level="9" id="media-session-release"><span class="secno">9. </span><span class="content">Media session release</span><a class="self-link" href="#media-session-release"></a></h2>
 
 
    <p>Once a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">playback has ended</a>, run
