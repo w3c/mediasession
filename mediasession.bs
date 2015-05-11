@@ -154,7 +154,8 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Indefinitely pauses all other <a lt="active media session">active</a>
+          Indefinitely pauses all other <a lt="active media session
+          state">active</a>
           <code><a lt="default media state">Default</a></code> and <code><a
           lt="content media state">Content</a></code> content when <a
           href="#media-session-invocation">playback begins</a>.
@@ -205,11 +206,11 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Ducks all other <a lt="active media session">active</a> <code><a
+          Ducks all other <a lt="active media session state">active</a> <code><a
           lt="default media state">Default</a></code>
           and <code><a lt="content media state">Content</a></code> content when
           <a href="#media-session-invocation">playback begins</a>. Unducks all
-          other <a lt="interrupted media session">interrupted</a> <code><a
+          other <a lt="interrupted media session state">interrupted</a> <code><a
           lt="default media state">Default</a></code> and <code><a lt="content
           media state">Content</a></code> content when <a
           href="#media-session-release">playback ends</a>.
@@ -255,14 +256,14 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Pauses all other <a lt="active media session">active</a> <code><a
-          lt="default media state">Default</a></code>,
+          Pauses all other <a lt="active media session state">active</a>
+          <code><a lt="default media state">Default</a></code>,
           <code><a lt="content media state">Content</a></code>, <code><a
           lt="transient mixable media state">Transient_Mixable</a></code> and
           <code><a lt="transient exclusive media
           state">Transient_Exclusive</a></code> content when <a
           href="#media-session-invocation">playback begins</a>. Unpauses all <a
-          lt="interrupted media session">interrupted</a>
+          lt="interrupted media session state">interrupted</a>
           <code><a lt="default media state">Default</a></code>, <code><a
           lt="content media state">Content</a></code>, <code><a lt="transient
           mixable media state">Transient_Mixable</a></code> and <code><a
@@ -399,7 +400,8 @@ The possible values are as follows:
   <dd>
     The <a>media session</a> is currently suspended from having platform-level
     media focus and its <a>participating media elements</a> are either paused or
-    ducked pending completion of another <a>media session</a>'s media focus.
+    ducked based on the <a>media session</a>'s <a>media category</a> and pending
+    completion of another <a>media session</a>'s media focus.
   </dd>
 </dl>
 
@@ -409,32 +411,26 @@ When a <a>media session</a> is created its <a>current state</a> must be
 initially set to
 <code><a lt="idle media session state">IDLE</a></code>.
 
-A <a>media session</a> is <dfn lt="active media session">active</dfn> when it
-has a <a>current state</a> of <code><a lt="active media session
-state">ACTIVE</a></code>.
-
-A <a>media session</a> is <dfn lt="interrupted media session">interrupted</dfn>
-when it has a <a>current state</a> of <code><a lt="interrupted media session
-state">INTERRUPTED</a></code>.
-
 When the <a>media session invocation algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from <code><a lt="idle media
 session state">IDLE</a></code> to
-<code><a lt="active media session state">ACTIVE</a></code>. Existing <a>media
-sessions</a> may be set from
-<code><a lt="active media session state">ACTIVE</a></code> to <code><a
-lt="interrupted media session state">INTERRUPTED</a></code> during this
-algorithm when activating a new <a>media session</a>.
+<code><a lt="active media session state">ACTIVE</a></code>.
 
 When the <a>media session interruption algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from
-<code><a lt="interrupted media session state">INTERRUPTED</a></code> to <code><a
-lt="active media session state">ACTIVE</a></code>.
+<code><a lt="active media session state">ACTIVE</a></code> to either <code><a
+lt="idle media session state">IDLE</a></code> or <code><a lt="interrupted media
+session state">INTERRUPTED</a></code> depending on its associated <a>media
+category</a>.
 
 When the <a>media session release algorithm</a> is run a <a>media session</a>'s
 <a>current state</a>
 may be set from <code><a lt="active media session state">ACTIVE</a></code> to
-<code><a lt="idle media session state">IDLE</a></code>.
+<code><a lt="idle media session state">IDLE</a></code>. Any <a lt="interrupted
+media session state">interrupted</a> <a>media sessions</a> may then be set from
+<code><a lt="interrupted media session state">INTERRUPTED</a></code>
+to <code><a lt="active media session state">ACTIVE</a></code> during this
+algorithm.
 
 
 <h2 id="assigning-a-media-category-to-media-elements">Assigning a media category
@@ -702,7 +698,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             If <var>current media category</var> is <code><a lt="default media
             state">Default</a></code> or <code><a lt="content media
             state">Content</a></code> then {{pause()}} all of <var>current media
-            session</var>'s <a lt="active media session">active</a>
+            session</var>'s
             <a>participating media elements</a> and set
             <var>current media session</var>'s <a>current state</a> to
             <code><a lt="idle media session state">IDLE</a></code>.
@@ -726,8 +722,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             Optionally, based on platform conventions, the user agent must
             prevent any hardware and/or software media keys from controlling
             playback of
-            <var>current media session</var>'s <a lt="active media
-            session">active</a> <a>participating media elements</a>.
+            <var>current media session</var>'s <a lt="active media session
+            state">active</a> <a>participating media elements</a>.
           </li>
         </ol>
       </dd>
@@ -742,7 +738,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             state">Default</a></code> or <code><a lt="content media
             state">Content</a></code> then duck (i.e. reduce the output volume)
             all of <var>current media session</var>'s <a lt="active media
-            session">active</a> <a>participating media elements</a> and set
+            session state">active</a> <a>participating media elements</a> and
+            set
             <var>current media session</var>'s
             <a>current state</a> to <code><a lt="interrupted media session
             state">INTERRUPTED</a></code>.
@@ -768,9 +765,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             state">Transient_Mixable</a></code> or <code><a lt="transient
             exclusive media state">Transient_Exclusive</a></code> then
             {{pause()}} all of <var>current media session</var>'s
-            <a lt="active media session">active</a> <a>participating media
-            elements</a> and set <var>current media session</var>'s <a>current
-            state</a> to
+            <a>participating media elements</a> and set <var>current media
+            session</var>'s <a>current state</a> to
             <code><a lt="interrupted media session
             state">INTERRUPTED</a></code>.
 
@@ -834,7 +830,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
   <li>
     Optionally, based on platform conventions, the user agent must prevent any
     hardware and/or software media keys from controlling playback of
-    <var>current media session</var>'s <a lt="active media session">active</a>
+    <var>current media session</var>'s
     <a>participating media elements</a>.
   </li>
   <li>
@@ -884,7 +880,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
                 state">Default</a></code> or
                 <code><a lt="content media state">Content</a></code>
                 then unduck (i.e. restore the volume) of <var>incumbent media
-                session</var>'s <a lt="active media session">active</a>
+                session</var>'s
                 <a>participating media elements</a>
                 and set <var>incumbent media session</var>'s <a>current
                 state</a> to <code><a lt="active media session
@@ -906,8 +902,8 @@ The <dfn>media session release algorithm</dfn> takes one argument,
                 lt="transient mixable media state">Transient_Mixable</a></code>,
                 or <code><a lt="transient exclusive media
                 state">Transient_Exclusive</a></code> then un-{{pause()}} the
-                <var>incumbent media session</var>'s <a lt="active media
-                session">active</a>
+                <var>incumbent media session</var>'s <a lt="active media session
+                state">active</a>
                 <a>participating media elements</a>
                 and set <var>incumbent media session</var>'s <a>current
                 state</a> to <code><a lt="active media session
