@@ -663,7 +663,9 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
         underlying platform's notifications area or show any ongoing media
         interface in the underlying platform's lock screen area for
         <code><a lt="transient mixable media
-        state">Transient_Mixable</a></code>-based <a>media sessions</a>.
+        state">Transient_Mixable</a></code>, <code><a lt="transient exclusive
+        media state">Transient_Exclusive</a></code> or <code><a lt="ambient
+        media state">Ambient</a></code>-based <a>media sessions</a>.
       </dd>
       <dt>
         Otherwise, <var>media category state</var> is <code><a lt="default media
