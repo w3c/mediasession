@@ -52,6 +52,9 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: readyState; for: HTMLMediaElement; url: #dom-media-readystate
             text: HAVE_FUTURE_DATA; for: HTMLMediaElement; url: #dom-media-have_future_data
             text: HAVE_ENOUGH_DATA; for: HTMLMediaElement; url: #dom-media-have_enough_data
+urlPrefix: http://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
+    type: interface
+        text: AudioContext
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -490,7 +493,7 @@ myAudio.kind = "content";
 </div>
 
 <div class="example">
-  An AudioContext [[!WEBAUDIO]] can be rendered via <code><a
+  An {{AudioContext}} object [[!WEBAUDIO]] can be rendered via <code><a
   element>audio</a></code> or <code><a element>video</a></code>
   elements. As both <code><a element>audio</a></code> and <code><a
   element>video</a></code>
