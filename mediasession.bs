@@ -430,7 +430,9 @@ category</a>.
 
 When the <a>media session release algorithm</a> is run a <a>media session</a>'s
 <a>current state</a>
-may be set from <code><a lt="active media session state">ACTIVE</a></code> to
+may be set from either <code><a lt="active media session
+state">ACTIVE</a></code> or <code><a lt="interrupted media session
+state">INTERRUPTED</a></code> to
 <code><a lt="idle media session state">IDLE</a></code>. Any <a lt="interrupted
 media session state">interrupted</a> <a>media sessions</a> may then be set from
 <code><a lt="interrupted media session state">INTERRUPTED</a></code>
