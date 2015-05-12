@@ -21,6 +21,8 @@ Boilerplate: omit conformance, omit idl-index
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
     type: interface
+        urlPrefix: dom.html
+            text: Document
         urlPrefix: embedded-content.html
             text: HTMLMediaElement
     type: element
@@ -965,6 +967,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 </ol>
 
 When a <a>media element</a> is <a lt="remove an element from a document">removed
-from a <code>Document</code></a>, run the <a>media session release algorithm</a>
+from a <code>Document</code></a> and is not attached to another {{Document}},
+run the <a>media session release algorithm</a>
 passing in the
 <a>media element</a> as <var>current media element</var>.
