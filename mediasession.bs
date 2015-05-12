@@ -52,6 +52,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: readyState; for: HTMLMediaElement; url: #dom-media-readystate
             text: HAVE_FUTURE_DATA; for: HTMLMediaElement; url: #dom-media-have_future_data
             text: HAVE_ENOUGH_DATA; for: HTMLMediaElement; url: #dom-media-have_enough_data
+            text: pause; url: #event-media-pause
+            text: play; url: #event-media-play
 urlPrefix: http://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
     type: interface
         text: AudioContext
@@ -511,6 +513,16 @@ myAudio.srcObject = destinationNode.stream;
 myAudio.kind = "content";
 // myAudio.outerHTML === "&lt;audio kind="content">&lt;/audio>" === true
   </pre>
+
+  <p class="note">
+    Web developers should ensure that, when an {{AudioContext}} object is
+    attached to an <code><a element>audio</a></code> or <code><a
+    element>video</a></code>
+    element, that they apply subsequent {{pause}} and {{play}} events dispatched
+    on that <code><a element>audio</a></code> or <code><a
+    element>video</a></code>
+    element to their {{AudioContext}} object appropriately.
+  </p>
 </div>
 
 <h3 id="extensions-to-the-video-element">Extensions to the <code><a

@@ -788,7 +788,7 @@ myAudio.kind = "content";
 </div>
 
 
-   <div class="example" id="example-3ca3171f"><a class="self-link" href="#example-3ca3171f"></a>
+   <div class="example" id="example-fb4b5847"><a class="self-link" href="#example-fb4b5847"></a>
   An <code class="idl"><a data-link-type="idl" href="http://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object <a data-link-type="biblio" href="#biblio-webaudio">[WEBAUDIO]</a> can be rendered via <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
   elements. As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
   elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
@@ -805,6 +805,15 @@ myAudio.srcObject = destinationNode.stream;
 myAudio.kind = "content";
 // myAudio.outerHTML === "&lt;audio kind="content">&lt;/audio>" === true
 </pre>
+
+  
+    <p class="note" role="note">
+    Web developers should ensure that, when an <code class="idl"><a data-link-type="idl" href="http://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object is
+    attached to an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+    element, that they apply subsequent <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-pause">pause</a></code> and <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a></code> events dispatched
+    on that <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+    element to their <code class="idl"><a data-link-type="idl" href="http://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object appropriately.
+  </p>
 </div>
 
 
@@ -1389,8 +1398,10 @@ algorithm</a> passing in the
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited to only known values</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">media element load algorithm</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-pause">pause</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a>
