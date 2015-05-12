@@ -723,6 +723,11 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
     lt="default media state">Default</a></code>.
   </li>
   <li>
+    If <var>current media session</var>'s <a>current state</a> is not <code><a
+    lt="active media session state">ACTIVE</a></code> abort any remaining steps
+    and return.
+  </li>
+  <li>
     Run these substeps:
 
     <dl class=switch>
