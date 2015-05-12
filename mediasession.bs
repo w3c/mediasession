@@ -17,6 +17,7 @@ Abstract: mobile devices.
 Boilerplate: omit conformance, omit idl-index
 </pre>
 
+
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
     type: interface
@@ -31,6 +32,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: case-sensitive; url: #case-sensitivity-and-string-comparison
             text: reflect
             text: limited to only known values
+            text: remove an element from a document; url: #remove-an-element-from-a-document
         urlPrefix: embedded-content.html
             text: media element
             text: media element load algorithm
@@ -961,3 +963,8 @@ The <dfn>media session release algorithm</dfn> takes one argument,
     </ol>
   </li>
 </ol>
+
+When a <a>media element</a> is <a lt="remove an element from a document">removed
+from a <code>Document</code></a>, run the <a>media session release algorithm</a>
+passing in the
+<a>media element</a> as <var>current media element</var>.
