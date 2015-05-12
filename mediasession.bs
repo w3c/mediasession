@@ -489,6 +489,27 @@ myAudio.kind = "content";
   </pre>
 </div>
 
+<div class="example">
+  An AudioContext [[!WEBAUDIO]] can be rendered via <code><a
+  element>audio</a></code> or <code><a element>video</a></code>
+  elements. As both <code><a element>audio</a></code> and <code><a
+  element>video</a></code>
+  elements implement the {{HTMLMediaElement}} interface, these element's
+  {{HTMLMediaElement/kind}} IDL attribute can be set via JavaScript:
+
+  <pre class="lang-javascript">
+var audioCtx = new AudioContext();
+// ...
+var destinationNode = audioCtx.createMediaStreamDestination();
+
+var myAudio = document.createElement("audio");
+console.log(myAudio.kind) // --> ""
+myAudio.srcObject = destinationNode.stream;
+myAudio.kind = "content";
+// myAudio.outerHTML === "&lt;audio kind="content">&lt;/audio>" === true
+  </pre>
+</div>
+
 <h3 id="extensions-to-the-video-element">Extensions to the <code><a
 element>video</a></code> element</h3>
 
