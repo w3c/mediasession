@@ -335,11 +335,12 @@ on the preferred definitions in the table’s third and fourth columns.
           begins</a>.
         </li>
         <li>
-          Pauses itself when its <a>browsing context</a> loses focus (i.e. the
-          page is placed in the background or the user agent is minimized or the
-          screen is switched off). Unpauses itself when its <a>browsing
-          context</a> re-gains focus (i.e. the user agent is in the foreground
-          and the page is visible again).
+          Pauses itself when its <a>top-level browsing context</a> is not
+          visible (i.e. the page is placed in the background or the user agent
+          is minimized or the screen is switched off). Unpauses itself when its
+          <a>top-level browsing context</a> is at least partially visible again
+          (i.e. the user agent is in the foreground and the page is focused
+          again).
         </li>
       </ul>
     </td>

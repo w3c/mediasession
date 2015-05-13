@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-05-12">12 May 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-05-13">13 May 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -584,11 +584,12 @@ on the preferred definitions in the table’s third and fourth columns.</p>
         
         
         <li>
-          Pauses itself when its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> loses focus (i.e. the
-          page is placed in the background or the user agent is minimized or the
-          screen is switched off). Unpauses itself when its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing
-          context</a> re-gains focus (i.e. the user agent is in the foreground
-          and the page is visible again).
+          Pauses itself when its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is not
+          visible (i.e. the page is placed in the background or the user agent
+          is minimized or the screen is switched off). Unpauses itself when its
+          <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is at least partially visible again
+          (i.e. the user agent is in the foreground and the page is focused
+          again).
         
         
       
@@ -1405,7 +1406,6 @@ passing in the
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#case-sensitivity-and-string-comparison">case-sensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">ended playback</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
