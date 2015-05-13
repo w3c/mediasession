@@ -551,7 +551,7 @@ empty string otherwise.
 
 <div class="example">
   A <code><a element>video</a></code> element's <code><a lt="audio
-  kind">kind</a></code> content attribute can be declared in as follows HTML:
+  kind">kind</a></code> content attribute can be declared as follows HTML:
 
   <pre class="lang-markup">
 &lt;video src="short_ping.webm" kind="transient">
