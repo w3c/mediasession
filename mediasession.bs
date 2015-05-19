@@ -17,6 +17,7 @@ Abstract: mobile devices.
 Boilerplate: omit conformance
 </pre>
 
+<script src=https://resources.whatwg.org/file-issue.js async></script>
 
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
