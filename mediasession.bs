@@ -280,7 +280,7 @@ platform-specific interaction and interoperation between web media.
 enum MediaSessionKind {
   "content",
   "transient",
-  "transientsolo",
+  "transient-solo",
   "ambient"
 };
 </pre>
@@ -400,8 +400,8 @@ on the preferred definitions in the table’s third and fourth columns.
   </tr>
   <tr>
     <td>
-      &quot;<dfn lt="transientsolo attribute
-      value"><code>transientsolo</code></dfn>&quot;
+      &quot;<dfn lt="transient-solo attribute
+      value"><code>transient-solo</code></dfn>&quot;
     </td>
     <td>
       <dfn lt="transient exclusive media state">Transient_Exclusive</dfn>
@@ -610,7 +610,7 @@ var myAudio = document.createElement("audio");
 myAudio.srcObject = destinationNode.stream;
 
 console.log(myAudio.session) // --> null
-myAudio.kind = "transientsolo";
+myAudio.kind = "transient-solo";
 console.log(myAudio.session) // --> [object MediaSession]
 
 myAudio.play(); // Go!

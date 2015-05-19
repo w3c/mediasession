@@ -493,7 +493,7 @@ platform-specific interaction and interoperation between web media.</p>
    <pre class="idl">enum <dfn class="idl-code" data-dfn-type="enum" data-export="" data-global-name="" id="enumdef-mediasessionkind">MediaSessionKind<a class="self-link" href="#enumdef-mediasessionkind"></a></dfn> {
   "content",
   "transient",
-  "transientsolo",
+  "transient-solo",
   "ambient"
 };
 </pre>
@@ -652,8 +652,8 @@ on the preferred definitions in the table’s third and fourth columns.</p>
      <tr>
     
       <td>
-      "<dfn data-dfn-type="dfn" data-lt="transientsolo attribute
-      value" data-noexport="" id="transientsolo-attribute-value"><code>transientsolo</code><a class="self-link" href="#transientsolo-attribute-value"></a></dfn>"
+      "<dfn data-dfn-type="dfn" data-lt="transient-solo attribute
+      value" data-noexport="" id="transient_solo-attribute-value"><code>transient-solo</code><a class="self-link" href="#transient_solo-attribute-value"></a></dfn>"
     
       
     
@@ -895,7 +895,7 @@ myAudio.play(); // Go!
 </div>
 
 
-   <div class="example" id="example-97514764"><a class="self-link" href="#example-97514764"></a>
+   <div class="example" id="example-9e013e6a"><a class="self-link" href="#example-9e013e6a"></a>
   An <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object <a data-link-type="biblio" href="#biblio-webaudio">[WEBAUDIO]</a> can be rendered via <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
   elements. As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
   elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
@@ -910,7 +910,7 @@ var myAudio = document.createElement("audio");
 myAudio.srcObject = destinationNode.stream;
 
 console.log(myAudio.session) // --> null
-myAudio.kind = "transientsolo";
+myAudio.kind = "transient-solo";
 console.log(myAudio.session) // --> [object MediaSession]
 
 myAudio.play(); // Go!
@@ -1544,8 +1544,8 @@ argument.</p>
       value, <a href="#transient-attribute-value">5</a>
    <li>transient exclusive media state, <a href="#transient-exclusive-media-state">5</a>
    <li>transient mixable media state, <a href="#transient-mixable-media-state">5</a>
-   <li>transientsolo attribute
-      value, <a href="#transientsolo-attribute-value">5</a>
+   <li>transient-solo attribute
+      value, <a href="#transient_solo-attribute-value">5</a>
    <li>update the attached media session algorithm, <a href="#update-the-attached-media-session-algorithm">6.2</a></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
@@ -1599,7 +1599,7 @@ argument.</p>
 enum <a data-global-name="" href="#enumdef-mediasessionkind">MediaSessionKind</a> {
   "content",
   "transient",
-  "transientsolo",
+  "transient-solo",
   "ambient"
 };
 
