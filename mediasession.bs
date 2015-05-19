@@ -281,8 +281,7 @@ enum MediaSessionKind {
   "content",
   "transient",
   "transientsolo",
-  "ambient",
-  ""
+  "ambient"
 };
 </pre>
 
