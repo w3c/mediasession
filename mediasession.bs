@@ -640,7 +640,7 @@ When a <a>media element</a> is created with a {{HTMLMediaElement/kind}} content
 attribute then the user agent must run the <a>update the attached media session
 algorithm</a>, passing in <a>media element</a> as the only argument.
 
-The <dfn>update the attached media session algorithm</dfn> takes two arguments,
+The <dfn>update the attached media session algorithm</dfn> takes one argument,
 <var>current media element</var>, and consists of running the following steps:
 
 <ol>
