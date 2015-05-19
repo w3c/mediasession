@@ -189,9 +189,11 @@ The possible values are as follows:
   </dt>
   <dd>
     The <a>media session</a> is currently suspended from having platform-level
-    media focus and its <a>participating media elements</a> are either paused or
-    ducked based on the <a>media session</a>'s <a>media category</a> and pending
-    completion of another <a>media session</a>'s media focus.
+    media focus and its <a>participating media elements</a> are either <a
+    lt="pause">paused</a> or
+    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>media
+    category</a> and pending completion of another <a>media session</a>'s media
+    focus.
   </dd>
 </dl>
 
@@ -223,6 +225,20 @@ media session state">interrupted</a> <a>media sessions</a> may then be set from
 <code><a lt="interrupted media session state">INTERRUPTED</a></code>
 to <code><a lt="active media session state">ACTIVE</a></code> during this
 algorithm.
+
+The <a>media session interruption algorithm</a> may cause a <a>media element</a>
+to either <a>pause</a> or <a>duck</a> depending on its <a>media category</a>.
+When a <a>media element</a> is to <dfn>pause</dfn> the user agent must run its
+{{pause()}} method. When a <a>media element</a> is to <dfn>duck</dfn>
+then the user agent must ensure its output volume is lowered.
+
+The <a>media session release algorithm</a> may cause a <a>media element</a> to
+either <a>unpause</a> or <a>unduck</a> depending on its <a>media category</a>.
+When a <a>media element</a> is to <dfn>unduck</dfn>
+then the user agent should restore its output volume to the same level that was
+observed prior to the original corresponding <a>duck</a> request. When a
+<a>media element</a> is to <dfn>unpause</dfn> the user agent must run its
+{{play()}} method.
 
 <dl class=domintro>
   <dt>
@@ -260,7 +276,7 @@ must run the following steps:
 
 <ol>
   <li>
-    {{pause()}} each of <a>media session</a>'s <a lt="active media session
+    <a>Pause</a> each of <a>media session</a>'s <a lt="active media session
     state">active</a> <a>participating media elements</a>.
   </li>
   <li>
@@ -307,7 +323,7 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Indefinitely pauses all other <a lt="active media session
+          Indefinitely <a>pauses</a> all other <a lt="active media session
           state">active</a>
           <code><a lt="default media state">Default</a></code> and <code><a
           lt="content media state">Content</a></code> content when <a
@@ -322,17 +338,19 @@ on the preferred definitions in the table’s third and fourth columns.
           buttons when <a href="#media-session-invocation">playback begins</a>.
         </li>
         <li>
-          Ducks itself when <code><a lt="transient media
+          <a>Ducks</a> itself when <code><a lt="transient media
           state">Transient</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>. Unducks
+          href="#media-session-interruption">starts interrupting</a>.
+          <a>Unducks</a>
           itself when <code><a lt="transient media state">Transient</a></code>
           content <a href="#media-session-release">ends playback</a>.
         </li>
         <li>
-          Pauses itself when <code><a lt="transient solo media state">Transient
-          Solo</a></code> content <a href="#media-session-interruption">starts
-          interrupting</a>. Unpauses itself when <code><a lt="transient solo
-          media state">Transient Solo</a></code> content <a
+          <a>Pauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#media-session-interruption">starts interrupting</a>.
+          <a>Unpauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
           href="#media-session-release">ends playback</a>.
         </li>
         <li>
@@ -357,13 +375,14 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Ducks all other <a lt="active media session state">active</a> <code><a
-          lt="default media state">Default</a></code>
+          <a>Ducks</a> all other <a lt="active media session state">active</a>
+          <code><a lt="default media state">Default</a></code>
           and <code><a lt="content media state">Content</a></code> content when
-          <a href="#media-session-invocation">playback begins</a>. Unducks all
-          other <a lt="interrupted media session state">interrupted</a> <code><a
-          lt="default media state">Default</a></code> and <code><a lt="content
-          media state">Content</a></code> content when <a
+          <a href="#media-session-invocation">playback begins</a>.
+          <a>Unducks</a> all other <a lt="interrupted media session
+          state">interrupted</a> <code><a lt="default media
+          state">Default</a></code> and <code><a lt="content media
+          state">Content</a></code> content when <a
           href="#media-session-release">playback ends</a>.
         </li>
         <li>
@@ -376,10 +395,11 @@ on the preferred definitions in the table’s third and fourth columns.
           begins</a>.
         </li>
         <li>
-          Pauses itself when <code><a lt="transient solo media state">Transient
-          Solo</a></code> content <a href="#media-session-interruption">starts
-          interrupting</a>. Unpauses itself when <code><a lt="transient solo
-          media state">Transient Solo</a></code> content <a
+          <a>Pauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#media-session-interruption">starts interrupting</a>.
+          <a>Unpauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
           href="#media-session-release">ends playback</a>.
         </li>
         <li>
@@ -406,13 +426,14 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Pauses all other <a lt="active media session state">active</a>
+          <a>Pauses</a> all other <a lt="active media session state">active</a>
           <code><a lt="default media state">Default</a></code>,
           <code><a lt="content media state">Content</a></code>, <code><a
           lt="transient media state">Transient</a></code> and
           <code><a lt="transient solo media state">Transient Solo</a></code>
           content when <a href="#media-session-invocation">playback begins</a>.
-          Unpauses all <a lt="interrupted media session state">interrupted</a>
+          <a>Unpauses</a> all <a lt="interrupted media session
+          state">interrupted</a>
           <code><a lt="default media state">Default</a></code>, <code><a
           lt="content media state">Content</a></code>, <code><a lt="transient
           media state">Transient</a></code> and <code><a lt="transient solo
@@ -429,9 +450,10 @@ on the preferred definitions in the table’s third and fourth columns.
           begins</a>.
         </li>
         <li>
-          Pauses itself when other <code><a lt="transient solo media
+          <a>Pauses</a> itself when other <code><a lt="transient solo media
           state">Transient Solo</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>. Unpauses
+          href="#media-session-interruption">starts interrupting</a>.
+          <a>Unpauses</a>
           itself when other <code><a lt="transient solo media state">Transient
           Solo</a></code> content <a href="#media-session-release">ends
           playback</a>.
@@ -475,9 +497,10 @@ on the preferred definitions in the table’s third and fourth columns.
           begins</a>.
         </li>
         <li>
-          Pauses itself when its <a>top-level browsing context</a> is not
+          <a>Pauses</a> itself when its <a>top-level browsing context</a> is not
           visible (i.e. the page is placed in the background or the user agent
-          is minimized or the screen is switched off). Unpauses itself when its
+          is minimized or the screen is switched off). <a>Unpauses</a> itself
+          when its
           <a>top-level browsing context</a> is at least partially visible again
           (i.e. the user agent is in the foreground and the page is focused
           again).
@@ -821,11 +844,11 @@ when another application or <a>media session</a> requests and is granted
 platform-level media focus.
 
 Interruptions can be both transient or permanent. A transient interruption means
-we can choose to either continue playing out our content at a reduced volume for
-the duration of the interruption or we can pause our content for the duration of
-the interruption and then, optionally, resume playback when the interruption
-ends. A permanent interruption means we must pause our media content
-indefinitely.
+we can either choose to <a>duck</a> our content and continue playing it out at a
+reduced volume for the duration of the interruption; or <a>pause</a> our content
+for the duration of the interruption and then resume playback it when the
+interruption ends. A permanent interruption means we must <a>pause</a> our media
+content indefinitely.
 
 When a <a>media session</a> receives an interruption notification from the
 platform, run the
@@ -867,8 +890,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
           <li>
             If <var>current media category</var> is <code><a lt="default media
             state">Default</a></code> or <code><a lt="content media
-            state">Content</a></code> then {{pause()}} all of <var>current media
-            session</var>'s
+            state">Content</a></code> then <a>pause</a> all of <var>current
+            media session</var>'s
             <a>participating media elements</a> and set
             <var>current media session</var>'s <a>current state</a> to
             <code><a lt="idle media session state">IDLE</a></code>.
@@ -906,7 +929,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
           <li>
             If <var>current media category</var> is <code><a lt="default media
             state">Default</a></code> or <code><a lt="content media
-            state">Content</a></code> then duck (i.e. reduce the output volume)
+            state">Content</a></code> then <a>duck</a>
             all of <var>current media session</var>'s <a lt="active media
             session state">active</a> <a>participating media elements</a> and
             set
@@ -933,7 +956,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             state">Default</a></code>, <code><a lt="content media
             state">Content</a></code>, <code><a lt="transient media
             state">Transient</a></code> or <code><a lt="transient solo media
-            state">Transient Solo</a></code> then {{pause()}} all of
+            state">Transient Solo</a></code> then <a>pause</a> all of
             <var>current media session</var>'s
             <a>participating media elements</a> and set <var>current media
             session</var>'s <a>current state</a> to
@@ -1055,8 +1078,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
                 category</a> is <code><a lt="default media
                 state">Default</a></code> or
                 <code><a lt="content media state">Content</a></code>
-                then unduck (i.e. restore the volume) of <var>incumbent media
-                session</var>'s
+                then <a>unduck</a> all of <var>incumbent media session</var>'s
                 <a>participating media elements</a>
                 and set <var>incumbent media session</var>'s <a>current
                 state</a> to <code><a lt="active media session
@@ -1077,7 +1099,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
                 <code><a lt="content media state">Content</a></code>, <code><a
                 lt="transient media state">Transient</a></code>, or
                 <code><a lt="transient solo media state">Transient
-                Solo</a></code> then un-{{pause()}} the
+                Solo</a></code> then <a>unpause</a> the
                 <var>incumbent media session</var>'s <a lt="active media session
                 state">active</a>
                 <a>participating media elements</a>
