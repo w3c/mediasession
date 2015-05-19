@@ -323,18 +323,17 @@ on the preferred definitions in the table’s third and fourth columns.
         </li>
         <li>
           Ducks itself when <code><a lt="transient mixable media
-          state">Transient_Mixable</a></code> content <a
+          state">Transient</a></code> content <a
           href="#media-session-interruption">starts interrupting</a>. Unducks
           itself when <code><a lt="transient mixable media
-          state">Transient_Mixable</a></code> content <a
+          state">Transient</a></code> content <a
           href="#media-session-release">ends playback</a>.
         </li>
         <li>
-          Pauses itself when <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>. Unpauses
-          itself when <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> content <a
+          Pauses itself when <code><a lt="transient solo media state">Transient
+          Solo</a></code> content <a href="#media-session-interruption">starts
+          interrupting</a>. Unpauses itself when <code><a lt="transient solo
+          media state">Transient Solo</a></code> content <a
           href="#media-session-release">ends playback</a>.
         </li>
         <li>
@@ -354,7 +353,7 @@ on the preferred definitions in the table’s third and fourth columns.
       value"><code>transient</code></dfn>&quot;
     </td>
     <td>
-      <dfn lt="transient mixable media state">Transient_Mixable</dfn>
+      <dfn lt="transient mixable media state">Transient</dfn>
     </td>
     <td>
       <ul>
@@ -378,17 +377,16 @@ on the preferred definitions in the table’s third and fourth columns.
           begins</a>.
         </li>
         <li>
-          Pauses itself when <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>. Unpauses
-          itself when <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> content <a
+          Pauses itself when <code><a lt="transient solo media state">Transient
+          Solo</a></code> content <a href="#media-session-interruption">starts
+          interrupting</a>. Unpauses itself when <code><a lt="transient solo
+          media state">Transient Solo</a></code> content <a
           href="#media-session-release">ends playback</a>.
         </li>
         <li>
           Continues playing normally when other <code><a lt="transient mixable
-          media state">Transient_Mixable</a></code> or <code><a lt="ambient
-          media state">Ambient</a></code> content <a
+          media state">Transient</a></code> or <code><a lt="ambient media
+          state">Ambient</a></code> content <a
           href="#media-session-interruption">starts interrupting</a>.
         </li>
       </ul>
@@ -404,7 +402,7 @@ on the preferred definitions in the table’s third and fourth columns.
       value"><code>transient-solo</code></dfn>&quot;
     </td>
     <td>
-      <dfn lt="transient exclusive media state">Transient_Exclusive</dfn>
+      <dfn lt="transient solo media state">Transient Solo</dfn>
     </td>
     <td>
       <ul>
@@ -412,15 +410,14 @@ on the preferred definitions in the table’s third and fourth columns.
           Pauses all other <a lt="active media session state">active</a>
           <code><a lt="default media state">Default</a></code>,
           <code><a lt="content media state">Content</a></code>, <code><a
-          lt="transient mixable media state">Transient_Mixable</a></code> and
-          <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> content when <a
-          href="#media-session-invocation">playback begins</a>. Unpauses all <a
-          lt="interrupted media session state">interrupted</a>
+          lt="transient mixable media state">Transient</a></code> and
+          <code><a lt="transient solo media state">Transient Solo</a></code>
+          content when <a href="#media-session-invocation">playback begins</a>.
+          Unpauses all <a lt="interrupted media session state">interrupted</a>
           <code><a lt="default media state">Default</a></code>, <code><a
           lt="content media state">Content</a></code>, <code><a lt="transient
-          mixable media state">Transient_Mixable</a></code> and <code><a
-          lt="transient exclusive media state">Transient_Exclusive</a></code>
+          mixable media state">Transient</a></code> and <code><a lt="transient
+          solo media state">Transient Solo</a></code>
           content when <a href="#media-session-release">playback ends</a>.
         </li>
         <li>
@@ -433,12 +430,12 @@ on the preferred definitions in the table’s third and fourth columns.
           begins</a>.
         </li>
         <li>
-          Pauses itself when other <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> content <a
+          Pauses itself when other <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
           href="#media-session-interruption">starts interrupting</a>. Unpauses
-          itself when other <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> content <a
-          href="#media-session-release">ends playback</a>.
+          itself when other <code><a lt="transient solo media state">Transient
+          Solo</a></code> content <a href="#media-session-release">ends
+          playback</a>.
         </li>
         <li>
           Continues playing normally when <code><a lt="ambient media
@@ -464,10 +461,10 @@ on the preferred definitions in the table’s third and fourth columns.
           Does not interact with any other <code><a lt="default media
           state">Default</a></code>,
           <code><a lt="content media state">Content</a></code>, <code><a
-          lt="transient mixable media state">Transient_Mixable</a></code>,
-          <code><a lt="transient exclusive media
-          state">Transient_Exclusive</a></code> or <code><a lt="ambient media
-          state">Ambient</a></code> content during playback.
+          lt="transient mixable media state">Transient</a></code>,
+          <code><a lt="transient solo media state">Transient Solo</a></code> or
+          <code><a lt="ambient media state">Ambient</a></code> content during
+          playback.
         </li>
         <li>
           Does not display lock-screen and notification area user interfaces
@@ -784,19 +781,19 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
       </dd>
       <dt>
         If <var>media category state</var> is <code><a lt="transient mixable
-        media state">Transient_Mixable</a></code>, <code><a lt="transient
-        exclusive media state">Transient_Exclusive</a></code> or <code><a
-        lt="ambient media state">Ambient</a></code>
+        media state">Transient</a></code>, <code><a lt="transient solo media
+        state">Transient Solo</a></code> or <code><a lt="ambient media
+        state">Ambient</a></code>
       </dt>
       <dd class="note">
         The user agent should not provide user access to any hardware or
         software media keys and not display any ongoing media interface in the
         underlying platform's notifications area or show any ongoing media
         interface in the underlying platform's lock screen area for
-        <code><a lt="transient mixable media
-        state">Transient_Mixable</a></code>, <code><a lt="transient exclusive
-        media state">Transient_Exclusive</a></code> or <code><a lt="ambient
-        media state">Ambient</a></code>-based <a>media sessions</a>.
+        <code><a lt="transient mixable media state">Transient</a></code>,
+        <code><a lt="transient solo media state">Transient Solo</a></code> or
+        <code><a lt="ambient media state">Ambient</a></code>-based <a>media
+        sessions</a>.
       </dd>
       <dt>
         Otherwise, <var>media category state</var> is <code><a lt="default media
@@ -903,7 +900,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
       </dd>
       <dt>
         If <var>interrupting media category</var> is <code><a lt="transient
-        mixable media state">Transient_Mixable</a></code>
+        mixable media state">Transient</a></code>
       </dt>
       <dd>
         <ol>
@@ -927,8 +924,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>interrupting media category</var> is <code><a lt="transient
-        exclusive media state">Transient_Exclusive</a></code>
+        If <var>interrupting media category</var> is <code><a lt="transient solo
+        media state">Transient Solo</a></code>
       </dt>
       <dd>
         <ol>
@@ -936,9 +933,9 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             If <var>current media category</var> is <code><a lt="default media
             state">Default</a></code>, <code><a lt="content media
             state">Content</a></code>, <code><a lt="transient mixable media
-            state">Transient_Mixable</a></code> or <code><a lt="transient
-            exclusive media state">Transient_Exclusive</a></code> then
-            {{pause()}} all of <var>current media session</var>'s
+            state">Transient</a></code> or <code><a lt="transient solo media
+            state">Transient Solo</a></code> then {{pause()}} all of
+            <var>current media session</var>'s
             <a>participating media elements</a> and set <var>current media
             session</var>'s <a>current state</a> to
             <code><a lt="interrupted media session
@@ -1042,7 +1039,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
         <dl class=switch>
           <dt>
             If <var>releasing media category</var> is <code><a lt="transient
-            mixable media state">Transient_Mixable</a></code>
+            mixable media state">Transient</a></code>
           </dt>
           <dd>
             <ol>
@@ -1062,7 +1059,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
           </dd>
           <dt>
             If <var>releasing media category</var> is <code><a lt="transient
-            exclusive media state">Transient_Exclusive</a></code>
+            solo media state">Transient Solo</a></code>
           </dt>
           <dd>
             <ol>
@@ -1071,9 +1068,9 @@ The <dfn>media session release algorithm</dfn> takes one argument,
                 category</a> is <code><a lt="default media
                 state">Default</a></code>,
                 <code><a lt="content media state">Content</a></code>, <code><a
-                lt="transient mixable media state">Transient_Mixable</a></code>,
-                or <code><a lt="transient exclusive media
-                state">Transient_Exclusive</a></code> then un-{{pause()}} the
+                lt="transient mixable media state">Transient</a></code>, or
+                <code><a lt="transient solo media state">Transient
+                Solo</a></code> then un-{{pause()}} the
                 <var>incumbent media session</var>'s <a lt="active media session
                 state">active</a>
                 <a>participating media elements</a>

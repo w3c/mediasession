@@ -559,14 +559,15 @@ on the preferred definitions in the table’s third and fourth columns.</p>
         
         
         <li>
-          Ducks itself when <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code> content <a href="#media-session-interruption">starts interrupting</a>. Unducks
-          itself when <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code> content <a href="#media-session-release">ends playback</a>.
+          Ducks itself when <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code> content <a href="#media-session-interruption">starts interrupting</a>. Unducks
+          itself when <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code> content <a href="#media-session-release">ends playback</a>.
         
         
         
         <li>
-          Pauses itself when <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> content <a href="#media-session-interruption">starts interrupting</a>. Unpauses
-          itself when <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> content <a href="#media-session-release">ends playback</a>.
+          Pauses itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient
+          Solo</a></code> content <a href="#media-session-interruption">starts
+          interrupting</a>. Unpauses itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#media-session-release">ends playback</a>.
         
         
         
@@ -596,7 +597,7 @@ on the preferred definitions in the table’s third and fourth columns.</p>
       
     
       <td>
-      <dfn data-dfn-type="dfn" data-lt="transient mixable media state" data-noexport="" id="transient-mixable-media-state">Transient_Mixable<a class="self-link" href="#transient-mixable-media-state"></a></dfn>
+      <dfn data-dfn-type="dfn" data-lt="transient mixable media state" data-noexport="" id="transient-mixable-media-state">Transient<a class="self-link" href="#transient-mixable-media-state"></a></dfn>
     
       
     
@@ -626,13 +627,14 @@ on the preferred definitions in the table’s third and fourth columns.</p>
         
         
         <li>
-          Pauses itself when <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> content <a href="#media-session-interruption">starts interrupting</a>. Unpauses
-          itself when <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> content <a href="#media-session-release">ends playback</a>.
+          Pauses itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient
+          Solo</a></code> content <a href="#media-session-interruption">starts
+          interrupting</a>. Unpauses itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#media-session-release">ends playback</a>.
         
         
         
         <li>
-          Continues playing normally when other <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#media-session-interruption">starts interrupting</a>.
+          Continues playing normally when other <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#media-session-interruption">starts interrupting</a>.
         
         
       
@@ -658,7 +660,7 @@ on the preferred definitions in the table’s third and fourth columns.</p>
       
     
       <td>
-      <dfn data-dfn-type="dfn" data-lt="transient exclusive media state" data-noexport="" id="transient-exclusive-media-state">Transient_Exclusive<a class="self-link" href="#transient-exclusive-media-state"></a></dfn>
+      <dfn data-dfn-type="dfn" data-lt="transient solo media state" data-noexport="" id="transient-solo-media-state">Transient Solo<a class="self-link" href="#transient-solo-media-state"></a></dfn>
     
       
     
@@ -669,9 +671,11 @@ on the preferred definitions in the table’s third and fourth columns.</p>
         <li>
           Pauses all other <a data-link-type="dfn" href="#active-media-session-state">active</a>
           <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
-          <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code> and
-          <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> content when <a href="#media-session-invocation">playback begins</a>. Unpauses all <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a>
-          <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code> and <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code>
+          <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code> and
+          <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
+          content when <a href="#media-session-invocation">playback begins</a>.
+          Unpauses all <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a>
+          <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
           content when <a href="#media-session-release">playback ends</a>.
         
         
@@ -690,8 +694,10 @@ on the preferred definitions in the table’s third and fourth columns.</p>
         
         
         <li>
-          Pauses itself when other <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> content <a href="#media-session-interruption">starts interrupting</a>. Unpauses
-          itself when other <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> content <a href="#media-session-release">ends playback</a>.
+          Pauses itself when other <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#media-session-interruption">starts interrupting</a>. Unpauses
+          itself when other <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient
+          Solo</a></code> content <a href="#media-session-release">ends
+          playback</a>.
         
         
         
@@ -730,8 +736,10 @@ on the preferred definitions in the table’s third and fourth columns.</p>
         
         <li>
           Does not interact with any other <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
-          <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code>,
-          <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content during playback.
+          <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code>,
+          <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or
+          <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content during
+          playback.
         
         
         
@@ -1119,7 +1127,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
       
       
       <dt>
-        If <var>media category state</var> is <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code>, <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>
+        If <var>media category state</var> is <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code>, <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>
       
       
       
@@ -1128,7 +1136,10 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
         software media keys and not display any ongoing media interface in the
         underlying platform’s notifications area or show any ongoing media
         interface in the underlying platform’s lock screen area for
-        <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code>, <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a>.
+        <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code>,
+        <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or
+        <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>-based <a data-link-type="dfn" href="#media-session">media
+        sessions</a>.
       
       
       
@@ -1263,7 +1274,7 @@ as <var>current media session</var>.</p>
       
       
       <dt>
-        If <var>interrupting media category</var> is <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code>
+        If <var>interrupting media category</var> is <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code>
       
       
       
@@ -1294,7 +1305,7 @@ as <var>current media session</var>.</p>
       
       
       <dt>
-        If <var>interrupting media category</var> is <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code>
+        If <var>interrupting media category</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
       
       
       
@@ -1303,8 +1314,8 @@ as <var>current media session</var>.</p>
        <ol>
           
         <li>
-            If <var>current media category</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code> or <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> then
-            <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> all of <var>current media session</var>’s
+            If <var>current media category</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> all of
+            <var>current media session</var>’s
             <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and set <var>current media
             session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
@@ -1437,7 +1448,7 @@ argument.</p>
        <dl class="switch">
           
         <dt>
-            If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code>
+            If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code>
           
         
           
@@ -1463,7 +1474,7 @@ argument.</p>
         
           
         <dt>
-            If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code>
+            If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
           
         
           
@@ -1474,8 +1485,9 @@ argument.</p>
           <li>
                 If <var>incumbent media session</var>’s associated <a data-link-type="dfn" href="#media-category">media
                 category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
-                <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient_Mixable</a></code>,
-                or <code><a data-link-type="dfn" href="#transient-exclusive-media-state">Transient_Exclusive</a></code> then un-<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> the
+                <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-mixable-media-state">Transient</a></code>, or
+                <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient
+                Solo</a></code> then un-<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> the
                 <var>incumbent media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a>
                 <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>
                 and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current
@@ -1542,10 +1554,10 @@ argument.</p>
    <li>session, <a href="#dom-htmlmediaelement-session">6.1</a>
    <li>transient attribute
       value, <a href="#transient-attribute-value">5</a>
-   <li>transient exclusive media state, <a href="#transient-exclusive-media-state">5</a>
    <li>transient mixable media state, <a href="#transient-mixable-media-state">5</a>
    <li>transient-solo attribute
       value, <a href="#transient_solo-attribute-value">5</a>
+   <li>transient solo media state, <a href="#transient-solo-media-state">5</a>
    <li>update the attached media session algorithm, <a href="#update-the-attached-media-session-algorithm">6.2</a></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
