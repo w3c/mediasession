@@ -965,14 +965,22 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
 
 <h2 id="media-session-release">Media session release</h2>
 
-When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, run
-the <a>media session release algorithm</a> passing in the
+When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
+user agent must run the <a>media session release algorithm</a> passing in the
 <a>media element</a>'s <a>current media session</a>, if any, as the only
 argument.
 
-Additionally, any time a <a>media element</a>'s <a lt="media element load
-algorithm">load algorithm</a> is run, also run the <a>media session release
-algorithm</a> passing in the
+When a <a>media element</a> with a {{HTMLMediaElement/kind}} attribute set to
+<code><a lt="transient media state">Transient</a></code> or <code><a
+lt="transient solo media state">Transient Solo</a></code> is <a>paused</a>, then
+the user agent must run the <a>media session release algorithm</a> passing in
+the
+<a>media element</a>'s <a>current media session</a> as the only argument.
+
+Any time a <a>media element</a>'s <a lt="media element load algorithm">load
+algorithm</a> is run by the user agent, it must also run the <a>media session
+release algorithm</a>
+passing in the
 <a>media element</a>'s <a>current media session</a>, if any, as the only
 argument.
 

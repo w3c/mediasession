@@ -1361,14 +1361,23 @@ as <var>current media session</var>.</p>
    <h2 class="heading settled" data-level="9" id="media-session-release"><span class="secno">9. </span><span class="content">Media session release</span><a class="self-link" href="#media-session-release"></a></h2>
 
 
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">playback has ended</a>, run
-the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">playback has ended</a>, the
+user agent must run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, as the only
 argument.</p>
 
 
-   <p>Additionally, any time a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">load algorithm</a> is run, also run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release
-algorithm</a> passing in the
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> with a <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute set to
+<code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>, then
+the user agent must run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in
+the
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> as the only argument.</p>
+
+
+   <p>Any time a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">load
+algorithm</a> is run by the user agent, it must also run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session
+release algorithm</a>
+passing in the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, as the only
 argument.</p>
 
@@ -1595,7 +1604,7 @@ argument.</p>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-html"><a class="self-link" href="#biblio-html"></a>[HTML]
-   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WebIDL]
    <dd>Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 19 April 2012. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
