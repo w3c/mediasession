@@ -1061,7 +1061,7 @@ user agent must run the <a>media session release algorithm</a> passing in the
 <a>media element</a>'s <a>current media session</a>, if any, as the only
 argument.
 
-When a <a>media element</a> with a {{HTMLMediaElement/kind}} attribute set to
+When a <a>media element</a> with an <a>intrinsic media category state</a> set to
 <code><a lt="transient media state">Transient</a></code> or <code><a
 lt="transient solo media state">Transient Solo</a></code> is <a>paused</a>, then
 the user agent must run the <a>media session release algorithm</a> passing in
