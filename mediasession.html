@@ -992,13 +992,13 @@ algorithm</a>, passing in <a data-link-type="dfn" href="https://html.spec.whatwg
     If <var>media category state</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then let <var>media session</var> be the current
     <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a>. Otherwise, let
     <var>media session</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object and set <var>media
-    session</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute to the DOMString value of
+    session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> to the value of
     <var>media category state</var>.
   
   
     <li>
     Set <var>current media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to
-    <var>new media session</var>.
+    <var>media session</var>.
   
   
     <li>

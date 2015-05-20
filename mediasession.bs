@@ -678,12 +678,12 @@ The <dfn>update the attached media session algorithm</dfn> takes one argument,
     state">Default</a></code> then let <var>media session</var> be the current
     <a>top-level browsing context</a>'s <a>media session</a>. Otherwise, let
     <var>media session</var> be a new {{MediaSession}} object and set <var>media
-    session</var>'s {{MediaSession/kind}} attribute to the DOMString value of
+    session</var>'s <a>intrinsic media category state</a> to the value of
     <var>media category state</var>.
   </li>
   <li>
     Set <var>current media element</var>'s <a>current media session</a> to
-    <var>new media session</var>.
+    <var>media session</var>.
   </li>
   <li>
     If <var>media category state</var> is <code><a lt="default media
