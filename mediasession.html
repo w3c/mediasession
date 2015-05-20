@@ -419,13 +419,15 @@ session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> 
 category</a>.</p>
 
 
+   <p>When the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
+session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>
+to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.</p>
+
+
    <p>When the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media session</a>’s
 <a data-link-type="dfn" href="#current-state">current state</a>
 may be set from either <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> to
-<code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>. Any <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <a data-link-type="dfn" href="#media-session">media sessions</a> may then be set from
-<code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>
-to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> during this
-algorithm.</p>
+<code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.</p>
 
 
    <p>The <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> may cause a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
@@ -999,7 +1001,7 @@ algorithm</a>, passing in <a data-link-type="dfn" href="https://html.spec.whatwg
   
     <li>
     If <var>media category state</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then set <var>current media element</var>’s
-    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute to null, abort any remaining steps
+    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute to null, abort the remaining steps
     and return.
     
      <p class="note" role="note">
@@ -1086,7 +1088,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
     <li>
     If <var>media session</var> is empty or <var>media session</var>’s
     <a data-link-type="dfn" href="#current-state">current state</a> is
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort any
+    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort the
     remaining steps and return.
   
   
@@ -1102,7 +1104,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
 
 
      <p>If this step is run and platform-level media focus can not be obtained for
-    any reason then <a data-link-type="dfn" href="#pause">pause</a> <var>current media element</var>, abort any
+    any reason then <a data-link-type="dfn" href="#pause">pause</a> <var>current media element</var>, abort the
     remaining steps and return.</p>
      
   
@@ -1207,14 +1209,15 @@ interruption ends. A permanent interruption means we must <a data-link-type="dfn
 content indefinitely.</p>
 
 
-   <p>When a <a data-link-type="dfn" href="#media-session">media session</a> receives an interruption notification from the
-platform, run the
+   <p>When a <a data-link-type="dfn" href="#media-session">media session</a> receives an start-of-interruption notification from
+the platform then the user agent must run the
 <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> passing in the <a data-link-type="dfn" href="#media-session">media session</a>
-as <var>current media session</var>.</p>
+as <var>interrupted media session</var>.</p>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-interruption-algorithm">media session interruption algorithm<a class="self-link" href="#media-session-interruption-algorithm"></a></dfn> takes one argument,
-<var>current media session</var>, and consists of running the following steps.</p>
+<var>interrupted media session</var>, and consists of running the following
+steps.</p>
 
 
    <ol>
@@ -1227,15 +1230,9 @@ as <var>current media session</var>.</p>
   
   
     <li>
-    Let <var>current media category</var> be the <var>current media
-    session</var>’s associated <a data-link-type="dfn" href="#media-category">media category</a>. If <var>current media
-    session</var> has no known
-    <a data-link-type="dfn" href="#media-category">media category</a>, let <var>current media category</var> be <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
-  
-  
-    <li>
-    If <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort any remaining steps
-    and return.
+    If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
+    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort the
+    remaining steps and return.
   
   
     <li>
@@ -1254,10 +1251,12 @@ as <var>current media session</var>.</p>
        <ol>
           
         <li>
-            If <var>current media category</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of <var>current
-            media session</var>’s
+            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
+            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
+            <a data-link-type="dfn" href="#pause">pause</a> all of <var>interrupted media session</var>’s
             <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and set
-            <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+            <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
 
             
@@ -1277,7 +1276,7 @@ as <var>current media session</var>.</p>
             remove any previously established ongoing media interface in the
             underlying platform’s notifications area and any ongoing media
             interface in the underlying platform’s lock screen area for
-            <var>current media session</var>, if any.
+            <var>interrupted media session</var>, if any.
           
         
           
@@ -1285,7 +1284,7 @@ as <var>current media session</var>.</p>
             Optionally, based on platform conventions, the user agent must
             prevent any hardware and/or software media keys from controlling
             playback of
-            <var>current media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.
+            <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.
           
         
         
@@ -1304,10 +1303,13 @@ as <var>current media session</var>.</p>
        <ol>
           
         <li>
-            If <var>current media category</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then <a data-link-type="dfn" href="#duck">duck</a>
-            all of <var>current media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and
+            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
+            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
+            <a data-link-type="dfn" href="#duck">duck</a>
+            all of <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and
             set
-            <var>current media session</var>’s
+            <var>interrupted media session</var>’s
             <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
             
          <p class="note" role="note">
@@ -1335,8 +1337,9 @@ as <var>current media session</var>.</p>
        <ol>
           
         <li>
-            If <var>current media category</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of
-            <var>current media session</var>’s
+            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
+            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of
+            <var>interrupted media session</var>’s
             <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and set <var>current media
             session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
@@ -1378,6 +1381,93 @@ as <var>current media session</var>.</p>
 </ol>
 
 
+   <p> </p>
+
+
+   <p>When a <a data-link-type="dfn" href="#media-session">media session</a> receives an end-of-interruption notification from
+the platform then the user agent must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
+algorithm</a> against all known <a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media
+session</a> as <var>incumbent media session</var>.</p>
+
+
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-continuation-algorithm">media session continuation algorithm<a class="self-link" href="#media-session-continuation-algorithm"></a></dfn> takes one argument,
+<var>incumbent media session</var>, and consists of running the following steps.</p>
+
+
+   <ol>
+  
+    <li>
+    If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
+    <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>
+    then abort the remaining steps and return.
+  
+  
+    <li>
+    Run these substeps:
+
+    
+     <dl class="switch">
+      
+      <dt>
+        If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>
+      
+      
+      
+      <dd>
+        
+       <ol>
+          
+        <li>
+            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
+            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            or
+            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
+            then <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
+            <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>
+            and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+            <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
+          
+        
+        
+       </ol>
+       
+      
+      
+      
+      <dt>
+        If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
+      
+      
+      
+      <dd>
+        
+       <ol>
+          
+        <li>
+            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
+            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
+            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
+            <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
+            then <a data-link-type="dfn" href="#unpause">unpause</a> the
+            <var>incumbent media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a>
+            <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>
+            and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+            <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
+          
+        
+        
+       </ol>
+       
+      
+      
+    
+     </dl>
+     
+  
+</ol>
+
+
+
    <h2 class="heading settled" data-level="9" id="media-session-release"><span class="secno">9. </span><span class="content">Media session release</span><a class="self-link" href="#media-session-release"></a></h2>
 
 
@@ -1409,7 +1499,9 @@ argument.</p>
    <ol>
   
     <li>
-    If <var>current media session</var> is empty then abort any remaining steps.
+    If <var>current media session</var> is empty or its <a data-link-type="dfn" href="#current-state">current state</a> is
+    <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> then abort the
+    remaining steps and return.
   
   
     <li>
@@ -1445,96 +1537,6 @@ argument.</p>
       that we will re-request media focus according to the steps defined in that
       algorithm.
     </p>
-     
-  
-  
-    <li>
-    Let <var>releasing media category</var> be the <var>current media
-    session</var>’s associated <a data-link-type="dfn" href="#media-category">media category</a>. If <var>current media
-    session</var> has no known
-    <a data-link-type="dfn" href="#media-category">media category</a>, let <var>releasing media category</var> be <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
-  
-  
-    <li>
-    For every other <a data-link-type="dfn" href="#media-session">media session</a> known to the user agent, run the
-    following substeps, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>incumbent
-    media session</var>:
-
-    
-     <ol>
-      
-      <li>
-        If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
-        <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>
-        then abort any remaining substeps and continue at the next available
-        <var>incumbent media session</var>.
-      
-      
-      
-      <li>
-        Run these substeps:
-
-        
-       <dl class="switch">
-          
-        <dt>
-            If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>
-          
-        
-          
-        <dd>
-            
-         <ol>
-              
-          <li>
-                If <var>incumbent media session</var>’s associated <a data-link-type="dfn" href="#media-category">media
-                category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> or
-                <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
-                then <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
-                <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>
-                and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current
-                state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
-              
-          
-            
-         </ol>
-         
-          
-        
-          
-        <dt>
-            If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
-          
-        
-          
-        <dd>
-            
-         <ol>
-              
-          <li>
-                If <var>incumbent media session</var>’s associated <a data-link-type="dfn" href="#media-category">media
-                category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
-                <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
-                <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient
-                Solo</a></code> then <a data-link-type="dfn" href="#unpause">unpause</a> the
-                <var>incumbent media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a>
-                <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>
-                and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current
-                state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
-              
-          
-            
-         </ol>
-         
-          
-        
-        
-       </dl>
-       
-      
-      
-    
-     </ol>
      
   
 </ol>
@@ -1575,6 +1577,7 @@ argument.</p>
    <li>media category, <a href="#media-category">5</a>
    <li>media session, <a href="#media-session">4</a>
    <li>MediaSession, <a href="#mediasession">4</a>
+   <li>media session continuation algorithm, <a href="#media-session-continuation-algorithm">8</a>
    <li>media session interruption algorithm, <a href="#media-session-interruption-algorithm">8</a>
    <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">7</a>
    <li>MediaSessionKind, <a href="#enumdef-mediasessionkind">5</a>
