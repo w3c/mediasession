@@ -453,20 +453,22 @@ observed prior to the original corresponding <a data-link-type="dfn" href="#duck
   
   
     <dd>
-    Returns the <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> the given media session
-    represents or an empty string by default.
+    Returns the DOMString value of the <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> the
+    given media session represents.
   
 </dl>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="intrinsic-media-category">intrinsic media category<a class="self-link" href="#intrinsic-media-category"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> is the
-<a data-link-type="dfn" href="#media-category">media category</a> that was set when a <a data-link-type="dfn" href="#media-session">media session</a> was created. The
-<a href="#media-categories">possible media categories</a> are defined below.</p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="intrinsic-media-category-state">intrinsic media category state<a class="self-link" href="#intrinsic-media-category-state"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> is the
+state value of the <a data-link-type="dfn" href="#media-category">media category</a> that was set when a <a data-link-type="dfn" href="#media-session">media
+session</a> was created. The
+<a href="#media-categories">possible media categories and their states</a> are
+defined below.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn>
-attribute must return the <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> of the <a data-link-type="dfn" href="#media-session">media
-session</a>.</p>
+attribute must return the DOMString value of the <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category
+state</a> of the <a data-link-type="dfn" href="#media-session">media session</a>.</p>
 
 
    <dl class="domintro">
@@ -990,8 +992,8 @@ algorithm</a>, passing in <a data-link-type="dfn" href="https://html.spec.whatwg
     If <var>media category state</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then let <var>media session</var> be the current
     <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a>. Otherwise, let
     <var>media session</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object and set <var>media
-    session</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute to the value of <var>media
-    category state</var>.
+    session</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute to the DOMString value of
+    <var>media category state</var>.
   
   
     <li>
@@ -1095,7 +1097,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
     <li>
     Optionally, based on platform conventions, request the most appropriate
     platform-level media focus for <var>media session</var> based on its current
-    <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a>.
+    <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a>.
 
 
      <p>If this step is run and platform-level media focus can not be obtained for
@@ -1116,7 +1118,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
      <dl class="switch">
       
       <dt>
-        If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> is
+        If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> is
         <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
       
       
@@ -1146,7 +1148,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
       
       
       <dt>
-        If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> is
+        If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> is
         <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>
       
       
@@ -1164,7 +1166,8 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
       
       
       <dt>
-        Otherwise, <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> is
+        Otherwise, <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category
+        state</a> is
         <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
       
       
@@ -1249,8 +1252,8 @@ steps.</p>
        <ol>
           
         <li>
-            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
-            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media
+            category state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
             <a data-link-type="dfn" href="#pause">pause</a> all of <var>interrupted media session</var>’s
             <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and set
@@ -1301,8 +1304,8 @@ steps.</p>
        <ol>
           
         <li>
-            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
-            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media
+            category state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
             <a data-link-type="dfn" href="#duck">duck</a>
             all of <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and
@@ -1335,8 +1338,8 @@ steps.</p>
        <ol>
           
         <li>
-            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
-            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of
+            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media
+            category state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of
             <var>interrupted media session</var>’s
             <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and set <var>current media
             session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
@@ -1423,8 +1426,8 @@ session</a> as <var>incumbent media session</var>.</p>
        <ol>
           
         <li>
-            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
-            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category
+            state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
             then <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
@@ -1449,8 +1452,8 @@ session</a> as <var>incumbent media session</var>.</p>
        <ol>
           
         <li>
-            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media
-            category</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
+            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category
+            state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
             <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
             then <a data-link-type="dfn" href="#unpause">unpause</a> the
@@ -1571,7 +1574,7 @@ argument.</p>
    <li>duck, <a href="#duck">4</a>
    <li>idle media session state, <a href="#idle-media-session-state">4</a>
    <li>interrupted media session state, <a href="#interrupted-media-session-state">4</a>
-   <li>intrinsic media category, <a href="#intrinsic-media-category">4</a>
+   <li>intrinsic media category state, <a href="#intrinsic-media-category-state">4</a>
    <li>kind
     <ul>
      <li>attribute for MediaSession, <a href="#dom-mediasession-kind">4</a>

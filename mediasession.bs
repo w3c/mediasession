@@ -246,18 +246,20 @@ observed prior to the original corresponding <a>duck</a> request. When a
     <code><var>session</var> . {{MediaSession/kind}}</code>
   </dt>
   <dd>
-    Returns the <a>intrinsic media category</a> the given media session
-    represents or an empty string by default.
+    Returns the DOMString value of the <a>intrinsic media category state</a> the
+    given media session represents.
   </dd>
 </dl>
 
-The <dfn>intrinsic media category</dfn> of a <a>media session</a> is the
-<a>media category</a> that was set when a <a>media session</a> was created. The
-<a href="#media-categories">possible media categories</a> are defined below.
+The <dfn>intrinsic media category state</dfn> of a <a>media session</a> is the
+state value of the <a>media category</a> that was set when a <a>media
+session</a> was created. The
+<a href="#media-categories">possible media categories and their states</a> are
+defined below.
 
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
-attribute must return the <a>intrinsic media category</a> of the <a>media
-session</a>.
+attribute must return the DOMString value of the <a>intrinsic media category
+state</a> of the <a>media session</a>.
 
 <dl class=domintro>
   <dt>
@@ -676,8 +678,8 @@ The <dfn>update the attached media session algorithm</dfn> takes one argument,
     state">Default</a></code> then let <var>media session</var> be the current
     <a>top-level browsing context</a>'s <a>media session</a>. Otherwise, let
     <var>media session</var> be a new {{MediaSession}} object and set <var>media
-    session</var>'s {{MediaSession/kind}} attribute to the value of <var>media
-    category state</var>.
+    session</var>'s {{MediaSession/kind}} attribute to the DOMString value of
+    <var>media category state</var>.
   </li>
   <li>
     Set <var>current media element</var>'s <a>current media session</a> to
@@ -766,7 +768,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
   <li>
     Optionally, based on platform conventions, request the most appropriate
     platform-level media focus for <var>media session</var> based on its current
-    <a>intrinsic media category</a>.
+    <a>intrinsic media category state</a>.
 
     If this step is run and platform-level media focus can not be obtained for
     any reason then <a>pause</a> <var>current media element</var>, abort the
@@ -781,7 +783,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
 
     <dl class=switch>
       <dt>
-        If <var>media session</var>'s <a>intrinsic media category</a> is
+        If <var>media session</var>'s <a>intrinsic media category state</a> is
         <code><a lt="content media state">Content</a></code>
       </dt>
       <dd>
@@ -800,7 +802,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>media session</var>'s <a>intrinsic media category</a> is
+        If <var>media session</var>'s <a>intrinsic media category state</a> is
         <code><a lt="transient media state">Transient</a></code>, <code><a
         lt="transient solo media state">Transient Solo</a></code> or <code><a
         lt="ambient media state">Ambient</a></code>
@@ -816,7 +818,8 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
         sessions</a>.
       </dd>
       <dt>
-        Otherwise, <var>media session</var>'s <a>intrinsic media category</a> is
+        Otherwise, <var>media session</var>'s <a>intrinsic media category
+        state</a> is
         <code><a lt="default media state">Default</a></code>
       </dt>
       <dd class="note">
@@ -881,7 +884,8 @@ steps.
         <ol>
           <li>
             If <var>interrupted media session</var>'s <a>intrinsic media
-            category</a> is <code><a lt="default media state">Default</a></code>
+            category state</a> is <code><a lt="default media
+            state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>pause</a> all of <var>interrupted media session</var>'s
             <a>participating media elements</a> and set
@@ -920,7 +924,8 @@ steps.
         <ol>
           <li>
             If <var>interrupted media session</var>'s <a>intrinsic media
-            category</a> is <code><a lt="default media state">Default</a></code>
+            category state</a> is <code><a lt="default media
+            state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>duck</a>
             all of <var>interrupted media session</var>'s <a lt="active media
@@ -946,7 +951,7 @@ steps.
         <ol>
           <li>
             If <var>interrupted media session</var>'s <a>intrinsic media
-            category</a> is <code><a lt="default media
+            category state</a> is <code><a lt="default media
             state">Default</a></code>, <code><a lt="content media
             state">Content</a></code>, <code><a lt="transient media
             state">Transient</a></code> or <code><a lt="transient solo media
@@ -1013,8 +1018,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
       <dd>
         <ol>
           <li>
-            If <var>incumbent media session</var>'s <a>intrinsic media
-            category</a> is <code><a lt="default media state">Default</a></code>
+            If <var>incumbent media session</var>'s <a>intrinsic media category
+            state</a> is <code><a lt="default media state">Default</a></code>
             or
             <code><a lt="content media state">Content</a></code>
             then <a>unduck</a> all of <var>incumbent media session</var>'s
@@ -1031,9 +1036,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
       <dd>
         <ol>
           <li>
-            If <var>incumbent media session</var>'s <a>intrinsic media
-            category</a> is <code><a lt="default media
-            state">Default</a></code>,
+            If <var>incumbent media session</var>'s <a>intrinsic media category
+            state</a> is <code><a lt="default media state">Default</a></code>,
             <code><a lt="content media state">Content</a></code>, <code><a
             lt="transient media state">Transient</a></code>, or
             <code><a lt="transient solo media state">Transient Solo</a></code>
