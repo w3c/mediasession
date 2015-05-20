@@ -1093,14 +1093,9 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
   
   
     <li>
-    Let <var>media category state</var> be the value of <var>media
-    session</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute.
-  
-  
-    <li>
     Optionally, based on platform conventions, request the most appropriate
     platform-level media focus for <var>media session</var> based on its current
-    <var>media category state</var>.
+    <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a>.
 
 
      <p>If this step is run and platform-level media focus can not be obtained for
@@ -1121,7 +1116,8 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
      <dl class="switch">
       
       <dt>
-        If <var>media category state</var> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
+        If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> is
+        <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
       
       
       
@@ -1150,7 +1146,8 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
       
       
       <dt>
-        If <var>media category state</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>
+        If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> is
+        <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>
       
       
       
@@ -1167,7 +1164,8 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
       
       
       <dt>
-        Otherwise, <var>media category state</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+        Otherwise, <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category">intrinsic media category</a> is
+        <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
       
       
       
@@ -1223,16 +1221,16 @@ steps.</p>
    <ol>
   
     <li>
+    If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
+    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort the
+    remaining steps and return.
+  
+  
+    <li>
     Let <var>interrupting media category</var> be the <a data-link-type="dfn" href="#media-category">media category</a> that
     triggered this interruption. If this interruption has no known
     <a data-link-type="dfn" href="#media-category">media category</a>, let <var>interrupting media category</var> be
     <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
-  
-  
-    <li>
-    If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort the
-    remaining steps and return.
   
   
     <li>
@@ -1403,13 +1401,20 @@ session</a> as <var>incumbent media session</var>.</p>
   
   
     <li>
+    Let <var>interrupting media category</var> be the <a data-link-type="dfn" href="#media-category">media category</a> that
+    intially triggered this interruption. If this interruption has no known
+    <a data-link-type="dfn" href="#media-category">media category</a>, let <var>interrupting media category</var> be
+    <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
+  
+  
+    <li>
     Run these substeps:
 
     
      <dl class="switch">
       
       <dt>
-        If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>
+        If <var>interrupting media category</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>
       
       
       
@@ -1435,7 +1440,7 @@ session</a> as <var>incumbent media session</var>.</p>
       
       
       <dt>
-        If <var>releasing media category</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
+        If <var>interrupting media category</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
       
       
       
@@ -1465,7 +1470,6 @@ session</a> as <var>incumbent media session</var>.</p>
      
   
 </ol>
-
 
 
    <h2 class="heading settled" data-level="9" id="media-session-release"><span class="secno">9. </span><span class="content">Media session release</span><a class="self-link" href="#media-session-release"></a></h2>

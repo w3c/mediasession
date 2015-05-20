@@ -764,13 +764,9 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
     remaining steps and return.
   </li>
   <li>
-    Let <var>media category state</var> be the value of <var>media
-    session</var>'s {{MediaSession/kind}} attribute.
-  </li>
-  <li>
     Optionally, based on platform conventions, request the most appropriate
     platform-level media focus for <var>media session</var> based on its current
-    <var>media category state</var>.
+    <a>intrinsic media category</a>.
 
     If this step is run and platform-level media focus can not be obtained for
     any reason then <a>pause</a> <var>current media element</var>, abort the
@@ -785,8 +781,8 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
 
     <dl class=switch>
       <dt>
-        If <var>media category state</var> is <code><a lt="content media
-        state">Content</a></code>
+        If <var>media session</var>'s <a>intrinsic media category</a> is
+        <code><a lt="content media state">Content</a></code>
       </dt>
       <dd>
         <ol>
@@ -804,10 +800,10 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>media category state</var> is <code><a lt="transient media
-        state">Transient</a></code>, <code><a lt="transient solo media
-        state">Transient Solo</a></code> or <code><a lt="ambient media
-        state">Ambient</a></code>
+        If <var>media session</var>'s <a>intrinsic media category</a> is
+        <code><a lt="transient media state">Transient</a></code>, <code><a
+        lt="transient solo media state">Transient Solo</a></code> or <code><a
+        lt="ambient media state">Ambient</a></code>
       </dt>
       <dd class="note">
         The user agent should not provide user access to any hardware or
@@ -820,8 +816,8 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
         sessions</a>.
       </dd>
       <dt>
-        Otherwise, <var>media category state</var> is <code><a lt="default media
-        state">Default</a></code>
+        Otherwise, <var>media session</var>'s <a>intrinsic media category</a> is
+        <code><a lt="default media state">Default</a></code>
       </dt>
       <dd class="note">
         @TBW
@@ -863,15 +859,15 @@ steps.
 
 <ol>
   <li>
+    If <var>interrupted media session</var>'s <a>current state</a> is not
+    <code><a lt="active media session state">ACTIVE</a></code> abort the
+    remaining steps and return.
+  </li>
+  <li>
     Let <var>interrupting media category</var> be the <a>media category</a> that
     triggered this interruption. If this interruption has no known
     <a>media category</a>, let <var>interrupting media category</var> be
     <code><a lt="default media state">Default</a></code>.
-  </li>
-  <li>
-    If <var>interrupted media session</var>'s <a>current state</a> is not
-    <code><a lt="active media session state">ACTIVE</a></code> abort the
-    remaining steps and return.
   </li>
   <li>
     Run these substeps:
@@ -1001,12 +997,18 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
     then abort the remaining steps and return.
   </li>
   <li>
+    Let <var>interrupting media category</var> be the <a>media category</a> that
+    intially triggered this interruption. If this interruption has no known
+    <a>media category</a>, let <var>interrupting media category</var> be
+    <code><a lt="default media state">Default</a></code>.
+  </li>
+  <li>
     Run these substeps:
 
     <dl class=switch>
       <dt>
-        If <var>releasing media category</var> is <code><a lt="transient media
-        state">Transient</a></code>
+        If <var>interrupting media category</var> is <code><a lt="transient
+        media state">Transient</a></code>
       </dt>
       <dd>
         <ol>
@@ -1023,7 +1025,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>releasing media category</var> is <code><a lt="transient solo
+        If <var>interrupting media category</var> is <code><a lt="transient solo
         media state">Transient Solo</a></code>
       </dt>
       <dd>
@@ -1047,7 +1049,6 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
     </dl>
   </li>
 </ol>
-
 
 <h2 id="media-session-release">Media session release</h2>
 
