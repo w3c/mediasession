@@ -778,10 +778,6 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
     remaining steps and return.
   </li>
   <li>
-    Set <var>media session</var>'s <a>current state</a> to
-    <code><a lt="active media session state">ACTIVE</a></code>.
-  </li>
-  <li>
     Run these substeps:
 
     <dl class=switch>
@@ -806,19 +802,35 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
       </dd>
       <dt>
         If <var>media session</var>'s <a>intrinsic media category state</a> is
-        <code><a lt="transient media state">Transient</a></code>, <code><a
-        lt="transient solo media state">Transient Solo</a></code> or <code><a
-        lt="ambient media state">Ambient</a></code>
+        <code><a lt="transient media state">Transient</a></code> or <code><a
+        lt="transient solo media state">Transient Solo</a></code>
       </dt>
       <dd class="note">
         The user agent should not provide user access to any hardware or
         software media keys and not display any ongoing media interface in the
         underlying platform's notifications area or show any ongoing media
         interface in the underlying platform's lock screen area for
-        <code><a lt="transient media state">Transient</a></code>,
-        <code><a lt="transient solo media state">Transient Solo</a></code> or
-        <code><a lt="ambient media state">Ambient</a></code>-based <a>media
-        sessions</a>.
+        <code><a lt="transient media state">Transient</a></code> or
+        <code><a lt="transient solo media state">Transient Solo</a></code>-based
+        <a>media sessions</a>.
+      </dd>
+      <dt>
+        If <var>media session</var>'s <a>intrinsic media category state</a> is
+        <code><a lt="ambient media state">Ambient</a></code>
+      </dt>
+      <dd>
+        If the <var>current media element</var>'s <a>top-level browsing
+        context</a> is not at least partially visible then <a>pause</a>
+        <var>current media element</var>, abort the remaining steps and return.
+
+        <p class="note">
+          The user agent should not provide user access to any hardware or
+          software media keys and not display any ongoing media interface in the
+          underlying platform's notifications area or show any ongoing media
+          interface in the underlying platform's lock screen area for
+          <code><a lt="ambient media state">Ambient</a></code>-based <a>media
+          sessions</a>.
+        </p>
       </dd>
       <dt>
         Otherwise, <var>media session</var>'s <a>intrinsic media category
@@ -837,6 +849,10 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
         conventions?
       </dd>
     </dl>
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>current state</a> to
+    <code><a lt="active media session state">ACTIVE</a></code>.
   </li>
 </ol>
 

@@ -1109,11 +1109,6 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
   
   
     <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
-  
-  
-    <li>
     Run these substeps:
 
     
@@ -1151,7 +1146,7 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
       
       <dt>
         If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> is
-        <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>
+        <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
       
       
       
@@ -1160,10 +1155,33 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
         software media keys and not display any ongoing media interface in the
         underlying platform’s notifications area or show any ongoing media
         interface in the underlying platform’s lock screen area for
-        <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>,
-        <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or
-        <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>-based <a data-link-type="dfn" href="#media-session">media
-        sessions</a>.
+        <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or
+        <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based
+        <a data-link-type="dfn" href="#media-session">media sessions</a>.
+      
+      
+      
+      <dt>
+        If <var>media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> is
+        <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>
+      
+      
+      
+      <dd>
+        If the <var>current media element</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing
+        context</a> is not at least partially visible then <a data-link-type="dfn" href="#pause">pause</a>
+        <var>current media element</var>, abort the remaining steps and return.
+
+        
+       <p class="note" role="note">
+          The user agent should not provide user access to any hardware or
+          software media keys and not display any ongoing media interface in the
+          underlying platform’s notifications area or show any ongoing media
+          interface in the underlying platform’s lock screen area for
+          <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>-based <a data-link-type="dfn" href="#media-session">media
+          sessions</a>.
+        </p>
+       
       
       
       
@@ -1191,6 +1209,11 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
     
      </dl>
      
+  
+  
+    <li>
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
   
 </ol>
 
