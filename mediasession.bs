@@ -1077,11 +1077,11 @@ platform-level media focus.
 Interruptions can be both transient or permanent. A transient interruption means
 we can either choose to <a>duck</a> our content and continue playing it out at a
 reduced volume for the duration of the interruption; or <a>pause</a> our content
-for the duration of the interruption and then resume playback it when the
+for the duration of the interruption and then resume playback when the
 interruption ends. A permanent interruption means we must <a>pause</a> our media
 content indefinitely.
 
-When a <a>media session</a> receives an start-of-interruption notification from
+When a <a>media session</a> receives a start-of-interruption notification from
 the platform then the user agent must run the
 <a>media session interruption algorithm</a> passing in the <a>media session</a>
 as <var>interrupted media session</var>.
