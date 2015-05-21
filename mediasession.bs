@@ -364,14 +364,15 @@ on the preferred definitions in the table’s third and fourth columns.
           href="#media-session-interruption">starts interrupting</a>.
           <a>Unducks</a>
           itself when <code><a lt="transient media state">Transient</a></code>
-          content <a href="#media-session-release">ends playback</a>.
+          content is <a>paused</a> or <a href="#media-session-release">ends
+          playback</a>.
         </li>
         <li>
           <a>Pauses</a> itself when <code><a lt="transient solo media
           state">Transient Solo</a></code> content <a
           href="#media-session-interruption">starts interrupting</a>.
           <a>Unpauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
+          state">Transient Solo</a></code> content is <a>paused</a> or <a
           href="#media-session-release">ends playback</a>.
         </li>
         <li>
@@ -404,7 +405,7 @@ on the preferred definitions in the table’s third and fourth columns.
           <a>Unducks</a> all other <a lt="interrupted media session
           state">interrupted</a> <code><a lt="default media
           state">Default</a></code> and <code><a lt="content media
-          state">Content</a></code> content when <a
+          state">Content</a></code> content when <a>paused</a> or <a
           href="#media-session-release">playback ends</a>.
         </li>
         <li>
@@ -421,7 +422,7 @@ on the preferred definitions in the table’s third and fourth columns.
           state">Transient Solo</a></code> content <a
           href="#media-session-interruption">starts interrupting</a>.
           <a>Unpauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
+          state">Transient Solo</a></code> content is <a>paused</a> or <a
           href="#media-session-release">ends playback</a>.
         </li>
         <li>
@@ -461,7 +462,8 @@ on the preferred definitions in the table’s third and fourth columns.
           lt="content media state">Content</a></code>, <code><a lt="transient
           media state">Transient</a></code> and <code><a lt="transient solo
           media state">Transient Solo</a></code>
-          content when <a href="#media-session-release">playback ends</a>.
+          content when <a>paused</a> or <a
+          href="#media-session-release">playback ends</a>.
         </li>
         <li>
           Does not display lock-screen and notification area user interfaces
@@ -478,8 +480,8 @@ on the preferred definitions in the table’s third and fourth columns.
           href="#media-session-interruption">starts interrupting</a>.
           <a>Unpauses</a>
           itself when other <code><a lt="transient solo media state">Transient
-          Solo</a></code> content <a href="#media-session-release">ends
-          playback</a>.
+          Solo</a></code> content is <a>paused</a> or <a
+          href="#media-session-release">ends playback</a>.
         </li>
         <li>
           Continues playing normally when <code><a lt="ambient media
