@@ -1622,21 +1622,25 @@ session</a> as <var>incumbent media session</var>.</p>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">playback has ended</a>, the
-user agent must run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
+user agent must remove the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> from its <a data-link-type="dfn" href="#current-media-session">current media
+session</a>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and then run the
+<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, as the only
 argument.</p>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> with an <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> set to
 <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>, then
-the user agent must run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in
-the
+the user agent must remove the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> from its <a data-link-type="dfn" href="#current-media-session">current media
+session</a>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and then run the
+<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> as the only argument.</p>
 
 
    <p>Any time a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">load
-algorithm</a> is run by the user agent, it must also run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session
-release algorithm</a>
+algorithm</a> is run by the user agent, it must remove the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
+from its <a data-link-type="dfn" href="#current-media-session">current media session</a>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
+elements</a> and then also run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a>
 passing in the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, as the only
 argument.</p>
@@ -1655,10 +1659,14 @@ argument.</p>
   
   
     <li>
+    If <var>current media session</var> has one or more <a data-link-type="dfn" href="#active-participating-media-elements">active participating
+    media elements</a> then abort the remaining steps and return.
+  
+  
+    <li>
     Optionally, based on platform conventions, the user agent must release any
     currently held platform media focus for <var>current media session</var>.
   
-
   
     <li>
     Optionally, based on platform conventions, the user agent must remove any
@@ -1683,7 +1691,7 @@ argument.</p>
      <p class="note" role="note">
       This implies that the next time the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
       algorithm</a>
-      is run against a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> in <a data-link-type="dfn" href="#current-media-session">current media session</a>
+      is run against any <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> in <a data-link-type="dfn" href="#current-media-session">current media session</a>
       that we will re-request media focus according to the steps defined in that
       algorithm.
     </p>
@@ -1694,7 +1702,9 @@ argument.</p>
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#remove-an-element-from-a-document">removed
 from a <code>Document</code></a> and is not attached to another <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a></code>,
-run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a>
+remove the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> from its <a data-link-type="dfn" href="#current-media-session">current media session</a>’s
+<a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and then run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session
+release algorithm</a>
 passing in the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, as the only
 argument.</p>
