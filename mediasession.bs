@@ -144,6 +144,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 <h2 id="media-sessions">Media sessions</h2>
 
 <pre class="idl">
+[Constructor(MediaSessionKind kind)]
 interface MediaSession {
   readonly attribute MediaSessionKind kind;
 
@@ -164,7 +165,9 @@ context</a>'s <a>media session</a>.
 
 The <dfn>participating media elements</dfn> of a <a>media session</a> are the
 <a>media elements</a> whose <a>current media session</a> is that
-<a>media session</a>.
+<a>media session</a>. A <a>media session</a>'s <dfn>active participating media
+elements</dfn> are the <a>participating media elements</a> of a <a>media
+session</a> that have a {{paused}} attribute of false.
 
 <a>Media sessions</a> have a <dfn>current state</dfn>, which describes their
 current status with respect to any interaction with other <a>media sessions</a>.
@@ -189,7 +192,7 @@ The possible values are as follows:
   </dt>
   <dd>
     The <a>media session</a> is currently suspended from having platform-level
-    media focus and its <a>participating media elements</a> are either <a
+    media focus and its <a>active participating media elements</a> are either <a
     lt="pause">paused</a> or
     <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>media
     category</a> and pending completion of another <a>media session</a>'s media
@@ -199,7 +202,22 @@ The possible values are as follows:
 
 <p>&nbsp;</p>
 
-When a <a>media session</a> is created its <a>current state</a> must be
+<dl class=domintro>
+  <dt>
+    <code><var>session</var> = new <a constructor
+    lt="MediaSession()">MediaSession</a>(<var>kind</var>)</code>
+  </dt>
+  <dd>
+    Returns a new {{MediaSession}} object.
+  </dd>
+</dl>
+
+The
+<dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
+constructor must create a new {{MediaSession}} object with its
+{{MediaSession/kind}} attribute set to <var>kind</var>, and then return it.
+
+When a new <a>media session</a> is created its <a>current state</a> must be
 initially set to
 <code><a lt="idle media session state">IDLE</a></code>.
 
@@ -269,7 +287,7 @@ state</a> of the <a>media session</a>.
     Releases platform-level media focus, sets the <a>media session</a>'s
     <a>current state</a> to <code><a lt="idle media session
     state">IDLE</a></code> and applies any changes necessary to its
-    <a>participating media elements</a>.
+    <a>active participating media elements</a>.
   </dd>
 </dl>
 
@@ -279,8 +297,8 @@ must run the following steps:
 
 <ol>
   <li>
-    <a>Pause</a> each of <a>media session</a>'s <a lt="active media session
-    state">active</a> <a>participating media elements</a>.
+    <a>Pause</a> each of <a>media session</a>'s <a>active participating media
+    elements</a>.
   </li>
   <li>
     Run the <a>media session release algorithm</a> passing in the
@@ -326,8 +344,8 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Indefinitely <a>pauses</a> all other <a lt="active media session
-          state">active</a>
+          Indefinitely <a>pauses</a> all other <a lt="active participating media
+          elements">active</a>
           <code><a lt="default media state">Default</a></code> and <code><a
           lt="content media state">Content</a></code> content when <a
           href="#media-session-invocation">playback begins</a>.
@@ -378,7 +396,8 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          <a>Ducks</a> all other <a lt="active media session state">active</a>
+          <a>Ducks</a> all other <a lt="active participating media
+          elements">active</a>
           <code><a lt="default media state">Default</a></code>
           and <code><a lt="content media state">Content</a></code> content when
           <a href="#media-session-invocation">playback begins</a>.
@@ -429,7 +448,8 @@ on the preferred definitions in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          <a>Pauses</a> all other <a lt="active media session state">active</a>
+          <a>Pauses</a> all other <a lt="active participating media
+          elements">active</a>
           <code><a lt="default media state">Default</a></code>,
           <code><a lt="content media state">Content</a></code>, <code><a
           lt="transient media state">Transient</a></code> and
@@ -546,7 +566,7 @@ to media elements</h2>
 partial interface HTMLMediaElement {
   // media session
   attribute DOMString kind;
-  readonly attribute MediaSession? session;
+  attribute MediaSession? session;
 };
 </pre>
 
@@ -565,6 +585,9 @@ partial interface HTMLMediaElement {
   <dd>
     Returns the <a>current media session</a> for the <a>media element</a>, if
     any; returns null otherwise.
+
+    Can be set, to set an explicit {{MediaSession}}. Doing so updates the
+    {{HTMLMediaElement/kind}} attribute.
   </dd>
 </dl>
 
@@ -594,8 +617,65 @@ algorithm</a> is subsequently re-run.
 
 The <dfn attribute for="HTMLMediaElement"
 lt="session"><code>session</code></dfn> attribute on a <a>media element</a>, on
-getting, must return the element's <a>current media session</a>, if any, or null
-otherwise.
+getting, must return the element's current <a>media session</a>, if any, or null
+otherwise. On setting, the user agent must run the following steps:
+
+<ol>
+  <li>
+    Let <var>m</var> be the <a>media element</a> in question.
+  </li>
+  <li>
+    Let <var>old media session</var> be <var>m</var>'s <a>current media
+    session</a>, if it has one, and null otherwise.
+  </li>
+  <li>
+    Let <var>new media session</var> be null.
+  </li>
+  <li>
+    Let <var>m</var> have no <a>current media session</a>, if it currently has
+    one.
+  </li>
+  <li>
+    If the new value is null then set the element's {{HTMLMediaElement/kind}}
+    attribute to the empty string. Otherwise, set element's
+    {{HTMLMediaElement/kind}} attribute to the value of <a>current media
+    session</a>'s {{MediaSession/kind}} attribute.
+  </li>
+  <li>
+    Let <var>m</var>'s <a>current media session</a> be the new value or the
+    <a>top-level browsing context</a>'s <a>media session</a> if the new value is
+    null.
+  </li>
+  <li>
+    Let <var>new media session</var> be <var>m</var>'s <a>current media
+    session</a>.
+  </li>
+  <li>
+    <var>Update media sessions</var>: If <var>old media session</var> and
+    <var>new media session</var> are the same (whether both null or both the
+    same <a>media session</a>) then abort these steps.
+  </li>
+  <li>
+    If <var>m</var> is an <a>active participating media element</a> of <var>old
+    media session</var> then <a>pause</a> <var>m</var>.
+  </li>
+  <li>
+    Remove <var>m</var> from <var>old media session</var>'s <a>participating
+    media elements</a>.
+  </li>
+  <li>
+    If <var>old media session</var> is not null and no longer has one or more
+    <a>active participating media elements</a>, then run the <a>media session
+    release algorithm</a>, passing in <var>old media session</var> as the only
+    argument.
+  </li>
+  <li>
+    Add <var>m</var> to <var>new media session</var>'s <a>participating media
+    elements</a>.
+  </li>
+</ol>
+
+<p>&nbsp;</p>
 
 <div class="example">
   As both <code><a element>audio</a></code> and <code><a
@@ -610,6 +690,23 @@ myAudio.src = "music.mp3";
 console.log(myAudio.session) // --> null
 myAudio.kind = "content";
 console.log(myAudio.session) // --> [object MediaSession]
+
+myAudio.play(); // Go!
+  </pre>
+
+  A <a>media session</a> can also be assigned to one or more <code><a
+  element>audio</a></code> and <code><a element>video</a></code>
+  elements by setting their {{HTMLMediaElement/session}} attribute directly in
+  JavaScript:
+
+  <pre class="lang-javascript">
+var myAudio = document.createElement("audio");
+myAudio.src = "music.mp3";
+
+var mySession = new MediaSession("content");
+
+myAudio.session = mySession;
+console.log(myAudio.kind) // --> "content"
 
 myAudio.play(); // Go!
   </pre>
@@ -796,7 +893,8 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
           <li>
             Optionally, based on platform conventions, the user agent may allow
             hardware and/or software media keys to control playback of
-            <var>media session</var>'s <a>participating media elements</a>.
+            <var>media session</var>'s <a>active participating media
+            elements</a>.
           </li>
         </ol>
       </dd>
@@ -907,7 +1005,7 @@ steps.
             state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>pause</a> all of <var>interrupted media session</var>'s
-            <a>participating media elements</a> and set
+            <a>active participating media elements</a> and set
             <var>interrupted media session</var>'s <a>current state</a> to
             <code><a lt="idle media session state">IDLE</a></code>.
 
@@ -930,8 +1028,8 @@ steps.
             Optionally, based on platform conventions, the user agent must
             prevent any hardware and/or software media keys from controlling
             playback of
-            <var>interrupted media session</var>'s <a lt="active media session
-            state">active</a> <a>participating media elements</a>.
+            <var>interrupted media session</var>'s <a>active participating media
+            elements</a>.
           </li>
         </ol>
       </dd>
@@ -947,9 +1045,8 @@ steps.
             state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>duck</a>
-            all of <var>interrupted media session</var>'s <a lt="active media
-            session state">active</a> <a>participating media elements</a> and
-            set
+            all of <var>interrupted media session</var>'s <a>active
+            participating media elements</a> and set
             <var>interrupted media session</var>'s
             <a>current state</a> to <code><a lt="interrupted media session
             state">INTERRUPTED</a></code>.
@@ -976,8 +1073,8 @@ steps.
             state">Transient</a></code> or <code><a lt="transient solo media
             state">Transient Solo</a></code> then <a>pause</a> all of
             <var>interrupted media session</var>'s
-            <a>participating media elements</a> and set <var>current media
-            session</var>'s <a>current state</a> to
+            <a>active participating media elements</a> and set <var>current
+            media session</var>'s <a>current state</a> to
             <code><a lt="interrupted media session
             state">INTERRUPTED</a></code>.
 
@@ -1042,7 +1139,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             or
             <code><a lt="content media state">Content</a></code>
             then <a>unduck</a> all of <var>incumbent media session</var>'s
-            <a>participating media elements</a>
+            <a>active participating media elements</a>
             and set <var>incumbent media session</var>'s <a>current state</a> to
             <code><a lt="active media session state">ACTIVE</a></code>.
           </li>
@@ -1061,10 +1158,11 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             lt="transient media state">Transient</a></code>, or
             <code><a lt="transient solo media state">Transient Solo</a></code>
             then <a>unpause</a> the
-            <var>incumbent media session</var>'s <a lt="active media session
-            state">active</a>
-            <a>participating media elements</a>
-            and set <var>incumbent media session</var>'s <a>current state</a> to
+            <var>incumbent media session</var>'s <a>participating media
+            elements</a> that were <a lt="active participating media
+            elements">active</a> prior to the corresponding
+            start-of-interruption notification and set <var>incumbent media
+            session</var>'s <a>current state</a> to
             <code><a lt="active media session state">ACTIVE</a></code>.
           </li>
         </ol>
@@ -1119,7 +1217,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
     Optionally, based on platform conventions, the user agent must prevent any
     hardware and/or software media keys from controlling playback of
     <var>current media session</var>'s
-    <a>participating media elements</a>.
+    <a>active participating media elements</a>.
   </li>
   <li>
     Set <var>current media session</var>'s <a>current state</a> to

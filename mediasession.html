@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-05-20">20 May 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-05-21">21 May 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -336,7 +336,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <h2 class="heading settled" data-level="4" id="media-sessions"><span class="secno">4. </span><span class="content">Media sessions</span><a class="self-link" href="#media-sessions"></a></h2>
 
 
-   <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
+   <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(<a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
   void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
@@ -359,7 +360,9 @@ context</a>’s <a data-link-type="dfn" href="#media-session">media session</a>.
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="participating-media-elements">participating media elements<a class="self-link" href="#participating-media-elements"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> are the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> whose <a data-link-type="dfn" href="#current-media-session">current media session</a> is that
-<a data-link-type="dfn" href="#media-session">media session</a>.</p>
+<a data-link-type="dfn" href="#media-session">media session</a>. A <a data-link-type="dfn" href="#media-session">media session</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="active-participating-media-elements">active participating media
+elements<a class="self-link" href="#active-participating-media-elements"></a></dfn> are the <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> of a <a data-link-type="dfn" href="#media-session">media
+session</a> that have a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a></code> attribute of false.</p>
 
 
    <p><a data-link-type="dfn" href="#media-session">Media sessions</a> have a <dfn data-dfn-type="dfn" data-noexport="" id="current-state">current state<a class="self-link" href="#current-state"></a></dfn>, which describes their
@@ -392,7 +395,7 @@ The possible values are as follows:</p>
   
     <dd>
     The <a data-link-type="dfn" href="#media-session">media session</a> is currently suspended from having platform-level
-    media focus and its <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> are either <a data-link-type="dfn" href="#pause">paused</a> or
+    media focus and its <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> are either <a data-link-type="dfn" href="#pause">paused</a> or
     <a data-link-type="dfn" href="#duck">ducked</a> based on the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-category">media
     category</a> and pending completion of another <a data-link-type="dfn" href="#media-session">media session</a>’s media
     focus.
@@ -403,7 +406,25 @@ The possible values are as follows:</p>
    <p> </p>
 
 
-   <p>When a <a data-link-type="dfn" href="#media-session">media session</a> is created its <a data-link-type="dfn" href="#current-state">current state</a> must be
+   <dl class="domintro">
+  
+    <dt>
+    <code><var>session</var> = new <a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">MediaSession</a>(<var>kind</var>)</code>
+  
+  
+    <dd>
+    Returns a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object.
+  
+</dl>
+
+
+   <p>The
+<dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasessionkind">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasessionkind"></a></dfn>
+constructor must create a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object with its
+<code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute set to <var>kind</var>, and then return it.</p>
+
+
+   <p>When a new <a data-link-type="dfn" href="#media-session">media session</a> is created its <a data-link-type="dfn" href="#current-state">current state</a> must be
 initially set to
 <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.</p>
 
@@ -480,7 +501,7 @@ state</a> of the <a data-link-type="dfn" href="#media-session">media session</a>
     <dd>
     Releases platform-level media focus, sets the <a data-link-type="dfn" href="#media-session">media session</a>’s
     <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> and applies any changes necessary to its
-    <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.
+    <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>.
   
 </dl>
 
@@ -492,7 +513,8 @@ must run the following steps:</p>
    <ol>
   
     <li>
-    <a data-link-type="dfn" href="#pause">Pause</a> each of <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.
+    <a data-link-type="dfn" href="#pause">Pause</a> each of <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
+    elements</a>.
   
   
     <li>
@@ -562,7 +584,7 @@ on the preferred definitions in the table’s third and fourth columns.</p>
        <ul>
         
         <li>
-          Indefinitely <a data-link-type="dfn" href="#pause">pauses</a> all other <a data-link-type="dfn" href="#active-media-session-state">active</a>
+          Indefinitely <a data-link-type="dfn" href="#pause">pauses</a> all other <a data-link-type="dfn" href="#active-participating-media-elements">active</a>
           <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> and <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a href="#media-session-invocation">playback begins</a>.
         
         
@@ -628,7 +650,7 @@ on the preferred definitions in the table’s third and fourth columns.</p>
        <ul>
         
         <li>
-          <a data-link-type="dfn" href="#duck">Ducks</a> all other <a data-link-type="dfn" href="#active-media-session-state">active</a>
+          <a data-link-type="dfn" href="#duck">Ducks</a> all other <a data-link-type="dfn" href="#active-participating-media-elements">active</a>
           <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
           and <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when
           <a href="#media-session-invocation">playback begins</a>.
@@ -691,7 +713,7 @@ on the preferred definitions in the table’s third and fourth columns.</p>
        <ul>
         
         <li>
-          <a data-link-type="dfn" href="#pause">Pauses</a> all other <a data-link-type="dfn" href="#active-media-session-state">active</a>
+          <a data-link-type="dfn" href="#pause">Pauses</a> all other <a data-link-type="dfn" href="#active-participating-media-elements">active</a>
           <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
           <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and
           <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
@@ -850,7 +872,7 @@ to media elements</span><a class="self-link" href="#assigning-a-media-session-to
    <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
   // media session
   attribute DOMString <a class="idl-code" data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
-  readonly attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-global-name="HTMLMediaElement<interface>/session<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
+  attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-global-name="HTMLMediaElement<interface>/session<attribute>" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 </pre>
 
@@ -873,6 +895,11 @@ to media elements</span><a class="self-link" href="#assigning-a-media-session-to
     <dd>
     Returns the <a data-link-type="dfn" href="#current-media-session">current media session</a> for the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, if
     any; returns null otherwise.
+
+
+     <p>Can be set, to set an explicit <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code>. Doing so updates the
+    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute.</p>
+     
   
 </dl>
 
@@ -905,11 +932,82 @@ algorithm</a> is subsequently re-run.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" id="dom-htmlmediaelement-session"><code>session</code><a class="self-link" href="#dom-htmlmediaelement-session"></a></dfn> attribute on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, on
-getting, must return the element’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, or null
-otherwise.</p>
+getting, must return the element’s current <a data-link-type="dfn" href="#media-session">media session</a>, if any, or null
+otherwise. On setting, the user agent must run the following steps:</p>
 
 
-   <div class="example" id="example-74dde311"><a class="self-link" href="#example-74dde311"></a>
+   <ol>
+  
+    <li>
+    Let <var>m</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> in question.
+  
+  
+    <li>
+    Let <var>old media session</var> be <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media
+    session</a>, if it has one, and null otherwise.
+  
+  
+    <li>
+    Let <var>new media session</var> be null.
+  
+  
+    <li>
+    Let <var>m</var> have no <a data-link-type="dfn" href="#current-media-session">current media session</a>, if it currently has
+    one.
+  
+  
+    <li>
+    If the new value is null then set the element’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code>
+    attribute to the empty string. Otherwise, set element’s
+    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the value of <a data-link-type="dfn" href="#current-media-session">current media
+    session</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute.
+  
+  
+    <li>
+    Let <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> be the new value or the
+    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> if the new value is
+    null.
+  
+  
+    <li>
+    Let <var>new media session</var> be <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media
+    session</a>.
+  
+  
+    <li>
+    <var>Update media sessions</var>: If <var>old media session</var> and
+    <var>new media session</var> are the same (whether both null or both the
+    same <a data-link-type="dfn" href="#media-session">media session</a>) then abort these steps.
+  
+  
+    <li>
+    If <var>m</var> is an <a data-link-type="dfn" href="#active-participating-media-elements">active participating media element</a> of <var>old
+    media session</var> then <a data-link-type="dfn" href="#pause">pause</a> <var>m</var>.
+  
+  
+    <li>
+    Remove <var>m</var> from <var>old media session</var>’s <a data-link-type="dfn" href="#participating-media-elements">participating
+    media elements</a>.
+  
+  
+    <li>
+    If <var>old media session</var> is not null and no longer has one or more
+    <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>, then run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session
+    release algorithm</a>, passing in <var>old media session</var> as the only
+    argument.
+  
+  
+    <li>
+    Add <var>m</var> to <var>new media session</var>’s <a data-link-type="dfn" href="#participating-media-elements">participating media
+    elements</a>.
+  
+</ol>
+
+
+   <p> </p>
+
+
+   <div class="example" id="example-48396142"><a class="self-link" href="#example-48396142"></a>
   As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
   elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
   <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be set via JavaScript:
@@ -921,6 +1019,23 @@ myAudio.src = "music.mp3";
 console.log(myAudio.session) // --> null
 myAudio.kind = "content";
 console.log(myAudio.session) // --> [object MediaSession]
+
+myAudio.play(); // Go!
+</pre>
+
+
+    <p>A <a data-link-type="dfn" href="#media-session">media session</a> can also be assigned to one or more <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+  elements by setting their <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute directly in
+  JavaScript:</p>
+
+  
+    <pre class="lang-javascript">var myAudio = document.createElement("audio");
+myAudio.src = "music.mp3";
+
+var mySession = new MediaSession("content");
+
+myAudio.session = mySession;
+console.log(myAudio.kind) // --> "content"
 
 myAudio.play(); // Go!
 </pre>
@@ -1135,7 +1250,8 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
         <li>
             Optionally, based on platform conventions, the user agent may allow
             hardware and/or software media keys to control playback of
-            <var>media session</var>’s <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.
+            <var>media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
+            elements</a>.
           
         
         
@@ -1281,7 +1397,7 @@ steps.</p>
             category state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
             <a data-link-type="dfn" href="#pause">pause</a> all of <var>interrupted media session</var>’s
-            <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and set
+            <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
             <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
 
@@ -1310,7 +1426,8 @@ steps.</p>
             Optionally, based on platform conventions, the user agent must
             prevent any hardware and/or software media keys from controlling
             playback of
-            <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.
+            <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
+            elements</a>.
           
         
         
@@ -1333,8 +1450,8 @@ steps.</p>
             category state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
             <a data-link-type="dfn" href="#duck">duck</a>
-            all of <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a> <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and
-            set
+            all of <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active
+            participating media elements</a> and set
             <var>interrupted media session</var>’s
             <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
             
@@ -1366,8 +1483,8 @@ steps.</p>
             If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media
             category state</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of
             <var>interrupted media session</var>’s
-            <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> and set <var>current media
-            session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+            <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set <var>current
+            media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
 
             
@@ -1456,7 +1573,7 @@ session</a> as <var>incumbent media session</var>.</p>
             or
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
             then <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
-            <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>
+            <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>
             and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
           
@@ -1482,9 +1599,10 @@ session</a> as <var>incumbent media session</var>.</p>
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
             <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
             then <a data-link-type="dfn" href="#unpause">unpause</a> the
-            <var>incumbent media session</var>’s <a data-link-type="dfn" href="#active-media-session-state">active</a>
-            <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>
-            and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+            <var>incumbent media session</var>’s <a data-link-type="dfn" href="#participating-media-elements">participating media
+            elements</a> that were <a data-link-type="dfn" href="#active-participating-media-elements">active</a> prior to the corresponding
+            start-of-interruption notification and set <var>incumbent media
+            session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
           
         
@@ -1554,7 +1672,7 @@ argument.</p>
     Optionally, based on platform conventions, the user agent must prevent any
     hardware and/or software media keys from controlling playback of
     <var>current media session</var>’s
-    <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.
+    <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>.
   
   
     <li>
@@ -1589,6 +1707,8 @@ argument.</p>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li>active media session state, <a href="#active-media-session-state">4</a>
+   <li>active participating media
+elements, <a href="#active-participating-media-elements">4</a>
    <li>ambient attribute value, <a href="#ambient-attribute-value">5</a>
    <li>ambient media state, <a href="#ambient-media-state">5</a>
    <li>content attribute value, <a href="#content-attribute-value">5</a>
@@ -1602,6 +1722,7 @@ argument.</p>
    <li>intrinsic media category state, <a href="#intrinsic-media-category-state">4</a>
    <li>kind
     <ul>
+     <li>argument for MediaSession/MediaSession(kind), <a href="#dom-mediasession-mediasessionkind-kind">4</a>
      <li>attribute for MediaSession, <a href="#dom-mediasession-kind">4</a>
      <li>attribute for HTMLMediaElement, <a href="#dom-htmlmediaelement-kind">6.1</a>
     </ul>
@@ -1612,6 +1733,7 @@ argument.</p>
    <li>media session continuation algorithm, <a href="#media-session-continuation-algorithm">8</a>
    <li>media session interruption algorithm, <a href="#media-session-interruption-algorithm">8</a>
    <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">7</a>
+   <li>MediaSession(kind), <a href="#dom-mediasession-mediasessionkind">4</a>
    <li>MediaSessionKind, <a href="#enumdef-mediasessionkind">5</a>
    <li>media session release algorithm, <a href="#media-session-release-algorithm">9</a>
    <li>participating media elements, <a href="#participating-media-elements">4</a>
@@ -1670,7 +1792,8 @@ argument.</p>
    <dt id="biblio-webaudio"><a class="self-link" href="#biblio-webaudio"></a>[WEBAUDIO]
    <dd>Paul Adenot; Chris Wilson; Chris Rogers. <a href="https://webaudio.github.io/web-audio-api/">Web Audio API</a>. 10 October 2013. WD. URL: <a href="https://webaudio.github.io/web-audio-api/">https://webaudio.github.io/web-audio-api/</a></dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">interface <a data-global-name="" href="#mediasession">MediaSession</a> {
+  <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(<a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" href="#dom-mediasession-mediasessionkind-kind">kind</a>)]
+interface <a data-global-name="" href="#mediasession">MediaSession</a> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
   void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
@@ -1686,7 +1809,7 @@ enum <a data-global-name="" href="#enumdef-mediasessionkind">MediaSessionKind</a
 partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
   // media session
   attribute DOMString <a class="idl-code" data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
-  readonly attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-global-name="HTMLMediaElement<interface>/session<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
+  attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-global-name="HTMLMediaElement<interface>/session<attribute>" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 
 </pre>
