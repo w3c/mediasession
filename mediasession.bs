@@ -587,7 +587,7 @@ partial interface HTMLMediaElement {
     any; returns null otherwise.
 
     Can be set, to set an explicit {{MediaSession}}. Doing so updates the
-    {{HTMLMediaElement/kind}} attribute.
+    <a>media element</a>'s {{HTMLMediaElement/kind}} attribute.
   </dd>
 </dl>
 
@@ -617,7 +617,7 @@ algorithm</a> is subsequently re-run.
 
 The <dfn attribute for="HTMLMediaElement"
 lt="session"><code>session</code></dfn> attribute on a <a>media element</a>, on
-getting, must return the element's current <a>media session</a>, if any, or null
+getting, must return the element's <a>current media session</a>, if any, or null
 otherwise. On setting, the user agent must run the following steps:
 
 <ol>
