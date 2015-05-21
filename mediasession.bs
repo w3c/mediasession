@@ -251,9 +251,9 @@ When a <a>media element</a> is to <dfn>pause</dfn> the user agent must run its
 {{pause()}} method. When a <a>media element</a> is to <dfn>duck</dfn>
 then the user agent must ensure its output volume is lowered.
 
-The <a>media session release algorithm</a> may cause a <a>media element</a> to
-either <a>unpause</a> or <a>unduck</a> depending on its <a>media category</a>.
-When a <a>media element</a> is to <dfn>unduck</dfn>
+The <a>media session continuation algorithm</a> may cause a <a>media element</a>
+to either <a>unpause</a> or <a>unduck</a> depending on its <a>media
+category</a>. When a <a>media element</a> is to <dfn>unduck</dfn>
 then the user agent should restore its output volume to the same level that was
 observed prior to the original corresponding <a>duck</a> request. When a
 <a>media element</a> is to <dfn>unpause</dfn> the user agent must run its
