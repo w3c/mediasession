@@ -49,6 +49,10 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
         urlPrefix: browsers.html
             text: browsing context
             text: top-level browsing context; url: #top-level-browsing-context
+        urlPrefix: webappapis.html
+            text: event handlers
+            text: event handler event type
+            text: event handler content attributes
     type: method
         urlPrefix: embedded-content.html
             text: play(); for: HTMLMediaElement; url: #dom-media-play
@@ -67,6 +71,7 @@ urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
 urlPrefix: https://dom.spec.whatwg.org/; spec: DOM
     type: interface; urlPrefix: #interface-
         text: EventTarget
+        text: Event
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -143,10 +148,15 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 <h2 id="media-sessions">Media sessions</h2>
 
+<h3 id="mediasession interface">The {{MediaSession}} interface</h3>
+
 <pre class="idl">
 [Constructor(MediaSessionKind kind)]
-interface MediaSession {
+interface MediaSession : EventTarget {
   readonly attribute MediaSessionKind kind;
+
+  attribute EventHandler onprevious;
+  attribute EventHandler onnext;
 
   void release();
 };
@@ -306,6 +316,107 @@ must run the following steps:
   </li>
 </ol>
 
+<h3 id="event-handlers-on-mediasession-objects">Event handlers on
+{{MediaSession}} objects</h3>
+
+The following are the <a>event handlers</a> (and their corresponding <a>event
+handler event types</a>) that must be supported by all <a>media sessions</a>, as
+<a>event handler content attributes</a>:
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        <a>Event handler</a>
+      </th>
+      <th>
+        <a>Event handler event type</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <dfn attribute for="MediaSession"><code>onprevious</code></dfn>
+      </td>
+      <td>
+        <code><a lt="event previous">previous</a></code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn attribute for="MediaSession"><code>onnext</code></dfn>
+      </td>
+      <td>
+        <code><a lt="event next">next</a></code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="media-session-events-summary">Events summary</h3>
+
+<em>This section is non-normative.</em>
+
+The following events fire on <a>media sessions</a> as part of the processing
+model described above:
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Event name
+      </th>
+      <th>
+        Interface
+      </th>
+      <th>
+        Fired when...
+      </th>
+      <th>
+        Preconditions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <dfn lt="event previous"><code>previous</code></dfn>
+      </td>
+      <td>
+        {{Event}}
+      </td>
+      <td>
+        The user presses the 'previous track' media key or button on any
+        hardware or software media interface.
+      </td>
+      <td>
+        <a>intrinsic media category state</a> is <code><a lt="default media
+        state">Default</a></code> or <code><a lt="content media
+        state">Content</a></code>; and <a>current state</a> is not <code><a
+        lt="idle media session state">IDLE</a></code>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn lt="event next"><code>next</code></dfn>
+      </td>
+      <td>
+        {{Event}}
+      </td>
+      <td>
+        The user presses the 'next track' media key or button on any hardware or
+        software media interface.
+      </td>
+      <td>
+        <a>intrinsic media category state</a> is <code><a lt="default media
+        state">Default</a></code> or <code><a lt="content media
+        state">Content</a></code>; and <a>current state</a> is not <code><a
+        lt="idle media session state">IDLE</a></code>.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="media-categories">Media categories</h2>
 
