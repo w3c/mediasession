@@ -597,10 +597,10 @@ objects implementing the <code class="idl"><a data-link-type="idl" href="#medias
 </table>
 
 
-   <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaPlayPause">MediaPlayPause</a></code> media key on any hardware or
-software interface (e.g. on a keyboard or OS-level button) then the user agent
-must, for each <a data-link-type="dfn" href="#media-session">media session</a> known by the user agent, run the following
-steps:</p>
+   <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaPlayPause">MediaPlayPause</a></code> media key, or an equivalent key, on
+any hardware or software interface (e.g. on a keyboard or OS-level button) then
+the user agent must, for each <a data-link-type="dfn" href="#media-session">media session</a> known by the user agent, run
+the following steps:</p>
 
 
    <ol>
@@ -638,16 +638,16 @@ steps:</p>
 </ol>
 
 
-   <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackPrevious">MediaTrackPrevious</a></code> media key on any hardware or
-software interface (e.g. on a keyboard or OS-level button) then the user agent
-must, for each <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>
+   <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackPrevious">MediaTrackPrevious</a></code> media key, or an equivalent
+key, on any hardware or software interface (e.g. on a keyboard or OS-level
+button) then the user agent must, for each <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> <a data-link-type="dfn" href="#media-session">media session</a>,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-previous"><code>previous</code></a> at its <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object.</p>
 
 
-   <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackNext">MediaTrackNext</a></code> media key on any hardware or
-software interface (e.g. on a keyboard or OS-level button) then the user agent
-must, for each <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>
+   <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackNext">MediaTrackNext</a></code> media key, or an equivalent key, on
+any hardware or software interface (e.g. on a keyboard or OS-level button) then
+the user agent must, for each <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> <a data-link-type="dfn" href="#media-session">media session</a>,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-next"><code>next</code></a> at its <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object.</p>
 

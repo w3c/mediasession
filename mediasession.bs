@@ -361,10 +361,10 @@ objects implementing the {{MediaSession}} interface:
   </tbody>
 </table>
 
-When the user presses the {{MediaPlayPause}} media key on any hardware or
-software interface (e.g. on a keyboard or OS-level button) then the user agent
-must, for each <a>media session</a> known by the user agent, run the following
-steps:
+When the user presses the {{MediaPlayPause}} media key, or an equivalent key, on
+any hardware or software interface (e.g. on a keyboard or OS-level button) then
+the user agent must, for each <a>media session</a> known by the user agent, run
+the following steps:
 
 <ol>
   <li>
@@ -392,16 +392,18 @@ steps:
   </li>
 </ol>
 
-When the user presses the {{MediaTrackPrevious}} media key on any hardware or
-software interface (e.g. on a keyboard or OS-level button) then the user agent
-must, for each <code><a lt="active media session state">ACTIVE</a></code>
+When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
+key, on any hardware or software interface (e.g. on a keyboard or OS-level
+button) then the user agent must, for each <code><a lt="active media session
+state">ACTIVE</a></code>
 <code><a lt="content media state">Content</a></code> <a>media session</a>,
 <a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
 previous"><code>previous</code></a> at its {{MediaSession}} object.
 
-When the user presses the {{MediaTrackNext}} media key on any hardware or
-software interface (e.g. on a keyboard or OS-level button) then the user agent
-must, for each <code><a lt="active media session state">ACTIVE</a></code>
+When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
+any hardware or software interface (e.g. on a keyboard or OS-level button) then
+the user agent must, for each <code><a lt="active media session
+state">ACTIVE</a></code>
 <code><a lt="content media state">Content</a></code> <a>media session</a>,
 <a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
 next"><code>next</code></a> at its {{MediaSession}} object.
