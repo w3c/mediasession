@@ -452,8 +452,8 @@ model described above:
       </td>
       <td>
         <a>intrinsic media category state</a> is <code><a lt="content media
-        state">Content</a></code> and <a>current state</a> is not <code><a
-        lt="idle media session state">IDLE</a></code>.
+        state">Content</a></code> and <a>current state</a> is <code><a
+        lt="active media session state">ACTIVE</a></code>.
       </td>
     </tr>
     <tr>
@@ -469,8 +469,8 @@ model described above:
       </td>
       <td>
         <a>intrinsic media category state</a> is <code><a lt="content media
-        state">Content</a></code> and <a>current state</a> is not <code><a
-        lt="idle media session state">IDLE</a></code>.
+        state">Content</a></code> and <a>current state</a> is <code><a
+        lt="active media session state">ACTIVE</a></code>.
       </td>
     </tr>
   </tbody>
