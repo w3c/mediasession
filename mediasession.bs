@@ -55,6 +55,9 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: event handler content attributes
             text: queue a task
             text: fire a simple event
+            text: task
+            text: task source
+            text: DOM manipulation task source
     type: method
         urlPrefix: embedded-content.html
             text: play(); for: HTMLMediaElement; url: #dom-media-play
@@ -360,6 +363,9 @@ objects implementing the {{MediaSession}} interface:
     </tr>
   </tbody>
 </table>
+
+The <a>task source</a> for the <a>tasks</a> listed in this section is the <a>DOM
+manipulation task source</a>.
 
 When the user presses the {{MediaPlayPause}} media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
