@@ -394,19 +394,19 @@ the following steps:
 
 When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
-button) then the user agent must, for each <code><a lt="active media session
-state">ACTIVE</a></code>
-<code><a lt="content media state">Content</a></code> <a>media session</a>,
+button) then the user agent must, for each
+<code><a lt="content media state">Content</a></code>-based <a>media session</a>
+that is currently <code><a lt="active media session state">ACTIVE</a></code>,
 <a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
 previous"><code>previous</code></a> at its {{MediaSession}} object.
 
 When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <code><a lt="active media session
-state">ACTIVE</a></code>
-<code><a lt="content media state">Content</a></code> <a>media session</a>,
-<a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
-next"><code>next</code></a> at its {{MediaSession}} object.
+the user agent must, for each <code><a lt="content media
+state">Content</a></code>-based <a>media session</a> that is currently <code><a
+lt="active media session state">ACTIVE</a></code>, <a>queue a task</a> to
+<a>fire a simple event</a> named <a lt="event next"><code>next</code></a> at its
+{{MediaSession}} object.
 
 <h3 id="media-session-events-summary">Events summary</h3>
 
