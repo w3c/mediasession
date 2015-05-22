@@ -371,7 +371,10 @@ steps:
     Let <var>m</var> be the <a>media session</a>.
   </li>
   <li>
-    If <var>m</var> is empty or <var>m</var>'s <a>current state</a> is not
+    If <var>m</var> is empty or <var>m</var>'s <a>intrinsic media category
+    state</a> is not <code><a lt="default media state">Default</a></code> or
+    <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
+    <a>current state</a> is not
     <code><a lt="active media session state">ACTIVE</a></code> then abort these
     steps.
   </li>
@@ -392,14 +395,16 @@ steps:
 When the user presses the {{MediaTrackPrevious}} media key on any hardware or
 software interface (e.g. on a keyboard or OS-level button) then the user agent
 must, for each <code><a lt="active media session state">ACTIVE</a></code>
-<a>media session</a>, <a>queue a task</a> to <a>fire a simple event</a> named <a
-lt="event previous"><code>previous</code></a> at its {{MediaSession}} object.
+<code><a lt="content media state">Content</a></code> <a>media session</a>,
+<a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
+previous"><code>previous</code></a> at its {{MediaSession}} object.
 
 When the user presses the {{MediaTrackNext}} media key on any hardware or
 software interface (e.g. on a keyboard or OS-level button) then the user agent
 must, for each <code><a lt="active media session state">ACTIVE</a></code>
-<a>media session</a>, <a>queue a task</a> to <a>fire a simple event</a> named <a
-lt="event next"><code>next</code></a> at its {{MediaSession}} object.
+<code><a lt="content media state">Content</a></code> <a>media session</a>,
+<a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
+next"><code>next</code></a> at its {{MediaSession}} object.
 
 <h3 id="media-session-events-summary">Events summary</h3>
 
@@ -438,9 +443,8 @@ model described above:
         hardware or software media interface.
       </td>
       <td>
-        <a>intrinsic media category state</a> is <code><a lt="default media
-        state">Default</a></code> or <code><a lt="content media
-        state">Content</a></code>; and <a>current state</a> is not <code><a
+        <a>intrinsic media category state</a> is <code><a lt="content media
+        state">Content</a></code> and <a>current state</a> is not <code><a
         lt="idle media session state">IDLE</a></code>.
       </td>
     </tr>
@@ -456,9 +460,8 @@ model described above:
         software media interface.
       </td>
       <td>
-        <a>intrinsic media category state</a> is <code><a lt="default media
-        state">Default</a></code> or <code><a lt="content media
-        state">Content</a></code>; and <a>current state</a> is not <code><a
+        <a>intrinsic media category state</a> is <code><a lt="content media
+        state">Content</a></code> and <a>current state</a> is not <code><a
         lt="idle media session state">IDLE</a></code>.
       </td>
     </tr>
