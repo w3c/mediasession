@@ -1101,22 +1101,6 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
           sessions</a>.
         </p>
       </dd>
-      <dt>
-        Otherwise, <var>media session</var>'s <a>intrinsic media category
-        state</a> is
-        <code><a lt="default media state">Default</a></code>
-      </dt>
-      <dd class="note">
-        @TBW
-
-        Different platforms (e.g. desktop vs. mobile) currently enforce
-        different platform-level default behavior for media elements. Should we
-        define a consistent behavior across platforms or keep the existing
-        defaults per platform? Do the existing defaults continue to make sense
-        given the presence of the kind attribute? Can we say something here
-        without being overly prescriptive about platform-level default
-        conventions?
-      </dd>
     </dl>
   </li>
   <li>
