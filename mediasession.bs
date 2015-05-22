@@ -53,6 +53,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: event handlers
             text: event handler event type
             text: event handler content attributes
+            text: queue a task
+            text: fire a simple event
     type: method
         urlPrefix: embedded-content.html
             text: play(); for: HTMLMediaElement; url: #dom-media-play
@@ -72,6 +74,11 @@ urlPrefix: https://dom.spec.whatwg.org/; spec: DOM
     type: interface; urlPrefix: #interface-
         text: EventTarget
         text: Event
+urlPrefix: http://www.w3.org/TR/DOM-Level-3-Events-key/; spec: dom-level-3-events-key
+    type: attribute; urlPrefix: #key-
+        text: MediaPlayPause; url: MediaPlayPause
+        text: MediaTrackPrevious; url: MediaTrackPrevious
+        text: MediaTrackNext; url: MediaTrackNext
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -320,8 +327,8 @@ must run the following steps:
 {{MediaSession}} objects</h3>
 
 The following are the <a>event handlers</a> (and their corresponding <a>event
-handler event types</a>) that must be supported by all <a>media sessions</a>, as
-<a>event handler content attributes</a>:
+handler event types</a>) that must be supported, as IDL attributes, by all
+objects implementing the {{MediaSession}} interface:
 
 <table>
   <thead>
@@ -353,6 +360,46 @@ handler event types</a>) that must be supported by all <a>media sessions</a>, as
     </tr>
   </tbody>
 </table>
+
+When the user presses the {{MediaPlayPause}} media key on any hardware or
+software interface (e.g. on a keyboard or OS-level button) then the user agent
+must, for each <a>media session</a> known by the user agent, run the following
+steps:
+
+<ol>
+  <li>
+    Let <var>m</var> be the <a>media session</a>.
+  </li>
+  <li>
+    If <var>m</var> is empty or <var>m</var>'s <a>current state</a> is not
+    <code><a lt="active media session state">ACTIVE</a></code> then abort these
+    steps.
+  </li>
+  <li>
+    For each <a>active participating media element</a> in <var>m</var>, called
+    <var>active element</var>, run the following substeps:
+
+    <ol>
+      <li>
+        If <var>active element</var> is <a>paused</a> then <a>unpause</a>
+        <var>active element</var>. Otherwise, <a>pause</a> <var>active
+        element</var>.
+      </li>
+    </ol>
+  </li>
+</ol>
+
+When the user presses the {{MediaTrackPrevious}} media key on any hardware or
+software interface (e.g. on a keyboard or OS-level button) then the user agent
+must, for each <code><a lt="active media session state">ACTIVE</a></code>
+<a>media session</a>, <a>queue a task</a> to <a>fire a simple event</a> named <a
+lt="event previous"><code>previous</code></a> at its {{MediaSession}} object.
+
+When the user presses the {{MediaTrackNext}} media key on any hardware or
+software interface (e.g. on a keyboard or OS-level button) then the user agent
+must, for each <code><a lt="active media session state">ACTIVE</a></code>
+<a>media session</a>, <a>queue a task</a> to <a>fire a simple event</a> named <a
+lt="event next"><code>next</code></a> at its {{MediaSession}} object.
 
 <h3 id="media-session-events-summary">Events summary</h3>
 
