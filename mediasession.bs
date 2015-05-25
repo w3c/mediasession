@@ -599,7 +599,7 @@ on the preferred definitions in the table’s third and fourth columns.
 
 <dfn lt="media remote control">Media remote controls</dfn> enable a <a>media
 session</a> to respond to hardware or software remote control events. Such
-events may include keyboard media key events or; notification and lock screen
+events may include keyboard media key events; or notification and lock screen
 media button events.
 
 <h3 id="the-mediaremotecontrols-interface">The {{MediaRemoteControls}}
