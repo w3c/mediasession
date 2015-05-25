@@ -160,20 +160,21 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 <h3 id="mediasession interface">The {{MediaSession}} interface</h3>
 
+<dfn lt="media session">Media sessions</dfn> implement the following interface:
+
 <pre class="idl">
 [Constructor(MediaSessionKind kind)]
-interface MediaSession : EventTarget {
+interface MediaSession {
   readonly attribute MediaSessionKind kind;
 
-  attribute EventHandler onprevious;
-  attribute EventHandler onnext;
+  readonly attribute MediaRemoteControls? controls;
 
   void release();
 };
 </pre>
 
-A <dfn>media session</dfn> represents one or more <a>media elements</a> within
-the same <a>top-level browsing context</a> that share the same <a>media
+A <a>media session</a> represents one or more <a>media elements</a> within the
+same <a>top-level browsing context</a> that share the same <a>media
 category</a>. Each <a>media session</a> then defines the interactions of those
 <a>media elements</a> with both the underlying platform and other <a>media
 elements</a> belonging to other <a>media sessions</a> within the user agent.
@@ -235,7 +236,10 @@ The possible values are as follows:
 The
 <dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
 constructor must create a new {{MediaSession}} object with its
-{{MediaSession/kind}} attribute set to <var>kind</var>, and then return it.
+{{MediaSession/kind}} attribute set to <var>kind</var>, its
+{{MediaSession/controls}} attribute set to a new {{MediaRemoteControls}} object
+if its {{MediaSession/kind}} is &quot;<a lt="content attribute
+value"><code>content</code></a>&quot or null otherwise, and then return it.
 
 When a new <a>media session</a> is created its <a>current state</a> must be
 initially set to
@@ -285,7 +289,7 @@ observed prior to the original corresponding <a>duck</a> request. When a
   </dt>
   <dd>
     Returns the DOMString value of the <a>intrinsic media category state</a> the
-    given media session represents.
+    <a>media session</a> represents.
   </dd>
 </dl>
 
@@ -298,6 +302,22 @@ defined below.
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
 attribute must return the DOMString value of the <a>intrinsic media category
 state</a> of the <a>media session</a>.
+
+<dl class=domintro>
+  <dt>
+    <code><var>session</var> . {{MediaSession/controls}}</code>
+  </dt>
+  <dd>
+    Returns the {{MediaRemoteControls}} object assigned for the <a>media
+    session</a>, if any.
+  </dd>
+</dl>
+
+The <dfn attribute for="MediaSession" lt="controls"><code>controls</code></dfn>
+attribute must return the {{MediaRemoteControls}} object that was assigned to
+the <a>media session</a> when it was created. If {{MediaSession/kind}} is not
+&quot;<a lt="content attribute value"><code>content</code></a>&quot then this
+attribute should return null.
 
 <dl class=domintro>
   <dt>
@@ -325,156 +345,6 @@ must run the following steps:
     <a>media session</a> as the only argument.
   </li>
 </ol>
-
-<h3 id="event-handlers-on-mediasession-objects">Event handlers on
-{{MediaSession}} objects</h3>
-
-The following are the <a>event handlers</a> (and their corresponding <a>event
-handler event types</a>) that must be supported, as IDL attributes, by all
-objects implementing the {{MediaSession}} interface:
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        <a>Event handler</a>
-      </th>
-      <th>
-        <a>Event handler event type</a>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <dfn attribute for="MediaSession"><code>onprevious</code></dfn>
-      </td>
-      <td>
-        <code><a lt="event previous">previous</a></code>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <dfn attribute for="MediaSession"><code>onnext</code></dfn>
-      </td>
-      <td>
-        <code><a lt="event next">next</a></code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-The <a>task source</a> for the <a>tasks</a> listed in this section is the <a>DOM
-manipulation task source</a>.
-
-When the user presses the {{MediaPlayPause}} media key, or an equivalent key, on
-any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <a>media session</a> known by the user agent, run
-the following steps:
-
-<ol>
-  <li>
-    Let <var>m</var> be the <a>media session</a>.
-  </li>
-  <li>
-    If <var>m</var> is empty or <var>m</var>'s <a>intrinsic media category
-    state</a> is not <code><a lt="default media state">Default</a></code> or
-    <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
-    <a>current state</a> is not
-    <code><a lt="active media session state">ACTIVE</a></code> then abort these
-    steps.
-  </li>
-  <li>
-    For each <a>active participating media element</a> in <var>m</var>, called
-    <var>active element</var>, run the following substeps:
-
-    <ol>
-      <li>
-        If <var>active element</var> is <a>paused</a> then <a>unpause</a>
-        <var>active element</var>. Otherwise, <a>pause</a> <var>active
-        element</var>.
-      </li>
-    </ol>
-  </li>
-</ol>
-
-When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
-key, on any hardware or software interface (e.g. on a keyboard or OS-level
-button) then the user agent must, for each
-<code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">ACTIVE</a></code>,
-<a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
-previous"><code>previous</code></a> at its {{MediaSession}} object.
-
-When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
-any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <code><a lt="content media
-state">Content</a></code>-based <a>media session</a> that is currently <code><a
-lt="active media session state">ACTIVE</a></code>, <a>queue a task</a> to
-<a>fire a simple event</a> named <a lt="event next"><code>next</code></a> at its
-{{MediaSession}} object.
-
-<h3 id="media-session-events-summary">Events summary</h3>
-
-<em>This section is non-normative.</em>
-
-The following events fire on <a>media sessions</a> as part of the processing
-model described above:
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        Event name
-      </th>
-      <th>
-        Interface
-      </th>
-      <th>
-        Fired when...
-      </th>
-      <th>
-        Preconditions
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <dfn lt="event previous"><code>previous</code></dfn>
-      </td>
-      <td>
-        {{Event}}
-      </td>
-      <td>
-        The user presses the 'previous track' media key or button on any
-        hardware or software media interface.
-      </td>
-      <td>
-        <a>intrinsic media category state</a> is <code><a lt="content media
-        state">Content</a></code> and <a>current state</a> is <code><a
-        lt="active media session state">ACTIVE</a></code>.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <dfn lt="event next"><code>next</code></dfn>
-      </td>
-      <td>
-        {{Event}}
-      </td>
-      <td>
-        The user presses the 'next track' media key or button on any hardware or
-        software media interface.
-      </td>
-      <td>
-        <a>intrinsic media category state</a> is <code><a lt="content media
-        state">Content</a></code> and <a>current state</a> is <code><a
-        lt="active media session state">ACTIVE</a></code>.
-      </td>
-    </tr>
-  </tbody>
-</table>
 
 <h2 id="media-categories">Media categories</h2>
 
@@ -725,6 +595,338 @@ on the preferred definitions in the table’s third and fourth columns.
       Legacy media content
     </td>
   </tr>
+</table>
+
+<h2 id="media-remote-controls">Media remote controls</h2>
+
+<h3 id="the-mediaremotecontrols-interface">The {{MediaRemoteControls}}
+interface</h3>
+
+<dfn lt="media remote control">Media remote controls</dfn> implement the
+following interface:
+
+<pre class="idl">
+interface MediaRemoteControls {
+  attribute boolean previousTrackEnabled;
+  attribute boolean nextTrackEnabled;
+  attribute boolean seekForwardEnabled;
+  attribute boolean seekBackwardEnabled;
+
+  // Event handlers
+  attribute EventHandler onprevioustrack;
+  attribute EventHandler onnexttrack;
+  attribute EventHandler onseekforward;
+  attribute EventHandler onseekbackward;
+};
+</pre>
+
+<dl class=domintro>
+  <dt>
+    <code><var>controls</var> .
+    {{MediaRemoteControls/previousTrackEnabled}}</code>
+  </dt>
+  <dd>
+    Determines if a user can interact with a 'previous track' button. By
+    default, this attribute is false.
+  </dd>
+  <dt>
+    <code><var>controls</var> . {{MediaRemoteControls/nextTrackEnabled}}</code>
+  </dt>
+  <dd>
+    Determines if a user can interact with a 'next track' button. By default,
+    this attribute is false.
+  </dd>
+  <dt>
+    <code><var>controls</var> .
+    {{MediaRemoteControls/seekForwardEnabled}}</code>
+  </dt>
+  <dd>
+    Determines if a user can interact with a 'seek forward' button. By default,
+    this attribute is false.
+  </dd>
+  <dt>
+    <code><var>controls</var> .
+    {{MediaRemoteControls/seekBackwardEnabled}}</code>
+  </dt>
+  <dd>
+    Determines if a user can interact with a 'seek backward' button. By default,
+    this attribute is false.
+  </dd>
+</dl>
+
+The <dfn attribute for="MediaRemoteControls"
+lt="previousTrackEnabled"><code>previousTrackEnabled</code></dfn>
+attribute is intended to provide a hint that the user agent should enable a
+'previous track' button for users in all applicable hardware or software remote
+control interfaces.
+
+The <dfn attribute for="MediaRemoteControls"
+lt="nextTrackEnabled"><code>nextTrackEnabled</code></dfn>
+attribute is intended to provide a hint that the user agent should enable a
+'next track' button for users in all applicable hardware or software remote
+control interfaces.
+
+The <dfn attribute for="MediaRemoteControls"
+lt="seekBackwardEnabled"><code>seekBackwardEnabled</code></dfn>
+attribute is intended to provide a hint that the user agent should enable a
+'seek backward' button for users in all applicable hardware or software remote
+control interfaces.
+
+The <dfn attribute for="MediaRemoteControls"
+lt="seekForwardEnabled"><code>seekForwardEnabled</code></dfn>
+attribute is intended to provide a hint that the user agent should enable a
+'seek forward' button for users in all applicable hardware or software remote
+control interfaces.
+
+<p class="note">
+  While the attributes above can be set at any time they will only be read by
+  the user agent during the <a>media session invocation algorithm</a> in order
+  to correctly configure any connected remote control interfaces at the point
+  they become <code><a lt="active media session state">ACTIVE</a></code>.
+</p>
+
+<p class="note">
+  A user agent is not required to always implement each of these buttons
+  separately in an ongoing notification area or lock screen interface. For
+  example, if both {{MediaRemoteControls/nextTrackEnabled}} and
+  {{MediaRemoteControls/seekForwardEnabled}} are set to true, the user agent may
+  present a single unified button. When short-pressed this button may trigger a
+  <a lt="event nexttrack"><code>nexttrack</code></a> event to be fired. When
+  long-pressed this same button may trigger a <a lt="event
+  seekforward"><code>seekforward</code></a> event to be fired. The exact
+  notification and lock screen interfaces required to acheive this interaction
+  are left up to implementers.
+</p>
+
+<h3 id="event-handlers-on-mediaremotecontrols-objects">Event handlers on
+{{MediaRemoteControls}} objects</h3>
+
+The following are the <a>event handlers</a> (and their corresponding <a>event
+handler event types</a>) that must be supported, as IDL attributes, by all
+objects implementing the {{MediaRemoteControls}} interface:
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        <a>Event handler</a>
+      </th>
+      <th>
+        <a>Event handler event type</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <dfn attribute
+        for="MediaRemoteControls"><code>onprevioustrack</code></dfn>
+      </td>
+      <td>
+        <code><a lt="event previoustrack">previoustrack</a></code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn attribute for="MediaRemoteControls"><code>onnexttrack</code></dfn>
+      </td>
+      <td>
+        <code><a lt="event nexttrack">nexttrack</a></code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn attribute
+        for="MediaRemoteControls"><code>onseekbackward</code></dfn>
+      </td>
+      <td>
+        <code><a lt="event seekbackward">seekbackward</a></code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn attribute
+        for="MediaRemoteControls"><code>onseekforward</code></dfn>
+      </td>
+      <td>
+        <code><a lt="event seekforward">seekforward</a></code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+The <a>task source</a> for the <a>tasks</a> listed in this section is the <a>DOM
+manipulation task source</a>.
+
+When the user presses the {{MediaPlayPause}} media key, or an equivalent key, on
+any hardware or software interface (e.g. on a keyboard or OS-level button) then
+the user agent must, for each <a>media session</a> known by the user agent, run
+the following steps:
+
+<ol>
+  <li>
+    Let <var>m</var> be the <a>media session</a>.
+  </li>
+  <li>
+    If <var>m</var> is empty or <var>m</var>'s <a>intrinsic media category
+    state</a> is not <code><a lt="default media state">Default</a></code> or
+    <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
+    <a>current state</a> is not
+    <code><a lt="active media session state">ACTIVE</a></code> then abort these
+    steps.
+  </li>
+  <li>
+    For each <a>active participating media element</a> in <var>m</var>, called
+    <var>active element</var>, run the following substeps:
+
+    <ol>
+      <li>
+        If <var>active element</var> is <a>paused</a> then <a>unpause</a>
+        <var>active element</var>. Otherwise, <a>pause</a> <var>active
+        element</var>.
+      </li>
+    </ol>
+  </li>
+</ol>
+
+When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
+key, on any hardware or software interface (e.g. on a keyboard or OS-level
+button) then the user agent must, if
+{{MediaRemoteControls/previousTrackEnabled}} is true, for each
+<code><a lt="content media state">Content</a></code>-based <a>media session</a>
+that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+<a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
+previoustrack"><code>previoustrack</code></a> at its child
+{{MediaRemoteControls}} object.
+
+When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
+any hardware or software interface (e.g. on a keyboard or OS-level button) then
+the user agent must, if {{MediaRemoteControls/nextTrackEnabled}} is true, for
+each <code><a lt="content media state">Content</a></code>-based <a>media
+session</a> that is currently <code><a lt="active media session
+state">ACTIVE</a></code>, <a>queue a task</a> to
+<a>fire a simple event</a> named <a lt="event
+nexttrack"><code>nexttrack</code></a> at its child {{MediaRemoteControls}}
+object.
+
+When the user presses a 'seek backward' media key, or an equivalent key, on any
+hardware or software interface (e.g. on a keyboard or OS-level button) then the
+user agent must, if {{MediaRemoteControls/seekBackwardEnabled}} is true, for
+each <code><a lt="content media state">Content</a></code>-based <a>media
+session</a> that is currently <code><a lt="active media session
+state">ACTIVE</a></code>, <a>queue a task</a> to
+<a>fire a simple event</a> named <a lt="event
+seekbackward"><code>seekbackward</code></a> at its child {{MediaRemoteControls}}
+object.
+
+When the user presses a 'seek forward' media key, or an equivalent key, on any
+hardware or software interface (e.g. on a keyboard or OS-level button) then the
+user agent must, if {{MediaRemoteControls/seekForwardEnabled}} is true, for each
+<code><a lt="content media state">Content</a></code>-based <a>media session</a>
+that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+<a>queue a task</a> to
+<a>fire a simple event</a> named <a lt="event
+seekforward"><code>seekforward</code></a> at its child {{MediaRemoteControls}}
+object.
+
+<h3 id="media-remote-controls-events-summary">Events summary</h3>
+
+<em>This section is non-normative.</em>
+
+The following events fire on <a>media remote controls</a> objects as part of the
+processing model described above:
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Event name
+      </th>
+      <th>
+        Interface
+      </th>
+      <th>
+        Fired when...
+      </th>
+      <th>
+        Preconditions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <dfn lt="event previoustrack"><code>previoustrack</code></dfn>
+      </td>
+      <td>
+        {{Event}}
+      </td>
+      <td>
+        The user presses the 'previous track' media key or button on any
+        hardware or software media interface.
+      </td>
+      <td>
+        <a>intrinsic media category state</a> is <code><a lt="content media
+        state">Content</a></code>, <a>current state</a> is <code><a lt="active
+        media session state">ACTIVE</a></code> and
+        {{MediaRemoteControls/previousTrackEnabled}} is true.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn lt="event nexttrack"><code>nexttrack</code></dfn>
+      </td>
+      <td>
+        {{Event}}
+      </td>
+      <td>
+        The user presses the 'next track' media key or button on any hardware or
+        software media interface.
+      </td>
+      <td>
+        <a>intrinsic media category state</a> is <code><a lt="content media
+        state">Content</a></code>, <a>current state</a> is <code><a lt="active
+        media session state">ACTIVE</a></code> and
+        {{MediaRemoteControls/nextTrackEnabled}} is true.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn lt="event seekbackward"><code>seekbackward</code></dfn>
+      </td>
+      <td>
+        {{Event}}
+      </td>
+      <td>
+        The user presses the 'seek backward' media key or button on any hardware
+        or software media interface.
+      </td>
+      <td>
+        <a>intrinsic media category state</a> is <code><a lt="content media
+        state">Content</a></code>, <a>current state</a> is <code><a lt="active
+        media session state">ACTIVE</a></code> and
+        {{MediaRemoteControls/seekBackwardEnabled}} is true.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <dfn lt="event seekforward"><code>seekforward</code></dfn>
+      </td>
+      <td>
+        {{Event}}
+      </td>
+      <td>
+        The user presses the 'seek forward' media key or button on any hardware
+        or software media interface.
+      </td>
+      <td>
+        <a>intrinsic media category state</a> is <code><a lt="content media
+        state">Content</a></code>, <a>current state</a> is <code><a lt="active
+        media session state">ACTIVE</a></code> and
+        {{MediaRemoteControls/seekForwardEnabled}} is true.
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <h2 id="assigning-a-media-session-to-media-elements">Assigning a media session
@@ -1059,13 +1261,14 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform's
             notifications area and/or show an ongoing media interface in the
-            underlying platform's lock screen area for <var>media session</var>.
+            underlying platform's lock screen area for <var>media session</var>
+            based on the requested <a>media remote controls</a>.
           </li>
           <li>
             Optionally, based on platform conventions, the user agent may allow
             hardware and/or software media keys to control playback of
             <var>media session</var>'s <a>active participating media
-            elements</a>.
+            elements</a> based on the requested <a>media remote controls</a>.
           </li>
         </ol>
       </dd>
