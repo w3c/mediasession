@@ -606,7 +606,7 @@ interface</h3>
 following interface:
 
 <pre class="idl">
-interface MediaRemoteControls {
+interface MediaRemoteControls : EventTarget {
   attribute boolean previousTrackEnabled;
   attribute boolean nextTrackEnabled;
   attribute boolean seekForwardEnabled;

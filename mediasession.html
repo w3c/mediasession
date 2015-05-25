@@ -912,7 +912,7 @@ interface</span><a class="self-link" href="#the-mediaremotecontrols-interface"><
 following interface:</p>
 
 
-   <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediaremotecontrols">MediaRemoteControls<a class="self-link" href="#mediaremotecontrols"></a></dfn> {
+   <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediaremotecontrols">MediaRemoteControls<a class="self-link" href="#mediaremotecontrols"></a></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
   attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/previousTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
   attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/nextTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
   attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/seekForwardEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a>;
@@ -2232,6 +2232,7 @@ elements, <a href="#active-participating-media-elements">4.1</a>
    <li><a data-link-type="biblio" href="#biblio-dom">[dom]</a> defines the following terms:
     <ul>
      <li><a href="https://dom.spec.whatwg.org/#interface-event">Event</a>
+     <li><a href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a>
     </ul>
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
@@ -2308,7 +2309,7 @@ enum <a data-global-name="" href="#enumdef-mediasessionkind">MediaSessionKind</a
   "ambient"
 };
 
-interface <a data-global-name="" href="#mediaremotecontrols">MediaRemoteControls</a> {
+interface <a data-global-name="" href="#mediaremotecontrols">MediaRemoteControls</a> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
   attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/previousTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
   attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/nextTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
   attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/seekForwardEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a>;
