@@ -158,23 +158,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 <h2 id="media-sessions">Media sessions</h2>
 
-<h3 id="mediasession interface">The {{MediaSession}} interface</h3>
-
-<dfn lt="media session">Media sessions</dfn> implement the following interface:
-
-<pre class="idl">
-[Constructor(MediaSessionKind kind)]
-interface MediaSession {
-  readonly attribute MediaSessionKind kind;
-
-  readonly attribute MediaRemoteControls? controls;
-
-  void release();
-};
-</pre>
-
-A <a>media session</a> represents one or more <a>media elements</a> within the
-same <a>top-level browsing context</a> that share the same <a>media
+A <dfn>media session</dfn> represents one or more <a>media elements</a> within
+the same <a>top-level browsing context</a> that share the same <a>media
 category</a>. Each <a>media session</a> then defines the interactions of those
 <a>media elements</a> with both the underlying platform and other <a>media
 elements</a> belonging to other <a>media sessions</a> within the user agent.
@@ -221,26 +206,6 @@ The possible values are as follows:
   </dd>
 </dl>
 
-<p>&nbsp;</p>
-
-<dl class=domintro>
-  <dt>
-    <code><var>session</var> = new <a constructor
-    lt="MediaSession()">MediaSession</a>(<var>kind</var>)</code>
-  </dt>
-  <dd>
-    Returns a new {{MediaSession}} object.
-  </dd>
-</dl>
-
-The
-<dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
-constructor must create a new {{MediaSession}} object with its
-{{MediaSession/kind}} attribute set to <var>kind</var>, its
-{{MediaSession/controls}} attribute set to a new {{MediaRemoteControls}} object
-if its {{MediaSession/kind}} is &quot;<a lt="content attribute
-value"><code>content</code></a>&quot or null otherwise, and then return it.
-
 When a new <a>media session</a> is created its <a>current state</a> must be
 initially set to
 <code><a lt="idle media session state">IDLE</a></code>.
@@ -283,6 +248,45 @@ observed prior to the original corresponding <a>duck</a> request. When a
 <a>media element</a> is to <dfn>unpause</dfn> the user agent must run its
 {{play()}} method.
 
+The <dfn>intrinsic media category state</dfn> of a <a>media session</a> is the
+state value of the <a>media category</a> that was set when a <a>media
+session</a> was created. The
+<a href="#media-categories">possible media categories and their states</a> are
+defined below.
+
+<h3 id="mediasession interface">The {{MediaSession}} interface</h3>
+
+<a>Media sessions</a> implement the following interface:
+
+<pre class="idl">
+[Constructor(MediaSessionKind kind)]
+interface MediaSession {
+  readonly attribute MediaSessionKind kind;
+
+  readonly attribute MediaRemoteControls? controls;
+
+  void release();
+};
+</pre>
+
+<dl class=domintro>
+  <dt>
+    <code><var>session</var> = new <a constructor
+    lt="MediaSession()">MediaSession</a>(<var>kind</var>)</code>
+  </dt>
+  <dd>
+    Returns a new {{MediaSession}} object.
+  </dd>
+</dl>
+
+The
+<dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
+constructor must create a new {{MediaSession}} object with its
+{{MediaSession/kind}} attribute set to <var>kind</var>, its
+{{MediaSession/controls}} attribute set to a new {{MediaRemoteControls}} object
+if its {{MediaSession/kind}} is &quot;<a lt="content attribute
+value"><code>content</code></a>&quot or null otherwise, and then return it.
+
 <dl class=domintro>
   <dt>
     <code><var>session</var> . {{MediaSession/kind}}</code>
@@ -292,12 +296,6 @@ observed prior to the original corresponding <a>duck</a> request. When a
     <a>media session</a> represents.
   </dd>
 </dl>
-
-The <dfn>intrinsic media category state</dfn> of a <a>media session</a> is the
-state value of the <a>media category</a> that was set when a <a>media
-session</a> was created. The
-<a href="#media-categories">possible media categories and their states</a> are
-defined below.
 
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
 attribute must return the DOMString value of the <a>intrinsic media category
@@ -599,11 +597,15 @@ on the preferred definitions in the table’s third and fourth columns.
 
 <h2 id="media-remote-controls">Media remote controls</h2>
 
+<dfn lt="media remote control">Media remote controls</dfn> enable a <a>media
+session</a> to respond to hardware or software remote control events. Such
+events may include keyboard media key events or; notification and lock screen
+media button events.
+
 <h3 id="the-mediaremotecontrols-interface">The {{MediaRemoteControls}}
 interface</h3>
 
-<dfn lt="media remote control">Media remote controls</dfn> implement the
-following interface:
+<a>Media remote controls</a> implement the following interface:
 
 <pre class="idl">
 interface MediaRemoteControls : EventTarget {
@@ -626,31 +628,27 @@ interface MediaRemoteControls : EventTarget {
     {{MediaRemoteControls/previousTrackEnabled}}</code>
   </dt>
   <dd>
-    Determines if a user can interact with a 'previous track' button. By
-    default, this attribute is false.
+    Determines if a user can interact with a 'previous track' button.
   </dd>
   <dt>
     <code><var>controls</var> . {{MediaRemoteControls/nextTrackEnabled}}</code>
   </dt>
   <dd>
-    Determines if a user can interact with a 'next track' button. By default,
-    this attribute is false.
+    Determines if a user can interact with a 'next track' button.
   </dd>
   <dt>
     <code><var>controls</var> .
     {{MediaRemoteControls/seekForwardEnabled}}</code>
   </dt>
   <dd>
-    Determines if a user can interact with a 'seek forward' button. By default,
-    this attribute is false.
+    Determines if a user can interact with a 'seek forward' button.
   </dd>
   <dt>
     <code><var>controls</var> .
     {{MediaRemoteControls/seekBackwardEnabled}}</code>
   </dt>
   <dd>
-    Determines if a user can interact with a 'seek backward' button. By default,
-    this attribute is false.
+    Determines if a user can interact with a 'seek backward' button.
   </dd>
 </dl>
 
@@ -658,25 +656,25 @@ The <dfn attribute for="MediaRemoteControls"
 lt="previousTrackEnabled"><code>previousTrackEnabled</code></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'previous track' button for users in all applicable hardware or software remote
-control interfaces.
+control interfaces. By default, this attribute is false.
 
 The <dfn attribute for="MediaRemoteControls"
 lt="nextTrackEnabled"><code>nextTrackEnabled</code></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'next track' button for users in all applicable hardware or software remote
-control interfaces.
+control interfaces. By default, this attribute is false.
 
 The <dfn attribute for="MediaRemoteControls"
 lt="seekBackwardEnabled"><code>seekBackwardEnabled</code></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'seek backward' button for users in all applicable hardware or software remote
-control interfaces.
+control interfaces. By default, this attribute is false.
 
 The <dfn attribute for="MediaRemoteControls"
 lt="seekForwardEnabled"><code>seekForwardEnabled</code></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'seek forward' button for users in all applicable hardware or software remote
-control interfaces.
+control interfaces. By default, this attribute is false.
 
 <p class="note">
   While the attributes above can be set at any time they will only be read by

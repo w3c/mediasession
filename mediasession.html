@@ -347,25 +347,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <h2 class="heading settled" data-level="4" id="media-sessions"><span class="secno">4. </span><span class="content">Media sessions</span><a class="self-link" href="#media-sessions"></a></h2>
 
 
-   <h3 class="heading settled" data-level="4.1" id="mediasession interface"><span class="secno">4.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> interface</span><a class="self-link" href="#mediasession%20interface"></a></h3>
-
-
-   <p><dfn data-dfn-type="dfn" data-lt="media session" data-noexport="" id="media-session">Media sessions<a class="self-link" href="#media-session"></a></dfn> implement the following interface:</p>
-
-
-   <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(<a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
-interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
-  readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
-
-  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-global-name="MediaSession<interface>/controls<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
-
-  void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
-};
-</pre>
-
-
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> represents one or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> within the
-same <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that share the same <a data-link-type="dfn" href="#media-category">media
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session">media session<a class="self-link" href="#media-session"></a></dfn> represents one or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> within
+the same <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that share the same <a data-link-type="dfn" href="#media-category">media
 category</a>. Each <a data-link-type="dfn" href="#media-session">media session</a> then defines the interactions of those
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> with both the underlying platform and other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 elements</a> belonging to other <a data-link-type="dfn" href="#media-session">media sessions</a> within the user agent.</p>
@@ -422,29 +405,6 @@ The possible values are as follows:</p>
 </dl>
 
 
-   <p> </p>
-
-
-   <dl class="domintro">
-  
-    <dt>
-    <code><var>session</var> = new <a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">MediaSession</a>(<var>kind</var>)</code>
-  
-  
-    <dd>
-    Returns a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object.
-  
-</dl>
-
-
-   <p>The
-<dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasessionkind">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasessionkind"></a></dfn>
-constructor must create a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object with its
-<code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute set to <var>kind</var>, its
-<code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code> attribute set to a new <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object
-if its <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" or null otherwise, and then return it.</p>
-
-
    <p>When a new <a data-link-type="dfn" href="#media-session">media session</a> is created its <a data-link-type="dfn" href="#current-state">current state</a> must be
 initially set to
 <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.</p>
@@ -488,6 +448,50 @@ observed prior to the original corresponding <a data-link-type="dfn" href="#duck
 <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method.</p>
 
 
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="intrinsic-media-category-state">intrinsic media category state<a class="self-link" href="#intrinsic-media-category-state"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> is the
+state value of the <a data-link-type="dfn" href="#media-category">media category</a> that was set when a <a data-link-type="dfn" href="#media-session">media
+session</a> was created. The
+<a href="#media-categories">possible media categories and their states</a> are
+defined below.</p>
+
+
+   <h3 class="heading settled" data-level="4.1" id="mediasession interface"><span class="secno">4.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> interface</span><a class="self-link" href="#mediasession%20interface"></a></h3>
+
+
+   <p><a data-link-type="dfn" href="#media-session">Media sessions</a> implement the following interface:</p>
+
+
+   <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(<a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
+  readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
+
+  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-global-name="MediaSession<interface>/controls<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
+
+  void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
+};
+</pre>
+
+
+   <dl class="domintro">
+  
+    <dt>
+    <code><var>session</var> = new <a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">MediaSession</a>(<var>kind</var>)</code>
+  
+  
+    <dd>
+    Returns a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object.
+  
+</dl>
+
+
+   <p>The
+<dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasessionkind">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasessionkind"></a></dfn>
+constructor must create a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object with its
+<code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute set to <var>kind</var>, its
+<code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code> attribute set to a new <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object
+if its <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" or null otherwise, and then return it.</p>
+
+
    <dl class="domintro">
   
     <dt>
@@ -499,13 +503,6 @@ observed prior to the original corresponding <a data-link-type="dfn" href="#duck
     <a data-link-type="dfn" href="#media-session">media session</a> represents.
   
 </dl>
-
-
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="intrinsic-media-category-state">intrinsic media category state<a class="self-link" href="#intrinsic-media-category-state"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> is the
-state value of the <a data-link-type="dfn" href="#media-category">media category</a> that was set when a <a data-link-type="dfn" href="#media-session">media
-session</a> was created. The
-<a href="#media-categories">possible media categories and their states</a> are
-defined below.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn>
@@ -904,12 +901,17 @@ on the preferred definitions in the table’s third and fourth columns.</p>
    <h2 class="heading settled" data-level="6" id="media-remote-controls"><span class="secno">6. </span><span class="content">Media remote controls</span><a class="self-link" href="#media-remote-controls"></a></h2>
 
 
+   <p><dfn data-dfn-type="dfn" data-lt="media remote control" data-noexport="" id="media-remote-control">Media remote controls<a class="self-link" href="#media-remote-control"></a></dfn> enable a <a data-link-type="dfn" href="#media-session">media
+session</a> to respond to hardware or software remote control events. Such
+events may include keyboard media key events or; notification and lock screen
+media button events.</p>
+
+
    <h3 class="heading settled" data-level="6.1" id="the-mediaremotecontrols-interface"><span class="secno">6.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
 interface</span><a class="self-link" href="#the-mediaremotecontrols-interface"></a></h3>
 
 
-   <p><dfn data-dfn-type="dfn" data-lt="media remote control" data-noexport="" id="media-remote-control">Media remote controls<a class="self-link" href="#media-remote-control"></a></dfn> implement the
-following interface:</p>
+   <p><a data-link-type="dfn" href="#media-remote-control">Media remote controls</a> implement the following interface:</p>
 
 
    <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediaremotecontrols">MediaRemoteControls<a class="self-link" href="#mediaremotecontrols"></a></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
@@ -935,8 +937,7 @@ following interface:</p>
   
   
     <dd>
-    Determines if a user can interact with a 'previous track' button. By
-    default, this attribute is false.
+    Determines if a user can interact with a 'previous track' button.
   
   
     <dt>
@@ -944,8 +945,7 @@ following interface:</p>
   
   
     <dd>
-    Determines if a user can interact with a 'next track' button. By default,
-    this attribute is false.
+    Determines if a user can interact with a 'next track' button.
   
   
     <dt>
@@ -954,8 +954,7 @@ following interface:</p>
   
   
     <dd>
-    Determines if a user can interact with a 'seek forward' button. By default,
-    this attribute is false.
+    Determines if a user can interact with a 'seek forward' button.
   
   
     <dt>
@@ -964,8 +963,7 @@ following interface:</p>
   
   
     <dd>
-    Determines if a user can interact with a 'seek backward' button. By default,
-    this attribute is false.
+    Determines if a user can interact with a 'seek backward' button.
   
 </dl>
 
@@ -973,25 +971,25 @@ following interface:</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-previoustrackenabled"><code>previousTrackEnabled</code><a class="self-link" href="#dom-mediaremotecontrols-previoustrackenabled"></a></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'previous track' button for users in all applicable hardware or software remote
-control interfaces.</p>
+control interfaces. By default, this attribute is false.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-nexttrackenabled"><code>nextTrackEnabled</code><a class="self-link" href="#dom-mediaremotecontrols-nexttrackenabled"></a></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'next track' button for users in all applicable hardware or software remote
-control interfaces.</p>
+control interfaces. By default, this attribute is false.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-seekbackwardenabled"><code>seekBackwardEnabled</code><a class="self-link" href="#dom-mediaremotecontrols-seekbackwardenabled"></a></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'seek backward' button for users in all applicable hardware or software remote
-control interfaces.</p>
+control interfaces. By default, this attribute is false.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-seekforwardenabled"><code>seekForwardEnabled</code><a class="self-link" href="#dom-mediaremotecontrols-seekforwardenabled"></a></dfn>
 attribute is intended to provide a hint that the user agent should enable a
 'seek forward' button for users in all applicable hardware or software remote
-control interfaces.</p>
+control interfaces. By default, this attribute is false.</p>
 
 
    <p class="note" role="note">
@@ -2169,25 +2167,25 @@ argument.</p>
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
-   <li>active media session state, <a href="#active-media-session-state">4.1</a>
+   <li>active media session state, <a href="#active-media-session-state">4</a>
    <li>active participating media
-elements, <a href="#active-participating-media-elements">4.1</a>
+elements, <a href="#active-participating-media-elements">4</a>
    <li>ambient attribute value, <a href="#ambient-attribute-value">5</a>
    <li>ambient media state, <a href="#ambient-media-state">5</a>
    <li>content attribute value, <a href="#content-attribute-value">5</a>
    <li>content media state, <a href="#content-media-state">5</a>
    <li>controls, <a href="#dom-mediasession-controls">4.1</a>
-   <li>current media session, <a href="#current-media-session">4.1</a>
-   <li>current state, <a href="#current-state">4.1</a>
+   <li>current media session, <a href="#current-media-session">4</a>
+   <li>current state, <a href="#current-state">4</a>
    <li>default media state, <a href="#default-media-state">5</a>
-   <li>duck, <a href="#duck">4.1</a>
+   <li>duck, <a href="#duck">4</a>
    <li>event nexttrack, <a href="#event-nexttrack">6.3</a>
    <li>event previoustrack, <a href="#event-previoustrack">6.3</a>
    <li>event seekbackward, <a href="#event-seekbackward">6.3</a>
    <li>event seekforward, <a href="#event-seekforward">6.3</a>
-   <li>idle media session state, <a href="#idle-media-session-state">4.1</a>
-   <li>interrupted media session state, <a href="#interrupted-media-session-state">4.1</a>
-   <li>intrinsic media category state, <a href="#intrinsic-media-category-state">4.1</a>
+   <li>idle media session state, <a href="#idle-media-session-state">4</a>
+   <li>interrupted media session state, <a href="#interrupted-media-session-state">4</a>
+   <li>intrinsic media category state, <a href="#intrinsic-media-category-state">4</a>
    <li>kind
     <ul>
      <li>argument for MediaSession/MediaSession(kind), <a href="#dom-mediasession-mediasessionkind-kind">4.1</a>
@@ -2196,23 +2194,23 @@ elements, <a href="#active-participating-media-elements">4.1</a>
     </ul>
    <li>kind content attribute, <a href="#kind-content-attribute">7.2</a>
    <li>media category, <a href="#media-category">5</a>
-   <li>media remote control, <a href="#media-remote-control">6.1</a>
+   <li>media remote control, <a href="#media-remote-control">6</a>
    <li>MediaRemoteControls, <a href="#mediaremotecontrols">6.1</a>
-   <li>media session, <a href="#media-session">4.1</a>
    <li>MediaSession, <a href="#mediasession">4.1</a>
+   <li>media session, <a href="#media-session">4</a>
    <li>media session continuation algorithm, <a href="#media-session-continuation-algorithm">9</a>
    <li>media session interruption algorithm, <a href="#media-session-interruption-algorithm">9</a>
    <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">8</a>
-   <li>MediaSession(kind), <a href="#dom-mediasession-mediasessionkind">4.1</a>
    <li>MediaSessionKind, <a href="#enumdef-mediasessionkind">5</a>
+   <li>MediaSession(kind), <a href="#dom-mediasession-mediasessionkind">4.1</a>
    <li>media session release algorithm, <a href="#media-session-release-algorithm">10</a>
    <li>nextTrackEnabled, <a href="#dom-mediaremotecontrols-nexttrackenabled">6.1</a>
    <li>onnexttrack, <a href="#dom-mediaremotecontrols-onnexttrack">6.2</a>
    <li>onprevioustrack, <a href="#dom-mediaremotecontrols-onprevioustrack">6.2</a>
    <li>onseekbackward, <a href="#dom-mediaremotecontrols-onseekbackward">6.2</a>
    <li>onseekforward, <a href="#dom-mediaremotecontrols-onseekforward">6.2</a>
-   <li>participating media elements, <a href="#participating-media-elements">4.1</a>
-   <li>pause, <a href="#pause">4.1</a>
+   <li>participating media elements, <a href="#participating-media-elements">4</a>
+   <li>pause, <a href="#pause">4</a>
    <li>previousTrackEnabled, <a href="#dom-mediaremotecontrols-previoustrackenabled">6.1</a>
    <li>release(), <a href="#dom-mediasession-release">4.1</a>
    <li>seekBackwardEnabled, <a href="#dom-mediaremotecontrols-seekbackwardenabled">6.1</a>
@@ -2224,8 +2222,8 @@ elements, <a href="#active-participating-media-elements">4.1</a>
    <li>transient-solo attribute
       value, <a href="#transient_solo-attribute-value">5</a>
    <li>transient solo media state, <a href="#transient-solo-media-state">5</a>
-   <li>unduck, <a href="#unduck">4.1</a>
-   <li>unpause, <a href="#unpause">4.1</a>
+   <li>unduck, <a href="#unduck">4</a>
+   <li>unpause, <a href="#unpause">4</a>
    <li>update the attached media session algorithm, <a href="#update-the-attached-media-session-algorithm">7.2</a></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
