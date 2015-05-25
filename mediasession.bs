@@ -930,6 +930,11 @@ processing model described above:
 <h2 id="assigning-a-media-session-to-media-elements">Assigning a media session
 to media elements</h2>
 
+In order to activate and use a <a>media session</a> it must be assigned to one
+or more <a>media elements</a>. This section describes how a web developer can
+assign a <a>media session</a> to a <a>media element</a> both declaratively and
+programmatically.
+
 <h3 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
 {{HTMLMediaElement}} interface</h3>
 
