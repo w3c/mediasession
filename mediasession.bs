@@ -563,9 +563,9 @@ on the preferred definitions in the table’s third and fourth columns.
           visible (i.e. the page is placed in the background or the user agent
           is minimized or the screen is switched off). <a>Unpauses</a> itself
           when its
-          <a>top-level browsing context</a> is at least partially visible again
-          (i.e. the user agent is in the foreground and the page is focused
-          again).
+          <a>top-level browsing context</a> is at least partially visible on at
+          least one screen again (i.e. the user agent is in the foreground and
+          the page is focused again).
         </li>
       </ul>
     </td>
@@ -1295,7 +1295,8 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
       </dt>
       <dd>
         If the <var>current media element</var>'s <a>top-level browsing
-        context</a> is not at least partially visible then <a>pause</a>
+        context</a> is not at least partially visible on at least one screen
+        then <a>pause</a>
         <var>current media element</var>, abort the remaining steps and return.
 
         <p class="note">
@@ -1531,6 +1532,24 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
     </dl>
   </li>
 </ol>
+
+When a <a>top-level browsing context</a> loses visibility then the user agent
+must set the <a>current state</a> to <code><a lt="interrupted media session
+state">INTERRUPTED</a></code> for every <a>media session</a> within the
+<a>top-level browsing context</a> that has an <a>intrinsic media category
+state</a> of <code><a lt="ambient media state">Ambient</a></code> and a
+<a>current state</a> of <code><a lt="active media session
+state">ACTIVE</a></code>; and <a>pause</a> all <a>active participating media
+elements</a> within that <a>media session</a>.
+
+When a <a>top-level browsing context</a> becomes at least partially visible on
+at least one screen again then the user agent must set the <a>current state</a>
+to <code><a lt="ACTIVE media session state">ACTIVE</a></code> for every <a>media
+session</a> within the <a>top-level browsing context</a> that has an
+<a>intrinsic media category state</a> of <code><a lt="ambient media
+state">Ambient</a></code> and a <a>current state</a> of <code><a lt="interrupted
+media session state">INTERRUPTED</a></code>; and <a>unpause</a> all <a>active
+participating media elements</a> within that <a>media session</a>.
 
 <h2 id="media-session-release">Media session release</h2>
 

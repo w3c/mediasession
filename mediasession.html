@@ -843,9 +843,9 @@ on the preferred definitions in the table’s third and fourth columns.</p>
           visible (i.e. the page is placed in the background or the user agent
           is minimized or the screen is switched off). <a data-link-type="dfn" href="#unpause">Unpauses</a> itself
           when its
-          <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is at least partially visible again
-          (i.e. the user agent is in the foreground and the page is focused
-          again).
+          <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is at least partially visible on at
+          least one screen again (i.e. the user agent is in the foreground and
+          the page is focused again).
         
         
       
@@ -1764,7 +1764,8 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
       
       <dd>
         If the <var>current media element</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing
-        context</a> is not at least partially visible then <a data-link-type="dfn" href="#pause">pause</a>
+        context</a> is not at least partially visible on at least one screen
+        then <a data-link-type="dfn" href="#pause">pause</a>
         <var>current media element</var>, abort the remaining steps and return.
 
         
@@ -2073,6 +2074,22 @@ session</a> as <var>incumbent media session</var>.</p>
      
   
 </ol>
+
+
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> loses visibility then the user agent
+must set the <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> for every <a data-link-type="dfn" href="#media-session">media session</a> within the
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that has an <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category
+state</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> and a
+<a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>; and <a data-link-type="dfn" href="#pause">pause</a> all <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
+elements</a> within that <a data-link-type="dfn" href="#media-session">media session</a>.</p>
+
+
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> becomes at least partially visible on
+at least one screen again then the user agent must set the <a data-link-type="dfn" href="#current-state">current state</a>
+to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> for every <a data-link-type="dfn" href="#media-session">media
+session</a> within the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that has an
+<a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> and a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>; and <a data-link-type="dfn" href="#unpause">unpause</a> all <a data-link-type="dfn" href="#active-participating-media-elements">active
+participating media elements</a> within that <a data-link-type="dfn" href="#media-session">media session</a>.</p>
 
 
    <h2 class="heading settled" data-level="10" id="media-session-release"><span class="secno">10. </span><span class="content">Media session release</span><a class="self-link" href="#media-session-release"></a></h2>
