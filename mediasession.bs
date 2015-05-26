@@ -1540,8 +1540,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 </ol>
 
 After a {{visibilitychange}} event [[PAGE-VISIBILITY]] has been fired at a
-{{Document}} object, known as <var>browsing context</var>, the user agent must
-run the following steps:
+<a>top-level browsing context</a>, known as <var>the browsing context</var>, the
+user agent must run the following steps:
 
 <ol>
   <li>
@@ -1550,7 +1550,7 @@ run the following steps:
   </li>
 
   <li>
-    For each <a>media session</a>, known as <var>s</var>, in <var>browsing
+    For each <a>media session</a>, known as <var>s</var>, in <var>the browsing
     context</var> with an <a>intrinsic media category state</a> of <code><a
     lt="ambient media state">Ambient</a></code> run the following substeps:
     <ol>
