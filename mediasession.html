@@ -2076,20 +2076,53 @@ session</a> as <var>incumbent media session</var>.</p>
 </ol>
 
 
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> loses visibility then the user agent
-must set the <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> for every <a data-link-type="dfn" href="#media-session">media session</a> within the
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that has an <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category
-state</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> and a
-<a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>; and <a data-link-type="dfn" href="#pause">pause</a> all <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
-elements</a> within that <a data-link-type="dfn" href="#media-session">media session</a>.</p>
+   <p>After a <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#sec-visibilitychange-event">visibilitychange</a></code> event <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> has been fired at a
+<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a></code> object, known as <var>browsing context</var>, the user agent must
+run the following steps:</p>
 
 
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> becomes at least partially visible on
-at least one screen again then the user agent must set the <a data-link-type="dfn" href="#current-state">current state</a>
-to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> for every <a data-link-type="dfn" href="#media-session">media
-session</a> within the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that has an
-<a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> and a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>; and <a data-link-type="dfn" href="#unpause">unpause</a> all <a data-link-type="dfn" href="#active-participating-media-elements">active
-participating media elements</a> within that <a data-link-type="dfn" href="#media-session">media session</a>.</p>
+   <ol>
+  
+    <li>
+    If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is not "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" or
+    "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> abort the remaining steps.
+  
+
+  
+    <li>
+    For each <a data-link-type="dfn" href="#media-session">media session</a>, known as <var>s</var>, in <var>browsing
+    context</var> with an <a data-link-type="dfn" href="#intrinsic-media-category-state">intrinsic media category state</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> run the following substeps:
+    
+     <ol>
+      
+      <li>
+        If <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> then abort any remaining substeps and
+        continue at the next available <var>s</var>.
+      
+      
+      
+      <li>
+        If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> and
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
+        <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set <var>s</var>’s
+        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>; then abort any remaining substeps and
+        continue at the next available <var>s</var>.
+      
+      
+      
+      <li>
+        If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>
+        and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> then <a data-link-type="dfn" href="#unpause">unpause</a> all of
+        <var>s</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>; then abort any remaining substeps and continue
+        at the next available <var>s</var>.
+      
+      
+    
+     </ol>
+     
+  
+</ol>
 
 
    <h2 class="heading settled" data-level="10" id="media-session-release"><span class="secno">10. </span><span class="content">Media session release</span><a class="self-link" href="#media-session-release"></a></h2>
@@ -2288,6 +2321,13 @@ elements, <a href="#active-participating-media-elements">4</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a>
     </ul>
+   <li><a data-link-type="biblio" href="#biblio-page-visibility">[page-visibility]</a> defines the following terms:
+    <ul>
+     <li><a href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a>
+     <li><a href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a>
+     <li><a href="http://www.w3.org/TR/page-visibility/#sec-visibilitychange-event">visibilitychange</a>
+     <li><a href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a>
+    </ul>
    <li><a data-link-type="biblio" href="#biblio-webaudio">[webaudio]</a> defines the following terms:
     <ul>
      <li><a href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a>
@@ -2309,6 +2349,8 @@ elements, <a href="#active-participating-media-elements">4</a>
    <dd>Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 19 April 2012. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-dom"><a class="self-link" href="#biblio-dom"></a>[DOM]
    <dd>Anne van Kesteren; et al. <a href="https://w3c.github.io/dom/">W3C DOM4</a>. 28 April 2015. LCWD. URL: <a href="https://w3c.github.io/dom/">https://w3c.github.io/dom/</a>
+   <dt id="biblio-page-visibility"><a class="self-link" href="#biblio-page-visibility"></a>[PAGE-VISIBILITY]
+   <dd>Jatinder Mann; Arvind Jain. <a href="http://www.w3.org/TR/page-visibility/">Page Visibility (Second Edition)</a>. 29 October 2013. REC. URL: <a href="http://www.w3.org/TR/page-visibility/">http://www.w3.org/TR/page-visibility/</a>
    <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webaudio"><a class="self-link" href="#biblio-webaudio"></a>[WEBAUDIO]

@@ -82,6 +82,12 @@ urlPrefix: http://www.w3.org/TR/DOM-Level-3-Events-key/; spec: dom-level-3-event
         text: MediaPlayPause; url: MediaPlayPause
         text: MediaTrackPrevious; url: MediaTrackPrevious
         text: MediaTrackNext; url: MediaTrackNext
+urlPrefix: http://www.w3.org/TR/page-visibility/; spec: PAGE-VISIBILITY
+    type: attribute
+        text: visibilitychange; url: #sec-visibilitychange-event
+        text: visibilityState; url: #dom-document-visibilitystate
+        text: visible; url: #pv-page-visible
+        text: hidden; url: #pv-page-hidden
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -1533,23 +1539,47 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-When a <a>top-level browsing context</a> loses visibility then the user agent
-must set the <a>current state</a> to <code><a lt="interrupted media session
-state">INTERRUPTED</a></code> for every <a>media session</a> within the
-<a>top-level browsing context</a> that has an <a>intrinsic media category
-state</a> of <code><a lt="ambient media state">Ambient</a></code> and a
-<a>current state</a> of <code><a lt="active media session
-state">ACTIVE</a></code>; and <a>pause</a> all <a>active participating media
-elements</a> within that <a>media session</a>.
+After a {{visibilitychange}} event [[PAGE-VISIBILITY]] has been fired at a
+{{Document}} object, known as <var>browsing context</var>, the user agent must
+run the following steps:
 
-When a <a>top-level browsing context</a> becomes at least partially visible on
-at least one screen again then the user agent must set the <a>current state</a>
-to <code><a lt="ACTIVE media session state">ACTIVE</a></code> for every <a>media
-session</a> within the <a>top-level browsing context</a> that has an
-<a>intrinsic media category state</a> of <code><a lt="ambient media
-state">Ambient</a></code> and a <a>current state</a> of <code><a lt="interrupted
-media session state">INTERRUPTED</a></code>; and <a>unpause</a> all <a>active
-participating media elements</a> within that <a>media session</a>.
+<ol>
+  <li>
+    If {{visibilityState}} is not &quot;{{hidden}}&quot; or
+    &quot;{{visible}}&quot; [[PAGE-VISIBILITY]] abort the remaining steps.
+  </li>
+
+  <li>
+    For each <a>media session</a>, known as <var>s</var>, in <var>browsing
+    context</var> with an <a>intrinsic media category state</a> of <code><a
+    lt="ambient media state">Ambient</a></code> run the following substeps:
+    <ol>
+      <li>
+        If <var>s</var>'s <a>current state</a> is <code><a lt="idle media
+        session state">IDLE</a></code> then abort any remaining substeps and
+        continue at the next available <var>s</var>.
+      </li>
+      <li>
+        If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
+        <var>s</var>'s <a>current state</a> is <code><a lt="active media session
+        state">ACTIVE</a></code> then <a>pause</a> all of <var>s</var>'s
+        <a>active participating media elements</a> and set <var>s</var>'s
+        <a>current state</a> to <code><a lt="interrupted media session
+        state">INTERRUPTED</a></code>; then abort any remaining substeps and
+        continue at the next available <var>s</var>.
+      </li>
+      <li>
+        If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
+        and <var>s</var>'s <a>current state</a> is <code><a lt="interrupted
+        media session state">INTERRUPTED</a></code> then <a>unpause</a> all of
+        <var>s</var>'s <a>active participating media elements</a> and set
+        <var>s</var>'s <a>current state</a> to <code><a lt="active media session
+        state">ACTIVE</a></code>; then abort any remaining substeps and continue
+        at the next available <var>s</var>.
+      </li>
+    </ol>
+  </li>
+</ol>
 
 <h2 id="media-session-release">Media session release</h2>
 
