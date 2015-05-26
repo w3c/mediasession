@@ -2096,17 +2096,11 @@ user agent must run the following steps:</p>
      <ol>
       
       <li>
-        If <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> then abort any remaining substeps and
-        continue at the next available <var>s</var>.
-      
-      
-      
-      <li>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> and
         <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
         <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set <var>s</var>’s
-        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>; then abort any remaining substeps and
-        continue at the next available <var>s</var>.
+        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>, abort any remaining substeps and continue
+        at the next available <var>s</var>.
       
       
       
@@ -2114,8 +2108,8 @@ user agent must run the following steps:</p>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>
         and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> then <a data-link-type="dfn" href="#unpause">unpause</a> all of
         <var>s</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>; then abort any remaining substeps and continue
-        at the next available <var>s</var>.
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, abort any remaining substeps and continue at
+        the next available <var>s</var>.
       
       
     

@@ -1555,18 +1555,13 @@ user agent must run the following steps:
     lt="ambient media state">Ambient</a></code> run the following substeps:
     <ol>
       <li>
-        If <var>s</var>'s <a>current state</a> is <code><a lt="idle media
-        session state">IDLE</a></code> then abort any remaining substeps and
-        continue at the next available <var>s</var>.
-      </li>
-      <li>
         If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
         <var>s</var>'s <a>current state</a> is <code><a lt="active media session
         state">ACTIVE</a></code> then <a>pause</a> all of <var>s</var>'s
         <a>active participating media elements</a> and set <var>s</var>'s
         <a>current state</a> to <code><a lt="interrupted media session
-        state">INTERRUPTED</a></code>; then abort any remaining substeps and
-        continue at the next available <var>s</var>.
+        state">INTERRUPTED</a></code>, abort any remaining substeps and continue
+        at the next available <var>s</var>.
       </li>
       <li>
         If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
@@ -1574,8 +1569,8 @@ user agent must run the following steps:
         media session state">INTERRUPTED</a></code> then <a>unpause</a> all of
         <var>s</var>'s <a>active participating media elements</a> and set
         <var>s</var>'s <a>current state</a> to <code><a lt="active media session
-        state">ACTIVE</a></code>; then abort any remaining substeps and continue
-        at the next available <var>s</var>.
+        state">ACTIVE</a></code>, abort any remaining substeps and continue at
+        the next available <var>s</var>.
       </li>
     </ol>
   </li>
