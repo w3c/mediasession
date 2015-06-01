@@ -342,7 +342,8 @@ must run the following steps:
 <ol>
   <li>
     <a>Pause</a> each of <a>media session</a>'s <a>active participating media
-    elements</a>.
+    elements</a> and then remove each <a>active participating media element</a>
+    from <a>media session</a>'s <a>active participating media elements</a>.
   </li>
   <li>
     Run the <a>media session release algorithm</a> passing in the
