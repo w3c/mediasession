@@ -7,10 +7,10 @@ Status: LS
 No Editor: true
 Logo: https://resources.whatwg.org/logo.svg
 Abstract: This specification enables web developers to obtain different levels
-Abstract: of platform media focus and access to platform media keys such as
-Abstract: hardware keys found on keyboards, headsets, remote controls, and
-Abstract: software keys found in notification areas and on lock screens of
-Abstract: mobile devices.
+Abstract: of platform media focus, customize available platform media controls,
+Abstract: and access platform media keys such as hardware keys found on
+Abstract: keyboards, headsets, remote controls, and software keys found in
+Abstract: notification areas and on lock screens of mobile devices.
 !Participate: <a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)
 !Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 !Version History: <a href="https://github.com/whatwg/mediasession/commits">https://github.com/whatwg/mediasession/commits</a>
@@ -50,6 +50,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: browsing context
             text: top-level browsing context; url: #top-level-browsing-context
         urlPrefix: webappapis.html
+            text: API base URL
+            text: entry settings object
             text: event handlers
             text: event handler event type
             text: event handler content attributes
@@ -70,6 +72,9 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: HAVE_ENOUGH_DATA; for: HTMLMediaElement; url: #dom-media-have_enough_data
             text: pause; url: #event-media-pause
             text: play; url: #event-media-play
+urlPrefix: https://url.spec.whatwg.org/;
+    type: dfn; urlPrefix: #concept-
+        text: url parser
 urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
     type: interface
         text: AudioContext
@@ -181,7 +186,12 @@ The <dfn>participating media elements</dfn> of a <a>media session</a> are the
 elements</dfn> are the <a>participating media elements</a> of a <a>media
 session</a> that have a {{paused}} attribute of false.
 
-<a>Media sessions</a> have a <dfn>current state</dfn>, which describes their
+A <a>media session</a> may have associated <dfn>media session metadata</dfn>
+that <em>can</em> consist of <dfn lt="session title">title</dfn>,
+<dfn>artist name</dfn>, <dfn>album name</dfn>, <dfn>artwork URL</dfn> and
+<dfn>artwork resource</dfn>.
+
+A <a>media session</a> has a <dfn>current state</dfn>, which describes its
 current status with respect to any interaction with other <a>media sessions</a>.
 The possible values are as follows:
 
@@ -271,7 +281,16 @@ interface MediaSession {
 
   readonly attribute MediaRemoteControls? controls;
 
+  void setMetadata(MediaMetadata metadata);
+
   void release();
+};
+
+dictionary MediaMetadata {
+  DOMString title;
+  DOMString artist;
+  DOMString album;
+  USVString artwork;
 };
 </pre>
 
@@ -325,6 +344,83 @@ attribute should return null.
 
 <dl class=domintro>
   <dt>
+    <code><var>session</var> . {{MediaSession/setMetadata(metadata)}}</code>
+  </dt>
+  <dd>
+    Provides the user agent with meta data to use when a <a>media session</a> is
+    showing media control interfaces (e.g. in an OS-level notification area or
+    on a lock screen).
+
+    The <var>metadata</var> argument allows for setting a <a>media session</a>'s
+    current meta data via object members. These are the object members that can
+    be used:
+
+    <dl>
+      <dt>
+        {{MediaMetadata/title}}
+      </dt>
+      <dd>
+        The <a lt="session title">title</a> to display for the <a>media
+        session</a>, if any.
+      </dd>
+      <dt>
+        {{MediaMetadata/artist}}
+      </dt>
+      <dd>
+        The <a>artist name</a> to display for the <a>media session</a>, if any.
+      </dd>
+      <dt>
+        {{MediaMetadata/album}}
+      </dt>
+      <dd>
+        The <a>album name</a> to display for the <a>media session</a>, if any.
+      </dd>
+      <dt>
+        {{MediaMetadata/artwork}}
+      </dt>
+      <dd>
+        The <a>artwork URL</a> for an image resource to display for the <a>media
+        session</a>, if any.
+      </dd>
+    </dl>
+  </dd>
+</dl>
+
+When the <dfn method for="MediaSession"><code>setMetadata(metadata)</code></dfn>
+method is invoked, the user agent must run the following steps:
+
+<ol>
+  <li>
+    Let <var>baseURL</var> be the <a>API base URL</a> specified by the <a>entry
+    settings object</a>.
+  </li>
+  <li>
+    If <var>metadata</var>'s <code>title</code> is present set <var>media
+    session</var>'s <a lt="session title">title</a> to the return value.
+    (Otherwise <a lt="session title">title</a> is not set.)
+  </li>
+  <li>
+    If <var>metadata</var>'s <code>artist</code> is present set <var>media
+    session</var>'s <a>artist name</a> to the return value. (Otherwise <a>artist
+    name</a> is not set.)
+  </li>
+  <li>
+    If <var>metadata</var>'s <code>album</code> is present set <var>media
+    session</var>'s <a>album name</a> to the return value. (Otherwise <a>album
+    name</a> is not set.)
+  </li>
+  <li>
+    If <var>metadata</var>'s <code>artwork</code> is present,
+    <a lt="url parser">parse</a> it using <var>baseURL</var>, and if that does
+    not return failure, set <var>media session</var>'s <a>artwork URL</a> to the
+    return value. (Otherwise <a>artwork URL</a> is not set.)
+  </li>
+</ol>
+
+<p class="XXX">TBD: When exactly should we fetch the <a>artwork URL</a>?</p>
+
+<dl class=domintro>
+  <dt>
     <code><var>session</var> . {{MediaSession/release()}}</code>
   </dt>
   <dd>
@@ -350,6 +446,7 @@ must run the following steps:
     <a>media session</a> as the only argument.
   </li>
 </ol>
+
 
 <h2 id="media-categories">Media categories</h2>
 
@@ -1088,6 +1185,11 @@ myAudio.src = "music.mp3";
 
 var mySession = new MediaSession("content");
 
+mySession.setMetadata({
+  title: "Demo Track",
+  artwork: "/resources/cover.png"
+});
+
 myAudio.session = mySession;
 console.log(myAudio.kind) // --> "content"
 
@@ -1272,7 +1374,8 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
             an ongoing media interface in the underlying platform's
             notifications area and/or show an ongoing media interface in the
             underlying platform's lock screen area for <var>media session</var>
-            based on the requested <a>media remote controls</a>.
+            based on both the requested <a>media remote controls</a> and using
+            any available <a>media session metadata</a>.
           </li>
           <li>
             Optionally, based on platform conventions, the user agent may allow

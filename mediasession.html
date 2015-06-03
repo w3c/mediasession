@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-01">1 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-03">3 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -186,10 +186,10 @@ pre[class*="language-"] {
   <div class="p-summary" data-fill-with="abstract">
    <p>This specification enables web developers to obtain different levels
 
-of platform media focus and access to platform media keys such as
-hardware keys found on keyboards, headsets, remote controls, and
-software keys found in notification areas and on lock screens of
-mobile devices.</p>
+of platform media focus, customize available platform media controls,
+and access platform media keys such as hardware keys found on
+keyboards, headsets, remote controls, and software keys found in
+notification areas and on lock screens of mobile devices.</p>
 
 </div>
   
@@ -367,7 +367,13 @@ elements<a class="self-link" href="#active-participating-media-elements"></a></d
 session</a> that have a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a></code> attribute of false.</p>
 
 
-   <p><a data-link-type="dfn" href="#media-session">Media sessions</a> have a <dfn data-dfn-type="dfn" data-noexport="" id="current-state">current state<a class="self-link" href="#current-state"></a></dfn>, which describes their
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> may have associated <dfn data-dfn-type="dfn" data-noexport="" id="media-session-metadata">media session metadata<a class="self-link" href="#media-session-metadata"></a></dfn>
+that <em>can</em> consist of <dfn data-dfn-type="dfn" data-lt="session title" data-noexport="" id="session-title">title<a class="self-link" href="#session-title"></a></dfn>,
+<dfn data-dfn-type="dfn" data-noexport="" id="artist-name">artist name<a class="self-link" href="#artist-name"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport="" id="album-name">album name<a class="self-link" href="#album-name"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport="" id="artwork-url">artwork URL<a class="self-link" href="#artwork-url"></a></dfn> and
+<dfn data-dfn-type="dfn" data-noexport="" id="artwork-resource">artwork resource<a class="self-link" href="#artwork-resource"></a></dfn>.</p>
+
+
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-state">current state<a class="self-link" href="#current-state"></a></dfn>, which describes its
 current status with respect to any interaction with other <a data-link-type="dfn" href="#media-session">media sessions</a>.
 The possible values are as follows:</p>
 
@@ -467,7 +473,16 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-gl
 
   readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-global-name="MediaSession<interface>/controls<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
 
+  void <a class="idl-code" data-global-name="MediaSession<interface>/setMetadata(metadata)<method>" data-link-type="method" href="#dom-mediasession-setmetadatametadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <dfn class="idl-code" data-dfn-for="MediaSession/setMetadata(metadata)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/setMetadata(metadata)<method>/metadata<argument>" id="dom-mediasession-setmetadatametadata-metadata">metadata<a class="self-link" href="#dom-mediasession-setmetadatametadata-metadata"></a></dfn>);
+
   void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
+};
+
+dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" data-global-name="" id="dictdef-mediametadata">MediaMetadata<a class="self-link" href="#dictdef-mediametadata"></a></dfn> {
+  DOMString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " id="dom-mediametadata-title">title<a class="self-link" href="#dom-mediametadata-title"></a></dfn>;
+  DOMString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " id="dom-mediametadata-artist">artist<a class="self-link" href="#dom-mediametadata-artist"></a></dfn>;
+  DOMString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " id="dom-mediametadata-album">album<a class="self-link" href="#dom-mediametadata-album"></a></dfn>;
+  USVString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/artwork<dict-member>" data-type="USVString " id="dom-mediametadata-artwork">artwork<a class="self-link" href="#dom-mediametadata-artwork"></a></dfn>;
 };
 </pre>
 
@@ -533,6 +548,115 @@ attribute should return null.</p>
    <dl class="domintro">
   
     <dt>
+    <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-setmetadatametadata">setMetadata(metadata)</a></code></code>
+  
+  
+    <dd>
+    Provides the user agent with meta data to use when a <a data-link-type="dfn" href="#media-session">media session</a> is
+    showing media control interfaces (e.g. in an OS-level notification area or
+    on a lock screen).
+
+
+     <p>The <var>metadata</var> argument allows for setting a <a data-link-type="dfn" href="#media-session">media session</a>’s
+    current meta data via object members. These are the object members that can
+    be used:</p>
+     
+
+    
+     <dl>
+      
+      <dt>
+        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-title">title</a></code>
+      
+      
+      
+      <dd>
+        The <a data-link-type="dfn" href="#session-title">title</a> to display for the <a data-link-type="dfn" href="#media-session">media
+        session</a>, if any.
+      
+      
+      
+      <dt>
+        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artist">artist</a></code>
+      
+      
+      
+      <dd>
+        The <a data-link-type="dfn" href="#artist-name">artist name</a> to display for the <a data-link-type="dfn" href="#media-session">media session</a>, if any.
+      
+      
+      
+      <dt>
+        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-album">album</a></code>
+      
+      
+      
+      <dd>
+        The <a data-link-type="dfn" href="#album-name">album name</a> to display for the <a data-link-type="dfn" href="#media-session">media session</a>, if any.
+      
+      
+      
+      <dt>
+        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artwork">artwork</a></code>
+      
+      
+      
+      <dd>
+        The <a data-link-type="dfn" href="#artwork-url">artwork URL</a> for an image resource to display for the <a data-link-type="dfn" href="#media-session">media
+        session</a>, if any.
+      
+      
+    
+     </dl>
+     
+  
+</dl>
+
+
+   <p>When the <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export="" id="dom-mediasession-setmetadatametadata"><code>setMetadata(metadata)</code><a class="self-link" href="#dom-mediasession-setmetadatametadata"></a></dfn>
+method is invoked, the user agent must run the following steps:</p>
+
+
+   <ol>
+  
+    <li>
+    Let <var>baseURL</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-base-url">API base URL</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry
+    settings object</a>.
+  
+  
+    <li>
+    If <var>metadata</var>’s <code>title</code> is present set <var>media
+    session</var>’s <a data-link-type="dfn" href="#session-title">title</a> to the return value.
+    (Otherwise <a data-link-type="dfn" href="#session-title">title</a> is not set.)
+  
+  
+    <li>
+    If <var>metadata</var>’s <code>artist</code> is present set <var>media
+    session</var>’s <a data-link-type="dfn" href="#artist-name">artist name</a> to the return value. (Otherwise <a data-link-type="dfn" href="#artist-name">artist
+    name</a> is not set.)
+  
+  
+    <li>
+    If <var>metadata</var>’s <code>album</code> is present set <var>media
+    session</var>’s <a data-link-type="dfn" href="#album-name">album name</a> to the return value. (Otherwise <a data-link-type="dfn" href="#album-name">album
+    name</a> is not set.)
+  
+  
+    <li>
+    If <var>metadata</var>’s <code>artwork</code> is present,
+    <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser">parse</a> it using <var>baseURL</var>, and if that does
+    not return failure, set <var>media session</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a> to the
+    return value. (Otherwise <a data-link-type="dfn" href="#artwork-url">artwork URL</a> is not set.)
+  
+</ol>
+
+
+   <p class="XXX">TBD: When exactly should we fetch the <a data-link-type="dfn" href="#artwork-url">artwork URL</a>?</p>
+
+
+   <dl class="domintro">
+  
+    <dt>
     <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-release">release()</a></code></code>
   
   
@@ -561,6 +685,7 @@ must run the following steps:</p>
     <a data-link-type="dfn" href="#media-session">media session</a> as the only argument.
   
 </ol>
+
 
 
    <h2 class="heading settled" data-level="5" id="media-categories"><span class="secno">5. </span><span class="content">Media categories</span><a class="self-link" href="#media-categories"></a></h2>
@@ -1486,7 +1611,7 @@ otherwise. On setting, the user agent must run the following steps:</p>
    <p> </p>
 
 
-   <div class="example" id="example-48396142"><a class="self-link" href="#example-48396142"></a>
+   <div class="example" id="example-dc92484c"><a class="self-link" href="#example-dc92484c"></a>
   As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
   elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
   <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be set via JavaScript:
@@ -1512,6 +1637,11 @@ myAudio.play(); // Go!
 myAudio.src = "music.mp3";
 
 var mySession = new MediaSession("content");
+
+mySession.setMetadata({
+  title: "Demo Track",
+  artwork: "/resources/cover.png"
+});
 
 myAudio.session = mySession;
 console.log(myAudio.kind) // --> "content"
@@ -1723,7 +1853,8 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
             an ongoing media interface in the underlying platform’s
             notifications area and/or show an ongoing media interface in the
             underlying platform’s lock screen area for <var>media session</var>
-            based on the requested <a data-link-type="dfn" href="#media-remote-control">media remote controls</a>.
+            based on both the requested <a data-link-type="dfn" href="#media-remote-control">media remote controls</a> and using
+            any available <a data-link-type="dfn" href="#media-session-metadata">media session metadata</a>.
           
         
           
@@ -2221,8 +2352,15 @@ argument.</p>
    <li>active media session state, <a href="#active-media-session-state">4</a>
    <li>active participating media
 elements, <a href="#active-participating-media-elements">4</a>
+   <li>album, <a href="#dom-mediametadata-album">4.1</a>
+   <li>album name, <a href="#album-name">4</a>
    <li>ambient attribute value, <a href="#ambient-attribute-value">5</a>
    <li>ambient media state, <a href="#ambient-media-state">5</a>
+   <li>artist, <a href="#dom-mediametadata-artist">4.1</a>
+   <li>artist name, <a href="#artist-name">4</a>
+   <li>artwork, <a href="#dom-mediametadata-artwork">4.1</a>
+   <li>artwork resource, <a href="#artwork-resource">4</a>
+   <li>artwork URL, <a href="#artwork-url">4</a>
    <li>content attribute value, <a href="#content-attribute-value">5</a>
    <li>content media state, <a href="#content-media-state">5</a>
    <li>controls, <a href="#dom-mediasession-controls">4.1</a>
@@ -2245,16 +2383,19 @@ elements, <a href="#active-participating-media-elements">4</a>
     </ul>
    <li>kind content attribute, <a href="#kind-content-attribute">7.2</a>
    <li>media category, <a href="#media-category">5</a>
+   <li>MediaMetadata, <a href="#dictdef-mediametadata">4.1</a>
    <li>media remote control, <a href="#media-remote-control">6</a>
    <li>MediaRemoteControls, <a href="#mediaremotecontrols">6.1</a>
-   <li>MediaSession, <a href="#mediasession">4.1</a>
    <li>media session, <a href="#media-session">4</a>
+   <li>MediaSession, <a href="#mediasession">4.1</a>
    <li>media session continuation algorithm, <a href="#media-session-continuation-algorithm">9</a>
    <li>media session interruption algorithm, <a href="#media-session-interruption-algorithm">9</a>
    <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">8</a>
-   <li>MediaSessionKind, <a href="#enumdef-mediasessionkind">5</a>
    <li>MediaSession(kind), <a href="#dom-mediasession-mediasessionkind">4.1</a>
+   <li>MediaSessionKind, <a href="#enumdef-mediasessionkind">5</a>
+   <li>media session metadata, <a href="#media-session-metadata">4</a>
    <li>media session release algorithm, <a href="#media-session-release-algorithm">10</a>
+   <li>metadata, <a href="#dom-mediasession-setmetadatametadata-metadata">4.1</a>
    <li>nextTrackEnabled, <a href="#dom-mediaremotecontrols-nexttrackenabled">6.1</a>
    <li>onnexttrack, <a href="#dom-mediaremotecontrols-onnexttrack">6.2</a>
    <li>onprevioustrack, <a href="#dom-mediaremotecontrols-onprevioustrack">6.2</a>
@@ -2267,6 +2408,9 @@ elements, <a href="#active-participating-media-elements">4</a>
    <li>seekBackwardEnabled, <a href="#dom-mediaremotecontrols-seekbackwardenabled">6.1</a>
    <li>seekForwardEnabled, <a href="#dom-mediaremotecontrols-seekforwardenabled">6.1</a>
    <li>session, <a href="#dom-htmlmediaelement-session">7.1</a>
+   <li>session title, <a href="#session-title">4</a>
+   <li>setMetadata(metadata), <a href="#dom-mediasession-setmetadatametadata">4.1</a>
+   <li>title, <a href="#dom-mediametadata-title">4.1</a>
    <li>transient attribute
       value, <a href="#transient-attribute-value">5</a>
    <li>transient media state, <a href="#transient-media-state">5</a>
@@ -2290,10 +2434,12 @@ elements, <a href="#active-participating-media-elements">4</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#api-base-url">api base url</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#case-sensitivity-and-string-comparison">case-sensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-manipulation-task-source">dom manipulation task source</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">ended playback</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a>
@@ -2357,7 +2503,16 @@ interface <a data-global-name="" href="#mediasession">MediaSession</a> {
 
   readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-global-name="MediaSession<interface>/controls<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
 
+  void <a class="idl-code" data-global-name="MediaSession<interface>/setMetadata(metadata)<method>" data-link-type="method" href="#dom-mediasession-setmetadatametadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <a data-global-name="MediaSession<interface>/setMetadata(metadata)<method>/metadata<argument>" href="#dom-mediasession-setmetadatametadata-metadata">metadata</a>);
+
   void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
+};
+
+dictionary <a data-global-name="" href="#dictdef-mediametadata">MediaMetadata</a> {
+  DOMString <a data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " href="#dom-mediametadata-title">title</a>;
+  DOMString <a data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " href="#dom-mediametadata-artist">artist</a>;
+  DOMString <a data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " href="#dom-mediametadata-album">album</a>;
+  USVString <a data-global-name="MediaMetadata<dictionary>/artwork<dict-member>" data-type="USVString " href="#dom-mediametadata-artwork">artwork</a>;
 };
 
 enum <a data-global-name="" href="#enumdef-mediasessionkind">MediaSessionKind</a> {
