@@ -275,7 +275,7 @@ defined below.
 <a>Media sessions</a> implement the following interface:
 
 <pre class="idl">
-[Constructor(MediaSessionKind kind)]
+[Constructor(optional MediaSessionKind kind)]
 interface MediaSession {
   readonly attribute MediaSessionKind kind;
 
@@ -297,7 +297,7 @@ dictionary MediaMetadata {
 <dl class=domintro>
   <dt>
     <code><var>session</var> = new <a constructor
-    lt="MediaSession()">MediaSession</a>(<var>kind</var>)</code>
+    lt="MediaSession()">MediaSession</a>([<var>kind</var>])</code>
   </dt>
   <dd>
     Returns a new {{MediaSession}} object.
@@ -307,7 +307,8 @@ dictionary MediaMetadata {
 The
 <dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
 constructor must create a new {{MediaSession}} object with its
-{{MediaSession/kind}} attribute set to <var>kind</var>, its
+{{MediaSession/kind}} attribute set to <var>kind</var> or &quot;<a lt="content
+attribute value"><code>content</code></a>&quot if <var>kind</var> is empty, its
 {{MediaSession/controls}} attribute set to a new {{MediaRemoteControls}} object
 if its {{MediaSession/kind}} is &quot;<a lt="content attribute
 value"><code>content</code></a>&quot or null otherwise, and then return it.

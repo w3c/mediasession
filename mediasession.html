@@ -467,7 +467,7 @@ defined below.</p>
    <p><a data-link-type="dfn" href="#media-session">Media sessions</a> implement the following interface:</p>
 
 
-   <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(<a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
+   <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
@@ -490,7 +490,7 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" data-
    <dl class="domintro">
   
     <dt>
-    <code><var>session</var> = new <a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">MediaSession</a>(<var>kind</var>)</code>
+    <code><var>session</var> = new <a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">MediaSession</a>([<var>kind</var>])</code>
   
   
     <dd>
@@ -502,7 +502,7 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" data-
    <p>The
 <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasessionkind">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasessionkind"></a></dfn>
 constructor must create a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object with its
-<code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute set to <var>kind</var>, its
+<code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute set to <var>kind</var> or "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" if <var>kind</var> is empty, its
 <code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code> attribute set to a new <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object
 if its <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" or null otherwise, and then return it.</p>
 
@@ -2497,7 +2497,7 @@ elements, <a href="#active-participating-media-elements">4</a>
    <dt id="biblio-webaudio"><a class="self-link" href="#biblio-webaudio"></a>[WEBAUDIO]
    <dd>Paul Adenot; Chris Wilson; Chris Rogers. <a href="https://webaudio.github.io/web-audio-api/">Web Audio API</a>. 10 October 2013. WD. URL: <a href="https://webaudio.github.io/web-audio-api/">https://webaudio.github.io/web-audio-api/</a></dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(<a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" href="#dom-mediasession-mediasessionkind-kind">kind</a>)]
+  <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" href="#dom-mediasession-mediasessionkind-kind">kind</a>)]
 interface <a data-global-name="" href="#mediasession">MediaSession</a> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
