@@ -1611,7 +1611,7 @@ otherwise. On setting, the user agent must run the following steps:</p>
    <p> </p>
 
 
-   <div class="example" id="example-dc92484c"><a class="self-link" href="#example-dc92484c"></a>
+   <div class="example" id="example-9c851683"><a class="self-link" href="#example-9c851683"></a>
   As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
   elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
   <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be set via JavaScript:
@@ -1636,7 +1636,7 @@ myAudio.play(); // Go!
     <pre class="lang-javascript">var myAudio = document.createElement("audio");
 myAudio.src = "music.mp3";
 
-var mySession = new MediaSession("content");
+var mySession = new MediaSession();
 
 mySession.setMetadata({
   title: "Demo Track",

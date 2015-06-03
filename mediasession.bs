@@ -1184,7 +1184,7 @@ myAudio.play(); // Go!
 var myAudio = document.createElement("audio");
 myAudio.src = "music.mp3";
 
-var mySession = new MediaSession("content");
+var mySession = new MediaSession();
 
 mySession.setMetadata({
   title: "Demo Track",
