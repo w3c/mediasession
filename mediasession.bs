@@ -287,9 +287,9 @@ interface MediaSession {
 };
 
 dictionary MediaMetadata {
-  DOMString title;
-  DOMString artist;
-  DOMString album;
+  DOMString title = "";
+  DOMString artist = "";
+  DOMString album = "";
   USVString artwork;
 };
 </pre>
@@ -396,19 +396,16 @@ method is invoked, the user agent must run the following steps:
     settings object</a>.
   </li>
   <li>
-    If <var>metadata</var>'s <code>title</code> is present set <var>media
-    session</var>'s <a lt="session title">title</a> to the return value.
-    (Otherwise <a lt="session title">title</a> is not set.)
+    Set <var>media session</var>'s <a lt="session title">title</a> to
+    <var>metadata</var>'s <code>title</code>.
   </li>
   <li>
-    If <var>metadata</var>'s <code>artist</code> is present set <var>media
-    session</var>'s <a>artist name</a> to the return value. (Otherwise <a>artist
-    name</a> is not set.)
+    Set <var>media session</var>'s <a>artist name</a> to <var>metadata</var>'s
+    <code>artist</code>.
   </li>
   <li>
-    If <var>metadata</var>'s <code>album</code> is present set <var>media
-    session</var>'s <a>album name</a> to the return value. (Otherwise <a>album
-    name</a> is not set.)
+    Set <var>media session</var>'s <a>album name</a> to <var>metadata</var>'s
+    <code>album</code>.
   </li>
   <li>
     If <var>metadata</var>'s <code>artwork</code> is present,

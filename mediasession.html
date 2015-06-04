@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-03">3 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-04">4 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -479,9 +479,9 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-gl
 };
 
 dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" data-global-name="" id="dictdef-mediametadata">MediaMetadata<a class="self-link" href="#dictdef-mediametadata"></a></dfn> {
-  DOMString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " id="dom-mediametadata-title">title<a class="self-link" href="#dom-mediametadata-title"></a></dfn>;
-  DOMString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " id="dom-mediametadata-artist">artist<a class="self-link" href="#dom-mediametadata-artist"></a></dfn>;
-  DOMString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " id="dom-mediametadata-album">album<a class="self-link" href="#dom-mediametadata-album"></a></dfn>;
+  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " id="dom-mediametadata-title">title<a class="self-link" href="#dom-mediametadata-title"></a></dfn> = "";
+  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " id="dom-mediametadata-artist">artist<a class="self-link" href="#dom-mediametadata-artist"></a></dfn> = "";
+  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " id="dom-mediametadata-album">album<a class="self-link" href="#dom-mediametadata-album"></a></dfn> = "";
   USVString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/artwork<dict-member>" data-type="USVString " id="dom-mediametadata-artwork">artwork<a class="self-link" href="#dom-mediametadata-artwork"></a></dfn>;
 };
 </pre>
@@ -625,21 +625,18 @@ method is invoked, the user agent must run the following steps:</p>
   
   
     <li>
-    If <var>metadata</var>’s <code>title</code> is present set <var>media
-    session</var>’s <a data-link-type="dfn" href="#session-title">title</a> to the return value.
-    (Otherwise <a data-link-type="dfn" href="#session-title">title</a> is not set.)
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#session-title">title</a> to
+    <var>metadata</var>’s <code>title</code>.
   
   
     <li>
-    If <var>metadata</var>’s <code>artist</code> is present set <var>media
-    session</var>’s <a data-link-type="dfn" href="#artist-name">artist name</a> to the return value. (Otherwise <a data-link-type="dfn" href="#artist-name">artist
-    name</a> is not set.)
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#artist-name">artist name</a> to <var>metadata</var>’s
+    <code>artist</code>.
   
   
     <li>
-    If <var>metadata</var>’s <code>album</code> is present set <var>media
-    session</var>’s <a data-link-type="dfn" href="#album-name">album name</a> to the return value. (Otherwise <a data-link-type="dfn" href="#album-name">album
-    name</a> is not set.)
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#album-name">album name</a> to <var>metadata</var>’s
+    <code>album</code>.
   
   
     <li>
@@ -2509,9 +2506,9 @@ interface <a data-global-name="" href="#mediasession">MediaSession</a> {
 };
 
 dictionary <a data-global-name="" href="#dictdef-mediametadata">MediaMetadata</a> {
-  DOMString <a data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " href="#dom-mediametadata-title">title</a>;
-  DOMString <a data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " href="#dom-mediametadata-artist">artist</a>;
-  DOMString <a data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " href="#dom-mediametadata-album">album</a>;
+  DOMString <a data-default="&quot;&quot;" data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " href="#dom-mediametadata-title">title</a> = "";
+  DOMString <a data-default="&quot;&quot;" data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " href="#dom-mediametadata-artist">artist</a> = "";
+  DOMString <a data-default="&quot;&quot;" data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " href="#dom-mediametadata-album">album</a> = "";
   USVString <a data-global-name="MediaMetadata<dictionary>/artwork<dict-member>" data-type="USVString " href="#dom-mediametadata-artwork">artwork</a>;
 };
 
