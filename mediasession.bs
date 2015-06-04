@@ -264,22 +264,6 @@ state">ACTIVE</a></code> or <code><a lt="interrupted media session
 state">INTERRUPTED</a></code> to
 <code><a lt="idle media session state">IDLE</a></code>.
 
-The <a>media session interruption algorithm</a> may cause a <a>media element</a>
-to either <a>pause</a> or <a>duck</a> depending on its <a>media session
-category</a>. When a <a>media element</a> is to <dfn>pause</dfn> the user agent
-must run <a>media element</a>'s <a>internal pause steps</a>. When a <a>media
-element</a> is to <dfn>indefinitely pause</dfn> the user agent must run its
-{{pause()}} method. When a <a>media element</a> is to <dfn>duck</dfn> then the
-user agent must ensure its output volume is lowered.
-
-The <a>media session continuation algorithm</a> may cause a <a>media element</a>
-to either <a>unpause</a> or <a>unduck</a> depending on its <a>media session
-category</a>. When a <a>media element</a> is to <dfn>unduck</dfn>
-then the user agent should restore its output volume to the same level that was
-observed prior to the original corresponding <a>duck</a> request. When a
-<a>media element</a> is to <dfn>unpause</dfn> the user agent must run its
-{{play()}} method.
-
 <h3 id="media-session-types">Types</h3>
 
 A <dfn>media session category</dfn> is a keyword that maps to a well-defined
@@ -548,9 +532,6 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
     element</var>'s <a>current media session</a>.
   </li>
   <li>
-    If <var>media session</var> is empty abort the remaining steps and return.
-  </li>
-  <li>
     If <var>current media element</var> is not currently in <var>media
     session</var>'s list of <a>active participating media elements</a> then
     append <var>current media element</var> to this list.
@@ -635,12 +616,6 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-When the {{pause()}} method on a <a>media element</a> is invoked and the
-<a>media element</a>'s {{paused}} attribute is false and <a>media element</a>
-has a <a>current media session</a> then the user agent must remove this <a>media
-element</a> from its <a>current media session</a>'s list of <a>active
-participating media elements</a>. [[HTML]]
-
 <h3 id="interrupting-a-media-session">Interrupting a media session</h3>
 
 A <a>media session</a> may be interrupted at any time after its
@@ -654,6 +629,54 @@ reduced volume for the duration of the interruption; or <a>pause</a> our content
 for the duration of the interruption and then resume playback when the
 interruption ends. A permanent interruption means we must <a lt="indefinitely
 pause">pause our media content indefinitely</a>.
+
+When a <a>media element</a> is to <dfn>pause</dfn> the user agent must run
+<a>media element</a>'s <a>internal pause steps</a>.
+
+When a <a>media element</a> is to <dfn>indefinitely pause</dfn> the user agent
+must invoke its {{pause()}} method.
+
+When the {{pause()}} method on a <a>media element</a> is invoked and the
+<a>media element</a>'s {{paused}} attribute is initially false then the user
+agent must remove this <a>media element</a> from its <a>current media
+session</a>'s list of <a>active participating media elements</a>.
+
+After the {{pause()}} method on a <a>media element</a> has been invoked and that
+<a>media element</a> has a <a>current media session type</a> set to
+<code><a lt="transient media state">Transient</a></code> or <code><a
+lt="transient solo media state">Transient Solo</a></code>, then the user agent
+must run the <a>media session continuation algorithm</a> against all known
+<a>media sessions</a>, passing in each <a>media session</a> as <var>incumbent
+media session</var> and then, for the originally <a>paused</a> <a>media
+session</a>, immediately run the <a>media session release algorithm</a> passing
+in that <a>media element</a>'s <a>current media session</a> as the only
+argument.
+
+<div class="note">
+  This prevents <code><a lt="transient media state">Transient</a></code> or
+  <code><a lt="transient solo media state">Transient Solo</a></code>-based
+  <a>media sessions</a> from indefinitely blocking the continuation of other
+  <code><a lt="interrupted media session state">INTERRUPTED</a></code> <a>media
+  sessions</a> when they are paused.
+
+  After we have completed this process, the original <code><a lt="transient
+  media state">Transient</a></code> or
+  <code><a lt="transient solo media state">Transient Solo</a></code>-based
+  <a>media session</a> will have a <a>current state</a> of <code><a lt="idle
+  media session state">IDLE</a></code> and all interrupted <a>media sessions</a>
+  will have returned to a <a>current state</a> of <code><a lt="active media
+  session state">ACTIVE</a></code>.
+</div>
+
+When a <a>media element</a> is to <dfn>unpause</dfn> the user agent must invoke
+its {{play()}} method.
+
+When a <a>media element</a> is to <dfn>duck</dfn> then the user agent must
+ensure its output volume is lowered.
+
+When a <a>media element</a> is to <dfn>unduck</dfn> then the user agent should
+restore its output volume to the same level that was observed prior to the
+original corresponding <a>duck</a> request.
 
 When a <a>media session</a> receives a start-of-interruption notification from
 the platform then the user agent must run the
@@ -794,24 +817,6 @@ the platform then the user agent must run the <a>media session continuation
 algorithm</a> against all known <a>media sessions</a>, passing in each <a>media
 session</a> as <var>incumbent media session</var>.
 
-After the {{pause()}} method on a <a>media element</a> has been invoked and that
-<a>media element</a> has a <a>current media session type</a> set to
-<code><a lt="transient media state">Transient</a></code> or <code><a
-lt="transient solo media state">Transient Solo</a></code>, then the user agent
-must run the <a>media session continuation algorithm</a> against all known
-<a>media sessions</a>, passing in each <a>media session</a> as <var>incumbent
-media session</var> and then, for the original <a>media session</a>, immediately
-run the <a>media session release algorithm</a> passing in that <a>media
-element</a>'s <a>current media session</a> as the only argument.
-
-<p class="note">
-  This prevents <code><a lt="transient media state">Transient</a></code> or
-  <code><a lt="transient solo media state">Transient Solo</a></code>-based
-  <a>media sessions</a> from indefinitely blocking the continuation of other
-  <code><a lt="interrupted media session state">INTERRUPTED</a></code> <a>media
-  sessions</a> when they are paused.
-</p>
-
 The <dfn>media session continuation algorithm</dfn> takes one argument,
 <var>incumbent media session</var>, and consists of running the following steps.
 
@@ -934,7 +939,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 
 <ol>
   <li>
-    If <var>current media session</var> is empty or its <a>current state</a> is
+    If <var>current media session</var>'s <a>current state</a> is
     <code><a lt="idle media session state">IDLE</a></code> then abort the
     remaining steps and return.
   </li>
@@ -1351,7 +1356,7 @@ the following steps:
     Let <var>m</var> be the <a>media session</a>.
   </li>
   <li>
-    If <var>m</var> is empty or <var>m</var>'s <a>current media session type</a>
+    If <var>m</var>'s <a>current media session type</a>
     is not <code><a lt="default media state">Default</a></code> or
     <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
     <a>current state</a> is not
