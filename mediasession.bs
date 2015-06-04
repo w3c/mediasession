@@ -310,7 +310,7 @@ in the table’s third and fourth columns.
     <td>
       <ul>
         <li>
-          Indefinitely <a>pauses</a> all other <a lt="active participating media
+          <a>Indefinitely pauses</a> all other <a lt="active participating media
           elements">active</a>
           <code><a lt="default media state">Default</a></code> and <code><a
           lt="content media state">Content</a></code> content when <a
@@ -652,8 +652,8 @@ Interruptions can be both transient or permanent. A transient interruption means
 we can either choose to <a>duck</a> our content and continue playing it out at a
 reduced volume for the duration of the interruption; or <a>pause</a> our content
 for the duration of the interruption and then resume playback when the
-interruption ends. A permanent interruption means we must <a>pause</a> our media
-content indefinitely.
+interruption ends. A permanent interruption means we must <a lt="indefinitely
+pause">pause our media content indefinitely</a>.
 
 When a <a>media session</a> receives a start-of-interruption notification from
 the platform then the user agent must run the
