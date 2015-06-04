@@ -75,6 +75,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
 urlPrefix: https://url.spec.whatwg.org/;
     type: dfn; urlPrefix: #concept-
         text: url parser
+        text: event listener
 urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
     type: interface
         text: AudioContext
@@ -170,12 +171,27 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 <h2 id="media-sessions">Media sessions</h2>
 
 A <dfn>media session</dfn> represents one or more <a>media elements</a> within
-the same <a>top-level browsing context</a> that share the same <a>media
+the same <a>top-level browsing context</a> that share the same <a>media session
 category</a>. Each <a>media session</a> then defines the interactions of those
 <a>media elements</a> with both the underlying platform and other <a>media
 elements</a> belonging to other <a>media sessions</a> within the user agent.
 
-A <a>media element</a> can have a <dfn>current media session</dfn>, which is a
+A <a>media session</a> may have associated <dfn>media session metadata</dfn>
+that <em>can</em> consist of <dfn lt="session title">title</dfn>,
+<dfn>artist name</dfn>, <dfn>album name</dfn>, <dfn>artwork URL</dfn> and
+<dfn>artwork resource</dfn>.
+
+A <a>media session</a> has a <dfn>current media session type</dfn>. The <a
+lt="media session category">possible media categories and their states</a> are
+defined below.
+
+A <a>media session</a> may provide access to <dfn lt="media remote
+control">media remote controls</dfn> that can be used to respond to hardware or
+software remote control events. Such events may be triggered by e.g. keyboard
+media keys, headphone buttons, remote controller buttons or notification and
+lock screen media buttons.
+
+A <a>media element</a> may have a <dfn>current media session</dfn>, which is a
 <a>media session</a>. When a <a>media element</a> is created the user agent must
 set its <a>current media session</a> to the current <a>top-level browsing
 context</a>'s <a>media session</a>.
@@ -186,10 +202,7 @@ The <dfn>participating media elements</dfn> of a <a>media session</a> are the
 elements</dfn> are the <a>participating media elements</a> of a <a>media
 session</a> that have a {{paused}} attribute of false.
 
-A <a>media session</a> may have associated <dfn>media session metadata</dfn>
-that <em>can</em> consist of <dfn lt="session title">title</dfn>,
-<dfn>artist name</dfn>, <dfn>album name</dfn>, <dfn>artwork URL</dfn> and
-<dfn>artwork resource</dfn>.
+<h3 id="media-session-states">States</h3>
 
 A <a>media session</a> has a <dfn>current state</dfn>, which describes its
 current status with respect to any interaction with other <a>media sessions</a>.
@@ -216,7 +229,7 @@ The possible values are as follows:
     The <a>media session</a> is currently suspended from having platform-level
     media focus and its <a>active participating media elements</a> are either <a
     lt="pause">paused</a> or
-    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>media
+    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>media session
     category</a> and pending completion of another <a>media session</a>'s media
     focus.
   </dd>
@@ -236,7 +249,7 @@ session</a>'s <a>current state</a> may be set from
 <code><a lt="active media session state">ACTIVE</a></code> to either <code><a
 lt="idle media session state">IDLE</a></code> or <code><a lt="interrupted media
 session state">INTERRUPTED</a></code> depending on its associated <a>media
-category</a>.
+session category</a>.
 
 When the <a>media session continuation algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from <code><a lt="interrupted
@@ -251,26 +264,706 @@ state">INTERRUPTED</a></code> to
 <code><a lt="idle media session state">IDLE</a></code>.
 
 The <a>media session interruption algorithm</a> may cause a <a>media element</a>
-to either <a>pause</a> or <a>duck</a> depending on its <a>media category</a>.
-When a <a>media element</a> is to <dfn>pause</dfn> the user agent must run its
-{{pause()}} method. When a <a>media element</a> is to <dfn>duck</dfn>
+to either <a>pause</a> or <a>duck</a> depending on its <a>media session
+category</a>. When a <a>media element</a> is to <dfn>pause</dfn> the user agent
+must run its {{pause()}} method. When a <a>media element</a> is to
+<dfn>duck</dfn>
 then the user agent must ensure its output volume is lowered.
 
 The <a>media session continuation algorithm</a> may cause a <a>media element</a>
-to either <a>unpause</a> or <a>unduck</a> depending on its <a>media
+to either <a>unpause</a> or <a>unduck</a> depending on its <a>media session
 category</a>. When a <a>media element</a> is to <dfn>unduck</dfn>
 then the user agent should restore its output volume to the same level that was
 observed prior to the original corresponding <a>duck</a> request. When a
 <a>media element</a> is to <dfn>unpause</dfn> the user agent must run its
 {{play()}} method.
 
-The <dfn>intrinsic media category state</dfn> of a <a>media session</a> is the
-state value of the <a>media category</a> that was set when a <a>media
-session</a> was created. The
-<a href="#media-categories">possible media categories and their states</a> are
-defined below.
+<h3 id="media-session-types">Types</h3>
 
-<h3 id="mediasession interface">The {{MediaSession}} interface</h3>
+A <dfn>media session category</dfn> is a keyword that maps to a well-defined
+interaction state for a <a>media session</a> – called its <dfn>media session
+type</dfn> – that user agents use to enforce platform-specific interaction and
+interoperation between web media.
+
+The following table lists the available <a>media session categories</a> keywords
+and their corresponding <a>media session type</a> states — the keywords in the
+left column map to the states in the cell in the second column on the same row
+as the keyword. The attribute should be set based on the preferred definitions
+in the table’s third and fourth columns.
+
+<table id="valid-media-categories">
+  <tr>
+    <th>Category</th>
+    <th>State</th>
+    <th>Definition</th>
+    <th>Examples</th>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="content attribute value"><code>content</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="content media state">Content</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          Indefinitely <a>pauses</a> all other <a lt="active participating media
+          elements">active</a>
+          <code><a lt="default media state">Default</a></code> and <code><a
+          lt="content media state">Content</a></code> content when <a
+          href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Displays lock-screen and notification area user interfaces when
+          <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Reacts to changes in both hardware and software-based media key
+          buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Ducks</a> itself when <code><a lt="transient media
+          state">Transient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unducks</a>
+          itself when <code><a lt="transient media state">Transient</a></code>
+          content is <a>paused</a> or <a href="#releasing-a-media-session">ends
+          playback</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unpauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content is <a>paused</a> or <a
+          href="#releasing-a-media-session">ends playback</a>.
+        </li>
+        <li>
+          Continues playing normally when <code><a lt="ambient media
+          state">Ambient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+        </li>
+      </ul>
+    </td>
+    <td>
+      Music, podcasts, radio streams.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="transient attribute
+      value"><code>transient</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="transient media state">Transient</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          <a>Ducks</a> all other <a lt="active participating media
+          elements">active</a>
+          <code><a lt="default media state">Default</a></code>
+          and <code><a lt="content media state">Content</a></code> content when
+          <a href="#activating-a-media-session">playback begins</a>.
+          <a>Unducks</a> all other <a lt="interrupted media session
+          state">interrupted</a> <code><a lt="default media
+          state">Default</a></code> and <code><a lt="content media
+          state">Content</a></code> content when <a>paused</a> or <a
+          href="#releasing-a-media-session">playback ends</a>.
+        </li>
+        <li>
+          Does not display lock-screen and notification area user interfaces
+          when <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Does not react to changes in both hardware and software-based media
+          key buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unpauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content is <a>paused</a> or <a
+          href="#releasing-a-media-session">ends playback</a>.
+        </li>
+        <li>
+          Continues playing normally when other <code><a lt="transient media
+          state">Transient</a></code> or <code><a lt="ambient media
+          state">Ambient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+        </li>
+      </ul>
+    </td>
+    <td>
+      Notification sounds. Spoken driving directions where playback of music in
+      the background is acceptable.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="transient-solo attribute
+      value"><code>transient-solo</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="transient solo media state">Transient Solo</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          <a>Pauses</a> all other <a lt="active participating media
+          elements">active</a>
+          <code><a lt="default media state">Default</a></code>,
+          <code><a lt="content media state">Content</a></code>, <code><a
+          lt="transient media state">Transient</a></code> and
+          <code><a lt="transient solo media state">Transient Solo</a></code>
+          content when <a href="#activating-a-media-session">playback
+          begins</a>.
+          <a>Unpauses</a> all <a lt="interrupted media session
+          state">interrupted</a>
+          <code><a lt="default media state">Default</a></code>, <code><a
+          lt="content media state">Content</a></code>, <code><a lt="transient
+          media state">Transient</a></code> and <code><a lt="transient solo
+          media state">Transient Solo</a></code>
+          content when <a>paused</a> or <a
+          href="#releasing-a-media-session">playback ends</a>.
+        </li>
+        <li>
+          Does not display lock-screen and notification area user interfaces
+          when <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Does not react to changes in both hardware and software-based media
+          key buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when other <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unpauses</a>
+          itself when other <code><a lt="transient solo media state">Transient
+          Solo</a></code> content is <a>paused</a> or <a
+          href="#releasing-a-media-session">ends playback</a>.
+        </li>
+        <li>
+          Continues playing normally when <code><a lt="ambient media
+          state">Ambient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+        </li>
+      </ul>
+    </td>
+    <td>
+      Playback of driving directions. Other spoken notifications.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="ambient attribute value"><code>ambient</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="ambient media state">Ambient</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          Does not interact with any other <code><a lt="default media
+          state">Default</a></code>,
+          <code><a lt="content media state">Content</a></code>, <code><a
+          lt="transient media state">Transient</a></code>,
+          <code><a lt="transient solo media state">Transient Solo</a></code> or
+          <code><a lt="ambient media state">Ambient</a></code> content during
+          playback.
+        </li>
+        <li>
+          Does not display lock-screen and notification area user interfaces
+          when <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Does not react to changes in both hardware and software-based media
+          key buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when its <a>top-level browsing context</a> is not
+          visible (i.e. the page is placed in the background or the user agent
+          is minimized or the screen is switched off). <a>Unpauses</a> itself
+          when its
+          <a>top-level browsing context</a> is at least partially visible on at
+          least one screen again (i.e. the user agent is in the foreground and
+          the page is focused again).
+        </li>
+      </ul>
+    </td>
+    <td>
+      UI sounds. In-game sound effects and background music.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &quot;<strong id="default-media-value"><code></code></strong>&quot; (empty
+      string)
+    </td>
+    <td>
+      <dfn lt="default media state">Default</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          No explicit kind, or the kind of the media given is not recognized by
+          the user agent.
+        </li>
+      </ul>
+    </td>
+    <td>
+      Legacy media content
+    </td>
+  </tr>
+</table>
+
+<h3 id="media-session-resources">Resources</h3>
+
+<p class=XXX>TODO: Add the required fetch steps for <a>artwork URL</a>.</p>
+
+<h3 id="activating-a-media-session">Activating a media session</h3>
+
+When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
+element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
+{{HTMLMediaElement/readyState}} attribute has the value {{HAVE_FUTURE_DATA}} or
+{{HAVE_ENOUGH_DATA}}, then the user agent must run the <a>media session
+invocation algorithm</a>, passing in the <a>media element</a> as
+<var>current media element</var>. [[HTML]]
+
+The <dfn>media session invocation algorithm</dfn> takes one argument,
+<var>current media element</var>, and consists of the following steps:
+
+<ol>
+  <li>
+    Let <var>media session</var> be the value of <var>current media
+    element</var>'s <a>current media session</a>.
+  </li>
+  <li>
+    If <var>media session</var> is empty or <var>media session</var>'s
+    <a>current state</a> is
+    <code><a lt="active media session state">ACTIVE</a></code> abort the
+    remaining steps and return.
+  </li>
+  <li>
+    Optionally, based on platform conventions, request the most appropriate
+    platform-level media focus for <var>media session</var> based on its current
+    <a>current media session type</a>.
+
+    If this step is run and platform-level media focus can not be obtained for
+    any reason then <a>pause</a> <var>current media element</var>, abort the
+    remaining steps and return.
+  </li>
+  <li>
+    Run these substeps:
+
+    <dl class=switch>
+      <dt>
+        If <var>media session</var>'s <a>current media session type</a> is
+        <code><a lt="content media state">Content</a></code>
+      </dt>
+      <dd>
+        <ol>
+          <li>
+            Optionally, based on platform conventions, the user agent may show
+            an ongoing media interface in the underlying platform's
+            notifications area and/or show an ongoing media interface in the
+            underlying platform's lock screen area for <var>media session</var>
+            based on both the requested <a>media remote controls</a> and using
+            any available <a>media session metadata</a>.
+          </li>
+          <li>
+            Optionally, based on platform conventions, the user agent may allow
+            hardware and/or software media keys to control playback of
+            <var>media session</var>'s <a>active participating media
+            elements</a> based on the requested <a>media remote controls</a>.
+          </li>
+        </ol>
+      </dd>
+      <dt>
+        If <var>media session</var>'s <a>current media session type</a> is
+        <code><a lt="transient media state">Transient</a></code> or <code><a
+        lt="transient solo media state">Transient Solo</a></code>
+      </dt>
+      <dd class="note">
+        The user agent should not provide user access to any hardware or
+        software media keys and not display any ongoing media interface in the
+        underlying platform's notifications area or show any ongoing media
+        interface in the underlying platform's lock screen area for
+        <code><a lt="transient media state">Transient</a></code> or
+        <code><a lt="transient solo media state">Transient Solo</a></code>-based
+        <a>media sessions</a>.
+      </dd>
+      <dt>
+        If <var>media session</var>'s <a>current media session type</a> is
+        <code><a lt="ambient media state">Ambient</a></code>
+      </dt>
+      <dd>
+        If the <var>current media element</var>'s <a>top-level browsing
+        context</a> is not at least partially visible on at least one screen
+        then <a>pause</a>
+        <var>current media element</var>, abort the remaining steps and return.
+
+        <p class="note">
+          The user agent should not provide user access to any hardware or
+          software media keys and not display any ongoing media interface in the
+          underlying platform's notifications area or show any ongoing media
+          interface in the underlying platform's lock screen area for
+          <code><a lt="ambient media state">Ambient</a></code>-based <a>media
+          sessions</a>.
+        </p>
+      </dd>
+    </dl>
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>current state</a> to
+    <code><a lt="active media session state">ACTIVE</a></code>.
+  </li>
+</ol>
+
+<h3 id="interrupting-a-media-session">Interrupting a media session</h3>
+
+A <a>media session</a> may be interrupted at any time after its
+<a>media session invocation algorithm</a> has been run. This typically occurs
+when another application or <a>media session</a> requests and is granted
+platform-level media focus.
+
+Interruptions can be both transient or permanent. A transient interruption means
+we can either choose to <a>duck</a> our content and continue playing it out at a
+reduced volume for the duration of the interruption; or <a>pause</a> our content
+for the duration of the interruption and then resume playback when the
+interruption ends. A permanent interruption means we must <a>pause</a> our media
+content indefinitely.
+
+When a <a>media session</a> receives a start-of-interruption notification from
+the platform then the user agent must run the
+<a>media session interruption algorithm</a> passing in the <a>media session</a>
+as <var>interrupted media session</var>.
+
+The <dfn>media session interruption algorithm</dfn> takes one argument,
+<var>interrupted media session</var>, and consists of running the following
+steps.
+
+<ol>
+  <li>
+    If <var>interrupted media session</var>'s <a>current state</a> is not
+    <code><a lt="active media session state">ACTIVE</a></code> abort the
+    remaining steps and return.
+  </li>
+  <li>
+    Let <var>interrupting media session category</var> be the <a>media session
+    category</a> that triggered this interruption. If this interruption has no
+    known
+    <a>media session category</a>, let <var>interrupting media session
+    category</var> be
+    <code><a lt="default media state">Default</a></code>.
+  </li>
+  <li>
+    Run these substeps:
+
+    <dl class=switch>
+      <dt>
+        If <var>interrupting media session category</var> is <code><a
+        lt="content media state">Content</a></code>
+      </dt>
+      <dd>
+        <ol>
+          <li>
+            If <var>interrupted media session</var>'s <a>current media session
+            type</a> is <code><a lt="default media state">Default</a></code>
+            or <code><a lt="content media state">Content</a></code> then
+            <a>pause</a> all of <var>interrupted media session</var>'s
+            <a>active participating media elements</a> and set
+            <var>interrupted media session</var>'s <a>current state</a> to
+            <code><a lt="idle media session state">IDLE</a></code>.
+
+            <p class="note">
+              This implies that the next time the <a>media session invocation
+              algorithm</a>
+              is run against a <a>media element</a> in <a>media session</a>
+              that we will re-request media focus according to the steps defined
+              in that algorithm.
+            </p>
+          </li>
+          <li>
+            Optionally, based on platform conventions, the user agent must
+            remove any previously established ongoing media interface in the
+            underlying platform's notifications area and any ongoing media
+            interface in the underlying platform's lock screen area for
+            <var>interrupted media session</var>, if any.
+          </li>
+          <li>
+            Optionally, based on platform conventions, the user agent must
+            prevent any hardware and/or software media keys from controlling
+            playback of
+            <var>interrupted media session</var>'s <a>active participating media
+            elements</a>.
+          </li>
+        </ol>
+      </dd>
+      <dt>
+        If <var>interrupting media session category</var> is <code><a
+        lt="transient media state">Transient</a></code>
+      </dt>
+      <dd>
+        <ol>
+          <li>
+            If <var>interrupted media session</var>'s <a>current media session
+            type</a> is <code><a lt="default media state">Default</a></code>
+            or <code><a lt="content media state">Content</a></code> then
+            <a>duck</a>
+            all of <var>interrupted media session</var>'s <a>active
+            participating media elements</a> and set
+            <var>interrupted media session</var>'s
+            <a>current state</a> to <code><a lt="interrupted media session
+            state">INTERRUPTED</a></code>.
+            <p class="note">
+              This implies that the next time the <a>media session release
+              algorithm</a>
+              is run that we will re-activate this <a>media session</a>
+              according to the steps defined in that algorithm.
+            </p>
+          </li>
+        </ol>
+      </dd>
+      <dt>
+        If <var>interrupting media session category</var> is <code><a
+        lt="transient solo media state">Transient Solo</a></code>
+      </dt>
+      <dd>
+        <ol>
+          <li>
+            If <var>interrupted media session</var>'s <a>current media session
+            type</a> is <code><a lt="default media state">Default</a></code>,
+            <code><a lt="content media state">Content</a></code>, <code><a
+            lt="transient media state">Transient</a></code> or <code><a
+            lt="transient solo media state">Transient Solo</a></code> then
+            <a>pause</a> all of
+            <var>interrupted media session</var>'s
+            <a>active participating media elements</a> and set <var>current
+            media session</var>'s <a>current state</a> to
+            <code><a lt="interrupted media session
+            state">INTERRUPTED</a></code>.
+
+            <div class="note">
+              <p>
+                This implies that the next time the <a>media session invocation
+                algorithm</a>
+                is run against a <a>media element</a> in <a>media session</a>
+                that we will re-request media focus according to the steps
+                defined in that algorithm.
+              </p>
+
+              <p>
+                It also implies that the next time the <a>media session release
+                algorithm</a>
+                is run that we will re-activate this <a>media session</a>
+                according to the steps defined in that algorithm.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </dd>
+    </dl>
+  </li>
+</ol>
+
+<p>&nbsp;</p>
+
+When a <a>media session</a> receives an end-of-interruption notification from
+the platform then the user agent must run the <a>media session continuation
+algorithm</a> against all known <a>media sessions</a>, passing in each <a>media
+session</a> as <var>incumbent media session</var>.
+
+The <dfn>media session continuation algorithm</dfn> takes one argument,
+<var>incumbent media session</var>, and consists of running the following steps.
+
+<ol>
+  <li>
+    If <var>incumbent media session</var>'s <a>current state</a> is not
+    <code><a lt="interrupted media session state">INTERRUPTED</a></code>
+    then abort the remaining steps and return.
+  </li>
+  <li>
+    Let <var>interrupting media session category</var> be the <a>media session
+    category</a> that intially triggered this interruption. If this interruption
+    has no known
+    <a>media session category</a>, let <var>interrupting media session
+    category</var> be
+    <code><a lt="default media state">Default</a></code>.
+  </li>
+  <li>
+    Run these substeps:
+
+    <dl class=switch>
+      <dt>
+        If <var>interrupting media session category</var> is <code><a
+        lt="transient media state">Transient</a></code>
+      </dt>
+      <dd>
+        <ol>
+          <li>
+            If <var>incumbent media session</var>'s <a>current media session
+            type</a> is <code><a lt="default media state">Default</a></code>
+            or
+            <code><a lt="content media state">Content</a></code>
+            then <a>unduck</a> all of <var>incumbent media session</var>'s
+            <a>active participating media elements</a>
+            and set <var>incumbent media session</var>'s <a>current state</a> to
+            <code><a lt="active media session state">ACTIVE</a></code>.
+          </li>
+        </ol>
+      </dd>
+      <dt>
+        If <var>interrupting media session category</var> is <code><a
+        lt="transient solo media state">Transient Solo</a></code>
+      </dt>
+      <dd>
+        <ol>
+          <li>
+            If <var>incumbent media session</var>'s <a>current media session
+            type</a> is <code><a lt="default media state">Default</a></code>,
+            <code><a lt="content media state">Content</a></code>, <code><a
+            lt="transient media state">Transient</a></code>, or
+            <code><a lt="transient solo media state">Transient Solo</a></code>
+            then <a>unpause</a> the
+            <var>incumbent media session</var>'s <a>participating media
+            elements</a> that were <a lt="active participating media
+            elements">active</a> prior to the corresponding
+            start-of-interruption notification and set <var>incumbent media
+            session</var>'s <a>current state</a> to
+            <code><a lt="active media session state">ACTIVE</a></code>.
+          </li>
+        </ol>
+      </dd>
+    </dl>
+  </li>
+</ol>
+
+After a {{visibilitychange}} event [[PAGE-VISIBILITY]] has been fired at a
+<a>top-level browsing context</a>, known as <var>the browsing context</var>, the
+user agent must run the following steps:
+
+<ol>
+  <li>
+    If {{visibilityState}} is not &quot;{{hidden}}&quot; or
+    &quot;{{visible}}&quot; [[PAGE-VISIBILITY]] abort the remaining steps.
+  </li>
+
+  <li>
+    For each <a>media session</a>, known as <var>s</var>, in <var>the browsing
+    context</var> with an <a>current media session type</a> of <code><a
+    lt="ambient media state">Ambient</a></code> run the following substeps:
+    <ol>
+      <li>
+        If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
+        <var>s</var>'s <a>current state</a> is <code><a lt="active media session
+        state">ACTIVE</a></code> then <a>pause</a> all of <var>s</var>'s
+        <a>active participating media elements</a> and set <var>s</var>'s
+        <a>current state</a> to <code><a lt="interrupted media session
+        state">INTERRUPTED</a></code>, abort any remaining substeps and continue
+        at the next available <var>s</var>.
+      </li>
+      <li>
+        If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
+        and <var>s</var>'s <a>current state</a> is <code><a lt="interrupted
+        media session state">INTERRUPTED</a></code> then <a>unpause</a> all of
+        <var>s</var>'s <a>active participating media elements</a> and set
+        <var>s</var>'s <a>current state</a> to <code><a lt="active media session
+        state">ACTIVE</a></code>, abort any remaining substeps and continue at
+        the next available <var>s</var>.
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="releasing-a-media-session">Releasing a media session</h3>
+
+When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
+user agent must remove the <a>media element</a> from its <a>current media
+session</a>'s <a>active participating media elements</a> and then run the
+<a>media session release algorithm</a> passing in the
+<a>media element</a>'s <a>current media session</a>, if any, as the only
+argument.
+
+When a <a>media element</a> with an <a>current media session type</a> set to
+<code><a lt="transient media state">Transient</a></code> or <code><a
+lt="transient solo media state">Transient Solo</a></code> is <a>paused</a>, then
+the user agent must remove the <a>media element</a> from its <a>current media
+session</a>'s <a>active participating media elements</a> and then run the
+<a>media session release algorithm</a> passing in the
+<a>media element</a>'s <a>current media session</a> as the only argument.
+
+Any time a <a>media element</a>'s <a lt="media element load algorithm">load
+algorithm</a> is run by the user agent, it must remove the <a>media element</a>
+from its <a>current media session</a>'s <a>active participating media
+elements</a> and then also run the <a>media session release algorithm</a>
+passing in the
+<a>media element</a>'s <a>current media session</a>, if any, as the only
+argument.
+
+The <dfn>media session release algorithm</dfn> takes one argument,
+<var>current media session</var>, and consists of running the following steps.
+
+<ol>
+  <li>
+    If <var>current media session</var> is empty or its <a>current state</a> is
+    <code><a lt="idle media session state">IDLE</a></code> then abort the
+    remaining steps and return.
+  </li>
+  <li>
+    If <var>current media session</var> has one or more <a>active participating
+    media elements</a> then abort the remaining steps and return.
+  </li>
+  <li>
+    Optionally, based on platform conventions, the user agent must release any
+    currently held platform media focus for <var>current media session</var>.
+  </li>
+  <li>
+    Optionally, based on platform conventions, the user agent must remove any
+    previously established ongoing media interface in the underlying platform's
+    notifications area and any ongoing media interface in the underlying
+    platform's lock screen area for
+    <var>current media session</var>, if any.
+  </li>
+  <li>
+    Optionally, based on platform conventions, the user agent must prevent any
+    hardware and/or software media keys from controlling playback of
+    <var>current media session</var>'s
+    <a>active participating media elements</a>.
+  </li>
+  <li>
+    Set <var>current media session</var>'s <a>current state</a> to
+    <code><a lt="idle media session state">IDLE</a></code>.
+
+    <p class="note">
+      This implies that the next time the <a>media session invocation
+      algorithm</a>
+      is run against any <a>media element</a> in <a>current media session</a>
+      that we will re-request media focus according to the steps defined in that
+      algorithm.
+    </p>
+  </li>
+</ol>
+
+When a <a>media element</a> is <a lt="remove an element from a document">removed
+from a <code>Document</code></a> and is not attached to another {{Document}},
+remove the <a>media element</a> from its <a>current media session</a>'s
+<a>active participating media elements</a> and then run the <a>media session
+release algorithm</a>
+passing in the
+<a>media element</a>'s <a>current media session</a>, if any, as the only
+argument.
+
+<h2 id="api">API</h2>
+
+<h3 id="the-mediasession-interface">The {{MediaSession}} interface</h3>
 
 <a>Media sessions</a> implement the following interface:
 
@@ -286,6 +979,13 @@ interface MediaSession {
   void release();
 };
 
+enum MediaSessionKind {
+  "content",
+  "transient",
+  "transient-solo",
+  "ambient"
+};
+
 dictionary MediaMetadata {
   DOMString title = "";
   DOMString artist = "";
@@ -293,6 +993,19 @@ dictionary MediaMetadata {
   USVString artwork;
 };
 </pre>
+
+<h4 id="mediasession-garbage-collection">Garbage collection</h4>
+
+A {{MediaSession}} object must not be garbage collected while its corresponding
+<a>media session</a> is attached to at least one <a>participating media
+element</a>.
+
+Additionally, a {{MediaSession}} object must not be garbage collected while the
+{{MediaSession}} object's child {{MediaRemoteControls}} object has an <a>event
+listener</a> whose <b>type</b> is <code>previoustrack</code>,
+<code>nexttrack</code>, <code>seekforward</code> or <code>seekbackward</code>.
+
+<h4 id="mediasession-constructors">Constructors</h4>
 
 <dl class=domintro>
   <dt>
@@ -313,19 +1026,21 @@ attribute value"><code>content</code></a>&quot if <var>kind</var> is empty, its
 if its {{MediaSession/kind}} is &quot;<a lt="content attribute
 value"><code>content</code></a>&quot or null otherwise, and then return it.
 
+<h4 id="mediasession-object-members">Object members</h4>
+
 <dl class=domintro>
   <dt>
     <code><var>session</var> . {{MediaSession/kind}}</code>
   </dt>
   <dd>
-    Returns the DOMString value of the <a>intrinsic media category state</a> the
+    Returns the DOMString value of the <a>current media session type</a> the
     <a>media session</a> represents.
   </dd>
 </dl>
 
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
-attribute must return the DOMString value of the <a>intrinsic media category
-state</a> of the <a>media session</a>.
+attribute must return the DOMString value of the <a>current media session
+type</a> of the <a>media session</a>.
 
 <dl class=domintro>
   <dt>
@@ -445,265 +1160,6 @@ must run the following steps:
   </li>
 </ol>
 
-
-<h2 id="media-categories">Media categories</h2>
-
-A <dfn>media category</dfn> is a keyword that maps to a well-defined interaction
-state for a <a>media element</a> that user agents use to enforce
-platform-specific interaction and interoperation between web media.
-
-<pre class="idl">
-enum MediaSessionKind {
-  "content",
-  "transient",
-  "transient-solo",
-  "ambient"
-};
-</pre>
-
-The following table lists the available <a>media categories</a> keywords and
-states — the keywords in the left column map to the states in the cell in the
-second column on the same row as the keyword. The attribute should be set based
-on the preferred definitions in the table’s third and fourth columns.
-
-<table id="valid-media-categories">
-  <tr>
-    <th>Category</th>
-    <th>State</th>
-    <th>Definition</th>
-    <th>Examples</th>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="content attribute value"><code>content</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="content media state">Content</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          Indefinitely <a>pauses</a> all other <a lt="active participating media
-          elements">active</a>
-          <code><a lt="default media state">Default</a></code> and <code><a
-          lt="content media state">Content</a></code> content when <a
-          href="#media-session-invocation">playback begins</a>.
-        </li>
-        <li>
-          Displays lock-screen and notification area user interfaces when
-          <a href="#media-session-invocation">playback begins</a>.
-        </li>
-        <li>
-          Reacts to changes in both hardware and software-based media key
-          buttons when <a href="#media-session-invocation">playback begins</a>.
-        </li>
-        <li>
-          <a>Ducks</a> itself when <code><a lt="transient media
-          state">Transient</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>.
-          <a>Unducks</a>
-          itself when <code><a lt="transient media state">Transient</a></code>
-          content is <a>paused</a> or <a href="#media-session-release">ends
-          playback</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>.
-          <a>Unpauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content is <a>paused</a> or <a
-          href="#media-session-release">ends playback</a>.
-        </li>
-        <li>
-          Continues playing normally when <code><a lt="ambient media
-          state">Ambient</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Music, podcasts, radio streams.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="transient attribute
-      value"><code>transient</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="transient media state">Transient</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          <a>Ducks</a> all other <a lt="active participating media
-          elements">active</a>
-          <code><a lt="default media state">Default</a></code>
-          and <code><a lt="content media state">Content</a></code> content when
-          <a href="#media-session-invocation">playback begins</a>.
-          <a>Unducks</a> all other <a lt="interrupted media session
-          state">interrupted</a> <code><a lt="default media
-          state">Default</a></code> and <code><a lt="content media
-          state">Content</a></code> content when <a>paused</a> or <a
-          href="#media-session-release">playback ends</a>.
-        </li>
-        <li>
-          Does not display lock-screen and notification area user interfaces
-          when <a href="#media-session-invocation">playback begins</a>.
-        </li>
-        <li>
-          Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#media-session-invocation">playback
-          begins</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>.
-          <a>Unpauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content is <a>paused</a> or <a
-          href="#media-session-release">ends playback</a>.
-        </li>
-        <li>
-          Continues playing normally when other <code><a lt="transient media
-          state">Transient</a></code> or <code><a lt="ambient media
-          state">Ambient</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Notification sounds. Spoken driving directions where playback of music in
-      the background is acceptable.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="transient-solo attribute
-      value"><code>transient-solo</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="transient solo media state">Transient Solo</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          <a>Pauses</a> all other <a lt="active participating media
-          elements">active</a>
-          <code><a lt="default media state">Default</a></code>,
-          <code><a lt="content media state">Content</a></code>, <code><a
-          lt="transient media state">Transient</a></code> and
-          <code><a lt="transient solo media state">Transient Solo</a></code>
-          content when <a href="#media-session-invocation">playback begins</a>.
-          <a>Unpauses</a> all <a lt="interrupted media session
-          state">interrupted</a>
-          <code><a lt="default media state">Default</a></code>, <code><a
-          lt="content media state">Content</a></code>, <code><a lt="transient
-          media state">Transient</a></code> and <code><a lt="transient solo
-          media state">Transient Solo</a></code>
-          content when <a>paused</a> or <a
-          href="#media-session-release">playback ends</a>.
-        </li>
-        <li>
-          Does not display lock-screen and notification area user interfaces
-          when <a href="#media-session-invocation">playback begins</a>.
-        </li>
-        <li>
-          Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#media-session-invocation">playback
-          begins</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when other <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>.
-          <a>Unpauses</a>
-          itself when other <code><a lt="transient solo media state">Transient
-          Solo</a></code> content is <a>paused</a> or <a
-          href="#media-session-release">ends playback</a>.
-        </li>
-        <li>
-          Continues playing normally when <code><a lt="ambient media
-          state">Ambient</a></code> content <a
-          href="#media-session-interruption">starts interrupting</a>.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Playback of driving directions. Other spoken notifications.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="ambient attribute value"><code>ambient</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="ambient media state">Ambient</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          Does not interact with any other <code><a lt="default media
-          state">Default</a></code>,
-          <code><a lt="content media state">Content</a></code>, <code><a
-          lt="transient media state">Transient</a></code>,
-          <code><a lt="transient solo media state">Transient Solo</a></code> or
-          <code><a lt="ambient media state">Ambient</a></code> content during
-          playback.
-        </li>
-        <li>
-          Does not display lock-screen and notification area user interfaces
-          when <a href="#media-session-invocation">playback begins</a>.
-        </li>
-        <li>
-          Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#media-session-invocation">playback
-          begins</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when its <a>top-level browsing context</a> is not
-          visible (i.e. the page is placed in the background or the user agent
-          is minimized or the screen is switched off). <a>Unpauses</a> itself
-          when its
-          <a>top-level browsing context</a> is at least partially visible on at
-          least one screen again (i.e. the user agent is in the foreground and
-          the page is focused again).
-        </li>
-      </ul>
-    </td>
-    <td>
-      UI sounds. In-game sound effects and background music.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<strong id="default-media-value"><code></code></strong>&quot; (empty
-      string)
-    </td>
-    <td>
-      <dfn lt="default media state">Default</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          No explicit kind, or the kind of the media given is not recognized by
-          the user agent.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Legacy media content
-    </td>
-  </tr>
-</table>
-
-<h2 id="media-remote-controls">Media remote controls</h2>
-
-<dfn lt="media remote control">Media remote controls</dfn> enable a <a>media
-session</a> to respond to hardware or software remote control events. Such
-events may be triggered by e.g. keyboard media keys, headphone buttons, remote
-controller buttons or notification and lock screen media buttons.
-
 <h3 id="the-mediaremotecontrols-interface">The {{MediaRemoteControls}}
 interface</h3>
 
@@ -723,6 +1179,8 @@ interface MediaRemoteControls : EventTarget {
   attribute EventHandler onseekbackward;
 };
 </pre>
+
+<h4 id="mediaremotecontrols-object-members">Object members</h4>
 
 <dl class=domintro>
   <dt>
@@ -798,8 +1256,7 @@ control interfaces. By default, this attribute is false.
   are left up to implementers.
 </p>
 
-<h3 id="event-handlers-on-mediaremotecontrols-objects">Event handlers on
-{{MediaRemoteControls}} objects</h3>
+<h4 id="mediaremotecontrols-event-handlers">Event handlers</h4>
 
 The following are the <a>event handlers</a> (and their corresponding <a>event
 handler event types</a>) that must be supported, as IDL attributes, by all
@@ -868,8 +1325,8 @@ the following steps:
     Let <var>m</var> be the <a>media session</a>.
   </li>
   <li>
-    If <var>m</var> is empty or <var>m</var>'s <a>intrinsic media category
-    state</a> is not <code><a lt="default media state">Default</a></code> or
+    If <var>m</var> is empty or <var>m</var>'s <a>current media session type</a>
+    is not <code><a lt="default media state">Default</a></code> or
     <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
     <a>current state</a> is not
     <code><a lt="active media session state">ACTIVE</a></code> then abort these
@@ -929,7 +1386,7 @@ that is currently <code><a lt="active media session state">ACTIVE</a></code>,
 seekforward"><code>seekforward</code></a> at its child {{MediaRemoteControls}}
 object.
 
-<h3 id="media-remote-controls-events-summary">Events summary</h3>
+<h4 id="mediaremotecontrols-events-summary">Events summary</h4>
 
 <em>This section is non-normative.</em>
 
@@ -966,7 +1423,7 @@ processing model described above:
         hardware or software media interface.
       </td>
       <td>
-        <a>intrinsic media category state</a> is <code><a lt="content media
+        <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
         media session state">ACTIVE</a></code> and
         {{MediaRemoteControls/previousTrackEnabled}} is true.
@@ -984,7 +1441,7 @@ processing model described above:
         software media interface.
       </td>
       <td>
-        <a>intrinsic media category state</a> is <code><a lt="content media
+        <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
         media session state">ACTIVE</a></code> and
         {{MediaRemoteControls/nextTrackEnabled}} is true.
@@ -1002,7 +1459,7 @@ processing model described above:
         or software media interface.
       </td>
       <td>
-        <a>intrinsic media category state</a> is <code><a lt="content media
+        <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
         media session state">ACTIVE</a></code> and
         {{MediaRemoteControls/seekBackwardEnabled}} is true.
@@ -1020,7 +1477,7 @@ processing model described above:
         or software media interface.
       </td>
       <td>
-        <a>intrinsic media category state</a> is <code><a lt="content media
+        <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
         media session state">ACTIVE</a></code> and
         {{MediaRemoteControls/seekForwardEnabled}} is true.
@@ -1053,8 +1510,8 @@ partial interface HTMLMediaElement {
     <code><var>media</var> . {{HTMLMediaElement/kind}}</code>
   </dt>
   <dd>
-    Returns the category the given media falls into. The <a
-    href="#media-categories">possible media categories</a> are defined above.
+    Returns the category the given media falls into. The <a lt="media session
+    categories">possible media categories</a> are defined above.
   </dd>
   <dt>
     <code><var>media</var> . {{HTMLMediaElement/session}}</code> [ = <code>
@@ -1153,7 +1610,103 @@ otherwise. On setting, the user agent must run the following steps:
   </li>
 </ol>
 
-<p>&nbsp;</p>
+<h3 id="assigning-a-media-session-declaratively">Assigning a media session
+declaratively</h3>
+
+The <dfn lt="kind content attribute"><code>kind</code></dfn> content attribute
+on <a>media elements</a> is an <a>enumerated attribute</a>
+and must return the <a>media element</a>'s <a>media session category</a>, if it
+has one, or the empty string otherwise.
+
+When a <a>media element</a> is created with a {{HTMLMediaElement/kind}} content
+attribute then the user agent must run the <a>update the attached media session
+algorithm</a>, passing in <a>media element</a> as the only argument.
+
+The <dfn>update the attached media session algorithm</dfn> takes one argument,
+<var>current media element</var>, and consists of running the following steps:
+
+<ol>
+  <li>
+    Let <var>media session type</var> be the <var>current media element</var>'s
+    {{MediaSession/kind}} attribute's corresponding <a>media session type</a> as
+    defined in the list of
+    <a href="#valid-media-categories">possible media session categories</a>. If
+    no known category match is found, let <var>media session type</var> be
+    <code><a lt="default media state">Default</a></code>.
+  </li>
+  <li>
+    If <var>media session type</var> is <code><a lt="default media
+    state">Default</a></code> then let <var>media session</var> be the current
+    <a>top-level browsing context</a>'s <a>media session</a> and set
+    <var>current media element</var>'s <a>current media session</a> to the
+    current
+    <a>top-level browsing context</a>'s <a>media session</a>. Otherwise, if
+    <var>current media element</var>'s <a>current media session type</a> is the
+    same as <var>media session type</var> then let <var>media session</var> be
+    <var>current media element</var>'s <a>current media session</a> object.
+    Otherwise, let
+    <var>media session</var> be a new {{MediaSession}} object and set <var>media
+    session</var>'s <a>current media session type</a> to the value of
+    <var>media session type</var>.
+  </li>
+  <li>
+    If <var>media session type</var> is <code><a lt="default media
+    state">Default</a></code> then set <var>current media element</var>'s
+    {{HTMLMediaElement/session}} attribute to null, abort the remaining steps
+    and return.
+    <p class="note">
+      <code><a lt="default media state">Default</a></code> <a>media sessions</a>
+      do not expose a {{HTMLMediaElement/session}} attribute but still maintain
+      an internal
+      <a>current media session</a> reference.
+    </p>
+  </li>
+</ol>
+
+<h4 id="extensions-to-the-video-element">Extensions to the <code><a
+element>video</a></code> element</h4>
+
+<dl class="element">
+  <dt>
+    Additional content attributes:
+  </dt>
+  <dd>
+    <a lt="kind content attribute"><code>kind</code></a> — The type of video
+  </dd>
+</dl>
+
+<div class="example">
+  A <code><a element>video</a></code> element's <code><a lt="kind content
+  attribute">kind</a></code> content attribute can be declared as follows HTML:
+
+  <pre class="lang-markup">
+&lt;video src="short_ping.webm" kind="transient">
+  </pre>
+</div>
+
+<h4 id="extensions-to-the-audio-element">Extensions to the <code><a
+element>audio</a></code> element</h4>
+
+<dl class="element">
+  <dt>
+    Additional content attributes:
+  </dt>
+  <dd>
+    <a lt="kind content attribute"><code>kind</code></a> — The type of audio
+  </dd>
+</dl>
+
+<div class="example">
+  An <code><a element>audio</a></code> element's <code><a lt="kind content
+  attribute">kind</a></code> content attribute can be declared as follows in
+  HTML:
+
+  <pre class="lang-markup">
+&lt;audio src="track1.ogg" kind="content">
+  </pre>
+</div>
+
+<h2 id="examples">Examples</h2>
 
 <div class="example">
   As both <code><a element>audio</a></code> and <code><a
@@ -1228,530 +1781,3 @@ myAudio.play(); // Go!
     element to their {{AudioContext}} object appropriately.
   </p>
 </div>
-
-<h3 id="assigning-a-media-session-declaratively">Assigning a media session
-declaratively</h3>
-
-The <dfn lt="kind content attribute"><code>kind</code></dfn> content attribute
-on <a>media elements</a> is an <a>enumerated attribute</a>
-and must return the <a>media element</a>'s <a>media category</a>, if it has one,
-or the empty string otherwise.
-
-When a <a>media element</a> is created with a {{HTMLMediaElement/kind}} content
-attribute then the user agent must run the <a>update the attached media session
-algorithm</a>, passing in <a>media element</a> as the only argument.
-
-The <dfn>update the attached media session algorithm</dfn> takes one argument,
-<var>current media element</var>, and consists of running the following steps:
-
-<ol>
-  <li>
-    Let <var>media category state</var> be the <var>current media
-    element</var>'s {{MediaSession/kind}} attribute's state value as defined in
-    the list of
-    <a href="#valid-media-categories">possible media categories</a>. If no known
-    category match is found, let <var>media category state</var> be <code><a
-    lt="default media state">Default</a></code>.
-  </li>
-  <li>
-    If <var>media category state</var> is <code><a lt="default media
-    state">Default</a></code> then let <var>media session</var> be the current
-    <a>top-level browsing context</a>'s <a>media session</a> and set
-    <var>current media element</var>'s <a>current media session</a> to the
-    current
-    <a>top-level browsing context</a>'s <a>media session</a>. Otherwise, if
-    <var>current media element</var>'s <a>intrinsic media category state</a> is
-    the same as <var>media category state</var> then let <var>media
-    session</var> be <var>current media element</var>'s <a>current media
-    session</a> object. Otherwise, let
-    <var>media session</var> be a new {{MediaSession}} object and set <var>media
-    session</var>'s <a>intrinsic media category state</a> to the value of
-    <var>media category state</var>.
-  </li>
-  <li>
-    If <var>media category state</var> is <code><a lt="default media
-    state">Default</a></code> then set <var>current media element</var>'s
-    {{HTMLMediaElement/session}} attribute to null, abort the remaining steps
-    and return.
-    <p class="note">
-      <code><a lt="default media state">Default</a></code> <a lt="media
-      category">media categories</a> do not expose a
-      {{HTMLMediaElement/session}} attribute but still maintain an internal
-      <a>current media session</a> reference.
-    </p>
-  </li>
-</ol>
-
-<h4 id="extensions-to-the-video-element">Extensions to the <code><a
-element>video</a></code> element</h4>
-
-<dl class="element">
-  <dt>
-    Additional content attributes:
-  </dt>
-  <dd>
-    <a lt="kind content attribute"><code>kind</code></a> — The type of video
-  </dd>
-</dl>
-
-<div class="example">
-  A <code><a element>video</a></code> element's <code><a lt="kind content
-  attribute">kind</a></code> content attribute can be declared as follows HTML:
-
-  <pre class="lang-markup">
-&lt;video src="short_ping.webm" kind="transient">
-  </pre>
-</div>
-
-<h4 id="extensions-to-the-audio-element">Extensions to the <code><a
-element>audio</a></code> element</h4>
-
-<dl class="element">
-  <dt>
-    Additional content attributes:
-  </dt>
-  <dd>
-    <a lt="kind content attribute"><code>kind</code></a> — The type of audio
-  </dd>
-</dl>
-
-<div class="example">
-  An <code><a element>audio</a></code> element's <code><a lt="kind content
-  attribute">kind</a></code> content attribute can be declared as follows in
-  HTML:
-
-  <pre class="lang-markup">
-&lt;audio src="track1.ogg" kind="content">
-  </pre>
-</div>
-
-<h2 id="media-session-invocation">Media session invocation</h2>
-
-When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
-element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
-{{HTMLMediaElement/readyState}} attribute has the value {{HAVE_FUTURE_DATA}} or
-{{HAVE_ENOUGH_DATA}}, then the user agent must run the <a>media session
-invocation algorithm</a>, passing in the <a>media element</a> as
-<var>current media element</var>. [[HTML]]
-
-The <dfn>media session invocation algorithm</dfn> takes one argument,
-<var>current media element</var>, and consists of the following steps:
-
-<ol>
-  <li>
-    Let <var>media session</var> be the value of <var>current media
-    element</var>'s <a>current media session</a>.
-  </li>
-  <li>
-    If <var>media session</var> is empty or <var>media session</var>'s
-    <a>current state</a> is
-    <code><a lt="active media session state">ACTIVE</a></code> abort the
-    remaining steps and return.
-  </li>
-  <li>
-    Optionally, based on platform conventions, request the most appropriate
-    platform-level media focus for <var>media session</var> based on its current
-    <a>intrinsic media category state</a>.
-
-    If this step is run and platform-level media focus can not be obtained for
-    any reason then <a>pause</a> <var>current media element</var>, abort the
-    remaining steps and return.
-  </li>
-  <li>
-    Run these substeps:
-
-    <dl class=switch>
-      <dt>
-        If <var>media session</var>'s <a>intrinsic media category state</a> is
-        <code><a lt="content media state">Content</a></code>
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            Optionally, based on platform conventions, the user agent may show
-            an ongoing media interface in the underlying platform's
-            notifications area and/or show an ongoing media interface in the
-            underlying platform's lock screen area for <var>media session</var>
-            based on both the requested <a>media remote controls</a> and using
-            any available <a>media session metadata</a>.
-          </li>
-          <li>
-            Optionally, based on platform conventions, the user agent may allow
-            hardware and/or software media keys to control playback of
-            <var>media session</var>'s <a>active participating media
-            elements</a> based on the requested <a>media remote controls</a>.
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>media session</var>'s <a>intrinsic media category state</a> is
-        <code><a lt="transient media state">Transient</a></code> or <code><a
-        lt="transient solo media state">Transient Solo</a></code>
-      </dt>
-      <dd class="note">
-        The user agent should not provide user access to any hardware or
-        software media keys and not display any ongoing media interface in the
-        underlying platform's notifications area or show any ongoing media
-        interface in the underlying platform's lock screen area for
-        <code><a lt="transient media state">Transient</a></code> or
-        <code><a lt="transient solo media state">Transient Solo</a></code>-based
-        <a>media sessions</a>.
-      </dd>
-      <dt>
-        If <var>media session</var>'s <a>intrinsic media category state</a> is
-        <code><a lt="ambient media state">Ambient</a></code>
-      </dt>
-      <dd>
-        If the <var>current media element</var>'s <a>top-level browsing
-        context</a> is not at least partially visible on at least one screen
-        then <a>pause</a>
-        <var>current media element</var>, abort the remaining steps and return.
-
-        <p class="note">
-          The user agent should not provide user access to any hardware or
-          software media keys and not display any ongoing media interface in the
-          underlying platform's notifications area or show any ongoing media
-          interface in the underlying platform's lock screen area for
-          <code><a lt="ambient media state">Ambient</a></code>-based <a>media
-          sessions</a>.
-        </p>
-      </dd>
-    </dl>
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>current state</a> to
-    <code><a lt="active media session state">ACTIVE</a></code>.
-  </li>
-</ol>
-
-<h2 id="media-session-interruption">Media session interruption</h2>
-
-A <a>media session</a> may be interrupted at any time after its
-<a>media session invocation algorithm</a> has been run. This typically occurs
-when another application or <a>media session</a> requests and is granted
-platform-level media focus.
-
-Interruptions can be both transient or permanent. A transient interruption means
-we can either choose to <a>duck</a> our content and continue playing it out at a
-reduced volume for the duration of the interruption; or <a>pause</a> our content
-for the duration of the interruption and then resume playback when the
-interruption ends. A permanent interruption means we must <a>pause</a> our media
-content indefinitely.
-
-When a <a>media session</a> receives a start-of-interruption notification from
-the platform then the user agent must run the
-<a>media session interruption algorithm</a> passing in the <a>media session</a>
-as <var>interrupted media session</var>.
-
-The <dfn>media session interruption algorithm</dfn> takes one argument,
-<var>interrupted media session</var>, and consists of running the following
-steps.
-
-<ol>
-  <li>
-    If <var>interrupted media session</var>'s <a>current state</a> is not
-    <code><a lt="active media session state">ACTIVE</a></code> abort the
-    remaining steps and return.
-  </li>
-  <li>
-    Let <var>interrupting media category</var> be the <a>media category</a> that
-    triggered this interruption. If this interruption has no known
-    <a>media category</a>, let <var>interrupting media category</var> be
-    <code><a lt="default media state">Default</a></code>.
-  </li>
-  <li>
-    Run these substeps:
-
-    <dl class=switch>
-      <dt>
-        If <var>interrupting media category</var> is <code><a lt="content media
-        state">Content</a></code>
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>interrupted media session</var>'s <a>intrinsic media
-            category state</a> is <code><a lt="default media
-            state">Default</a></code>
-            or <code><a lt="content media state">Content</a></code> then
-            <a>pause</a> all of <var>interrupted media session</var>'s
-            <a>active participating media elements</a> and set
-            <var>interrupted media session</var>'s <a>current state</a> to
-            <code><a lt="idle media session state">IDLE</a></code>.
-
-            <p class="note">
-              This implies that the next time the <a>media session invocation
-              algorithm</a>
-              is run against a <a>media element</a> in <a>media session</a>
-              that we will re-request media focus according to the steps defined
-              in that algorithm.
-            </p>
-          </li>
-          <li>
-            Optionally, based on platform conventions, the user agent must
-            remove any previously established ongoing media interface in the
-            underlying platform's notifications area and any ongoing media
-            interface in the underlying platform's lock screen area for
-            <var>interrupted media session</var>, if any.
-          </li>
-          <li>
-            Optionally, based on platform conventions, the user agent must
-            prevent any hardware and/or software media keys from controlling
-            playback of
-            <var>interrupted media session</var>'s <a>active participating media
-            elements</a>.
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>interrupting media category</var> is <code><a lt="transient
-        media state">Transient</a></code>
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>interrupted media session</var>'s <a>intrinsic media
-            category state</a> is <code><a lt="default media
-            state">Default</a></code>
-            or <code><a lt="content media state">Content</a></code> then
-            <a>duck</a>
-            all of <var>interrupted media session</var>'s <a>active
-            participating media elements</a> and set
-            <var>interrupted media session</var>'s
-            <a>current state</a> to <code><a lt="interrupted media session
-            state">INTERRUPTED</a></code>.
-            <p class="note">
-              This implies that the next time the <a>media session release
-              algorithm</a>
-              is run that we will re-activate this <a>media session</a>
-              according to the steps defined in that algorithm.
-            </p>
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>interrupting media category</var> is <code><a lt="transient solo
-        media state">Transient Solo</a></code>
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>interrupted media session</var>'s <a>intrinsic media
-            category state</a> is <code><a lt="default media
-            state">Default</a></code>, <code><a lt="content media
-            state">Content</a></code>, <code><a lt="transient media
-            state">Transient</a></code> or <code><a lt="transient solo media
-            state">Transient Solo</a></code> then <a>pause</a> all of
-            <var>interrupted media session</var>'s
-            <a>active participating media elements</a> and set <var>current
-            media session</var>'s <a>current state</a> to
-            <code><a lt="interrupted media session
-            state">INTERRUPTED</a></code>.
-
-            <div class="note">
-              <p>
-                This implies that the next time the <a>media session invocation
-                algorithm</a>
-                is run against a <a>media element</a> in <a>media session</a>
-                that we will re-request media focus according to the steps
-                defined in that algorithm.
-              </p>
-
-              <p>
-                It also implies that the next time the <a>media session release
-                algorithm</a>
-                is run that we will re-activate this <a>media session</a>
-                according to the steps defined in that algorithm.
-              </p>
-            </div>
-          </li>
-        </ol>
-      </dd>
-    </dl>
-  </li>
-</ol>
-
-<p>&nbsp;</p>
-
-When a <a>media session</a> receives an end-of-interruption notification from
-the platform then the user agent must run the <a>media session continuation
-algorithm</a> against all known <a>media sessions</a>, passing in each <a>media
-session</a> as <var>incumbent media session</var>.
-
-The <dfn>media session continuation algorithm</dfn> takes one argument,
-<var>incumbent media session</var>, and consists of running the following steps.
-
-<ol>
-  <li>
-    If <var>incumbent media session</var>'s <a>current state</a> is not
-    <code><a lt="interrupted media session state">INTERRUPTED</a></code>
-    then abort the remaining steps and return.
-  </li>
-  <li>
-    Let <var>interrupting media category</var> be the <a>media category</a> that
-    intially triggered this interruption. If this interruption has no known
-    <a>media category</a>, let <var>interrupting media category</var> be
-    <code><a lt="default media state">Default</a></code>.
-  </li>
-  <li>
-    Run these substeps:
-
-    <dl class=switch>
-      <dt>
-        If <var>interrupting media category</var> is <code><a lt="transient
-        media state">Transient</a></code>
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>incumbent media session</var>'s <a>intrinsic media category
-            state</a> is <code><a lt="default media state">Default</a></code>
-            or
-            <code><a lt="content media state">Content</a></code>
-            then <a>unduck</a> all of <var>incumbent media session</var>'s
-            <a>active participating media elements</a>
-            and set <var>incumbent media session</var>'s <a>current state</a> to
-            <code><a lt="active media session state">ACTIVE</a></code>.
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>interrupting media category</var> is <code><a lt="transient solo
-        media state">Transient Solo</a></code>
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>incumbent media session</var>'s <a>intrinsic media category
-            state</a> is <code><a lt="default media state">Default</a></code>,
-            <code><a lt="content media state">Content</a></code>, <code><a
-            lt="transient media state">Transient</a></code>, or
-            <code><a lt="transient solo media state">Transient Solo</a></code>
-            then <a>unpause</a> the
-            <var>incumbent media session</var>'s <a>participating media
-            elements</a> that were <a lt="active participating media
-            elements">active</a> prior to the corresponding
-            start-of-interruption notification and set <var>incumbent media
-            session</var>'s <a>current state</a> to
-            <code><a lt="active media session state">ACTIVE</a></code>.
-          </li>
-        </ol>
-      </dd>
-    </dl>
-  </li>
-</ol>
-
-After a {{visibilitychange}} event [[PAGE-VISIBILITY]] has been fired at a
-<a>top-level browsing context</a>, known as <var>the browsing context</var>, the
-user agent must run the following steps:
-
-<ol>
-  <li>
-    If {{visibilityState}} is not &quot;{{hidden}}&quot; or
-    &quot;{{visible}}&quot; [[PAGE-VISIBILITY]] abort the remaining steps.
-  </li>
-
-  <li>
-    For each <a>media session</a>, known as <var>s</var>, in <var>the browsing
-    context</var> with an <a>intrinsic media category state</a> of <code><a
-    lt="ambient media state">Ambient</a></code> run the following substeps:
-    <ol>
-      <li>
-        If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
-        <var>s</var>'s <a>current state</a> is <code><a lt="active media session
-        state">ACTIVE</a></code> then <a>pause</a> all of <var>s</var>'s
-        <a>active participating media elements</a> and set <var>s</var>'s
-        <a>current state</a> to <code><a lt="interrupted media session
-        state">INTERRUPTED</a></code>, abort any remaining substeps and continue
-        at the next available <var>s</var>.
-      </li>
-      <li>
-        If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
-        and <var>s</var>'s <a>current state</a> is <code><a lt="interrupted
-        media session state">INTERRUPTED</a></code> then <a>unpause</a> all of
-        <var>s</var>'s <a>active participating media elements</a> and set
-        <var>s</var>'s <a>current state</a> to <code><a lt="active media session
-        state">ACTIVE</a></code>, abort any remaining substeps and continue at
-        the next available <var>s</var>.
-      </li>
-    </ol>
-  </li>
-</ol>
-
-<h2 id="media-session-release">Media session release</h2>
-
-When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
-user agent must remove the <a>media element</a> from its <a>current media
-session</a>'s <a>active participating media elements</a> and then run the
-<a>media session release algorithm</a> passing in the
-<a>media element</a>'s <a>current media session</a>, if any, as the only
-argument.
-
-When a <a>media element</a> with an <a>intrinsic media category state</a> set to
-<code><a lt="transient media state">Transient</a></code> or <code><a
-lt="transient solo media state">Transient Solo</a></code> is <a>paused</a>, then
-the user agent must remove the <a>media element</a> from its <a>current media
-session</a>'s <a>active participating media elements</a> and then run the
-<a>media session release algorithm</a> passing in the
-<a>media element</a>'s <a>current media session</a> as the only argument.
-
-Any time a <a>media element</a>'s <a lt="media element load algorithm">load
-algorithm</a> is run by the user agent, it must remove the <a>media element</a>
-from its <a>current media session</a>'s <a>active participating media
-elements</a> and then also run the <a>media session release algorithm</a>
-passing in the
-<a>media element</a>'s <a>current media session</a>, if any, as the only
-argument.
-
-The <dfn>media session release algorithm</dfn> takes one argument,
-<var>current media session</var>, and consists of running the following steps.
-
-<ol>
-  <li>
-    If <var>current media session</var> is empty or its <a>current state</a> is
-    <code><a lt="idle media session state">IDLE</a></code> then abort the
-    remaining steps and return.
-  </li>
-  <li>
-    If <var>current media session</var> has one or more <a>active participating
-    media elements</a> then abort the remaining steps and return.
-  </li>
-  <li>
-    Optionally, based on platform conventions, the user agent must release any
-    currently held platform media focus for <var>current media session</var>.
-  </li>
-  <li>
-    Optionally, based on platform conventions, the user agent must remove any
-    previously established ongoing media interface in the underlying platform's
-    notifications area and any ongoing media interface in the underlying
-    platform's lock screen area for
-    <var>current media session</var>, if any.
-  </li>
-  <li>
-    Optionally, based on platform conventions, the user agent must prevent any
-    hardware and/or software media keys from controlling playback of
-    <var>current media session</var>'s
-    <a>active participating media elements</a>.
-  </li>
-  <li>
-    Set <var>current media session</var>'s <a>current state</a> to
-    <code><a lt="idle media session state">IDLE</a></code>.
-
-    <p class="note">
-      This implies that the next time the <a>media session invocation
-      algorithm</a>
-      is run against any <a>media element</a> in <a>current media session</a>
-      that we will re-request media focus according to the steps defined in that
-      algorithm.
-    </p>
-  </li>
-</ol>
-
-When a <a>media element</a> is <a lt="remove an element from a document">removed
-from a <code>Document</code></a> and is not attached to another {{Document}},
-remove the <a>media element</a> from its <a>current media session</a>'s
-<a>active participating media elements</a> and then run the <a>media session
-release algorithm</a>
-passing in the
-<a>media element</a>'s <a>current media session</a>, if any, as the only
-argument.
