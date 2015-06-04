@@ -55,12 +55,12 @@ This spec is built using [Bikeshed](https://github.com/tabatkins/bikeshed).
 
 Update `mediasession.bs`, then run `make` to format `mediasession.bs` and generate `mediasession.html` using [Bikeshed's web interface](https://api.csswg.org/bikeshed/).
 
-To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/master/docs/install.md) and then run `bikeshed spec` in the working directory.
+To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/gh-pages/docs/install.md) and then run `bikeshed spec` in the working directory.
 
 Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
 
 ## Other Proposals
 
-* [Implicit media focus, key binding, events and overrides](ImplicitMediaControls.md) &ndash; a default and declarative proposal that reuses existing features of `HTMLMediaElement` objects.
+* [Implicit media focus, key binding, events and overrides](https://github.com/whatwg/mediasession/blob/gh-pages/ImplicitMediaControls.md) &ndash; a default and declarative proposal that reuses existing features of `HTMLMediaElement` objects.
 * [Media focus with channels support, metadata additions and media category overrides](https://github.com/mounirlamouri/media-focus/blob/master/explainer.md) &ndash; improve default media handling and provide channels for both `HTMLMediaElement` and `AudioContext` objects.
-* [MediaRemoteControl](MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
+* [MediaRemoteControl](https://github.com/whatwg/mediasession/blob/gh-pages/MediaRemoteControl.md) &ndash; an API proposal to handle all types of media and non-media remote control access.
