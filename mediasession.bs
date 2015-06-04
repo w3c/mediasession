@@ -848,11 +848,9 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             lt="transient media state">Transient</a></code>, or
             <code><a lt="transient solo media state">Transient Solo</a></code>
             then <a>unpause</a> the
-            <var>incumbent media session</var>'s <a>participating media
-            elements</a> that were <a lt="active participating media
-            elements">active</a> prior to the corresponding
-            start-of-interruption notification and set <var>incumbent media
-            session</var>'s <a>current state</a> to
+            <var>incumbent media session</var>'s <a>active participating media
+            elements</a> and set <var>incumbent media session</var>'s <a>current
+            state</a> to
             <code><a lt="active media session state">ACTIVE</a></code>.
           </li>
         </ol>
