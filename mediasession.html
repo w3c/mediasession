@@ -945,10 +945,10 @@ platform-level media focus.</p>
 
 
    <p>Interruptions can be both transient or permanent. A transient interruption means
-we can either choose to <a data-link-type="dfn" href="#duck">duck</a> our content and continue playing it out at a
-reduced volume for the duration of the interruption; or <a data-link-type="dfn" href="#pause">pause</a> our content
-for the duration of the interruption and then resume playback when the
-interruption ends. A permanent interruption means we must <a data-link-type="dfn" href="#indefinitely-pause">pause our media content indefinitely</a>.</p>
+we can either choose to <a data-link-type="dfn" href="#duck">duck</a> our media content and continue playing it
+out at a reduced volume for the duration of the interruption; or <a data-link-type="dfn" href="#pause">pause</a>
+our media content for the duration of the interruption and then resume playback
+when the interruption ends. A permanent interruption means we must <a data-link-type="dfn" href="#indefinitely-pause">pause our media content indefinitely</a>.</p>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="pause">pause<a class="self-link" href="#pause"></a></dfn> the user agent must run
@@ -979,10 +979,9 @@ session</a>’s list of <a data-link-type="dfn" href="#active-participating-medi
 <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the user agent
 must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> against all known
 <a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>incumbent
-media session</var> and then, for the originally <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> <a data-link-type="dfn" href="#media-session">media
-session</a>, immediately run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing
-in that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> as the only
-argument.</p>
+media session</var> and then, for the original <a data-link-type="dfn" href="#indefinitely-pause">indefinitely paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, immediately run the
+<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s
+<a data-link-type="dfn" href="#current-media-session">current media session</a> as the only argument.</p>
 
 
    <div class="note" role="note">
@@ -990,7 +989,7 @@ argument.</p>
   <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based
   <a data-link-type="dfn" href="#media-session">media sessions</a> from indefinitely blocking the continuation of other
   <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> <a data-link-type="dfn" href="#media-session">media
-  sessions</a> when they are paused.
+  sessions</a> when they are indefinitely paused.
 
 
     <p>After we have completed this process, the original <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or

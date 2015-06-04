@@ -624,11 +624,11 @@ when another application or <a>media session</a> requests and is granted
 platform-level media focus.
 
 Interruptions can be both transient or permanent. A transient interruption means
-we can either choose to <a>duck</a> our content and continue playing it out at a
-reduced volume for the duration of the interruption; or <a>pause</a> our content
-for the duration of the interruption and then resume playback when the
-interruption ends. A permanent interruption means we must <a lt="indefinitely
-pause">pause our media content indefinitely</a>.
+we can either choose to <a>duck</a> our media content and continue playing it
+out at a reduced volume for the duration of the interruption; or <a>pause</a>
+our media content for the duration of the interruption and then resume playback
+when the interruption ends. A permanent interruption means we must <a
+lt="indefinitely pause">pause our media content indefinitely</a>.
 
 When a <a>media element</a> is to <dfn>pause</dfn> the user agent must run
 <a>media element</a>'s <a>internal pause steps</a>.
@@ -655,17 +655,17 @@ After the {{pause()}} method on a <a>media element</a> has been invoked and that
 lt="transient solo media state">Transient Solo</a></code>, then the user agent
 must run the <a>media session continuation algorithm</a> against all known
 <a>media sessions</a>, passing in each <a>media session</a> as <var>incumbent
-media session</var> and then, for the originally <a>paused</a> <a>media
-session</a>, immediately run the <a>media session release algorithm</a> passing
-in that <a>media element</a>'s <a>current media session</a> as the only
-argument.
+media session</var> and then, for the original <a lt="indefinitely
+pause">indefinitely paused</a> <a>media session</a>, immediately run the
+<a>media session release algorithm</a> passing in that <a>media element</a>'s
+<a>current media session</a> as the only argument.
 
 <div class="note">
   This prevents <code><a lt="transient media state">Transient</a></code> or
   <code><a lt="transient solo media state">Transient Solo</a></code>-based
   <a>media sessions</a> from indefinitely blocking the continuation of other
   <code><a lt="interrupted media session state">INTERRUPTED</a></code> <a>media
-  sessions</a> when they are paused.
+  sessions</a> when they are indefinitely paused.
 
   After we have completed this process, the original <code><a lt="transient
   media state">Transient</a></code> or
