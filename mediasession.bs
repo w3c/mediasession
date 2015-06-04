@@ -198,9 +198,9 @@ context</a>'s <a>media session</a>.
 
 The <dfn>participating media elements</dfn> of a <a>media session</a> are the
 <a>media elements</a> whose <a>current media session</a> is that
-<a>media session</a>. A <a>media session</a>'s <dfn>active participating media
-elements</dfn> are the <a>participating media elements</a> of a <a>media
-session</a> that have a {{paused}} attribute of false.
+<a>media session</a>. A <a>media session</a> must keep a list of <dfn>active
+participating media elements</dfn> that consists of zero or more
+<a>participating media elements</a>.
 
 <h3 id="media-session-states">States</h3>
 
@@ -546,10 +546,16 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
     element</var>'s <a>current media session</a>.
   </li>
   <li>
-    If <var>media session</var> is empty or <var>media session</var>'s
-    <a>current state</a> is
-    <code><a lt="active media session state">ACTIVE</a></code> abort the
-    remaining steps and return.
+    If <var>media session</var> is empty abort the remaining steps and return.
+  </li>
+  <li>
+    If <var>current media element</var> is not currently in <var>media
+    session</var>'s list of <a>active participating media elements</a> then
+    append <var>current media element</var> to this list.
+  </li>
+  <li>
+    If <var>media session</var> is <code><a lt="active media session
+    state">ACTIVE</a></code> abort the remaining steps and return.
   </li>
   <li>
     Optionally, based on platform conventions, request the most appropriate
@@ -679,6 +685,9 @@ steps.
             type</a> is <code><a lt="default media state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>pause</a> all of <var>interrupted media session</var>'s
+            <a>active participating media elements</a>, remove each <a>active
+            participating media element</a> from <var>interrupted media
+            session</var>'s list of
             <a>active participating media elements</a> and set
             <var>interrupted media session</var>'s <a>current state</a> to
             <code><a lt="idle media session state">IDLE</a></code>.
@@ -724,10 +733,9 @@ steps.
             <a>current state</a> to <code><a lt="interrupted media session
             state">INTERRUPTED</a></code>.
             <p class="note">
-              This implies that the next time the <a>media session release
-              algorithm</a>
-              is run that we will re-activate this <a>media session</a>
-              according to the steps defined in that algorithm.
+              This implies that the next time the <a>media session continuation
+              algorithm</a> is run that we will re-activate this <a>media
+              session</a> according to the steps defined in that algorithm.
             </p>
           </li>
         </ol>
@@ -761,10 +769,10 @@ steps.
               </p>
 
               <p>
-                It also implies that the next time the <a>media session release
-                algorithm</a>
-                is run that we will re-activate this <a>media session</a>
-                according to the steps defined in that algorithm.
+                It also implies that the next time the <a>media session
+                continuation algorithm</a> is run that we will re-activate this
+                <a>media session</a> according to the steps defined in that
+                algorithm.
               </p>
             </div>
           </li>
@@ -937,6 +945,11 @@ The <dfn>media session release algorithm</dfn> takes one argument,
     hardware and/or software media keys from controlling playback of
     <var>current media session</var>'s
     <a>active participating media elements</a>.
+
+    <p class="note">
+      If the algorithm reaches this step a <a>media session</a> can not have any
+      <a>active participating media elements</a>.
+    </p>
   </li>
   <li>
     Set <var>current media session</var>'s <a>current state</a> to

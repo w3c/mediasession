@@ -389,9 +389,9 @@ context</a>’s <a data-link-type="dfn" href="#media-session">media session</a>.
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="participating-media-elements">participating media elements<a class="self-link" href="#participating-media-elements"></a></dfn> of a <a data-link-type="dfn" href="#media-session">media session</a> are the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> whose <a data-link-type="dfn" href="#current-media-session">current media session</a> is that
-<a data-link-type="dfn" href="#media-session">media session</a>. A <a data-link-type="dfn" href="#media-session">media session</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="active-participating-media-elements">active participating media
-elements<a class="self-link" href="#active-participating-media-elements"></a></dfn> are the <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a> of a <a data-link-type="dfn" href="#media-session">media
-session</a> that have a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a></code> attribute of false.</p>
+<a data-link-type="dfn" href="#media-session">media session</a>. A <a data-link-type="dfn" href="#media-session">media session</a> must keep a list of <dfn data-dfn-type="dfn" data-noexport="" id="active-participating-media-elements">active
+participating media elements<a class="self-link" href="#active-participating-media-elements"></a></dfn> that consists of zero or more
+<a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.</p>
 
 
    <h3 class="heading settled" data-level="4.1" id="media-session-states"><span class="secno">4.1. </span><span class="content">States</span><a class="self-link" href="#media-session-states"></a></h3>
@@ -839,10 +839,17 @@ invocation algorithm</a>, passing in the <a data-link-type="dfn" href="https://h
   
   
     <li>
-    If <var>media session</var> is empty or <var>media session</var>’s
-    <a data-link-type="dfn" href="#current-state">current state</a> is
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort the
-    remaining steps and return.
+    If <var>media session</var> is empty abort the remaining steps and return.
+  
+  
+    <li>
+    If <var>current media element</var> is not currently in <var>media
+    session</var>’s list of <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> then
+    append <var>current media element</var> to this list.
+  
+  
+    <li>
+    If <var>media session</var> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort the remaining steps and return.
   
   
     <li>
@@ -1014,6 +1021,9 @@ steps.</p>
             type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
             <a data-link-type="dfn" href="#pause">pause</a> all of <var>interrupted media session</var>’s
+            <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>, remove each <a data-link-type="dfn" href="#active-participating-media-elements">active
+            participating media element</a> from <var>interrupted media
+            session</var>’s list of
             <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
             <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
@@ -1073,10 +1083,9 @@ steps.</p>
             <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
             
          <p class="note" role="note">
-              This implies that the next time the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release
-              algorithm</a>
-              is run that we will re-activate this <a data-link-type="dfn" href="#media-session">media session</a>
-              according to the steps defined in that algorithm.
+              This implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
+              algorithm</a> is run that we will re-activate this <a data-link-type="dfn" href="#media-session">media
+              session</a> according to the steps defined in that algorithm.
             </p>
          
           
@@ -1120,10 +1129,10 @@ steps.</p>
 
               
           <p>
-                It also implies that the next time the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release
-                algorithm</a>
-                is run that we will re-activate this <a data-link-type="dfn" href="#media-session">media session</a>
-                according to the steps defined in that algorithm.
+                It also implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session
+                continuation algorithm</a> is run that we will re-activate this
+                <a data-link-type="dfn" href="#media-session">media session</a> according to the steps defined in that
+                algorithm.
               </p>
           
             
@@ -1345,6 +1354,13 @@ argument.</p>
     hardware and/or software media keys from controlling playback of
     <var>current media session</var>’s
     <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>.
+
+    
+     <p class="note" role="note">
+      If the algorithm reaches this step a <a data-link-type="dfn" href="#media-session">media session</a> can not have any
+      <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>.
+    </p>
+     
   
   
     <li>
@@ -2396,8 +2412,8 @@ myAudio.play(); // Go!
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li>active media session state, <a href="#active-media-session-state">4.1</a>
-   <li>active participating media
-elements, <a href="#active-participating-media-elements">4</a>
+   <li>active
+participating media elements, <a href="#active-participating-media-elements">4</a>
    <li>album, <a href="#dom-mediametadata-album">5.1</a>
    <li>album name, <a href="#album-name">4</a>
    <li>ambient attribute value, <a href="#ambient-attribute-value">4.2</a>
