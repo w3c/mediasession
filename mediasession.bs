@@ -804,6 +804,14 @@ media session</var> and then, for the original <a>media session</a>, immediately
 run the <a>media session release algorithm</a> passing in that <a>media
 element</a>'s <a>current media session</a> as the only argument.
 
+<p class="note">
+  This prevents <code><a lt="transient media state">Transient</a></code> or
+  <code><a lt="transient solo media state">Transient Solo</a></code>-based
+  <a>media sessions</a> from indefinitely blocking the continuation of other
+  <code><a lt="interrupted media session state">INTERRUPTED</a></code> <a>media
+  sessions</a> when they are paused.
+</p>
+
 The <dfn>media session continuation algorithm</dfn> takes one argument,
 <var>incumbent media session</var>, and consists of running the following steps.
 

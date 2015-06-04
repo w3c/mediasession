@@ -1176,6 +1176,15 @@ run the <a data-link-type="dfn" href="#media-session-release-algorithm">media se
 element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> as the only argument.</p>
 
 
+   <p class="note" role="note">
+  This prevents <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or
+  <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based
+  <a data-link-type="dfn" href="#media-session">media sessions</a> from indefinitely blocking the continuation of other
+  <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> <a data-link-type="dfn" href="#media-session">media
+  sessions</a> when they are paused.
+</p>
+
+
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-continuation-algorithm">media session continuation algorithm<a class="self-link" href="#media-session-continuation-algorithm"></a></dfn> takes one argument,
 <var>incumbent media session</var>, and consists of running the following steps.</p>
 
