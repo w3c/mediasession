@@ -44,6 +44,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: potentially playing
             text: ended playback
             text: paused; url: #dom-media-paused
+            text: internal pause steps
         urlPrefix: infrastructure.html
             text: enumerated attribute
         urlPrefix: browsers.html
@@ -266,9 +267,9 @@ state">INTERRUPTED</a></code> to
 The <a>media session interruption algorithm</a> may cause a <a>media element</a>
 to either <a>pause</a> or <a>duck</a> depending on its <a>media session
 category</a>. When a <a>media element</a> is to <dfn>pause</dfn> the user agent
-must run its {{pause()}} method. When a <a>media element</a> is to
-<dfn>duck</dfn>
-then the user agent must ensure its output volume is lowered.
+must run <a>media element</a>'s <a>internal pause steps</a>. When a <a>media
+element</a> is to <dfn>duck</dfn> then the user agent must ensure its output
+volume is lowered.
 
 The <a>media session continuation algorithm</a> may cause a <a>media element</a>
 to either <a>unpause</a> or <a>unduck</a> depending on its <a>media session
@@ -632,6 +633,12 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
     <code><a lt="active media session state">ACTIVE</a></code>.
   </li>
 </ol>
+
+When the {{pause()}} method on a <a>media element</a> is invoked and the
+<a>media element</a>'s {{paused}} attribute is false and <a>media element</a>
+has a <a>current media session</a> then the user agent must remove this <a>media
+element</a> from its <a>current media session</a>'s list of <a>active
+participating media elements</a>. [[HTML]]
 
 <h3 id="interrupting-a-media-session">Interrupting a media session</h3>
 
