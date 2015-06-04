@@ -78,7 +78,7 @@ urlPrefix: https://url.spec.whatwg.org/;
     type: dfn; urlPrefix: #concept-
         text: url parser
         text: event listener
-urlPrefix: https://fetch.spec.whatwg.org/;
+urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
     type: dfn; urlPrefix: #concept-
         text: fetch
         text: internal response
