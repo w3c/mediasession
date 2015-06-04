@@ -641,6 +641,14 @@ When the {{pause()}} method on a <a>media element</a> is invoked and the
 agent must remove this <a>media element</a> from its <a>current media
 session</a>'s list of <a>active participating media elements</a>.
 
+<p class="note">
+  In effect, the different between running a <a>media element</a>'s <a>internal
+  pause steps</a> and invoking a <a>media element</a>'s {{pause()}} method is
+  whether we should keep a reference to that <a>media element</a> in its
+  <a>current media session</a>'s list of <a>active participating media
+  elements</a>.
+</p>
+
 After the {{pause()}} method on a <a>media element</a> has been invoked and that
 <a>media element</a> has a <a>current media session type</a> set to
 <code><a lt="transient media state">Transient</a></code> or <code><a
