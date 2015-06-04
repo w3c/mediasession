@@ -268,8 +268,9 @@ The <a>media session interruption algorithm</a> may cause a <a>media element</a>
 to either <a>pause</a> or <a>duck</a> depending on its <a>media session
 category</a>. When a <a>media element</a> is to <dfn>pause</dfn> the user agent
 must run <a>media element</a>'s <a>internal pause steps</a>. When a <a>media
-element</a> is to <dfn>duck</dfn> then the user agent must ensure its output
-volume is lowered.
+element</a> is to <dfn>indefinitely pause</dfn> the user agent must run its
+{{pause()}} method. When a <a>media element</a> is to <dfn>duck</dfn> then the
+user agent must ensure its output volume is lowered.
 
 The <a>media session continuation algorithm</a> may cause a <a>media element</a>
 to either <a>unpause</a> or <a>unduck</a> depending on its <a>media session
@@ -691,11 +692,8 @@ steps.
             If <var>interrupted media session</var>'s <a>current media session
             type</a> is <code><a lt="default media state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
-            <a>pause</a> all of <var>interrupted media session</var>'s
-            <a>active participating media elements</a>, remove each <a>active
-            participating media element</a> from <var>interrupted media
-            session</var>'s list of
-            <a>active participating media elements</a> and set
+            <a>indefinitely pause</a> all of <var>interrupted media
+            session</var>'s <a>active participating media elements</a> and set
             <var>interrupted media session</var>'s <a>current state</a> to
             <code><a lt="idle media session state">IDLE</a></code>.
 
@@ -795,6 +793,16 @@ When a <a>media session</a> receives an end-of-interruption notification from
 the platform then the user agent must run the <a>media session continuation
 algorithm</a> against all known <a>media sessions</a>, passing in each <a>media
 session</a> as <var>incumbent media session</var>.
+
+After the {{pause()}} method on a <a>media element</a> has been invoked and that
+<a>media element</a> has a <a>current media session type</a> set to
+<code><a lt="transient media state">Transient</a></code> or <code><a
+lt="transient solo media state">Transient Solo</a></code>, then the user agent
+must run the <a>media session continuation algorithm</a> against all known
+<a>media sessions</a>, passing in each <a>media session</a> as <var>incumbent
+media session</var> and then, for the original <a>media session</a>, immediately
+run the <a>media session release algorithm</a> passing in that <a>media
+element</a>'s <a>current media session</a> as the only argument.
 
 The <dfn>media session continuation algorithm</dfn> takes one argument,
 <var>incumbent media session</var>, and consists of running the following steps.
@@ -904,14 +912,6 @@ session</a>'s <a>active participating media elements</a> and then run the
 <a>media session release algorithm</a> passing in the
 <a>media element</a>'s <a>current media session</a>, if any, as the only
 argument.
-
-When a <a>media element</a> with an <a>current media session type</a> set to
-<code><a lt="transient media state">Transient</a></code> or <code><a
-lt="transient solo media state">Transient Solo</a></code> is <a>paused</a>, then
-the user agent must remove the <a>media element</a> from its <a>current media
-session</a>'s <a>active participating media elements</a> and then run the
-<a>media session release algorithm</a> passing in the
-<a>media element</a>'s <a>current media session</a> as the only argument.
 
 Any time a <a>media element</a>'s <a lt="media element load algorithm">load
 algorithm</a> is run by the user agent, it must remove the <a>media element</a>

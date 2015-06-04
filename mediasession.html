@@ -466,8 +466,9 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
 to either <a data-link-type="dfn" href="#pause">pause</a> or <a data-link-type="dfn" href="#duck">duck</a> depending on its <a data-link-type="dfn" href="#media-session-category">media session
 category</a>. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="pause">pause<a class="self-link" href="#pause"></a></dfn> the user agent
 must run <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal pause steps</a>. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="duck">duck<a class="self-link" href="#duck"></a></dfn> then the user agent must ensure its output
-volume is lowered.</p>
+element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="indefinitely-pause">indefinitely pause<a class="self-link" href="#indefinitely-pause"></a></dfn> the user agent must run its
+<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> method. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="duck">duck<a class="self-link" href="#duck"></a></dfn> then the
+user agent must ensure its output volume is lowered.</p>
 
 
    <p>The <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> may cause a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
@@ -1027,11 +1028,8 @@ steps.</p>
             If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
             type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
-            <a data-link-type="dfn" href="#pause">pause</a> all of <var>interrupted media session</var>’s
-            <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>, remove each <a data-link-type="dfn" href="#active-participating-media-elements">active
-            participating media element</a> from <var>interrupted media
-            session</var>’s list of
-            <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
+            <a data-link-type="dfn" href="#indefinitely-pause">indefinitely pause</a> all of <var>interrupted media
+            session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
             <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
 
@@ -1166,6 +1164,16 @@ steps.</p>
 the platform then the user agent must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
 algorithm</a> against all known <a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media
 session</a> as <var>incumbent media session</var>.</p>
+
+
+   <p>After the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has been invoked and that
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has a <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> set to
+<code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the user agent
+must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> against all known
+<a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>incumbent
+media session</var> and then, for the original <a data-link-type="dfn" href="#media-session">media session</a>, immediately
+run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> as the only argument.</p>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-continuation-algorithm">media session continuation algorithm<a class="self-link" href="#media-session-continuation-algorithm"></a></dfn> takes one argument,
@@ -1306,14 +1314,6 @@ session</a>’s <a data-link-type="dfn" href="#active-participating-media-elemen
 <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, as the only
 argument.</p>
-
-
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> with an <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> set to
-<code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>, then
-the user agent must remove the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> from its <a data-link-type="dfn" href="#current-media-session">current media
-session</a>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and then run the
-<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> as the only argument.</p>
 
 
    <p>Any time a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">load
@@ -2442,6 +2442,7 @@ participating media elements, <a href="#active-participating-media-elements">4</
    <li>event seekbackward, <a href="#event-seekbackward">5.2.3</a>
    <li>event seekforward, <a href="#event-seekforward">5.2.3</a>
    <li>idle media session state, <a href="#idle-media-session-state">4.1</a>
+   <li>indefinitely pause, <a href="#indefinitely-pause">4.1</a>
    <li>interrupted media session state, <a href="#interrupted-media-session-state">4.1</a>
    <li>kind
     <ul>
