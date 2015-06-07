@@ -1425,39 +1425,40 @@ the following steps:
 
 When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
-button) then the user agent must, if
-{{MediaRemoteControls/previousTrackEnabled}} is true, for each
+button) then the user agent must, for each
 <code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+that is currently <code><a lt="active media session state">ACTIVE</a></code> and
+has {{MediaRemoteControls/previousTrackEnabled}} set to true,
 <a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
 previoustrack"><code>previoustrack</code></a> at its child
 {{MediaRemoteControls}} object.
 
 When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, if {{MediaRemoteControls/nextTrackEnabled}} is true, for
-each <code><a lt="content media state">Content</a></code>-based <a>media
-session</a> that is currently <code><a lt="active media session
-state">ACTIVE</a></code>, <a>queue a task</a> to
+the user agent must, for each <code><a lt="content media
+state">Content</a></code>-based <a>media session</a> that is currently <code><a
+lt="active media session state">ACTIVE</a></code> and has
+{{MediaRemoteControls/nextTrackEnabled}} set to true, <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
 nexttrack"><code>nexttrack</code></a> at its child {{MediaRemoteControls}}
 object.
 
 When the user presses a 'seek backward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
-user agent must, if {{MediaRemoteControls/seekBackwardEnabled}} is true, for
-each <code><a lt="content media state">Content</a></code>-based <a>media
-session</a> that is currently <code><a lt="active media session
-state">ACTIVE</a></code>, <a>queue a task</a> to
+user agent must, for each <code><a lt="content media
+state">Content</a></code>-based <a>media session</a> that is currently <code><a
+lt="active media session state">ACTIVE</a></code> and has
+{{MediaRemoteControls/seekBackwardEnabled}} set is true, <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
 seekbackward"><code>seekbackward</code></a> at its child {{MediaRemoteControls}}
 object.
 
 When the user presses a 'seek forward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
-user agent must, if {{MediaRemoteControls/seekForwardEnabled}} is true, for each
+user agent must, for each
 <code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+that is currently <code><a lt="active media session state">ACTIVE</a></code> and
+has {{MediaRemoteControls/seekForwardEnabled}} set to true,
 <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
 seekforward"><code>seekforward</code></a> at its child {{MediaRemoteControls}}

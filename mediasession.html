@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-04">4 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-08">8 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1959,37 +1959,36 @@ the following steps:</p>
 
    <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackPrevious">MediaTrackPrevious</a></code> media key, or an equivalent
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
-button) then the user agent must, if
-<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> is true, for each
+button) then the user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
-that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>,
+that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
+has <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> set to true,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-previoustrack"><code>previoustrack</code></a> at its child
 <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object.</p>
 
 
    <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackNext">MediaTrackNext</a></code> media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, if <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> is true, for
-each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
+the user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and has
+<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> set to true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-nexttrack"><code>nexttrack</code></a> at its child <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
 object.</p>
 
 
    <p>When the user presses a 'seek backward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
-user agent must, if <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a></code> is true, for
-each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
+user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and has
+<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a></code> set is true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-seekbackward"><code>seekbackward</code></a> at its child <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
 object.</p>
 
 
    <p>When the user presses a 'seek forward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
-user agent must, if <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a></code> is true, for each
+user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
-that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>,
+that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
+has <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a></code> set to true,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-seekforward"><code>seekforward</code></a> at its child <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
 object.</p>
