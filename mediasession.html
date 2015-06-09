@@ -2226,8 +2226,7 @@ otherwise. On setting, the user agent must run the following steps:</p>
     <li>
     If <var>old media session</var> is not null and no longer has one or more
     <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>, then run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session
-    release algorithm</a>, passing in <var>old media session</var> as the only
-    argument.
+    release algorithm</a> for <var>old media session</var>.
   
   
     <li>
@@ -2415,8 +2414,8 @@ session</a>’s list of <a data-link-type="dfn" href="#active-participating-medi
 must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> against all known
 <a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>incumbent
 media session</var> and then, for the original <a data-link-type="dfn" href="#indefinitely-pause">indefinitely paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, immediately run the
-<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s
-<a data-link-type="dfn" href="#current-media-session">current media session</a> as the only argument.</p>
+<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s
+<a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
 
 
    <div class="note" role="note">

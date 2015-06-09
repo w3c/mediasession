@@ -1619,8 +1619,7 @@ otherwise. On setting, the user agent must run the following steps:
   <li>
     If <var>old media session</var> is not null and no longer has one or more
     <a>active participating media elements</a>, then run the <a>media session
-    release algorithm</a>, passing in <var>old media session</var> as the only
-    argument.
+    release algorithm</a> for <var>old media session</var>.
   </li>
   <li>
     Add <var>m</var> to <var>new media session</var>'s <a>participating media
@@ -1782,8 +1781,8 @@ must run the <a>media session continuation algorithm</a> against all known
 <a>media sessions</a>, passing in each <a>media session</a> as <var>incumbent
 media session</var> and then, for the original <a lt="indefinitely
 pause">indefinitely paused</a> <a>media session</a>, immediately run the
-<a>media session release algorithm</a> passing in that <a>media element</a>'s
-<a>current media session</a> as the only argument.
+<a>media session release algorithm</a> for <a>media element</a>'s
+<a>current media session</a>.
 
 <div class="note">
   This prevents <code><a lt="transient media state">Transient</a></code> or
