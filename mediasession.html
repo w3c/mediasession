@@ -384,6 +384,33 @@ that <em>can</em> consist of <dfn data-dfn-type="dfn" data-lt="session title" da
 <dfn data-dfn-type="dfn" data-noexport="" id="artwork-resource">artwork resource<a class="self-link" href="#artwork-resource"></a></dfn>.</p>
 
 
+   <p><br>
+To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>media session category</var>,
+run these steps:</p>
+
+
+   <ol>
+  
+    <li>
+    Let <var>media session</var> be a new <a data-link-type="dfn" href="#media-session">media session</a>.
+  
+  
+    <li>
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
+  
+  
+    <li>
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
+    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>media session
+    category</var>.
+  
+  
+    <li>
+    Return <var>media session</var>.
+  
+</ol>
+
+
    <h3 class="heading settled" data-level="4.1" id="media-session-states"><span class="secno">4.1. </span><span class="content">States</span><a class="self-link" href="#media-session-states"></a></h3>
 
 
@@ -1417,10 +1444,6 @@ constructor when invoked must run these steps:</p>
    <ol>
   
     <li>
-    Let <var>media session</var> be a new <a data-link-type="dfn" href="#media-session">media session</a>.
-  
-  
-    <li>
     Let <var>media session category</var> be the value of <var>kind</var>.
   
   
@@ -1429,8 +1452,7 @@ constructor when invoked must run these steps:</p>
   
   
     <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
-    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>media session
+    Let <var>media session</var> be the result of <a data-link-type="dfn" href="#create-a-media-session">creating a media session</a> given <var>media session
     category</var>.
   
   
@@ -2196,10 +2218,10 @@ otherwise. On setting, the user agent must run the following steps:</p>
   
   
     <li>
-    If the new value is null then set the element’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code>
-    attribute to the empty string. Otherwise, set element’s
-    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the value of <a data-link-type="dfn" href="#current-media-session">current media
-    session</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute.
+    If the new value is null then set the <var>m</var>’s
+    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the empty string. Otherwise, set
+    <var>m</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the value of
+    <a data-link-type="dfn" href="#current-media-session">current media session</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute.
   
   
     <li>
@@ -2273,17 +2295,20 @@ given <var>media element</var> it must run the following steps:</p>
   
   
     <li>
-    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then let <var>media session</var> be the current
+    Let <var>media session</var> be null.
+  
+  
+    <li>
+    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then set <var>media session</var> be the current
     <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> and set
-    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to the current
-    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a>. Otherwise, if
-    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is the same as
-    <var>media session type</var> then let <var>media session</var> be
-    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> object. Otherwise,
-    let
-    <var>media session</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object and set <var>media
-    session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the value of
-    <var>media session type</var>.
+    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to this <a data-link-type="dfn" href="#media-session">media
+    session</a>. Otherwise, if <var>media session type</var> is the same as
+    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> then set
+    <var>media session</var> to
+    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>. Otherwise, set
+    <var>media session</var> the result of invoking the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-mediasessionkind">MediaSession(kind)</a></code>
+    constructor passing in the corresponding <a data-link-type="dfn" href="#media-session-category">media session category</a> value
+    of <var>media session type</var> as its <var>kind</var>.
   
   
     <li>
@@ -2292,9 +2317,8 @@ given <var>media element</var> it must run the following steps:</p>
     
      <p class="note" role="note">
       <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a>
-      do not expose a <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute but still maintain
-      an internal
-      <a data-link-type="dfn" href="#current-media-session">current media session</a> reference.
+      do not expose a <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute but may still
+      maintain an internal <a data-link-type="dfn" href="#current-media-session">current media session</a> reference.
     </p>
      
   
@@ -2592,6 +2616,7 @@ myAudio.play(); // Go!
    <li>content attribute value, <a href="#content-attribute-value">4.2</a>
    <li>content media state, <a href="#content-media-state">4.2</a>
    <li>controls, <a href="#dom-mediasession-controls">5.1.3</a>
+   <li>create a media session, <a href="#create-a-media-session">4</a>
    <li>current media session, <a href="#current-media-session">6</a>
    <li>current media session type, <a href="#current-media-session-type">4.2</a>
    <li>current state, <a href="#current-state">4.1</a>
