@@ -980,8 +980,8 @@ steps.</p>
   
     <li>
     If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> abort the
-    remaining steps and return.
+    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> terminate these
+    steps.
   
   
     <li>
@@ -1159,7 +1159,7 @@ session</a> as <var>incumbent media session</var>.</p>
     <li>
     If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
     <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>
-    then abort the remaining steps and return.
+    terminate these steps.
   
   
     <li>
@@ -1245,7 +1245,7 @@ user agent must run the following steps:</p>
   
     <li>
     If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is not "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" or
-    "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> abort the remaining steps.
+    "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> terminate these steps.
   
 
   
@@ -1259,7 +1259,7 @@ user agent must run the following steps:</p>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> and
         <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
         <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set <var>s</var>’s
-        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>, abort any remaining substeps and continue
+        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> then terminate these substeps and continue
         at the next available <var>s</var>.
       
       
@@ -1268,7 +1268,7 @@ user agent must run the following steps:</p>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>
         and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> then <a data-link-type="dfn" href="#unpause">unpause</a> all of
         <var>s</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, abort any remaining substeps and continue at
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then terminate these substeps and continue at
         the next available <var>s</var>.
       
       
@@ -1290,13 +1290,13 @@ user agent must run the following steps:</p>
   
     <li>
     If <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is
-    <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> then abort the
-    remaining steps and return.
+    <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> terminate these
+    steps.
   
   
     <li>
-    If <var>current media session</var> has one or more <a data-link-type="dfn" href="#active-participating-media-elements">active participating
-    media elements</a> then abort the remaining steps and return.
+    If <var>current media session</var> still has one or more <a data-link-type="dfn" href="#active-participating-media-elements">active
+    participating media elements</a> terminate these steps.
   
   
     <li>
@@ -1865,7 +1865,7 @@ the following steps:</p>
     is not <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> or
     <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>; or <var>m</var>’s
     <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then abort these
+    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> terminate these
     steps.
   
   
@@ -2210,7 +2210,7 @@ otherwise. On setting, the user agent must run the following steps:</p>
     <li>
     <var>Update media sessions</var>: If <var>old media session</var> and
     <var>new media session</var> are the same (whether both null or both the
-    same <a data-link-type="dfn" href="#media-session">media session</a>) then abort these steps.
+    same <a data-link-type="dfn" href="#media-session">media session</a>) then terminate these steps.
   
   
     <li>
@@ -2282,8 +2282,7 @@ given <var>media element</var> it must run the following steps:</p>
   
     <li>
     If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then set <var>media element</var>’s
-    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute to null, abort the remaining steps
-    and return.
+    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute to null.
     
      <p class="note" role="note">
       <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a>
@@ -2478,8 +2477,7 @@ steps:</p>
   
     <li>
     If <var>media element</var> is not currently in <var>media session</var>’s
-    list of <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> then abort any remaining
-    steps.
+    list of <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> terminate these steps.
   
   
     <li>
