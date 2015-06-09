@@ -1420,22 +1420,31 @@ constructor when invoked must run these steps:</p>
   
   
     <li>
+    Let <var>media session category</var> be the value of <var>kind</var>.
+  
+  
+    <li>
+    If <var>media session category</var> is empty then set it to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
+  
+  
+    <li>
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
+    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>media session
+    category</var>.
+  
+  
+    <li>
     Let <var>s</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object associated with
     <var>media session</var>.
   
   
     <li>
     Set <var>s</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute to the value of
-    <var>kind</var>.
+    <var>media session category</var>.
   
   
     <li>
-    If <var>kind</var> is empty set <var>s</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code>
-    attribute to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
-  
-  
-    <li>
-    If <var>s</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" then set <var>s</var>’s
+    If <var>media session category</var> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" then set <var>s</var>’s
     <code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code> attribute to a new <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object.
     (Otherwise <var>media session</var> has no <a data-link-type="dfn" href="#media-remote-control">media remote controls</a>.)
   
