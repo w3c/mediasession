@@ -1022,14 +1022,14 @@ constructor when invoked must run these steps:
     <code><var>session</var> . {{MediaSession/kind}}</code>
   </dt>
   <dd>
-    Returns the DOMString value of the <a>current media session type</a> the
-    <a>media session</a> represents.
+    Returns the <a>media session category</a> of the
+    <a>media session</a>.
   </dd>
 </dl>
 
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
-attribute must return the DOMString value of the <a>current media session
-type</a> of the <a>media session</a>.
+attribute must return the <a>media session category</a> of the <a>media
+session</a> that was set when the object was created.
 
 <dl class=domintro>
   <dt>
