@@ -1688,7 +1688,8 @@ element>audio</a></code> element</h4>
   </pre>
 </div>
 
-<h3 id="#1">Activating a media session from a media element</h3>
+<h3 id="activating-a-media-session-from-a-media-element">Activating a media
+session from a media element</h3>
 
 When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
 element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
@@ -1716,7 +1717,8 @@ in <a>media element</a> <var>media element</var>:
   </li>
 </ol>
 
-<h3 id="#2">Interrupting a media session from a media element</h3>
+<h3 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
+session from a media element</h3>
 
 When a <a>media element</a> is to <dfn>pause</dfn> the user agent must run
 <a>media element</a>'s <a>internal pause steps</a>.
@@ -1774,7 +1776,8 @@ When a <a>media element</a> is to <dfn>unduck</dfn> then the user agent should
 restore its output volume to the same level that was observed prior to the
 original corresponding <a>duck</a> request.
 
-<h3 id="#3">Releasing a media session from a media element</h3>
+<h3 id="releasing-a-media-session-from-a-media-element">Releasing a media
+session from a media element</h3>
 
 When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
 user agent must <a>release media element from its media session</a>.
