@@ -550,7 +550,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
   </li>
   <li>
     Optionally, based on platform conventions, request the most appropriate
-    platform-level media focus for <var>media session</var> based on its current
+    platform-level media focus for <var>media session</var> based on its
     <a>current media session type</a>.
 
     If this step is run and platform-level media focus can not be obtained for
