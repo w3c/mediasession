@@ -1531,6 +1531,9 @@ partial interface HTMLMediaElement {
   <dd>
     Returns the category the given media falls into. The <a lt="media session
     categories">possible media categories</a> are defined above.
+
+    Setting, changing or removing this attribute updates the <a>media
+    element</a>'s {{HTMLMediaElement/session}} attribute.
   </dd>
   <dt>
     <code><var>media</var> . {{HTMLMediaElement/session}}</code> [ = <code>
