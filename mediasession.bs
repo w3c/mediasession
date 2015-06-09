@@ -129,7 +129,7 @@ external remote controllers.
 This specification provides these platform media integration features for web
 media. By allowing web developers to express the intended usage of their media
 content, user agents can supply the most suitable platform-level interactions
-for that content and enforce logical inter-operation behavior on the current
+for that content and enforce logical interoperation behavior on the current
 platform between any number of different sources of media.
 
 This specification describes the mechanism that allows web developers to specify
@@ -185,10 +185,6 @@ audio-producing objects with both the underlying platform and other
 audio-producing objects belonging to other <a>media sessions</a> within the user
 agent.
 
-A <a>media session</a> has a <dfn>current media session type</dfn>. The <a
-lt="media session category">possible media categories and their states</a> are
-defined below.
-
 A <a>media session</a> may provide access to <dfn lt="media remote
 control">media remote controls</dfn> that can be used to respond to hardware or
 software remote control events. Such events may be triggered by e.g. keyboard
@@ -202,9 +198,9 @@ that <em>can</em> consist of <dfn lt="session title">title</dfn>,
 
 <h3 id="media-session-states">States</h3>
 
-A <a>media session</a> has a <dfn>current state</dfn>, which describes its
-current status with respect to any interaction with other <a>media sessions</a>.
-The possible values are as follows:
+A <a>media session</a> has a <dfn>current state</dfn> that describes its current
+status with respect to any platform-level interactions and interactions with
+other <a>media sessions</a>. The possible values are as follows:
 
 <dl>
   <dt>
@@ -227,9 +223,8 @@ The possible values are as follows:
     The <a>media session</a> is currently suspended from having platform-level
     media focus and its <a>active participating media elements</a> are either <a
     lt="pause">paused</a> or
-    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>media session
-    category</a> and pending completion of another <a>media session</a>'s media
-    focus.
+    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>current media
+    session type</a>.
   </dd>
 </dl>
 
@@ -266,13 +261,17 @@ state">INTERRUPTED</a></code> to
 A <dfn>media session category</dfn> is a keyword that maps to a well-defined
 interaction state for a <a>media session</a> – called its <dfn>media session
 type</dfn> – that user agents use to enforce platform-specific interaction and
-interoperation between web media.
+interoperation between media content.
+
+A <a>media session</a> has a <dfn>current media session type</dfn> that is set
+when a new <a>media session</a> is created.
 
 The following table lists the available <a>media session categories</a> keywords
 and their corresponding <a>media session type</a> states — the keywords in the
 left column map to the states in the cell in the second column on the same row
-as the keyword. The attribute should be set based on the preferred definitions
-in the table’s third and fourth columns.
+as the keyword. <a>Media session categories</a> and <a>media session types</a>
+should be used based on their preferred definitions in the table’s third and
+fourth columns.
 
 <table id="valid-media-categories">
   <tr>
@@ -627,14 +626,15 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
 
 A <a>media session</a> may be interrupted at any time after its
 <a>media session invocation algorithm</a> has been run. This typically occurs
-when another application or <a>media session</a> requests and is granted
-platform-level media focus.
+when another application or another <a>media session</a> requests and is granted
+a level of platform media focus that affects the <a>media session</a> based on
+its <a>current media session type</a>.
 
 Interruptions can be both transient or permanent. A transient interruption means
 we can either choose to <a>duck</a> our media content and continue playing it
 out at a reduced volume for the duration of the interruption; or <a>pause</a>
 our media content for the duration of the interruption and then resume playback
-when the interruption ends. A permanent interruption means we must <a
+when that interruption ends. A permanent interruption means we must <a
 lt="indefinitely pause">pause our media content indefinitely</a>.
 
 When a <a>media session</a> receives a start-of-interruption notification from
@@ -1242,7 +1242,7 @@ attribute is intended to provide a hint that the user agent should enable a
 control interfaces. By default, this attribute is false.
 
 <p class="note">
-  While the attributes above can be set at any time they will only be read by
+  While the attributes above can be set at any time they must only be read by
   the user agent during the <a>media session invocation algorithm</a> in order
   to correctly configure any connected remote control interfaces at the point
   they become <code><a lt="active media session state">ACTIVE</a></code>.
@@ -1564,12 +1564,12 @@ changed, or removed then the user agent must <a>update media element's media
 session</a> for <a>media element</a>.
 
 A <a>media element</a>'s <code>{{HTMLMediaElement/kind}}</code> attribute can be
-changed at any time even once the media resource is being played; but it is only
-read by the user agent at the time that it is set, changed or removed. Thus,
-setting, changing or removing this attribute once the media element is
-<a>potentially playing</a> does not dynamically change the <a>media session</a>
-to which the <a>media element</a> belongs until the <a>media session invocation
-algorithm</a> is subsequently re-run.
+changed at any time even once a <a>media element</a> is <a>potentially
+playing</a>; but it is only read by the user agent at the time that it is set,
+changed or removed. Thus, setting, changing or removing this attribute once a
+<a>media element</a> is <a>potentially playing</a> does not dynamically change
+the <a>media session</a> to which the <a>media element</a> belongs until the
+<a>media session invocation algorithm</a> is subsequently re-run.
 
 The <dfn attribute for="HTMLMediaElement"
 lt="session"><code>session</code></dfn> attribute on a <a>media element</a>, on

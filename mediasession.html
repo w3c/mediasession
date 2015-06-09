@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-09">9 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-10">10 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -301,7 +301,7 @@ external remote controllers.</p>
    <p>This specification provides these platform media integration features for web
 media. By allowing web developers to express the intended usage of their media
 content, user agents can supply the most suitable platform-level interactions
-for that content and enforce logical inter-operation behavior on the current
+for that content and enforce logical interoperation behavior on the current
 platform between any number of different sources of media.</p>
 
 
@@ -371,10 +371,6 @@ audio-producing objects belonging to other <a data-link-type="dfn" href="#media-
 agent.</p>
 
 
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session-type">current media session type<a class="self-link" href="#current-media-session-type"></a></dfn>. The <a data-link-type="dfn" href="#media-session-category">possible media categories and their states</a> are
-defined below.</p>
-
-
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may provide access to <dfn data-dfn-type="dfn" data-lt="media remote
 control" data-noexport="" id="media-remote-control">media remote controls<a class="self-link" href="#media-remote-control"></a></dfn> that can be used to respond to hardware or
 software remote control events. Such events may be triggered by e.g. keyboard
@@ -391,9 +387,9 @@ that <em>can</em> consist of <dfn data-dfn-type="dfn" data-lt="session title" da
    <h3 class="heading settled" data-level="4.1" id="media-session-states"><span class="secno">4.1. </span><span class="content">States</span><a class="self-link" href="#media-session-states"></a></h3>
 
 
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-state">current state<a class="self-link" href="#current-state"></a></dfn>, which describes its
-current status with respect to any interaction with other <a data-link-type="dfn" href="#media-session">media sessions</a>.
-The possible values are as follows:</p>
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-state">current state<a class="self-link" href="#current-state"></a></dfn> that describes its current
+status with respect to any platform-level interactions and interactions with
+other <a data-link-type="dfn" href="#media-session">media sessions</a>. The possible values are as follows:</p>
 
 
    <dl>
@@ -422,9 +418,8 @@ The possible values are as follows:</p>
     <dd>
     The <a data-link-type="dfn" href="#media-session">media session</a> is currently suspended from having platform-level
     media focus and its <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> are either <a data-link-type="dfn" href="#pause">paused</a> or
-    <a data-link-type="dfn" href="#duck">ducked</a> based on the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-session-category">media session
-    category</a> and pending completion of another <a data-link-type="dfn" href="#media-session">media session</a>’s media
-    focus.
+    <a data-link-type="dfn" href="#duck">ducked</a> based on the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#current-media-session-type">current media
+    session type</a>.
   
 </dl>
 
@@ -462,14 +457,19 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session-category">media session category<a class="self-link" href="#media-session-category"></a></dfn> is a keyword that maps to a well-defined
 interaction state for a <a data-link-type="dfn" href="#media-session">media session</a> – called its <dfn data-dfn-type="dfn" data-noexport="" id="media-session-type">media session
 type<a class="self-link" href="#media-session-type"></a></dfn> – that user agents use to enforce platform-specific interaction and
-interoperation between web media.</p>
+interoperation between media content.</p>
+
+
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session-type">current media session type<a class="self-link" href="#current-media-session-type"></a></dfn> that is set
+when a new <a data-link-type="dfn" href="#media-session">media session</a> is created.</p>
 
 
    <p>The following table lists the available <a data-link-type="dfn" href="#media-session-category">media session categories</a> keywords
 and their corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> states — the keywords in the
 left column map to the states in the cell in the second column on the same row
-as the keyword. The attribute should be set based on the preferred definitions
-in the table’s third and fourth columns.</p>
+as the keyword. <a data-link-type="dfn" href="#media-session-category">Media session categories</a> and <a data-link-type="dfn" href="#media-session-type">media session types</a>
+should be used based on their preferred definitions in the table’s third and
+fourth columns.</p>
 
 
    <table id="valid-media-categories">
@@ -954,15 +954,16 @@ session</var> are:</p>
 
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its
 <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> has been run. This typically occurs
-when another application or <a data-link-type="dfn" href="#media-session">media session</a> requests and is granted
-platform-level media focus.</p>
+when another application or another <a data-link-type="dfn" href="#media-session">media session</a> requests and is granted
+a level of platform media focus that affects the <a data-link-type="dfn" href="#media-session">media session</a> based on
+its <a data-link-type="dfn" href="#current-media-session-type">current media session type</a>.</p>
 
 
    <p>Interruptions can be both transient or permanent. A transient interruption means
 we can either choose to <a data-link-type="dfn" href="#duck">duck</a> our media content and continue playing it
 out at a reduced volume for the duration of the interruption; or <a data-link-type="dfn" href="#pause">pause</a>
 our media content for the duration of the interruption and then resume playback
-when the interruption ends. A permanent interruption means we must <a data-link-type="dfn" href="#indefinitely-pause">pause our media content indefinitely</a>.</p>
+when that interruption ends. A permanent interruption means we must <a data-link-type="dfn" href="#indefinitely-pause">pause our media content indefinitely</a>.</p>
 
 
    <p>When a <a data-link-type="dfn" href="#media-session">media session</a> receives a start-of-interruption notification from
@@ -1736,7 +1737,7 @@ control interfaces. By default, this attribute is false.</p>
 
 
    <p class="note" role="note">
-  While the attributes above can be set at any time they will only be read by
+  While the attributes above can be set at any time they must only be read by
   the user agent during the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> in order
   to correctly configure any connected remote control interfaces at the point
   they become <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
@@ -2161,12 +2162,12 @@ session</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multi
 
 
    <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> attribute can be
-changed at any time even once the media resource is being played; but it is only
-read by the user agent at the time that it is set, changed or removed. Thus,
-setting, changing or removing this attribute once the media element is
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change the <a data-link-type="dfn" href="#media-session">media session</a>
-to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs until the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
-algorithm</a> is subsequently re-run.</p>
+changed at any time even once a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially
+playing</a>; but it is only read by the user agent at the time that it is set,
+changed or removed. Thus, setting, changing or removing this attribute once a
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change
+the <a data-link-type="dfn" href="#media-session">media session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs until the
+<a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is subsequently re-run.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" id="dom-htmlmediaelement-session"><code>session</code><a class="self-link" href="#dom-htmlmediaelement-session"></a></dfn> attribute on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, on
@@ -2592,7 +2593,7 @@ myAudio.play(); // Go!
    <li>content media state, <a href="#content-media-state">4.2</a>
    <li>controls, <a href="#dom-mediasession-controls">5.1.3</a>
    <li>current media session, <a href="#current-media-session">6</a>
-   <li>current media session type, <a href="#current-media-session-type">4</a>
+   <li>current media session type, <a href="#current-media-session-type">4.2</a>
    <li>current state, <a href="#current-state">4.1</a>
    <li>default media state, <a href="#default-media-state">4.2</a>
    <li>duck, <a href="#duck">6.4</a>
