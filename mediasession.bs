@@ -985,12 +985,35 @@ listener</a> whose <b>type</b> is <code>previoustrack</code>,
 
 The
 <dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
-constructor must create a new {{MediaSession}} object with its
-{{MediaSession/kind}} attribute set to <var>kind</var> or &quot;<a lt="content
-attribute value"><code>content</code></a>&quot if <var>kind</var> is empty, its
-{{MediaSession/controls}} attribute set to a new {{MediaRemoteControls}} object
-if its {{MediaSession/kind}} is &quot;<a lt="content attribute
-value"><code>content</code></a>&quot or null otherwise, and then return it.
+constructor when invoked must run these steps:
+
+<ol>
+  <li>
+    Let <var>session</var> be a new <a>media session</a>.
+  </li>
+  <li>
+    Let <var>s</var> be a new {{MediaSession}} object associated with
+    <var>session</var>.
+  </li>
+  <li>
+    Set <var>s</var>'s {{MediaSession/kind}} attribute to the value of
+    <var>kind</var>.
+  </li>
+  <li>
+    If <var>kind</var> is empty set <var>s</var>'s {{MediaSession/kind}}
+    attribute to &quot;<a lt="content attribute
+    value"><code>content</code></a>&quot.
+  </li>
+  <li>
+    If <var>s</var>'s {{MediaSession/kind}} attribute is &quot;<a lt="content
+    attribute value"><code>content</code></a>&quot then set <var>s</var>'s
+    {{MediaSession/controls}} attribute to a new {{MediaRemoteControls}} object.
+    (Otherwise <var>session</var> has no <a>media remote controls</a>.)
+  </li>
+  <li>
+    Return <var>s</var>.
+  </li>
+</ol>
 
 <h4 id="mediasession-object-members">Object members</h4>
 

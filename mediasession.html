@@ -1410,10 +1410,40 @@ listener</a> whose <b>type</b> is <code>previoustrack</code>,
 
    <p>The
 <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasessionkind">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasessionkind"></a></dfn>
-constructor must create a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object with its
-<code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute set to <var>kind</var> or "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" if <var>kind</var> is empty, its
-<code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code> attribute set to a new <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object
-if its <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" or null otherwise, and then return it.</p>
+constructor when invoked must run these steps:</p>
+
+
+   <ol>
+  
+    <li>
+    Let <var>session</var> be a new <a data-link-type="dfn" href="#media-session">media session</a>.
+  
+  
+    <li>
+    Let <var>s</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object associated with
+    <var>session</var>.
+  
+  
+    <li>
+    Set <var>s</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute to the value of
+    <var>kind</var>.
+  
+  
+    <li>
+    If <var>kind</var> is empty set <var>s</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code>
+    attribute to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
+  
+  
+    <li>
+    If <var>s</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" then set <var>s</var>’s
+    <code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code> attribute to a new <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object.
+    (Otherwise <var>session</var> has no <a data-link-type="dfn" href="#media-remote-control">media remote controls</a>.)
+  
+  
+    <li>
+    Return <var>s</var>.
+  
+</ol>
 
 
    <h4 class="heading settled" data-level="5.1.3" id="mediasession-object-members"><span class="secno">5.1.3. </span><span class="content">Object members</span><a class="self-link" href="#mediasession-object-members"></a></h4>
