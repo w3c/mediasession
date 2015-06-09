@@ -1628,14 +1628,21 @@ must run the following steps:</p>
    <ol>
   
     <li>
-    <a data-link-type="dfn" href="#pause">Pause</a> each of <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
-    elements</a> and then remove each <a data-link-type="dfn" href="#active-participating-media-elements">active participating media element</a>
-    from <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>.
+    Let <var>media session</var> be the current <a data-link-type="dfn" href="#media-session">media session</a>.
   
   
     <li>
-    Run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> passing in the
-    <a data-link-type="dfn" href="#media-session">media session</a> as the only argument.
+    <a data-link-type="dfn" href="#indefinitely-pause">Indefinitely pause</a> all of <var>media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active
+    participating media elements</a>.
+  
+  
+    <li>
+    Reset <var>media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>
+    to an empty list.
+  
+  
+    <li>
+    Run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> for <var>media session</var>.
   
 </ol>
 

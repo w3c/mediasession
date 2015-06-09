@@ -1150,13 +1150,18 @@ must run the following steps:
 
 <ol>
   <li>
-    <a>Pause</a> each of <a>media session</a>'s <a>active participating media
-    elements</a> and then remove each <a>active participating media element</a>
-    from <a>media session</a>'s <a>active participating media elements</a>.
+    Let <var>media session</var> be the current <a>media session</a>.
   </li>
   <li>
-    Run the <a>media session release algorithm</a> passing in the
-    <a>media session</a> as the only argument.
+    <a>Indefinitely pause</a> all of <var>media session</var>'s <a>active
+    participating media elements</a>.
+  </li>
+  <li>
+    Reset <var>media session</var>'s <a>active participating media elements</a>
+    to an empty list.
+  </li>
+  <li>
+    Run the <a>media session release algorithm</a> for <var>media session</var>.
   </li>
 </ol>
 
