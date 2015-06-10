@@ -385,8 +385,7 @@ that <em>can</em> consist of <dfn data-dfn-type="dfn" data-lt="session title" da
 
 
    <p><br>
-To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>media session category</var>,
-run these steps:</p>
+To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>kind</var>, run these steps:</p>
 
 
    <ol>
@@ -396,13 +395,13 @@ run these steps:</p>
   
   
     <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
+    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>kind</var>’s <a data-link-type="dfn" href="#media-session-category">media
+    session category</a>.
   
   
     <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
-    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>media session
-    category</var>.
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
   
   
     <li>
@@ -2299,7 +2298,7 @@ given <var>media element</var> it must run the following steps:</p>
   
   
     <li>
-    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then set <var>media session</var> be the current
+    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then set <var>media session</var> to the current
     <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> and set
     <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to this <a data-link-type="dfn" href="#media-session">media
     session</a>. Otherwise, if <var>media session type</var> is the same as

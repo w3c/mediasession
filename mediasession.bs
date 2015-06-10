@@ -197,21 +197,20 @@ that <em>can</em> consist of <dfn lt="session title">title</dfn>,
 <dfn>artwork resource</dfn>.
 
 <br>
-To <dfn>create a media session</dfn>, given a <var>media session category</var>,
-run these steps:
+To <dfn>create a media session</dfn>, given a <var>kind</var>, run these steps:
 
 <ol>
   <li>
     Let <var>media session</var> be a new <a>media session</a>.
   </li>
   <li>
-    Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
-    media session state">IDLE</a></code>.
+    Set <var>media session</var>'s <a>current media session type</a> to the
+    corresponding <a>media session type</a> of <var>kind</var>'s <a>media
+    session category</a>.
   </li>
   <li>
-    Set <var>media session</var>'s <a>current media session type</a> to the
-    corresponding <a>media session type</a> of <var>media session
-    category</var>.
+    Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
+    media session state">IDLE</a></code>.
   </li>
   <li>
     Return <var>media session</var>.
