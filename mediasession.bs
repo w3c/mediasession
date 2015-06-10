@@ -985,8 +985,7 @@ dictionary MediaMetadata {
 <h4 id="mediasession-garbage-collection">Garbage collection</h4>
 
 A {{MediaSession}} object must not be garbage collected while its corresponding
-<a>media session</a> is attached to at least one <a>participating media
-element</a>.
+<a>media session</a> is attached to at least one <a>media element</a>.
 
 Additionally, a {{MediaSession}} object must not be garbage collected while the
 {{MediaSession}} object's child {{MediaRemoteControls}} object has an <a>event
@@ -1525,12 +1524,10 @@ A <a>media element</a> may have a <dfn>current media session</dfn>, which is a
 set its <a>current media session</a> to the current <a>top-level browsing
 context</a>'s <a>media session</a>.
 
-The <a>media session</a> has <dfn>participating media elements</dfn> that
-consists of zero or more <a>media elements</a> whose <a>current media
-session</a> is that <a>media session</a>. A <a>media session</a> must also keep
-a list of <dfn>active participating media elements</dfn> that consists of zero
-or more
-<a>participating media elements</a>.
+A <a>media session</a>'s <dfn>participating media elements</dfn> are <a>media
+elements</a> whose <a>current media session</a> is that <a>media session</a>. A
+<a>media session</a> must keep a list of <dfn>active participating media
+elements</dfn> that consists of zero or more <a>participating media elements</a>.
 
 
 
@@ -1634,20 +1631,14 @@ otherwise. On setting, the user agent must run the following steps:
   </li>
   <li>
     If <var>m</var> is an <a>active participating media element</a> of <var>old
-    media session</var> then <a>pause</a> <var>m</var>.
-  </li>
-  <li>
-    Remove <var>m</var> from <var>old media session</var>'s <a>participating
-    media elements</a>.
+    media session</var> then <a>pause</a> <var>m</var> and remove <var>m</var>
+    from <var>old media session</var>'s <a>active participating media
+    elements</a>.
   </li>
   <li>
     If <var>old media session</var> is not null and no longer has one or more
     <a>active participating media elements</a>, then run the <a>media session
     release algorithm</a> for <var>old media session</var>.
-  </li>
-  <li>
-    Add <var>m</var> to <var>new media session</var>'s <a>participating media
-    elements</a>.
   </li>
 </ol>
 

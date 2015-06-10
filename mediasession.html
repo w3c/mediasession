@@ -1418,8 +1418,7 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" data-
 
 
    <p>A <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object must not be garbage collected while its corresponding
-<a data-link-type="dfn" href="#media-session">media session</a> is attached to at least one <a data-link-type="dfn" href="#participating-media-elements">participating media
-element</a>.</p>
+<a data-link-type="dfn" href="#media-session">media session</a> is attached to at least one <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>.</p>
 
 
    <p>Additionally, a <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object must not be garbage collected while the
@@ -2121,12 +2120,10 @@ set its <a data-link-type="dfn" href="#current-media-session">current media sess
 context</a>’s <a data-link-type="dfn" href="#media-session">media session</a>.</p>
 
 
-   <p>The <a data-link-type="dfn" href="#media-session">media session</a> has <dfn data-dfn-type="dfn" data-noexport="" id="participating-media-elements">participating media elements<a class="self-link" href="#participating-media-elements"></a></dfn> that
-consists of zero or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> whose <a data-link-type="dfn" href="#current-media-session">current media
-session</a> is that <a data-link-type="dfn" href="#media-session">media session</a>. A <a data-link-type="dfn" href="#media-session">media session</a> must also keep
-a list of <dfn data-dfn-type="dfn" data-noexport="" id="active-participating-media-elements">active participating media elements<a class="self-link" href="#active-participating-media-elements"></a></dfn> that consists of zero
-or more
-<a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.</p>
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="participating-media-elements">participating media elements<a class="self-link" href="#participating-media-elements"></a></dfn> are <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+elements</a> whose <a data-link-type="dfn" href="#current-media-session">current media session</a> is that <a data-link-type="dfn" href="#media-session">media session</a>. A
+<a data-link-type="dfn" href="#media-session">media session</a> must keep a list of <dfn data-dfn-type="dfn" data-noexport="" id="active-participating-media-elements">active participating media
+elements<a class="self-link" href="#active-participating-media-elements"></a></dfn> that consists of zero or more <a data-link-type="dfn" href="#participating-media-elements">participating media elements</a>.</p>
 
 
 
@@ -2252,23 +2249,15 @@ otherwise. On setting, the user agent must run the following steps:</p>
   
     <li>
     If <var>m</var> is an <a data-link-type="dfn" href="#active-participating-media-elements">active participating media element</a> of <var>old
-    media session</var> then <a data-link-type="dfn" href="#pause">pause</a> <var>m</var>.
-  
-  
-    <li>
-    Remove <var>m</var> from <var>old media session</var>’s <a data-link-type="dfn" href="#participating-media-elements">participating
-    media elements</a>.
+    media session</var> then <a data-link-type="dfn" href="#pause">pause</a> <var>m</var> and remove <var>m</var>
+    from <var>old media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
+    elements</a>.
   
   
     <li>
     If <var>old media session</var> is not null and no longer has one or more
     <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>, then run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session
     release algorithm</a> for <var>old media session</var>.
-  
-  
-    <li>
-    Add <var>m</var> to <var>new media session</var>’s <a data-link-type="dfn" href="#participating-media-elements">participating media
-    elements</a>.
   
 </ol>
 
@@ -2713,7 +2702,8 @@ if (mySession.controls) {
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li>active media session state, <a href="#active-media-session-state">4.1</a>
-   <li>active participating media elements, <a href="#active-participating-media-elements">6</a>
+   <li>active participating media
+elements, <a href="#active-participating-media-elements">6</a>
    <li>album, <a href="#dom-mediametadata-album">5.1</a>
    <li>album name, <a href="#album-name">4</a>
    <li>ambient attribute value, <a href="#ambient-attribute-value">4.2</a>
