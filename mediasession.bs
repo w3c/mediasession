@@ -1871,15 +1871,28 @@ steps:
   </li>
 </ol>
 
-<h2 id="examples">Examples</h2>
+<h3 id="examples">Examples</h3>
 
-<div class="example">
-  As both <code><a element>audio</a></code> and <code><a
-  element>video</a></code>
-  elements implement the {{HTMLMediaElement}} interface, these element's
-  {{HTMLMediaElement/kind}} attribute can be set via JavaScript:
+<em>This section and all its subsections are non-normative.</em>
 
-  <pre class="lang-javascript">
+<h4 id="example-setting-up-a-media-session">Setting up a media session</h4>
+
+An <code><a element>audio</a></code> element's <code><a lt="kind content
+attribute">kind</a></code> content attribute can be declared as follows in HTML
+to associate that <code><a element>audio</a></code> element to a <a>media
+session</a>:
+
+<pre class="lang-markup">
+&lt;audio src=track1.mp3 kind=content autoplay>
+</pre>
+
+As both <code><a element>audio</a></code> and <code><a element>video</a></code>
+elements implement the {{HTMLMediaElement}} interface, these element's
+{{HTMLMediaElement/kind}} attribute can also be set via JavaScript to associate
+that <code><a element>audio</a></code> or <code><a element>video</a></code>
+element to a <a>media session</a>:
+
+<pre class="lang-javascript">
 var myAudio = document.createElement("audio");
 myAudio.src = "music.mp3";
 
@@ -1890,38 +1903,35 @@ console.log(myAudio.session) // --> [object MediaSession]
 myAudio.play(); // Go!
   </pre>
 
-  A <a>media session</a> can also be assigned to one or more <code><a
-  element>audio</a></code> and <code><a element>video</a></code>
-  elements by setting their {{HTMLMediaElement/session}} attribute directly in
-  JavaScript:
+A <a>media session</a> can also be assigned to one or more <code><a
+element>audio</a></code> and <code><a element>video</a></code>
+elements by setting their respective {{HTMLMediaElement/session}} attributes to
+the same {{MediaSession}} object in JavaScript:
 
-  <pre class="lang-javascript">
+<pre class="lang-javascript">
 var myAudio = document.createElement("audio");
-myAudio.src = "music.mp3";
+myAudio.src = "track1_audio.mp3";
+
+var myVideo = document.createElement("audio");
+myVideo.src = "track1_video.mp3";
 
 var mySession = new MediaSession();
 
-mySession.setMetadata({
-  title: "Demo Track",
-  artwork: "/resources/cover.png"
-});
-
 myAudio.session = mySession;
-console.log(myAudio.kind) // --> "content"
+myVideo.session = mySession;
 
 myAudio.play(); // Go!
+myVideo.play(); // Go!
   </pre>
-</div>
 
-<div class="example">
-  An {{AudioContext}} object [[!WEBAUDIO]] can be rendered via <code><a
-  element>audio</a></code> or <code><a element>video</a></code>
-  elements. As both <code><a element>audio</a></code> and <code><a
-  element>video</a></code>
-  elements implement the {{HTMLMediaElement}} interface, these element's
-  {{HTMLMediaElement/kind}} attribute can be set via JavaScript:
+An {{AudioContext}} object [[!WEBAUDIO]] can be rendered via <code><a
+element>audio</a></code> or <code><a element>video</a></code>
+elements. As both <code><a element>audio</a></code> and <code><a
+element>video</a></code>
+elements implement the {{HTMLMediaElement}} interface, these element's
+{{HTMLMediaElement/kind}} attribute can be set via JavaScript:
 
-  <pre class="lang-javascript">
+<pre class="lang-javascript">
 var audioCtx = new AudioContext();
 // ...
 var destinationNode = audioCtx.createMediaStreamDestination();
@@ -1936,13 +1946,95 @@ console.log(myAudio.session) // --> [object MediaSession]
 myAudio.play(); // Go!
   </pre>
 
-  <p class="note">
-    Web developers should ensure that, when an {{AudioContext}} object is
-    attached to an <code><a element>audio</a></code> or <code><a
-    element>video</a></code>
-    element, that they apply subsequent {{pause}} and {{play}} events dispatched
-    on that <code><a element>audio</a></code> or <code><a
-    element>video</a></code>
-    element to their {{AudioContext}} object appropriately.
-  </p>
-</div>
+<p class="note">
+  Web developers should ensure that, when an {{AudioContext}} object is attached
+  to an <code><a element>audio</a></code> or <code><a element>video</a></code>
+  element, that they apply subsequent {{pause}} and {{play}} events dispatched
+  on that <code><a element>audio</a></code> or <code><a element>video</a></code>
+  element to their {{AudioContext}} object appropriately.
+</p>
+
+<h4 id="example-setting-media-session-meta-data">Setting media session meta
+data</h4>
+
+When a <code><a lt="content media state">Content</a></code>-based <a>media
+session</a> is <code><a lt="active media session state">ACTIVE</a></code> it may
+be possible to display meta data within platform-level interfaces. Media session
+meta data can be added at any time to update these interfaces:
+
+<pre class="lang-javascript">
+// Set some media session metadata
+// to display to the user
+mySession.setMetadata({
+  title: "Demo Track 1",
+  artwork: "/resources/cover1.png"
+});
+
+// ... time passes ...
+
+// Change the media session metadata
+// to display to the user
+mySession.setMetadata({
+  title: "Demo Track 2",
+  artwork: "/resources/cover2.png"
+});
+  </pre>
+
+<h4 id="example-responding-to-media-remote-control-events">Responding to media
+remote control events</h4>
+
+Before a <code><a lt="content media state">Content</a></code>-based <a>media
+session</a> becomes <code><a lt="active media session state">ACTIVE</a></code> a
+web developer must set which remote control keys they want to enable:
+
+<pre class="lang-javascript">
+var mySession = new MediaSession("content");
+
+// Enable previous and next track media key inputs
+if (mySession.controls) {
+  mySession.controls.nextTrackEnabled = true;
+  mySession.controls.previousTrackEnabled = true;
+}
+
+// ... assign media session to a media element and play
+// that media element to active the media session ...
+</pre>
+
+When a <code><a lt="content media state">Content</a></code>-based <a>media
+session</a> then becomes <code><a lt="active media session
+state">ACTIVE</a></code> it is possible to listen for any interaction with the
+registered remote control keys and respond appropriately to those inputs in a
+web application:
+
+<pre class="lang-javascript">
+// Respond to previous and next track media key inputs
+if (mySession.controls) {
+  mySession.controls.addEventListener('nextTrack', function() {
+    // Play next track
+    if (myAudio.src === "track1.mp3") {
+      myAudio.src = "track2.mp3";
+      myAudio.play();
+
+      // Set appropriate meta data for track 2
+      mySession.setMetadata({
+        title: "Demo Track 2",
+        artwork: "/resources/cover2.png"
+      });
+    }
+  }, false);
+
+  mySession.controls.addEventListener('previousTrack', function() {
+    // Play previous track
+    if (myAudio.src === "track2.mp3") {
+      myAudio.src = "track1.mp3";
+      myAudio.play();
+
+      // Set appropriate meta data for track 1
+      mySession.setMetadata({
+        title: "Demo Track 1",
+        artwork: "/resources/cover1.png"
+      });
+    }
+  }, false);
+}
+</pre>

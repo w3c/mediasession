@@ -248,8 +248,15 @@ session from a media element</span></a>
 session from a media element</span></a>
       <li><a href="#releasing-a-media-session-from-a-media-element"><span class="secno">6.5</span> <span class="content">Releasing a media
 session from a media element</span></a>
+      <li><a href="#examples"><span class="secno">6.6</span> <span class="content">Examples</span></a>
+       <ul class="toc">
+        <li><a href="#example-setting-up-a-media-session"><span class="secno">6.6.1</span> <span class="content">Setting up a media session</span></a>
+        <li><a href="#example-setting-media-session-meta-data"><span class="secno">6.6.2</span> <span class="content">Setting media session meta
+data</span></a>
+        <li><a href="#example-responding-to-media-remote-control-events"><span class="secno">6.6.3</span> <span class="content">Responding to media
+remote control events</span></a>
+       </ul>
      </ul>
-    <li><a href="#examples"><span class="secno">7</span> <span class="content">Examples</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ul class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
@@ -2380,11 +2387,11 @@ given <var>media element</var> it must run the following steps:</p>
 session from a media element</span><a class="self-link" href="#activating-a-media-session-from-a-media-element"></a></h3>
 
 
-   <p>When the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is invoked and the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+When the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is invoked and the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
 element</a>’s <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a></code> attribute is true and the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s
 <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a></code> attribute has the value <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a></code> or
 <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a></code>, then the user agent must run the following steps passing
-in <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> <var>media element</var>:</p>
+in <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> <var>media element</var>:
 
 
    <ol>
@@ -2523,16 +2530,32 @@ steps:</p>
 </ol>
 
 
-   <h2 class="heading settled" data-level="7" id="examples"><span class="secno">7. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
+   <h3 class="heading settled" data-level="6.6" id="examples"><span class="secno">6.6. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h3>
 
 
-   <div class="example" id="example-9c851683"><a class="self-link" href="#example-9c851683"></a>
-  As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-  elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
-  <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be set via JavaScript:
+   <p><em>This section and all its subsections are non-normative.</em></p>
 
-  
-    <pre class="lang-javascript">var myAudio = document.createElement("audio");
+
+   <h4 class="heading settled" data-level="6.6.1" id="example-setting-up-a-media-session"><span class="secno">6.6.1. </span><span class="content">Setting up a media session</span><a class="self-link" href="#example-setting-up-a-media-session"></a></h4>
+
+
+   <p>An <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element’s <code><a data-link-type="dfn" href="#kind-content-attribute">kind</a></code> content attribute can be declared as follows in HTML
+to associate that <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element to a <a data-link-type="dfn" href="#media-session">media
+session</a>:</p>
+
+
+   <pre class="lang-markup">&lt;audio src=track1.mp3 kind=content autoplay>
+</pre>
+
+
+   <p>As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
+<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can also be set via JavaScript to associate
+that <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+element to a <a data-link-type="dfn" href="#media-session">media session</a>:</p>
+
+
+   <pre class="lang-javascript">var myAudio = document.createElement("audio");
 myAudio.src = "music.mp3";
 
 console.log(myAudio.session) // --> null
@@ -2543,37 +2566,34 @@ myAudio.play(); // Go!
 </pre>
 
 
-    <p>A <a data-link-type="dfn" href="#media-session">media session</a> can also be assigned to one or more <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-  elements by setting their <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute directly in
-  JavaScript:</p>
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> can also be assigned to one or more <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+elements by setting their respective <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attributes to
+the same <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object in JavaScript:</p>
 
-  
-    <pre class="lang-javascript">var myAudio = document.createElement("audio");
-myAudio.src = "music.mp3";
+
+   <pre class="lang-javascript">var myAudio = document.createElement("audio");
+myAudio.src = "track1_audio.mp3";
+
+var myVideo = document.createElement("audio");
+myVideo.src = "track1_video.mp3";
 
 var mySession = new MediaSession();
 
-mySession.setMetadata({
-  title: "Demo Track",
-  artwork: "/resources/cover.png"
-});
-
 myAudio.session = mySession;
-console.log(myAudio.kind) // --> "content"
+myVideo.session = mySession;
 
 myAudio.play(); // Go!
+myVideo.play(); // Go!
 </pre>
-</div>
 
 
-   <div class="example" id="example-9e013e6a"><a class="self-link" href="#example-9e013e6a"></a>
-  An <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object <a data-link-type="biblio" href="#biblio-webaudio">[WEBAUDIO]</a> can be rendered via <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-  elements. As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-  elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
-  <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be set via JavaScript:
+   <p>An <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object <a data-link-type="biblio" href="#biblio-webaudio">[WEBAUDIO]</a> can be rendered via <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+elements. As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
+<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be set via JavaScript:</p>
 
-  
-    <pre class="lang-javascript">var audioCtx = new AudioContext();
+
+   <pre class="lang-javascript">var audioCtx = new AudioContext();
 // ...
 var destinationNode = audioCtx.createMediaStreamDestination();
 
@@ -2587,15 +2607,103 @@ console.log(myAudio.session) // --> [object MediaSession]
 myAudio.play(); // Go!
 </pre>
 
-  
-    <p class="note" role="note">
-    Web developers should ensure that, when an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object is
-    attached to an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-    element, that they apply subsequent <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-pause">pause</a></code> and <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a></code> events dispatched
-    on that <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
-    element to their <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object appropriately.
-  </p>
-</div>
+
+   <p class="note" role="note">
+  Web developers should ensure that, when an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object is attached
+  to an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+  element, that they apply subsequent <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-pause">pause</a></code> and <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a></code> events dispatched
+  on that <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
+  element to their <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object appropriately.
+</p>
+
+
+   <h4 class="heading settled" data-level="6.6.2" id="example-setting-media-session-meta-data"><span class="secno">6.6.2. </span><span class="content">Setting media session meta
+data</span><a class="self-link" href="#example-setting-media-session-meta-data"></a></h4>
+
+
+   <p>When a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
+session</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> it may
+be possible to display meta data within platform-level interfaces. Media session
+meta data can be added at any time to update these interfaces:</p>
+
+
+   <pre class="lang-javascript">// Set some media session metadata
+// to display to the user
+mySession.setMetadata({
+  title: "Demo Track 1",
+  artwork: "/resources/cover1.png"
+});
+
+// ... time passes ...
+
+// Change the media session metadata
+// to display to the user
+mySession.setMetadata({
+  title: "Demo Track 2",
+  artwork: "/resources/cover2.png"
+});
+</pre>
+
+
+   <h4 class="heading settled" data-level="6.6.3" id="example-responding-to-media-remote-control-events"><span class="secno">6.6.3. </span><span class="content">Responding to media
+remote control events</span><a class="self-link" href="#example-responding-to-media-remote-control-events"></a></h4>
+
+
+   <p>Before a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
+session</a> becomes <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> a
+web developer must set which remote control keys they want to enable:</p>
+
+
+   <pre class="lang-javascript">var mySession = new MediaSession("content");
+
+// Enable previous and next track media key inputs
+if (mySession.controls) {
+  mySession.controls.nextTrackEnabled = true;
+  mySession.controls.previousTrackEnabled = true;
+}
+
+// ... assign media session to a media element and play
+// that media element to active the media session ...
+</pre>
+
+
+   <p>When a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
+session</a> then becomes <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> it is possible to listen for any interaction with the
+registered remote control keys and respond appropriately to those inputs in a
+web application:</p>
+
+
+   <pre class="lang-javascript">// Respond to previous and next track media key inputs
+if (mySession.controls) {
+  mySession.controls.addEventListener('nextTrack', function() {
+    // Play next track
+    if (myAudio.src === "track1.mp3") {
+      myAudio.src = "track2.mp3";
+      myAudio.play();
+
+      // Set appropriate meta data for track 2
+      mySession.setMetadata({
+        title: "Demo Track 2",
+        artwork: "/resources/cover2.png"
+      });
+    }
+  }, false);
+
+  mySession.controls.addEventListener('previousTrack', function() {
+    // Play previous track
+    if (myAudio.src === "track2.mp3") {
+      myAudio.src = "track1.mp3";
+      myAudio.play();
+
+      // Set appropriate meta data for track 1
+      mySession.setMetadata({
+        title: "Demo Track 1",
+        artwork: "/resources/cover1.png"
+      });
+    }
+  }, false);
+}
+</pre>
 
 </main>
   
