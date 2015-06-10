@@ -860,6 +860,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
+<br>
 After a {{visibilitychange}} event [[PAGE-VISIBILITY]] has been fired at a
 <a>top-level browsing context</a>, known as <var>the browsing context</var>, the
 user agent must run the following steps:
@@ -1338,6 +1339,7 @@ objects implementing the {{MediaRemoteControls}} interface:
 The <a>task source</a> for the <a>tasks</a> listed in this section is the <a>DOM
 manipulation task source</a>.
 
+<br>
 When the user presses the {{MediaPlayPause}} media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
 the user agent must, for each <a>media session</a> known by the user agent, run
@@ -1369,6 +1371,7 @@ the following steps:
   </li>
 </ol>
 
+<br>
 When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
 button) then the user agent must, for each
@@ -1746,6 +1749,7 @@ element>audio</a></code> element</h4>
 <h3 id="activating-a-media-session-from-a-media-element">Activating a media
 session from a media element</h3>
 
+<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
 element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
 {{HTMLMediaElement/readyState}} attribute has the value {{HAVE_FUTURE_DATA}} or
