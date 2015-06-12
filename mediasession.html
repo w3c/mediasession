@@ -163,10 +163,12 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-10">10 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-12">12 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/whatwg/mediasession/issues/">GitHub</a>
      <dt>Participate:
      <dd><span><a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)</span>
      <dd><span><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a></span>
@@ -1388,29 +1390,29 @@ user agent must run the following steps:</p>
    <p><a data-link-type="dfn" href="#media-session">Media sessions</a> implement the following interface:</p>
 
 
-   <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
-interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
-  readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
+   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
+  readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
-  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-global-name="MediaSession<interface>/controls<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
+  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
 
-  void <a class="idl-code" data-global-name="MediaSession<interface>/setMetadata(metadata)<method>" data-link-type="method" href="#dom-mediasession-setmetadatametadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <dfn class="idl-code" data-dfn-for="MediaSession/setMetadata(metadata)" data-dfn-type="argument" data-export="" data-global-name="MediaSession<interface>/setMetadata(metadata)<method>/metadata<argument>" id="dom-mediasession-setmetadatametadata-metadata">metadata<a class="self-link" href="#dom-mediasession-setmetadatametadata-metadata"></a></dfn>);
+  void <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmetadatametadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <dfn class="idl-code" data-dfn-for="MediaSession/setMetadata(metadata)" data-dfn-type="argument" data-export="" id="dom-mediasession-setmetadatametadata-metadata">metadata<a class="self-link" href="#dom-mediasession-setmetadatametadata-metadata"></a></dfn>);
 
-  void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
+  void <a class="idl-code" data-link-type="method" href="#dom-mediasession-release">release</a>();
 };
 
-enum <dfn class="idl-code" data-dfn-type="enum" data-export="" data-global-name="" id="enumdef-mediasessionkind">MediaSessionKind<a class="self-link" href="#enumdef-mediasessionkind"></a></dfn> {
+enum <dfn class="idl-code" data-dfn-type="enum" data-export="" id="enumdef-mediasessionkind">MediaSessionKind<a class="self-link" href="#enumdef-mediasessionkind"></a></dfn> {
   "content",
   "transient",
   "transient-solo",
   "ambient"
 };
 
-dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" data-global-name="" id="dictdef-mediametadata">MediaMetadata<a class="self-link" href="#dictdef-mediametadata"></a></dfn> {
-  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " id="dom-mediametadata-title">title<a class="self-link" href="#dom-mediametadata-title"></a></dfn> = "";
-  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " id="dom-mediametadata-artist">artist<a class="self-link" href="#dom-mediametadata-artist"></a></dfn> = "";
-  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " id="dom-mediametadata-album">album<a class="self-link" href="#dom-mediametadata-album"></a></dfn> = "";
-  USVString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-global-name="MediaMetadata<dictionary>/artwork<dict-member>" data-type="USVString " id="dom-mediametadata-artwork">artwork<a class="self-link" href="#dom-mediametadata-artwork"></a></dfn>;
+dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-mediametadata">MediaMetadata<a class="self-link" href="#dictdef-mediametadata"></a></dfn> {
+  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadata-title">title<a class="self-link" href="#dom-mediametadata-title"></a></dfn> = "";
+  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadata-artist">artist<a class="self-link" href="#dom-mediametadata-artist"></a></dfn> = "";
+  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadata-album">album<a class="self-link" href="#dom-mediametadata-album"></a></dfn> = "";
+  USVString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="USVString " id="dom-mediametadata-artwork">artwork<a class="self-link" href="#dom-mediametadata-artwork"></a></dfn>;
 };
 </pre>
 
@@ -1684,17 +1686,17 @@ interface</span><a class="self-link" href="#the-mediaremotecontrols-interface"><
    <p><a data-link-type="dfn" href="#media-remote-control">Media remote controls</a> implement the following interface:</p>
 
 
-   <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="mediaremotecontrols">MediaRemoteControls<a class="self-link" href="#mediaremotecontrols"></a></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/previousTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/nextTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/seekForwardEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a>;
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/seekBackwardEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a>;
+   <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediaremotecontrols">MediaRemoteControls<a class="self-link" href="#mediaremotecontrols"></a></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a>;
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a>;
 
   // Event handlers
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onprevioustrack<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onnexttrack<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onseekforward<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekforward">onseekforward</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onseekbackward<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekbackward">onseekbackward</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekforward">onseekforward</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekbackward">onseekbackward</a>;
 };
 </pre>
 
@@ -2136,8 +2138,8 @@ elements</a>.</p>
 
    <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
   // media session
-  attribute DOMString <a class="idl-code" data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
-  attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-global-name="HTMLMediaElement<interface>/session<attribute>" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
+  attribute DOMString <a class="idl-code" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
+  attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 </pre>
 
@@ -2896,48 +2898,48 @@ session, <a href="#release-media-element-from-its-media-session">6.5</a>
    <dt id="biblio-webaudio"><a class="self-link" href="#biblio-webaudio"></a>[WEBAUDIO]
    <dd>Paul Adenot; Chris Wilson; Chris Rogers. <a href="https://webaudio.github.io/web-audio-api/">Web Audio API</a>. 10 October 2013. WD. URL: <a href="https://webaudio.github.io/web-audio-api/">https://webaudio.github.io/web-audio-api/</a></dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">[<a class="idl-code" data-global-name="MediaSession<interface>/MediaSession(kind)<constructor>" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a data-global-name="MediaSession<interface>/MediaSession(kind)<method>/kind<argument>" href="#dom-mediasession-mediasessionkind-kind">kind</a>)]
-interface <a data-global-name="" href="#mediasession">MediaSession</a> {
-  readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-global-name="MediaSession<interface>/kind<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
+  <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a href="#dom-mediasession-mediasessionkind-kind">kind</a>)]
+interface <a href="#mediasession">MediaSession</a> {
+  readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
-  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-global-name="MediaSession<interface>/controls<attribute>" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
+  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
 
-  void <a class="idl-code" data-global-name="MediaSession<interface>/setMetadata(metadata)<method>" data-link-type="method" href="#dom-mediasession-setmetadatametadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <a data-global-name="MediaSession<interface>/setMetadata(metadata)<method>/metadata<argument>" href="#dom-mediasession-setmetadatametadata-metadata">metadata</a>);
+  void <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmetadatametadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <a href="#dom-mediasession-setmetadatametadata-metadata">metadata</a>);
 
-  void <a class="idl-code" data-global-name="MediaSession<interface>/release()<method>" data-link-type="method" href="#dom-mediasession-release">release</a>();
+  void <a class="idl-code" data-link-type="method" href="#dom-mediasession-release">release</a>();
 };
 
-enum <a data-global-name="" href="#enumdef-mediasessionkind">MediaSessionKind</a> {
+enum <a href="#enumdef-mediasessionkind">MediaSessionKind</a> {
   "content",
   "transient",
   "transient-solo",
   "ambient"
 };
 
-dictionary <a data-global-name="" href="#dictdef-mediametadata">MediaMetadata</a> {
-  DOMString <a data-default="&quot;&quot;" data-global-name="MediaMetadata<dictionary>/title<dict-member>" data-type="DOMString " href="#dom-mediametadata-title">title</a> = "";
-  DOMString <a data-default="&quot;&quot;" data-global-name="MediaMetadata<dictionary>/artist<dict-member>" data-type="DOMString " href="#dom-mediametadata-artist">artist</a> = "";
-  DOMString <a data-default="&quot;&quot;" data-global-name="MediaMetadata<dictionary>/album<dict-member>" data-type="DOMString " href="#dom-mediametadata-album">album</a> = "";
-  USVString <a data-global-name="MediaMetadata<dictionary>/artwork<dict-member>" data-type="USVString " href="#dom-mediametadata-artwork">artwork</a>;
+dictionary <a href="#dictdef-mediametadata">MediaMetadata</a> {
+  DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-title">title</a> = "";
+  DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-artist">artist</a> = "";
+  DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-album">album</a> = "";
+  USVString <a data-type="USVString " href="#dom-mediametadata-artwork">artwork</a>;
 };
 
-interface <a data-global-name="" href="#mediaremotecontrols">MediaRemoteControls</a> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/previousTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/nextTrackEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/seekForwardEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a>;
-  attribute boolean <a class="idl-code" data-global-name="MediaRemoteControls<interface>/seekBackwardEnabled<attribute>" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a>;
+interface <a href="#mediaremotecontrols">MediaRemoteControls</a> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a>;
+  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a>;
 
   // Event handlers
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onprevioustrack<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onnexttrack<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onseekforward<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekforward">onseekforward</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-global-name="MediaRemoteControls<interface>/onseekbackward<attribute>" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekbackward">onseekbackward</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekforward">onseekforward</a>;
+  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekbackward">onseekbackward</a>;
 };
 
 partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
   // media session
-  attribute DOMString <a class="idl-code" data-global-name="HTMLMediaElement<interface>/kind<attribute>" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
-  attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-global-name="HTMLMediaElement<interface>/session<attribute>" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
+  attribute DOMString <a class="idl-code" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
+  attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 
 </pre>
