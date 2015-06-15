@@ -1026,10 +1026,6 @@ constructor when invoked must run these steps:
     <var>media session</var>.
   </li>
   <li>
-    Set <var>s</var>'s {{MediaSession/kind}} attribute to the value of
-    <var>media session category</var>.
-  </li>
-  <li>
     If <var>media session category</var> is &quot;<a lt="content attribute
     value"><code>content</code></a>&quot then set <var>s</var>'s
     {{MediaSession/controls}} attribute to a new {{MediaRemoteControls}} object.
