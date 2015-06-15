@@ -1027,7 +1027,7 @@ constructor when invoked must run these steps:
   </li>
   <li>
     If <var>media session category</var> is &quot;<a lt="content attribute
-    value"><code>content</code></a>&quot then set <var>s</var>'s
+    value"><code>content</code></a>&quot, then set <var>s</var>'s
     {{MediaSession/controls}} attribute to a new {{MediaRemoteControls}} object.
     (Otherwise <var>media session</var> has no <a>media remote controls</a>.)
   </li>
@@ -1065,7 +1065,7 @@ session</a> that was set when the object was created.
 The <dfn attribute for="MediaSession" lt="controls"><code>controls</code></dfn>
 attribute must return the {{MediaRemoteControls}} object that was assigned to
 the <a>media session</a> when it was created. If {{MediaSession/kind}} is not
-&quot;<a lt="content attribute value"><code>content</code></a>&quot then this
+&quot;<a lt="content attribute value"><code>content</code></a>&quot, then this
 attribute should return null.
 
 <dl class=domintro>
