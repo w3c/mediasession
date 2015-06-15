@@ -163,7 +163,7 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-12">12 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-15">15 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1387,9 +1387,6 @@ user agent must run the following steps:</p>
    <h3 class="heading settled" data-level="5.1" id="the-mediasession-interface"><span class="secno">5.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> interface</span><a class="self-link" href="#the-mediasession-interface"></a></h3>
 
 
-   <p><a data-link-type="dfn" href="#media-session">Media sessions</a> implement the following interface:</p>
-
-
    <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasessionkind">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" id="dom-mediasession-mediasessionkind-kind">kind<a class="self-link" href="#dom-mediasession-mediasessionkind-kind"></a></dfn>)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
@@ -1415,6 +1412,9 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="d
   USVString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="USVString " id="dom-mediametadata-artwork">artwork<a class="self-link" href="#dom-mediametadata-artwork"></a></dfn>;
 };
 </pre>
+
+
+   <p><code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> objects are simply known as <a data-link-type="dfn" href="#media-session">media sessions</a>.</p>
 
 
    <h4 class="heading settled" data-level="5.1.1" id="mediasession-garbage-collection"><span class="secno">5.1.1. </span><span class="content">Garbage collection</span><a class="self-link" href="#mediasession-garbage-collection"></a></h4>

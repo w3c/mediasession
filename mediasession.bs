@@ -953,8 +953,6 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 
 <h3 id="the-mediasession-interface">The {{MediaSession}} interface</h3>
 
-<a>Media sessions</a> implement the following interface:
-
 <pre class="idl">
 [Constructor(optional MediaSessionKind kind)]
 interface MediaSession {
@@ -981,6 +979,8 @@ dictionary MediaMetadata {
   USVString artwork;
 };
 </pre>
+
+{{MediaSession}} objects are simply known as <a>media sessions</a>.
 
 <h4 id="mediasession-garbage-collection">Garbage collection</h4>
 
