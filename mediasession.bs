@@ -1006,7 +1006,7 @@ listener</a> whose <b>type</b> is <code>previoustrack</code>,
 
 The
 <dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
-constructor when invoked must run these steps:
+constructor, when invoked, must run these steps:
 
 <ol>
   <li>
