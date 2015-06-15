@@ -1516,8 +1516,8 @@ a <a>media element</a> both declaratively and programmatically and how, once
 attached, the <a>media element</a> can control state of a <a>media session</a>.
 
 A <a>media element</a> may have a <dfn>current media session</dfn>, which is a
-<a>media session</a>. When a <a>media element</a> is created the user agent must
-set its <a>current media session</a> to the current <a>top-level browsing
+<a>media session</a>. When a <a>media element</a> is created, the user agent
+must set its <a>current media session</a> to the current <a>top-level browsing
 context</a>'s <a>media session</a>.
 
 A <a>media session</a>'s <dfn>participating media elements</dfn> are <a>media
