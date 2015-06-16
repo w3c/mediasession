@@ -1777,9 +1777,11 @@ session from a media element</h3>
 When a <a>media element</a> is to <dfn>pause</dfn>, the user agent must run
 <a>media element</a>'s <a>internal pause steps</a>.
 
+<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 When a <a>media element</a> is to <dfn>indefinitely pause</dfn>, the user agent
 must invoke its {{pause()}} method.
 
+<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 When the {{pause()}} method on a <a>media element</a> is invoked and the
 <a>media element</a>'s {{paused}} attribute is initially false, then the user
 agent must remove this <a>media element</a> from its <a>current media
@@ -1793,6 +1795,8 @@ session</a>'s list of <a>active participating media elements</a>.
   elements</a>.
 </p>
 
+<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
+<!-- https://github.com/whatwg/mediasession/issues/66 -->
 After the {{pause()}} method on a <a>media element</a> has been invoked and that
 <a>media element</a> has a <a>current media session type</a> set to
 <code><a lt="transient media state">Transient</a></code> or <code><a
