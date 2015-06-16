@@ -394,7 +394,8 @@ that <em>can</em> consist of <dfn data-dfn-type="dfn" data-lt="session title" da
 
 
    <p><br>
-To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>kind</var>, run these steps:</p>
+To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>media session category</var>,
+run these steps:</p>
 
 
    <ol>
@@ -405,13 +406,15 @@ To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create 
   
     <li>
     Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
-    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>kind</var>’s <a data-link-type="dfn" href="#media-session-category">media
-    session category</a>.
+    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>media session category</var>
+    or "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>" if no
+    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> can be found for the provided
+    <var>media session category</var>.
   
   
     <li>
-    If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>", then create a
-    new <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> for <var>media session</var>. (Otherwise
+    If <var>media session category</var> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>", then create a new <a data-link-type="dfn" href="#media-remote-controller">media remote
+    controller</a> for <var>media session</var>. (Otherwise
     <var>media session</var> has no <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>.)
   
   

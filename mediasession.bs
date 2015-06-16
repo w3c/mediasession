@@ -198,7 +198,8 @@ that <em>can</em> consist of <dfn lt="session title">title</dfn>,
 <dfn>artwork resource</dfn>.
 
 <br>
-To <dfn>create a media session</dfn>, given a <var>kind</var>, run these steps:
+To <dfn>create a media session</dfn>, given a <var>media session category</var>,
+run these steps:
 
 <ol>
   <li>
@@ -206,13 +207,15 @@ To <dfn>create a media session</dfn>, given a <var>kind</var>, run these steps:
   </li>
   <li>
     Set <var>media session</var>'s <a>current media session type</a> to the
-    corresponding <a>media session type</a> of <var>kind</var>'s <a>media
-    session category</a>.
+    corresponding <a>media session type</a> of <var>media session category</var>
+    or &quot;<a lt="content attribute value"><code>content</code></a>&quot if no
+    corresponding <a>media session type</a> can be found for the provided
+    <var>media session category</var>.
   </li>
   <li>
-    If <var>media session</var>'s <a>current media session type</a> is &quot;<a
-    lt="content attribute value"><code>content</code></a>&quot, then create a
-    new <a>media remote controller</a> for <var>media session</var>. (Otherwise
+    If <var>media session category</var> is &quot;<a lt="content attribute
+    value"><code>content</code></a>&quot, then create a new <a>media remote
+    controller</a> for <var>media session</var>. (Otherwise
     <var>media session</var> has no <a>media remote controller</a>.)
   </li>
   <li>
