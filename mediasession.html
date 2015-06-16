@@ -163,12 +163,10 @@ pre[class*="language-"] {
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-15">15 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-16">16 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
-     <dt>Issue Tracking:
-     <dd><a href="https://github.com/whatwg/mediasession/issues/">GitHub</a>
      <dt>Participate:
      <dd><span><a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)</span>
      <dd><span><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a></span>
@@ -381,11 +379,12 @@ audio-producing objects belonging to other <a data-link-type="dfn" href="#media-
 agent.</p>
 
 
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> may provide access to <dfn data-dfn-type="dfn" data-lt="media remote
-control" data-noexport="" id="media-remote-control">media remote controls<a class="self-link" href="#media-remote-control"></a></dfn> that can be used to respond to hardware or
-software remote control events. Such events may be triggered by e.g. keyboard
-media keys, headphone buttons, remote controller buttons or notification and
-lock screen media buttons.</p>
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> may have a <dfn data-dfn-type="dfn" data-noexport="" id="media-remote-controller">media remote controller<a class="self-link" href="#media-remote-controller"></a></dfn> that
+provides access to <a data-link-type="dfn" href="#media-remote-controls">media remote controls</a>. A <a data-link-type="dfn" href="#media-remote-controller">media remote
+controller</a> can be used to request particular media key access and respond to
+hardware or software remote control events. Such events may be triggered by e.g.
+keyboard media keys, headphone buttons, remote controller buttons or
+notification and lock screen media buttons.</p>
 
 
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may have associated <dfn data-dfn-type="dfn" data-noexport="" id="media-session-metadata">media session metadata<a class="self-link" href="#media-session-metadata"></a></dfn>
@@ -408,6 +407,12 @@ To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create 
     Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
     corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>kind</var>’s <a data-link-type="dfn" href="#media-session-category">media
     session category</a>.
+  
+  
+    <li>
+    If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>", then create a
+    new <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> for <var>media session</var>. (Otherwise
+    <var>media session</var> has no <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>.)
   
   
     <li>
@@ -914,8 +919,8 @@ session</var> are:</p>
             an ongoing media interface in the underlying platform’s
             notifications area and/or show an ongoing media interface in the
             underlying platform’s lock screen area for <var>media session</var>
-            based on both the requested <a data-link-type="dfn" href="#media-remote-control">media remote controls</a> and using
-            any available <a data-link-type="dfn" href="#media-session-metadata">media session metadata</a>.
+            based on its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>, if any, and using any
+            available <a data-link-type="dfn" href="#media-session-metadata">media session metadata</a>.
           
         
           
@@ -923,7 +928,7 @@ session</var> are:</p>
             Optionally, based on platform conventions, the user agent may allow
             hardware and/or software media keys to control playback of
             <var>media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
-            elements</a> based on the requested <a data-link-type="dfn" href="#media-remote-control">media remote controls</a>.
+            elements</a> based on its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>, if any.
           
         
         
@@ -1424,9 +1429,11 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="d
 <a data-link-type="dfn" href="#media-session">media session</a> is attached to at least one <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>.</p>
 
 
-   <p>Additionally, a <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object must not be garbage collected while the
-<code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object’s child <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object has an <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-event-listener">event
-listener</a> whose <b>type</b> is <code>previoustrack</code>,
+   <p>Additionally, a <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object must not be garbage collected while it
+has a
+<a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> and that object has an <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-event-listener">event listener</a>
+whose
+<b>type</b> is <code>previoustrack</code>,
 <code>nexttrack</code>, <code>seekforward</code> or <code>seekbackward</code>.</p>
 
 
@@ -1447,7 +1454,7 @@ listener</a> whose <b>type</b> is <code>previoustrack</code>,
 
    <p>The
 <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasessionkind">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasessionkind"></a></dfn>
-constructor when invoked must run these steps:</p>
+constructor, when invoked, must run these steps:</p>
 
 
    <ol>
@@ -1469,12 +1476,7 @@ constructor when invoked must run these steps:</p>
     Let <var>s</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object associated with
     <var>media session</var>.
   
-  
-    <li>
-    If <var>media session category</var> is "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>", then set <var>s</var>’s
-    <code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code> attribute to a new <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object.
-    (Otherwise <var>media session</var> has no <a data-link-type="dfn" href="#media-remote-control">media remote controls</a>.)
-  
+
   
     <li>
     Return <var>s</var>.
@@ -1510,15 +1512,15 @@ session</a> that was set when the object was created.</p>
   
   
     <dd>
-    Returns the <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object assigned for the <a data-link-type="dfn" href="#media-session">media
+    Returns the <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> assigned to the <a data-link-type="dfn" href="#media-session">media
     session</a>, if any.
   
 </dl>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-controls"><code>controls</code><a class="self-link" href="#dom-mediasession-controls"></a></dfn>
-attribute must return the <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object that was assigned to
-the <a data-link-type="dfn" href="#media-session">media session</a> when it was created. If <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> is not
+attribute must return the <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> that was assigned to a
+<a data-link-type="dfn" href="#media-session">media session</a> when it was created. If <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> is not
 "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>", then this
 attribute should return null.</p>
 
@@ -1678,9 +1680,6 @@ must run the following steps:</p>
 interface</span><a class="self-link" href="#the-mediaremotecontrols-interface"></a></h3>
 
 
-   <p><a data-link-type="dfn" href="#media-remote-control">Media remote controls</a> implement the following interface:</p>
-
-
    <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediaremotecontrols">MediaRemoteControls<a class="self-link" href="#mediaremotecontrols"></a></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
   attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
   attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
@@ -1694,6 +1693,10 @@ interface</span><a class="self-link" href="#the-mediaremotecontrols-interface"><
   attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onseekbackward">onseekbackward</a>;
 };
 </pre>
+
+
+   <p>Objects implementing the <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> interface are simply known as
+<dfn data-dfn-type="dfn" data-noexport="" id="media-remote-controls">media remote controls<a class="self-link" href="#media-remote-controls"></a></dfn>.</p>
 
 
    <h4 class="heading settled" data-level="5.2.1" id="mediaremotecontrols-object-members"><span class="secno">5.2.1. </span><span class="content">Object members</span><a class="self-link" href="#mediaremotecontrols-object-members"></a></h4>
@@ -1922,37 +1925,39 @@ When the user presses the <code class="idl"><a data-link-type="idl" href="http:/
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
 button) then the user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
-that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
-has <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> set to true,
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-previoustrack"><code>previoustrack</code></a> at its child
-<code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> object.</p>
+that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>,
+has a <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> with its
+<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> attribute set to true,
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-previoustrack"><code>previoustrack</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote
+controller</a>.</p>
 
 
    <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackNext">MediaTrackNext</a></code> media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and has
-<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> set to true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-nexttrack"><code>nexttrack</code></a> at its child <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
-object.</p>
+the user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
+controller</a> with its <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> attribute set
+to true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-nexttrack"><code>nexttrack</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>.</p>
 
 
    <p>When the user presses a 'seek backward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
-user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and has
-<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a></code> set is true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-seekbackward"><code>seekbackward</code></a> at its child <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
-object.</p>
+user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
+controller</a> with its <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a></code> attribute
+set is true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-seekbackward"><code>seekbackward</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote
+controller</a>.</p>
 
 
    <p>When the user presses a 'seek forward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
 user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
-that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
-has <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a></code> set to true,
+that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>,
+has a <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> with its
+<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a></code> attribute set to true,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-seekforward"><code>seekforward</code></a> at its child <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
-object.</p>
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-seekforward"><code>seekforward</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>.</p>
 
 
    <h4 class="heading settled" data-level="5.2.3" id="mediaremotecontrols-events-summary"><span class="secno">5.2.3. </span><span class="content">Events summary</span><a class="self-link" href="#mediaremotecontrols-events-summary"></a></h4>
@@ -1961,7 +1966,7 @@ object.</p>
    <p><em>This section is non-normative.</em></p>
 
 
-   <p>The following events fire on <a data-link-type="dfn" href="#media-remote-control">media remote controls</a> objects as part of the
+   <p>The following events fire on <a data-link-type="dfn" href="#media-remote-controller">media remote controllers</a> as part of the
 processing model described above:</p>
 
 
@@ -2113,8 +2118,8 @@ attached, the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipa
 
 
    <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> may have a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session">current media session<a class="self-link" href="#current-media-session"></a></dfn>, which is a
-<a data-link-type="dfn" href="#media-session">media session</a>. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created the user agent must
-set its <a data-link-type="dfn" href="#current-media-session">current media session</a> to the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing
+<a data-link-type="dfn" href="#media-session">media session</a>. When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created, the user agent
+must set its <a data-link-type="dfn" href="#current-media-session">current media session</a> to the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing
 context</a>’s <a data-link-type="dfn" href="#media-session">media session</a>.</p>
 
 
@@ -2763,8 +2768,8 @@ elements, <a href="#active-participating-media-elements">6</a>
     </ul>
    <li>kind content attribute, <a href="#kind-content-attribute">6.2</a>
    <li>MediaMetadata, <a href="#dictdef-mediametadata">5.1</a>
-   <li>media remote
-control, <a href="#media-remote-control">4</a>
+   <li>media remote controller, <a href="#media-remote-controller">4</a>
+   <li>media remote controls, <a href="#media-remote-controls">5.2</a>
    <li>MediaRemoteControls, <a href="#mediaremotecontrols">5.2</a>
    <li>media session, <a href="#media-session">4</a>
    <li>MediaSession, <a href="#mediasession">5.1</a>

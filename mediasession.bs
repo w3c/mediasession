@@ -185,11 +185,12 @@ audio-producing objects with both the underlying platform and other
 audio-producing objects belonging to other <a>media sessions</a> within the user
 agent.
 
-A <a>media session</a> may provide access to <dfn lt="media remote
-control">media remote controls</dfn> that can be used to respond to hardware or
-software remote control events. Such events may be triggered by e.g. keyboard
-media keys, headphone buttons, remote controller buttons or notification and
-lock screen media buttons.
+A <a>media session</a> may have a <dfn>media remote controller</dfn> that
+provides access to <a>media remote controls</a>. A <a>media remote
+controller</a> can be used to request particular media key access and respond to
+hardware or software remote control events. Such events may be triggered by e.g.
+keyboard media keys, headphone buttons, remote controller buttons or
+notification and lock screen media buttons.
 
 A <a>media session</a> may have associated <dfn>media session metadata</dfn>
 that <em>can</em> consist of <dfn lt="session title">title</dfn>,
@@ -207,6 +208,12 @@ To <dfn>create a media session</dfn>, given a <var>kind</var>, run these steps:
     Set <var>media session</var>'s <a>current media session type</a> to the
     corresponding <a>media session type</a> of <var>kind</var>'s <a>media
     session category</a>.
+  </li>
+  <li>
+    If <var>media session</var>'s <a>current media session type</a> is &quot;<a
+    lt="content attribute value"><code>content</code></a>&quot, then create a
+    new <a>media remote controller</a> for <var>media session</var>. (Otherwise
+    <var>media session</var> has no <a>media remote controller</a>.)
   </li>
   <li>
     Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
@@ -591,14 +598,14 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
             an ongoing media interface in the underlying platform's
             notifications area and/or show an ongoing media interface in the
             underlying platform's lock screen area for <var>media session</var>
-            based on both the requested <a>media remote controls</a> and using
-            any available <a>media session metadata</a>.
+            based on its <a>media remote controller</a>, if any, and using any
+            available <a>media session metadata</a>.
           </li>
           <li>
             Optionally, based on platform conventions, the user agent may allow
             hardware and/or software media keys to control playback of
             <var>media session</var>'s <a>active participating media
-            elements</a> based on the requested <a>media remote controls</a>.
+            elements</a> based on its <a>media remote controller</a>, if any.
           </li>
         </ol>
       </dd>
@@ -987,9 +994,11 @@ dictionary MediaMetadata {
 A {{MediaSession}} object must not be garbage collected while its corresponding
 <a>media session</a> is attached to at least one <a>media element</a>.
 
-Additionally, a {{MediaSession}} object must not be garbage collected while the
-{{MediaSession}} object's child {{MediaRemoteControls}} object has an <a>event
-listener</a> whose <b>type</b> is <code>previoustrack</code>,
+Additionally, a {{MediaSession}} object must not be garbage collected while it
+has a
+<a>media remote controller</a> and that object has an <a>event listener</a>
+whose
+<b>type</b> is <code>previoustrack</code>,
 <code>nexttrack</code>, <code>seekforward</code> or <code>seekbackward</code>.
 
 <h4 id="mediasession-constructors">Constructors</h4>
@@ -1025,12 +1034,7 @@ constructor, when invoked, must run these steps:
     Let <var>s</var> be a new {{MediaSession}} object associated with
     <var>media session</var>.
   </li>
-  <li>
-    If <var>media session category</var> is &quot;<a lt="content attribute
-    value"><code>content</code></a>&quot, then set <var>s</var>'s
-    {{MediaSession/controls}} attribute to a new {{MediaRemoteControls}} object.
-    (Otherwise <var>media session</var> has no <a>media remote controls</a>.)
-  </li>
+
   <li>
     Return <var>s</var>.
   </li>
@@ -1057,14 +1061,14 @@ session</a> that was set when the object was created.
     <code><var>session</var> . {{MediaSession/controls}}</code>
   </dt>
   <dd>
-    Returns the {{MediaRemoteControls}} object assigned for the <a>media
+    Returns the <a>media remote controller</a> assigned to the <a>media
     session</a>, if any.
   </dd>
 </dl>
 
 The <dfn attribute for="MediaSession" lt="controls"><code>controls</code></dfn>
-attribute must return the {{MediaRemoteControls}} object that was assigned to
-the <a>media session</a> when it was created. If {{MediaSession/kind}} is not
+attribute must return the <a>media remote controller</a> that was assigned to a
+<a>media session</a> when it was created. If {{MediaSession/kind}} is not
 &quot;<a lt="content attribute value"><code>content</code></a>&quot, then this
 attribute should return null.
 
@@ -1182,8 +1186,6 @@ must run the following steps:
 <h3 id="the-mediaremotecontrols-interface">The {{MediaRemoteControls}}
 interface</h3>
 
-<a>Media remote controls</a> implement the following interface:
-
 <pre class="idl">
 interface MediaRemoteControls : EventTarget {
   attribute boolean previousTrackEnabled;
@@ -1198,6 +1200,9 @@ interface MediaRemoteControls : EventTarget {
   attribute EventHandler onseekbackward;
 };
 </pre>
+
+Objects implementing the {{MediaRemoteControls}} interface are simply known as
+<dfn>media remote controls</dfn>.
 
 <h4 id="mediaremotecontrols-object-members">Object members</h4>
 
@@ -1371,48 +1376,50 @@ When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
 button) then the user agent must, for each
 <code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">ACTIVE</a></code> and
-has {{MediaRemoteControls/previousTrackEnabled}} set to true,
+that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+has a <a>media remote controller</a> with its
+{{MediaRemoteControls/previousTrackEnabled}} attribute set to true,
 <a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
-previoustrack"><code>previoustrack</code></a> at its child
-{{MediaRemoteControls}} object.
+previoustrack"><code>previoustrack</code></a> at its <a>media remote
+controller</a>.
 
 When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
 the user agent must, for each <code><a lt="content media
 state">Content</a></code>-based <a>media session</a> that is currently <code><a
-lt="active media session state">ACTIVE</a></code> and has
-{{MediaRemoteControls/nextTrackEnabled}} set to true, <a>queue a task</a> to
+lt="active media session state">ACTIVE</a></code>, has a <a>media remote
+controller</a> with its {{MediaRemoteControls/nextTrackEnabled}} attribute set
+to true, <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
-nexttrack"><code>nexttrack</code></a> at its child {{MediaRemoteControls}}
-object.
+nexttrack"><code>nexttrack</code></a> at its <a>media remote controller</a>.
 
 When the user presses a 'seek backward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
 user agent must, for each <code><a lt="content media
 state">Content</a></code>-based <a>media session</a> that is currently <code><a
-lt="active media session state">ACTIVE</a></code> and has
-{{MediaRemoteControls/seekBackwardEnabled}} set is true, <a>queue a task</a> to
+lt="active media session state">ACTIVE</a></code>, has a <a>media remote
+controller</a> with its {{MediaRemoteControls/seekBackwardEnabled}} attribute
+set is true, <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
-seekbackward"><code>seekbackward</code></a> at its child {{MediaRemoteControls}}
-object.
+seekbackward"><code>seekbackward</code></a> at its <a>media remote
+controller</a>.
 
 When the user presses a 'seek forward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
 user agent must, for each
 <code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">ACTIVE</a></code> and
-has {{MediaRemoteControls/seekForwardEnabled}} set to true,
+that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+has a <a>media remote controller</a> with its
+{{MediaRemoteControls/seekForwardEnabled}} attribute set to true,
 <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
-seekforward"><code>seekforward</code></a> at its child {{MediaRemoteControls}}
-object.
+seekforward"><code>seekforward</code></a> at its <a>media remote controller</a>.
 
 <h4 id="mediaremotecontrols-events-summary">Events summary</h4>
 
 <em>This section is non-normative.</em>
 
-The following events fire on <a>media remote controls</a> objects as part of the
+The following events fire on <a>media remote controllers</a> as part of the
 processing model described above:
 
 <table>
