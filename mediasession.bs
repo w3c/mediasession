@@ -1610,7 +1610,7 @@ otherwise. On setting, the user agent must run the following steps:
     Let <var>new media session</var> be null.
   </li>
   <li>
-    Let <var>m</var> have no <a>current media session</a>, if it currently has
+    Set <var>m</var>'s <a>current media session</a> to null, if it currently has
     one.
   </li>
   <li>
