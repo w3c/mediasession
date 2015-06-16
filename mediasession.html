@@ -1200,7 +1200,7 @@ session</a> as <var>incumbent media session</var>.</p>
   
     <li>
     If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>
+    <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then
     terminate these steps.
   
   
@@ -1288,13 +1288,14 @@ user agent must run the following steps:</p>
   
     <li>
     If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is not "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" or
-    "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> terminate these steps.
+    "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>, then terminate these steps.
   
 
   
     <li>
     For each <a data-link-type="dfn" href="#media-session">media session</a>, known as <var>s</var>, in <var>the browsing
     context</var> with an <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> run the following substeps:
+
     
      <ol>
       
@@ -1339,7 +1340,7 @@ user agent must run the following steps:</p>
   
     <li>
     If <var>current media session</var> still has one or more <a data-link-type="dfn" href="#active-participating-media-elements">active
-    participating media elements</a> terminate these steps.
+    participating media elements</a>, then terminate these steps.
   
   
     <li>
@@ -2513,7 +2514,8 @@ steps:</p>
   
     <li>
     If <var>media element</var> is not currently in <var>media session</var>’s
-    list of <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> terminate these steps.
+    list of <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>, then terminate these
+    steps.
   
   
     <li>

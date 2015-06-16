@@ -810,7 +810,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 <ol>
   <li>
     If <var>incumbent media session</var>'s <a>current state</a> is not
-    <code><a lt="interrupted media session state">interrupted</a></code>
+    <code><a lt="interrupted media session state">interrupted</a></code>, then
     terminate these steps.
   </li>
   <li>
@@ -875,13 +875,14 @@ user agent must run the following steps:
 <ol>
   <li>
     If {{visibilityState}} is not &quot;{{hidden}}&quot; or
-    &quot;{{visible}}&quot; [[PAGE-VISIBILITY]] terminate these steps.
+    &quot;{{visible}}&quot; [[PAGE-VISIBILITY]], then terminate these steps.
   </li>
 
   <li>
     For each <a>media session</a>, known as <var>s</var>, in <var>the browsing
     context</var> with an <a>current media session type</a> of <code><a
     lt="ambient media state">Ambient</a></code> run the following substeps:
+
     <ol>
       <li>
         If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
@@ -918,7 +919,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
   </li>
   <li>
     If <var>current media session</var> still has one or more <a>active
-    participating media elements</a> terminate these steps.
+    participating media elements</a>, then terminate these steps.
   </li>
   <li>
     Optionally, based on platform conventions, the user agent must release any
@@ -1861,7 +1862,8 @@ steps:
   </li>
   <li>
     If <var>media element</var> is not currently in <var>media session</var>'s
-    list of <a>active participating media elements</a> terminate these steps.
+    list of <a>active participating media elements</a>, then terminate these
+    steps.
   </li>
   <li>
     Remove <var>media element</var> from <var>media session</var>'s list of
