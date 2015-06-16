@@ -683,8 +683,8 @@ steps.
 <ol>
   <li>
     If <var>interrupted media session</var>'s <a>current state</a> is not
-    <code><a lt="active media session state">active</a></code> terminate these
-    steps.
+    <code><a lt="active media session state">active</a></code>, then terminate
+    these steps.
   </li>
   <li>
     Let <var>interrupting media session category</var> be the <a>media session
@@ -920,7 +920,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 <ol>
   <li>
     If <var>current media session</var>'s <a>current state</a> is
-    <code><a lt="idle media session state">idle</a></code> terminate these
+    <code><a lt="idle media session state">idle</a></code>, then terminate these
     steps.
   </li>
   <li>
@@ -1361,8 +1361,8 @@ the following steps:
     is not <code><a lt="default media state">Default</a></code> or
     <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
     <a>current state</a> is not
-    <code><a lt="active media session state">active</a></code> terminate these
-    steps.
+    <code><a lt="active media session state">active</a></code>, then terminate
+    these steps.
   </li>
   <li>
     For each <a>active participating media element</a> in <var>m</var>, called
