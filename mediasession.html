@@ -409,7 +409,8 @@ run these steps:</p>
     corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>media session
     category</var>. If no corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> can be found
     for the provided
-    <var>media session category</var>, then set <var>media session</var>’s
+    <var>media session category</var> or <var>media session category</var> is
+    empty, then set <var>media session</var>’s
     <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
   
   
@@ -1467,23 +1468,13 @@ constructor, when invoked, must run these steps:</p>
    <ol>
   
     <li>
-    Let <var>media session category</var> be the value of <var>kind</var>.
-  
-  
-    <li>
-    If <var>media session category</var> is empty, then set it to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
-  
-  
-    <li>
-    Let <var>media session</var> be the result of <a data-link-type="dfn" href="#create-a-media-session">creating a media session</a> given <var>media session
-    category</var>.
+    Let <var>media session</var> be the result of <a data-link-type="dfn" href="#create-a-media-session">creating a media session</a> given <var>kind</var>.
   
   
     <li>
     Let <var>s</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object associated with
     <var>media session</var>.
   
-
   
     <li>
     Return <var>s</var>.

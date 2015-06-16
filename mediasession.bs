@@ -210,7 +210,8 @@ run these steps:
     corresponding <a>media session type</a> of <var>media session
     category</var>. If no corresponding <a>media session type</a> can be found
     for the provided
-    <var>media session category</var>, then set <var>media session</var>'s
+    <var>media session category</var> or <var>media session category</var> is
+    empty, then set <var>media session</var>'s
     <a>current media session type</a> to &quot;<a lt="content attribute
     value"><code>content</code></a>&quot.
   </li>
@@ -1026,22 +1027,13 @@ constructor, when invoked, must run these steps:
 
 <ol>
   <li>
-    Let <var>media session category</var> be the value of <var>kind</var>.
-  </li>
-  <li>
-    If <var>media session category</var> is empty, then set it to &quot;<a
-    lt="content attribute value"><code>content</code></a>&quot.
-  </li>
-  <li>
     Let <var>media session</var> be the result of <a lt="create a media
-    session">creating a media session</a> given <var>media session
-    category</var>.
+    session">creating a media session</a> given <var>kind</var>.
   </li>
   <li>
     Let <var>s</var> be a new {{MediaSession}} object associated with
     <var>media session</var>.
   </li>
-
   <li>
     Return <var>s</var>.
   </li>
