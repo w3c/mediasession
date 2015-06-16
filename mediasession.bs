@@ -217,7 +217,7 @@ To <dfn>create a media session</dfn>, given a <var>kind</var>, run these steps:
   </li>
   <li>
     Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
-    media session state">IDLE</a></code>.
+    media session state">idle</a></code>.
   </li>
   <li>
     Return <var>media session</var>.
@@ -232,20 +232,20 @@ other <a>media sessions</a>. The possible values are as follows:
 
 <dl>
   <dt>
-    <dfn lt="idle media session state"><code>IDLE</code></dfn>
+    <dfn lt="idle media session state"><code>idle</code></dfn>
   </dt>
   <dd>
     The <a>media session</a> does not have any platform-level media focus nor is
     it in a suspended state.
   </dd>
   <dt>
-    <dfn lt="active media session state"><code>ACTIVE</code></dfn>
+    <dfn lt="active media session state"><code>active</code></dfn>
   </dt>
   <dd>
     The <a>media session</a> currently has platform-level media focus.
   </dd>
   <dt>
-    <dfn lt="interrupted media session state"><code>INTERRUPTED</code></dfn>
+    <dfn lt="interrupted media session state"><code>interrupted</code></dfn>
   </dt>
   <dd>
     The <a>media session</a> is currently suspended from having platform-level
@@ -258,31 +258,31 @@ other <a>media sessions</a>. The possible values are as follows:
 
 When a new <a>media session</a> is created its <a>current state</a> must be
 initially set to
-<code><a lt="idle media session state">IDLE</a></code>.
+<code><a lt="idle media session state">idle</a></code>.
 
 When the <a>media session invocation algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from <code><a lt="idle media
-session state">IDLE</a></code> to
-<code><a lt="active media session state">ACTIVE</a></code>.
+session state">idle</a></code> to
+<code><a lt="active media session state">active</a></code>.
 
 When the <a>media session interruption algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from
-<code><a lt="active media session state">ACTIVE</a></code> to either <code><a
-lt="idle media session state">IDLE</a></code> or <code><a lt="interrupted media
-session state">INTERRUPTED</a></code> depending on its associated <a>media
+<code><a lt="active media session state">active</a></code> to either <code><a
+lt="idle media session state">idle</a></code> or <code><a lt="interrupted media
+session state">interrupted</a></code> depending on its associated <a>media
 session category</a>.
 
 When the <a>media session continuation algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from <code><a lt="interrupted
-media session state">INTERRUPTED</a></code>
-to <code><a lt="active media session state">ACTIVE</a></code>.
+media session state">interrupted</a></code>
+to <code><a lt="active media session state">active</a></code>.
 
 When the <a>media session release algorithm</a> is run a <a>media session</a>'s
 <a>current state</a>
 may be set from either <code><a lt="active media session
-state">ACTIVE</a></code> or <code><a lt="interrupted media session
-state">INTERRUPTED</a></code> to
-<code><a lt="idle media session state">IDLE</a></code>.
+state">active</a></code> or <code><a lt="interrupted media session
+state">interrupted</a></code> to
+<code><a lt="idle media session state">idle</a></code>.
 
 <h3 id="media-session-types">Types</h3>
 
@@ -573,7 +573,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
 <ol>
   <li>
     If <var>media session</var> is already <code><a lt="active media session
-    state">ACTIVE</a></code> then return success.
+    state">active</a></code> then return success.
   </li>
   <li>
     Optionally, based on platform conventions, request the most appropriate
@@ -645,7 +645,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
   </li>
   <li>
     Set <var>media session</var>'s <a>current state</a> to
-    <code><a lt="active media session state">ACTIVE</a></code> and return
+    <code><a lt="active media session state">active</a></code> and return
     success.
   </li>
 </ol>
@@ -677,7 +677,7 @@ steps.
 <ol>
   <li>
     If <var>interrupted media session</var>'s <a>current state</a> is not
-    <code><a lt="active media session state">ACTIVE</a></code> terminate these
+    <code><a lt="active media session state">active</a></code> terminate these
     steps.
   </li>
   <li>
@@ -705,7 +705,7 @@ steps.
             <a>indefinitely pause</a> all of <var>interrupted media
             session</var>'s <a>active participating media elements</a> and set
             <var>interrupted media session</var>'s <a>current state</a> to
-            <code><a lt="idle media session state">IDLE</a></code>.
+            <code><a lt="idle media session state">idle</a></code>.
 
             <p class="note">
               This implies that the next time the <a>media session invocation
@@ -746,7 +746,7 @@ steps.
             participating media elements</a> and set
             <var>interrupted media session</var>'s
             <a>current state</a> to <code><a lt="interrupted media session
-            state">INTERRUPTED</a></code>.
+            state">interrupted</a></code>.
             <p class="note">
               This implies that the next time the <a>media session continuation
               algorithm</a> is run that we will re-activate this <a>media
@@ -772,7 +772,7 @@ steps.
             <a>active participating media elements</a> and set <var>current
             media session</var>'s <a>current state</a> to
             <code><a lt="interrupted media session
-            state">INTERRUPTED</a></code>.
+            state">interrupted</a></code>.
 
             <div class="note">
               <p>
@@ -810,7 +810,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 <ol>
   <li>
     If <var>incumbent media session</var>'s <a>current state</a> is not
-    <code><a lt="interrupted media session state">INTERRUPTED</a></code>
+    <code><a lt="interrupted media session state">interrupted</a></code>
     terminate these steps.
   </li>
   <li>
@@ -839,7 +839,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             then <a>unduck</a> all of <var>incumbent media session</var>'s
             <a>active participating media elements</a>
             and set <var>incumbent media session</var>'s <a>current state</a> to
-            <code><a lt="active media session state">ACTIVE</a></code>.
+            <code><a lt="active media session state">active</a></code>.
           </li>
         </ol>
       </dd>
@@ -859,7 +859,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             <var>incumbent media session</var>'s <a>active participating media
             elements</a> and set <var>incumbent media session</var>'s <a>current
             state</a> to
-            <code><a lt="active media session state">ACTIVE</a></code>.
+            <code><a lt="active media session state">active</a></code>.
           </li>
         </ol>
       </dd>
@@ -886,19 +886,19 @@ user agent must run the following steps:
       <li>
         If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
         <var>s</var>'s <a>current state</a> is <code><a lt="active media session
-        state">ACTIVE</a></code> then <a>pause</a> all of <var>s</var>'s
+        state">active</a></code> then <a>pause</a> all of <var>s</var>'s
         <a>active participating media elements</a> and set <var>s</var>'s
         <a>current state</a> to <code><a lt="interrupted media session
-        state">INTERRUPTED</a></code> then terminate these substeps and continue
+        state">interrupted</a></code> then terminate these substeps and continue
         at the next available <var>s</var>.
       </li>
       <li>
         If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
         and <var>s</var>'s <a>current state</a> is <code><a lt="interrupted
-        media session state">INTERRUPTED</a></code> then <a>unpause</a> all of
+        media session state">interrupted</a></code> then <a>unpause</a> all of
         <var>s</var>'s <a>active participating media elements</a> and set
         <var>s</var>'s <a>current state</a> to <code><a lt="active media session
-        state">ACTIVE</a></code> then terminate these substeps and continue at
+        state">active</a></code> then terminate these substeps and continue at
         the next available <var>s</var>.
       </li>
     </ol>
@@ -913,7 +913,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 <ol>
   <li>
     If <var>current media session</var>'s <a>current state</a> is
-    <code><a lt="idle media session state">IDLE</a></code> terminate these
+    <code><a lt="idle media session state">idle</a></code> terminate these
     steps.
   </li>
   <li>
@@ -944,7 +944,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
   </li>
   <li>
     Set <var>current media session</var>'s <a>current state</a> to
-    <code><a lt="idle media session state">IDLE</a></code>.
+    <code><a lt="idle media session state">idle</a></code>.
 
     <p class="note">
       This implies that the next time the <a>media session invocation
@@ -1157,7 +1157,7 @@ method is invoked, the user agent must run the following steps:
   <dd>
     Releases platform-level media focus, sets the <a>media session</a>'s
     <a>current state</a> to <code><a lt="idle media session
-    state">IDLE</a></code> and applies any changes necessary to its
+    state">idle</a></code> and applies any changes necessary to its
     <a>active participating media elements</a>.
   </dd>
 </dl>
@@ -1264,7 +1264,7 @@ control interfaces. By default, this attribute is false.
   While the attributes above can be set at any time they must only be read by
   the user agent during the <a>media session invocation algorithm</a> in order
   to correctly configure any connected remote control interfaces at the point
-  they become <code><a lt="active media session state">ACTIVE</a></code>.
+  they become <code><a lt="active media session state">active</a></code>.
 </p>
 
 <p class="note">
@@ -1354,7 +1354,7 @@ the following steps:
     is not <code><a lt="default media state">Default</a></code> or
     <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
     <a>current state</a> is not
-    <code><a lt="active media session state">ACTIVE</a></code> terminate these
+    <code><a lt="active media session state">active</a></code> terminate these
     steps.
   </li>
   <li>
@@ -1376,7 +1376,7 @@ When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
 button) then the user agent must, for each
 <code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+that is currently <code><a lt="active media session state">active</a></code>,
 has a <a>media remote controller</a> with its
 {{MediaRemoteControls/previousTrackEnabled}} attribute set to true,
 <a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
@@ -1387,7 +1387,7 @@ When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
 the user agent must, for each <code><a lt="content media
 state">Content</a></code>-based <a>media session</a> that is currently <code><a
-lt="active media session state">ACTIVE</a></code>, has a <a>media remote
+lt="active media session state">active</a></code>, has a <a>media remote
 controller</a> with its {{MediaRemoteControls/nextTrackEnabled}} attribute set
 to true, <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
@@ -1397,7 +1397,7 @@ When the user presses a 'seek backward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
 user agent must, for each <code><a lt="content media
 state">Content</a></code>-based <a>media session</a> that is currently <code><a
-lt="active media session state">ACTIVE</a></code>, has a <a>media remote
+lt="active media session state">active</a></code>, has a <a>media remote
 controller</a> with its {{MediaRemoteControls/seekBackwardEnabled}} attribute
 set is true, <a>queue a task</a> to
 <a>fire a simple event</a> named <a lt="event
@@ -1408,7 +1408,7 @@ When the user presses a 'seek forward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
 user agent must, for each
 <code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">ACTIVE</a></code>,
+that is currently <code><a lt="active media session state">active</a></code>,
 has a <a>media remote controller</a> with its
 {{MediaRemoteControls/seekForwardEnabled}} attribute set to true,
 <a>queue a task</a> to
@@ -1454,7 +1454,7 @@ processing model described above:
       <td>
         <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
-        media session state">ACTIVE</a></code> and
+        media session state">active</a></code> and
         {{MediaRemoteControls/previousTrackEnabled}} is true.
       </td>
     </tr>
@@ -1472,7 +1472,7 @@ processing model described above:
       <td>
         <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
-        media session state">ACTIVE</a></code> and
+        media session state">active</a></code> and
         {{MediaRemoteControls/nextTrackEnabled}} is true.
       </td>
     </tr>
@@ -1490,7 +1490,7 @@ processing model described above:
       <td>
         <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
-        media session state">ACTIVE</a></code> and
+        media session state">active</a></code> and
         {{MediaRemoteControls/seekBackwardEnabled}} is true.
       </td>
     </tr>
@@ -1508,7 +1508,7 @@ processing model described above:
       <td>
         <a>current media session type</a> is <code><a lt="content media
         state">Content</a></code>, <a>current state</a> is <code><a lt="active
-        media session state">ACTIVE</a></code> and
+        media session state">active</a></code> and
         {{MediaRemoteControls/seekForwardEnabled}} is true.
       </td>
     </tr>
@@ -1808,16 +1808,16 @@ pause">indefinitely paused</a> <a>media session</a>, immediately run the
   This prevents <code><a lt="transient media state">Transient</a></code> or
   <code><a lt="transient solo media state">Transient Solo</a></code>-based
   <a>media sessions</a> from indefinitely blocking the continuation of other
-  <code><a lt="interrupted media session state">INTERRUPTED</a></code> <a>media
+  <code><a lt="interrupted media session state">interrupted</a></code> <a>media
   sessions</a> when they are indefinitely paused.
 
   After we have completed this process, the original <code><a lt="transient
   media state">Transient</a></code> or
   <code><a lt="transient solo media state">Transient Solo</a></code>-based
   <a>media session</a> will have a <a>current state</a> of <code><a lt="idle
-  media session state">IDLE</a></code> and all interrupted <a>media sessions</a>
+  media session state">idle</a></code> and all interrupted <a>media sessions</a>
   will have returned to a <a>current state</a> of <code><a lt="active media
-  session state">ACTIVE</a></code>.
+  session state">active</a></code>.
 </div>
 
 When a <a>media element</a> is to <dfn>unpause</dfn> the user agent must invoke
@@ -1953,7 +1953,7 @@ myAudio.play(); // Go!
 data</h4>
 
 When a <code><a lt="content media state">Content</a></code>-based <a>media
-session</a> is <code><a lt="active media session state">ACTIVE</a></code> it may
+session</a> is <code><a lt="active media session state">active</a></code> it may
 be possible to display meta data within platform-level interfaces. Media session
 meta data can be added at any time to update these interfaces:
 
@@ -1979,7 +1979,7 @@ mySession.setMetadata({
 remote control events</h4>
 
 Before a <code><a lt="content media state">Content</a></code>-based <a>media
-session</a> becomes <code><a lt="active media session state">ACTIVE</a></code> a
+session</a> becomes <code><a lt="active media session state">active</a></code> a
 web developer must set which remote control keys they want to enable:
 
 <pre class="lang-javascript">
@@ -1997,7 +1997,7 @@ if (mySession.controls) {
 
 When a <code><a lt="content media state">Content</a></code>-based <a>media
 session</a> then becomes <code><a lt="active media session
-state">ACTIVE</a></code> it is possible to listen for any interaction with the
+state">active</a></code> it is possible to listen for any interaction with the
 registered remote control keys and respond appropriately to those inputs in a
 web application:
 

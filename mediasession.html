@@ -416,7 +416,7 @@ To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create 
   
   
     <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.
   
   
     <li>
@@ -436,7 +436,7 @@ other <a data-link-type="dfn" href="#media-session">media sessions</a>. The poss
    <dl>
   
     <dt>
-    <dfn data-dfn-type="dfn" data-lt="idle media session state" data-noexport="" id="idle-media-session-state"><code>IDLE</code><a class="self-link" href="#idle-media-session-state"></a></dfn>
+    <dfn data-dfn-type="dfn" data-lt="idle media session state" data-noexport="" id="idle-media-session-state"><code>idle</code><a class="self-link" href="#idle-media-session-state"></a></dfn>
   
   
     <dd>
@@ -445,7 +445,7 @@ other <a data-link-type="dfn" href="#media-session">media sessions</a>. The poss
   
   
     <dt>
-    <dfn data-dfn-type="dfn" data-lt="active media session state" data-noexport="" id="active-media-session-state"><code>ACTIVE</code><a class="self-link" href="#active-media-session-state"></a></dfn>
+    <dfn data-dfn-type="dfn" data-lt="active media session state" data-noexport="" id="active-media-session-state"><code>active</code><a class="self-link" href="#active-media-session-state"></a></dfn>
   
   
     <dd>
@@ -453,7 +453,7 @@ other <a data-link-type="dfn" href="#media-session">media sessions</a>. The poss
   
   
     <dt>
-    <dfn data-dfn-type="dfn" data-lt="interrupted media session state" data-noexport="" id="interrupted-media-session-state"><code>INTERRUPTED</code><a class="self-link" href="#interrupted-media-session-state"></a></dfn>
+    <dfn data-dfn-type="dfn" data-lt="interrupted media session state" data-noexport="" id="interrupted-media-session-state"><code>interrupted</code><a class="self-link" href="#interrupted-media-session-state"></a></dfn>
   
   
     <dd>
@@ -467,29 +467,29 @@ other <a data-link-type="dfn" href="#media-session">media sessions</a>. The poss
 
    <p>When a new <a data-link-type="dfn" href="#media-session">media session</a> is created its <a data-link-type="dfn" href="#current-state">current state</a> must be
 initially set to
-<code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.</p>
+<code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
 
 
    <p>When the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
-session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> to
-<code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.</p>
+session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> to
+<code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
 
 
    <p>When the <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
 session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from
-<code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> to either <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> depending on its associated <a data-link-type="dfn" href="#media-session-category">media
+<code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> to either <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> depending on its associated <a data-link-type="dfn" href="#media-session-category">media
 session category</a>.</p>
 
 
    <p>When the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
-session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>
-to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.</p>
+session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>
+to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
 
 
    <p>When the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media session</a>’s
 <a data-link-type="dfn" href="#current-state">current state</a>
-may be set from either <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> to
-<code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.</p>
+may be set from either <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> to
+<code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
 
 
    <h3 class="heading settled" data-level="4.2" id="media-session-types"><span class="secno">4.2. </span><span class="content">Types</span><a class="self-link" href="#media-session-types"></a></h3>
@@ -884,7 +884,7 @@ session</var> are:</p>
    <ol>
   
     <li>
-    If <var>media session</var> is already <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then return success.
+    If <var>media session</var> is already <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> then return success.
   
   
     <li>
@@ -984,7 +984,7 @@ session</var> are:</p>
   
     <li>
     Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and return
+    <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and return
     success.
   
 </ol>
@@ -1022,7 +1022,7 @@ steps.</p>
   
     <li>
     If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> terminate these
+    <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> terminate these
     steps.
   
   
@@ -1057,7 +1057,7 @@ steps.</p>
             <a data-link-type="dfn" href="#indefinitely-pause">indefinitely pause</a> all of <var>interrupted media
             session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
             <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-            <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
+            <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.
 
             
          <p class="note" role="note">
@@ -1111,7 +1111,7 @@ steps.</p>
             all of <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active
             participating media elements</a> and set
             <var>interrupted media session</var>’s
-            <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
+            <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
             
          <p class="note" role="note">
               This implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
@@ -1144,7 +1144,7 @@ steps.</p>
             <var>interrupted media session</var>’s
             <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set <var>current
             media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-            <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>.
+            <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
 
             
          <div class="note" role="note">
@@ -1200,7 +1200,7 @@ session</a> as <var>incumbent media session</var>.</p>
   
     <li>
     If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code>
+    <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>
     terminate these steps.
   
   
@@ -1236,7 +1236,7 @@ session</a> as <var>incumbent media session</var>.</p>
             then <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
             <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>
             and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-            <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
+            <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
           
         
         
@@ -1263,7 +1263,7 @@ session</a> as <var>incumbent media session</var>.</p>
             <var>incumbent media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
             elements</a> and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current
             state</a> to
-            <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
+            <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
           
         
         
@@ -1300,18 +1300,18 @@ user agent must run the following steps:</p>
       
       <li>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> and
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
         <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set <var>s</var>’s
-        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> then terminate these substeps and continue
+        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> then terminate these substeps and continue
         at the next available <var>s</var>.
       
       
       
       <li>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>
-        and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> then <a data-link-type="dfn" href="#unpause">unpause</a> all of
+        and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> then <a data-link-type="dfn" href="#unpause">unpause</a> all of
         <var>s</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> then terminate these substeps and continue at
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> then terminate these substeps and continue at
         the next available <var>s</var>.
       
       
@@ -1333,7 +1333,7 @@ user agent must run the following steps:</p>
   
     <li>
     If <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is
-    <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> terminate these
+    <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> terminate these
     steps.
   
   
@@ -1371,7 +1371,7 @@ user agent must run the following steps:</p>
   
     <li>
     Set <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-    <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code>.
+    <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.
 
     
      <p class="note" role="note">
@@ -1644,7 +1644,7 @@ method is invoked, the user agent must run the following steps:</p>
   
     <dd>
     Releases platform-level media focus, sets the <a data-link-type="dfn" href="#media-session">media session</a>’s
-    <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> and applies any changes necessary to its
+    <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and applies any changes necessary to its
     <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>.
   
 </dl>
@@ -1769,7 +1769,7 @@ control interfaces. By default, this attribute is false.</p>
   While the attributes above can be set at any time they must only be read by
   the user agent during the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> in order
   to correctly configure any connected remote control interfaces at the point
-  they become <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.
+  they become <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
 </p>
 
 
@@ -1896,7 +1896,7 @@ the following steps:</p>
     is not <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> or
     <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>; or <var>m</var>’s
     <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> terminate these
+    <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> terminate these
     steps.
   
   
@@ -1925,7 +1925,7 @@ When the user presses the <code class="idl"><a data-link-type="idl" href="http:/
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
 button) then the user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
-that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>,
+that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>,
 has a <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> with its
 <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> attribute set to true,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-previoustrack"><code>previoustrack</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote
@@ -1934,7 +1934,7 @@ controller</a>.</p>
 
    <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackNext">MediaTrackNext</a></code> media key, or an equivalent key, on
 any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
+the user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
 controller</a> with its <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> attribute set
 to true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-nexttrack"><code>nexttrack</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>.</p>
@@ -1942,7 +1942,7 @@ to true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/we
 
    <p>When the user presses a 'seek backward' media key, or an equivalent key, on any
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
-user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
+user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
 controller</a> with its <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a></code> attribute
 set is true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-seekbackward"><code>seekbackward</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote
@@ -1953,7 +1953,7 @@ controller</a>.</p>
 hardware or software interface (e.g. on a keyboard or OS-level button) then the
 user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
-that is currently <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>,
+that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>,
 has a <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> with its
 <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a></code> attribute set to true,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
@@ -2020,7 +2020,7 @@ processing model described above:</p>
       
       
       <td>
-        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
+        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and
         <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> is true.
       
       
@@ -2046,7 +2046,7 @@ processing model described above:</p>
       
       
       <td>
-        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
+        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and
         <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> is true.
       
       
@@ -2072,7 +2072,7 @@ processing model described above:</p>
       
       
       <td>
-        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
+        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and
         <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a></code> is true.
       
       
@@ -2098,7 +2098,7 @@ processing model described above:</p>
       
       
       <td>
-        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> and
+        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and
         <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekforwardenabled">seekForwardEnabled</a></code> is true.
       
       
@@ -2453,14 +2453,14 @@ media session</var> and then, for the original <a data-link-type="dfn" href="#in
   This prevents <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or
   <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based
   <a data-link-type="dfn" href="#media-session">media sessions</a> from indefinitely blocking the continuation of other
-  <code><a data-link-type="dfn" href="#interrupted-media-session-state">INTERRUPTED</a></code> <a data-link-type="dfn" href="#media-session">media
+  <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media
   sessions</a> when they are indefinitely paused.
 
 
     <p>After we have completed this process, the original <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or
   <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based
-  <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">IDLE</a></code> and all interrupted <a data-link-type="dfn" href="#media-session">media sessions</a>
-  will have returned to a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code>.</p>
+  <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all interrupted <a data-link-type="dfn" href="#media-session">media sessions</a>
+  will have returned to a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
 </div>
 
 
@@ -2615,7 +2615,7 @@ data</span><a class="self-link" href="#example-setting-media-session-meta-data">
 
 
    <p>When a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> is <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> it may
+session</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> it may
 be possible to display meta data within platform-level interfaces. Media session
 meta data can be added at any time to update these interfaces:</p>
 
@@ -2643,7 +2643,7 @@ remote control events</span><a class="self-link" href="#example-responding-to-me
 
 
    <p>Before a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> becomes <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> a
+session</a> becomes <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> a
 web developer must set which remote control keys they want to enable:</p>
 
 
@@ -2661,7 +2661,7 @@ if (mySession.controls) {
 
 
    <p>When a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> then becomes <code><a data-link-type="dfn" href="#active-media-session-state">ACTIVE</a></code> it is possible to listen for any interaction with the
+session</a> then becomes <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> it is possible to listen for any interaction with the
 registered remote control keys and respond appropriately to those inputs in a
 web application:</p>
 
