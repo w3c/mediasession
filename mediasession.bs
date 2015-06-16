@@ -1631,7 +1631,7 @@ otherwise. On setting, the user agent must run the following steps:
   <li>
     <var>Update media sessions</var>: If <var>old media session</var> and
     <var>new media session</var> are the same (whether both null or both the
-    same <a>media session</a>) then terminate these steps.
+    same <a>media session</a>), then terminate these steps.
   </li>
   <li>
     If <var>m</var> is an <a>active participating media element</a> of <var>old
