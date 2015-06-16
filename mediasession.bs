@@ -1745,6 +1745,7 @@ element>audio</a></code> element</h4>
 session from a media element</h3>
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
+
 When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
 element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
 {{HTMLMediaElement/readyState}} attribute has the value {{HAVE_FUTURE_DATA}} or
@@ -1770,6 +1771,7 @@ in <a>media element</a> <var>media element</var>:
     element</var>.
   </li>
 </ol>
+
 
 <h3 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
 session from a media element</h3>
