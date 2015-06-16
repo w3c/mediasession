@@ -2195,7 +2195,8 @@ session</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multi
    <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> attribute can be
 changed at any time even once a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially
 playing</a>; but it is only read by the user agent at the time that it is set,
-changed or removed. Thus, setting, changing or removing this attribute once a
+changed or removed. Thus, setting, changing, or removing the
+<code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> attribute once a
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change
 the <a data-link-type="dfn" href="#media-session">media session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs until the
 <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is subsequently re-run.</p>
@@ -2228,8 +2229,8 @@ otherwise. On setting, the user agent must run the following steps:</p>
   
     <li>
     If the new value is null, then set the <var>m</var>’s
-    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the empty string. Otherwise, set
-    <var>m</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the value of
+    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute to the empty string. Otherwise, set
+    <var>m</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute to the value of
     <a data-link-type="dfn" href="#current-media-session">current media session</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute.
   
   

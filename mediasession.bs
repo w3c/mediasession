@@ -1588,7 +1588,8 @@ session</a> for <a>media element</a>.
 A <a>media element</a>'s <code>{{HTMLMediaElement/kind}}</code> attribute can be
 changed at any time even once a <a>media element</a> is <a>potentially
 playing</a>; but it is only read by the user agent at the time that it is set,
-changed or removed. Thus, setting, changing or removing this attribute once a
+changed or removed. Thus, setting, changing, or removing the
+<code>{{HTMLMediaElement/kind}}</code> attribute once a
 <a>media element</a> is <a>potentially playing</a> does not dynamically change
 the <a>media session</a> to which the <a>media element</a> belongs until the
 <a>media session invocation algorithm</a> is subsequently re-run.
@@ -1615,8 +1616,8 @@ otherwise. On setting, the user agent must run the following steps:
   </li>
   <li>
     If the new value is null, then set the <var>m</var>'s
-    {{HTMLMediaElement/kind}} attribute to the empty string. Otherwise, set
-    <var>m</var>'s {{HTMLMediaElement/kind}} attribute to the value of
+    {{HTMLMediaElement/kind}} IDL attribute to the empty string. Otherwise, set
+    <var>m</var>'s {{HTMLMediaElement/kind}} IDL attribute to the value of
     <a>current media session</a>'s {{MediaSession/kind}} attribute.
   </li>
   <li>
