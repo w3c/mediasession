@@ -1774,14 +1774,14 @@ in <a>media element</a> <var>media element</var>:
 <h3 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
 session from a media element</h3>
 
-When a <a>media element</a> is to <dfn>pause</dfn> the user agent must run
+When a <a>media element</a> is to <dfn>pause</dfn>, the user agent must run
 <a>media element</a>'s <a>internal pause steps</a>.
 
-When a <a>media element</a> is to <dfn>indefinitely pause</dfn> the user agent
+When a <a>media element</a> is to <dfn>indefinitely pause</dfn>, the user agent
 must invoke its {{pause()}} method.
 
 When the {{pause()}} method on a <a>media element</a> is invoked and the
-<a>media element</a>'s {{paused}} attribute is initially false then the user
+<a>media element</a>'s {{paused}} attribute is initially false, then the user
 agent must remove this <a>media element</a> from its <a>current media
 session</a>'s list of <a>active participating media elements</a>.
 
