@@ -207,15 +207,18 @@ run these steps:
   </li>
   <li>
     Set <var>media session</var>'s <a>current media session type</a> to the
-    corresponding <a>media session type</a> of <var>media session category</var>
-    or &quot;<a lt="content attribute value"><code>content</code></a>&quot if no
-    corresponding <a>media session type</a> can be found for the provided
-    <var>media session category</var>.
+    corresponding <a>media session type</a> of <var>media session
+    category</var>. If no corresponding <a>media session type</a> can be found
+    for the provided
+    <var>media session category</var>, then set <var>media session</var>'s
+    <a>current media session type</a> to &quot;<a lt="content attribute
+    value"><code>content</code></a>&quot.
   </li>
   <li>
-    If <var>media session category</var> is &quot;<a lt="content attribute
-    value"><code>content</code></a>&quot, then create a new <a>media remote
-    controller</a> for <var>media session</var>. (Otherwise
+    If <var>media session</var>’s <a>current media session type</a> is
+    &quot;<a lt="content attribute value"><code>content</code></a>&quot, then
+    create a new <a>media remote controller</a> for <var>media session</var>.
+    (Otherwise
     <var>media session</var> has no <a>media remote controller</a>.)
   </li>
   <li>
