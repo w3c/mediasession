@@ -2057,3 +2057,5 @@ Per <a rel="license"
 href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to the extent
 possible under law, the editors have waived all copyright and related or
 neighboring rights to this work.
+
+<script id=head src=https://resources.whatwg.org/dfn.js></script>
