@@ -884,7 +884,7 @@ session</var> are:</p>
    <ol>
   
     <li>
-    If <var>media session</var> is already <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> then return success.
+    If <var>media session</var> is already <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then return success.
   
   
     <li>
@@ -894,7 +894,7 @@ session</var> are:</p>
 
 
      <p>If this step is run and platform-level media focus can not be obtained for
-    any reason then return failure.</p>
+    any reason, then return failure.</p>
      
   
   
@@ -962,7 +962,7 @@ session</var> are:</p>
       
       <dd>
         If the <var>current media element</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing
-        context</a> is not at least partially visible on at least one screen
+        context</a> is not at least partially visible on at least one screen,
         then return failure.
 
         
@@ -1003,12 +1003,12 @@ its <a data-link-type="dfn" href="#current-media-session-type">current media ses
    <p>Interruptions can be both transient or permanent. A transient interruption means
 we can either choose to <a data-link-type="dfn" href="#duck">duck</a> our media content and continue playing it
 out at a reduced volume for the duration of the interruption; or <a data-link-type="dfn" href="#pause">pause</a>
-our media content for the duration of the interruption and then resume playback
-when that interruption ends. A permanent interruption means we must <a data-link-type="dfn" href="#indefinitely-pause">pause our media content indefinitely</a>.</p>
+our media content for the duration of the interruption and, then, resume
+playback when that interruption ends. A permanent interruption means we must <a data-link-type="dfn" href="#indefinitely-pause">pause our media content indefinitely</a>.</p>
 
 
    <p>When a <a data-link-type="dfn" href="#media-session">media session</a> receives a start-of-interruption notification from
-the platform then the user agent must run the
+the platform, then the user agent must run the
 <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> passing in the <a data-link-type="dfn" href="#media-session">media session</a>
 as <var>interrupted media session</var>.</p>
 
@@ -1187,7 +1187,7 @@ steps.</p>
 
 
    <p>When a <a data-link-type="dfn" href="#media-session">media session</a> receives an end-of-interruption notification from
-the platform then the user agent must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
+the platform, then the user agent must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
 algorithm</a> against all known <a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media
 session</a> as <var>incumbent media session</var>.</p>
 
@@ -1232,8 +1232,8 @@ session</a> as <var>incumbent media session</var>.</p>
             If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
             type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or
-            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>
-            then <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
+            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then
+            <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
             <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>
             and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
@@ -1258,7 +1258,7 @@ session</a> as <var>incumbent media session</var>.</p>
             If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
             type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
-            <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
+            <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>,
             then <a data-link-type="dfn" href="#unpause">unpause</a> the
             <var>incumbent media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
             elements</a> and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current
@@ -1300,18 +1300,18 @@ user agent must run the following steps:</p>
       
       <li>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> and
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
         <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set <var>s</var>’s
-        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> then terminate these substeps and continue
-        at the next available <var>s</var>.
+        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then terminate these substeps and
+        continue at the next available <var>s</var>.
       
       
       
       <li>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>
-        and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> then <a data-link-type="dfn" href="#unpause">unpause</a> all of
+        and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then <a data-link-type="dfn" href="#unpause">unpause</a> all of
         <var>s</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> and set
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> then terminate these substeps and continue at
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then terminate these substeps and continue at
         the next available <var>s</var>.
       
       
@@ -1464,7 +1464,7 @@ constructor, when invoked, must run these steps:</p>
   
   
     <li>
-    If <var>media session category</var> is empty then set it to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
+    If <var>media session category</var> is empty, then set it to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
   
   
     <li>
@@ -1908,7 +1908,7 @@ the following steps:</p>
      <ol>
       
       <li>
-        If <var>active element</var> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> then <a data-link-type="dfn" href="#unpause">unpause</a>
+        If <var>active element</var> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>, then <a data-link-type="dfn" href="#unpause">unpause</a>
         <var>active element</var>. Otherwise, <a data-link-type="dfn" href="#pause">pause</a> <var>active
         element</var>.
       
@@ -1923,7 +1923,7 @@ the following steps:</p>
    <p><br>
 When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackPrevious">MediaTrackPrevious</a></code> media key, or an equivalent
 key, on any hardware or software interface (e.g. on a keyboard or OS-level
-button) then the user agent must, for each
+button), then the user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
 that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>,
 has a <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> with its
@@ -1941,7 +1941,7 @@ to true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/we
 
 
    <p>When the user presses a 'seek backward' media key, or an equivalent key, on any
-hardware or software interface (e.g. on a keyboard or OS-level button) then the
+hardware or software interface (e.g. on a keyboard or OS-level button), then the
 user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
 controller</a> with its <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-seekbackwardenabled">seekBackwardEnabled</a></code> attribute
 set is true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
@@ -1950,7 +1950,7 @@ controller</a>.</p>
 
 
    <p>When the user presses a 'seek forward' media key, or an equivalent key, on any
-hardware or software interface (e.g. on a keyboard or OS-level button) then the
+hardware or software interface (e.g. on a keyboard or OS-level button), then the
 user agent must, for each
 <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
 that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>,
@@ -2189,7 +2189,7 @@ to only known values</a>.</p>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute is set,
-changed, or removed then the user agent must <a data-link-type="dfn" href="#update-media-elements-media-session">update media element’s media
+changed, or removed the user agent must <a data-link-type="dfn" href="#update-media-elements-media-session">update media element’s media
 session</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>.</p>
 
 
@@ -2228,7 +2228,7 @@ otherwise. On setting, the user agent must run the following steps:</p>
   
   
     <li>
-    If the new value is null then set the <var>m</var>’s
+    If the new value is null, then set the <var>m</var>’s
     <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the empty string. Otherwise, set
     <var>m</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute to the value of
     <a data-link-type="dfn" href="#current-media-session">current media session</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute.
@@ -2253,7 +2253,7 @@ otherwise. On setting, the user agent must run the following steps:</p>
   
     <li>
     If <var>m</var> is an <a data-link-type="dfn" href="#active-participating-media-elements">active participating media element</a> of <var>old
-    media session</var> then <a data-link-type="dfn" href="#pause">pause</a> <var>m</var> and remove <var>m</var>
+    media session</var>, then <a data-link-type="dfn" href="#pause">pause</a> <var>m</var> and remove <var>m</var>
     from <var>old media session</var>’s <a data-link-type="dfn" href="#active-participating-media-elements">active participating media
     elements</a>.
   
@@ -2277,7 +2277,7 @@ has one, or the empty string otherwise.</p>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created with a <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> content
-attribute then the user agent must <a data-link-type="dfn" href="#update-media-elements-media-session">update media element’s media session</a>,
+attribute, then the user agent must <a data-link-type="dfn" href="#update-media-elements-media-session">update media element’s media session</a>,
 for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>.</p>
 
 
@@ -2301,11 +2301,11 @@ given <var>media element</var> it must run the following steps:</p>
   
   
     <li>
-    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then set <var>media session</var> to the current
+    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, then set <var>media session</var> to the current
     <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> and set
     <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to this <a data-link-type="dfn" href="#media-session">media
     session</a>. Otherwise, if <var>media session type</var> is the same as
-    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> then set
+    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a>, then set
     <var>media session</var> to
     <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>. Otherwise, set
     <var>media session</var> the result of invoking the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-mediasessionkind">MediaSession(kind)</a></code>
@@ -2314,7 +2314,7 @@ given <var>media element</var> it must run the following steps:</p>
   
   
     <li>
-    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> then set <var>media element</var>’s
+    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, then set <var>media element</var>’s
     <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute to null.
     
      <p class="note" role="note">
@@ -2396,7 +2396,7 @@ in <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded
   
     <li>
     If <var>media element</var> is not currently in <var>media session</var>’s
-    list of <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a> then append <var>media
+    list of <a data-link-type="dfn" href="#active-participating-media-elements">active participating media elements</a>, then append <var>media
     element</var> to this list.
   
   
@@ -2468,11 +2468,11 @@ media session</var> and then, for the original <a data-link-type="dfn" href="#in
 its <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method.</p>
 
 
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="duck">duck<a class="self-link" href="#duck"></a></dfn> then the user agent must
-ensure its output volume is lowered.</p>
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="duck">duck<a class="self-link" href="#duck"></a></dfn> the user agent must ensure its
+output volume is lowered.</p>
 
 
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="unduck">unduck<a class="self-link" href="#unduck"></a></dfn> then the user agent should
+   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is to <dfn data-dfn-type="dfn" data-noexport="" id="unduck">unduck<a class="self-link" href="#unduck"></a></dfn> the user agent should
 restore its output volume to the same level that was observed prior to the
 original corresponding <a data-link-type="dfn" href="#duck">duck</a> request.</p>
 
