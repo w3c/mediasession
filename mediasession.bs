@@ -1775,26 +1775,15 @@ in <a>media element</a> <var>media element</var>:
 <h3 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
 session from a media element</h3>
 
-When a <a>media element</a> is to <dfn>pause</dfn>, the user agent must run
-<a>media element</a>'s <a>internal pause steps</a>.
+When a <a>media element</a> is to <dfn>pause</dfn>, the user agent must run that
+<a>media element</a>'s <a>internal pause steps</a> but must not remove it from
+its <a>current media session</a>'s list of <a>active participating media
+elements</a>.
 
-<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 When a <a>media element</a> is to <dfn>indefinitely pause</dfn>, the user agent
-must invoke its {{pause()}} method.
-
-<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
-When the {{pause()}} method on a <a>media element</a> is invoked and the
-<a>media element</a>'s {{paused}} attribute is initially false, then the user
-agent must remove this <a>media element</a> from its <a>current media
-session</a>'s list of <a>active participating media elements</a>.
-
-<p class="note">
-  In effect, the different between running a <a>media element</a>'s <a>internal
-  pause steps</a> and invoking a <a>media element</a>'s {{pause()}} method is
-  whether we should keep a reference to that <a>media element</a> in its
-  <a>current media session</a>'s list of <a>active participating media
-  elements</a>.
-</p>
+must <a>pause</a> that <a>media element</a> and, then remove it from its
+<a>current media session</a>'s list of <a>active participating media
+elements</a>.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 <!-- https://github.com/whatwg/mediasession/issues/66 -->
