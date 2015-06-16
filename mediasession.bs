@@ -1777,13 +1777,11 @@ in <a>media element</a> <var>media element</var>:
 session from a media element</h3>
 
 When a <a>media element</a> is to <dfn>pause</dfn>, the user agent must run that
-<a>media element</a>'s <a>internal pause steps</a> but must not remove it from
-its <a>current media session</a>'s list of <a>active participating media
-elements</a>.
+<a>media element</a>'s <a>internal pause steps</a>.
 
 When a <a>media element</a> is to <dfn>indefinitely pause</dfn>, the user agent
-must <a>pause</a> that <a>media element</a> and, then remove it from its
-<a>current media session</a>'s list of <a>active participating media
+must <a>pause</a> that <a>media element</a> and, then proceed to remove it from
+its <a>current media session</a>'s list of <a>active participating media
 elements</a>.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
