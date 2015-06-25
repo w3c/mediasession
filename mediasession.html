@@ -1075,9 +1075,8 @@ session</var> are:</p>
       
       
       <dd>
-        If the <var>current media element</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing
-        context</a> is not at least partially visible on at least one screen,
-        then return failure.
+        If <var>media session</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is not
+        at least partially visible on at least one screen, then return failure.
 
         
        <p class="note" role="note">
@@ -1544,7 +1543,7 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="d
 
 
    <p>A <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object must not be garbage collected while its corresponding
-<a data-link-type="dfn" href="#media-session">media session</a> is attached to at least one <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>.</p>
+<a data-link-type="dfn" href="#media-session">media session</a> is attached to at least one <a data-link-type="dfn" href="#audio_producing-object">audio-producing object</a>.</p>
 
 
    <p>Additionally, a <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object must not be garbage collected while it
