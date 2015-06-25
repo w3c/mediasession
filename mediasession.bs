@@ -1615,15 +1615,15 @@ otherwise. On setting, the user agent must run the following steps:
     one.
   </li>
   <li>
+    Let <var>m</var>'s <a>current media session</a> be the new value or the
+    <a>top-level browsing context</a>'s <a>media session</a> if the new value is
+    null.
+  </li>
+  <li>
     If the new value is null, then set the <var>m</var>'s
     {{HTMLMediaElement/kind}} IDL attribute to the empty string. Otherwise, set
     <var>m</var>'s {{HTMLMediaElement/kind}} IDL attribute to the value of
     <a>current media session</a>'s {{MediaSession/kind}} attribute.
-  </li>
-  <li>
-    Let <var>m</var>'s <a>current media session</a> be the new value or the
-    <a>top-level browsing context</a>'s <a>media session</a> if the new value is
-    null.
   </li>
   <li>
     Let <var>new media session</var> be <var>m</var>'s <a>current media
