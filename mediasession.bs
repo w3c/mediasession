@@ -263,34 +263,6 @@ other <a>media sessions</a>. The possible values are as follows:
   </dd>
 </dl>
 
-When a new <a>media session</a> is created its <a>current state</a> must be
-initially set to
-<code><a lt="idle media session state">idle</a></code>.
-
-When the <a>media session invocation algorithm</a> is run a <a>media
-session</a>'s <a>current state</a> may be set from <code><a lt="idle media
-session state">idle</a></code> to
-<code><a lt="active media session state">active</a></code>.
-
-When the <a>media session interruption algorithm</a> is run a <a>media
-session</a>'s <a>current state</a> may be set from
-<code><a lt="active media session state">active</a></code> to either <code><a
-lt="idle media session state">idle</a></code> or <code><a lt="interrupted media
-session state">interrupted</a></code> depending on its associated <a>media
-session category</a>.
-
-When the <a>media session continuation algorithm</a> is run a <a>media
-session</a>'s <a>current state</a> may be set from <code><a lt="interrupted
-media session state">interrupted</a></code>
-to <code><a lt="active media session state">active</a></code>.
-
-When the <a>media session release algorithm</a> is run a <a>media session</a>'s
-<a>current state</a>
-may be set from either <code><a lt="active media session
-state">active</a></code> or <code><a lt="interrupted media session
-state">interrupted</a></code> to
-<code><a lt="idle media session state">idle</a></code>.
-
 <h3 id="media-session-types">Types</h3>
 
 A <dfn>media session category</dfn> is a keyword that maps to a well-defined
@@ -656,7 +628,37 @@ session</var> are:
   </li>
 </ol>
 
-<h3 id="activating-a-media-session">Activating a media session</h3>
+<h3 id="media-session-lifecycle">Lifecycle</h3>
+
+When a new <a>media session</a> is created its <a>current state</a> must be
+initially set to
+<code><a lt="idle media session state">idle</a></code>.
+
+When the <a>media session invocation algorithm</a> is run a <a>media
+session</a>'s <a>current state</a> may be set from <code><a lt="idle media
+session state">idle</a></code> to
+<code><a lt="active media session state">active</a></code>.
+
+When the <a>media session interruption algorithm</a> is run a <a>media
+session</a>'s <a>current state</a> may be set from
+<code><a lt="active media session state">active</a></code> to either <code><a
+lt="idle media session state">idle</a></code> or <code><a lt="interrupted media
+session state">interrupted</a></code> depending on its associated <a>media
+session category</a>.
+
+When the <a>media session continuation algorithm</a> is run a <a>media
+session</a>'s <a>current state</a> may be set from <code><a lt="interrupted
+media session state">interrupted</a></code>
+to <code><a lt="active media session state">active</a></code>.
+
+When the <a>media session release algorithm</a> is run a <a>media session</a>'s
+<a>current state</a>
+may be set from either <code><a lt="active media session
+state">active</a></code> or <code><a lt="interrupted media session
+state">interrupted</a></code> to
+<code><a lt="idle media session state">idle</a></code>.
+
+<h4 id="activating-a-media-session">Activating a media session</h4>
 
 The <dfn>media session invocation algorithm</dfn> takes one argument,
 <var>media session</var>, and consists of the following steps:
@@ -741,7 +743,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-<h3 id="interrupting-a-media-session">Interrupting a media session</h3>
+<h4 id="interrupting-a-media-session">Interrupting a media session</h4>
 
 A <a>media session</a> may be interrupted at any time after its
 <a>media session invocation algorithm</a> has been run. This typically occurs
@@ -997,7 +999,7 @@ user agent must run the following steps:
   </li>
 </ol>
 
-<h3 id="releasing-a-media-session">Releasing a media session</h3>
+<h4 id="releasing-a-media-session">Releasing a media session</h4>
 
 The <dfn>media session release algorithm</dfn> takes one argument,
 <var>media session</var>, and consists of the following steps.

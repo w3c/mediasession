@@ -137,9 +137,12 @@ notification areas and on lock screens of mobile devices.</p>
       <li><a href="#media-session-types"><span class="secno">4.2</span> <span class="content">Types</span></a>
       <li><a href="#media-session-participants"><span class="secno">4.3</span> <span class="content">Participants</span></a>
       <li><a href="#media-session-resources"><span class="secno">4.4</span> <span class="content">Resources</span></a>
-      <li><a href="#activating-a-media-session"><span class="secno">4.5</span> <span class="content">Activating a media session</span></a>
-      <li><a href="#interrupting-a-media-session"><span class="secno">4.6</span> <span class="content">Interrupting a media session</span></a>
-      <li><a href="#releasing-a-media-session"><span class="secno">4.7</span> <span class="content">Releasing a media session</span></a>
+      <li><a href="#media-session-lifecycle"><span class="secno">4.5</span> <span class="content">Lifecycle</span></a>
+       <ul class="toc">
+        <li><a href="#activating-a-media-session"><span class="secno">4.5.1</span> <span class="content">Activating a media session</span></a>
+        <li><a href="#interrupting-a-media-session"><span class="secno">4.5.2</span> <span class="content">Interrupting a media session</span></a>
+        <li><a href="#releasing-a-media-session"><span class="secno">4.5.3</span> <span class="content">Releasing a media session</span></a>
+       </ul>
      </ul>
     <li><a href="#api"><span class="secno">5</span> <span class="content">API</span></a>
      <ul class="toc">
@@ -396,33 +399,6 @@ other <a data-link-type="dfn" href="#media-session">media sessions</a>. The poss
     session type</a>.
   
 </dl>
-
-
-   <p>When a new <a data-link-type="dfn" href="#media-session">media session</a> is created its <a data-link-type="dfn" href="#current-state">current state</a> must be
-initially set to
-<code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
-
-
-   <p>When the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
-session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> to
-<code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
-
-
-   <p>When the <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
-session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from
-<code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> to either <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> depending on its associated <a data-link-type="dfn" href="#media-session-category">media
-session category</a>.</p>
-
-
-   <p>When the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
-session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>
-to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
-
-
-   <p>When the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media session</a>’s
-<a data-link-type="dfn" href="#current-state">current state</a>
-may be set from either <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> to
-<code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
 
 
    <h3 class="heading settled" data-level="4.2" id="media-session-types"><span class="secno">4.2. </span><span class="content">Types</span><a class="self-link" href="#media-session-types"></a></h3>
@@ -912,7 +888,37 @@ session</var> are:</p>
 </ol>
 
 
-   <h3 class="heading settled" data-level="4.5" id="activating-a-media-session"><span class="secno">4.5. </span><span class="content">Activating a media session</span><a class="self-link" href="#activating-a-media-session"></a></h3>
+   <h3 class="heading settled" data-level="4.5" id="media-session-lifecycle"><span class="secno">4.5. </span><span class="content">Lifecycle</span><a class="self-link" href="#media-session-lifecycle"></a></h3>
+
+
+   <p>When a new <a data-link-type="dfn" href="#media-session">media session</a> is created its <a data-link-type="dfn" href="#current-state">current state</a> must be
+initially set to
+<code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
+
+
+   <p>When the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
+session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> to
+<code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
+
+
+   <p>When the <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
+session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from
+<code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> to either <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> depending on its associated <a data-link-type="dfn" href="#media-session-category">media
+session category</a>.</p>
+
+
+   <p>When the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
+session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>
+to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
+
+
+   <p>When the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media session</a>’s
+<a data-link-type="dfn" href="#current-state">current state</a>
+may be set from either <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> or <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> to
+<code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
+
+
+   <h4 class="heading settled" data-level="4.5.1" id="activating-a-media-session"><span class="secno">4.5.1. </span><span class="content">Activating a media session</span><a class="self-link" href="#activating-a-media-session"></a></h4>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-invocation-algorithm">media session invocation algorithm<a class="self-link" href="#media-session-invocation-algorithm"></a></dfn> takes one argument,
@@ -1028,7 +1034,7 @@ session</var> are:</p>
 </ol>
 
 
-   <h3 class="heading settled" data-level="4.6" id="interrupting-a-media-session"><span class="secno">4.6. </span><span class="content">Interrupting a media session</span><a class="self-link" href="#interrupting-a-media-session"></a></h3>
+   <h4 class="heading settled" data-level="4.5.2" id="interrupting-a-media-session"><span class="secno">4.5.2. </span><span class="content">Interrupting a media session</span><a class="self-link" href="#interrupting-a-media-session"></a></h4>
 
 
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its
@@ -1360,7 +1366,7 @@ user agent must run the following steps:</p>
 </ol>
 
 
-   <h3 class="heading settled" data-level="4.7" id="releasing-a-media-session"><span class="secno">4.7. </span><span class="content">Releasing a media session</span><a class="self-link" href="#releasing-a-media-session"></a></h3>
+   <h4 class="heading settled" data-level="4.5.3" id="releasing-a-media-session"><span class="secno">4.5.3. </span><span class="content">Releasing a media session</span><a class="self-link" href="#releasing-a-media-session"></a></h4>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-release-algorithm">media session release algorithm<a class="self-link" href="#media-session-release-algorithm"></a></dfn> takes one argument,
@@ -2772,13 +2778,13 @@ participants, <a href="#active-audio_producing-participants">4.3</a>
    <li>media session, <a href="#media-session">4</a>
    <li>MediaSession, <a href="#mediasession">5.1</a>
    <li>media session category, <a href="#media-session-category">4.2</a>
-   <li>media session continuation algorithm, <a href="#media-session-continuation-algorithm">4.6</a>
-   <li>media session interruption algorithm, <a href="#media-session-interruption-algorithm">4.6</a>
-   <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">4.5</a>
+   <li>media session continuation algorithm, <a href="#media-session-continuation-algorithm">4.5.2</a>
+   <li>media session interruption algorithm, <a href="#media-session-interruption-algorithm">4.5.2</a>
+   <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">4.5.1</a>
    <li>MediaSessionKind, <a href="#enumdef-mediasessionkind">5.1</a>
    <li>MediaSession(kind), <a href="#dom-mediasession-mediasession">5.1.2</a>
    <li>media session metadata, <a href="#media-session-metadata">4</a>
-   <li>media session release algorithm, <a href="#media-session-release-algorithm">4.7</a>
+   <li>media session release algorithm, <a href="#media-session-release-algorithm">4.5.3</a>
    <li>media session
 type, <a href="#media-session-type">4.2</a>
    <li>metadata, <a href="#dom-mediasession-setmetadata-metadata-metadata">5.1</a>
