@@ -908,11 +908,10 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
   </li>
   <li>
     Let <var>interrupting media session category</var> be the <a>media session
-    category</a> that intially triggered this interruption. If this interruption
-    has no known
-    <a>media session category</a>, let <var>interrupting media session
-    category</var> be
-    <code><a lt="default media state">Default</a></code>.
+    category</a> that initially triggered this interruption. If this
+    interruption has no known <a>media session category</a>, let
+    <var>interrupting media session category</var> be <code><a lt="default media
+    state">Default</a></code>.
   </li>
   <li>
     Run these substeps:
