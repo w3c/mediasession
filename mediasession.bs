@@ -1597,8 +1597,7 @@ processing model described above:
   </tbody>
 </table>
 
-<h2 id="assigning-a-media-element-to-a-media-session">Assigning a media element
-to a media session</h2>
+<h2 id="media-element-extensions">Media element extensions</h2>
 
 This section describes how a web developer can assign a <a>media session</a> to
 a <a>media element</a> both declaratively and programmatically and how, once
@@ -1820,8 +1819,11 @@ element>audio</a></code> element</h4>
   </pre>
 </div>
 
-<h3 id="activating-a-media-session-from-a-media-element">Activating a media
-session from a media element</h3>
+<h3 id="media-elements-and-the-media-session-lifecycle">Media elements and the
+media session lifecycle</h3>
+
+<h4 id="activating-a-media-session-from-a-media-element">Activating a media
+session from a media element</h4>
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 
@@ -1852,8 +1854,8 @@ in <a>media element</a> <var>media element</var>:
 </ol>
 
 
-<h3 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
-session from a media element</h3>
+<h4 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
+session from a media element</h4>
 
 When the user agent is to <dfn>pause a media element</dfn> for a given a
 <var>media element</var> it must run that <a>media element</a>'s <a>internal
@@ -1893,8 +1895,8 @@ When the user agent is to <dfn>unpause a media element</dfn> for a given a
 <var>media element</var> it must invoke that <a>media element</a>'s {{play()}}
 method.
 
-<h3 id="releasing-a-media-session-from-a-media-element">Releasing a media
-session from a media element</h3>
+<h4 id="releasing-a-media-session-from-a-media-element">Releasing a media
+session from a media element</h4>
 
 When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
 user agent must <a>release media element from its media session</a>.

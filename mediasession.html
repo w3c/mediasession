@@ -160,8 +160,7 @@ interface</span></a>
         <li><a href="#mediaremotecontrols-events-summary"><span class="secno">5.2.3</span> <span class="content">Events summary</span></a>
        </ul>
      </ul>
-    <li><a href="#assigning-a-media-element-to-a-media-session"><span class="secno">6</span> <span class="content">Assigning a media element
-to a media session</span></a>
+    <li><a href="#media-element-extensions"><span class="secno">6</span> <span class="content">Media element extensions</span></a>
      <ul class="toc">
       <li><a href="#extensions-to-the-htmlmediaelement-interface"><span class="secno">6.1</span> <span class="content">Extensions to the
 <code class="idl"><span>HTMLMediaElement</span></code> interface</span></a>
@@ -171,18 +170,22 @@ declaratively</span></a>
         <li><a href="#extensions-to-the-video-element"><span class="secno">6.2.1</span> <span class="content">Extensions to the <code><span>video</span></code> element</span></a>
         <li><a href="#extensions-to-the-audio-element"><span class="secno">6.2.2</span> <span class="content">Extensions to the <code><span>audio</span></code> element</span></a>
        </ul>
-      <li><a href="#activating-a-media-session-from-a-media-element"><span class="secno">6.3</span> <span class="content">Activating a media
-session from a media element</span></a>
-      <li><a href="#interrupting-a-media-session-from-a-media-element"><span class="secno">6.4</span> <span class="content">Interrupting a media
-session from a media element</span></a>
-      <li><a href="#releasing-a-media-session-from-a-media-element"><span class="secno">6.5</span> <span class="content">Releasing a media
-session from a media element</span></a>
-      <li><a href="#examples"><span class="secno">6.6</span> <span class="content">Examples</span></a>
+      <li><a href="#media-elements-and-the-media-session-lifecycle"><span class="secno">6.3</span> <span class="content">Media elements and the
+media session lifecycle</span></a>
        <ul class="toc">
-        <li><a href="#example-setting-up-a-media-session"><span class="secno">6.6.1</span> <span class="content">Setting up a media session</span></a>
-        <li><a href="#example-setting-media-session-meta-data"><span class="secno">6.6.2</span> <span class="content">Setting media session meta
+        <li><a href="#activating-a-media-session-from-a-media-element"><span class="secno">6.3.1</span> <span class="content">Activating a media
+session from a media element</span></a>
+        <li><a href="#interrupting-a-media-session-from-a-media-element"><span class="secno">6.3.2</span> <span class="content">Interrupting a media
+session from a media element</span></a>
+        <li><a href="#releasing-a-media-session-from-a-media-element"><span class="secno">6.3.3</span> <span class="content">Releasing a media
+session from a media element</span></a>
+       </ul>
+      <li><a href="#examples"><span class="secno">6.4</span> <span class="content">Examples</span></a>
+       <ul class="toc">
+        <li><a href="#example-setting-up-a-media-session"><span class="secno">6.4.1</span> <span class="content">Setting up a media session</span></a>
+        <li><a href="#example-setting-media-session-meta-data"><span class="secno">6.4.2</span> <span class="content">Setting media session meta
 data</span></a>
-        <li><a href="#example-responding-to-media-remote-control-events"><span class="secno">6.6.3</span> <span class="content">Responding to media
+        <li><a href="#example-responding-to-media-remote-control-events"><span class="secno">6.4.3</span> <span class="content">Responding to media
 remote control events</span></a>
        </ul>
      </ul>
@@ -2139,8 +2142,7 @@ processing model described above:</p>
 </table>
 
 
-   <h2 class="heading settled" data-level="6" id="assigning-a-media-element-to-a-media-session"><span class="secno">6. </span><span class="content">Assigning a media element
-to a media session</span><a class="self-link" href="#assigning-a-media-element-to-a-media-session"></a></h2>
+   <h2 class="heading settled" data-level="6" id="media-element-extensions"><span class="secno">6. </span><span class="content">Media element extensions</span><a class="self-link" href="#media-element-extensions"></a></h2>
 
 
    <p>This section describes how a web developer can assign a <a data-link-type="dfn" href="#media-session">media session</a> to
@@ -2402,8 +2404,12 @@ given <var>media element</var> it must run the following steps:</p>
 </div>
 
 
-   <h3 class="heading settled" data-level="6.3" id="activating-a-media-session-from-a-media-element"><span class="secno">6.3. </span><span class="content">Activating a media
-session from a media element</span><a class="self-link" href="#activating-a-media-session-from-a-media-element"></a></h3>
+   <h3 class="heading settled" data-level="6.3" id="media-elements-and-the-media-session-lifecycle"><span class="secno">6.3. </span><span class="content">Media elements and the
+media session lifecycle</span><a class="self-link" href="#media-elements-and-the-media-session-lifecycle"></a></h3>
+
+
+   <h4 class="heading settled" data-level="6.3.1" id="activating-a-media-session-from-a-media-element"><span class="secno">6.3.1. </span><span class="content">Activating a media
+session from a media element</span><a class="self-link" href="#activating-a-media-session-from-a-media-element"></a></h4>
 
 
 
@@ -2441,8 +2447,8 @@ in <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded
 
 
 
-   <h3 class="heading settled" data-level="6.4" id="interrupting-a-media-session-from-a-media-element"><span class="secno">6.4. </span><span class="content">Interrupting a media
-session from a media element</span><a class="self-link" href="#interrupting-a-media-session-from-a-media-element"></a></h3>
+   <h4 class="heading settled" data-level="6.3.2" id="interrupting-a-media-session-from-a-media-element"><span class="secno">6.3.2. </span><span class="content">Interrupting a media
+session from a media element</span><a class="self-link" href="#interrupting-a-media-session-from-a-media-element"></a></h4>
 
 
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="pause-a-media-element">pause a media element<a class="self-link" href="#pause-a-media-element"></a></dfn> for a given a
@@ -2482,8 +2488,8 @@ paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, imme
 method.</p>
 
 
-   <h3 class="heading settled" data-level="6.5" id="releasing-a-media-session-from-a-media-element"><span class="secno">6.5. </span><span class="content">Releasing a media
-session from a media element</span><a class="self-link" href="#releasing-a-media-session-from-a-media-element"></a></h3>
+   <h4 class="heading settled" data-level="6.3.3" id="releasing-a-media-session-from-a-media-element"><span class="secno">6.3.3. </span><span class="content">Releasing a media
+session from a media element</span><a class="self-link" href="#releasing-a-media-session-from-a-media-element"></a></h4>
 
 
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">playback has ended</a>, the
@@ -2529,13 +2535,13 @@ steps:</p>
 </ol>
 
 
-   <h3 class="heading settled" data-level="6.6" id="examples"><span class="secno">6.6. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h3>
+   <h3 class="heading settled" data-level="6.4" id="examples"><span class="secno">6.4. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h3>
 
 
    <p><em>This section and all its subsections are non-normative.</em></p>
 
 
-   <h4 class="heading settled" data-level="6.6.1" id="example-setting-up-a-media-session"><span class="secno">6.6.1. </span><span class="content">Setting up a media session</span><a class="self-link" href="#example-setting-up-a-media-session"></a></h4>
+   <h4 class="heading settled" data-level="6.4.1" id="example-setting-up-a-media-session"><span class="secno">6.4.1. </span><span class="content">Setting up a media session</span><a class="self-link" href="#example-setting-up-a-media-session"></a></h4>
 
 
    <p>An <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element’s <code><a data-link-type="dfn" href="#kind-content-attribute">kind</a></code> content attribute can be declared as follows in HTML
@@ -2612,7 +2618,7 @@ elements implement the <code class="idl"><a data-link-type="idl" href="https://h
 </p>
 
 
-   <h4 class="heading settled" data-level="6.6.2" id="example-setting-media-session-meta-data"><span class="secno">6.6.2. </span><span class="content">Setting media session meta
+   <h4 class="heading settled" data-level="6.4.2" id="example-setting-media-session-meta-data"><span class="secno">6.4.2. </span><span class="content">Setting media session meta
 data</span><a class="self-link" href="#example-setting-media-session-meta-data"></a></h4>
 
 
@@ -2639,7 +2645,7 @@ meta data can be added at any time to update these interfaces:</p>
 <span class="p">});</span></pre>
 
 
-   <h4 class="heading settled" data-level="6.6.3" id="example-responding-to-media-remote-control-events"><span class="secno">6.6.3. </span><span class="content">Responding to media
+   <h4 class="heading settled" data-level="6.4.3" id="example-responding-to-media-remote-control-events"><span class="secno">6.4.3. </span><span class="content">Responding to media
 remote control events</span><a class="self-link" href="#example-responding-to-media-remote-control-events"></a></h4>
 
 
@@ -2795,11 +2801,11 @@ type, <a href="#media-session-type">4.2</a>
    <li>onseekforward, <a href="#dom-mediaremotecontrols-onseekforward">5.2.2</a>
    <li>participating media elements, <a href="#participating-media-elements">6</a>
    <li>pause, <a href="#pause">4.3</a>
-   <li>pause a media element, <a href="#pause-a-media-element">6.4</a>
+   <li>pause a media element, <a href="#pause-a-media-element">6.3.2</a>
    <li>previousTrackEnabled, <a href="#dom-mediaremotecontrols-previoustrackenabled">5.2.1</a>
    <li>release(), <a href="#dom-mediasession-release">5.1.3</a>
    <li>release media element from its media
-session, <a href="#release-media-element-from-its-media-session">6.5</a>
+session, <a href="#release-media-element-from-its-media-session">6.3.3</a>
    <li>seekBackwardEnabled, <a href="#dom-mediaremotecontrols-seekbackwardenabled">5.2.1</a>
    <li>seekForwardEnabled, <a href="#dom-mediaremotecontrols-seekforwardenabled">5.2.1</a>
    <li>session, <a href="#dom-htmlmediaelement-session">6.1</a>
@@ -2814,7 +2820,7 @@ session, <a href="#release-media-element-from-its-media-session">6.5</a>
    <li>transient solo media state, <a href="#transient-solo-media-state">4.2</a>
    <li>unduck, <a href="#unduck">4.3</a>
    <li>unpause, <a href="#unpause">4.3</a>
-   <li>unpause a media element, <a href="#unpause-a-media-element">6.4</a>
+   <li>unpause a media element, <a href="#unpause-a-media-element">6.3.2</a>
    <li>update media element’s media session, <a href="#update-media-elements-media-session">6.2</a></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
