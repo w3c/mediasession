@@ -822,7 +822,7 @@ object</var> it must run the following steps:</p>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="indefinitely-pause">indefinitely pause<a class="self-link" href="#indefinitely-pause"></a></dfn> a given
 <var>audio-producing object</var>, the user agent must <a data-link-type="dfn" href="#pause">pause</a>
 <var>audio-producing object</var> and, then proceed to remove it from its
-associated <a data-link-type="dfn" href="#media-session">media session</a>’s list of
+<a data-link-type="dfn" href="#current-media-session">current media session</a>’s list of
 <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a>.</p>
 
 
@@ -1022,7 +1022,7 @@ session</var> are:</p>
   
     <li>
     Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-    <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and return
+    <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then return
     success.
   
 </ol>
@@ -1048,19 +1048,17 @@ playback when that interruption ends. A permanent interruption means we must <a 
    <p>When a start-of-interruption notification event is received from the platform,
 then the user agent must run the
 <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> against all known <a data-link-type="dfn" href="#media-session">media
-sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>interrupted media
-session</var>.</p>
+sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>media session</var>.</p>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-interruption-algorithm">media session interruption algorithm<a class="self-link" href="#media-session-interruption-algorithm"></a></dfn> takes one argument,
-<var>interrupted media session</var>, and consists of running the following
-steps.</p>
+<var>media session</var>, and consists of the following steps.</p>
 
 
    <ol>
   
     <li>
-    If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
+    If <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
     <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then terminate
     these steps.
   
@@ -1090,22 +1088,20 @@ steps.</p>
        <ol>
           
         <li>
-            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
-            type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
-            <a data-link-type="dfn" href="#indefinitely-pause">indefinitely pause</a> all of <var>interrupted media
-            session</var>’s <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a>
-            and set
-            <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+            <a data-link-type="dfn" href="#indefinitely-pause">indefinitely pause</a> all of <var>media session</var>’s
+            <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a> and set <var>media
+            session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.
 
             
          <p class="note" role="note">
               This implies that the next time the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
-              algorithm</a>
-              is run against <var>interrupted media session</var>
-              that we will re-request media focus according to the steps defined
-              in that algorithm.
+              algorithm</a> is run against <var>media session</var> that we will
+              re-request media focus according to the steps defined in that
+              algorithm.
             </p>
          
           
@@ -1116,7 +1112,7 @@ steps.</p>
             remove any previously established ongoing media interface in the
             underlying platform’s notifications area and any ongoing media
             interface in the underlying platform’s lock screen area for
-            <var>interrupted media session</var>, if any.
+            <var>media session</var>, if any.
           
         
           
@@ -1124,7 +1120,7 @@ steps.</p>
             Optionally, based on platform conventions, the user agent must
             prevent any hardware and/or software media keys from controlling
             playback of
-            <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing
+            <var>media session</var>’s <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing
             participants</a>.
           
         
@@ -1144,19 +1140,20 @@ steps.</p>
        <ol>
           
         <li>
-            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
-            type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
             <a data-link-type="dfn" href="#duck">duck</a>
-            all of <var>interrupted media session</var>’s <a data-link-type="dfn" href="#active-audio_producing-participants">active
-            audio-producing participants</a> and set
-            <var>interrupted media session</var>’s
+            all of <var>media session</var>’s <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing
+            participants</a> and set
+            <var>media session</var>’s
             <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
             
          <p class="note" role="note">
               This implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
-              algorithm</a> is run that we will re-activate this <a data-link-type="dfn" href="#media-session">media
-              session</a> according to the steps defined in that algorithm.
+              algorithm</a> is run for <var>media session</var> that we will
+              re-activate this <a data-link-type="dfn" href="#media-session">media session</a> according to the steps
+              defined in that algorithm.
             </p>
          
           
@@ -1177,11 +1174,11 @@ steps.</p>
        <ol>
           
         <li>
-            If <var>interrupted media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
-            type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
+            If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then
             <a data-link-type="dfn" href="#pause">pause</a> all of
-            <var>interrupted media session</var>’s
+            <var>media session</var>’s
             <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a> and set
             <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
@@ -1192,7 +1189,7 @@ steps.</p>
           <p>
                 This implies that the next time the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
                 algorithm</a>
-                is run against <var>interrupted media session</var>
+                is run against <var>media session</var>
                 that we will re-request media focus according to the steps
                 defined in that algorithm.
               </p>
@@ -1201,7 +1198,8 @@ steps.</p>
               
           <p>
                 It also implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session
-                continuation algorithm</a> is run that we will re-activate this
+                continuation algorithm</a> is run against <var>media
+                session</var> that we will re-activate this
                 <a data-link-type="dfn" href="#media-session">media session</a> according to the steps defined in that
                 algorithm.
               </p>
@@ -1229,17 +1227,17 @@ steps.</p>
    <p>When an end-of-interruption notification event is received from the platform,
 then the user agent must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a>
 against all known <a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as
-<var>incumbent media session</var>.</p>
+<var>media session</var>.</p>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-continuation-algorithm">media session continuation algorithm<a class="self-link" href="#media-session-continuation-algorithm"></a></dfn> takes one argument,
-<var>incumbent media session</var>, and consists of running the following steps.</p>
+<var>media session</var>, and consists of the following steps.</p>
 
 
    <ol>
   
     <li>
-    If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
+    If <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not
     <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then
     terminate these steps.
   
@@ -1267,13 +1265,13 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
        <ol>
           
         <li>
-            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
-            type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
+            If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
             or
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then
-            <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>incumbent media session</var>’s
+            <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>media session</var>’s
             <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a>
-            and set <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+            and set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
           
         
@@ -1293,13 +1291,13 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
        <ol>
           
         <li>
-            If <var>incumbent media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session
-            type</a> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
+            If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
             <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>,
             then <a data-link-type="dfn" href="#unpause">unpause</a> the
-            <var>incumbent media session</var>’s <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing
-            participants</a> and set <var>incumbent media session</var>’s
+            <var>media session</var>’s <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing
+            participants</a> and set <var>media session</var>’s
             <a data-link-type="dfn" href="#current-state">current state</a> to
             <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
           
@@ -1366,60 +1364,57 @@ user agent must run the following steps:</p>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-release-algorithm">media session release algorithm<a class="self-link" href="#media-session-release-algorithm"></a></dfn> takes one argument,
-<var>current media session</var>, and consists of running the following steps.</p>
+<var>media session</var>, and consists of the following steps.</p>
 
 
    <ol>
   
     <li>
-    If <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is
+    If <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is
     <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>, then terminate these
     steps.
   
   
     <li>
-    If <var>current media session</var> still has one or more <a data-link-type="dfn" href="#active-audio_producing-participants">active
-    audio-producing participants</a>, then terminate these steps.
+    If <var>media session</var> still has one or more <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing
+    participants</a>, then terminate these steps.
   
   
     <li>
     Optionally, based on platform conventions, the user agent must release any
-    currently held platform media focus for <var>current media session</var>.
+    currently held platform media focus for <var>media session</var>.
   
   
     <li>
     Optionally, based on platform conventions, the user agent must remove any
     previously established ongoing media interface in the underlying platform’s
     notifications area and any ongoing media interface in the underlying
-    platform’s lock screen area for
-    <var>current media session</var>, if any.
+    platform’s lock screen area for <var>media session</var>, if any.
   
   
     <li>
     Optionally, based on platform conventions, the user agent must prevent any
     hardware and/or software media keys from controlling playback of
-    <var>current media session</var>’s
+    <var>media session</var>’s
     <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a>.
 
     
      <p class="note" role="note">
-      If the algorithm reaches this step a <a data-link-type="dfn" href="#media-session">media session</a> can not have any
-      <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a>.
+      If the algorithm reaches this step then <var>media session</var> can not
+      have any <a data-link-type="dfn" href="#active-audio_producing-participants">active audio-producing participants</a>.
     </p>
      
   
   
     <li>
-    Set <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
     <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.
 
     
      <p class="note" role="note">
       This implies that the next time the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
-      algorithm</a>
-      is run against <var>current media session</var>
-      that we will re-request media focus according to the steps defined in that
-      algorithm.
+      algorithm</a> is run against <var>media session</var> that we will
+      re-request media focus according to the steps defined in that algorithm.
     </p>
      
   
@@ -2454,8 +2449,9 @@ After the <code class="idl"><a data-link-type="idl" href="https://html.spec.what
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has a <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> set to
 <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the user agent
 must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> against all known
-<a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>incumbent
-media session</var> and then, for the original <a data-link-type="dfn" href="#indefinitely-pause">indefinitely paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, immediately run the
+<a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>media
+session</var> and then, for the original <a data-link-type="dfn" href="#indefinitely-pause">indefinitely
+paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, immediately run the
 <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s
 <a data-link-type="dfn" href="#current-media-session">current media session</a>.
 
@@ -2470,7 +2466,7 @@ media session</var> and then, for the original <a data-link-type="dfn" href="#in
 
     <p>After we have completed this process, the original <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or
   <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based
-  <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all interrupted <a data-link-type="dfn" href="#media-session">media sessions</a>
+  <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a>
   will have returned to a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
 </div>
 

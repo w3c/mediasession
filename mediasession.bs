@@ -591,7 +591,7 @@ object</var> it must run the following steps:
 When the user agent is to <dfn>indefinitely pause</dfn> a given
 <var>audio-producing object</var>, the user agent must <a>pause</a>
 <var>audio-producing object</var> and, then proceed to remove it from its
-associated <a>media session</a>'s list of
+<a>current media session</a>'s list of
 <a>active audio-producing participants</a>.
 
 When the user agent is to <dfn>unpause</dfn> a given <var>audio-producing
@@ -736,7 +736,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
   </li>
   <li>
     Set <var>media session</var>'s <a>current state</a> to
-    <code><a lt="active media session state">active</a></code> and return
+    <code><a lt="active media session state">active</a></code>, then return
     success.
   </li>
 </ol>
@@ -759,16 +759,14 @@ lt="indefinitely pause">pause our media content indefinitely</a>.
 When a start-of-interruption notification event is received from the platform,
 then the user agent must run the
 <a>media session interruption algorithm</a> against all known <a>media
-sessions</a>, passing in each <a>media session</a> as <var>interrupted media
-session</var>.
+sessions</a>, passing in each <a>media session</a> as <var>media session</var>.
 
 The <dfn>media session interruption algorithm</dfn> takes one argument,
-<var>interrupted media session</var>, and consists of running the following
-steps.
+<var>media session</var>, and consists of the following steps.
 
 <ol>
   <li>
-    If <var>interrupted media session</var>'s <a>current state</a> is not
+    If <var>media session</var>'s <a>current state</a> is not
     <code><a lt="active media session state">active</a></code>, then terminate
     these steps.
   </li>
@@ -791,21 +789,19 @@ steps.
       <dd>
         <ol>
           <li>
-            If <var>interrupted media session</var>'s <a>current media session
-            type</a> is <code><a lt="default media state">Default</a></code>
+            If <var>media session</var>'s <a>current media session type</a> is
+            <code><a lt="default media state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
-            <a>indefinitely pause</a> all of <var>interrupted media
-            session</var>'s <a>active audio-producing participants</a>
-            and set
-            <var>interrupted media session</var>'s <a>current state</a> to
+            <a>indefinitely pause</a> all of <var>media session</var>'s
+            <a>active audio-producing participants</a> and set <var>media
+            session</var>'s <a>current state</a> to
             <code><a lt="idle media session state">idle</a></code>.
 
             <p class="note">
               This implies that the next time the <a>media session invocation
-              algorithm</a>
-              is run against <var>interrupted media session</var>
-              that we will re-request media focus according to the steps defined
-              in that algorithm.
+              algorithm</a> is run against <var>media session</var> that we will
+              re-request media focus according to the steps defined in that
+              algorithm.
             </p>
           </li>
           <li>
@@ -813,13 +809,13 @@ steps.
             remove any previously established ongoing media interface in the
             underlying platform's notifications area and any ongoing media
             interface in the underlying platform's lock screen area for
-            <var>interrupted media session</var>, if any.
+            <var>media session</var>, if any.
           </li>
           <li>
             Optionally, based on platform conventions, the user agent must
             prevent any hardware and/or software media keys from controlling
             playback of
-            <var>interrupted media session</var>'s <a>active audio-producing
+            <var>media session</var>'s <a>active audio-producing
             participants</a>.
           </li>
         </ol>
@@ -831,19 +827,20 @@ steps.
       <dd>
         <ol>
           <li>
-            If <var>interrupted media session</var>'s <a>current media session
-            type</a> is <code><a lt="default media state">Default</a></code>
+            If <var>media session</var>'s <a>current media session type</a> is
+            <code><a lt="default media state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>duck</a>
-            all of <var>interrupted media session</var>'s <a>active
-            audio-producing participants</a> and set
-            <var>interrupted media session</var>'s
+            all of <var>media session</var>'s <a>active audio-producing
+            participants</a> and set
+            <var>media session</var>'s
             <a>current state</a> to <code><a lt="interrupted media session
             state">interrupted</a></code>.
             <p class="note">
               This implies that the next time the <a>media session continuation
-              algorithm</a> is run that we will re-activate this <a>media
-              session</a> according to the steps defined in that algorithm.
+              algorithm</a> is run for <var>media session</var> that we will
+              re-activate this <a>media session</a> according to the steps
+              defined in that algorithm.
             </p>
           </li>
         </ol>
@@ -855,13 +852,13 @@ steps.
       <dd>
         <ol>
           <li>
-            If <var>interrupted media session</var>'s <a>current media session
-            type</a> is <code><a lt="default media state">Default</a></code>,
+            If <var>media session</var>'s <a>current media session type</a> is
+            <code><a lt="default media state">Default</a></code>,
             <code><a lt="content media state">Content</a></code>, <code><a
             lt="transient media state">Transient</a></code> or <code><a
             lt="transient solo media state">Transient Solo</a></code> then
             <a>pause</a> all of
-            <var>interrupted media session</var>'s
+            <var>media session</var>'s
             <a>active audio-producing participants</a> and set
             <var>current media session</var>'s <a>current state</a> to
             <code><a lt="interrupted media session
@@ -871,14 +868,15 @@ steps.
               <p>
                 This implies that the next time the <a>media session invocation
                 algorithm</a>
-                is run against <var>interrupted media session</var>
+                is run against <var>media session</var>
                 that we will re-request media focus according to the steps
                 defined in that algorithm.
               </p>
 
               <p>
                 It also implies that the next time the <a>media session
-                continuation algorithm</a> is run that we will re-activate this
+                continuation algorithm</a> is run against <var>media
+                session</var> that we will re-activate this
                 <a>media session</a> according to the steps defined in that
                 algorithm.
               </p>
@@ -895,14 +893,14 @@ steps.
 When an end-of-interruption notification event is received from the platform,
 then the user agent must run the <a>media session continuation algorithm</a>
 against all known <a>media sessions</a>, passing in each <a>media session</a> as
-<var>incumbent media session</var>.
+<var>media session</var>.
 
 The <dfn>media session continuation algorithm</dfn> takes one argument,
-<var>incumbent media session</var>, and consists of running the following steps.
+<var>media session</var>, and consists of the following steps.
 
 <ol>
   <li>
-    If <var>incumbent media session</var>'s <a>current state</a> is not
+    If <var>media session</var>'s <a>current state</a> is not
     <code><a lt="interrupted media session state">interrupted</a></code>, then
     terminate these steps.
   </li>
@@ -924,13 +922,13 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
       <dd>
         <ol>
           <li>
-            If <var>incumbent media session</var>'s <a>current media session
-            type</a> is <code><a lt="default media state">Default</a></code>
+            If <var>media session</var>'s <a>current media session type</a> is
+            <code><a lt="default media state">Default</a></code>
             or
             <code><a lt="content media state">Content</a></code>, then
-            <a>unduck</a> all of <var>incumbent media session</var>'s
+            <a>unduck</a> all of <var>media session</var>'s
             <a>active audio-producing participants</a>
-            and set <var>incumbent media session</var>'s <a>current state</a> to
+            and set <var>media session</var>'s <a>current state</a> to
             <code><a lt="active media session state">active</a></code>.
           </li>
         </ol>
@@ -942,14 +940,14 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
       <dd>
         <ol>
           <li>
-            If <var>incumbent media session</var>'s <a>current media session
-            type</a> is <code><a lt="default media state">Default</a></code>,
+            If <var>media session</var>'s <a>current media session type</a> is
+            <code><a lt="default media state">Default</a></code>,
             <code><a lt="content media state">Content</a></code>, <code><a
             lt="transient media state">Transient</a></code>, or
             <code><a lt="transient solo media state">Transient Solo</a></code>,
             then <a>unpause</a> the
-            <var>incumbent media session</var>'s <a>active audio-producing
-            participants</a> and set <var>incumbent media session</var>'s
+            <var>media session</var>'s <a>active audio-producing
+            participants</a> and set <var>media session</var>'s
             <a>current state</a> to
             <code><a lt="active media session state">active</a></code>.
           </li>
@@ -1002,50 +1000,47 @@ user agent must run the following steps:
 <h3 id="releasing-a-media-session">Releasing a media session</h3>
 
 The <dfn>media session release algorithm</dfn> takes one argument,
-<var>current media session</var>, and consists of running the following steps.
+<var>media session</var>, and consists of the following steps.
 
 <ol>
   <li>
-    If <var>current media session</var>'s <a>current state</a> is
+    If <var>media session</var>'s <a>current state</a> is
     <code><a lt="idle media session state">idle</a></code>, then terminate these
     steps.
   </li>
   <li>
-    If <var>current media session</var> still has one or more <a>active
-    audio-producing participants</a>, then terminate these steps.
+    If <var>media session</var> still has one or more <a>active audio-producing
+    participants</a>, then terminate these steps.
   </li>
   <li>
     Optionally, based on platform conventions, the user agent must release any
-    currently held platform media focus for <var>current media session</var>.
+    currently held platform media focus for <var>media session</var>.
   </li>
   <li>
     Optionally, based on platform conventions, the user agent must remove any
     previously established ongoing media interface in the underlying platform's
     notifications area and any ongoing media interface in the underlying
-    platform's lock screen area for
-    <var>current media session</var>, if any.
+    platform's lock screen area for <var>media session</var>, if any.
   </li>
   <li>
     Optionally, based on platform conventions, the user agent must prevent any
     hardware and/or software media keys from controlling playback of
-    <var>current media session</var>'s
+    <var>media session</var>'s
     <a>active audio-producing participants</a>.
 
     <p class="note">
-      If the algorithm reaches this step a <a>media session</a> can not have any
-      <a>active audio-producing participants</a>.
+      If the algorithm reaches this step then <var>media session</var> can not
+      have any <a>active audio-producing participants</a>.
     </p>
   </li>
   <li>
-    Set <var>current media session</var>'s <a>current state</a> to
+    Set <var>media session</var>'s <a>current state</a> to
     <code><a lt="idle media session state">idle</a></code>.
 
     <p class="note">
       This implies that the next time the <a>media session invocation
-      algorithm</a>
-      is run against <var>current media session</var>
-      that we will re-request media focus according to the steps defined in that
-      algorithm.
+      algorithm</a> is run against <var>media session</var> that we will
+      re-request media focus according to the steps defined in that algorithm.
     </p>
   </li>
 </ol>
@@ -1869,9 +1864,9 @@ After the {{pause()}} method on a <a>media element</a> has been invoked and that
 <code><a lt="transient media state">Transient</a></code> or <code><a
 lt="transient solo media state">Transient Solo</a></code>, then the user agent
 must run the <a>media session continuation algorithm</a> against all known
-<a>media sessions</a>, passing in each <a>media session</a> as <var>incumbent
-media session</var> and then, for the original <a lt="indefinitely
-pause">indefinitely paused</a> <a>media session</a>, immediately run the
+<a>media sessions</a>, passing in each <a>media session</a> as <var>media
+session</var> and then, for the original <a lt="indefinitely pause">indefinitely
+paused</a> <a>media session</a>, immediately run the
 <a>media session release algorithm</a> for <a>media element</a>'s
 <a>current media session</a>.
 
@@ -1886,7 +1881,8 @@ pause">indefinitely paused</a> <a>media session</a>, immediately run the
   media state">Transient</a></code> or
   <code><a lt="transient solo media state">Transient Solo</a></code>-based
   <a>media session</a> will have a <a>current state</a> of <code><a lt="idle
-  media session state">idle</a></code> and all interrupted <a>media sessions</a>
+  media session state">idle</a></code> and all <code><a lt="interrupted media
+  session state">interrupted</a></code> <a>media sessions</a>
   will have returned to a <a>current state</a> of <code><a lt="active media
   session state">active</a></code>.
 </div>
