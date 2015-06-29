@@ -2462,10 +2462,9 @@ After the <code class="idl"><a data-link-type="idl" href="https://html.spec.what
 <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the user agent
 must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> against all known
 <a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>media
-session</var> and then, for the original <a data-link-type="dfn" href="#indefinitely-pause">indefinitely
-paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, immediately run the
-<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s
-<a data-link-type="dfn" href="#current-media-session">current media session</a>.
+session</var>. Then, for the original <a data-link-type="dfn" href="#indefinitely-pause">indefinitely
+paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, the user agent must immediately run the
+<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> for its <a data-link-type="dfn" href="#current-media-session">current media session</a>.
 
 
    <div class="note" role="note">
