@@ -630,9 +630,9 @@ session</var> are:
 
 <h3 id="media-session-lifecycle">Lifecycle</h3>
 
-When a new <a>media session</a> is created its <a>current state</a> must be
-initially set to
-<code><a lt="idle media session state">idle</a></code>.
+When <a lt="create a media session">creating a new media session</a> a <a>media
+session</a>'s <a>current state</a> is initially set to <code><a lt="idle media
+session state">idle</a></code>.
 
 When the <a>media session invocation algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from <code><a lt="idle media
