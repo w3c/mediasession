@@ -2058,7 +2058,7 @@ if (mySession.controls) {
 }
 
 // ... assign media session to a media element and play
-// that media element to active the media session ...
+// that media element to activate the media session ...
 </pre>
 
 When a <code><a lt="content media state">Content</a></code>-based <a>media
@@ -2070,7 +2070,7 @@ web application:
 <pre class="lang-javascript">
 // Respond to previous and next track media key inputs
 if (mySession.controls) {
-  mySession.controls.addEventListener('nextTrack', function() {
+  mySession.controls.addEventListener('nexttrack', function() {
     // Play next track
     if (myAudio.src === "track1.mp3") {
       myAudio.src = "track2.mp3";
@@ -2084,7 +2084,7 @@ if (mySession.controls) {
     }
   }, false);
 
-  mySession.controls.addEventListener('previousTrack', function() {
+  mySession.controls.addEventListener('previoustrack', function() {
     // Play previous track
     if (myAudio.src === "track2.mp3") {
       myAudio.src = "track1.mp3";
