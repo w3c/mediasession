@@ -1054,8 +1054,6 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 <pre class="idl">
 [Constructor(optional MediaSessionKind kind)]
 interface MediaSession {
-  readonly attribute MediaSessionKind kind;
-
   readonly attribute MediaRemoteControls? controls;
 
   void setMetadata(MediaMetadata metadata);
@@ -1126,20 +1124,6 @@ constructor, when invoked, must run these steps:
 
 <dl class=domintro>
   <dt>
-    <code><var>session</var> . {{MediaSession/kind}}</code>
-  </dt>
-  <dd>
-    Returns the <a>media session category</a> of the
-    <a>media session</a>.
-  </dd>
-</dl>
-
-The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
-attribute must return the <a>media session category</a> of the <a>media
-session</a> that was set when the object was created.
-
-<dl class=domintro>
-  <dt>
     <code><var>session</var> . {{MediaSession/controls}}</code>
   </dt>
   <dd>
@@ -1150,9 +1134,9 @@ session</a> that was set when the object was created.
 
 The <dfn attribute for="MediaSession" lt="controls"><code>controls</code></dfn>
 attribute must return the <a>media remote controller</a> that was assigned to a
-<a>media session</a> when it was created. If {{MediaSession/kind}} is not
-&quot;<a lt="content attribute value"><code>content</code></a>&quot, then this
-attribute should return null.
+<a>media session</a> when it was created. If <a>media session</a>'s <a>current
+media session type</a> is not &quot;<a lt="content attribute
+value"><code>content</code></a>&quot, then this attribute should return null.
 
 <dl class=domintro>
   <dt>
@@ -1699,7 +1683,7 @@ otherwise. On setting, the user agent must run the following steps:
     If the new value is null, then set the <var>m</var>'s
     {{HTMLMediaElement/kind}} IDL attribute to the empty string. Otherwise, set
     <var>m</var>'s {{HTMLMediaElement/kind}} IDL attribute to the value of
-    <a>current media session</a>'s {{MediaSession/kind}} attribute.
+    <a>current media session</a>'s <a>current media session type</a> attribute.
   </li>
   <li>
     Let <var>new media session</var> be <var>m</var>'s <a>current media
@@ -1742,10 +1726,8 @@ given <var>media element</var> it must run the following steps:
 <ol>
   <li>
     Let <var>media session type</var> be the <var>media element</var>'s
-    {{MediaSession/kind}} attribute's corresponding <a>media session type</a> as
-    defined in the list of
-    <a href="#valid-media-categories">possible media session categories</a>. If
-    no known category match is found, let <var>media session type</var> be
+    <a>current media session type</a>. If no known category match is found, let
+    <var>media session type</var> be
     <code><a lt="default media state">Default</a></code>.
   </li>
   <li>
