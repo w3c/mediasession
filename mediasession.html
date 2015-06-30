@@ -88,7 +88,7 @@
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-29">29 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-07-01">1 July 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -856,8 +856,24 @@ session</var> are:</p>
   
   
     <li>
-    If the platform supports displaying media artwork, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>
-    <var>media session</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a>, if <a data-link-type="dfn" href="#artwork-url">artwork URL</a> is set.
+    If <var>media session metadata</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a> is empty, then
+    terminate these steps.
+  
+  
+    <li>
+    If the platform supports displaying media artwork, let <var>request</var> be
+    a new <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> whose method is "<code>GET</code>",
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-url">url</a> is <var>media session metadata</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a>,
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-context">context</a> is "<code>image</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-context-frame-type">context frame type</a>
+    is "<code>none</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-origin">origin</a> is the current
+    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>’s <a href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>,
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force <code>Origin</code> header flag</a> is set, and referrer is <var>no
+    referrer</var>. Otherwise, if the platform does not support displaying media
+    artwork, terminate these steps.
+  
+  
+    <li>
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch">Fetch</a> <var>request</var>.
 
 
      <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
@@ -2829,10 +2845,16 @@ session, <a href="#release-media-element-from-its-media-session">6.3.3</a>
     </ul>
    <li><a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> defines the following terms:
     <ul>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-context">context</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-context-frame-type">context frame type</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>
+     <li><a href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force origin header flag</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-internal-response">internal response</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-origin">origin</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request">request</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-response">response</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-response-type">response type</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-url">url</a>
     </ul>
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
