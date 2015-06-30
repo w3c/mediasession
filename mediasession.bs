@@ -15,6 +15,7 @@ Abstract: notification areas and on lock screens of mobile devices.
 !Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 !Version History: <a href="https://github.com/whatwg/mediasession/commits">https://github.com/whatwg/mediasession/commits</a>
 Boilerplate: omit conformance
+Ignored Terms: EmptyString
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
@@ -192,10 +193,8 @@ hardware or software remote control events. Such events may be triggered by e.g.
 keyboard media keys, headphone buttons, remote controller buttons or
 notification and lock screen media buttons.
 
-A <a>media session</a> may have associated <dfn>media session metadata</dfn>
-that <em>can</em> consist of <dfn lt="session title">title</dfn>,
-<dfn>artist name</dfn>, <dfn>album name</dfn>, <dfn>artwork URL</dfn> and
-<dfn>artwork resource</dfn>.
+A <a>media session</a> may have an associated <dfn>media metadata
+controller</dfn> that provides access to <a>media session metadata</a>.
 
 <br>
 To <dfn>create a media session</dfn>, given a <var>media session category</var>,
@@ -221,6 +220,13 @@ run these steps:
     create a new <a>media remote controller</a> for <var>media session</var>.
     (Otherwise
     <var>media session</var> has no <a>media remote controller</a>.)
+  </li>
+  <li>
+    If <var>media session</var>’s <a>current media session type</a> is
+    &quot;<a lt="content attribute value"><code>content</code></a>&quot, then
+    create a new <a>media metadata controller</a> for <var>media session</var>.
+    (Otherwise
+    <var>media session</var> has no <a>media metadata controller</a>.)
   </li>
   <li>
     Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
@@ -599,14 +605,15 @@ the original corresponding <a>duck</a> request.
 
 <h3 id="media-session-resources">Resources</h3>
 
-The <dfn>fetch steps</dfn> for a given <a>media session</a> <var>media
-session</var> are:
+The <dfn>fetch steps</dfn> for a given set of <a>media session metadata</a>
+<var>media session metadata</var> are:
 
 <ol>
   <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
   <li>
     If the platform supports displaying media artwork, <a>fetch</a>
-    <var>media session</var>'s <a>artwork URL</a>, if <a>artwork URL</a> is set.
+    <var>media session metadata</var>'s <a>artwork URL</a>, if <a>artwork
+    URL</a> is set.
 
     Then, <a>in parallel</a>:
 
@@ -620,9 +627,10 @@ session</var> are:
         resource as image.
       </li>
       <li>
-        If the image format is supported, set <var>media session</var>'s
-        <a>artwork resource</a> to the decoded resource. (Otherwise
-        <var>media session</var> has no <a>artwork resource</a>.)
+        If the image format is supported, set <var>media session
+        metadata</var>'s <a>artwork resource</a> to the decoded resource.
+        (Otherwise <var>media session metadata</var> has no <a>artwork
+        resource</a>.)
       </li>
     </ol>
   </li>
@@ -1056,7 +1064,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 interface MediaSession {
   readonly attribute MediaRemoteControls? controls;
 
-  void setMetadata(MediaMetadata metadata);
+  readonly attribute MediaMetadata? metadata;
 
   void release();
 };
@@ -1066,13 +1074,6 @@ enum MediaSessionKind {
   "transient",
   "transient-solo",
   "ambient"
-};
-
-dictionary MediaMetadata {
-  DOMString title = "";
-  DOMString artist = "";
-  DOMString album = "";
-  USVString artwork;
 };
 </pre>
 
@@ -1140,81 +1141,19 @@ value"><code>content</code></a>&quot, then this attribute should return null.
 
 <dl class=domintro>
   <dt>
-    <code><var>session</var> . {{MediaSession/setMetadata(metadata)}}</code>
+    <code><var>session</var> . {{MediaSession/metadata}}</code>
   </dt>
   <dd>
-    Provides the user agent with meta data to use when a <a>media session</a> is
-    showing media control interfaces (e.g. in an OS-level notification area or
-    on a lock screen).
-
-    The <var>metadata</var> argument allows for setting a <a>media session</a>'s
-    current meta data via object members. These are the object members that can
-    be used:
-
-    <dl>
-      <dt>
-        {{MediaMetadata/title}}
-      </dt>
-      <dd>
-        The <a lt="session title">title</a> to display for the <a>media
-        session</a>, if any.
-      </dd>
-      <dt>
-        {{MediaMetadata/artist}}
-      </dt>
-      <dd>
-        The <a>artist name</a> to display for the <a>media session</a>, if any.
-      </dd>
-      <dt>
-        {{MediaMetadata/album}}
-      </dt>
-      <dd>
-        The <a>album name</a> to display for the <a>media session</a>, if any.
-      </dd>
-      <dt>
-        {{MediaMetadata/artwork}}
-      </dt>
-      <dd>
-        The <a>artwork URL</a> for an image resource to display for the <a>media
-        session</a>, if any.
-      </dd>
-    </dl>
+    Returns the <a>media metadata controller</a> assigned to the <a>media
+    session</a>, if any.
   </dd>
 </dl>
 
-When the <dfn method for="MediaSession"><code>setMetadata(metadata)</code></dfn>
-method is invoked, the user agent must run the following steps:
-
-<ol>
-  <li>
-    Let <var>media session</var> be the current <a>media session</a>.
-  </li>
-  <li>
-    Let <var>baseURL</var> be the <a>API base URL</a> specified by the <a>entry
-    settings object</a>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a lt="session title">title</a> to
-    <var>metadata</var>'s <code>title</code>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>artist name</a> to <var>metadata</var>'s
-    <code>artist</code>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>album name</a> to <var>metadata</var>'s
-    <code>album</code>.
-  </li>
-  <li>
-    If <var>metadata</var>'s <code>artwork</code> is present,
-    <a lt="url parser">parse</a> it using <var>baseURL</var>, and if that does
-    not return failure, set <var>media session</var>'s <a>artwork URL</a> to the
-    return value. (Otherwise <a>artwork URL</a> is not set.)
-  </li>
-  <li>
-    Run the <a>fetch steps</a> for <var>media session</var>.
-  </li>
-</ol>
+The <dfn attribute for="MediaSession" lt="metadata"><code>metadata</code></dfn>
+attribute must return the <a>media metadata controller</a> that was assigned to
+a <a>media session</a> when it was created. If <a>media session</a>'s <a>current
+media session type</a> is not &quot;<a lt="content attribute
+value"><code>content</code></a>&quot, then this attribute should return null.
 
 <dl class=domintro>
   <dt>
@@ -1580,6 +1519,105 @@ processing model described above:
     </tr>
   </tbody>
 </table>
+
+<h3 id="the-mediametadata-interface">The {{MediaMetadata}} interface</h3>
+
+<pre class="idl">
+interface MediaMetadata {
+  [TreatNullAs=EmptyString] attribute DOMString title;
+  [TreatNullAs=EmptyString] attribute DOMString artist;
+  [TreatNullAs=EmptyString] attribute DOMString album;
+  attribute USVString artwork;
+};
+</pre>
+
+Objects implementing the {{MediaMetadata}} interface are simply known as
+<dfn>media session metadata</dfn> and provides the user agent with meta data to
+use when a <a>media session</a> is showing media control interfaces (e.g. in an
+OS-level notification area or on a lock screen).
+
+<a>Media session metadata</a> <em>can</em> consist of <dfn lt="session
+title">title</dfn>, <dfn>artist name</dfn>, <dfn>album name</dfn>, <dfn>artwork
+URL</dfn> and <dfn>artwork resource</dfn>.
+
+<h4 id="mediametadata-object-members">Object members</h4>
+
+<dl class=domintro>
+  <dt>
+    <code><var>metadata</var> . {{MediaMetadata/title}}</code>
+  </dt>
+  <dd>
+    The <a lt="session title">title</a> to display for the <a>media session</a>,
+    if any.
+  </dd>
+  <dt>
+    <code><var>metadata</var> . {{MediaMetadata/artist}}</code>
+  </dt>
+  <dd>
+    The <a>artist name</a> to display for the <a>media session</a>, if any.
+  </dd>
+  <dt>
+    <code><var>metadata</var> . {{MediaMetadata/album}}</code>
+  </dt>
+  <dd>
+    The <a>album name</a> to display for the <a>media session</a>, if any.
+  </dd>
+  <dt>
+    <code><var>metadata</var> . {{MediaMetadata/artwork}}</code>
+  </dt>
+  <dd>
+    The <a>artwork URL</a> for an image resource to display for the <a>media
+    session</a>, if any.
+  </dd>
+</dl>
+
+The <dfn attribute for="MediaMetadata" lt="title"><code>title</code></dfn>
+attribute is a title to display within user interfaces when the <a>media
+session</a> is <code><a lt="active media session state">active</a></code>. On
+getting, the {{MediaMetadata/title}} attribute must return <a>media session
+metadata</a>'s <a lt="session title">title</a>. On setting, let <a>media session
+metadata</a>'s <a lt="session title">title</a> be the new value.
+
+The <dfn attribute for="MediaMetadata" lt="artist"><code>artist</code></dfn>
+attribute is an artist name to display within user interfaces when the <a>media
+session</a> is <code><a lt="active media session state">active</a></code>. On
+getting, the {{MediaMetadata/artist}} attribute must return <a>media session
+metadata</a>'s <a>artist name</a>. On setting, let <a>media session
+metadata</a>'s <a>artist name</a> be the new value.
+
+The <dfn attribute for="MediaMetadata" lt="album"><code>album</code></dfn>
+attribute is an album name to display within user interfaces when the <a>media
+session</a> is <code><a lt="active media session state">active</a></code>. On
+getting, the {{MediaMetadata/album}} attribute must return <a>media session
+metadata</a>'s <a>album name</a>. On setting, let <a>media session
+metadata</a>'s <a>album name</a> be the new value.
+
+The <dfn attribute for="MediaMetadata" lt="artwork"><code>artwork</code></dfn>
+attribute is an URL pointing to an image to display within user interfaces when
+the <a>media session</a> is <code><a lt="active media session
+state">active</a></code>. On getting, the {{MediaMetadata/artwork}} attribute
+must return <a>media session metadata</a>'s <a>artwork URL</a>. On setting, the
+user agent must run the following steps:
+
+<ol>
+  <li>
+    Let <var>media session metadata</var> be the current <a>media session
+    metadata</a>.
+  </li>
+  <li>
+    Let <var>baseURL</var> be the <a>API base URL</a> specified by the <a>entry
+    settings object</a>.
+  </li>
+  <li>
+    If <code>artwork</code> is present,
+    <a lt="url parser">parse</a> it using <var>baseURL</var>, and if that does
+    not return failure, set <var>media session metadata</var>'s <a>artwork
+    URL</a> to the return value. (Otherwise <a>artwork URL</a> is not set.)
+  </li>
+  <li>
+    Run the <a>fetch steps</a> for <var>media session metadata</var>.
+  </li>
+</ol>
 
 <h2 id="media-element-extensions">Media element extensions</h2>
 
@@ -2007,19 +2045,18 @@ meta data can be added at any time to update these interfaces:
 <pre class="lang-javascript">
 // Set some media session metadata
 // to display to the user
-mySession.setMetadata({
-  title: "Demo Track 1",
-  artwork: "/resources/cover1.png"
-});
+if (mySession.metadata) {
+  mySession.metadata.title = "Track 1";
+  mySession.metadata.artwork = "/resources/albumcover.png";
+}
 
 // ... time passes ...
 
 // Change the media session metadata
 // to display to the user
-mySession.setMetadata({
-  title: "Demo Track 2",
-  artwork: "/resources/cover2.png"
-});
+if (mySession.metadata) {
+  mySession.metadata.title = "Track 2";
+}
   </pre>
 
 <h4 id="example-responding-to-media-remote-control-events">Responding to media
@@ -2058,10 +2095,8 @@ if (mySession.controls) {
       myAudio.play();
 
       // Set appropriate meta data for track 2
-      mySession.setMetadata({
-        title: "Demo Track 2",
-        artwork: "/resources/cover2.png"
-      });
+      mySession.metadata.title = "Demo Track 2";
+      mySession.metadata.artwork = "/resources/cover2.png";
     }
   }, false);
 
@@ -2072,10 +2107,8 @@ if (mySession.controls) {
       myAudio.play();
 
       // Set appropriate meta data for track 1
-      mySession.setMetadata({
-        title: "Demo Track 1",
-        artwork: "/resources/cover1.png"
-      });
+      mySession.metadata.title = "Demo Track 1";
+      mySession.metadata.artwork = "/resources/cover1.png";
     }
   }, false);
 }
