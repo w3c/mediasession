@@ -866,9 +866,24 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
   
   
     <li>
-    If the platform supports displaying media artwork, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>
-    <var>media session metadata</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a>, if <a data-link-type="dfn" href="#artwork-url">artwork
-    URL</a> is set.
+    If <var>media session metadata</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a> is empty, then
+    terminate these steps.
+  
+  
+    <li>
+    If the platform supports displaying media artwork, let <var>request</var> be
+    a new <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> whose method is "<code>GET</code>",
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-url">url</a> is <var>media session metadata</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a>,
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-context">context</a> is "<code>image</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-context-frame-type">context frame type</a>
+    is "<code>none</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-origin">origin</a> is the current
+    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>’s <a href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>,
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force <code>Origin</code> header flag</a> is set, and referrer is <var>no
+    referrer</var>. Otherwise, if the platform does not support displaying media
+    artwork, terminate these steps.
+  
+  
+    <li>
+    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch">Fetch</a> <var>request</var>.
 
 
      <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
@@ -2836,10 +2851,16 @@ title, <a href="#session-title">5.3</a>
     </ul>
    <li><a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> defines the following terms:
     <ul>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-context">context</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-context-frame-type">context frame type</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>
+     <li><a href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force origin header flag</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-internal-response">internal response</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-origin">origin</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request">request</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-response">response</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-response-type">response type</a>
+     <li><a href="https://fetch.spec.whatwg.org/#concept-request-url">url</a>
     </ul>
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>

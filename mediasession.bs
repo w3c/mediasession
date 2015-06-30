@@ -82,9 +82,17 @@ urlPrefix: https://url.spec.whatwg.org/;
 urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
     type: dfn; urlPrefix: #concept-
         text: fetch
+        text: request
+        text: context; url: request-context
+        text: context frame type; url: request-context-frame-type
         text: internal response
+        text: origin; url: request-origin
+        text: referrer; url: request-referrer
         text: response
         text: response type
+        text: url; url: request-url
+    type: dfn;
+        text: force Origin header flag
 urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
     type: interface
         text: AudioContext
@@ -611,9 +619,23 @@ The <dfn>fetch steps</dfn> for a given set of <a>media session metadata</a>
 <ol>
   <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
   <li>
-    If the platform supports displaying media artwork, <a>fetch</a>
-    <var>media session metadata</var>'s <a>artwork URL</a>, if <a>artwork
-    URL</a> is set.
+    If <var>media session metadata</var>'s <a>artwork URL</a> is empty, then
+    terminate these steps.
+  </li>
+  <li>
+    If the platform supports displaying media artwork, let <var>request</var> be
+    a new <a>request</a> whose method is &quot;<code>GET</code>&quot;,
+    <a>url</a> is <var>media session metadata</var>'s <a>artwork URL</a>,
+    <a>context</a> is &quot;<code>image</code>&quot;, <a>context frame type</a>
+    is &quot;<code>none</code>&quot;, <a>origin</a> is the current
+    <a>entry settings object</a>'s <a
+    href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>,
+    <a>force <code>Origin</code> header flag</a> is set, and referrer is <var>no
+    referrer</var>. Otherwise, if the platform does not support displaying media
+    artwork, terminate these steps.
+  </li>
+  <li>
+    <a>Fetch</a> <var>request</var>.
 
     Then, <a>in parallel</a>:
 
