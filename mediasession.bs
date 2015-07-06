@@ -5,7 +5,7 @@ H1: Media Session
 Shortname: mediasession
 Status: LS
 No Editor: true
-Logo: https://resources.whatwg.org/logo.svg
+Logo: https://resources.whatwg.org/logo-mediasession.svg
 Abstract: This specification enables web developers to obtain different levels
 Abstract: of platform media focus, customize available platform media controls,
 Abstract: and access platform media keys such as hardware keys found on
