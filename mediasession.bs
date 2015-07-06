@@ -1640,22 +1640,11 @@ elements</a> whose <a>current media session</a> is that <a>media session</a>.
 <pre class="idl">
 partial interface HTMLMediaElement {
   // media session
-  attribute DOMString kind;
   attribute MediaSession? session;
 };
 </pre>
 
 <dl class=domintro>
-  <dt>
-    <code><var>media</var> . {{HTMLMediaElement/kind}}</code>
-  </dt>
-  <dd>
-    Returns the category the given media falls into. The <a lt="media session
-    categories">possible media categories</a> are defined above.
-
-    Setting, changing or removing this attribute updates the <a>media
-    element</a>'s {{HTMLMediaElement/session}} attribute.
-  </dd>
   <dt>
     <code><var>media</var> . {{HTMLMediaElement/session}}</code> [ = <code>
     session</code> ]
@@ -1664,34 +1653,9 @@ partial interface HTMLMediaElement {
     Returns the <a>current media session</a> for the <a>media element</a>, if
     any; returns null otherwise.
 
-    Can be set, to set an explicit {{MediaSession}}. Doing so updates the
-    <a>media element</a>'s {{HTMLMediaElement/kind}} attribute.
+    Can be set, to set an explicit {{MediaSession}}.
   </dd>
 </dl>
-
-The <dfn attribute for="HTMLMediaElement" lt="kind"><code>kind</code></dfn> IDL
-attribute is intended to provide a hint to the user agent about what the author
-thinks will lead to the best user experience for media playback. The attribute
-may be ignored altogether, for example based on explicit user preferences or
-based on the capabilities of the underlying platform.
-
-The <code>{{HTMLMediaElement/kind}}</code> attribute must
-<a>reflect</a> the <code><a element>video</a></code> and <code><a
-element>audio</a></code> element content attribute of the same name, <a>limited
-to only known values</a>.
-
-When a <a>media element</a>'s {{HTMLMediaElement/kind}} attribute is set,
-changed, or removed the user agent must <a>update media element's media
-session</a> for <a>media element</a>.
-
-A <a>media element</a>'s <code>{{HTMLMediaElement/kind}}</code> attribute can be
-changed at any time even once a <a>media element</a> is <a>potentially
-playing</a>; but it is only read by the user agent at the time that it is set,
-changed or removed. Thus, setting, changing, or removing the
-<code>{{HTMLMediaElement/kind}}</code> attribute once a
-<a>media element</a> is <a>potentially playing</a> does not dynamically change
-the <a>media session</a> to which the <a>media element</a> belongs until the
-<a>media session invocation algorithm</a> is subsequently re-run.
 
 The <dfn attribute for="HTMLMediaElement"
 lt="session"><code>session</code></dfn> attribute on a <a>media element</a>, on
@@ -1719,12 +1683,6 @@ otherwise. On setting, the user agent must run the following steps:
     null.
   </li>
   <li>
-    If the new value is null, then set the <var>m</var>'s
-    {{HTMLMediaElement/kind}} IDL attribute to the empty string. Otherwise, set
-    <var>m</var>'s {{HTMLMediaElement/kind}} IDL attribute to the value of
-    <a>current media session</a>'s {{MediaSession/kind}} attribute.
-  </li>
-  <li>
     Let <var>new media session</var> be <var>m</var>'s <a>current media
     session</a>.
   </li>
@@ -1746,101 +1704,6 @@ otherwise. On setting, the user agent must run the following steps:
     release algorithm</a> for <var>old media session</var>.
   </li>
 </ol>
-
-<h3 id="assigning-a-media-session-declaratively">Assigning a media session
-declaratively</h3>
-
-The <dfn lt="kind content attribute"><code>kind</code></dfn> content attribute
-on <a>media elements</a> is an <a>enumerated attribute</a>
-and must return the <a>media element</a>'s <a>media session category</a>, if it
-has one, or the empty string otherwise.
-
-When a <a>media element</a> is created with a {{HTMLMediaElement/kind}} content
-attribute, then the user agent must <a>update media element's media session</a>,
-for <a>media element</a>.
-
-When the user agent is to <dfn>update media element's media session</dfn> for a
-given <var>media element</var> it must run the following steps:
-
-<ol>
-  <li>
-    Let <var>media session type</var> be the <var>media element</var>'s
-    {{MediaSession/kind}} attribute's corresponding <a>media session type</a> as
-    defined in the list of
-    <a href="#valid-media-categories">possible media session categories</a>. If
-    no known category match is found, let <var>media session type</var> be
-    <code><a lt="default media state">Default</a></code>.
-  </li>
-  <li>
-    Let <var>media session</var> be null.
-  </li>
-  <li>
-    If <var>media session type</var> is <code><a lt="default media
-    state">Default</a></code>, then set <var>media session</var> to the current
-    <a>top-level browsing context</a>'s <a>media session</a> and set
-    <var>media element</var>'s <a>current media session</a> to this <a>media
-    session</a>. Otherwise, if <var>media session type</var> is the same as
-    <var>media element</var>'s <a>current media session type</a>, then set
-    <var>media session</var> to
-    <var>media element</var>'s <a>current media session</a>. Otherwise, set
-    <var>media session</var> the result of invoking the {{MediaSession(kind)}}
-    constructor passing in the corresponding <a>media session category</a> value
-    of <var>media session type</var> as its <var>kind</var>.
-  </li>
-  <li>
-    If <var>media session type</var> is <code><a lt="default media
-    state">Default</a></code>, then set <var>media element</var>'s
-    {{HTMLMediaElement/session}} attribute to null.
-    <p class="note">
-      <code><a lt="default media state">Default</a></code> <a>media sessions</a>
-      do not expose a {{HTMLMediaElement/session}} attribute but may still
-      maintain an internal <a>current media session</a> reference.
-    </p>
-  </li>
-</ol>
-
-<h4 id="extensions-to-the-video-element">Extensions to the <code><a
-element>video</a></code> element</h4>
-
-<dl class="element">
-  <dt>
-    Additional content attributes:
-  </dt>
-  <dd>
-    <a lt="kind content attribute"><code>kind</code></a> — The type of video
-  </dd>
-</dl>
-
-<div class="example">
-  A <code><a element>video</a></code> element's <code><a lt="kind content
-  attribute">kind</a></code> content attribute can be declared as follows HTML:
-
-  <pre class="lang-markup">
-&lt;video src="short_ping.webm" kind="transient">
-  </pre>
-</div>
-
-<h4 id="extensions-to-the-audio-element">Extensions to the <code><a
-element>audio</a></code> element</h4>
-
-<dl class="element">
-  <dt>
-    Additional content attributes:
-  </dt>
-  <dd>
-    <a lt="kind content attribute"><code>kind</code></a> — The type of audio
-  </dd>
-</dl>
-
-<div class="example">
-  An <code><a element>audio</a></code> element's <code><a lt="kind content
-  attribute">kind</a></code> content attribute can be declared as follows in
-  HTML:
-
-  <pre class="lang-markup">
-&lt;audio src="track1.ogg" kind="content">
-  </pre>
-</div>
 
 <h3 id="media-elements-and-the-media-session-lifecycle">Media elements and the
 media session lifecycle</h3>
@@ -1960,28 +1823,19 @@ steps:
 
 <h4 id="example-setting-up-a-media-session">Setting up a media session</h4>
 
-An <code><a element>audio</a></code> element's <code><a lt="kind content
-attribute">kind</a></code> content attribute can be declared as follows in HTML
-to associate that <code><a element>audio</a></code> element to a <a>media
-session</a>:
-
-<pre class="lang-markup">
-&lt;audio src=track1.mp3 kind=content autoplay>
-</pre>
-
 As both <code><a element>audio</a></code> and <code><a element>video</a></code>
 elements implement the {{HTMLMediaElement}} interface, these element's
-{{HTMLMediaElement/kind}} attribute can also be set via JavaScript to associate
+{{HTMLMediaElement/session}} attribute can be set via JavaScript to associate
 that <code><a element>audio</a></code> or <code><a element>video</a></code>
 element to a <a>media session</a>:
 
 <pre class="lang-javascript">
 var myAudio = document.createElement("audio");
-myAudio.src = "music.mp3";
+myAudio.src = "podcast.mp3";
 
-console.log(myAudio.session) // --> null
-myAudio.kind = "content";
-console.log(myAudio.session) // --> [object MediaSession]
+var mySession = new MediaSession("content");
+
+myAudio.session = mySession;
 
 myAudio.play(); // Go!
   </pre>
@@ -2012,7 +1866,7 @@ element>audio</a></code> or <code><a element>video</a></code>
 elements. As both <code><a element>audio</a></code> and <code><a
 element>video</a></code>
 elements implement the {{HTMLMediaElement}} interface, these element's
-{{HTMLMediaElement/kind}} attribute can be set via JavaScript:
+{{HTMLMediaElement/session}} attribute can be set via JavaScript:
 
 <pre class="lang-javascript">
 var audioCtx = new AudioContext();
@@ -2022,9 +1876,7 @@ var destinationNode = audioCtx.createMediaStreamDestination();
 var myAudio = document.createElement("audio");
 myAudio.srcObject = destinationNode.stream;
 
-console.log(myAudio.session) // --> null
-myAudio.kind = "transient-solo";
-console.log(myAudio.session) // --> [object MediaSession]
+myAudio.session = new MediaSession("transient-solo");
 
 myAudio.play(); // Go!
   </pre>

@@ -88,7 +88,7 @@
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-07-01">1 July 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-07-06">6 July 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -164,28 +164,22 @@ interface</span></a>
      <ul class="toc">
       <li><a href="#extensions-to-the-htmlmediaelement-interface"><span class="secno">6.1</span> <span class="content">Extensions to the
 <code class="idl"><span>HTMLMediaElement</span></code> interface</span></a>
-      <li><a href="#assigning-a-media-session-declaratively"><span class="secno">6.2</span> <span class="content">Assigning a media session
-declaratively</span></a>
-       <ul class="toc">
-        <li><a href="#extensions-to-the-video-element"><span class="secno">6.2.1</span> <span class="content">Extensions to the <code><span>video</span></code> element</span></a>
-        <li><a href="#extensions-to-the-audio-element"><span class="secno">6.2.2</span> <span class="content">Extensions to the <code><span>audio</span></code> element</span></a>
-       </ul>
-      <li><a href="#media-elements-and-the-media-session-lifecycle"><span class="secno">6.3</span> <span class="content">Media elements and the
+      <li><a href="#media-elements-and-the-media-session-lifecycle"><span class="secno">6.2</span> <span class="content">Media elements and the
 media session lifecycle</span></a>
        <ul class="toc">
-        <li><a href="#activating-a-media-session-from-a-media-element"><span class="secno">6.3.1</span> <span class="content">Activating a media
+        <li><a href="#activating-a-media-session-from-a-media-element"><span class="secno">6.2.1</span> <span class="content">Activating a media
 session from a media element</span></a>
-        <li><a href="#interrupting-a-media-session-from-a-media-element"><span class="secno">6.3.2</span> <span class="content">Interrupting a media
+        <li><a href="#interrupting-a-media-session-from-a-media-element"><span class="secno">6.2.2</span> <span class="content">Interrupting a media
 session from a media element</span></a>
-        <li><a href="#releasing-a-media-session-from-a-media-element"><span class="secno">6.3.3</span> <span class="content">Releasing a media
+        <li><a href="#releasing-a-media-session-from-a-media-element"><span class="secno">6.2.3</span> <span class="content">Releasing a media
 session from a media element</span></a>
        </ul>
-      <li><a href="#examples"><span class="secno">6.4</span> <span class="content">Examples</span></a>
+      <li><a href="#examples"><span class="secno">6.3</span> <span class="content">Examples</span></a>
        <ul class="toc">
-        <li><a href="#example-setting-up-a-media-session"><span class="secno">6.4.1</span> <span class="content">Setting up a media session</span></a>
-        <li><a href="#example-setting-media-session-meta-data"><span class="secno">6.4.2</span> <span class="content">Setting media session meta
+        <li><a href="#example-setting-up-a-media-session"><span class="secno">6.3.1</span> <span class="content">Setting up a media session</span></a>
+        <li><a href="#example-setting-media-session-meta-data"><span class="secno">6.3.2</span> <span class="content">Setting media session meta
 data</span></a>
-        <li><a href="#example-responding-to-media-remote-control-events"><span class="secno">6.4.3</span> <span class="content">Responding to media
+        <li><a href="#example-responding-to-media-remote-control-events"><span class="secno">6.3.3</span> <span class="content">Responding to media
 remote control events</span></a>
        </ul>
      </ul>
@@ -2181,26 +2175,12 @@ elements</a> whose <a data-link-type="dfn" href="#current-media-session">current
 
    <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
   // media session
-  attribute DOMString <a class="idl-code" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 </pre>
 
 
    <dl class="domintro">
-  
-    <dt>
-    <code><var>media</var> . <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code>
-  
-  
-    <dd>
-    Returns the category the given media falls into. The <a data-link-type="dfn" href="#media-session-category">possible media categories</a> are defined above.
-
-
-     <p>Setting, changing or removing this attribute updates the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
-    element</a>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute.</p>
-     
-  
   
     <dt>
     <code><var>media</var> . <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code></code> [ = <code>
@@ -2212,38 +2192,10 @@ elements</a> whose <a data-link-type="dfn" href="#current-media-session">current
     any; returns null otherwise.
 
 
-     <p>Can be set, to set an explicit <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code>. Doing so updates the
-    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute.</p>
+     <p>Can be set, to set an explicit <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code>.</p>
      
   
 </dl>
-
-
-   <p>The <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" id="dom-htmlmediaelement-kind"><code>kind</code><a class="self-link" href="#dom-htmlmediaelement-kind"></a></dfn> IDL
-attribute is intended to provide a hint to the user agent about what the author
-thinks will lead to the best user experience for media playback. The attribute
-may be ignored altogether, for example based on explicit user preferences or
-based on the capabilities of the underlying platform.</p>
-
-
-   <p>The <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> attribute must
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a> the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element content attribute of the same name, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited
-to only known values</a>.</p>
-
-
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute is set,
-changed, or removed the user agent must <a data-link-type="dfn" href="#update-media-elements-media-session">update media element’s media
-session</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>.</p>
-
-
-   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> attribute can be
-changed at any time even once a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially
-playing</a>; but it is only read by the user agent at the time that it is set,
-changed or removed. Thus, setting, changing, or removing the
-<code><code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code></code> attribute once a
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a> does not dynamically change
-the <a data-link-type="dfn" href="#media-session">media session</a> to which the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> belongs until the
-<a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is subsequently re-run.</p>
 
 
    <p>The <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" id="dom-htmlmediaelement-session"><code>session</code><a class="self-link" href="#dom-htmlmediaelement-session"></a></dfn> attribute on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, on
@@ -2278,13 +2230,6 @@ otherwise. On setting, the user agent must run the following steps:</p>
   
   
     <li>
-    If the new value is null, then set the <var>m</var>’s
-    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute to the empty string. Otherwise, set
-    <var>m</var>’s <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> IDL attribute to the value of
-    <a data-link-type="dfn" href="#current-media-session">current media session</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute.
-  
-  
-    <li>
     Let <var>new media session</var> be <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media
     session</a>.
   
@@ -2311,119 +2256,11 @@ otherwise. On setting, the user agent must run the following steps:</p>
 </ol>
 
 
-   <h3 class="heading settled" data-level="6.2" id="assigning-a-media-session-declaratively"><span class="secno">6.2. </span><span class="content">Assigning a media session
-declaratively</span><a class="self-link" href="#assigning-a-media-session-declaratively"></a></h3>
-
-
-   <p>The <dfn data-dfn-type="dfn" data-lt="kind content attribute" data-noexport="" id="kind-content-attribute"><code>kind</code><a class="self-link" href="#kind-content-attribute"></a></dfn> content attribute
-on <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
-and must return the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#media-session-category">media session category</a>, if it
-has one, or the empty string otherwise.</p>
-
-
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is created with a <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> content
-attribute, then the user agent must <a data-link-type="dfn" href="#update-media-elements-media-session">update media element’s media session</a>,
-for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>.</p>
-
-
-   <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="update-media-elements-media-session">update media element’s media session<a class="self-link" href="#update-media-elements-media-session"></a></dfn> for a
-given <var>media element</var> it must run the following steps:</p>
-
-
-   <ol>
-  
-    <li>
-    Let <var>media session type</var> be the <var>media element</var>’s
-    <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> attribute’s corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> as
-    defined in the list of
-    <a href="#valid-media-categories">possible media session categories</a>. If
-    no known category match is found, let <var>media session type</var> be
-    <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
-  
-  
-    <li>
-    Let <var>media session</var> be null.
-  
-  
-    <li>
-    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, then set <var>media session</var> to the current
-    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="#media-session">media session</a> and set
-    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to this <a data-link-type="dfn" href="#media-session">media
-    session</a>. Otherwise, if <var>media session type</var> is the same as
-    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a>, then set
-    <var>media session</var> to
-    <var>media element</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>. Otherwise, set
-    <var>media session</var> the result of invoking the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-mediasession">MediaSession(kind)</a></code>
-    constructor passing in the corresponding <a data-link-type="dfn" href="#media-session-category">media session category</a> value
-    of <var>media session type</var> as its <var>kind</var>.
-  
-  
-    <li>
-    If <var>media session type</var> is <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, then set <var>media element</var>’s
-    <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute to null.
-    
-     <p class="note" role="note">
-      <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a>
-      do not expose a <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute but may still
-      maintain an internal <a data-link-type="dfn" href="#current-media-session">current media session</a> reference.
-    </p>
-     
-  
-</ol>
-
-
-   <h4 class="heading settled" data-level="6.2.1" id="extensions-to-the-video-element"><span class="secno">6.2.1. </span><span class="content">Extensions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element</span><a class="self-link" href="#extensions-to-the-video-element"></a></h4>
-
-
-   <dl class="element">
-  
-    <dt>
-    Additional content attributes:
-  
-  
-    <dd>
-    <a data-link-type="dfn" href="#kind-content-attribute"><code>kind</code></a> — The type of video
-  
-</dl>
-
-
-   <div class="example" id="example-52af20c3"><a class="self-link" href="#example-52af20c3"></a>
-  A <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code> element’s <code><a data-link-type="dfn" href="#kind-content-attribute">kind</a></code> content attribute can be declared as follows HTML:
-
-  
-    <pre class="lang-markup highlight"><span class="nt">&lt;video</span> <span class="na">src=</span><span class="s">"short_ping.webm"</span> <span class="na">kind=</span><span class="s">"transient"</span><span class="nt">></span></pre>
-</div>
-
-
-   <h4 class="heading settled" data-level="6.2.2" id="extensions-to-the-audio-element"><span class="secno">6.2.2. </span><span class="content">Extensions to the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element</span><a class="self-link" href="#extensions-to-the-audio-element"></a></h4>
-
-
-   <dl class="element">
-  
-    <dt>
-    Additional content attributes:
-  
-  
-    <dd>
-    <a data-link-type="dfn" href="#kind-content-attribute"><code>kind</code></a> — The type of audio
-  
-</dl>
-
-
-   <div class="example" id="example-623b50f0"><a class="self-link" href="#example-623b50f0"></a>
-  An <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element’s <code><a data-link-type="dfn" href="#kind-content-attribute">kind</a></code> content attribute can be declared as follows in
-  HTML:
-
-  
-    <pre class="lang-markup highlight"><span class="nt">&lt;audio</span> <span class="na">src=</span><span class="s">"track1.ogg"</span> <span class="na">kind=</span><span class="s">"content"</span><span class="nt">></span></pre>
-</div>
-
-
-   <h3 class="heading settled" data-level="6.3" id="media-elements-and-the-media-session-lifecycle"><span class="secno">6.3. </span><span class="content">Media elements and the
+   <h3 class="heading settled" data-level="6.2" id="media-elements-and-the-media-session-lifecycle"><span class="secno">6.2. </span><span class="content">Media elements and the
 media session lifecycle</span><a class="self-link" href="#media-elements-and-the-media-session-lifecycle"></a></h3>
 
 
-   <h4 class="heading settled" data-level="6.3.1" id="activating-a-media-session-from-a-media-element"><span class="secno">6.3.1. </span><span class="content">Activating a media
+   <h4 class="heading settled" data-level="6.2.1" id="activating-a-media-session-from-a-media-element"><span class="secno">6.2.1. </span><span class="content">Activating a media
 session from a media element</span><a class="self-link" href="#activating-a-media-session-from-a-media-element"></a></h4>
 
 
@@ -2462,7 +2299,7 @@ in <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded
 
 
 
-   <h4 class="heading settled" data-level="6.3.2" id="interrupting-a-media-session-from-a-media-element"><span class="secno">6.3.2. </span><span class="content">Interrupting a media
+   <h4 class="heading settled" data-level="6.2.2" id="interrupting-a-media-session-from-a-media-element"><span class="secno">6.2.2. </span><span class="content">Interrupting a media
 session from a media element</span><a class="self-link" href="#interrupting-a-media-session-from-a-media-element"></a></h4>
 
 
@@ -2502,7 +2339,7 @@ paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, the 
 method.</p>
 
 
-   <h4 class="heading settled" data-level="6.3.3" id="releasing-a-media-session-from-a-media-element"><span class="secno">6.3.3. </span><span class="content">Releasing a media
+   <h4 class="heading settled" data-level="6.2.3" id="releasing-a-media-session-from-a-media-element"><span class="secno">6.2.3. </span><span class="content">Releasing a media
 session from a media element</span><a class="self-link" href="#releasing-a-media-session-from-a-media-element"></a></h4>
 
 
@@ -2549,36 +2386,28 @@ steps:</p>
 </ol>
 
 
-   <h3 class="heading settled" data-level="6.4" id="examples"><span class="secno">6.4. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h3>
+   <h3 class="heading settled" data-level="6.3" id="examples"><span class="secno">6.3. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h3>
 
 
    <p><em>This section and all its subsections are non-normative.</em></p>
 
 
-   <h4 class="heading settled" data-level="6.4.1" id="example-setting-up-a-media-session"><span class="secno">6.4.1. </span><span class="content">Setting up a media session</span><a class="self-link" href="#example-setting-up-a-media-session"></a></h4>
-
-
-   <p>An <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element’s <code><a data-link-type="dfn" href="#kind-content-attribute">kind</a></code> content attribute can be declared as follows in HTML
-to associate that <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> element to a <a data-link-type="dfn" href="#media-session">media
-session</a>:</p>
-
-
-   <pre class="lang-markup highlight"><span class="nt">&lt;audio</span> <span class="na">src=</span><span class="s">track1.mp3</span> <span class="na">kind=</span><span class="s">content</span> <span class="na">autoplay</span><span class="nt">></span></pre>
+   <h4 class="heading settled" data-level="6.3.1" id="example-setting-up-a-media-session"><span class="secno">6.3.1. </span><span class="content">Setting up a media session</span><a class="self-link" href="#example-setting-up-a-media-session"></a></h4>
 
 
    <p>As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
 elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
-<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can also be set via JavaScript to associate
+<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute can be set via JavaScript to associate
 that <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
 element to a <a data-link-type="dfn" href="#media-session">media session</a>:</p>
 
 
    <pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">myAudio</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"audio"</span><span class="p">);</span>
-<span class="nx">myAudio</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"music.mp3"</span><span class="p">;</span>
+<span class="nx">myAudio</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"podcast.mp3"</span><span class="p">;</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myAudio</span><span class="p">.</span><span class="nx">session</span><span class="p">)</span> <span class="c1">// --> null</span>
-<span class="nx">myAudio</span><span class="p">.</span><span class="nx">kind</span> <span class="o">=</span> <span class="s2">"content"</span><span class="p">;</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myAudio</span><span class="p">.</span><span class="nx">session</span><span class="p">)</span> <span class="c1">// --> [object MediaSession]</span>
+<span class="kd">var</span> <span class="nx">mySession</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MediaSession</span><span class="p">(</span><span class="s2">"content"</span><span class="p">);</span>
+
+<span class="nx">myAudio</span><span class="p">.</span><span class="nx">session</span> <span class="o">=</span> <span class="nx">mySession</span><span class="p">;</span>
 
 <span class="nx">myAudio</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span> <span class="c1">// Go!</span></pre>
 
@@ -2606,7 +2435,7 @@ the same <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSes
    <p>An <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object <a data-link-type="biblio" href="#biblio-webaudio">[WEBAUDIO]</a> can be rendered via <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
 elements. As both <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a></code> and <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a></code>
 elements implement the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface, these element’s
-<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-kind">kind</a></code> attribute can be set via JavaScript:</p>
+<code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code> attribute can be set via JavaScript:</p>
 
 
    <pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">audioCtx</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AudioContext</span><span class="p">();</span>
@@ -2616,9 +2445,7 @@ elements implement the <code class="idl"><a data-link-type="idl" href="https://h
 <span class="kd">var</span> <span class="nx">myAudio</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"audio"</span><span class="p">);</span>
 <span class="nx">myAudio</span><span class="p">.</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">destinationNode</span><span class="p">.</span><span class="nx">stream</span><span class="p">;</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myAudio</span><span class="p">.</span><span class="nx">session</span><span class="p">)</span> <span class="c1">// --> null</span>
-<span class="nx">myAudio</span><span class="p">.</span><span class="nx">kind</span> <span class="o">=</span> <span class="s2">"transient-solo"</span><span class="p">;</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myAudio</span><span class="p">.</span><span class="nx">session</span><span class="p">)</span> <span class="c1">// --> [object MediaSession]</span>
+<span class="nx">myAudio</span><span class="p">.</span><span class="nx">session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MediaSession</span><span class="p">(</span><span class="s2">"transient-solo"</span><span class="p">);</span>
 
 <span class="nx">myAudio</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span> <span class="c1">// Go!</span></pre>
 
@@ -2632,7 +2459,7 @@ elements implement the <code class="idl"><a data-link-type="idl" href="https://h
 </p>
 
 
-   <h4 class="heading settled" data-level="6.4.2" id="example-setting-media-session-meta-data"><span class="secno">6.4.2. </span><span class="content">Setting media session meta
+   <h4 class="heading settled" data-level="6.3.2" id="example-setting-media-session-meta-data"><span class="secno">6.3.2. </span><span class="content">Setting media session meta
 data</span><a class="self-link" href="#example-setting-media-session-meta-data"></a></h4>
 
 
@@ -2659,7 +2486,7 @@ meta data can be added at any time to update these interfaces:</p>
 <span class="p">});</span></pre>
 
 
-   <h4 class="heading settled" data-level="6.4.3" id="example-responding-to-media-remote-control-events"><span class="secno">6.4.3. </span><span class="content">Responding to media
+   <h4 class="heading settled" data-level="6.3.3" id="example-responding-to-media-remote-control-events"><span class="secno">6.3.3. </span><span class="content">Responding to media
 remote control events</span><a class="self-link" href="#example-responding-to-media-remote-control-events"></a></h4>
 
 
@@ -2788,9 +2615,7 @@ participants, <a href="#active-audio_producing-participants">4.3</a>
     <ul>
      <li>argument for MediaSession/MediaSession(kind), <a href="#dom-mediasession-mediasession-kind-kind">5.1</a>
      <li>attribute for MediaSession, <a href="#dom-mediasession-kind">5.1.3</a>
-     <li>attribute for HTMLMediaElement, <a href="#dom-htmlmediaelement-kind">6.1</a>
     </ul>
-   <li>kind content attribute, <a href="#kind-content-attribute">6.2</a>
    <li>MediaMetadata, <a href="#dictdef-mediametadata">5.1</a>
    <li>media remote controller, <a href="#media-remote-controller">4</a>
    <li>MediaRemoteControls, <a href="#mediaremotecontrols">5.2</a>
@@ -2815,11 +2640,11 @@ type, <a href="#media-session-type">4.2</a>
    <li>onseekforward, <a href="#dom-mediaremotecontrols-onseekforward">5.2.2</a>
    <li>participating media elements, <a href="#participating-media-elements">6</a>
    <li>pause, <a href="#pause">4.3</a>
-   <li>pause a media element, <a href="#pause-a-media-element">6.3.2</a>
+   <li>pause a media element, <a href="#pause-a-media-element">6.2.2</a>
    <li>previousTrackEnabled, <a href="#dom-mediaremotecontrols-previoustrackenabled">5.2.1</a>
    <li>release(), <a href="#dom-mediasession-release">5.1.3</a>
    <li>release media element from its media
-session, <a href="#release-media-element-from-its-media-session">6.3.3</a>
+session, <a href="#release-media-element-from-its-media-session">6.2.3</a>
    <li>seekBackwardEnabled, <a href="#dom-mediaremotecontrols-seekbackwardenabled">5.2.1</a>
    <li>seekForwardEnabled, <a href="#dom-mediaremotecontrols-seekforwardenabled">5.2.1</a>
    <li>session, <a href="#dom-htmlmediaelement-session">6.1</a>
@@ -2834,8 +2659,7 @@ session, <a href="#release-media-element-from-its-media-session">6.3.3</a>
    <li>transient solo media state, <a href="#transient-solo-media-state">4.2</a>
    <li>unduck, <a href="#unduck">4.3</a>
    <li>unpause, <a href="#unpause">4.3</a>
-   <li>unpause a media element, <a href="#unpause-a-media-element">6.3.2</a>
-   <li>update media element’s media session, <a href="#update-media-elements-media-session">6.2</a></ul>
+   <li>unpause a media element, <a href="#unpause-a-media-element">6.2.2</a></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
    <li><a data-link-type="biblio" href="#biblio-dom">[dom]</a> defines the following terms:
@@ -2869,13 +2693,11 @@ session, <a href="#release-media-element-from-its-media-session">6.3.3</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-manipulation-task-source">dom manipulation task source</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">ended playback</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#enumerated-attribute">enumerated attribute</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal pause steps</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#limited-to-only-known-values">limited to only known values</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">media element load algorithm</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-pause">pause</a>
@@ -2883,10 +2705,8 @@ session, <a href="#release-media-element-from-its-media-session">6.3.3</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-play">play</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#potentially-playing">potentially playing</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#reflect">reflect</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#remove-an-element-from-a-document">remove an element from a document</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#task">task</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source">task source</a>
@@ -2970,7 +2790,6 @@ interface <a href="#mediaremotecontrols">MediaRemoteControls</a> : <a data-link-
 
 partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
   // media session
-  attribute DOMString <a class="idl-code" data-link-type="attribute" data-type="DOMString " href="#dom-htmlmediaelement-kind">kind</a>;
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 
