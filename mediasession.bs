@@ -95,7 +95,7 @@ urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
 urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
     type: interface
         text: AudioContext
-urlPrefix: https://dom.spec.whatwg.org/; spec: DOM
+urlPrefix: https://dom.spec.whatwg.org/; spec: WHATWG-DOM
     type: interface; urlPrefix: #interface-
         text: EventTarget
         text: Event
