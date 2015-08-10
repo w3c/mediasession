@@ -1625,11 +1625,13 @@ After the {{pause()}} method on a <a>media element</a> has been invoked and that
 <a>media element</a> has a <a>current media session type</a> set to
 <code><a lt="transient media state">Transient</a></code> or <code><a
 lt="transient solo media state">Transient Solo</a></code>, then the user agent
-must run the <a>media session continuation algorithm</a> against all known
-<a>media sessions</a>, passing in each <a>media session</a> as <var>media
-session</var>. Then, for the original <a lt="indefinitely pause">indefinitely
-paused</a> <a>media session</a>, the user agent must immediately run the
-<a>media session release algorithm</a> for its <a>current media session</a>.
+must immediately run the <a>media session release algorithm</a> for <a>media
+element</a>'s
+<a>current media session</a>. Then, for all other <a>media sessions</a>, the
+user agent must run the
+<a>media session continuation algorithm</a>, passing in each <a>media
+session</a>
+as <var>media session</var>.
 
 <div class="note">
   This prevents <code><a lt="transient media state">Transient</a></code> or

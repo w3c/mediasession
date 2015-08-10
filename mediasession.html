@@ -2156,11 +2156,13 @@ pause steps</a>.</p>
 After the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has been invoked and that
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has a <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> set to
 <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the user agent
-must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a> against all known
-<a data-link-type="dfn" href="#media-session">media sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">media session</a> as <var>media
-session</var>. Then, for the original <a data-link-type="dfn" href="#indefinitely-pause">indefinitely
-paused</a> <a data-link-type="dfn" href="#media-session">media session</a>, the user agent must immediately run the
-<a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> for its <a data-link-type="dfn" href="#current-media-session">current media session</a>.
+must immediately run the <a data-link-type="dfn" href="#media-session-release-algorithm">media session release algorithm</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media
+element</a>’s
+<a data-link-type="dfn" href="#current-media-session">current media session</a>. Then, for all other <a data-link-type="dfn" href="#media-session">media sessions</a>, the
+user agent must run the
+<a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a>, passing in each <a data-link-type="dfn" href="#media-session">media
+session</a>
+as <var>media session</var>.
 
 
    <div class="note" role="note">
