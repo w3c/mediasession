@@ -264,7 +264,7 @@ other <a>media sessions</a>. The possible values are as follows:
   </dt>
   <dd>
     The <a>media session</a> is currently suspended from having platform-level
-    media focus and its <a>active audio-producing participants</a> are either <a
+    media focus and its <a>audio-producing participants</a> are either <a
     lt="pause">paused</a> or
     <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>current media
     session type</a>.
@@ -305,7 +305,7 @@ fourth columns.
     <td>
       <ul>
         <li>
-          <a>Indefinitely pauses</a> all other <a lt="active audio-producing
+          <a>Indefinitely pauses</a> all other <a lt="audio-producing
           participants">active</a>
           <code><a lt="default media state">Default</a></code> and <code><a
           lt="content media state">Content</a></code> content when <a
@@ -359,8 +359,7 @@ fourth columns.
     <td>
       <ul>
         <li>
-          <a>Ducks</a> all other <a lt="active audio-producing
-          participants">active</a>
+          <a>Ducks</a> all other <a lt="audio-producing participants">active</a>
           <code><a lt="default media state">Default</a></code>
           and <code><a lt="content media state">Content</a></code> content when
           <a href="#activating-a-media-session">playback begins</a>.
@@ -411,7 +410,7 @@ fourth columns.
     <td>
       <ul>
         <li>
-          <a>Pauses</a> all other <a lt="active audio-producing
+          <a>Pauses</a> all other <a lt="audio-producing
           participants">active</a>
           <code><a lt="default media state">Default</a></code>,
           <code><a lt="content media state">Content</a></code>, <code><a
@@ -539,16 +538,16 @@ platforms.
 </p>
 
 A <a>media session</a> may have one or more <a>audio-producing objects</a>
-attached to it; called its <dfn>audio-producing participants</dfn>. A
-<a>media session</a> must keep a list of <dfn>active audio-producing
-participants</dfn> that consists of zero of more <a>audio-producing objects</a>.
+attached to it; called its <dfn>audio-producing participants</dfn>. A <a>media
+session</a> must keep a list of its <a>audio-producing participants</a> that
+consists of zero of more <a>audio-producing objects</a>.
 
-<a>Audio-producing participants</a> are attached to a
-<a>media session</a> when they are invoked; at that point becoming one of
-<a>media session</a>'s <a>active audio-producing participants</a>.
-<a>Audio-producing participants</a> are detached from a <a>media session</a>
-when they are released; at that point no longer being one of <a>media
-session</a>'s <a>active audio-producing participants</a>.
+<a>Audio-producing objects</a> can be attached to a
+<a>media session</a>; at that point becoming one of
+<a>media session</a>'s <a>audio-producing participants</a>.
+<a>Audio-producing objects</a> can be detached from a <a>media session</a>; at
+that point no longer being one of <a>media session</a>'s <a>audio-producing
+participants</a>.
 
 When the user agent is to <dfn>pause</dfn> a given <var>audio-producing
 object</var> it must run the following steps:
@@ -572,7 +571,7 @@ When the user agent is to <dfn>indefinitely pause</dfn> a given
 <var>audio-producing object</var>, the user agent must <a>pause</a>
 <var>audio-producing object</var> and, then proceed to remove it from its
 <a>current media session</a>'s list of
-<a>active audio-producing participants</a>.
+<a>audio-producing participants</a>.
 
 When the user agent is to <dfn>unpause</dfn> a given <var>audio-producing
 object</var> it must run the following steps:
@@ -720,9 +719,8 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
           <li>
             Optionally, based on platform conventions, the user agent may allow
             hardware and/or software media keys to control playback of
-            <var>media session</var>'s <a>active audio-producing
-            participants</a> based on its <a>media remote controller</a>, if
-            any.
+            <var>media session</var>'s <a>audio-producing participants</a> based
+            on its <a>media remote controller</a>, if any.
           </li>
         </ol>
       </dd>
@@ -818,9 +816,9 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             <code><a lt="default media state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>indefinitely pause</a> all of <var>media session</var>'s
-            <a>active audio-producing participants</a> and set <var>media
-            session</var>'s <a>current state</a> to
-            <code><a lt="idle media session state">idle</a></code>.
+            <a>audio-producing participants</a> and set <var>media
+            session</var>'s <a>current state</a> to <code><a lt="idle media
+            session state">idle</a></code>.
 
             <p class="note">
               This implies that the next time the <a>media session invocation
@@ -840,8 +838,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             Optionally, based on platform conventions, the user agent must
             prevent any hardware and/or software media keys from controlling
             playback of
-            <var>media session</var>'s <a>active audio-producing
-            participants</a>.
+            <var>media session</var>'s <a>audio-producing participants</a>.
           </li>
         </ol>
       </dd>
@@ -856,11 +853,10 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             <code><a lt="default media state">Default</a></code>
             or <code><a lt="content media state">Content</a></code> then
             <a>duck</a>
-            all of <var>media session</var>'s <a>active audio-producing
+            all of <var>media session</var>'s <a>audio-producing
             participants</a> and set
-            <var>media session</var>'s
-            <a>current state</a> to <code><a lt="interrupted media session
-            state">interrupted</a></code>.
+            <var>media session</var>'s <a>current state</a> to <code><a
+            lt="interrupted media session state">interrupted</a></code>.
             <p class="note">
               This implies that the next time the <a>media session continuation
               algorithm</a> is run for <var>media session</var> that we will
@@ -884,7 +880,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             lt="transient solo media state">Transient Solo</a></code> then
             <a>pause</a> all of
             <var>media session</var>'s
-            <a>active audio-producing participants</a> and set
+            <a>audio-producing participants</a> and set
             <var>current media session</var>'s <a>current state</a> to
             <code><a lt="interrupted media session
             state">interrupted</a></code>.
@@ -952,7 +948,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             or
             <code><a lt="content media state">Content</a></code>, then
             <a>unduck</a> all of <var>media session</var>'s
-            <a>active audio-producing participants</a>
+            <a>audio-producing participants</a>
             and set <var>media session</var>'s <a>current state</a> to
             <code><a lt="active media session state">active</a></code>.
           </li>
@@ -971,8 +967,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             lt="transient media state">Transient</a></code>, or
             <code><a lt="transient solo media state">Transient Solo</a></code>,
             then <a>unpause</a> the
-            <var>media session</var>'s <a>active audio-producing
-            participants</a> and set <var>media session</var>'s
+            <var>media session</var>'s <a>audio-producing participants</a> and
+            set <var>media session</var>'s
             <a>current state</a> to
             <code><a lt="active media session state">active</a></code>.
           </li>
@@ -1003,8 +999,7 @@ user agent must run the following steps:
         If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
         <var>s</var>'s <a>current state</a> is <code><a lt="active media session
         state">active</a></code>, then <a>pause</a> all of <var>s</var>'s
-        <a>active audio-producing participants</a> and set
-        <var>s</var>'s
+        <a>audio-producing participants</a> and set <var>s</var>'s
         <a>current state</a> to <code><a lt="interrupted media session
         state">interrupted</a></code>, then terminate these substeps and
         continue at the next available <var>s</var>.
@@ -1013,7 +1008,7 @@ user agent must run the following steps:
         If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
         and <var>s</var>'s <a>current state</a> is <code><a lt="interrupted
         media session state">interrupted</a></code>, then <a>unpause</a> all of
-        <var>s</var>'s <a>active audio-producing participants</a> and set
+        <var>s</var>'s <a>audio-producing participants</a> and set
         <var>s</var>'s <a>current state</a> to <code><a lt="active media session
         state">active</a></code>, then terminate these substeps and continue at
         the next available <var>s</var>.
@@ -1034,7 +1029,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
     steps.
   </li>
   <li>
-    If <var>media session</var> still has one or more <a>active audio-producing
+    If <var>media session</var> still has one or more <a>audio-producing
     participants</a>, then terminate these steps.
   </li>
   <li>
@@ -1050,12 +1045,11 @@ The <dfn>media session release algorithm</dfn> takes one argument,
   <li>
     Optionally, based on platform conventions, the user agent must prevent any
     hardware and/or software media keys from controlling playback of
-    <var>media session</var>'s
-    <a>active audio-producing participants</a>.
+    <var>media session</var>'s <a>audio-producing participants</a>.
 
     <p class="note">
       If the algorithm reaches this step then <var>media session</var> can not
-      have any <a>active audio-producing participants</a>.
+      have any remaining <a>audio-producing participants</a>.
     </p>
   </li>
   <li>
@@ -1261,7 +1255,7 @@ method is invoked, the user agent must run the following steps:
     Releases platform-level media focus, sets the <a>media session</a>'s
     <a>current state</a> to <code><a lt="idle media session
     state">idle</a></code> and applies any changes necessary to its
-    <a>active audio-producing participants</a>.
+    <a>audio-producing participants</a>.
   </dd>
 </dl>
 
@@ -1274,11 +1268,11 @@ must run the following steps:
     Let <var>media session</var> be the current <a>media session</a>.
   </li>
   <li>
-    <a>Indefinitely pause</a> all of <var>media session</var>'s <a>active
-    audio-producing participants</a>.
+    <a>Indefinitely pause</a> all of <var>media session</var>'s
+    <a>audio-producing participants</a>.
   </li>
   <li>
-    Reset <var>media session</var>'s <a>active audio-producing participants</a>
+    Reset <var>media session</var>'s <a>audio-producing participants</a>
     to an empty list.
   </li>
   <li>
@@ -1400,7 +1394,7 @@ the following steps:
     these steps.
   </li>
   <li>
-    For each <a>active audio-producing participant</a> in <var>m</var>, called
+    For each <a>audio-producing participant</a> in <var>m</var>, called
     <var>active element</var>, run the following substeps:
 
     <ol>
@@ -1571,16 +1565,15 @@ otherwise. On setting, the user agent must run the following steps:
     same <a>media session</a>), then terminate these steps.
   </li>
   <li>
-    If <var>m</var> is an <a>active audio-producing participant</a> of
+    If <var>m</var> is an <a>audio-producing participant</a> of
     <var>old media session</var>, then <a>pause</a> <var>m</var> and remove
-    <var>m</var>
-    from <var>old media session</var>'s <a>active audio-producing
+    <var>m</var> from <var>old media session</var>'s list of <a>audio-producing
     participants</a>.
   </li>
   <li>
     If <var>old media session</var> is not null and no longer has one or more
-    <a>active audio-producing participants</a>, then run the <a>media session
-    release algorithm</a> for <var>old media session</var>.
+    <a>audio-producing participants</a>, then run the <a>media session release
+    algorithm</a> for <var>old media session</var>.
   </li>
 </ol>
 
@@ -1605,8 +1598,8 @@ in <a>media element</a> <var>media element</var>:
   </li>
   <li>
     If <var>media element</var> is not currently in <var>media session</var>'s
-    list of <a>active audio-producing participants</a>, then append
-    <var>media element</var> to this list.
+    list of <a>audio-producing participants</a>, then append <var>media
+    element</var> to this list.
   </li>
   <li>
     Let <var>activated</var> be the result of running the <a>media session
@@ -1684,12 +1677,11 @@ steps:
   </li>
   <li>
     If <var>media element</var> is not currently in <var>media session</var>'s
-    list of <a>active audio-producing participants</a>, then terminate these
-    steps.
+    list of <a>audio-producing participants</a>, then terminate these steps.
   </li>
   <li>
     Remove <var>media element</var> from <var>media session</var>'s list of
-    <a>active audio-producing participants</a>.
+    <a>audio-producing participants</a>.
   </li>
   <li>
     Run the <a>media session release algorithm</a> for <var>media session</var>.
