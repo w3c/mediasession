@@ -72,8 +72,8 @@
 .highlight .vi { color: #0077aa } /* Name.Variable.Instance */
 .highlight .il { color: #990055 } /* Literal.Number.Integer.Long */
         .highlight { background: hsl(24, 20%, 95%); }
-        pre.highlight { padding: 1em; margin: .5em 0; overflow: auto; }
-        :not(pre).highlight { padding: .1em; border-radius: .3em; }
+        code.highlight { padding: .1em; border-radius: .3em; }
+        pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
         </style>
  </head>
  <body class="h-entry status-LS">
@@ -88,7 +88,7 @@
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-07-07">7 July 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-10">10 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -2154,7 +2154,7 @@ in <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded
 session from a media element</span><a class="self-link" href="#interrupting-a-media-session-from-a-media-element"></a></h4>
 
 
-   <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="pause-a-media-element">pause a media element<a class="self-link" href="#pause-a-media-element"></a></dfn> for a given a
+   <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="pause-a-media-element">pause a media element<a class="self-link" href="#pause-a-media-element"></a></dfn> for a given
 <var>media element</var> it must run that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal
 pause steps</a>.</p>
 
@@ -2431,80 +2431,80 @@ neighboring rights to this work.</p>
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
-   <li>active audio-producing
-participants, <a href="#active-audio_producing-participants">4.3</a>
-   <li>active media session state, <a href="#active-media-session-state">4.1</a>
-   <li>album, <a href="#dom-mediametadata-album">5.1</a>
-   <li>album name, <a href="#album-name">4</a>
-   <li>ambient attribute value, <a href="#ambient-attribute-value">4.2</a>
-   <li>ambient media state, <a href="#ambient-media-state">4.2</a>
-   <li>artist, <a href="#dom-mediametadata-artist">5.1</a>
-   <li>artist name, <a href="#artist-name">4</a>
-   <li>artwork, <a href="#dom-mediametadata-artwork">5.1</a>
-   <li>artwork resource, <a href="#artwork-resource">4</a>
-   <li>artwork URL, <a href="#artwork-url">4</a>
-   <li>audio-producing object, <a href="#audio_producing-object">4.3</a>
-   <li>audio-producing participants, <a href="#audio_producing-participants">4.3</a>
-   <li>content attribute value, <a href="#content-attribute-value">4.2</a>
-   <li>content media state, <a href="#content-media-state">4.2</a>
-   <li>controls, <a href="#dom-mediasession-controls">5.1.3</a>
-   <li>create a media session, <a href="#create-a-media-session">4</a>
-   <li>current media session, <a href="#current-media-session">6</a>
-   <li>current media session type, <a href="#current-media-session-type">4.2</a>
-   <li>current state, <a href="#current-state">4.1</a>
-   <li>default media state, <a href="#default-media-state">4.2</a>
-   <li>duck, <a href="#duck">4.3</a>
-   <li>event nexttrack, <a href="#event-nexttrack">5.2.3</a>
-   <li>event previoustrack, <a href="#event-previoustrack">5.2.3</a>
-   <li>fetch steps, <a href="#fetch-steps">4.4</a>
-   <li>idle media session state, <a href="#idle-media-session-state">4.1</a>
-   <li>indefinitely pause, <a href="#indefinitely-pause">4.3</a>
-   <li>interrupted media session state, <a href="#interrupted-media-session-state">4.1</a>
+   <li><a href="#active-audio_producing-participants">active audio-producing
+participants</a><span>, in §4.3</span>
+   <li><a href="#active-media-session-state">active media session state</a><span>, in §4.1</span>
+   <li><a href="#dom-mediametadata-album">album</a><span>, in §5.1</span>
+   <li><a href="#album-name">album name</a><span>, in §4</span>
+   <li><a href="#ambient-attribute-value">ambient attribute value</a><span>, in §4.2</span>
+   <li><a href="#ambient-media-state">ambient media state</a><span>, in §4.2</span>
+   <li><a href="#dom-mediametadata-artist">artist</a><span>, in §5.1</span>
+   <li><a href="#artist-name">artist name</a><span>, in §4</span>
+   <li><a href="#dom-mediametadata-artwork">artwork</a><span>, in §5.1</span>
+   <li><a href="#artwork-resource">artwork resource</a><span>, in §4</span>
+   <li><a href="#artwork-url">artwork URL</a><span>, in §4</span>
+   <li><a href="#audio_producing-object">audio-producing object</a><span>, in §4.3</span>
+   <li><a href="#audio_producing-participants">audio-producing participants</a><span>, in §4.3</span>
+   <li><a href="#content-attribute-value">content attribute value</a><span>, in §4.2</span>
+   <li><a href="#content-media-state">content media state</a><span>, in §4.2</span>
+   <li><a href="#dom-mediasession-controls">controls</a><span>, in §5.1.3</span>
+   <li><a href="#create-a-media-session">create a media session</a><span>, in §4</span>
+   <li><a href="#current-media-session">current media session</a><span>, in §6</span>
+   <li><a href="#current-media-session-type">current media session type</a><span>, in §4.2</span>
+   <li><a href="#current-state">current state</a><span>, in §4.1</span>
+   <li><a href="#default-media-state">default media state</a><span>, in §4.2</span>
+   <li><a href="#duck">duck</a><span>, in §4.3</span>
+   <li><a href="#event-nexttrack">event nexttrack</a><span>, in §5.2.3</span>
+   <li><a href="#event-previoustrack">event previoustrack</a><span>, in §5.2.3</span>
+   <li><a href="#fetch-steps">fetch steps</a><span>, in §4.4</span>
+   <li><a href="#idle-media-session-state">idle media session state</a><span>, in §4.1</span>
+   <li><a href="#indefinitely-pause">indefinitely pause</a><span>, in §4.3</span>
+   <li><a href="#interrupted-media-session-state">interrupted media session state</a><span>, in §4.1</span>
    <li>kind
     <ul>
-     <li>argument for MediaSession/MediaSession(kind), <a href="#dom-mediasession-mediasession-kind-kind">5.1</a>
-     <li>attribute for MediaSession, <a href="#dom-mediasession-kind">5.1.3</a>
+     <li><a href="#dom-mediasession-mediasession-kind-kind">argument for MediaSession/MediaSession(kind)</a><span>, in §5.1</span>
+     <li><a href="#dom-mediasession-kind">attribute for MediaSession</a><span>, in §5.1.3</span>
     </ul>
-   <li>MediaMetadata, <a href="#dictdef-mediametadata">5.1</a>
-   <li>media remote controller, <a href="#media-remote-controller">4</a>
-   <li>MediaRemoteControls, <a href="#mediaremotecontrols">5.2</a>
-   <li>media remote controls, <a href="#media-remote-controls">5.2</a>
-   <li>media session, <a href="#media-session">4</a>
-   <li>MediaSession, <a href="#mediasession">5.1</a>
-   <li>media session category, <a href="#media-session-category">4.2</a>
-   <li>media session continuation algorithm, <a href="#media-session-continuation-algorithm">4.5.2</a>
-   <li>media session interruption algorithm, <a href="#media-session-interruption-algorithm">4.5.2</a>
-   <li>media session invocation algorithm, <a href="#media-session-invocation-algorithm">4.5.1</a>
-   <li>MediaSessionKind, <a href="#enumdef-mediasessionkind">5.1</a>
-   <li>MediaSession(kind), <a href="#dom-mediasession-mediasession">5.1.2</a>
-   <li>media session metadata, <a href="#media-session-metadata">4</a>
-   <li>media session release algorithm, <a href="#media-session-release-algorithm">4.5.3</a>
-   <li>media session
-type, <a href="#media-session-type">4.2</a>
-   <li>metadata, <a href="#dom-mediasession-setmetadata-metadata-metadata">5.1</a>
-   <li>nextTrackEnabled, <a href="#dom-mediaremotecontrols-nexttrackenabled">5.2.1</a>
-   <li>onnexttrack, <a href="#dom-mediaremotecontrols-onnexttrack">5.2.2</a>
-   <li>onprevioustrack, <a href="#dom-mediaremotecontrols-onprevioustrack">5.2.2</a>
-   <li>participating media elements, <a href="#participating-media-elements">6</a>
-   <li>pause, <a href="#pause">4.3</a>
-   <li>pause a media element, <a href="#pause-a-media-element">6.2.2</a>
-   <li>previousTrackEnabled, <a href="#dom-mediaremotecontrols-previoustrackenabled">5.2.1</a>
-   <li>release(), <a href="#dom-mediasession-release">5.1.3</a>
-   <li>release media element from its media
-session, <a href="#release-media-element-from-its-media-session">6.2.3</a>
-   <li>session, <a href="#dom-htmlmediaelement-session">6.1</a>
-   <li>session title, <a href="#session-title">4</a>
-   <li>setMetadata(metadata), <a href="#dom-mediasession-setmetadata">5.1.3</a>
-   <li>title, <a href="#dom-mediametadata-title">5.1</a>
-   <li>transient attribute
-      value, <a href="#transient-attribute-value">4.2</a>
-   <li>transient media state, <a href="#transient-media-state">4.2</a>
-   <li>transient-solo attribute
-      value, <a href="#transient_solo-attribute-value">4.2</a>
-   <li>transient solo media state, <a href="#transient-solo-media-state">4.2</a>
-   <li>unduck, <a href="#unduck">4.3</a>
-   <li>unpause, <a href="#unpause">4.3</a>
-   <li>unpause a media element, <a href="#unpause-a-media-element">6.2.2</a></ul>
+   <li><a href="#dictdef-mediametadata">MediaMetadata</a><span>, in §5.1</span>
+   <li><a href="#media-remote-controller">media remote controller</a><span>, in §4</span>
+   <li><a href="#mediaremotecontrols">MediaRemoteControls</a><span>, in §5.2</span>
+   <li><a href="#media-remote-controls">media remote controls</a><span>, in §5.2</span>
+   <li><a href="#media-session">media session</a><span>, in §4</span>
+   <li><a href="#mediasession">MediaSession</a><span>, in §5.1</span>
+   <li><a href="#media-session-category">media session category</a><span>, in §4.2</span>
+   <li><a href="#media-session-continuation-algorithm">media session continuation algorithm</a><span>, in §4.5.2</span>
+   <li><a href="#media-session-interruption-algorithm">media session interruption algorithm</a><span>, in §4.5.2</span>
+   <li><a href="#media-session-invocation-algorithm">media session invocation algorithm</a><span>, in §4.5.1</span>
+   <li><a href="#enumdef-mediasessionkind">MediaSessionKind</a><span>, in §5.1</span>
+   <li><a href="#dom-mediasession-mediasession">MediaSession(kind)</a><span>, in §5.1.2</span>
+   <li><a href="#media-session-metadata">media session metadata</a><span>, in §4</span>
+   <li><a href="#media-session-release-algorithm">media session release algorithm</a><span>, in §4.5.3</span>
+   <li><a href="#media-session-type">media session
+type</a><span>, in §4.2</span>
+   <li><a href="#dom-mediasession-setmetadata-metadata-metadata">metadata</a><span>, in §5.1</span>
+   <li><a href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a><span>, in §5.2.1</span>
+   <li><a href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a><span>, in §5.2.2</span>
+   <li><a href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a><span>, in §5.2.2</span>
+   <li><a href="#participating-media-elements">participating media elements</a><span>, in §6</span>
+   <li><a href="#pause">pause</a><span>, in §4.3</span>
+   <li><a href="#pause-a-media-element">pause a media element</a><span>, in §6.2.2</span>
+   <li><a href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a><span>, in §5.2.1</span>
+   <li><a href="#dom-mediasession-release">release()</a><span>, in §5.1.3</span>
+   <li><a href="#release-media-element-from-its-media-session">release media element from its media
+session</a><span>, in §6.2.3</span>
+   <li><a href="#dom-htmlmediaelement-session">session</a><span>, in §6.1</span>
+   <li><a href="#session-title">session title</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-setmetadata">setMetadata(metadata)</a><span>, in §5.1.3</span>
+   <li><a href="#dom-mediametadata-title">title</a><span>, in §5.1</span>
+   <li><a href="#transient-attribute-value">transient attribute
+      value</a><span>, in §4.2</span>
+   <li><a href="#transient-media-state">transient media state</a><span>, in §4.2</span>
+   <li><a href="#transient_solo-attribute-value">transient-solo attribute
+      value</a><span>, in §4.2</span>
+   <li><a href="#transient-solo-media-state">transient solo media state</a><span>, in §4.2</span>
+   <li><a href="#unduck">unduck</a><span>, in §4.3</span>
+   <li><a href="#unpause">unpause</a><span>, in §4.3</span>
+   <li><a href="#unpause-a-media-element">unpause a media element</a><span>, in §6.2.2</span></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
    <li><a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> defines the following terms:

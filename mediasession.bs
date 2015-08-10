@@ -1622,7 +1622,7 @@ in <a>media element</a> <var>media element</var>:
 <h4 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
 session from a media element</h4>
 
-When the user agent is to <dfn>pause a media element</dfn> for a given a
+When the user agent is to <dfn>pause a media element</dfn> for a given
 <var>media element</var> it must run that <a>media element</a>'s <a>internal
 pause steps</a>.
 
