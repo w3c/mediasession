@@ -68,6 +68,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: pause(); for: HTMLMediaElement; url: #dom-media-pause
     type: attribute
         urlPrefix: embedded-content.html
+            text: controls; url: #attr-media-controls
             text: paused; for: HTMLMediaElement; url: #dom-media-paused
             text: readyState; for: HTMLMediaElement; url: #dom-media-readystate
             text: HAVE_FUTURE_DATA; for: HTMLMediaElement; url: #dom-media-have_future_data
@@ -1585,11 +1586,12 @@ session from a media element</h4>
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 
-When the {{play()}} method on a <a>media element</a> is invoked and the <a>media
-element</a>'s {{paused}} attribute is true and the <a>media element</a>'s
-{{HTMLMediaElement/readyState}} attribute has the value {{HAVE_FUTURE_DATA}} or
-{{HAVE_ENOUGH_DATA}}, then the user agent must run the following steps passing
-in <a>media element</a> <var>media element</var>:
+When the {{play()}} method on a <a>media element</a> is invoked from script —
+or a <a>media element</a> is otherwise played from the web page (e.g. via its
+{{controls}}) — and that <a>media element</a>'s {{paused}} attribute is true
+and its {{HTMLMediaElement/readyState}} attribute has the value
+{{HAVE_FUTURE_DATA}} or {{HAVE_ENOUGH_DATA}} then the user agent must run the
+following steps, passing in <a>media element</a> as <var>media element</var>:
 
 <ol>
   <li>
@@ -1621,17 +1623,16 @@ pause steps</a>.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 <!-- https://github.com/whatwg/mediasession/issues/66 -->
-After the {{pause()}} method on a <a>media element</a> has been invoked and that
-<a>media element</a> has a <a>current media session type</a> set to
-<code><a lt="transient media state">Transient</a></code> or <code><a
-lt="transient solo media state">Transient Solo</a></code>, then the user agent
-must immediately run the <a>media session release algorithm</a> for <a>media
-element</a>'s
+After the {{pause()}} method on a <a>media element</a> has been invoked — or a
+<a>media element</a> is otherwise paused from the web page (e.g. via its
+{{controls}}) — and that <a>media element</a> has a <a>current media session
+type</a> set to <code><a lt="transient media state">Transient</a></code> or
+<code><a lt="transient solo media state">Transient Solo</a></code>, then the
+user agent must immediately run the <a>media session release algorithm</a> for
+<a>media element</a>'s
 <a>current media session</a>. Then, for all other <a>media sessions</a>, the
-user agent must run the
-<a>media session continuation algorithm</a>, passing in each <a>media
-session</a>
-as <var>media session</var>.
+user agent must run the <a>media session continuation algorithm</a>, passing in
+each <a>media session</a> as <var>media session</var>.
 
 <div class="note">
   This prevents <code><a lt="transient media state">Transient</a></code> or
