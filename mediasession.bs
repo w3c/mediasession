@@ -1091,7 +1091,7 @@ user agent must run the following steps:
           </li>
           <li>
             Terminate these substeps and continue at the next available
-            <var>s</var>.
+            <a>media session</a>.
           </li>
         </ol>
       </li>
