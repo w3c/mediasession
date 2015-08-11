@@ -551,13 +551,6 @@ that must also be present in the <a>media session</a>'s list of
 <a>audio-producing participants</a>. When a new <a>media session</a> is created
 its <a>resume list</a> must be empty.
 
-<a>Audio-producing objects</a> can be attached to a
-<a>media session</a>; at that point becoming one of
-<a>media session</a>'s <a>audio-producing participants</a>.
-<a>Audio-producing objects</a> can be detached from a <a>media session</a>; at
-that point no longer being one of <a>media session</a>'s <a>audio-producing
-participants</a>.
-
 When the user agent is to <dfn>pause</dfn> a given <var>audio-producing
 object</var> it must run the following steps:
 
