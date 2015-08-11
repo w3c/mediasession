@@ -1654,13 +1654,6 @@ otherwise. On setting, the user agent must run the following steps:
     session</a>, if it has one, and null otherwise.
   </li>
   <li>
-    Let <var>new media session</var> be null.
-  </li>
-  <li>
-    Set <var>m</var>'s <a>current media session</a> to null, if it currently has
-    one.
-  </li>
-  <li>
     Let <var>m</var>'s <a>current media session</a> be the new value or the
     <a>top-level browsing context</a>'s <a>media session</a> if the new value is
     null.
