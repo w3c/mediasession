@@ -543,6 +543,14 @@ attached to it; called its <dfn>audio-producing participants</dfn>. A <a>media
 session</a> must keep a list of its <a>audio-producing participants</a> that
 consists of zero of more <a>audio-producing objects</a>.
 
+A <a>media session</a> has a <dfn>resume list</dfn> that is used internally to
+restore <a>audio-producing participants</a> at the end of an interruption that
+were playing, or were otherwise running, when that interruption started. The
+<a>resume list</a> may consist of zero or more <a>audio-producing objects</a>
+that must also be present in the <a>media session</a>'s list of
+<a>audio-producing participants</a>. When a new <a>media session</a> is created
+its <a>resume list</a> must be empty.
+
 <a>Audio-producing objects</a> can be attached to a
 <a>media session</a>; at that point becoming one of
 <a>media session</a>'s <a>audio-producing participants</a>.
@@ -759,6 +767,9 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
     </dl>
   </li>
   <li>
+    Set <var>media session</var>'s <a>resume list</a> to an empty list.
+  </li>
+  <li>
     Set <var>media session</var>'s <a>current state</a> to
     <code><a lt="active media session state">active</a></code>, then return
     success.
@@ -851,13 +862,36 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         <ol>
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
+            not
             <code><a lt="default media state">Default</a></code>
-            or <code><a lt="content media state">Content</a></code> then
-            <a>duck</a>
-            all of <var>media session</var>'s <a>audio-producing
-            participants</a> and set
-            <var>media session</var>'s <a>current state</a> to <code><a
+            or <code><a lt="content media state">Content</a></code>, then
+            terminate these steps.
+          </li>
+
+          <li>
+            For each <var>audio-producing object</var> in <var>media
+            session</var>'s list of <a>audio-producing participants</a>:
+
+            <ol>
+              <li>
+                If <var>audio-producing object</var> is not currently playing,
+                or is not otherwise running, then terminate these substeps and
+                continue at the next available <var>audio-producing
+                object</var>.
+              </li>
+              <li>
+                <a>Duck</a> <var>audio-producing object</var>.
+              </li>
+              <li>
+                Add <var>audio-producing object</var> to <var>media
+                session</var>'s <a>resume list</a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+            Set <var>media session</var>'s <a>current state</a> to <code><a
             lt="interrupted media session state">interrupted</a></code>.
+
             <p class="note">
               This implies that the next time the <a>media session continuation
               algorithm</a> is run for <var>media session</var> that we will
@@ -875,34 +909,44 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         <ol>
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
+            not
             <code><a lt="default media state">Default</a></code>,
             <code><a lt="content media state">Content</a></code>, <code><a
             lt="transient media state">Transient</a></code> or <code><a
-            lt="transient solo media state">Transient Solo</a></code> then
-            <a>pause</a> all of
-            <var>media session</var>'s
-            <a>audio-producing participants</a> and set
-            <var>current media session</var>'s <a>current state</a> to
-            <code><a lt="interrupted media session
-            state">interrupted</a></code>.
+            lt="transient solo media state">Transient Solo</a></code>, then
+            terminate these steps.
+          </li>
 
-            <div class="note">
-              <p>
-                This implies that the next time the <a>media session invocation
-                algorithm</a>
-                is run against <var>media session</var>
-                that we will re-request media focus according to the steps
-                defined in that algorithm.
-              </p>
+          <li>
+            For each <var>audio-producing object</var> in <var>media
+            session</var>'s list of <a>audio-producing participants</a>:
 
-              <p>
-                It also implies that the next time the <a>media session
-                continuation algorithm</a> is run against <var>media
-                session</var> that we will re-activate this
-                <a>media session</a> according to the steps defined in that
-                algorithm.
-              </p>
-            </div>
+            <ol>
+              <li>
+                If <var>audio-producing object</var> is not currently playing,
+                or is not otherwise running, then terminate these substeps and
+                continue at the next available <var>audio-producing
+                object</var>.
+              </li>
+              <li>
+                <a>Pause</a> <var>audio-producing object</var>.
+              </li>
+              <li>
+                Add <var>audio-producing object</var> to <var>media
+                session</var>'s <a>resume list</a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+            Set <var>media session</var>'s <a>current state</a> to <code><a
+            lt="interrupted media session state">interrupted</a></code>.
+
+            <p class="note">
+              This implies that the next time the <a>media session continuation
+              algorithm</a> is run for <var>media session</var> that we will
+              re-activate this <a>media session</a> according to the steps
+              defined in that algorithm.
+            </p>
           </li>
         </ol>
       </dd>
@@ -945,13 +989,21 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
         <ol>
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
+            not
             <code><a lt="default media state">Default</a></code>
-            or
-            <code><a lt="content media state">Content</a></code>, then
-            <a>unduck</a> all of <var>media session</var>'s
-            <a>audio-producing participants</a>
-            and set <var>media session</var>'s <a>current state</a> to
-            <code><a lt="active media session state">active</a></code>.
+            or <code><a lt="content media state">Content</a></code>, then
+            terminate these steps.
+          </li>
+          <li>
+            <a>Unduck</a> each <var>audio-producing object</var> in <var>media
+            session</var>'s <a>resume list</a>.
+          </li>
+          <li>
+            Set <var>media session</var>'s <a>resume list</a> to an empty list.
+          </li>
+          <li>
+            Set <var>media session</var>'s <a>current state</a> to <code><a
+            lt="active media session state">active</a></code>.
           </li>
         </ol>
       </dd>
@@ -963,15 +1015,22 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
         <ol>
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
-            <code><a lt="default media state">Default</a></code>,
+            not <code><a lt="default media state">Default</a></code>,
             <code><a lt="content media state">Content</a></code>, <code><a
             lt="transient media state">Transient</a></code>, or
             <code><a lt="transient solo media state">Transient Solo</a></code>,
-            then <a>unpause</a> the
-            <var>media session</var>'s <a>audio-producing participants</a> and
-            set <var>media session</var>'s
-            <a>current state</a> to
-            <code><a lt="active media session state">active</a></code>.
+            then terminate these steps.
+          </li>
+          <li>
+            <a>Unpause</a> each <var>audio-producing object</var> in <var>media
+            session</var>'s <a>resume list</a>.
+          </li>
+          <li>
+            Set <var>media session</var>'s <a>resume list</a> to an empty list.
+          </li>
+          <li>
+            Set <var>media session</var>'s <a>current state</a> to <code><a
+            lt="active media session state">active</a></code>.
           </li>
         </ol>
       </dd>
@@ -980,6 +1039,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 </ol>
 
 <br>
+
 After a {{visibilitychange}} event [[PAGE-VISIBILITY]] has been fired at a
 <a>top-level browsing context</a>, known as <var>the browsing context</var>, the
 user agent must run the following steps:
@@ -989,30 +1049,76 @@ user agent must run the following steps:
     If {{visibilityState}} is not &quot;{{hidden}}&quot; or
     &quot;{{visible}}&quot; [[PAGE-VISIBILITY]], then terminate these steps.
   </li>
-
   <li>
-    For each <a>media session</a>, known as <var>s</var>, in <var>the browsing
-    context</var> with an <a>current media session type</a> of <code><a
-    lt="ambient media state">Ambient</a></code> run the following substeps:
+    For each <a>media session</a> in <var>the browsing context</var> with a
+    <a>current media session type</a> of <code><a lt="ambient media
+    state">Ambient</a></code> run the following substeps:
 
     <ol>
       <li>
+        Let <var>s</var> be the current <a>media session</a>.
+      </li>
+      <li>
         If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
         <var>s</var>'s <a>current state</a> is <code><a lt="active media session
-        state">active</a></code>, then <a>pause</a> all of <var>s</var>'s
-        <a>audio-producing participants</a> and set <var>s</var>'s
-        <a>current state</a> to <code><a lt="interrupted media session
-        state">interrupted</a></code>, then terminate these substeps and
-        continue at the next available <var>s</var>.
+        state">active</a></code>, then run the following substeps:
+
+        <ol>
+          <li>
+            For each <var>audio-producing object</var> in <var>s</var>'s list of
+            <a>audio-producing participants</a>, run the following substeps:
+
+            <ol>
+              <li>
+                If <var>audio-producing object</var> is not currently playing,
+                or is not otherwise running, then terminate these substeps and
+                continue at the next available <var>audio-producing
+                object</var>.
+              </li>
+              <li>
+                <a>Pause</a> <var>audio-producing object</var>.
+              </li>
+              <li>
+                Add <var>audio-producing object</var> to <var>media
+                session</var>'s <a>resume list</a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+            Set <var>s</var>'s
+            <a>current state</a> to <code><a lt="interrupted media session
+            state">interrupted</a></code>.
+          </li>
+          <li>
+            Terminate these substeps and continue at the next available
+            <var>s</var>.
+          </li>
+        </ol>
       </li>
+
       <li>
         If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
         and <var>s</var>'s <a>current state</a> is <code><a lt="interrupted
-        media session state">interrupted</a></code>, then <a>unpause</a> all of
-        <var>s</var>'s <a>audio-producing participants</a> and set
-        <var>s</var>'s <a>current state</a> to <code><a lt="active media session
-        state">active</a></code>, then terminate these substeps and continue at
-        the next available <var>s</var>.
+        media session state">interrupted</a></code>, then run the following
+        substeps:
+
+        <ol>
+          <li>
+            <a>Unpause</a> each <var>audio-producing object</var> in
+            <var>s</var>'s <a>resume list</a>.
+          </li>
+          <li>
+            Set <var>s</var>'s <a>resume list</a> to an empty list.
+          </li>
+          <li>
+            Set <var>s</var>'s <a>current state</a> to <code><a lt="active media
+            session state">active</a></code>.
+          </li>
+          <li>
+            Terminate these substeps and continue at the next available
+            <a>media session</a>.
+          </li>
+        </ol>
       </li>
     </ol>
   </li>
@@ -1273,7 +1379,10 @@ must run the following steps:
     <a>audio-producing participants</a>.
   </li>
   <li>
-    Reset <var>media session</var>'s <a>audio-producing participants</a>
+    Set <var>media session</var>'s <a>resume list</a> to an empty list.
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>audio-producing participants</a>
     to an empty list.
   </li>
   <li>
@@ -1681,6 +1790,10 @@ steps:
   <li>
     If <var>media element</var> is not currently in <var>media session</var>'s
     list of <a>audio-producing participants</a>, then terminate these steps.
+  </li>
+  <li>
+    If <var>media element</var> is in <var>media session</var>'s <a>resume
+    list</a> then remove it from this list.
   </li>
   <li>
     Remove <var>media element</var> from <var>media session</var>'s list of

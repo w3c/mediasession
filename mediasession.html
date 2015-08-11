@@ -760,6 +760,15 @@ session</a> must keep a list of its <a data-link-type="dfn" href="#audio_produci
 consists of zero of more <a data-link-type="dfn" href="#audio_producing-object">audio-producing objects</a>.</p>
 
 
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="resume-list">resume list<a class="self-link" href="#resume-list"></a></dfn> that is used internally to
+restore <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a> at the end of an interruption that
+were playing, or were otherwise running, when that interruption started. The
+<a data-link-type="dfn" href="#resume-list">resume list</a> may consist of zero or more <a data-link-type="dfn" href="#audio_producing-object">audio-producing objects</a>
+that must also be present in the <a data-link-type="dfn" href="#media-session">media session</a>’s list of
+<a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>. When a new <a data-link-type="dfn" href="#media-session">media session</a> is created
+its <a data-link-type="dfn" href="#resume-list">resume list</a> must be empty.</p>
+
+
    <p><a data-link-type="dfn" href="#audio_producing-object">Audio-producing objects</a> can be attached to a
 <a data-link-type="dfn" href="#media-session">media session</a>; at that point becoming one of
 <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>.
@@ -1038,6 +1047,10 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
   
   
     <li>
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list.
+  
+  
+    <li>
     Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
     <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then return
     success.
@@ -1156,12 +1169,48 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
           
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            not
             <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
-            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
-            <a data-link-type="dfn" href="#duck">duck</a>
-            all of <var>media session</var>’s <a data-link-type="dfn" href="#audio_producing-participants">audio-producing
-            participants</a> and set
-            <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
+            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then
+            terminate these steps.
+          
+        
+
+          
+        <li>
+            For each <var>audio-producing object</var> in <var>media
+            session</var>’s list of <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>:
+
+            
+         <ol>
+              
+          <li>
+                If <var>audio-producing object</var> is not currently playing,
+                or is not otherwise running, then terminate these substeps and
+                continue at the next available <var>audio-producing
+                object</var>.
+              
+          
+              
+          <li>
+                <a data-link-type="dfn" href="#duck">Duck</a> <var>audio-producing object</var>.
+              
+          
+              
+          <li>
+                Add <var>audio-producing object</var> to <var>media
+                session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>.
+              
+          
+            
+         </ol>
+         
+          
+        
+          
+        <li>
+            Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
+
             
          <p class="note" role="note">
               This implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
@@ -1189,37 +1238,55 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
           
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            not
             <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
-            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> then
-            <a data-link-type="dfn" href="#pause">pause</a> all of
-            <var>media session</var>’s
-            <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a> and set
-            <var>current media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-            <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
+            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then
+            terminate these steps.
+          
+        
+
+          
+        <li>
+            For each <var>audio-producing object</var> in <var>media
+            session</var>’s list of <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>:
 
             
-         <div class="note" role="note">
+         <ol>
               
-          <p>
-                This implies that the next time the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
-                algorithm</a>
-                is run against <var>media session</var>
-                that we will re-request media focus according to the steps
-                defined in that algorithm.
-              </p>
+          <li>
+                If <var>audio-producing object</var> is not currently playing,
+                or is not otherwise running, then terminate these substeps and
+                continue at the next available <var>audio-producing
+                object</var>.
+              
           
-
               
-          <p>
-                It also implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session
-                continuation algorithm</a> is run against <var>media
-                session</var> that we will re-activate this
-                <a data-link-type="dfn" href="#media-session">media session</a> according to the steps defined in that
-                algorithm.
-              </p>
+          <li>
+                <a data-link-type="dfn" href="#pause">Pause</a> <var>audio-producing object</var>.
+              
+          
+              
+          <li>
+                Add <var>audio-producing object</var> to <var>media
+                session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>.
+              
           
             
-         </div>
+         </ol>
+         
+          
+        
+          
+        <li>
+            Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
+
+            
+         <p class="note" role="note">
+              This implies that the next time the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation
+              algorithm</a> is run for <var>media session</var> that we will
+              re-activate this <a data-link-type="dfn" href="#media-session">media session</a> according to the steps
+              defined in that algorithm.
+            </p>
          
           
         
@@ -1280,13 +1347,26 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
           
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
+            not
             <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
-            or
-            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then
-            <a data-link-type="dfn" href="#unduck">unduck</a> all of <var>media session</var>’s
-            <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>
-            and set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to
-            <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
+            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then
+            terminate these steps.
+          
+        
+          
+        <li>
+            <a data-link-type="dfn" href="#unduck">Unduck</a> each <var>audio-producing object</var> in <var>media
+            session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>.
+          
+        
+          
+        <li>
+            Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list.
+          
+        
+          
+        <li>
+            Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
           
         
         
@@ -1306,14 +1386,26 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
           
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
+            not <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
             <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>,
-            then <a data-link-type="dfn" href="#unpause">unpause</a> the
-            <var>media session</var>’s <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a> and
-            set <var>media session</var>’s
-            <a data-link-type="dfn" href="#current-state">current state</a> to
-            <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
+            then terminate these steps.
+          
+        
+          
+        <li>
+            <a data-link-type="dfn" href="#unpause">Unpause</a> each <var>audio-producing object</var> in <var>media
+            session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>.
+          
+        
+          
+        <li>
+            Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list.
+          
+        
+          
+        <li>
+            Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
           
         
         
@@ -1328,8 +1420,10 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
 </ol>
 
 
-   <p><br>
-After a <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#sec-visibilitychange-event">visibilitychange</a></code> event <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> has been fired at a
+   <p><br></p>
+
+
+   <p>After a <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#sec-visibilitychange-event">visibilitychange</a></code> event <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> has been fired at a
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>, known as <var>the browsing context</var>, the
 user agent must run the following steps:</p>
 
@@ -1340,30 +1434,107 @@ user agent must run the following steps:</p>
     If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is not "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" or
     "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>, then terminate these steps.
   
-
   
     <li>
-    For each <a data-link-type="dfn" href="#media-session">media session</a>, known as <var>s</var>, in <var>the browsing
-    context</var> with an <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> run the following substeps:
+    For each <a data-link-type="dfn" href="#media-session">media session</a> in <var>the browsing context</var> with a
+    <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> run the following substeps:
 
     
      <ol>
       
       <li>
-        If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> and
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then <a data-link-type="dfn" href="#pause">pause</a> all of <var>s</var>’s
-        <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a> and set <var>s</var>’s
-        <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then terminate these substeps and
-        continue at the next available <var>s</var>.
+        Let <var>s</var> be the current <a data-link-type="dfn" href="#media-session">media session</a>.
       
       
       
       <li>
+        If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a> and
+        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then run the following substeps:
+
+        
+       <ol>
+          
+        <li>
+            For each <var>audio-producing object</var> in <var>s</var>’s list of
+            <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>, run the following substeps:
+
+            
+         <ol>
+              
+          <li>
+                If <var>audio-producing object</var> is not currently playing,
+                or is not otherwise running, then terminate these substeps and
+                continue at the next available <var>audio-producing
+                object</var>.
+              
+          
+              
+          <li>
+                <a data-link-type="dfn" href="#pause">Pause</a> <var>audio-producing object</var>.
+              
+          
+              
+          <li>
+                Add <var>audio-producing object</var> to <var>media
+                session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>.
+              
+          
+            
+         </ol>
+         
+          
+        
+          
+        <li>
+            Set <var>s</var>’s
+            <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>.
+          
+        
+          
+        <li>
+            Terminate these substeps and continue at the next available
+            <var>s</var>.
+          
+        
+        
+       </ol>
+       
+      
+      
+
+      
+      <li>
         If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>
-        and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then <a data-link-type="dfn" href="#unpause">unpause</a> all of
-        <var>s</var>’s <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a> and set
-        <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then terminate these substeps and continue at
-        the next available <var>s</var>.
+        and <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then run the following
+        substeps:
+
+        
+       <ol>
+          
+        <li>
+            <a data-link-type="dfn" href="#unpause">Unpause</a> each <var>audio-producing object</var> in
+            <var>s</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>.
+          
+        
+          
+        <li>
+            Set <var>s</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list.
+          
+        
+          
+        <li>
+            Set <var>s</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
+          
+        
+          
+        <li>
+            Terminate these substeps and continue at the next available
+            <a data-link-type="dfn" href="#media-session">media session</a>.
+          
+        
+        
+       </ol>
+       
       
       
     
@@ -1701,7 +1872,11 @@ must run the following steps:</p>
   
   
     <li>
-    Reset <var>media session</var>’s <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list.
+  
+  
+    <li>
+    Set <var>media session</var>’s <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>
     to an empty list.
   
   
@@ -2222,6 +2397,11 @@ steps:</p>
   
   
     <li>
+    If <var>media element</var> is in <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume
+    list</a> then remove it from this list.
+  
+  
+    <li>
     Remove <var>media element</var> from <var>media session</var>’s list of
     <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a>.
   
@@ -2485,6 +2665,7 @@ type</a><span>, in §4.2</span>
    <li><a href="#dom-mediasession-release">release()</a><span>, in §5.1.3</span>
    <li><a href="#release-media-element-from-its-media-session">release media element from its media
 session</a><span>, in §6.2.3</span>
+   <li><a href="#resume-list">resume list</a><span>, in §4.3</span>
    <li><a href="#dom-htmlmediaelement-session">session</a><span>, in §6.1</span>
    <li><a href="#session-title">session title</a><span>, in §4</span>
    <li><a href="#dom-mediasession-setmetadata">setMetadata(metadata)</a><span>, in §5.1.3</span>
