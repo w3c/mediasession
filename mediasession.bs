@@ -1496,8 +1496,8 @@ processing model described above:
 <h2 id="media-element-extensions">Media element extensions</h2>
 
 This section describes how a web developer can assign a <a>media session</a> to
-a <a>media element</a> both declaratively and programmatically and how, once
-attached, the <a>media element</a> can control state of a <a>media session</a>.
+a <a>media element</a> and how, once attached, the <a>media element</a> can
+control state of a <a>media session</a>.
 
 A <a>media element</a> may have a <dfn>current media session</dfn>, which is a
 <a>media session</a>. When a <a>media element</a> is created, the user agent
