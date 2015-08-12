@@ -96,6 +96,11 @@ urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
 urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
     type: interface
         text: AudioContext
+    type: attribute; urlPrefix: #widl-
+        text: state; url: AudioContext-state
+    type: method; urlPrefix: #widl-
+        text: suspend(); url: AudioContext-suspend-Promise-void
+        text: resume(); url: AudioContext-resume-Promise-void
 urlPrefix: https://dom.spec.whatwg.org/; spec: WHATWG-DOM
     type: interface; urlPrefix: #interface-
         text: EventTarget
@@ -528,15 +533,10 @@ emitting sound within the user agent and is therefore also potentially capable
 of interacting with the media focus system available in different underlying
 platforms.
 
-<p class=note>
-  <!-- XXX https://github.com/whatwg/mediasession/issues/48 -->
-  <!-- XXX https://github.com/whatwg/mediasession/issues/50 -->
-  Initially the term <a>audio-producing objects</a>
-  is taken to only refer to <a>media element</a> objects. In the future it may
-  be possible to extend this specification to allow e.g. {{AudioContext}}
-  objects to also be attached to a <a>media session</a> as <a>audio-producing
-  objects</a>.
-</p>
+An <a>audio-producing object</a> may have a <dfn>current media session</dfn>,
+which is a <a>media session</a>. When an <a>audio-producing object</a> is
+created, the user agent must set its <a>current media session</a> to the current
+<a>top-level browsing context</a>'s <a>media session</a>.
 
 A <a>media session</a> may have one or more <a>audio-producing objects</a>
 attached to it; called its <dfn>audio-producing participants</dfn>. A <a>media
@@ -556,16 +556,14 @@ object</var> it must run the following steps:
 
 <ol>
   <li>
-    If <var>audio-producing object</var> is not a <a>media element</a> then
-    terminate these steps.
-    <p class=note>
-      This algorithm currently only supports <a>audio-producing objects</a> that
-      are <a>media elements</a>.
-    </p>
+    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
+    <a lt="pause a media element">pause media element</a>
+    <var>audio-producing object</var> and terminate these steps.
   </li>
   <li>
-    <a lt="pause a media element">Pause media element</a> <var>audio-producing
-    object</var>.
+    If <var>audio-producing object</var> is an {{AudioContext}} object, then
+    <a lt="suspend a web audio object">suspend web audio object</a>
+    <var>audio-producing object</var> and terminate these steps.
   </li>
 </ol>
 
@@ -580,16 +578,14 @@ object</var> it must run the following steps:
 
 <ol>
   <li>
-    If <var>audio-producing object</var> is not a <a>media element</a> then
-    terminate these steps.
-    <p class=note>
-      This algorithm currently only supports <a>audio-producing objects</a> that
-      are <a>media elements</a>.
-    </p>
+    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
+    <a lt="unpause a media element">unpause media element</a>
+    <var>audio-producing object</var> and terminate these steps.
   </li>
   <li>
-    <a lt="unpause a media element">Unpause media element</a>
-    <var>audio-producing object</var>.
+    If <var>audio-producing object</var> is an {{AudioContext}} object, then
+    <a lt="resume a web audio object">resume web audio object</a>
+    <var>audio-producing object</var> and terminate these steps.
   </li>
 </ol>
 
@@ -1602,14 +1598,6 @@ This section describes how a web developer can assign a <a>media session</a> to
 a <a>media element</a> and how, once attached, the <a>media element</a> can
 control state of a <a>media session</a>.
 
-A <a>media element</a> may have a <dfn>current media session</dfn>, which is a
-<a>media session</a>. When a <a>media element</a> is created, the user agent
-must set its <a>current media session</a> to the current <a>top-level browsing
-context</a>'s <a>media session</a>.
-
-A <a>media session</a>'s <dfn>participating media elements</dfn> are <a>media
-elements</a> whose <a>current media session</a> is that <a>media session</a>.
-
 <h3 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
 {{HTMLMediaElement}} interface</h3>
 
@@ -1676,8 +1664,8 @@ otherwise. On setting, the user agent must run the following steps:
 <h3 id="media-elements-and-the-media-session-lifecycle">Media elements and the
 media session lifecycle</h3>
 
-<h4 id="activating-a-media-session-from-a-media-element">Activating a media
-session from a media element</h4>
+<h4 id="activating-a-media-session-from-an-htmlmediaelement-object">Activating a
+media session from an {{HTMLMediaElement}} object</h4>
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 
@@ -1709,8 +1697,9 @@ following steps, passing in <a>media element</a> as <var>media element</var>:
 </ol>
 
 
-<h4 id="interrupting-a-media-session-from-a-media-element">Interrupting a media
-session from a media element</h4>
+<h4
+id="interrupting-a-media-session-from-an-htmlmediaelement-object">Interrupting a
+media session from an {{HTMLMediaElement}} object</h4>
 
 When the user agent is to <dfn>pause a media element</dfn> for a given
 <var>media element</var> it must run that <a>media element</a>'s <a>internal
@@ -1750,8 +1739,8 @@ When the user agent is to <dfn>unpause a media element</dfn> for a given a
 <var>media element</var> it must invoke that <a>media element</a>'s {{play()}}
 method.
 
-<h4 id="releasing-a-media-session-from-a-media-element">Releasing a media
-session from a media element</h4>
+<h4 id="releasing-a-media-session-from-an-htmlmediaelement-object">Releasing a
+media session from an {{HTMLMediaElement}} object</h4>
 
 When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
 user agent must <a>release media element from its media session</a>.
@@ -1790,11 +1779,194 @@ steps:
   </li>
 </ol>
 
-<h3 id="examples">Examples</h3>
+<h2 id="web-audio-extensions">Web Audio extensions</h2>
+
+This section describes how a web developer can assign a <a>media session</a> to
+an {{AudioContext}} object and how, once attached, the {{AudioContext}} can
+control state of a <a>media session</a>.
+
+<h3 id="extensions-to-the-audiocontext-interface">Extensions to the
+{{AudioContext}} interface</h3>
+
+<pre class="idl">
+partial interface AudioContext {
+  // media session
+  attribute MediaSession? session;
+};
+</pre>
+
+<dl class=domintro>
+  <dt>
+    <code><var>context</var> . {{AudioContext/session}}</code> [ = <code>
+    session</code> ]
+  </dt>
+  <dd>
+    Returns the <a>current media session</a> for the {{AudioContext}} object, if
+    any; returns null otherwise.
+
+    Can be set, to set an explicit {{MediaSession}}.
+  </dd>
+</dl>
+
+The <dfn attribute for="AudioContext" lt="session"><code>session</code></dfn>
+attribute on an {{AudioContext}} object, on getting, must return the object's
+<a>current media session</a>, if any, or null otherwise. On setting, the user
+agent must run the following steps:
+
+<ol>
+  <li>
+    Let <var>m</var> be the {{AudioContext}} object in question.
+  </li>
+  <li>
+    Let <var>old media session</var> be <var>m</var>'s <a>current media
+    session</a>, if it has one, and null otherwise.
+  </li>
+  <li>
+    Let <var>m</var>'s <a>current media session</a> be the new value or the
+    <a>top-level browsing context</a>'s <a>media session</a> if the new value is
+    null.
+  </li>
+  <li>
+    Let <var>new media session</var> be <var>m</var>'s <a>current media
+    session</a>.
+  </li>
+  <li>
+    <var>Update media sessions</var>: If <var>old media session</var> and
+    <var>new media session</var> are the same (whether both null or both the
+    same <a>media session</a>), then terminate these steps.
+  </li>
+  <li>
+    If <var>m</var> is an <a>audio-producing participant</a> of
+    <var>old media session</var>, then <a>pause</a> <var>m</var> and remove
+    <var>m</var> from <var>old media session</var>'s list of <a>audio-producing
+    participants</a>.
+  </li>
+  <li>
+    If <var>old media session</var> is not null and no longer has one or more
+    <a>audio-producing participants</a>, then run the <a>media session release
+    algorithm</a> for <var>old media session</var>.
+  </li>
+</ol>
+
+<h3 id="web-audio-and-the-media-session-lifecycle">Web Audio and the media
+session lifecycle</h3>
+
+<h4 id="activating-a-media-session-from-an-audiocontext-object">Activating a
+media session from an {{AudioContext}} object</h4>
+
+<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
+
+When the {{resume()}} method on an {{AudioContext}} object is invoked from
+script and that {{AudioContext}} object's {{state}} attribute is
+&quot;suspended&quot; then the user agent must run the following steps:
+
+<ol>
+  <li>
+    Let <var>audio object</var> be the current {{AudioContext}} object.
+  </li>
+  <li>
+    Let <var>media session</var> be the value of <var>audio object</var>'s
+    <a>current media session</a>.
+  </li>
+  <li>
+    If <var>audio object</var> is not currently in <var>media session</var>'s
+    list of <a>audio-producing participants</a>, then append <var>audio
+    object</var> to this list.
+  </li>
+  <li>
+    Let <var>activated</var> be the result of running the <a>media session
+    invocation algorithm</a> for <var>media session</var>.
+  </li>
+  <li>
+    If <var>activated</var> is failure, <a>pause</a> <var>audio object</var>.
+  </li>
+</ol>
+
+
+<h4 id="interrupting-a-media-session-from-an-audiocontext-object">Interrupting a
+media session from an {{AudioContext}} object</h4>
+
+When the user agent is to <dfn>suspend a web audio object</dfn> for a given
+{{AudioContext}} object it must invoke that {{AudioContext}} object's
+{{suspend()}} method.
+
+After the {{suspend()}} method on an {{AudioContext}} object has been invoked
+and that {{AudioContext}} object has a <a>current media session type</a> set to
+<code><a lt="transient media state">Transient</a></code> or
+<code><a lt="transient solo media state">Transient Solo</a></code>, then the
+user agent must immediately run the <a>media session release algorithm</a> for
+{{AudioContext}} object's
+<a>current media session</a>. Then, for all other <a>media sessions</a>, the
+user agent must run the <a>media session continuation algorithm</a>, passing in
+each <a>media session</a> as <var>media session</var>.
+
+<div class="note">
+  This prevents <code><a lt="transient media state">Transient</a></code> or
+  <code><a lt="transient solo media state">Transient Solo</a></code>-based
+  <a>media sessions</a> from indefinitely blocking the continuation of other
+  <code><a lt="interrupted media session state">interrupted</a></code> <a>media
+  sessions</a> when they are indefinitely paused.
+
+  After we have completed this process, the original <code><a lt="transient
+  media state">Transient</a></code> or
+  <code><a lt="transient solo media state">Transient Solo</a></code>-based
+  <a>media session</a> will have a <a>current state</a> of <code><a lt="idle
+  media session state">idle</a></code> and all <code><a lt="interrupted media
+  session state">interrupted</a></code> <a>media sessions</a>
+  will have returned to a <a>current state</a> of <code><a lt="active media
+  session state">active</a></code>.
+</div>
+
+When the user agent is to <dfn>resume a web audio object</dfn> for a given a
+{{AudioContext}} object it must invoke that {{AudioContext}} object's
+{{resume()}} method.
+
+<h4 id="releasing-a-media-session-from-an-audiocontext-object">Releasing a media
+session from an {{AudioContext}} object</h4>
+
+When an {{AudioContext}} object's {{state}} attribute transitions to
+&quot;closed&quot;, the user agent must <a>release web audio object from its
+media session</a>.
+
+When an {{AudioContext}} object is <a lt="remove an element from a
+document">removed from a <code>Document</code></a> and is not attached to
+another {{Document}}, then <a>release web audio object from its media
+session</a>.
+
+When the user agent is to <dfn>release web audio object from its media
+session</dfn> for a given {{AudioContext}} object it must run the following
+steps:
+
+<ol>
+  <li>
+    Let <var>audio object</var> be the current {{AudioContext}} object.
+  </li>
+  <li>
+    Let <var>media session</var> be the value of <var>audio object</var>'s
+    <a>current media session</a>.
+  </li>
+  <li>
+    If <var>audio object</var> is not currently in <var>media session</var>'s
+    list of <a>audio-producing participants</a>, then terminate these steps.
+  </li>
+  <li>
+    If <var>audio object</var> is in <var>media session</var>'s <a>resume
+    list</a> then remove it from this list.
+  </li>
+  <li>
+    Remove <var>audio object</var> from <var>media session</var>'s list of
+    <a>audio-producing participants</a>.
+  </li>
+  <li>
+    Run the <a>media session release algorithm</a> for <var>media session</var>.
+  </li>
+</ol>
+
+<h2 id="examples">Examples</h2>
 
 <em>This section and all its subsections are non-normative.</em>
 
-<h4 id="example-setting-up-a-media-session">Setting up a media session</h4>
+<h3 id="example-setting-up-a-media-session">Setting up a media session</h3>
 
 As both <code><a element>audio</a></code> and <code><a element>video</a></code>
 elements implement the {{HTMLMediaElement}} interface, these element's
@@ -1834,36 +2006,35 @@ myAudio.play(); // Go!
 myVideo.play(); // Go!
   </pre>
 
-An {{AudioContext}} object [[!WEBAUDIO]] can be rendered via <code><a
-element>audio</a></code> or <code><a element>video</a></code>
-elements. As both <code><a element>audio</a></code> and <code><a
-element>video</a></code>
-elements implement the {{HTMLMediaElement}} interface, these element's
-{{HTMLMediaElement/session}} attribute can be set via JavaScript:
+An {{AudioContext}} object's {{HTMLMediaElement/session}} attribute can be set
+via JavaScript to associate that object to a <a>media session</a>:
 
 <pre class="lang-javascript">
 var audioCtx = new AudioContext();
-// ...
-var destinationNode = audioCtx.createMediaStreamDestination();
 
-var myAudio = document.createElement("audio");
-myAudio.srcObject = destinationNode.stream;
+audioCtx.session = new MediaSession("ambient");
 
-myAudio.session = new MediaSession("transient-solo");
-
-myAudio.play(); // Go!
+audioCtx.resume(); // Go!
   </pre>
 
-<p class="note">
-  Web developers should ensure that, when an {{AudioContext}} object is attached
-  to an <code><a element>audio</a></code> or <code><a element>video</a></code>
-  element, that they apply subsequent {{pause}} and {{play}} events dispatched
-  on that <code><a element>audio</a></code> or <code><a element>video</a></code>
-  element to their {{AudioContext}} object appropriately.
-</p>
+It is also possible to add multiple {{HTMLMediaElement}} and {{AudioContext}}
+objects to a single <a>media session</a>:
 
-<h4 id="example-setting-media-session-meta-data">Setting media session meta
-data</h4>
+<pre class="lang-javascript">
+var myAudio = document.createElement("audio");
+myAudio.src = "track1_audio.mp3";
+
+var audioCtx = new AudioContext("transient-solo");
+
+myAudio.session = mySession;
+audioCtx.session = mySession;
+
+myAudio.play(); // Go!
+audioCtx.resume(); // Go!
+  </pre>
+
+<h3 id="example-setting-media-session-meta-data">Setting media session meta
+data</h3>
 
 When a <code><a lt="content media state">Content</a></code>-based <a>media
 session</a> is <code><a lt="active media session state">active</a></code> it may
@@ -1888,8 +2059,8 @@ mySession.setMetadata({
 });
   </pre>
 
-<h4 id="example-responding-to-media-remote-control-events">Responding to media
-remote control events</h4>
+<h3 id="example-responding-to-media-remote-control-events">Responding to media
+remote control events</h3>
 
 Before a <code><a lt="content media state">Content</a></code>-based <a>media
 session</a> becomes <code><a lt="active media session state">active</a></code> a
@@ -1904,8 +2075,8 @@ if (mySession.controls) {
   mySession.controls.previousTrackEnabled = true;
 }
 
-// ... assign media session to a media element and play
-// that media element to activate the media session ...
+// ... assign media session to an audio object and play/resume
+// that object to activate the media session ...
 </pre>
 
 When a <code><a lt="content media state">Content</a></code>-based <a>media
