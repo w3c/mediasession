@@ -1735,7 +1735,7 @@ each <a>media session</a> as <var>media session</var>.
   session state">active</a></code>.
 </div>
 
-When the user agent is to <dfn>unpause a media element</dfn> for a given a
+When the user agent is to <dfn>unpause a media element</dfn> for a given
 <var>media element</var> it must invoke that <a>media element</a>'s {{play()}}
 method.
 
@@ -1917,7 +1917,7 @@ each <a>media session</a> as <var>media session</var>.
   session state">active</a></code>.
 </div>
 
-When the user agent is to <dfn>resume a web audio object</dfn> for a given a
+When the user agent is to <dfn>resume a web audio object</dfn> for a given
 {{AudioContext}} object it must invoke that {{AudioContext}} object's
 {{resume()}} method.
 
