@@ -332,8 +332,8 @@ fourth columns.
           href="#interrupting-a-media-session">starts interrupting</a>.
           <a>Unducks</a>
           itself when <code><a lt="transient media state">Transient</a></code>
-          content is <a>paused</a> or <a href="#releasing-a-media-session">ends
-          playback</a>.
+          content is <a>paused</a> or <a
+          href="#deactivating-a-media-session">ends playback</a>.
         </li>
         <li>
           <a>Pauses</a> itself when <code><a lt="transient solo media
@@ -341,7 +341,7 @@ fourth columns.
           href="#interrupting-a-media-session">starts interrupting</a>.
           <a>Unpauses</a> itself when <code><a lt="transient solo media
           state">Transient Solo</a></code> content is <a>paused</a> or <a
-          href="#releasing-a-media-session">ends playback</a>.
+          href="#deactivating-a-media-session">ends playback</a>.
         </li>
         <li>
           Continues playing normally when <code><a lt="ambient media
@@ -373,7 +373,7 @@ fourth columns.
           state">interrupted</a> <code><a lt="default media
           state">Default</a></code> and <code><a lt="content media
           state">Content</a></code> content when <a>paused</a> or <a
-          href="#releasing-a-media-session">playback ends</a>.
+          href="#deactivating-a-media-session">playback ends</a>.
         </li>
         <li>
           Does not display lock-screen and notification area user interfaces
@@ -390,7 +390,7 @@ fourth columns.
           href="#interrupting-a-media-session">starts interrupting</a>.
           <a>Unpauses</a> itself when <code><a lt="transient solo media
           state">Transient Solo</a></code> content is <a>paused</a> or <a
-          href="#releasing-a-media-session">ends playback</a>.
+          href="#deactivating-a-media-session">ends playback</a>.
         </li>
         <li>
           Continues playing normally when other <code><a lt="transient media
@@ -431,7 +431,7 @@ fourth columns.
           media state">Transient</a></code> and <code><a lt="transient solo
           media state">Transient Solo</a></code>
           content when <a>paused</a> or <a
-          href="#releasing-a-media-session">playback ends</a>.
+          href="#deactivating-a-media-session">playback ends</a>.
         </li>
         <li>
           Does not display lock-screen and notification area user interfaces
@@ -449,7 +449,7 @@ fourth columns.
           <a>Unpauses</a>
           itself when other <code><a lt="transient solo media state">Transient
           Solo</a></code> content is <a>paused</a> or <a
-          href="#releasing-a-media-session">ends playback</a>.
+          href="#deactivating-a-media-session">ends playback</a>.
         </li>
         <li>
           Continues playing normally when <code><a lt="ambient media
@@ -671,7 +671,8 @@ session</a>'s <a>current state</a> may be set from <code><a lt="interrupted
 media session state">interrupted</a></code>
 to <code><a lt="active media session state">active</a></code>.
 
-When the <a>media session release algorithm</a> is run a <a>media session</a>'s
+When the <a>media session deactivation algorithm</a> is run a <a>media
+session</a>'s
 <a>current state</a>
 may be set from either <code><a lt="active media session
 state">active</a></code> or <code><a lt="interrupted media session
@@ -1113,9 +1114,9 @@ user agent must run the following steps:
   </li>
 </ol>
 
-<h4 id="releasing-a-media-session">Releasing a media session</h4>
+<h4 id="deactivating-a-media-session">Deactivating a media session</h4>
 
-The <dfn>media session release algorithm</dfn> takes one argument,
+The <dfn>media session deactivation algorithm</dfn> takes one argument,
 <var>media session</var>, and consists of the following steps.
 
 <ol>
@@ -1173,7 +1174,7 @@ interface MediaSession {
 
   void setMetadata(MediaMetadata metadata);
 
-  void release();
+  void deactivate();
 };
 
 enum MediaSessionKind {
@@ -1345,7 +1346,7 @@ method is invoked, the user agent must run the following steps:
 
 <dl class=domintro>
   <dt>
-    <code><var>session</var> . {{MediaSession/release()}}</code>
+    <code><var>session</var> . {{MediaSession/deactivate()}}</code>
   </dt>
   <dd>
     Releases platform-level media focus, sets the <a>media session</a>'s
@@ -1356,8 +1357,8 @@ method is invoked, the user agent must run the following steps:
 </dl>
 
 When the <dfn method for="MediaSession"
-lt="release()"><code>release()</code></dfn> method is invoked, the user agent
-must run the following steps:
+lt="deactivate()"><code>deactivate()</code></dfn> method is invoked, the user
+agent must run the following steps:
 
 <ol>
   <li>
@@ -1375,7 +1376,8 @@ must run the following steps:
     to an empty list.
   </li>
   <li>
-    Run the <a>media session release algorithm</a> for <var>media session</var>.
+    Run the <a>media session deactivation algorithm</a> for <var>media
+    session</var>.
   </li>
 </ol>
 
@@ -1656,8 +1658,8 @@ otherwise. On setting, the user agent must run the following steps:
   </li>
   <li>
     If <var>old media session</var> is not null and no longer has one or more
-    <a>audio-producing participants</a>, then run the <a>media session release
-    algorithm</a> for <var>old media session</var>.
+    <a>audio-producing participants</a>, then run the <a>media session
+    deactivation algorithm</a> for <var>old media session</var>.
   </li>
 </ol>
 
@@ -1712,7 +1714,8 @@ After the {{pause()}} method on a <a>media element</a> has been invoked — or a
 {{controls}}) — and that <a>media element</a> has a <a>current media session
 type</a> set to <code><a lt="transient media state">Transient</a></code> or
 <code><a lt="transient solo media state">Transient Solo</a></code>, then the
-user agent must immediately run the <a>media session release algorithm</a> for
+user agent must immediately run the <a>media session deactivation algorithm</a>
+for
 <a>media element</a>'s
 <a>current media session</a>. Then, for all other <a>media sessions</a>, the
 user agent must run the <a>media session continuation algorithm</a>, passing in
@@ -1739,7 +1742,8 @@ When the user agent is to <dfn>unpause a media element</dfn> for a given
 <var>media element</var> it must invoke that <a>media element</a>'s {{play()}}
 method.
 
-<h4 id="releasing-a-media-session-from-an-htmlmediaelement-object">Releasing a
+<h4
+id="deactivating-a-media-session-from-an-htmlmediaelement-object">Deactivating a
 media session from an {{HTMLMediaElement}} object</h4>
 
 When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
@@ -1775,7 +1779,8 @@ steps:
     <a>audio-producing participants</a>.
   </li>
   <li>
-    Run the <a>media session release algorithm</a> for <var>media session</var>.
+    Run the <a>media session deactivation algorithm</a> for <var>media
+    session</var>.
   </li>
 </ol>
 
@@ -1843,8 +1848,8 @@ agent must run the following steps:
   </li>
   <li>
     If <var>old media session</var> is not null and no longer has one or more
-    <a>audio-producing participants</a>, then run the <a>media session release
-    algorithm</a> for <var>old media session</var>.
+    <a>audio-producing participants</a>, then run the <a>media session
+    deactivation algorithm</a> for <var>old media session</var>.
   </li>
 </ol>
 
@@ -1894,8 +1899,8 @@ After the {{suspend()}} method on an {{AudioContext}} object has been invoked
 and that {{AudioContext}} object has a <a>current media session type</a> set to
 <code><a lt="transient media state">Transient</a></code> or
 <code><a lt="transient solo media state">Transient Solo</a></code>, then the
-user agent must immediately run the <a>media session release algorithm</a> for
-{{AudioContext}} object's
+user agent must immediately run the <a>media session deactivation algorithm</a>
+for {{AudioContext}} object's
 <a>current media session</a>. Then, for all other <a>media sessions</a>, the
 user agent must run the <a>media session continuation algorithm</a>, passing in
 each <a>media session</a> as <var>media session</var>.
@@ -1921,8 +1926,8 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 {{AudioContext}} object it must invoke that {{AudioContext}} object's
 {{resume()}} method.
 
-<h4 id="releasing-a-media-session-from-an-audiocontext-object">Releasing a media
-session from an {{AudioContext}} object</h4>
+<h4 id="deactivating-a-media-session-from-an-audiocontext-object">Deactivating a
+media session from an {{AudioContext}} object</h4>
 
 When an {{AudioContext}} object's {{state}} attribute transitions to
 &quot;closed&quot;, the user agent must <a>release web audio object from its
@@ -1958,7 +1963,8 @@ steps:
     <a>audio-producing participants</a>.
   </li>
   <li>
-    Run the <a>media session release algorithm</a> for <var>media session</var>.
+    Run the <a>media session deactivation algorithm</a> for <var>media
+    session</var>.
   </li>
 </ol>
 
