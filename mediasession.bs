@@ -1194,16 +1194,6 @@ dictionary MediaMetadata {
 
 {{MediaSession}} objects are simply known as <a>media sessions</a>.
 
-<h4 id="mediasession-garbage-collection">Garbage collection</h4>
-
-A {{MediaSession}} object must not be garbage collected while its corresponding
-<a>media session</a> is attached to at least one <a>audio-producing object</a>.
-
-Additionally, a {{MediaSession}} object must not be garbage collected while it
-has a <a>media remote controller</a> and that object has an <a>event
-listener</a> whose <b>type</b> is <code>previoustrack</code> or
-<code>nexttrack</code>.
-
 <h4 id="mediasession-constructors">Constructors</h4>
 
 <dl class=domintro>
