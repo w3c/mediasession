@@ -88,7 +88,7 @@
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-13">13 August 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-24">24 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1604,7 +1604,7 @@ user agent must run the following steps:</p>
    <h3 class="heading settled" data-level="5.1" id="the-mediasession-interface"><span class="secno">5.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> interface</span><a class="self-link" href="#the-mediasession-interface"></a></h3>
 
 
-   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" id="dom-mediasession-mediasession-kind-kind">kind<a class="self-link" href="#dom-mediasession-mediasession-kind-kind"></a></dfn>)]
+   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" id="dom-mediasession-mediasession-kind-kind">kind<a class="self-link" href="#dom-mediasession-mediasession-kind-kind"></a></dfn> = "content")]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
@@ -2966,7 +2966,7 @@ session</a><span>, in §7.2.3</span>
    <dt id="biblio-whatwg-dom"><a class="self-link" href="#biblio-whatwg-dom"></a>[WHATWG-DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WebIDL]
-   <dd>Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 19 April 2012. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 4 August 2015. WD. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-page-visibility"><a class="self-link" href="#biblio-page-visibility"></a>[PAGE-VISIBILITY]
    <dd>Jatinder Mann; Arvind Jain. <a href="http://www.w3.org/TR/page-visibility/">Page Visibility (Second Edition)</a>. 29 October 2013. REC. URL: <a href="http://www.w3.org/TR/page-visibility/">http://www.w3.org/TR/page-visibility/</a>
    <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
@@ -2974,7 +2974,7 @@ session</a><span>, in §7.2.3</span>
    <dt id="biblio-webaudio"><a class="self-link" href="#biblio-webaudio"></a>[WEBAUDIO]
    <dd>Paul Adenot; Chris Wilson; Chris Rogers. <a href="https://webaudio.github.io/web-audio-api/">Web Audio API</a>. 10 October 2013. WD. URL: <a href="https://webaudio.github.io/web-audio-api/">https://webaudio.github.io/web-audio-api/</a></dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a href="#dom-mediasession-mediasession-kind-kind">kind</a>)]
+  <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a href="#dom-mediasession-mediasession-kind-kind">kind</a> = "content")]
 interface <a href="#mediasession">MediaSession</a> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
