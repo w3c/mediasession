@@ -1165,7 +1165,7 @@ The <dfn>media session release algorithm</dfn> takes one argument,
 <h3 id="the-mediasession-interface">The {{MediaSession}} interface</h3>
 
 <pre class="idl">
-[Constructor(optional MediaSessionKind kind)]
+[Constructor(optional MediaSessionKind kind = "content")]
 interface MediaSession {
   readonly attribute MediaSessionKind kind;
 
