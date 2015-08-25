@@ -199,12 +199,6 @@ its <a>audio-producing objects</a> with both the underlying platform and other
 <a>audio-producing objects</a> belonging to other <a>media sessions</a> within
 the user agent.
 
-A <a>media session</a> may have associated <dfn>media session metadata</dfn>
-that <em>can</em> consist of <dfn lt="session title">title</dfn>,
-<dfn>artist name</dfn>, <dfn>album name</dfn>, <dfn>artwork URL</dfn> and
-<dfn>artwork resource</dfn>.
-
-<br>
 To <dfn>create a media session</dfn>, given a <var>media session category</var>,
 run these steps:
 
@@ -588,52 +582,6 @@ the original corresponding <a>duck</a> request.
   pages.
 </p>
 
-<h3 id="media-session-resources">Resources</h3>
-
-The <dfn>fetch steps</dfn> for a given <a>media session</a> <var>media
-session</var> are:
-
-<ol>
-  <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
-  <li>
-    If <var>media session metadata</var>'s <a>artwork URL</a> is empty, then
-    terminate these steps.
-  </li>
-  <li>
-    If the platform supports displaying media artwork, let <var>request</var> be
-    a new <a>request</a> whose method is &quot;<code>GET</code>&quot;,
-    <a>url</a> is <var>media session metadata</var>'s <a>artwork URL</a>,
-    <a>context</a> is &quot;<code>image</code>&quot;, <a>context frame type</a>
-    is &quot;<code>none</code>&quot;, <a>origin</a> is the current
-    <a>entry settings object</a>'s <a
-    href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>,
-    <a>force <code>Origin</code> header flag</a> is set, and referrer is <var>no
-    referrer</var>. Otherwise, if the platform does not support displaying media
-    artwork, terminate these steps.
-  </li>
-  <li>
-    <a>Fetch</a> <var>request</var>.
-
-    Then, <a>in parallel</a>:
-
-    <ol>
-      <li>
-        Wait for the <a>response</a>.
-      </li>
-      <li>
-        If the <a>response</a>'s <a>internal response</a>'s
-        <a lt="response type">type</a> is <i>default</i>, attempt to decode the
-        resource as image.
-      </li>
-      <li>
-        If the image format is supported, set <var>media session</var>'s
-        <a>artwork resource</a> to the decoded resource. (Otherwise
-        <var>media session</var> has no <a>artwork resource</a>.)
-      </li>
-    </ol>
-  </li>
-</ol>
-
 <h3 id="media-session-lifecycle">Lifecycle</h3>
 
 When <a lt="create a media session">creating a new media session</a> a <a>media
@@ -697,8 +645,7 @@ The <dfn>media session activation algorithm</dfn> takes one argument,
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform's
             notifications area and/or show an ongoing media interface in the
-            underlying platform's lock screen area, using any
-            available <a>media session metadata</a>.
+            underlying platform's lock screen area.
           </li>
         </ol>
       </dd>
@@ -1149,8 +1096,6 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
 interface MediaSession {
   readonly attribute MediaSessionKind kind;
 
-  void setMetadata(MediaMetadata metadata);
-
   void deactivate();
 };
 
@@ -1159,13 +1104,6 @@ enum MediaSessionKind {
   "transient",
   "transient-solo",
   "ambient"
-};
-
-dictionary MediaMetadata {
-  DOMString title = "";
-  DOMString artist = "";
-  DOMString album = "";
-  USVString artwork;
 };
 </pre>
 
@@ -1216,84 +1154,6 @@ constructor, when invoked, must run these steps:
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
 attribute must return the <a>media session category</a> of the <a>media
 session</a> that was set when the object was created.
-
-<dl class=domintro>
-  <dt>
-    <code><var>session</var> . {{MediaSession/setMetadata(metadata)}}</code>
-  </dt>
-  <dd>
-    Provides the user agent with meta data to use when a <a>media session</a> is
-    showing media control interfaces (e.g. in an OS-level notification area or
-    on a lock screen).
-
-    The <var>metadata</var> argument allows for setting a <a>media session</a>'s
-    current meta data via object members. These are the object members that can
-    be used:
-
-    <dl>
-      <dt>
-        {{MediaMetadata/title}}
-      </dt>
-      <dd>
-        The <a lt="session title">title</a> to display for the <a>media
-        session</a>, if any.
-      </dd>
-      <dt>
-        {{MediaMetadata/artist}}
-      </dt>
-      <dd>
-        The <a>artist name</a> to display for the <a>media session</a>, if any.
-      </dd>
-      <dt>
-        {{MediaMetadata/album}}
-      </dt>
-      <dd>
-        The <a>album name</a> to display for the <a>media session</a>, if any.
-      </dd>
-      <dt>
-        {{MediaMetadata/artwork}}
-      </dt>
-      <dd>
-        The <a>artwork URL</a> for an image resource to display for the <a>media
-        session</a>, if any.
-      </dd>
-    </dl>
-  </dd>
-</dl>
-
-When the <dfn method for="MediaSession"><code>setMetadata(metadata)</code></dfn>
-method is invoked, the user agent must run the following steps:
-
-<ol>
-  <li>
-    Let <var>media session</var> be the current <a>media session</a>.
-  </li>
-  <li>
-    Let <var>baseURL</var> be the <a>API base URL</a> specified by the <a>entry
-    settings object</a>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a lt="session title">title</a> to
-    <var>metadata</var>'s <code>title</code>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>artist name</a> to <var>metadata</var>'s
-    <code>artist</code>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>album name</a> to <var>metadata</var>'s
-    <code>album</code>.
-  </li>
-  <li>
-    If <var>metadata</var>'s <code>artwork</code> is present,
-    <a lt="url parser">parse</a> it using <var>baseURL</var>, and if that does
-    not return failure, set <var>media session</var>'s <a>artwork URL</a> to the
-    return value. (Otherwise <a>artwork URL</a> is not set.)
-  </li>
-  <li>
-    Run the <a>fetch steps</a> for <var>media session</var>.
-  </li>
-</ol>
 
 <dl class=domintro>
   <dt>
@@ -1775,32 +1635,6 @@ audioCtx.session = mySession;
 
 myAudio.play(); // Go!
 audioCtx.resume(); // Go!
-  </pre>
-
-<h3 id="example-setting-media-session-meta-data">Setting media session meta
-data</h3>
-
-When a <code><a lt="content media state">Content</a></code>-based <a>media
-session</a> is <code><a lt="active media session state">active</a></code> it may
-be possible to display meta data within platform-level interfaces. Media session
-meta data can be added at any time to update these interfaces:
-
-<pre class="lang-javascript">
-// Set some media session metadata
-// to display to the user
-mySession.setMetadata({
-  title: "Demo Track 1",
-  artwork: "/resources/cover1.png"
-});
-
-// ... time passes ...
-
-// Change the media session metadata
-// to display to the user
-mySession.setMetadata({
-  title: "Demo Track 2",
-  artwork: "/resources/cover2.png"
-});
   </pre>
 
 <h2 id="acknowledgments" class="no-num">Acknowledgments</h2>
