@@ -136,12 +136,11 @@ notification areas and on lock screens of mobile devices.</p>
       <li><a href="#media-session-states"><span class="secno">4.1</span> <span class="content">States</span></a>
       <li><a href="#media-session-types"><span class="secno">4.2</span> <span class="content">Types</span></a>
       <li><a href="#media-session-participants"><span class="secno">4.3</span> <span class="content">Participants</span></a>
-      <li><a href="#media-session-resources"><span class="secno">4.4</span> <span class="content">Resources</span></a>
-      <li><a href="#media-session-lifecycle"><span class="secno">4.5</span> <span class="content">Lifecycle</span></a>
+      <li><a href="#media-session-lifecycle"><span class="secno">4.4</span> <span class="content">Lifecycle</span></a>
        <ul class="toc">
-        <li><a href="#activating-a-media-session"><span class="secno">4.5.1</span> <span class="content">Activating a media session</span></a>
-        <li><a href="#interrupting-a-media-session"><span class="secno">4.5.2</span> <span class="content">Interrupting a media session</span></a>
-        <li><a href="#deactivating-a-media-session"><span class="secno">4.5.3</span> <span class="content">Deactivating a media session</span></a>
+        <li><a href="#activating-a-media-session"><span class="secno">4.4.1</span> <span class="content">Activating a media session</span></a>
+        <li><a href="#interrupting-a-media-session"><span class="secno">4.4.2</span> <span class="content">Interrupting a media session</span></a>
+        <li><a href="#deactivating-a-media-session"><span class="secno">4.4.3</span> <span class="content">Deactivating a media session</span></a>
        </ul>
      </ul>
     <li><a href="#api"><span class="secno">5</span> <span class="content">API</span></a>
@@ -185,7 +184,6 @@ media session from an <code class="idl"><span>AudioContext</span></code> object<
     <li><a href="#examples"><span class="secno">8</span> <span class="content">Examples</span></a>
      <ul class="toc">
       <li><a href="#example-setting-up-a-media-session"><span class="secno">8.1</span> <span class="content">Setting up a media session</span></a>
-      <li><a href="#example-setting-media-session-metadata"><span class="secno">8.2</span> <span class="content">Setting media session metadata</span></a>
      </ul>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -309,14 +307,7 @@ its <a data-link-type="dfn" href="#audio_producing-object">audio-producing objec
 the user agent.</p>
 
 
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> may have associated <dfn data-dfn-type="dfn" data-noexport="" id="media-session-metadata">media session metadata<a class="self-link" href="#media-session-metadata"></a></dfn>
-that <em>can</em> consist of <dfn data-dfn-type="dfn" data-lt="session title" data-noexport="" id="session-title">title<a class="self-link" href="#session-title"></a></dfn>,
-<dfn data-dfn-type="dfn" data-noexport="" id="artist-name">artist name<a class="self-link" href="#artist-name"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport="" id="album-name">album name<a class="self-link" href="#album-name"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport="" id="artwork-url">artwork URL<a class="self-link" href="#artwork-url"></a></dfn> and
-<dfn data-dfn-type="dfn" data-noexport="" id="artwork-resource">artwork resource<a class="self-link" href="#artwork-resource"></a></dfn>.</p>
-
-
-   <p><br>
-To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>media session category</var>,
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>media session category</var>,
 run these steps:</p>
 
 
@@ -814,69 +805,7 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
 </p>
 
 
-   <h3 class="heading settled" data-level="4.4" id="media-session-resources"><span class="secno">4.4. </span><span class="content">Resources</span><a class="self-link" href="#media-session-resources"></a></h3>
-
-
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="fetch-steps">fetch steps<a class="self-link" href="#fetch-steps"></a></dfn> for a given <a data-link-type="dfn" href="#media-session">media session</a> <var>media
-session</var> are:</p>
-
-
-   <ol>
-  
-  
-    <li>
-    If <var>media session metadata</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a> is empty, then
-    terminate these steps.
-  
-  
-    <li>
-    If the platform supports displaying media artwork, let <var>request</var> be
-    a new <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> whose method is "<code>GET</code>",
-    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-url">url</a> is <var>media session metadata</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a>,
-    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-context">context</a> is "<code>image</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-context-frame-type">context frame type</a>
-    is "<code>none</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-origin">origin</a> is the current
-    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>’s <a href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>,
-    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force <code>Origin</code> header flag</a> is set, and referrer is <var>no
-    referrer</var>. Otherwise, if the platform does not support displaying media
-    artwork, terminate these steps.
-  
-  
-    <li>
-    <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch">Fetch</a> <var>request</var>.
-
-
-     <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
-     
-
-    
-     <ol>
-      
-      <li>
-        Wait for the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>.
-      
-      
-      
-      <li>
-        If the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-internal-response">internal response</a>’s
-        <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-type">type</a> is <i>default</i>, attempt to decode the
-        resource as image.
-      
-      
-      
-      <li>
-        If the image format is supported, set <var>media session</var>’s
-        <a data-link-type="dfn" href="#artwork-resource">artwork resource</a> to the decoded resource. (Otherwise
-        <var>media session</var> has no <a data-link-type="dfn" href="#artwork-resource">artwork resource</a>.)
-      
-      
-    
-     </ol>
-     
-  
-</ol>
-
-
-   <h3 class="heading settled" data-level="4.5" id="media-session-lifecycle"><span class="secno">4.5. </span><span class="content">Lifecycle</span><a class="self-link" href="#media-session-lifecycle"></a></h3>
+   <h3 class="heading settled" data-level="4.4" id="media-session-lifecycle"><span class="secno">4.4. </span><span class="content">Lifecycle</span><a class="self-link" href="#media-session-lifecycle"></a></h3>
 
 
    <p>When <a data-link-type="dfn" href="#create-a-media-session">creating a new media session</a> a <a data-link-type="dfn" href="#media-session">media
@@ -906,7 +835,7 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
 <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
 
 
-   <h4 class="heading settled" data-level="4.5.1" id="activating-a-media-session"><span class="secno">4.5.1. </span><span class="content">Activating a media session</span><a class="self-link" href="#activating-a-media-session"></a></h4>
+   <h4 class="heading settled" data-level="4.4.1" id="activating-a-media-session"><span class="secno">4.4.1. </span><span class="content">Activating a media session</span><a class="self-link" href="#activating-a-media-session"></a></h4>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-activation-algorithm">media session activation algorithm<a class="self-link" href="#media-session-activation-algorithm"></a></dfn> takes one argument,
@@ -950,8 +879,7 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform’s
             notifications area and/or show an ongoing media interface in the
-            underlying platform’s lock screen area, using any
-            available <a data-link-type="dfn" href="#media-session-metadata">media session metadata</a>.
+            underlying platform’s lock screen area.
           
         
         
@@ -1016,7 +944,7 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
 </ol>
 
 
-   <h4 class="heading settled" data-level="4.5.2" id="interrupting-a-media-session"><span class="secno">4.5.2. </span><span class="content">Interrupting a media session</span><a class="self-link" href="#interrupting-a-media-session"></a></h4>
+   <h4 class="heading settled" data-level="4.4.2" id="interrupting-a-media-session"><span class="secno">4.4.2. </span><span class="content">Interrupting a media session</span><a class="self-link" href="#interrupting-a-media-session"></a></h4>
 
 
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its
@@ -1502,7 +1430,7 @@ user agent must run the following steps:</p>
 </ol>
 
 
-   <h4 class="heading settled" data-level="4.5.3" id="deactivating-a-media-session"><span class="secno">4.5.3. </span><span class="content">Deactivating a media session</span><a class="self-link" href="#deactivating-a-media-session"></a></h4>
+   <h4 class="heading settled" data-level="4.4.3" id="deactivating-a-media-session"><span class="secno">4.4.3. </span><span class="content">Deactivating a media session</span><a class="self-link" href="#deactivating-a-media-session"></a></h4>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-deactivation-algorithm">media session deactivation algorithm<a class="self-link" href="#media-session-deactivation-algorithm"></a></dfn> takes one argument,
@@ -1572,8 +1500,6 @@ user agent must run the following steps:</p>
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
-  void <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmetadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <dfn class="idl-code" data-dfn-for="MediaSession/setMetadata(metadata)" data-dfn-type="argument" data-export="" id="dom-mediasession-setmetadata-metadata-metadata">metadata<a class="self-link" href="#dom-mediasession-setmetadata-metadata-metadata"></a></dfn>);
-
   void <a class="idl-code" data-link-type="method" href="#dom-mediasession-deactivate">deactivate</a>();
 };
 
@@ -1582,13 +1508,6 @@ enum <dfn class="idl-code" data-dfn-type="enum" data-export="" id="enumdef-media
   "transient",
   "transient-solo",
   "ambient"
-};
-
-dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-mediametadata">MediaMetadata<a class="self-link" href="#dictdef-mediametadata"></a></dfn> {
-  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadata-title">title<a class="self-link" href="#dom-mediametadata-title"></a></dfn> = "";
-  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadata-artist">artist<a class="self-link" href="#dom-mediametadata-artist"></a></dfn> = "";
-  DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadata-album">album<a class="self-link" href="#dom-mediametadata-album"></a></dfn> = "";
-  USVString <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="dict-member" data-export="" data-type="USVString " id="dom-mediametadata-artwork">artwork<a class="self-link" href="#dom-mediametadata-artwork"></a></dfn>;
 };
 </pre>
 
@@ -1652,117 +1571,6 @@ constructor, when invoked, must run these steps:</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn>
 attribute must return the <a data-link-type="dfn" href="#media-session-category">media session category</a> of the <a data-link-type="dfn" href="#media-session">media
 session</a> that was set when the object was created.</p>
-
-
-   <dl class="domintro">
-  
-    <dt>
-    <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-setmetadata">setMetadata(metadata)</a></code></code>
-  
-  
-    <dd>
-    Provides the user agent with metadata to use when a <a data-link-type="dfn" href="#media-session">media session</a> is
-    showing media control interfaces (e.g. in an OS-level notification area or
-    on a lock screen).
-
-
-     <p>The <var>metadata</var> argument allows for setting a <a data-link-type="dfn" href="#media-session">media session</a>’s
-    current metadata via object members. These are the object members that can
-    be used:</p>
-     
-
-    
-     <dl>
-      
-      <dt>
-        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-title">title</a></code>
-      
-      
-      
-      <dd>
-        The <a data-link-type="dfn" href="#session-title">title</a> to display for the <a data-link-type="dfn" href="#media-session">media
-        session</a>, if any.
-      
-      
-      
-      <dt>
-        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artist">artist</a></code>
-      
-      
-      
-      <dd>
-        The <a data-link-type="dfn" href="#artist-name">artist name</a> to display for the <a data-link-type="dfn" href="#media-session">media session</a>, if any.
-      
-      
-      
-      <dt>
-        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-album">album</a></code>
-      
-      
-      
-      <dd>
-        The <a data-link-type="dfn" href="#album-name">album name</a> to display for the <a data-link-type="dfn" href="#media-session">media session</a>, if any.
-      
-      
-      
-      <dt>
-        <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artwork">artwork</a></code>
-      
-      
-      
-      <dd>
-        The <a data-link-type="dfn" href="#artwork-url">artwork URL</a> for an image resource to display for the <a data-link-type="dfn" href="#media-session">media
-        session</a>, if any.
-      
-      
-    
-     </dl>
-     
-  
-</dl>
-
-
-   <p>When the <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export="" id="dom-mediasession-setmetadata"><code>setMetadata(metadata)</code><a class="self-link" href="#dom-mediasession-setmetadata"></a></dfn>
-method is invoked, the user agent must run the following steps:</p>
-
-
-   <ol>
-  
-    <li>
-    Let <var>media session</var> be the current <a data-link-type="dfn" href="#media-session">media session</a>.
-  
-  
-    <li>
-    Let <var>baseURL</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#api-base-url">API base URL</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry
-    settings object</a>.
-  
-  
-    <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#session-title">title</a> to
-    <var>metadata</var>’s <code>title</code>.
-  
-  
-    <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#artist-name">artist name</a> to <var>metadata</var>’s
-    <code>artist</code>.
-  
-  
-    <li>
-    Set <var>media session</var>’s <a data-link-type="dfn" href="#album-name">album name</a> to <var>metadata</var>’s
-    <code>album</code>.
-  
-  
-    <li>
-    If <var>metadata</var>’s <code>artwork</code> is present,
-    <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser">parse</a> it using <var>baseURL</var>, and if that does
-    not return failure, set <var>media session</var>’s <a data-link-type="dfn" href="#artwork-url">artwork URL</a> to the
-    return value. (Otherwise <a data-link-type="dfn" href="#artwork-url">artwork URL</a> is not set.)
-  
-  
-    <li>
-    Run the <a data-link-type="dfn" href="#fetch-steps">fetch steps</a> for <var>media session</var>.
-  
-</ol>
 
 
    <dl class="domintro">
@@ -2329,32 +2137,6 @@ objects to a single <a data-link-type="dfn" href="#media-session">media session<
 <span class="nx">audioCtx</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span> <span class="c1">// Go!</span></pre>
 
 
-   <h3 class="heading settled" data-level="8.2" id="example-setting-media-session-metadata"><span class="secno">8.2. </span><span class="content">Setting media session metadata</span><a class="self-link" href="#example-setting-media-session-metadata"></a></h3>
-
-
-   <p>When a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> it may
-be possible to display metadata within platform-level interfaces. Media session
-metadata can be added at any time to update these interfaces:</p>
-
-
-   <pre class="lang-javascript highlight"><span class="c1">// Set some media session metadata</span>
-<span class="c1">// to display to the user</span>
-<span class="nx">mySession</span><span class="p">.</span><span class="nx">setMetadata</span><span class="p">({</span>
-  <span class="nx">title</span><span class="o">:</span> <span class="s2">"Demo Track 1"</span><span class="p">,</span>
-  <span class="nx">artwork</span><span class="o">:</span> <span class="s2">"/resources/cover1.png"</span>
-<span class="p">});</span>
-
-<span class="c1">// ... time passes ...</span>
-
-<span class="c1">// Change the media session metadata</span>
-<span class="c1">// to display to the user</span>
-<span class="nx">mySession</span><span class="p">.</span><span class="nx">setMetadata</span><span class="p">({</span>
-  <span class="nx">title</span><span class="o">:</span> <span class="s2">"Demo Track 2"</span><span class="p">,</span>
-  <span class="nx">artwork</span><span class="o">:</span> <span class="s2">"/resources/cover2.png"</span>
-<span class="p">});</span></pre>
-
-
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
 
 
@@ -2391,15 +2173,8 @@ neighboring rights to this work.</p>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li><a href="#active-media-session-state">active media session state</a><span>, in §4.1</span>
-   <li><a href="#dom-mediametadata-album">album</a><span>, in §5.1</span>
-   <li><a href="#album-name">album name</a><span>, in §4</span>
    <li><a href="#ambient-attribute-value">ambient attribute value</a><span>, in §4.2</span>
    <li><a href="#ambient-media-state">ambient media state</a><span>, in §4.2</span>
-   <li><a href="#dom-mediametadata-artist">artist</a><span>, in §5.1</span>
-   <li><a href="#artist-name">artist name</a><span>, in §4</span>
-   <li><a href="#dom-mediametadata-artwork">artwork</a><span>, in §5.1</span>
-   <li><a href="#artwork-resource">artwork resource</a><span>, in §4</span>
-   <li><a href="#artwork-url">artwork URL</a><span>, in §4</span>
    <li><a href="#audio_producing-object">audio-producing object</a><span>, in §4.3</span>
    <li><a href="#audio_producing-participants">audio-producing participants</a><span>, in §4.3</span>
    <li><a href="#content-attribute-value">content attribute value</a><span>, in §4.2</span>
@@ -2411,7 +2186,6 @@ neighboring rights to this work.</p>
    <li><a href="#dom-mediasession-deactivate">deactivate()</a><span>, in §5.1.2</span>
    <li><a href="#default-media-state">default media state</a><span>, in §4.2</span>
    <li><a href="#duck">duck</a><span>, in §4.3</span>
-   <li><a href="#fetch-steps">fetch steps</a><span>, in §4.4</span>
    <li><a href="#idle-media-session-state">idle media session state</a><span>, in §4.1</span>
    <li><a href="#indefinitely-pause">indefinitely pause</a><span>, in §4.3</span>
    <li><a href="#interrupted-media-session-state">interrupted media session state</a><span>, in §4.1</span>
@@ -2420,20 +2194,17 @@ neighboring rights to this work.</p>
      <li><a href="#dom-mediasession-mediasession-kind-kind">argument for MediaSession/MediaSession(kind)</a><span>, in §5.1</span>
      <li><a href="#dom-mediasession-kind">attribute for MediaSession</a><span>, in §5.1.2</span>
     </ul>
-   <li><a href="#dictdef-mediametadata">MediaMetadata</a><span>, in §5.1</span>
    <li><a href="#media-session">media session</a><span>, in §4</span>
    <li><a href="#mediasession">MediaSession</a><span>, in §5.1</span>
-   <li><a href="#media-session-activation-algorithm">media session activation algorithm</a><span>, in §4.5.1</span>
+   <li><a href="#media-session-activation-algorithm">media session activation algorithm</a><span>, in §4.4.1</span>
    <li><a href="#media-session-category">media session category</a><span>, in §4.2</span>
-   <li><a href="#media-session-continuation-algorithm">media session continuation algorithm</a><span>, in §4.5.2</span>
-   <li><a href="#media-session-deactivation-algorithm">media session deactivation algorithm</a><span>, in §4.5.3</span>
-   <li><a href="#media-session-interruption-algorithm">media session interruption algorithm</a><span>, in §4.5.2</span>
+   <li><a href="#media-session-continuation-algorithm">media session continuation algorithm</a><span>, in §4.4.2</span>
+   <li><a href="#media-session-deactivation-algorithm">media session deactivation algorithm</a><span>, in §4.4.3</span>
+   <li><a href="#media-session-interruption-algorithm">media session interruption algorithm</a><span>, in §4.4.2</span>
    <li><a href="#enumdef-mediasessionkind">MediaSessionKind</a><span>, in §5.1</span>
    <li><a href="#dom-mediasession-mediasession">MediaSession(kind)</a><span>, in §5.1.1</span>
-   <li><a href="#media-session-metadata">media session metadata</a><span>, in §4</span>
    <li><a href="#media-session-type">media session
 type</a><span>, in §4.2</span>
-   <li><a href="#dom-mediasession-setmetadata-metadata-metadata">metadata</a><span>, in §5.1</span>
    <li><a href="#pause">pause</a><span>, in §4.3</span>
    <li><a href="#pause-a-media-element">pause a media element</a><span>, in §6.2.2</span>
    <li><a href="#release-media-element-from-its-media-session">release media element from its media
@@ -2447,10 +2218,7 @@ session</a><span>, in §7.2.3</span>
      <li><a href="#dom-htmlmediaelement-session">attribute for HTMLMediaElement</a><span>, in §6.1</span>
      <li><a href="#dom-audiocontext-session">attribute for AudioContext</a><span>, in §7.1</span>
     </ul>
-   <li><a href="#session-title">session title</a><span>, in §4</span>
-   <li><a href="#dom-mediasession-setmetadata">setMetadata(metadata)</a><span>, in §5.1.2</span>
    <li><a href="#suspend-a-web-audio-object">suspend a web audio object</a><span>, in §7.2.2</span>
-   <li><a href="#dom-mediametadata-title">title</a><span>, in §5.1</span>
    <li><a href="#transient-attribute-value">transient attribute
       value</a><span>, in §4.2</span>
    <li><a href="#transient-media-state">transient media state</a><span>, in §4.2</span>
@@ -2462,32 +2230,16 @@ session</a><span>, in §7.2.3</span>
    <li><a href="#unpause-a-media-element">unpause a media element</a><span>, in §6.2.2</span></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
-   <li><a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> defines the following terms:
-    <ul>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-request-context">context</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-request-context-frame-type">context frame type</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>
-     <li><a href="https://fetch.spec.whatwg.org/#force-origin-header-flag">force origin header flag</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-internal-response">internal response</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-request-origin">origin</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-request">request</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-response">response</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-response-type">response type</a>
-     <li><a href="https://fetch.spec.whatwg.org/#concept-request-url">url</a>
-    </ul>
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#api-base-url">api base url</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#case-sensitivity-and-string-comparison">case-sensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">ended playback</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal pause steps</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">media element load algorithm</a>
@@ -2516,8 +2268,6 @@ session</a><span>, in §7.2.3</span>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
-   <dt id="biblio-fetch"><a class="self-link" href="#biblio-fetch"></a>[FETCH]
-   <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html"><a class="self-link" href="#biblio-html"></a>[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WebIDL]
@@ -2533,8 +2283,6 @@ session</a><span>, in §7.2.3</span>
 interface <a href="#mediasession">MediaSession</a> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
-  void <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmetadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <a href="#dom-mediasession-setmetadata-metadata-metadata">metadata</a>);
-
   void <a class="idl-code" data-link-type="method" href="#dom-mediasession-deactivate">deactivate</a>();
 };
 
@@ -2543,13 +2291,6 @@ enum <a href="#enumdef-mediasessionkind">MediaSessionKind</a> {
   "transient",
   "transient-solo",
   "ambient"
-};
-
-dictionary <a href="#dictdef-mediametadata">MediaMetadata</a> {
-  DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-title">title</a> = "";
-  DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-artist">artist</a> = "";
-  DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-album">album</a> = "";
-  USVString <a data-type="USVString " href="#dom-mediametadata-artwork">artwork</a>;
 };
 
 partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
