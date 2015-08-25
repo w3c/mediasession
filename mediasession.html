@@ -88,7 +88,7 @@
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-24">24 August 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-25">25 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -909,7 +909,7 @@ session</var> are:</p>
 session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> is initially set to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
 
 
-   <p>When the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
+   <p>When the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
 session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> to
 <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
 
@@ -935,7 +935,7 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
    <h4 class="heading settled" data-level="4.5.1" id="activating-a-media-session"><span class="secno">4.5.1. </span><span class="content">Activating a media session</span><a class="self-link" href="#activating-a-media-session"></a></h4>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-invocation-algorithm">media session invocation algorithm<a class="self-link" href="#media-session-invocation-algorithm"></a></dfn> takes one argument,
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-activation-algorithm">media session activation algorithm<a class="self-link" href="#media-session-activation-algorithm"></a></dfn> takes one argument,
 <var>media session</var>, and consists of the following steps:</p>
 
 
@@ -1055,7 +1055,7 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
 
 
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its
-<a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> has been run. This typically occurs
+<a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation algorithm</a> has been run. This typically occurs
 when another application or another <a data-link-type="dfn" href="#media-session">media session</a> requests and is granted
 a level of platform media focus that affects the <a data-link-type="dfn" href="#media-session">media session</a> based on
 its <a data-link-type="dfn" href="#current-media-session-type">current media session type</a>.</p>
@@ -1120,7 +1120,7 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
 
             
          <p class="note" role="note">
-              This implies that the next time the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
+              This implies that the next time the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation
               algorithm</a> is run against <var>media session</var> that we will
               re-request media focus according to the steps defined in that
               algorithm.
@@ -1588,7 +1588,7 @@ user agent must run the following steps:</p>
 
     
      <p class="note" role="note">
-      This implies that the next time the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation
+      This implies that the next time the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation
       algorithm</a> is run against <var>media session</var> that we will
       re-request media focus according to the steps defined in that algorithm.
     </p>
@@ -1924,7 +1924,7 @@ control interfaces. By default, this attribute is false.</p>
 
    <p class="note" role="note">
   While the attributes above can be set at any time they must only be read by
-  the user agent during the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session invocation algorithm</a> in order
+  the user agent during the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation algorithm</a> in order
   to correctly configure any connected remote control interfaces at the point
   they become <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
 </p>
@@ -2269,8 +2269,8 @@ following steps, passing in <a data-link-type="dfn" href="https://html.spec.what
   
   
     <li>
-    Let <var>activated</var> be the result of running the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session
-    invocation algorithm</a> for <var>media session</var>.
+    Let <var>activated</var> be the result of running the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session
+    activation algorithm</a> for <var>media session</var>.
   
   
     <li>
@@ -2495,8 +2495,8 @@ script and that <code class="idl"><a data-link-type="idl" href="https://webaudio
   
   
     <li>
-    Let <var>activated</var> be the result of running the <a data-link-type="dfn" href="#media-session-invocation-algorithm">media session
-    invocation algorithm</a> for <var>media session</var>.
+    Let <var>activated</var> be the result of running the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session
+    activation algorithm</a> for <var>media session</var>.
   
   
     <li>
@@ -2831,11 +2831,11 @@ neighboring rights to this work.</p>
    <li><a href="#media-remote-controls">media remote controls</a><span>, in §5.2</span>
    <li><a href="#media-session">media session</a><span>, in §4</span>
    <li><a href="#mediasession">MediaSession</a><span>, in §5.1</span>
+   <li><a href="#media-session-activation-algorithm">media session activation algorithm</a><span>, in §4.5.1</span>
    <li><a href="#media-session-category">media session category</a><span>, in §4.2</span>
    <li><a href="#media-session-continuation-algorithm">media session continuation algorithm</a><span>, in §4.5.2</span>
    <li><a href="#media-session-deactivation-algorithm">media session deactivation algorithm</a><span>, in §4.5.3</span>
    <li><a href="#media-session-interruption-algorithm">media session interruption algorithm</a><span>, in §4.5.2</span>
-   <li><a href="#media-session-invocation-algorithm">media session invocation algorithm</a><span>, in §4.5.1</span>
    <li><a href="#enumdef-mediasessionkind">MediaSessionKind</a><span>, in §5.1</span>
    <li><a href="#dom-mediasession-mediasession">MediaSession(kind)</a><span>, in §5.1.1</span>
    <li><a href="#media-session-metadata">media session metadata</a><span>, in §4</span>
