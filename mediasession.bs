@@ -654,7 +654,7 @@ When <a lt="create a media session">creating a new media session</a> a <a>media
 session</a>'s <a>current state</a> is initially set to <code><a lt="idle media
 session state">idle</a></code>.
 
-When the <a>media session invocation algorithm</a> is run a <a>media
+When the <a>media session activation algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from <code><a lt="idle media
 session state">idle</a></code> to
 <code><a lt="active media session state">active</a></code>.
@@ -681,7 +681,7 @@ state">interrupted</a></code> to
 
 <h4 id="activating-a-media-session">Activating a media session</h4>
 
-The <dfn>media session invocation algorithm</dfn> takes one argument,
+The <dfn>media session activation algorithm</dfn> takes one argument,
 <var>media session</var>, and consists of the following steps:
 
 <ol>
@@ -769,7 +769,7 @@ The <dfn>media session invocation algorithm</dfn> takes one argument,
 <h4 id="interrupting-a-media-session">Interrupting a media session</h4>
 
 A <a>media session</a> may be interrupted at any time after its
-<a>media session invocation algorithm</a> has been run. This typically occurs
+<a>media session activation algorithm</a> has been run. This typically occurs
 when another application or another <a>media session</a> requests and is granted
 a level of platform media focus that affects the <a>media session</a> based on
 its <a>current media session type</a>.
@@ -823,7 +823,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             session state">idle</a></code>.
 
             <p class="note">
-              This implies that the next time the <a>media session invocation
+              This implies that the next time the <a>media session activation
               algorithm</a> is run against <var>media session</var> that we will
               re-request media focus according to the steps defined in that
               algorithm.
@@ -1154,7 +1154,7 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
     <code><a lt="idle media session state">idle</a></code>.
 
     <p class="note">
-      This implies that the next time the <a>media session invocation
+      This implies that the next time the <a>media session activation
       algorithm</a> is run against <var>media session</var> that we will
       re-request media focus according to the steps defined in that algorithm.
     </p>
@@ -1420,7 +1420,7 @@ control interfaces. By default, this attribute is false.
 
 <p class="note">
   While the attributes above can be set at any time they must only be read by
-  the user agent during the <a>media session invocation algorithm</a> in order
+  the user agent during the <a>media session activation algorithm</a> in order
   to correctly configure any connected remote control interfaces at the point
   they become <code><a lt="active media session state">active</a></code>.
 </p>
@@ -1680,7 +1680,7 @@ following steps, passing in <a>media element</a> as <var>media element</var>:
   </li>
   <li>
     Let <var>activated</var> be the result of running the <a>media session
-    invocation algorithm</a> for <var>media session</var>.
+    activation algorithm</a> for <var>media session</var>.
   </li>
   <li>
     If <var>activated</var> is failure, <a>pause</a> <var>current media
@@ -1870,7 +1870,7 @@ script and that {{AudioContext}} object's {{state}} attribute is
   </li>
   <li>
     Let <var>activated</var> be the result of running the <a>media session
-    invocation algorithm</a> for <var>media session</var>.
+    activation algorithm</a> for <var>media session</var>.
   </li>
   <li>
     If <var>activated</var> is failure, <a>pause</a> <var>audio object</var>.
