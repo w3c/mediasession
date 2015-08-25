@@ -185,8 +185,7 @@ media session from an <code class="idl"><span>AudioContext</span></code> object<
     <li><a href="#examples"><span class="secno">8</span> <span class="content">Examples</span></a>
      <ul class="toc">
       <li><a href="#example-setting-up-a-media-session"><span class="secno">8.1</span> <span class="content">Setting up a media session</span></a>
-      <li><a href="#example-setting-media-session-meta-data"><span class="secno">8.2</span> <span class="content">Setting media session meta
-data</span></a>
+      <li><a href="#example-setting-media-session-metadata"><span class="secno">8.2</span> <span class="content">Setting media session metadata</span></a>
      </ul>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1662,13 +1661,13 @@ session</a> that was set when the object was created.</p>
   
   
     <dd>
-    Provides the user agent with meta data to use when a <a data-link-type="dfn" href="#media-session">media session</a> is
+    Provides the user agent with metadata to use when a <a data-link-type="dfn" href="#media-session">media session</a> is
     showing media control interfaces (e.g. in an OS-level notification area or
     on a lock screen).
 
 
      <p>The <var>metadata</var> argument allows for setting a <a data-link-type="dfn" href="#media-session">media session</a>’s
-    current meta data via object members. These are the object members that can
+    current metadata via object members. These are the object members that can
     be used:</p>
      
 
@@ -2330,14 +2329,13 @@ objects to a single <a data-link-type="dfn" href="#media-session">media session<
 <span class="nx">audioCtx</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span> <span class="c1">// Go!</span></pre>
 
 
-   <h3 class="heading settled" data-level="8.2" id="example-setting-media-session-meta-data"><span class="secno">8.2. </span><span class="content">Setting media session meta
-data</span><a class="self-link" href="#example-setting-media-session-meta-data"></a></h3>
+   <h3 class="heading settled" data-level="8.2" id="example-setting-media-session-metadata"><span class="secno">8.2. </span><span class="content">Setting media session metadata</span><a class="self-link" href="#example-setting-media-session-metadata"></a></h3>
 
 
    <p>When a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
 session</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> it may
-be possible to display meta data within platform-level interfaces. Media session
-meta data can be added at any time to update these interfaces:</p>
+be possible to display metadata within platform-level interfaces. Media session
+metadata can be added at any time to update these interfaces:</p>
 
 
    <pre class="lang-javascript highlight"><span class="c1">// Set some media session metadata</span>

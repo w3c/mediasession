@@ -1222,12 +1222,12 @@ session</a> that was set when the object was created.
     <code><var>session</var> . {{MediaSession/setMetadata(metadata)}}</code>
   </dt>
   <dd>
-    Provides the user agent with meta data to use when a <a>media session</a> is
+    Provides the user agent with metadata to use when a <a>media session</a> is
     showing media control interfaces (e.g. in an OS-level notification area or
     on a lock screen).
 
     The <var>metadata</var> argument allows for setting a <a>media session</a>'s
-    current meta data via object members. These are the object members that can
+    current metadata via object members. These are the object members that can
     be used:
 
     <dl>
@@ -1777,13 +1777,12 @@ myAudio.play(); // Go!
 audioCtx.resume(); // Go!
   </pre>
 
-<h3 id="example-setting-media-session-meta-data">Setting media session meta
-data</h3>
+<h3 id="example-setting-media-session-metadata">Setting media session metadata</h3>
 
 When a <code><a lt="content media state">Content</a></code>-based <a>media
 session</a> is <code><a lt="active media session state">active</a></code> it may
-be possible to display meta data within platform-level interfaces. Media session
-meta data can be added at any time to update these interfaces:
+be possible to display metadata within platform-level interfaces. Media session
+metadata can be added at any time to update these interfaces:
 
 <pre class="lang-javascript">
 // Set some media session metadata
