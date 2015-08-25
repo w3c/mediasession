@@ -151,13 +151,6 @@ notification areas and on lock screens of mobile devices.</p>
         <li><a href="#mediasession-constructors"><span class="secno">5.1.1</span> <span class="content">Constructors</span></a>
         <li><a href="#mediasession-object-members"><span class="secno">5.1.2</span> <span class="content">Object members</span></a>
        </ul>
-      <li><a href="#the-mediaremotecontrols-interface"><span class="secno">5.2</span> <span class="content">The <code class="idl"><span>MediaRemoteControls</span></code>
-interface</span></a>
-       <ul class="toc">
-        <li><a href="#mediaremotecontrols-object-members"><span class="secno">5.2.1</span> <span class="content">Object members</span></a>
-        <li><a href="#mediaremotecontrols-event-handlers"><span class="secno">5.2.2</span> <span class="content">Event handlers</span></a>
-        <li><a href="#mediaremotecontrols-events-summary"><span class="secno">5.2.3</span> <span class="content">Events summary</span></a>
-       </ul>
      </ul>
     <li><a href="#media-element-extensions"><span class="secno">6</span> <span class="content">Media element extensions</span></a>
      <ul class="toc">
@@ -194,8 +187,6 @@ media session from an <code class="idl"><span>AudioContext</span></code> object<
       <li><a href="#example-setting-up-a-media-session"><span class="secno">8.1</span> <span class="content">Setting up a media session</span></a>
       <li><a href="#example-setting-media-session-meta-data"><span class="secno">8.2</span> <span class="content">Setting media session meta
 data</span></a>
-      <li><a href="#example-responding-to-media-remote-control-events"><span class="secno">8.3</span> <span class="content">Responding to media
-remote control events</span></a>
      </ul>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -319,14 +310,6 @@ its <a data-link-type="dfn" href="#audio_producing-object">audio-producing objec
 the user agent.</p>
 
 
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> may have a <dfn data-dfn-type="dfn" data-noexport="" id="media-remote-controller">media remote controller<a class="self-link" href="#media-remote-controller"></a></dfn> that
-provides access to <a data-link-type="dfn" href="#media-remote-controls">media remote controls</a>. A <a data-link-type="dfn" href="#media-remote-controller">media remote
-controller</a> can be used to request particular media key access and respond to
-hardware or software remote control events. Such events may be triggered by e.g.
-keyboard media keys, headphone buttons, remote controller buttons or
-notification and lock screen media buttons.</p>
-
-
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may have associated <dfn data-dfn-type="dfn" data-noexport="" id="media-session-metadata">media session metadata<a class="self-link" href="#media-session-metadata"></a></dfn>
 that <em>can</em> consist of <dfn data-dfn-type="dfn" data-lt="session title" data-noexport="" id="session-title">title<a class="self-link" href="#session-title"></a></dfn>,
 <dfn data-dfn-type="dfn" data-noexport="" id="artist-name">artist name<a class="self-link" href="#artist-name"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport="" id="album-name">album name<a class="self-link" href="#album-name"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport="" id="artwork-url">artwork URL<a class="self-link" href="#artwork-url"></a></dfn> and
@@ -352,14 +335,6 @@ run these steps:</p>
     <var>media session category</var> or <var>media session category</var> is
     empty, then set <var>media session</var>’s
     <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>".
-  
-  
-    <li>
-    If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-    "<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>", then
-    create a new <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> for <var>media session</var>.
-    (Otherwise
-    <var>media session</var> has no <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>.)
   
   
     <li>
@@ -976,17 +951,8 @@ may be set from either <code><a data-link-type="dfn" href="#active-media-session
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform’s
             notifications area and/or show an ongoing media interface in the
-            underlying platform’s lock screen area for <var>media session</var>
-            based on its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>, if any, and using any
+            underlying platform’s lock screen area, using any
             available <a data-link-type="dfn" href="#media-session-metadata">media session metadata</a>.
-          
-        
-          
-        <li>
-            Optionally, based on platform conventions, the user agent may allow
-            hardware and/or software media keys to control playback of
-            <var>media session</var>’s <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a> based
-            on its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>, if any.
           
         
         
@@ -1607,8 +1573,6 @@ user agent must run the following steps:</p>
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
 
-  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
-
   void <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmetadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <dfn class="idl-code" data-dfn-for="MediaSession/setMetadata(metadata)" data-dfn-type="argument" data-export="" id="dom-mediasession-setmetadata-metadata-metadata">metadata<a class="self-link" href="#dom-mediasession-setmetadata-metadata-metadata"></a></dfn>);
 
   void <a class="idl-code" data-link-type="method" href="#dom-mediasession-deactivate">deactivate</a>();
@@ -1689,26 +1653,6 @@ constructor, when invoked, must run these steps:</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn>
 attribute must return the <a data-link-type="dfn" href="#media-session-category">media session category</a> of the <a data-link-type="dfn" href="#media-session">media
 session</a> that was set when the object was created.</p>
-
-
-   <dl class="domintro">
-  
-    <dt>
-    <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-controls">controls</a></code></code>
-  
-  
-    <dd>
-    Returns the <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> assigned to the <a data-link-type="dfn" href="#media-session">media
-    session</a>, if any.
-  
-</dl>
-
-
-   <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-controls"><code>controls</code><a class="self-link" href="#dom-mediasession-controls"></a></dfn>
-attribute must return the <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> that was assigned to a
-<a data-link-type="dfn" href="#media-session">media session</a> when it was created. If <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code> is not
-"<a data-link-type="dfn" href="#content-attribute-value"><code>content</code></a>", then this
-attribute should return null.</p>
 
 
    <dl class="domintro">
@@ -1865,291 +1809,6 @@ agent must run the following steps:</p>
     session</var>.
   
 </ol>
-
-
-   <h3 class="heading settled" data-level="5.2" id="the-mediaremotecontrols-interface"><span class="secno">5.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code>
-interface</span><a class="self-link" href="#the-mediaremotecontrols-interface"></a></h3>
-
-
-   <pre class="idl">interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediaremotecontrols">MediaRemoteControls<a class="self-link" href="#mediaremotecontrols"></a></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
-  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
-  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
-
-  // Event handlers
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a>;
-};
-</pre>
-
-
-   <p>Objects implementing the <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> interface are simply known as
-<dfn data-dfn-type="dfn" data-noexport="" id="media-remote-controls">media remote controls<a class="self-link" href="#media-remote-controls"></a></dfn>.</p>
-
-
-   <h4 class="heading settled" data-level="5.2.1" id="mediaremotecontrols-object-members"><span class="secno">5.2.1. </span><span class="content">Object members</span><a class="self-link" href="#mediaremotecontrols-object-members"></a></h4>
-
-
-   <dl class="domintro">
-  
-    <dt>
-    <code><var>controls</var> .
-    <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code></code>
-  
-  
-    <dd>
-    Determines if a user can interact with a 'previous track' button.
-  
-  
-    <dt>
-    <code><var>controls</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code></code>
-  
-  
-    <dd>
-    Determines if a user can interact with a 'next track' button.
-  
-</dl>
-
-
-   <p>The <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-previoustrackenabled"><code>previousTrackEnabled</code><a class="self-link" href="#dom-mediaremotecontrols-previoustrackenabled"></a></dfn>
-attribute is intended to provide a hint that the user agent should enable a
-'previous track' button for users in all applicable hardware or software remote
-control interfaces. By default, this attribute is false.</p>
-
-
-   <p>The <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-nexttrackenabled"><code>nextTrackEnabled</code><a class="self-link" href="#dom-mediaremotecontrols-nexttrackenabled"></a></dfn>
-attribute is intended to provide a hint that the user agent should enable a
-'next track' button for users in all applicable hardware or software remote
-control interfaces. By default, this attribute is false.</p>
-
-
-   <p class="note" role="note">
-  While the attributes above can be set at any time they must only be read by
-  the user agent during the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation algorithm</a> in order
-  to correctly configure any connected remote control interfaces at the point
-  they become <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.
-</p>
-
-
-   <h4 class="heading settled" data-level="5.2.2" id="mediaremotecontrols-event-handlers"><span class="secno">5.2.2. </span><span class="content">Event handlers</span><a class="self-link" href="#mediaremotecontrols-event-handlers"></a></h4>
-
-
-   <p>The following are the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> (and their corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event
-handler event types</a>) that must be supported, as IDL attributes, by all
-objects implementing the <code class="idl"><a data-link-type="idl" href="#mediaremotecontrols">MediaRemoteControls</a></code> interface:</p>
-
-
-   <table>
-  
-    <thead>
-    
-     <tr>
-      
-      <th>
-        <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">Event handler</a>
-      
-      
-      
-      <th>
-        <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">Event handler event type</a>
-      
-      
-    
-     
-  
-  
-    <tbody>
-    
-     <tr>
-      
-      <td>
-        <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-onprevioustrack"><code>onprevioustrack</code><a class="self-link" href="#dom-mediaremotecontrols-onprevioustrack"></a></dfn>
-      
-      
-      
-      <td>
-        <code><a data-link-type="dfn" href="#event-previoustrack">previoustrack</a></code>
-      
-      
-    
-     
-    
-     <tr>
-      
-      <td>
-        <dfn class="idl-code" data-dfn-for="MediaRemoteControls" data-dfn-type="attribute" data-export="" id="dom-mediaremotecontrols-onnexttrack"><code>onnexttrack</code><a class="self-link" href="#dom-mediaremotecontrols-onnexttrack"></a></dfn>
-      
-      
-      
-      <td>
-        <code><a data-link-type="dfn" href="#event-nexttrack">nexttrack</a></code>
-      
-      
-    
-     
-  
-</table>
-
-
-   <p>The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source">task source</a> for the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#task">tasks</a> listed in this section is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-manipulation-task-source">DOM
-manipulation task source</a>.</p>
-
-
-   <p><br>
-When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaPlayPause">MediaPlayPause</a></code> media key, or an equivalent key, on
-any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <a data-link-type="dfn" href="#media-session">media session</a> known by the user agent, run
-the following steps:</p>
-
-
-   <ol>
-  
-    <li>
-    Let <var>m</var> be the <a data-link-type="dfn" href="#media-session">media session</a>.
-  
-  
-    <li>
-    If <var>m</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a>
-    is not <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> or
-    <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>; or <var>m</var>’s
-    <a data-link-type="dfn" href="#current-state">current state</a> is not
-    <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then terminate
-    these steps.
-  
-  
-    <li>
-    For each <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participant</a> in <var>m</var>, called
-    <var>active element</var>, run the following substeps:
-
-    
-     <ol>
-      
-      <li>
-        If <var>active element</var> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>, then <a data-link-type="dfn" href="#unpause">unpause</a>
-        <var>active element</var>. Otherwise, <a data-link-type="dfn" href="#pause">pause</a> <var>active
-        element</var>.
-      
-      
-    
-     </ol>
-     
-  
-</ol>
-
-
-   <p><br>
-When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackPrevious">MediaTrackPrevious</a></code> media key, or an equivalent
-key, on any hardware or software interface (e.g. on a keyboard or OS-level
-button), then the user agent must, for each
-<code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a>
-that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>,
-has a <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a> with its
-<code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> attribute set to true,
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-previoustrack"><code>previoustrack</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote
-controller</a>.</p>
-
-
-   <p>When the user presses the <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackNext">MediaTrackNext</a></code> media key, or an equivalent key, on
-any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> that is currently <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, has a <a data-link-type="dfn" href="#media-remote-controller">media remote
-controller</a> with its <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> attribute set
-to true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a> named <a data-link-type="dfn" href="#event-nexttrack"><code>nexttrack</code></a> at its <a data-link-type="dfn" href="#media-remote-controller">media remote controller</a>.</p>
-
-
-   <h4 class="heading settled" data-level="5.2.3" id="mediaremotecontrols-events-summary"><span class="secno">5.2.3. </span><span class="content">Events summary</span><a class="self-link" href="#mediaremotecontrols-events-summary"></a></h4>
-
-
-   <p><em>This section is non-normative.</em></p>
-
-
-   <p>The following events fire on <a data-link-type="dfn" href="#media-remote-controller">media remote controllers</a> as part of the
-processing model described above:</p>
-
-
-   <table>
-  
-    <thead>
-    
-     <tr>
-      
-      <th>
-        Event name
-      
-      
-      
-      <th>
-        Interface
-      
-      
-      
-      <th>
-        Fired when...
-      
-      
-      
-      <th>
-        Preconditions
-      
-      
-    
-     
-  
-  
-    <tbody>
-    
-     <tr>
-      
-      <td>
-        <dfn data-dfn-type="dfn" data-lt="event previoustrack" data-noexport="" id="event-previoustrack"><code>previoustrack</code><a class="self-link" href="#event-previoustrack"></a></dfn>
-      
-      
-      
-      <td>
-        <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code>
-      
-      
-      
-      <td>
-        The user presses the 'previous track' media key or button on any
-        hardware or software media interface.
-      
-      
-      
-      <td>
-        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and
-        <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a></code> is true.
-      
-      
-    
-     
-    
-     <tr>
-      
-      <td>
-        <dfn data-dfn-type="dfn" data-lt="event nexttrack" data-noexport="" id="event-nexttrack"><code>nexttrack</code><a class="self-link" href="#event-nexttrack"></a></dfn>
-      
-      
-      
-      <td>
-        <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code>
-      
-      
-      
-      <td>
-        The user presses the 'next track' media key or button on any hardware or
-        software media interface.
-      
-      
-      
-      <td>
-        <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> and
-        <code class="idl"><a data-link-type="idl" href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a></code> is true.
-      
-      
-    
-     
-  
-</table>
 
 
    <h2 class="heading settled" data-level="6" id="media-element-extensions"><span class="secno">6. </span><span class="content">Media element extensions</span><a class="self-link" href="#media-element-extensions"></a></h2>
@@ -2698,65 +2357,6 @@ meta data can be added at any time to update these interfaces:</p>
 <span class="p">});</span></pre>
 
 
-   <h3 class="heading settled" data-level="8.3" id="example-responding-to-media-remote-control-events"><span class="secno">8.3. </span><span class="content">Responding to media
-remote control events</span><a class="self-link" href="#example-responding-to-media-remote-control-events"></a></h3>
-
-
-   <p>Before a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> becomes <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> a
-web developer must set which remote control keys they want to enable:</p>
-
-
-   <pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">mySession</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MediaSession</span><span class="p">(</span><span class="s2">"content"</span><span class="p">);</span>
-
-<span class="c1">// Enable previous and next track media key inputs</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">mySession</span><span class="p">.</span><span class="nx">controls</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">mySession</span><span class="p">.</span><span class="nx">controls</span><span class="p">.</span><span class="nx">nextTrackEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-  <span class="nx">mySession</span><span class="p">.</span><span class="nx">controls</span><span class="p">.</span><span class="nx">previousTrackEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// ... assign media session to an audio object and play/resume</span>
-<span class="c1">// that object to activate the media session ...</span></pre>
-
-
-   <p>When a <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>-based <a data-link-type="dfn" href="#media-session">media
-session</a> then becomes <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code> it is possible to listen for any interaction with the
-registered remote control keys and respond appropriately to those inputs in a
-web application:</p>
-
-
-   <pre class="lang-javascript highlight"><span class="c1">// Respond to previous and next track media key inputs</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">mySession</span><span class="p">.</span><span class="nx">controls</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">mySession</span><span class="p">.</span><span class="nx">controls</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'nexttrack'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Play next track</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">myAudio</span><span class="p">.</span><span class="nx">src</span> <span class="o">===</span> <span class="s2">"track1.mp3"</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">myAudio</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"track2.mp3"</span><span class="p">;</span>
-      <span class="nx">myAudio</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
-
-      <span class="c1">// Set appropriate meta data for track 2</span>
-      <span class="nx">mySession</span><span class="p">.</span><span class="nx">setMetadata</span><span class="p">({</span>
-        <span class="nx">title</span><span class="o">:</span> <span class="s2">"Demo Track 2"</span><span class="p">,</span>
-        <span class="nx">artwork</span><span class="o">:</span> <span class="s2">"/resources/cover2.png"</span>
-      <span class="p">});</span>
-    <span class="p">}</span>
-  <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
-
-  <span class="nx">mySession</span><span class="p">.</span><span class="nx">controls</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'previoustrack'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Play previous track</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">myAudio</span><span class="p">.</span><span class="nx">src</span> <span class="o">===</span> <span class="s2">"track2.mp3"</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">myAudio</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"track1.mp3"</span><span class="p">;</span>
-      <span class="nx">myAudio</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
-
-      <span class="c1">// Set appropriate meta data for track 1</span>
-      <span class="nx">mySession</span><span class="p">.</span><span class="nx">setMetadata</span><span class="p">({</span>
-        <span class="nx">title</span><span class="o">:</span> <span class="s2">"Demo Track 1"</span><span class="p">,</span>
-        <span class="nx">artwork</span><span class="o">:</span> <span class="s2">"/resources/cover1.png"</span>
-      <span class="p">});</span>
-    <span class="p">}</span>
-  <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
-<span class="p">}</span></pre>
-
-
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
 
 
@@ -2806,7 +2406,6 @@ neighboring rights to this work.</p>
    <li><a href="#audio_producing-participants">audio-producing participants</a><span>, in §4.3</span>
    <li><a href="#content-attribute-value">content attribute value</a><span>, in §4.2</span>
    <li><a href="#content-media-state">content media state</a><span>, in §4.2</span>
-   <li><a href="#dom-mediasession-controls">controls</a><span>, in §5.1.2</span>
    <li><a href="#create-a-media-session">create a media session</a><span>, in §4</span>
    <li><a href="#current-media-session">current media session</a><span>, in §4.3</span>
    <li><a href="#current-media-session-type">current media session type</a><span>, in §4.2</span>
@@ -2814,8 +2413,6 @@ neighboring rights to this work.</p>
    <li><a href="#dom-mediasession-deactivate">deactivate()</a><span>, in §5.1.2</span>
    <li><a href="#default-media-state">default media state</a><span>, in §4.2</span>
    <li><a href="#duck">duck</a><span>, in §4.3</span>
-   <li><a href="#event-nexttrack">event nexttrack</a><span>, in §5.2.3</span>
-   <li><a href="#event-previoustrack">event previoustrack</a><span>, in §5.2.3</span>
    <li><a href="#fetch-steps">fetch steps</a><span>, in §4.4</span>
    <li><a href="#idle-media-session-state">idle media session state</a><span>, in §4.1</span>
    <li><a href="#indefinitely-pause">indefinitely pause</a><span>, in §4.3</span>
@@ -2826,9 +2423,6 @@ neighboring rights to this work.</p>
      <li><a href="#dom-mediasession-kind">attribute for MediaSession</a><span>, in §5.1.2</span>
     </ul>
    <li><a href="#dictdef-mediametadata">MediaMetadata</a><span>, in §5.1</span>
-   <li><a href="#media-remote-controller">media remote controller</a><span>, in §4</span>
-   <li><a href="#mediaremotecontrols">MediaRemoteControls</a><span>, in §5.2</span>
-   <li><a href="#media-remote-controls">media remote controls</a><span>, in §5.2</span>
    <li><a href="#media-session">media session</a><span>, in §4</span>
    <li><a href="#mediasession">MediaSession</a><span>, in §5.1</span>
    <li><a href="#media-session-activation-algorithm">media session activation algorithm</a><span>, in §4.5.1</span>
@@ -2842,12 +2436,8 @@ neighboring rights to this work.</p>
    <li><a href="#media-session-type">media session
 type</a><span>, in §4.2</span>
    <li><a href="#dom-mediasession-setmetadata-metadata-metadata">metadata</a><span>, in §5.1</span>
-   <li><a href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a><span>, in §5.2.1</span>
-   <li><a href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a><span>, in §5.2.2</span>
-   <li><a href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a><span>, in §5.2.2</span>
    <li><a href="#pause">pause</a><span>, in §4.3</span>
    <li><a href="#pause-a-media-element">pause a media element</a><span>, in §6.2.2</span>
-   <li><a href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a><span>, in §5.2.1</span>
    <li><a href="#release-media-element-from-its-media-session">release media element from its media
 session</a><span>, in §6.2.3</span>
    <li><a href="#release-web-audio-object-from-its-media-session">release web audio object from its media
@@ -2890,7 +2480,6 @@ session</a><span>, in §7.2.3</span>
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a>
@@ -2898,12 +2487,8 @@ session</a><span>, in §7.2.3</span>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#case-sensitivity-and-string-comparison">case-sensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-manipulation-task-source">dom manipulation task source</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">ended playback</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">entry settings object</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#fire-a-simple-event">fire a simple event</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal pause steps</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
@@ -2911,11 +2496,8 @@ session</a><span>, in §7.2.3</span>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#remove-an-element-from-a-document">remove an element from a document</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#task">task</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source">task source</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#video">video</a>
     </ul>
@@ -2932,29 +2514,14 @@ session</a><span>, in §7.2.3</span>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-suspend-Promise-void">suspend()</a>
-    </ul>
-   <li><a data-link-type="biblio" href="#biblio-whatwg-dom">[WHATWG-DOM]</a> defines the following terms:
-    <ul>
-     <li><a href="https://dom.spec.whatwg.org/#interface-event">Event</a>
-     <li><a href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a>
-    </ul>
-   <li><a data-link-type="biblio" href="#biblio-dom-level-3-events-key">[DOM-Level-3-Events-key]</a> defines the following terms:
-    <ul>
-     <li><a href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaPlayPause">MediaPlayPause</a>
-     <li><a href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackNext">MediaTrackNext</a>
-     <li><a href="http://www.w3.org/TR/DOM-Level-3-Events-key/#key-MediaTrackPrevious">MediaTrackPrevious</a>
     </ul></ul>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
-   <dt id="biblio-dom-level-3-events-key"><a class="self-link" href="#biblio-dom-level-3-events-key"></a>[DOM-Level-3-Events-key]
-   <dd>Gary Kacmarcik; Travis Leithead. <a href="https://w3c.github.io/DOM-Level-3-Events-key/">DOM Level 3 KeyboardEvent key Values</a>. 27 April 2015. WD. URL: <a href="https://w3c.github.io/DOM-Level-3-Events-key/">https://w3c.github.io/DOM-Level-3-Events-key/</a>
    <dt id="biblio-fetch"><a class="self-link" href="#biblio-fetch"></a>[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html"><a class="self-link" href="#biblio-html"></a>[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
-   <dt id="biblio-whatwg-dom"><a class="self-link" href="#biblio-whatwg-dom"></a>[WHATWG-DOM]
-   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WebIDL]
    <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 4 August 2015. WD. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-page-visibility"><a class="self-link" href="#biblio-page-visibility"></a>[PAGE-VISIBILITY]
@@ -2967,8 +2534,6 @@ session</a><span>, in §7.2.3</span>
   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a href="#dom-mediasession-mediasession-kind-kind">kind</a> = "content")]
 interface <a href="#mediasession">MediaSession</a> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
-
-  readonly attribute <a data-link-type="idl-name" href="#mediaremotecontrols">MediaRemoteControls</a>? <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaRemoteControls? " href="#dom-mediasession-controls">controls</a>;
 
   void <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmetadata">setMetadata</a>(<a data-link-type="idl-name" href="#dictdef-mediametadata">MediaMetadata</a> <a href="#dom-mediasession-setmetadata-metadata-metadata">metadata</a>);
 
@@ -2987,15 +2552,6 @@ dictionary <a href="#dictdef-mediametadata">MediaMetadata</a> {
   DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-artist">artist</a> = "";
   DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadata-album">album</a> = "";
   USVString <a data-type="USVString " href="#dom-mediametadata-artwork">artwork</a>;
-};
-
-interface <a href="#mediaremotecontrols">MediaRemoteControls</a> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#interface-eventtarget">EventTarget</a> {
-  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-previoustrackenabled">previousTrackEnabled</a>;
-  attribute boolean <a class="idl-code" data-link-type="attribute" data-type="boolean " href="#dom-mediaremotecontrols-nexttrackenabled">nextTrackEnabled</a>;
-
-  // Event handlers
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onprevioustrack">onprevioustrack</a>;
-  attribute <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler " href="#dom-mediaremotecontrols-onnexttrack">onnexttrack</a>;
 };
 
 partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {

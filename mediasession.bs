@@ -199,13 +199,6 @@ its <a>audio-producing objects</a> with both the underlying platform and other
 <a>audio-producing objects</a> belonging to other <a>media sessions</a> within
 the user agent.
 
-A <a>media session</a> may have a <dfn>media remote controller</dfn> that
-provides access to <a>media remote controls</a>. A <a>media remote
-controller</a> can be used to request particular media key access and respond to
-hardware or software remote control events. Such events may be triggered by e.g.
-keyboard media keys, headphone buttons, remote controller buttons or
-notification and lock screen media buttons.
-
 A <a>media session</a> may have associated <dfn>media session metadata</dfn>
 that <em>can</em> consist of <dfn lt="session title">title</dfn>,
 <dfn>artist name</dfn>, <dfn>album name</dfn>, <dfn>artwork URL</dfn> and
@@ -228,13 +221,6 @@ run these steps:
     empty, then set <var>media session</var>'s
     <a>current media session type</a> to &quot;<a lt="content attribute
     value"><code>content</code></a>&quot.
-  </li>
-  <li>
-    If <var>media session</var>’s <a>current media session type</a> is
-    &quot;<a lt="content attribute value"><code>content</code></a>&quot, then
-    create a new <a>media remote controller</a> for <var>media session</var>.
-    (Otherwise
-    <var>media session</var> has no <a>media remote controller</a>.)
   </li>
   <li>
     Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
@@ -711,15 +697,8 @@ The <dfn>media session activation algorithm</dfn> takes one argument,
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform's
             notifications area and/or show an ongoing media interface in the
-            underlying platform's lock screen area for <var>media session</var>
-            based on its <a>media remote controller</a>, if any, and using any
+            underlying platform's lock screen area, using any
             available <a>media session metadata</a>.
-          </li>
-          <li>
-            Optionally, based on platform conventions, the user agent may allow
-            hardware and/or software media keys to control playback of
-            <var>media session</var>'s <a>audio-producing participants</a> based
-            on its <a>media remote controller</a>, if any.
           </li>
         </ol>
       </dd>
@@ -1170,8 +1149,6 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
 interface MediaSession {
   readonly attribute MediaSessionKind kind;
 
-  readonly attribute MediaRemoteControls? controls;
-
   void setMetadata(MediaMetadata metadata);
 
   void deactivate();
@@ -1239,22 +1216,6 @@ constructor, when invoked, must run these steps:
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
 attribute must return the <a>media session category</a> of the <a>media
 session</a> that was set when the object was created.
-
-<dl class=domintro>
-  <dt>
-    <code><var>session</var> . {{MediaSession/controls}}</code>
-  </dt>
-  <dd>
-    Returns the <a>media remote controller</a> assigned to the <a>media
-    session</a>, if any.
-  </dd>
-</dl>
-
-The <dfn attribute for="MediaSession" lt="controls"><code>controls</code></dfn>
-attribute must return the <a>media remote controller</a> that was assigned to a
-<a>media session</a> when it was created. If {{MediaSession/kind}} is not
-&quot;<a lt="content attribute value"><code>content</code></a>&quot, then this
-attribute should return null.
 
 <dl class=domintro>
   <dt>
@@ -1370,219 +1331,6 @@ agent must run the following steps:
     session</var>.
   </li>
 </ol>
-
-<h3 id="the-mediaremotecontrols-interface">The {{MediaRemoteControls}}
-interface</h3>
-
-<pre class="idl">
-interface MediaRemoteControls : EventTarget {
-  attribute boolean previousTrackEnabled;
-  attribute boolean nextTrackEnabled;
-
-  // Event handlers
-  attribute EventHandler onprevioustrack;
-  attribute EventHandler onnexttrack;
-};
-</pre>
-
-Objects implementing the {{MediaRemoteControls}} interface are simply known as
-<dfn>media remote controls</dfn>.
-
-<h4 id="mediaremotecontrols-object-members">Object members</h4>
-
-<dl class=domintro>
-  <dt>
-    <code><var>controls</var> .
-    {{MediaRemoteControls/previousTrackEnabled}}</code>
-  </dt>
-  <dd>
-    Determines if a user can interact with a 'previous track' button.
-  </dd>
-  <dt>
-    <code><var>controls</var> . {{MediaRemoteControls/nextTrackEnabled}}</code>
-  </dt>
-  <dd>
-    Determines if a user can interact with a 'next track' button.
-  </dd>
-</dl>
-
-The <dfn attribute for="MediaRemoteControls"
-lt="previousTrackEnabled"><code>previousTrackEnabled</code></dfn>
-attribute is intended to provide a hint that the user agent should enable a
-'previous track' button for users in all applicable hardware or software remote
-control interfaces. By default, this attribute is false.
-
-The <dfn attribute for="MediaRemoteControls"
-lt="nextTrackEnabled"><code>nextTrackEnabled</code></dfn>
-attribute is intended to provide a hint that the user agent should enable a
-'next track' button for users in all applicable hardware or software remote
-control interfaces. By default, this attribute is false.
-
-<p class="note">
-  While the attributes above can be set at any time they must only be read by
-  the user agent during the <a>media session activation algorithm</a> in order
-  to correctly configure any connected remote control interfaces at the point
-  they become <code><a lt="active media session state">active</a></code>.
-</p>
-
-<h4 id="mediaremotecontrols-event-handlers">Event handlers</h4>
-
-The following are the <a>event handlers</a> (and their corresponding <a>event
-handler event types</a>) that must be supported, as IDL attributes, by all
-objects implementing the {{MediaRemoteControls}} interface:
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        <a>Event handler</a>
-      </th>
-      <th>
-        <a>Event handler event type</a>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <dfn attribute
-        for="MediaRemoteControls"><code>onprevioustrack</code></dfn>
-      </td>
-      <td>
-        <code><a lt="event previoustrack">previoustrack</a></code>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <dfn attribute for="MediaRemoteControls"><code>onnexttrack</code></dfn>
-      </td>
-      <td>
-        <code><a lt="event nexttrack">nexttrack</a></code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-The <a>task source</a> for the <a>tasks</a> listed in this section is the <a>DOM
-manipulation task source</a>.
-
-<br>
-When the user presses the {{MediaPlayPause}} media key, or an equivalent key, on
-any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <a>media session</a> known by the user agent, run
-the following steps:
-
-<ol>
-  <li>
-    Let <var>m</var> be the <a>media session</a>.
-  </li>
-  <li>
-    If <var>m</var>'s <a>current media session type</a>
-    is not <code><a lt="default media state">Default</a></code> or
-    <code><a lt="content media state">Content</a></code>; or <var>m</var>'s
-    <a>current state</a> is not
-    <code><a lt="active media session state">active</a></code>, then terminate
-    these steps.
-  </li>
-  <li>
-    For each <a>audio-producing participant</a> in <var>m</var>, called
-    <var>active element</var>, run the following substeps:
-
-    <ol>
-      <li>
-        If <var>active element</var> is <a>paused</a>, then <a>unpause</a>
-        <var>active element</var>. Otherwise, <a>pause</a> <var>active
-        element</var>.
-      </li>
-    </ol>
-  </li>
-</ol>
-
-<br>
-When the user presses the {{MediaTrackPrevious}} media key, or an equivalent
-key, on any hardware or software interface (e.g. on a keyboard or OS-level
-button), then the user agent must, for each
-<code><a lt="content media state">Content</a></code>-based <a>media session</a>
-that is currently <code><a lt="active media session state">active</a></code>,
-has a <a>media remote controller</a> with its
-{{MediaRemoteControls/previousTrackEnabled}} attribute set to true,
-<a>queue a task</a> to <a>fire a simple event</a> named <a lt="event
-previoustrack"><code>previoustrack</code></a> at its <a>media remote
-controller</a>.
-
-When the user presses the {{MediaTrackNext}} media key, or an equivalent key, on
-any hardware or software interface (e.g. on a keyboard or OS-level button) then
-the user agent must, for each <code><a lt="content media
-state">Content</a></code>-based <a>media session</a> that is currently <code><a
-lt="active media session state">active</a></code>, has a <a>media remote
-controller</a> with its {{MediaRemoteControls/nextTrackEnabled}} attribute set
-to true, <a>queue a task</a> to
-<a>fire a simple event</a> named <a lt="event
-nexttrack"><code>nexttrack</code></a> at its <a>media remote controller</a>.
-
-<h4 id="mediaremotecontrols-events-summary">Events summary</h4>
-
-<em>This section is non-normative.</em>
-
-The following events fire on <a>media remote controllers</a> as part of the
-processing model described above:
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        Event name
-      </th>
-      <th>
-        Interface
-      </th>
-      <th>
-        Fired when...
-      </th>
-      <th>
-        Preconditions
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <dfn lt="event previoustrack"><code>previoustrack</code></dfn>
-      </td>
-      <td>
-        {{Event}}
-      </td>
-      <td>
-        The user presses the 'previous track' media key or button on any
-        hardware or software media interface.
-      </td>
-      <td>
-        <a>current media session type</a> is <code><a lt="content media
-        state">Content</a></code>, <a>current state</a> is <code><a lt="active
-        media session state">active</a></code> and
-        {{MediaRemoteControls/previousTrackEnabled}} is true.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <dfn lt="event nexttrack"><code>nexttrack</code></dfn>
-      </td>
-      <td>
-        {{Event}}
-      </td>
-      <td>
-        The user presses the 'next track' media key or button on any hardware or
-        software media interface.
-      </td>
-      <td>
-        <a>current media session type</a> is <code><a lt="content media
-        state">Content</a></code>, <a>current state</a> is <code><a lt="active
-        media session state">active</a></code> and
-        {{MediaRemoteControls/nextTrackEnabled}} is true.
-      </td>
-    </tr>
-  </tbody>
-</table>
 
 <h2 id="media-element-extensions">Media element extensions</h2>
 
@@ -2054,65 +1802,6 @@ mySession.setMetadata({
   artwork: "/resources/cover2.png"
 });
   </pre>
-
-<h3 id="example-responding-to-media-remote-control-events">Responding to media
-remote control events</h3>
-
-Before a <code><a lt="content media state">Content</a></code>-based <a>media
-session</a> becomes <code><a lt="active media session state">active</a></code> a
-web developer must set which remote control keys they want to enable:
-
-<pre class="lang-javascript">
-var mySession = new MediaSession("content");
-
-// Enable previous and next track media key inputs
-if (mySession.controls) {
-  mySession.controls.nextTrackEnabled = true;
-  mySession.controls.previousTrackEnabled = true;
-}
-
-// ... assign media session to an audio object and play/resume
-// that object to activate the media session ...
-</pre>
-
-When a <code><a lt="content media state">Content</a></code>-based <a>media
-session</a> then becomes <code><a lt="active media session
-state">active</a></code> it is possible to listen for any interaction with the
-registered remote control keys and respond appropriately to those inputs in a
-web application:
-
-<pre class="lang-javascript">
-// Respond to previous and next track media key inputs
-if (mySession.controls) {
-  mySession.controls.addEventListener('nexttrack', function() {
-    // Play next track
-    if (myAudio.src === "track1.mp3") {
-      myAudio.src = "track2.mp3";
-      myAudio.play();
-
-      // Set appropriate meta data for track 2
-      mySession.setMetadata({
-        title: "Demo Track 2",
-        artwork: "/resources/cover2.png"
-      });
-    }
-  }, false);
-
-  mySession.controls.addEventListener('previoustrack', function() {
-    // Play previous track
-    if (myAudio.src === "track2.mp3") {
-      myAudio.src = "track1.mp3";
-      myAudio.play();
-
-      // Set appropriate meta data for track 1
-      mySession.setMetadata({
-        title: "Demo Track 1",
-        artwork: "/resources/cover1.png"
-      });
-    }
-  }, false);
-}
-</pre>
 
 <h2 id="acknowledgments" class="no-num">Acknowledgments</h2>
 
