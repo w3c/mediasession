@@ -1302,6 +1302,7 @@ pause steps</a>.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 <!-- https://github.com/whatwg/mediasession/issues/66 -->
+
 After the {{pause()}} method on a <a>media element</a> has been invoked — or a
 <a>media element</a> is otherwise paused from the web page (e.g. via its
 {{controls}}) — and that <a>media element</a> has a <a>current media session
