@@ -1168,7 +1168,7 @@ agent must run the following steps:
 
 <ol>
   <li>
-    Let <var>media session</var> be the current <a>media session</a>.
+    Let <var>media session</var> be the <a>context object</a>.
   </li>
   <li>
     <a>Indefinitely pause</a> all of <var>media session</var>'s
