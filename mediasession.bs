@@ -483,9 +483,7 @@ of interacting with the media focus system available in different underlying
 platforms.
 
 An <a>audio-producing object</a> may have a <dfn>current media session</dfn>,
-which is a <a>media session</a>. When an <a>audio-producing object</a> is
-created, the user agent must set its <a>current media session</a> to the current
-<a>top-level browsing context</a>'s <a>media session</a>.
+which is a <a>media session</a>.
 
 A <a>media session</a> may have one or more <a>audio-producing objects</a>
 attached to it; called its <dfn>audio-producing participants</dfn>. A <a>media
@@ -1196,9 +1194,7 @@ otherwise. On setting, the user agent must run the following steps:
     session</a>, if it has one, and null otherwise.
   </li>
   <li>
-    Let <var>m</var>'s <a>current media session</a> be the new value or the
-    <a>top-level browsing context</a>'s <a>media session</a> if the new value is
-    null.
+    Let <var>m</var>'s <a>current media session</a> be the new value.
   </li>
   <li>
     Let <var>new media session</var> be <var>m</var>'s <a>current media
@@ -1387,9 +1383,7 @@ agent must run the following steps:
     session</a>, if it has one, and null otherwise.
   </li>
   <li>
-    Let <var>m</var>'s <a>current media session</a> be the new value or the
-    <a>top-level browsing context</a>'s <a>media session</a> if the new value is
-    null.
+    Let <var>m</var>'s <a>current media session</a> be the new value.
   </li>
   <li>
     Let <var>new media session</var> be <var>m</var>'s <a>current media
