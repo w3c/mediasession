@@ -88,10 +88,13 @@
    <h1 class="p-name no-ref" id="title">Media Session</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-09-01">1 September 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-09-02">2 September 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/whatwg/mediasession/issues/">GitHub</a>
+     <dd><a href="#issues-index">Inline In Spec</a>
      <dt>Participate:
      <dd><span><a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)</span>
      <dd><span><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a></span>
@@ -196,6 +199,7 @@ media session from an <code class="idl"><span>AudioContext</span></code> object<
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
      </ul>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
+    <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
    </ul></div>
   
 
@@ -430,8 +434,7 @@ fourth columns.</p>
        <ul>
         
         <li>
-          <a data-link-type="dfn" href="#indefinitely-pause">Indefinitely pauses</a> all other <a data-link-type="dfn" href="#audio_producing-participants">active</a>
-          <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> and <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a href="#activating-a-media-session">playback begins</a>.
+          <a data-link-type="dfn" href="#indefinitely-pause">Indefinitely pauses</a> all other <a data-link-type="dfn" href="#audio_producing-participants">active</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a href="#activating-a-media-session">playback begins</a>.
         
         
         
@@ -498,10 +501,9 @@ fourth columns.</p>
         
         <li>
           <a data-link-type="dfn" href="#duck">Ducks</a> all other <a data-link-type="dfn" href="#audio_producing-participants">active</a>
-          <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
-          and <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when
+          <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when
           <a href="#activating-a-media-session">playback begins</a>.
-          <a data-link-type="dfn" href="#unduck">Unducks</a> all other <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#default-media-state">Default</a></code> and <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>.
+          <a data-link-type="dfn" href="#unduck">Unducks</a> all other <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>.
         
         
         
@@ -561,13 +563,12 @@ fourth columns.</p>
         
         <li>
           <a data-link-type="dfn" href="#pause">Pauses</a> all other <a data-link-type="dfn" href="#audio_producing-participants">active</a>
-          <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
           <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and
           <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
           content when <a href="#activating-a-media-session">playback
           begins</a>.
           <a data-link-type="dfn" href="#unpause">Unpauses</a> all <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a>
-          <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>, <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
+          <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>
           content when <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>.
         
         
@@ -627,7 +628,7 @@ fourth columns.</p>
        <ul>
         
         <li>
-          Does not interact with any other <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
+          Does not interact with any other
           <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>,
           <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or
           <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content during
@@ -666,41 +667,6 @@ fourth columns.</p>
     
       <td>
       UI sounds. In-game sound effects and background music.
-    
-      
-  
-     
-  
-     <tr>
-    
-      <td>
-      "<strong id="default-media-value"><code></code></strong>" (empty
-      string)
-    
-      
-    
-      <td>
-      <dfn data-dfn-type="dfn" data-lt="default media state" data-noexport="" id="default-media-state">Default<a class="self-link" href="#default-media-state"></a></dfn>
-    
-      
-    
-      <td>
-      
-       <ul>
-        
-        <li>
-          No explicit kind, or the kind of the media given is not recognized by
-          the user agent.
-        
-        
-      
-       </ul>
-       
-    
-      
-    
-      <td>
-      Legacy media content
     
       
   
@@ -977,11 +943,11 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
   
     <li>
     Let <var>interrupting media session category</var> be the <a data-link-type="dfn" href="#media-session-category">media session
-    category</a> that triggered this interruption. If this interruption has no
-    known
-    <a data-link-type="dfn" href="#media-session-category">media session category</a>, let <var>interrupting media session
-    category</var> be
-    <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
+    category</a> that triggered this interruption.
+
+
+     <p class="issue" id="issue-8519f2d2"><a class="self-link" href="#issue-8519f2d2"></a> The interruption may not come from another media session at all. <a href="https://github.com/whatwg/mediasession/issues/100">&lt;https://github.com/whatwg/mediasession/issues/100></a></p>
+     
   
   
     <li>
@@ -1001,8 +967,7 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
           
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
-            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
+            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then
             <a data-link-type="dfn" href="#indefinitely-pause">indefinitely pause</a> all of <var>media session</var>’s
             <a data-link-type="dfn" href="#audio_producing-participants">audio-producing participants</a> and set <var>media
             session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.
@@ -1052,9 +1017,8 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
             not
-            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
-            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then
-            terminate these steps.
+            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then terminate
+            these steps.
           
         
 
@@ -1121,7 +1085,6 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
             not
-            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
             <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then
             terminate these steps.
           
@@ -1207,9 +1170,11 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
   
     <li>
     Let <var>interrupting media session category</var> be the <a data-link-type="dfn" href="#media-session-category">media session
-    category</a> that initially triggered this interruption. If this
-    interruption has no known <a data-link-type="dfn" href="#media-session-category">media session category</a>, let
-    <var>interrupting media session category</var> be <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>.
+    category</a> that initially triggered this interruption.
+
+
+     <p class="issue" id="issue-8519f2d20"><a class="self-link" href="#issue-8519f2d20"></a> The interruption may not come from another media session at all. <a href="https://github.com/whatwg/mediasession/issues/100">&lt;https://github.com/whatwg/mediasession/issues/100></a></p>
+     
   
   
     <li>
@@ -1230,9 +1195,8 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
             not
-            <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>
-            or <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then
-            terminate these steps.
+            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then terminate
+            these steps.
           
         
           
@@ -1268,8 +1232,7 @@ against all known <a data-link-type="dfn" href="#media-session">media sessions</
           
         <li>
             If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-            not <code><a data-link-type="dfn" href="#default-media-state">Default</a></code>,
-            <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
+            not <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or
             <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>,
             then terminate these steps.
           
@@ -2182,7 +2145,6 @@ neighboring rights to this work.</p>
    <li><a href="#current-media-session-type">current media session type</a><span>, in §4.2</span>
    <li><a href="#current-state">current state</a><span>, in §4.1</span>
    <li><a href="#dom-mediasession-deactivate">deactivate()</a><span>, in §5.1.2</span>
-   <li><a href="#default-media-state">default media state</a><span>, in §4.2</span>
    <li><a href="#duck">duck</a><span>, in §4.3</span>
    <li><a href="#idle-media-session-state">idle media session state</a><span>, in §4.1</span>
    <li><a href="#indefinitely-pause">indefinitely pause</a><span>, in §4.3</span>
@@ -2308,5 +2270,9 @@ partial interface <a class="idl-code" data-link-type="interface" href="https://w
 };
 
 </pre>
+  <h2 class="no-num heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
+  <div style="counter-reset:issue">
+   <div class="issue"> The interruption may not come from another media session at all. <a href="https://github.com/whatwg/mediasession/issues/100">&lt;https://github.com/whatwg/mediasession/issues/100></a><a href="#issue-8519f2d2"> ↵ </a></div>
+   <div class="issue"> The interruption may not come from another media session at all. <a href="https://github.com/whatwg/mediasession/issues/100">&lt;https://github.com/whatwg/mediasession/issues/100></a><a href="#issue-8519f2d20"> ↵ </a></div></div>
  </body>
 </html>

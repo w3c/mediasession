@@ -287,9 +287,8 @@ fourth columns.
       <ul>
         <li>
           <a>Indefinitely pauses</a> all other <a lt="audio-producing
-          participants">active</a>
-          <code><a lt="default media state">Default</a></code> and <code><a
-          lt="content media state">Content</a></code> content when <a
+          participants">active</a> <code><a lt="content media
+          state">Content</a></code> content when <a
           href="#activating-a-media-session">playback begins</a>.
         </li>
         <li>
@@ -341,12 +340,10 @@ fourth columns.
       <ul>
         <li>
           <a>Ducks</a> all other <a lt="audio-producing participants">active</a>
-          <code><a lt="default media state">Default</a></code>
-          and <code><a lt="content media state">Content</a></code> content when
+          <code><a lt="content media state">Content</a></code> content when
           <a href="#activating-a-media-session">playback begins</a>.
           <a>Unducks</a> all other <a lt="interrupted media session
-          state">interrupted</a> <code><a lt="default media
-          state">Default</a></code> and <code><a lt="content media
+          state">interrupted</a> <code><a lt="content media
           state">Content</a></code> content when <a>paused</a> or <a
           href="#deactivating-a-media-session">playback ends</a>.
         </li>
@@ -393,7 +390,6 @@ fourth columns.
         <li>
           <a>Pauses</a> all other <a lt="audio-producing
           participants">active</a>
-          <code><a lt="default media state">Default</a></code>,
           <code><a lt="content media state">Content</a></code>, <code><a
           lt="transient media state">Transient</a></code> and
           <code><a lt="transient solo media state">Transient Solo</a></code>
@@ -401,10 +397,9 @@ fourth columns.
           begins</a>.
           <a>Unpauses</a> all <a lt="interrupted media session
           state">interrupted</a>
-          <code><a lt="default media state">Default</a></code>, <code><a
-          lt="content media state">Content</a></code>, <code><a lt="transient
-          media state">Transient</a></code> and <code><a lt="transient solo
-          media state">Transient Solo</a></code>
+          <code><a lt="content media state">Content</a></code>, <code><a
+          lt="transient media state">Transient</a></code> and <code><a
+          lt="transient solo media state">Transient Solo</a></code>
           content when <a>paused</a> or <a
           href="#deactivating-a-media-session">playback ends</a>.
         </li>
@@ -447,8 +442,7 @@ fourth columns.
     <td>
       <ul>
         <li>
-          Does not interact with any other <code><a lt="default media
-          state">Default</a></code>,
+          Does not interact with any other
           <code><a lt="content media state">Content</a></code>, <code><a
           lt="transient media state">Transient</a></code>,
           <code><a lt="transient solo media state">Transient Solo</a></code> or
@@ -477,26 +471,6 @@ fourth columns.
     </td>
     <td>
       UI sounds. In-game sound effects and background music.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<strong id="default-media-value"><code></code></strong>&quot; (empty
-      string)
-    </td>
-    <td>
-      <dfn lt="default media state">Default</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          No explicit kind, or the kind of the media given is not recognized by
-          the user agent.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Legacy media content
     </td>
   </tr>
 </table>
@@ -718,11 +692,9 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
   </li>
   <li>
     Let <var>interrupting media session category</var> be the <a>media session
-    category</a> that triggered this interruption. If this interruption has no
-    known
-    <a>media session category</a>, let <var>interrupting media session
-    category</var> be
-    <code><a lt="default media state">Default</a></code>.
+    category</a> that triggered this interruption.
+
+    Issue(100): The interruption may not come from another media session at all.
   </li>
   <li>
     Run these substeps:
@@ -736,8 +708,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         <ol>
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
-            <code><a lt="default media state">Default</a></code>
-            or <code><a lt="content media state">Content</a></code> then
+            <code><a lt="content media state">Content</a></code> then
             <a>indefinitely pause</a> all of <var>media session</var>'s
             <a>audio-producing participants</a> and set <var>media
             session</var>'s <a>current state</a> to <code><a lt="idle media
@@ -774,9 +745,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
             not
-            <code><a lt="default media state">Default</a></code>
-            or <code><a lt="content media state">Content</a></code>, then
-            terminate these steps.
+            <code><a lt="content media state">Content</a></code>, then terminate
+            these steps.
           </li>
 
           <li>
@@ -821,7 +791,6 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
             not
-            <code><a lt="default media state">Default</a></code>,
             <code><a lt="content media state">Content</a></code>, <code><a
             lt="transient media state">Transient</a></code> or <code><a
             lt="transient solo media state">Transient Solo</a></code>, then
@@ -883,10 +852,9 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
   </li>
   <li>
     Let <var>interrupting media session category</var> be the <a>media session
-    category</a> that initially triggered this interruption. If this
-    interruption has no known <a>media session category</a>, let
-    <var>interrupting media session category</var> be <code><a lt="default media
-    state">Default</a></code>.
+    category</a> that initially triggered this interruption.
+
+    Issue(100): The interruption may not come from another media session at all.
   </li>
   <li>
     Run these substeps:
@@ -901,9 +869,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
             not
-            <code><a lt="default media state">Default</a></code>
-            or <code><a lt="content media state">Content</a></code>, then
-            terminate these steps.
+            <code><a lt="content media state">Content</a></code>, then terminate
+            these steps.
           </li>
           <li>
             <a>Unduck</a> each <var>audio-producing object</var> in <var>media
@@ -926,8 +893,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
         <ol>
           <li>
             If <var>media session</var>'s <a>current media session type</a> is
-            not <code><a lt="default media state">Default</a></code>,
-            <code><a lt="content media state">Content</a></code>, <code><a
+            not <code><a lt="content media state">Content</a></code>, <code><a
             lt="transient media state">Transient</a></code>, or
             <code><a lt="transient solo media state">Transient Solo</a></code>,
             then terminate these steps.
