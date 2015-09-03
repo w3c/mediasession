@@ -690,7 +690,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
     Let <var>interrupting media session category</var> be the <a>media session
     category</a> that triggered this interruption.
 
-    Issue(100): The interruption may not come from another media session at all.
+    <!-- TODO(philipj): The interruption may not come from another media session
+    at all. https://github.com/whatwg/mediasession/issues/100 -->
   </li>
   <li>
     Run these substeps:
@@ -850,7 +851,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
     Let <var>interrupting media session category</var> be the <a>media session
     category</a> that initially triggered this interruption.
 
-    Issue(100): The interruption may not come from another media session at all.
+    <!-- TODO(philipj): The interruption may not come from another media session
+    at all. https://github.com/whatwg/mediasession/issues/100 -->
   </li>
   <li>
     Run these substeps:

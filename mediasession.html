@@ -72,8 +72,6 @@
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-09-03">3 September 2015</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
-     <dt>Issue Tracking:
-     <dd><a href="#issues-index">Inline In Spec</a>
      <dt>Participate:
      <dd><span><a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)</span>
      <dd><span><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a></span>
@@ -173,7 +171,6 @@ media session from an <code class="idl"><span>AudioContext</span></code> object<
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
      </ul>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
-    <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
    </ul>
   </div>
   <main>
@@ -454,10 +451,8 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
    <ol>
     <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then terminate
     these steps. 
-    <li>
-      Let <var>interrupting media session category</var> be the <a data-link-type="dfn" href="#media-session-category">media session
+    <li> Let <var>interrupting media session category</var> be the <a data-link-type="dfn" href="#media-session-category">media session
     category</a> that triggered this interruption. 
-     <p class="issue" id="issue-8519f2d2"><a class="self-link" href="#issue-8519f2d2"></a> The interruption may not come from another media session at all.</p>
     <li>
       Run these substeps: 
      <dl class="switch">
@@ -538,10 +533,8 @@ then the user agent must run the <a data-link-type="dfn" href="#media-session-co
    <ol>
     <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is not <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then
     terminate these steps. 
-    <li>
-      Let <var>interrupting media session category</var> be the <a data-link-type="dfn" href="#media-session-category">media session
+    <li> Let <var>interrupting media session category</var> be the <a data-link-type="dfn" href="#media-session-category">media session
     category</a> that initially triggered this interruption. 
-     <p class="issue" id="issue-8519f2d20"><a class="self-link" href="#issue-8519f2d20"></a> The interruption may not come from another media session at all.</p>
     <li>
       Run these substeps: 
      <dl class="switch">
@@ -1069,10 +1062,5 @@ partial interface <a class="idl-code" data-link-type="interface" href="https://w
 };
 
 </pre>
-  <h2 class="no-num heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
-  <div style="counter-reset:issue">
-   <div class="issue"> The interruption may not come from another media session at all.<a href="#issue-8519f2d2"> ↵ </a></div>
-   <div class="issue"> The interruption may not come from another media session at all.<a href="#issue-8519f2d20"> ↵ </a></div>
-  </div>
  </body>
 </html>
