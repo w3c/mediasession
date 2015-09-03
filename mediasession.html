@@ -234,10 +234,9 @@ with custom properties or functions in JavaScript.</p>
    <p>The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a></p>
    <h2 class="heading settled" data-level="4" id="media-sessions"><span class="secno">4. </span><span class="content">Media sessions</span><a class="self-link" href="#media-sessions"></a></h2>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session">media session<a class="self-link" href="#media-session"></a></dfn> represents one or more <a data-link-type="dfn" href="#audio_producing-object">audio-producing objects</a> within the same <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> that share the same <a data-link-type="dfn" href="#media-session-category">media
-session category</a>. Each <a data-link-type="dfn" href="#media-session">media session</a> then defines the interactions of
-its <a data-link-type="dfn" href="#audio_producing-object">audio-producing objects</a> with both the underlying platform and other <a data-link-type="dfn" href="#audio_producing-object">audio-producing objects</a> belonging to other <a data-link-type="dfn" href="#media-session">media sessions</a> within
-the user agent.</p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session">media session<a class="self-link" href="#media-session"></a></dfn> represents a participant in the media playback
+environment of the platform. It is associated with zero or more <a data-link-type="dfn" href="#audio_producing-object">audio-producing objects</a> and has a <a data-link-type="dfn" href="#media-session-category">media session category</a> that
+determines the interactions with the underlying platform.</p>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>media session category</var>,
 run these steps:</p>
    <ol>

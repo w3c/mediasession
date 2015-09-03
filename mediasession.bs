@@ -192,12 +192,10 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 <h2 id="media-sessions">Media sessions</h2>
 
-A <dfn>media session</dfn> represents one or more <a>audio-producing objects</a>
-within the same <a>top-level browsing context</a> that share the same <a>media
-session category</a>. Each <a>media session</a> then defines the interactions of
-its <a>audio-producing objects</a> with both the underlying platform and other
-<a>audio-producing objects</a> belonging to other <a>media sessions</a> within
-the user agent.
+A <dfn>media session</dfn> represents a participant in the media playback
+environment of the platform. It is associated with zero or more
+<a>audio-producing objects</a> and has a <a>media session category</a> that
+determines the interactions with the underlying platform.
 
 To <dfn>create a media session</dfn>, given a <var>media session category</var>,
 run these steps:
