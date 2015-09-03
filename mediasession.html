@@ -230,15 +230,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> represents a participant in the media playback
 environment of the platform. It is associated with zero or more <a data-link-type="dfn" href="#audio-producing-object">audio-producing objects</a> and has a <a data-link-type="dfn" href="#media-session-kind">media session kind</a> that
 determines the interactions with the underlying platform.</p>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="create-a-media-session">create a media session<a class="self-link" href="#create-a-media-session"></a></dfn>, given a <var>media session kind</var>, run
-these steps:</p>
-   <ol>
-    <li> Let <var>media session</var> be a new <a data-link-type="dfn" href="#media-session">media session</a>. 
-    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
-    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>media session kind</var>. 
-    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>. 
-    <li> Return <var>media session</var>. 
-   </ol>
    <h3 class="heading settled" data-level="4.1" id="media-session-states"><span class="secno">4.1. </span><span class="content">States</span><a class="self-link" href="#media-session-states"></a></h3>
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-state">current state<a class="self-link" href="#current-state"></a></dfn> that describes its current
 status with respect to any platform-level interactions and interactions with
@@ -380,8 +371,6 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
   in volume applied by the user agent is not intended to be observable to web
   pages. </p>
    <h3 class="heading settled" data-level="4.4" id="media-session-lifecycle"><span class="secno">4.4. </span><span class="content">Lifecycle</span><a class="self-link" href="#media-session-lifecycle"></a></h3>
-   <p>When <a data-link-type="dfn" href="#create-a-media-session">creating a new media session</a> a <a data-link-type="dfn" href="#media-session">media
-session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> is initially set to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
    <p>When the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
 session</a>’s <a data-link-type="dfn" href="#current-state">current state</a> may be set from <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
    <p>When the <a data-link-type="dfn" href="#media-session-interruption-algorithm">media session interruption algorithm</a> is run a <a data-link-type="dfn" href="#media-session">media
@@ -643,9 +632,11 @@ sessions<a class="self-link" href="#media-session"></a></dfn>.</p>
    </dl>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasession">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasession"></a></dfn> constructor, when invoked, must run these steps:</p>
    <ol>
-    <li> Let <var>media session</var> be the result of <a data-link-type="dfn" href="#create-a-media-session">creating a media session</a> given <var>kind</var>. 
-    <li> Let <var>s</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object associated with <var>media session</var>. 
-    <li> Return <var>s</var>. 
+    <li> Let <var>media session</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object. 
+    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
+    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>kind</var>. 
+    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>. 
+    <li> Return <var>media session</var>. 
    </ol>
    <h4 class="heading settled" data-level="4.5.2" id="mediasession-object-members"><span class="secno">4.5.2. </span><span class="content">Object members</span><a class="self-link" href="#mediasession-object-members"></a></h4>
    <dl class="domintro">
@@ -917,7 +908,6 @@ neighboring rights to this work.</p>
    <li><a href="#audio-producing-participants">audio-producing participants</a><span>, in §4.3</span>
    <li><a href="#content-attribute-value">content attribute value</a><span>, in §4.2</span>
    <li><a href="#content-media-state">content media state</a><span>, in §4.2</span>
-   <li><a href="#create-a-media-session">create a media session</a><span>, in §4</span>
    <li><a href="#current-media-session">current media session</a><span>, in §4.3</span>
    <li><a href="#current-media-session-type">current media session type</a><span>, in §4.2</span>
    <li><a href="#current-state">current state</a><span>, in §4.1</span>
