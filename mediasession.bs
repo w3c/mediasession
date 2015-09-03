@@ -147,9 +147,9 @@ for that content and enforce logical interoperation behavior on the current
 platform between any number of different sources of media.
 
 This specification describes the mechanism that allows web developers to specify
-the most appropriate category for their media content and for user agents to
-then use these supplied hints to enforce how different sources of web media
-should interact with each other, other native media content and the underlying
+the most appropriate kind for their media content and for user agents to then
+use these supplied hints to enforce how different sources of web media should
+interact with each other, other native media content and the underlying
 platform.
 
 <h2 id="conformance">Conformance</h2>
@@ -194,11 +194,11 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 A <dfn>media session</dfn> represents a participant in the media playback
 environment of the platform. It is associated with zero or more
-<a>audio-producing objects</a> and has a <a>media session category</a> that
+<a>audio-producing objects</a> and has a <a>media session kind</a> that
 determines the interactions with the underlying platform.
 
-To <dfn>create a media session</dfn>, given a <var>media session category</var>,
-run these steps:
+To <dfn>create a media session</dfn>, given a <var>media session kind</var>, run
+these steps:
 
 <ol>
   <li>
@@ -206,8 +206,7 @@ run these steps:
   </li>
   <li>
     Set <var>media session</var>'s <a>current media session type</a> to the
-    corresponding <a>media session type</a> of <var>media session
-    category</var>.
+    corresponding <a>media session type</a> of <var>media session kind</var>.
   </li>
   <li>
     Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
@@ -252,7 +251,7 @@ other <a>media sessions</a>. The possible values are as follows:
 
 <h3 id="media-session-types">Types</h3>
 
-A <dfn>media session category</dfn> is a keyword that maps to a well-defined
+A <dfn>media session kind</dfn> is a keyword that maps to a well-defined
 interaction state for a <a>media session</a> – called its <dfn>media session
 type</dfn> – that user agents use to enforce platform-specific interaction and
 interoperation between media content.
@@ -260,16 +259,16 @@ interoperation between media content.
 A <a>media session</a> has a <dfn>current media session type</dfn> that is set
 when a new <a>media session</a> is created.
 
-The following table lists the available <a>media session categories</a> keywords
-and their corresponding <a>media session type</a> states — the keywords in the
+The following table lists the available <a>media session kinds</a> keywords and
+their corresponding <a>media session type</a> states — the keywords in the
 left column map to the states in the cell in the second column on the same row
-as the keyword. <a>Media session categories</a> and <a>media session types</a>
+as the keyword. <a>Media session kinds</a> and <a>media session types</a>
 should be used based on their preferred definitions in the table’s third and
 fourth columns.
 
-<table id="valid-media-categories">
+<table>
   <tr>
-    <th>Category</th>
+    <th>Kind</th>
     <th>State</th>
     <th>Definition</th>
     <th>Examples</th>
@@ -563,7 +562,7 @@ session</a>'s <a>current state</a> may be set from
 <code><a lt="active media session state">active</a></code> to either <code><a
 lt="idle media session state">idle</a></code> or <code><a lt="interrupted media
 session state">interrupted</a></code> depending on its associated <a>media
-session category</a>.
+session kind</a>.
 
 When the <a>media session continuation algorithm</a> is run a <a>media
 session</a>'s <a>current state</a> may be set from <code><a lt="interrupted
@@ -687,8 +686,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
     these steps.
   </li>
   <li>
-    Let <var>interrupting media session category</var> be the <a>media session
-    category</a> that triggered this interruption.
+    Let <var>interrupting media session kind</var> be the <a>media session
+    kind</a> that triggered this interruption.
 
     <!-- TODO(philipj): The interruption may not come from another media session
     at all. https://github.com/whatwg/mediasession/issues/100 -->
@@ -698,8 +697,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
 
     <dl class=switch>
       <dt>
-        If <var>interrupting media session category</var> is <code><a
-        lt="content media state">Content</a></code>
+        If <var>interrupting media session kind</var> is <code><a lt="content
+        media state">Content</a></code>
       </dt>
       <dd>
         <ol>
@@ -734,8 +733,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>interrupting media session category</var> is <code><a
-        lt="transient media state">Transient</a></code>
+        If <var>interrupting media session kind</var> is <code><a lt="transient
+        media state">Transient</a></code>
       </dt>
       <dd>
         <ol>
@@ -780,8 +779,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>interrupting media session category</var> is <code><a
-        lt="transient solo media state">Transient Solo</a></code>
+        If <var>interrupting media session kind</var> is <code><a lt="transient
+        solo media state">Transient Solo</a></code>
       </dt>
       <dd>
         <ol>
@@ -848,8 +847,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
     terminate these steps.
   </li>
   <li>
-    Let <var>interrupting media session category</var> be the <a>media session
-    category</a> that initially triggered this interruption.
+    Let <var>interrupting media session kind</var> be the <a>media session
+    kind</a> that initially triggered this interruption.
 
     <!-- TODO(philipj): The interruption may not come from another media session
     at all. https://github.com/whatwg/mediasession/issues/100 -->
@@ -859,8 +858,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 
     <dl class=switch>
       <dt>
-        If <var>interrupting media session category</var> is <code><a
-        lt="transient media state">Transient</a></code>
+        If <var>interrupting media session kind</var> is <code><a lt="transient
+        media state">Transient</a></code>
       </dt>
       <dd>
         <ol>
@@ -884,8 +883,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>interrupting media session category</var> is <code><a
-        lt="transient solo media state">Transient Solo</a></code>
+        If <var>interrupting media session kind</var> is <code><a lt="transient
+        solo media state">Transient Solo</a></code>
       </dt>
       <dd>
         <ol>
@@ -1105,14 +1104,14 @@ constructor, when invoked, must run these steps:
     <code><var>session</var> . {{MediaSession/kind}}</code>
   </dt>
   <dd>
-    Returns the <a>media session category</a> of the
+    Returns the <a>media session kind</a> of the
     <a>media session</a>.
   </dd>
 </dl>
 
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
-attribute must return the <a>media session category</a> of the <a>media
-session</a> that was set when the object was created.
+attribute must return the <a>media session kind</a> of the <a>media session</a>
+that was set when the object was created.
 
 <dl class=domintro>
   <dt>
