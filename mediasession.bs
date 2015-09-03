@@ -191,7 +191,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 <h2 id="media-sessions">Media sessions</h2>
 
-A <dfn>media session</dfn> represents a participant in the media playback
+A <a>media session</a> represents a participant in the media playback
 environment of the platform. It is associated with zero or more
 <a>audio-producing objects</a> and has a <a>media session kind</a> that
 determines the interactions with the underlying platform.
@@ -1044,8 +1044,6 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-<h2 id="api">API</h2>
-
 <h3 id="the-mediasession-interface">The {{MediaSession}} interface</h3>
 
 <pre class="idl">
@@ -1064,7 +1062,8 @@ enum MediaSessionKind {
 };
 </pre>
 
-{{MediaSession}} objects are simply known as <a>media sessions</a>.
+{{MediaSession}} objects are simply known as <dfn id="media-session">media
+sessions</dfn>.
 
 <h4 id="mediasession-constructors">Constructors</h4>
 
