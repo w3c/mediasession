@@ -235,8 +235,8 @@ constructor, when invoked, must run these steps:
     corresponding <a>media session type</a> of <var>kind</var>.
   </li>
   <li>
-    Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
-    media session state">idle</a></code>.
+    Set <var>media session</var>'s <a>state</a> to <code><a lt="idle media
+    session state">idle</a></code>.
   </li>
   <li>
     Return <var>media session</var>.
@@ -245,9 +245,10 @@ constructor, when invoked, must run these steps:
 
 <h3 id="media-session-states">States</h3>
 
-A <a>media session</a> has a <dfn>current state</dfn> that describes its current
-status with respect to any platform-level interactions and interactions with
-other <a>media sessions</a>. The possible values are as follows:
+A <a>media session</a> has a <dfn for="MediaSession">state</dfn> that describes
+its current status with respect to any platform-level interactions and
+interactions with other <a>media sessions</a>. The possible values are as
+follows:
 
 <dl>
   <dt>
@@ -659,7 +660,7 @@ The <dfn>media session activation algorithm</dfn> takes one argument,
     Set <var>media session</var>'s <a>resume list</a> to an empty list.
   </li>
   <li>
-    Set <var>media session</var>'s <a>current state</a> to
+    Set <var>media session</var>'s <a>state</a> to
     <code><a lt="active media session state">active</a></code>, then return
     success.
   </li>
@@ -690,7 +691,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
 
 <ol>
   <li>
-    If <var>media session</var>'s <a>current state</a> is not
+    If <var>media session</var>'s <a>state</a> is not
     <code><a lt="active media session state">active</a></code>, then terminate
     these steps.
   </li>
@@ -716,8 +717,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             <code><a lt="content media state">Content</a></code> then
             <a>indefinitely pause</a> all of <var>media session</var>'s
             <a>audio-producing participants</a> and set <var>media
-            session</var>'s <a>current state</a> to <code><a lt="idle media
-            session state">idle</a></code>.
+            session</var>'s <a>state</a> to <code><a lt="idle media session
+            state">idle</a></code>.
 
             <p class="note">
               This implies that the next time the <a>media session activation
@@ -775,7 +776,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             </ol>
           </li>
           <li>
-            Set <var>media session</var>'s <a>current state</a> to <code><a
+            Set <var>media session</var>'s <a>state</a> to <code><a
             lt="interrupted media session state">interrupted</a></code>.
 
             <p class="note">
@@ -823,7 +824,7 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             </ol>
           </li>
           <li>
-            Set <var>media session</var>'s <a>current state</a> to <code><a
+            Set <var>media session</var>'s <a>state</a> to <code><a
             lt="interrupted media session state">interrupted</a></code>.
 
             <p class="note">
@@ -851,7 +852,7 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 
 <ol>
   <li>
-    If <var>media session</var>'s <a>current state</a> is not
+    If <var>media session</var>'s <a>state</a> is not
     <code><a lt="interrupted media session state">interrupted</a></code>, then
     terminate these steps.
   </li>
@@ -886,8 +887,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             Set <var>media session</var>'s <a>resume list</a> to an empty list.
           </li>
           <li>
-            Set <var>media session</var>'s <a>current state</a> to <code><a
-            lt="active media session state">active</a></code>.
+            Set <var>media session</var>'s <a>state</a> to <code><a lt="active
+            media session state">active</a></code>.
           </li>
         </ol>
       </dd>
@@ -912,8 +913,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
             Set <var>media session</var>'s <a>resume list</a> to an empty list.
           </li>
           <li>
-            Set <var>media session</var>'s <a>current state</a> to <code><a
-            lt="active media session state">active</a></code>.
+            Set <var>media session</var>'s <a>state</a> to <code><a lt="active
+            media session state">active</a></code>.
           </li>
         </ol>
       </dd>
@@ -943,7 +944,7 @@ user agent must run the following steps:
       </li>
       <li>
         If {{visibilityState}} is &quot;{{hidden}}&quot; [[PAGE-VISIBILITY]] and
-        <var>s</var>'s <a>current state</a> is <code><a lt="active media session
+        <var>s</var>'s <a>state</a> is <code><a lt="active media session
         state">active</a></code>, then run the following substeps:
 
         <ol>
@@ -969,7 +970,7 @@ user agent must run the following steps:
           </li>
           <li>
             Set <var>s</var>'s
-            <a>current state</a> to <code><a lt="interrupted media session
+            <a>state</a> to <code><a lt="interrupted media session
             state">interrupted</a></code>.
           </li>
           <li>
@@ -981,9 +982,8 @@ user agent must run the following steps:
 
       <li>
         If {{visibilityState}} is &quot;{{visible}}&quot; [[PAGE-VISIBILITY]]
-        and <var>s</var>'s <a>current state</a> is <code><a lt="interrupted
-        media session state">interrupted</a></code>, then run the following
-        substeps:
+        and <var>s</var>'s <a>state</a> is <code><a lt="interrupted media
+        session state">interrupted</a></code>, then run the following substeps:
 
         <ol>
           <li>
@@ -994,8 +994,8 @@ user agent must run the following steps:
             Set <var>s</var>'s <a>resume list</a> to an empty list.
           </li>
           <li>
-            Set <var>s</var>'s <a>current state</a> to <code><a lt="active media
-            session state">active</a></code>.
+            Set <var>s</var>'s <a>state</a> to <code><a lt="active media session
+            state">active</a></code>.
           </li>
           <li>
             Terminate these substeps and continue at the next available
@@ -1015,8 +1015,8 @@ user agent must run the following steps:
   </dt>
   <dd>
     Releases platform-level media focus, sets the <a>media session</a>'s
-    <a>current state</a> to <code><a lt="idle media session
-    state">idle</a></code> and applies any changes necessary to its
+    <a>state</a> to <code><a lt="idle media session state">idle</a></code> and
+    applies any changes necessary to its
     <a>audio-producing participants</a>.
   </dd>
 </dl>
@@ -1051,7 +1051,7 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
 
 <ol>
   <li>
-    If <var>media session</var>'s <a>current state</a> is
+    If <var>media session</var>'s <a>state</a> is
     <code><a lt="idle media session state">idle</a></code>, then terminate these
     steps.
   </li>
@@ -1080,7 +1080,7 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
     </p>
   </li>
   <li>
-    Set <var>media session</var>'s <a>current state</a> to
+    Set <var>media session</var>'s <a>state</a> to
     <code><a lt="idle media session state">idle</a></code>.
 
     <p class="note">
@@ -1218,11 +1218,11 @@ each <a>media session</a> as <var>media session</var>.
   After we have completed this process, the original <code><a lt="transient
   media state">Transient</a></code> or
   <code><a lt="transient solo media state">Transient Solo</a></code>-based
-  <a>media session</a> will have a <a>current state</a> of <code><a lt="idle
-  media session state">idle</a></code> and all <code><a lt="interrupted media
-  session state">interrupted</a></code> <a>media sessions</a>
-  will have returned to a <a>current state</a> of <code><a lt="active media
-  session state">active</a></code>.
+  <a>media session</a> will have a <a>state</a> of <code><a lt="idle media
+  session state">idle</a></code> and all <code><a lt="interrupted media session
+  state">interrupted</a></code> <a>media sessions</a>
+  will have returned to a <a>state</a> of <code><a lt="active media session
+  state">active</a></code>.
 </div>
 
 When the user agent is to <dfn>unpause a media element</dfn> for a given
@@ -1391,11 +1391,11 @@ each <a>media session</a> as <var>media session</var>.
   After we have completed this process, the original <code><a lt="transient
   media state">Transient</a></code> or
   <code><a lt="transient solo media state">Transient Solo</a></code>-based
-  <a>media session</a> will have a <a>current state</a> of <code><a lt="idle
-  media session state">idle</a></code> and all <code><a lt="interrupted media
-  session state">interrupted</a></code> <a>media sessions</a>
-  will have returned to a <a>current state</a> of <code><a lt="active media
-  session state">active</a></code>.
+  <a>media session</a> will have a <a>state</a> of <code><a lt="idle media
+  session state">idle</a></code> and all <code><a lt="interrupted media session
+  state">interrupted</a></code> <a>media sessions</a>
+  will have returned to a <a>state</a> of <code><a lt="active media session
+  state">active</a></code>.
 </div>
 
 When the user agent is to <dfn>resume a web audio object</dfn> for a given
