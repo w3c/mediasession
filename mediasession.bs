@@ -277,6 +277,20 @@ other <a>media sessions</a>. The possible values are as follows:
 
 <h3 id="media-session-kinds">Kinds</h3>
 
+<dl class=domintro>
+  <dt>
+    <code><var>session</var> . {{MediaSession/kind}}</code>
+  </dt>
+  <dd>
+    Returns the <a>media session kind</a> of the
+    <a>media session</a>.
+  </dd>
+</dl>
+
+The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
+attribute must return the <a>media session kind</a> of the <a>media session</a>
+that was set when the object was created.
+
 A <dfn>media session kind</dfn> is a keyword that maps to a well-defined
 interaction state for a <a>media session</a> – called its <dfn>media session
 type</dfn> – that user agents use to enforce platform-specific interaction and
@@ -995,6 +1009,43 @@ user agent must run the following steps:
 
 <h3 id="deactivating-a-media-session">Deactivating a media session</h3>
 
+<dl class=domintro>
+  <dt>
+    <code><var>session</var> . {{MediaSession/deactivate()}}</code>
+  </dt>
+  <dd>
+    Releases platform-level media focus, sets the <a>media session</a>'s
+    <a>current state</a> to <code><a lt="idle media session
+    state">idle</a></code> and applies any changes necessary to its
+    <a>audio-producing participants</a>.
+  </dd>
+</dl>
+
+When the <dfn method for="MediaSession"
+lt="deactivate()"><code>deactivate()</code></dfn> method is invoked, the user
+agent must run the following steps:
+
+<ol>
+  <li>
+    Let <var>media session</var> be the <a>context object</a>.
+  </li>
+  <li>
+    <a>Indefinitely pause</a> all of <var>media session</var>'s
+    <a>audio-producing participants</a>.
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>resume list</a> to an empty list.
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>audio-producing participants</a>
+    to an empty list.
+  </li>
+  <li>
+    Run the <a>media session deactivation algorithm</a> for <var>media
+    session</var>.
+  </li>
+</ol>
+
 The <dfn>media session deactivation algorithm</dfn> takes one argument,
 <var>media session</var>, and consists of the following steps.
 
@@ -1037,59 +1088,6 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
       algorithm</a> is run against <var>media session</var> that we will
       re-request media focus according to the steps defined in that algorithm.
     </p>
-  </li>
-</ol>
-
-<h3 id="mediasession-object-members">Object members</h3>
-
-<dl class=domintro>
-  <dt>
-    <code><var>session</var> . {{MediaSession/kind}}</code>
-  </dt>
-  <dd>
-    Returns the <a>media session kind</a> of the
-    <a>media session</a>.
-  </dd>
-</dl>
-
-The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
-attribute must return the <a>media session kind</a> of the <a>media session</a>
-that was set when the object was created.
-
-<dl class=domintro>
-  <dt>
-    <code><var>session</var> . {{MediaSession/deactivate()}}</code>
-  </dt>
-  <dd>
-    Releases platform-level media focus, sets the <a>media session</a>'s
-    <a>current state</a> to <code><a lt="idle media session
-    state">idle</a></code> and applies any changes necessary to its
-    <a>audio-producing participants</a>.
-  </dd>
-</dl>
-
-When the <dfn method for="MediaSession"
-lt="deactivate()"><code>deactivate()</code></dfn> method is invoked, the user
-agent must run the following steps:
-
-<ol>
-  <li>
-    Let <var>media session</var> be the <a>context object</a>.
-  </li>
-  <li>
-    <a>Indefinitely pause</a> all of <var>media session</var>'s
-    <a>audio-producing participants</a>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>resume list</a> to an empty list.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>audio-producing participants</a>
-    to an empty list.
-  </li>
-  <li>
-    Run the <a>media session deactivation algorithm</a> for <var>media
-    session</var>.
   </li>
 </ol>
 
