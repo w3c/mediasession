@@ -230,8 +230,7 @@ sessions<a class="self-link" href="#media-session"></a></dfn>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasession">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasession"></a></dfn> constructor, when invoked, must run these steps:</p>
    <ol>
     <li> Let <var>media session</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object. 
-    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> to the
-    corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> of <var>kind</var>. 
+    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> to <var>kind</var>. 
     <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#state">state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>. 
     <li> Return <var>media session</var>. 
    </ol>
@@ -248,8 +247,7 @@ follows:</p>
     <dd> The <a data-link-type="dfn" href="#media-session">media session</a> currently has platform-level media focus. 
     <dt> <dfn data-dfn-type="dfn" data-lt="interrupted media session state" data-noexport="" id="interrupted-media-session-state"><code>interrupted</code><a class="self-link" href="#interrupted-media-session-state"></a></dfn> 
     <dd> The <a data-link-type="dfn" href="#media-session">media session</a> is currently suspended from having platform-level
-    media focus and its <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a> are either <a data-link-type="dfn" href="#pause">paused</a> or <a data-link-type="dfn" href="#duck">ducked</a> based on the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#current-media-session-type">current media
-    session type</a>. 
+    media focus and its <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a> are either <a data-link-type="dfn" href="#pause">paused</a> or <a data-link-type="dfn" href="#duck">ducked</a> based on the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#kind">kind</a>. 
    </dl>
    <h3 class="heading settled" data-level="4.3" id="media-session-kinds"><span class="secno">4.3. </span><span class="content">Kinds</span><a class="self-link" href="#media-session-kinds"></a></h3>
    <dl class="domintro">
@@ -257,94 +255,104 @@ follows:</p>
     <dd> Returns the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#kind">kind</a>. 
    </dl>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn> attribute must return the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#kind">kind</a>.</p>
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-for="MediaSession" data-dfn-type="dfn" data-noexport="" id="kind">kind<a class="self-link" href="#kind"></a></dfn> that maps to a
-well-defined interaction state for a <a data-link-type="dfn" href="#media-session">media session</a> – called its <dfn data-dfn-type="dfn" data-noexport="" id="media-session-type">media session type<a class="self-link" href="#media-session-type"></a></dfn> – that user agents use to enforce
-platform-specific interaction and interoperation between media content.</p>
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session-type">current media session type<a class="self-link" href="#current-media-session-type"></a></dfn> that is set
-when a new <a data-link-type="dfn" href="#media-session">media session</a> is created.</p>
-   <p>The following table lists the available <a data-link-type="dfn" href="#kind">kind</a> keywords and their
-corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> states — the keywords in the left
-column map to the states in the cell in the second column on the same row as the
-keyword. <a data-link-type="dfn" href="#kind">Kinds</a> and <a data-link-type="dfn" href="#media-session-type">media session types</a> should be used based on their preferred definitions in the table’s third and
-fourth columns.</p>
-   <table>
-    <tbody>
-     <tr>
-      <th>Kind
-      <th>State
-      <th>Definition
-      <th>Examples
-     <tr>
-      <td> "<dfn data-dfn-type="dfn" data-lt="content attribute value" data-noexport="" id="content-attribute-value"><code>content</code><a class="self-link" href="#content-attribute-value"></a></dfn>" 
-      <td> <dfn data-dfn-type="dfn" data-lt="content media state" data-noexport="" id="content-media-state">Content<a class="self-link" href="#content-media-state"></a></dfn> 
-      <td>
-       <ul>
-        <li> <a data-link-type="dfn" href="#indefinitely-pause">Indefinitely pauses</a> all other <a data-link-type="dfn" href="#audio-producing-participants">active</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a href="#activating-a-media-session">playback begins</a>. 
-        <li> Displays lock-screen and notification area user interfaces when <a href="#activating-a-media-session">playback begins</a>. 
-        <li> Reacts to changes in both hardware and software-based media key
-          buttons when <a href="#activating-a-media-session">playback
-          begins</a>. 
-        <li> <a data-link-type="dfn" href="#duck">Ducks</a> itself when <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> itself when <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
-        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
-        <li> Continues playing normally when <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. 
-       </ul>
-      <td> Music, podcasts, radio streams. 
-     <tr>
-      <td> "<dfn data-dfn-type="dfn" data-lt="transient attribute
-      value" data-noexport="" id="transient-attribute-value"><code>transient</code><a class="self-link" href="#transient-attribute-value"></a></dfn>" 
-      <td> <dfn data-dfn-type="dfn" data-lt="transient media state" data-noexport="" id="transient-media-state">Transient<a class="self-link" href="#transient-media-state"></a></dfn> 
-      <td>
-       <ul>
-        <li> <a data-link-type="dfn" href="#duck">Ducks</a> all other <a data-link-type="dfn" href="#audio-producing-participants">active</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a href="#activating-a-media-session">playback begins</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> all other <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>. 
-        <li> Does not display lock-screen and notification area user interfaces
-          when <a href="#activating-a-media-session">playback begins</a>. 
-        <li> Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#activating-a-media-session">playback
-          begins</a>. 
-        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
-        <li> Continues playing normally when other <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. 
-       </ul>
-      <td> Notification sounds. Spoken driving directions where playback of music in
-      the background is acceptable. 
-     <tr>
-      <td> "<dfn data-dfn-type="dfn" data-lt="transient-solo attribute
-      value" data-noexport="" id="transient-solo-attribute-value"><code>transient-solo</code><a class="self-link" href="#transient-solo-attribute-value"></a></dfn>" 
-      <td> <dfn data-dfn-type="dfn" data-lt="transient solo media state" data-noexport="" id="transient-solo-media-state">Transient Solo<a class="self-link" href="#transient-solo-media-state"></a></dfn> 
-      <td>
-       <ul>
-        <li> <a data-link-type="dfn" href="#pause">Pauses</a> all other <a data-link-type="dfn" href="#audio-producing-participants">active</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content when <a href="#activating-a-media-session">playback
-          begins</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> all <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content when <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>. 
-        <li> Does not display lock-screen and notification area user interfaces
-          when <a href="#activating-a-media-session">playback begins</a>. 
-        <li> Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#activating-a-media-session">playback
-          begins</a>. 
-        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when other <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when other <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient
-          Solo</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
-        <li> Continues playing normally when <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. 
-       </ul>
-      <td> Playback of driving directions. Other spoken notifications. 
-     <tr>
-      <td> "<dfn data-dfn-type="dfn" data-lt="ambient attribute value" data-noexport="" id="ambient-attribute-value"><code>ambient</code><a class="self-link" href="#ambient-attribute-value"></a></dfn>" 
-      <td> <dfn data-dfn-type="dfn" data-lt="ambient media state" data-noexport="" id="ambient-media-state">Ambient<a class="self-link" href="#ambient-media-state"></a></dfn> 
-      <td>
-       <ul>
-        <li> Does not interact with any other <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content during
-          playback. 
-        <li> Does not display lock-screen and notification area user interfaces
-          when <a href="#activating-a-media-session">playback begins</a>. 
-        <li> Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#activating-a-media-session">playback
-          begins</a>. 
-        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is not
-          visible (i.e. the page is placed in the background or the user agent
-          is minimized or the screen is switched off). <a data-link-type="dfn" href="#unpause">Unpauses</a> itself
-          when its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is at least partially visible on at
-          least one screen again (i.e. the user agent is in the foreground and
-          the page is focused again). 
-       </ul>
-      <td> UI sounds. In-game sound effects and background music. 
-   </table>
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-for="MediaSession" data-dfn-type="dfn" data-noexport="" id="kind">kind<a class="self-link" href="#kind"></a></dfn> which is one of
+"<code><a data-link-type="dfn" href="#content">content</a></code>", "<code><a data-link-type="dfn" href="#transient">transient</a></code>",
+"<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" and "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>".</p>
+   <div class="note" role="note">
+     The following table lists the available <a data-link-type="dfn" href="#kind">kinds</a>, their associated
+  behavior, and examples of when they are appropriate to use. 
+    <table>
+     <tbody>
+      <tr>
+       <th>Kind
+       <th>Behavior
+       <th>Examples
+      <tr>
+       <td> "<code><dfn data-dfn-type="dfn" data-noexport="" id="content">content<a class="self-link" href="#content"></a></dfn></code>" 
+       <td>
+        <ul>
+         <li> <a data-link-type="dfn" href="#indefinitely-pause">Indefinitely pauses</a> all other <a data-link-type="dfn" href="#audio-producing-participants">active</a> "<code><a data-link-type="dfn" href="#content">content</a></code>" content when <a href="#activating-a-media-session">playback begins</a>. 
+         <li> Displays lock-screen and notification area user interfaces when <a href="#activating-a-media-session">playback begins</a>. 
+         <li> Reacts to changes in both hardware and software-based media key
+            buttons when <a href="#activating-a-media-session">playback
+            begins</a>. 
+         <li> <a data-link-type="dfn" href="#duck">Ducks</a> itself when "<code><a data-link-type="dfn" href="#transient">transient</a></code>" content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> itself when "<code><a data-link-type="dfn" href="#transient">transient</a></code>" content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
+         <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"
+            content <a href="#interrupting-a-media-session">starts
+            interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"
+            content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends
+            playback</a>. 
+         <li> Continues playing normally when "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>"
+            content <a href="#interrupting-a-media-session">starts
+            interrupting</a>. 
+        </ul>
+       <td> Music, podcasts, radio streams. 
+      <tr>
+       <td> "<code><dfn data-dfn-type="dfn" data-noexport="" id="transient">transient<a class="self-link" href="#transient"></a></dfn></code>" 
+       <td>
+        <ul>
+         <li> <a data-link-type="dfn" href="#duck">Ducks</a> all other <a data-link-type="dfn" href="#audio-producing-participants">active</a> "<code><a data-link-type="dfn" href="#content">content</a></code>" content when <a href="#activating-a-media-session">playback begins</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> all other <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> "<code><a data-link-type="dfn" href="#content">content</a></code>" content when <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">playback
+            ends</a>. 
+         <li> Does not display lock-screen and notification area user interfaces
+            when <a href="#activating-a-media-session">playback begins</a>. 
+         <li> Does not react to changes in both hardware and software-based media
+            key buttons when <a href="#activating-a-media-session">playback
+            begins</a>. 
+         <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"
+            content <a href="#interrupting-a-media-session">starts
+            interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"
+            content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends
+            playback</a>. 
+         <li> Continues playing normally when other
+            "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>"
+            content <a href="#interrupting-a-media-session">starts
+            interrupting</a>. 
+        </ul>
+       <td> Notification sounds. Spoken driving directions where playback of music
+        in the background is acceptable. 
+      <tr>
+       <td> "<code><dfn data-dfn-type="dfn" data-noexport="" id="transient-solo">transient-solo<a class="self-link" href="#transient-solo"></a></dfn></code>" 
+       <td>
+        <ul>
+         <li> <a data-link-type="dfn" href="#pause">Pauses</a> all other <a data-link-type="dfn" href="#audio-producing-participants">active</a> "<code><a data-link-type="dfn" href="#content">content</a></code>", "<code><a data-link-type="dfn" href="#transient">transient</a></code>" and
+            "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" content when <a href="#activating-a-media-session">playback begins</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> all <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> "<code><a data-link-type="dfn" href="#content">content</a></code>", "<code><a data-link-type="dfn" href="#transient">transient</a></code>" and
+            "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" content when <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>. 
+         <li> Does not display lock-screen and notification area user interfaces
+            when <a href="#activating-a-media-session">playback begins</a>. 
+         <li> Does not react to changes in both hardware and software-based media
+            key buttons when <a href="#activating-a-media-session">playback
+            begins</a>. 
+         <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when other "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"
+            content <a href="#interrupting-a-media-session">starts
+            interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when other "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends
+            playback</a>. 
+         <li> Continues playing normally when "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>"
+            content <a href="#interrupting-a-media-session">starts
+            interrupting</a>. 
+        </ul>
+       <td> Playback of driving directions. Other spoken notifications. 
+      <tr>
+       <td> "<code><dfn data-dfn-type="dfn" data-noexport="" id="ambient">ambient<a class="self-link" href="#ambient"></a></dfn></code>" 
+       <td>
+        <ul>
+         <li> Does not interact with any other "<code><a data-link-type="dfn" href="#content">content</a></code>",
+            "<code><a data-link-type="dfn" href="#transient">transient</a></code>",
+            "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" or
+            "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>" content during playback. 
+         <li> Does not display lock-screen and notification area user interfaces
+            when <a href="#activating-a-media-session">playback begins</a>. 
+         <li> Does not react to changes in both hardware and software-based media
+            key buttons when <a href="#activating-a-media-session">playback
+            begins</a>. 
+         <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is
+            not visible (i.e. the page is placed in the background or the user
+            agent is minimized or the screen is switched off). <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is at least partially visible on
+            at least one screen again (i.e. the user agent is in the foreground
+            and the page is focused again). 
+        </ul>
+       <td> UI sounds. In-game sound effects and background music. 
+    </table>
+   </div>
    <h3 class="heading settled" data-level="4.4" id="media-session-participants"><span class="secno">4.4. </span><span class="content">Participants</span><a class="self-link" href="#media-session-participants"></a></h3>
    <p>An <dfn data-dfn-type="dfn" data-noexport="" id="audio-producing-object">audio-producing object<a class="self-link" href="#audio-producing-object"></a></dfn> is any object or element that is capable of
 emitting sound within the user agent and is therefore also potentially capable
@@ -386,13 +394,14 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
     <li> If <var>media session</var> is already <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then return success. 
     <li>
       Optionally, based on platform conventions, request the most appropriate
-    platform-level media focus for <var>media session</var> based on its <a data-link-type="dfn" href="#current-media-session-type">current media session type</a>. 
+    platform-level media focus for <var>media session</var> based on its <a data-link-type="dfn" href="#kind">kind</a>. 
      <p>If this step is run and platform-level media focus can not be obtained for
     any reason, then return failure.</p>
     <li>
       Run these substeps: 
      <dl class="switch">
-      <dt> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> 
+      <dt> If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is
+        "<code><a data-link-type="dfn" href="#content">content</a></code>" 
       <dd>
        <ol>
         <li> Optionally, based on platform conventions, the user agent may show
@@ -400,20 +409,24 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
             notifications area and/or show an ongoing media interface in the
             underlying platform’s lock screen area. 
        </ol>
-      <dt> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> 
+      <dt> If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is
+        "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" 
       <dd class="note" role="note"> The user agent should not provide user access to any hardware or
         software media keys and not display any ongoing media interface in the
         underlying platform’s notifications area or show any ongoing media
-        interface in the underlying platform’s lock screen area for <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a>. 
-      <dt> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> 
+        interface in the underlying platform’s lock screen area for
+        "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or
+        "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"-based <a data-link-type="dfn" href="#media-session">media sessions</a>. 
+      <dt> If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is
+        "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>" 
       <dd>
         If <var>media session</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> is not
         at least partially visible on at least one screen, then return failure. 
        <p class="note" role="note"> The user agent should not provide user access to any hardware or
           software media keys and not display any ongoing media interface in the
           underlying platform’s notifications area or show any ongoing media
-          interface in the underlying platform’s lock screen area for <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code>-based <a data-link-type="dfn" href="#media-session">media
-          sessions</a>. </p>
+          interface in the underlying platform’s lock screen area for
+          "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>"-based <a data-link-type="dfn" href="#media-session">media sessions</a>. </p>
      </dl>
     <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list. 
     <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#state">state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then return
@@ -423,7 +436,7 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation algorithm</a> has been run. This typically occurs
 when another application or another <a data-link-type="dfn" href="#media-session">media session</a> requests and is granted
 a level of platform media focus that affects the <a data-link-type="dfn" href="#media-session">media session</a> based on
-its <a data-link-type="dfn" href="#current-media-session-type">current media session type</a>.</p>
+its <a data-link-type="dfn" href="#kind">kind</a>.</p>
    <p>Interruptions can be both transient or permanent. A transient interruption means
 we can either choose to <a data-link-type="dfn" href="#duck">duck</a> our media content and continue playing it
 out at a reduced volume for the duration of the interruption; or <a data-link-type="dfn" href="#pause">pause</a> our media content for the duration of the interruption and, then, resume
@@ -440,11 +453,12 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
     <li>
       Run these substeps: 
      <dl class="switch">
-      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> 
+      <dt> If <var>interrupting kind</var> is "<code><a data-link-type="dfn" href="#content">content</a></code>" 
       <dd>
        <ol>
         <li>
-          If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> then <a data-link-type="dfn" href="#indefinitely-pause">indefinitely pause</a> all of <var>media session</var>’s <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a> and set <var>media
+          If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is
+            "<code><a data-link-type="dfn" href="#content">content</a></code>" then <a data-link-type="dfn" href="#indefinitely-pause">indefinitely pause</a> all of <var>media session</var>’s <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a> and set <var>media
             session</var>’s <a data-link-type="dfn" href="#state">state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>. 
          <p class="note" role="note"> This implies that the next time the <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation
               algorithm</a> is run against <var>media session</var> that we will
@@ -458,12 +472,11 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
             prevent any hardware and/or software media keys from controlling
             playback of <var>media session</var>’s <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>. 
        </ol>
-      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> 
+      <dt> If <var>interrupting kind</var> is "<code><a data-link-type="dfn" href="#transient">transient</a></code>" 
       <dd>
        <ol>
-        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-            not <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then terminate
-            these steps. 
+        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is not
+            "<code><a data-link-type="dfn" href="#content">content</a></code>", then terminate these steps. 
         <li>
           For each <var>audio-producing object</var> in <var>media
             session</var>’s list of <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>: 
@@ -483,12 +496,12 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
               re-activate this <a data-link-type="dfn" href="#media-session">media session</a> according to the steps
               defined in that algorithm. </p>
        </ol>
-      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> 
+      <dt> If <var>interrupting kind</var> is "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" 
       <dd>
        <ol>
-        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-            not <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then
-            terminate these steps. 
+        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is not
+            "<code><a data-link-type="dfn" href="#content">content</a></code>", "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or
+            "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>", then terminate these steps. 
         <li>
           For each <var>audio-producing object</var> in <var>media
             session</var>’s list of <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>: 
@@ -522,23 +535,22 @@ then the user agent must run the <a data-link-type="dfn" href="#media-session-co
     <li>
       Run these substeps: 
      <dl class="switch">
-      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> 
+      <dt> If <var>interrupting kind</var> is "<code><a data-link-type="dfn" href="#transient">transient</a></code>" 
       <dd>
        <ol>
-        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-            not <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, then terminate
-            these steps. 
+        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is not
+            "<code><a data-link-type="dfn" href="#content">content</a></code>", then terminate these steps. 
         <li> <a data-link-type="dfn" href="#unduck">Unduck</a> each <var>audio-producing object</var> in <var>media
             session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>. 
         <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list. 
         <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#state">state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>. 
        </ol>
-      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> 
+      <dt> If <var>interrupting kind</var> is "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>" 
       <dd>
        <ol>
-        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
-            not <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code>, or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>,
-            then terminate these steps. 
+        <li> If <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> is not
+            "<code><a data-link-type="dfn" href="#content">content</a></code>", "<code><a data-link-type="dfn" href="#transient">transient</a></code>", or
+            "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>", then terminate these steps. 
         <li> <a data-link-type="dfn" href="#unpause">Unpause</a> each <var>audio-producing object</var> in <var>media
             session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a>. 
         <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list. 
@@ -553,7 +565,7 @@ user agent must run the following steps:</p>
     <li> If <code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a></code> is not "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a></code>" or
     "<code class="idl"><a data-link-type="idl" href="http://www.w3.org/TR/page-visibility/#pv-page-visible">visible</a></code>" <a data-link-type="biblio" href="#biblio-page-visibility">[PAGE-VISIBILITY]</a>, then terminate these steps. 
     <li>
-      For each <a data-link-type="dfn" href="#media-session">media session</a> in <var>the browsing context</var> with a <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> of <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> run the following substeps: 
+      For each <a data-link-type="dfn" href="#media-session">media session</a> in <var>the browsing context</var> with a <a data-link-type="dfn" href="#kind">kind</a> of "<code><a data-link-type="dfn" href="#ambient">ambient</a></code>" run the following substeps: 
      <ol>
       <li> Let <var>s</var> be the current <a data-link-type="dfn" href="#media-session">media session</a>. 
       <li>
@@ -672,15 +684,18 @@ following steps, passing in <a data-link-type="dfn" href="https://html.spec.what
 media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#interrupting-a-media-session-from-an-htmlmediaelement-object"></a></h3>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="pause-a-media-element">pause a media element<a class="self-link" href="#pause-a-media-element"></a></dfn> for a given <var>media element</var> it must run that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal
 pause steps</a>.</p>
-   <p>After the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has been invoked — or a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is otherwise paused from the web page (e.g. via its <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a></code>) — and that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has a <a data-link-type="dfn" href="#current-media-session-type">current media session
-type</a> set to <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the
-user agent must immediately run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session deactivation algorithm</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>. Then, for all other <a data-link-type="dfn" href="#media-session">media sessions</a>, the
+   <p>After the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has been invoked — or a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is otherwise paused from the web page (e.g. via its <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a></code>) — and that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has a <a data-link-type="dfn" href="#kind">kind</a> set to
+"<code><a data-link-type="dfn" href="#transient">transient</a></code>" or "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>", then
+the user agent must immediately run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session deactivation
+algorithm</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a>. Then, for all other <a data-link-type="dfn" href="#media-session">media sessions</a>, the
 user agent must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a>, passing in
 each <a data-link-type="dfn" href="#media-session">media session</a> as <var>media session</var>.</p>
    <div class="note" role="note">
-     This prevents <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> from indefinitely blocking the continuation of other <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media
+     This prevents "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or
+  "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"-based <a data-link-type="dfn" href="#media-session">media sessions</a> from indefinitely blocking the continuation of other <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media
   sessions</a> when they are indefinitely paused. 
-    <p>After we have completed this process, the original <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a> will have returned to a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
+    <p>After we have completed this process, the original
+  "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"-based <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a> will have returned to a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
    </div>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="unpause-a-media-element">unpause a media element<a class="self-link" href="#unpause-a-media-element"></a></dfn> for a given <var>media element</var> it must invoke that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method.</p>
    <h3 class="heading settled" data-level="5.3" id="deactivating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.3. </span><span class="content">Deactivating a
@@ -754,14 +769,18 @@ script and that <code class="idl"><a data-link-type="idl" href="https://webaudio
 media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#interrupting-a-media-session-from-an-audiocontext-object"></a></h3>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="suspend-a-web-audio-object">suspend a web audio object<a class="self-link" href="#suspend-a-web-audio-object"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object it must invoke that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-suspend-Promise-void">suspend()</a></code> method.</p>
    <p>After the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-suspend-Promise-void">suspend()</a></code> method on an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object has been invoked
-and that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object has a <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> set to <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the
-user agent must immediately run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session deactivation algorithm</a> for <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <a data-link-type="dfn" href="#current-media-session">current media session</a>. Then, for all other <a data-link-type="dfn" href="#media-session">media sessions</a>, the
+and that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object has a <a data-link-type="dfn" href="#kind">kind</a> set to
+"<code><a data-link-type="dfn" href="#transient">transient</a></code>" or "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>", then
+the user agent must immediately run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session deactivation
+algorithm</a> for <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <a data-link-type="dfn" href="#current-media-session">current media session</a>. Then, for all other <a data-link-type="dfn" href="#media-session">media sessions</a>, the
 user agent must run the <a data-link-type="dfn" href="#media-session-continuation-algorithm">media session continuation algorithm</a>, passing in
 each <a data-link-type="dfn" href="#media-session">media session</a> as <var>media session</var>.</p>
    <div class="note" role="note">
-     This prevents <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based <a data-link-type="dfn" href="#media-session">media sessions</a> from indefinitely blocking the continuation of other <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media
+     This prevents "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or
+  "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"-based <a data-link-type="dfn" href="#media-session">media sessions</a> from indefinitely blocking the continuation of other <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media
   sessions</a> when they are indefinitely paused. 
-    <p>After we have completed this process, the original <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a> will have returned to a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
+    <p>After we have completed this process, the original
+  "<code><a data-link-type="dfn" href="#transient">transient</a></code>" or "<code><a data-link-type="dfn" href="#transient-solo">transient-solo</a></code>"-based <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a> will have returned to a <a data-link-type="dfn" href="#state">state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
    </div>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="resume-a-web-audio-object">resume a web audio object<a class="self-link" href="#resume-a-web-audio-object"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object it must invoke that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a></code> method.</p>
    <h3 class="heading settled" data-level="6.3" id="deactivating-a-media-session-from-an-audiocontext-object"><span class="secno">6.3. </span><span class="content">Deactivating a
@@ -854,14 +873,11 @@ neighboring rights to this work.</p>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li><a href="#active-media-session-state">active media session state</a><span>, in §4.2</span>
-   <li><a href="#ambient-attribute-value">ambient attribute value</a><span>, in §4.3</span>
-   <li><a href="#ambient-media-state">ambient media state</a><span>, in §4.3</span>
+   <li><a href="#ambient">ambient</a><span>, in §4.3</span>
    <li><a href="#audio-producing-object">audio-producing object</a><span>, in §4.4</span>
    <li><a href="#audio-producing-participants">audio-producing participants</a><span>, in §4.4</span>
-   <li><a href="#content-attribute-value">content attribute value</a><span>, in §4.3</span>
-   <li><a href="#content-media-state">content media state</a><span>, in §4.3</span>
+   <li><a href="#content">content</a><span>, in §4.3</span>
    <li><a href="#current-media-session">current media session</a><span>, in §4.4</span>
-   <li><a href="#current-media-session-type">current media session type</a><span>, in §4.3</span>
    <li><a href="#dom-mediasession-deactivate">deactivate()</a><span>, in §4.7</span>
    <li><a href="#duck">duck</a><span>, in §4.4</span>
    <li><a href="#idle-media-session-state">idle media session state</a><span>, in §4.2</span>
@@ -883,7 +899,6 @@ neighboring rights to this work.</p>
    <li><a href="#dom-mediasession-mediasession">MediaSession(kind)</a><span>, in §4.1</span>
    <li><a href="#media-session">media
 sessions</a><span>, in §4</span>
-   <li><a href="#media-session-type">media session type</a><span>, in §4.3</span>
    <li><a href="#pause">pause</a><span>, in §4.4</span>
    <li><a href="#pause-a-media-element">pause a media element</a><span>, in §5.2</span>
    <li><a href="#release-media-element-from-its-media-session">release media element from its media
@@ -900,12 +915,8 @@ session</a><span>, in §6.3</span>
     </ul>
    <li><a href="#state">state</a><span>, in §4.2</span>
    <li><a href="#suspend-a-web-audio-object">suspend a web audio object</a><span>, in §6.2</span>
-   <li><a href="#transient-attribute-value">transient attribute
-      value</a><span>, in §4.3</span>
-   <li><a href="#transient-media-state">transient media state</a><span>, in §4.3</span>
-   <li><a href="#transient-solo-attribute-value">transient-solo attribute
-      value</a><span>, in §4.3</span>
-   <li><a href="#transient-solo-media-state">transient solo media state</a><span>, in §4.3</span>
+   <li><a href="#transient">transient</a><span>, in §4.3</span>
+   <li><a href="#transient-solo">transient-solo</a><span>, in §4.3</span>
    <li><a href="#unduck">unduck</a><span>, in §4.4</span>
    <li><a href="#unpause">unpause</a><span>, in §4.4</span>
    <li><a href="#unpause-a-media-element">unpause a media element</a><span>, in §5.2</span>
