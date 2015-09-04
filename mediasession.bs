@@ -189,14 +189,7 @@ manner.
 The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
-<h2 id="media-sessions">Media sessions</h2>
-
-A <a>media session</a> represents a participant in the media playback
-environment of the platform. It is associated with zero or more
-<a>audio-producing objects</a> and has a <a>media session kind</a> that
-determines the interactions with the underlying platform.
-
-<h3 id="the-mediasession-interface">The {{MediaSession}} interface</h3>
+<h2 id="the-mediasession-interface">The {{MediaSession}} interface</h2>
 
 <pre class="idl">
 [Constructor(optional MediaSessionKind kind = "content")]
@@ -217,7 +210,7 @@ enum MediaSessionKind {
 {{MediaSession}} objects are simply known as <dfn id="media-session">media
 sessions</dfn>.
 
-<h4 id="mediasession-constructors">Constructors</h4>
+<h3 id="mediasession-constructors">Constructors</h3>
 
 <dl class=domintro>
   <dt>
@@ -250,7 +243,7 @@ constructor, when invoked, must run these steps:
   </li>
 </ol>
 
-<h4 id="media-session-states">States</h4>
+<h3 id="media-session-states">States</h3>
 
 A <a>media session</a> has a <dfn>current state</dfn> that describes its current
 status with respect to any platform-level interactions and interactions with
@@ -282,7 +275,7 @@ other <a>media sessions</a>. The possible values are as follows:
   </dd>
 </dl>
 
-<h4 id="media-session-kinds">Kinds</h4>
+<h3 id="media-session-kinds">Kinds</h3>
 
 A <dfn>media session kind</dfn> is a keyword that maps to a well-defined
 interaction state for a <a>media session</a> – called its <dfn>media session
@@ -505,7 +498,7 @@ fourth columns.
   </tr>
 </table>
 
-<h4 id="media-session-participants">Participants</h4>
+<h3 id="media-session-participants">Participants</h3>
 
 An <dfn>audio-producing object</dfn> is any object or element that is capable of
 emitting sound within the user agent and is therefore also potentially capable
@@ -579,7 +572,7 @@ the original corresponding <a>duck</a> request.
   pages.
 </p>
 
-<h4 id="activating-a-media-session">Activating a media session</h4>
+<h3 id="activating-a-media-session">Activating a media session</h3>
 
 The <dfn>media session activation algorithm</dfn> takes one argument,
 <var>media session</var>, and consists of the following steps:
@@ -658,7 +651,7 @@ The <dfn>media session activation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-<h4 id="interrupting-a-media-session">Interrupting a media session</h4>
+<h3 id="interrupting-a-media-session">Interrupting a media session</h3>
 
 A <a>media session</a> may be interrupted at any time after its
 <a>media session activation algorithm</a> has been run. This typically occurs
@@ -1000,7 +993,7 @@ user agent must run the following steps:
   </li>
 </ol>
 
-<h4 id="deactivating-a-media-session">Deactivating a media session</h4>
+<h3 id="deactivating-a-media-session">Deactivating a media session</h3>
 
 The <dfn>media session deactivation algorithm</dfn> takes one argument,
 <var>media session</var>, and consists of the following steps.
@@ -1047,7 +1040,7 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
-<h4 id="mediasession-object-members">Object members</h4>
+<h3 id="mediasession-object-members">Object members</h3>
 
 <dl class=domintro>
   <dt>
@@ -1100,14 +1093,8 @@ agent must run the following steps:
   </li>
 </ol>
 
-<h2 id="media-element-extensions">Media element extensions</h2>
-
-This section describes how a web developer can assign a <a>media session</a> to
-a <a>media element</a> and how, once attached, the <a>media element</a> can
-control state of a <a>media session</a>.
-
-<h3 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
-{{HTMLMediaElement}} interface</h3>
+<h2 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
+{{HTMLMediaElement}} interface</h2>
 
 <pre class="idl">
 partial interface HTMLMediaElement {
@@ -1167,11 +1154,8 @@ otherwise. On setting, the user agent must run the following steps:
   </li>
 </ol>
 
-<h3 id="media-elements-and-the-media-session-lifecycle">Media elements and the
-media session lifecycle</h3>
-
-<h4 id="activating-a-media-session-from-an-htmlmediaelement-object">Activating a
-media session from an {{HTMLMediaElement}} object</h4>
+<h3 id="activating-a-media-session-from-an-htmlmediaelement-object">Activating a
+media session from an {{HTMLMediaElement}} object</h3>
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 
@@ -1203,9 +1187,9 @@ following steps, passing in <a>media element</a> as <var>media element</var>:
 </ol>
 
 
-<h4
+<h3
 id="interrupting-a-media-session-from-an-htmlmediaelement-object">Interrupting a
-media session from an {{HTMLMediaElement}} object</h4>
+media session from an {{HTMLMediaElement}} object</h3>
 
 When the user agent is to <dfn>pause a media element</dfn> for a given
 <var>media element</var> it must run that <a>media element</a>'s <a>internal
@@ -1247,9 +1231,9 @@ When the user agent is to <dfn>unpause a media element</dfn> for a given
 <var>media element</var> it must invoke that <a>media element</a>'s {{play()}}
 method.
 
-<h4
+<h3
 id="deactivating-a-media-session-from-an-htmlmediaelement-object">Deactivating a
-media session from an {{HTMLMediaElement}} object</h4>
+media session from an {{HTMLMediaElement}} object</h3>
 
 When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
 user agent must <a>release media element from its media session</a>.
@@ -1289,14 +1273,8 @@ steps:
   </li>
 </ol>
 
-<h2 id="web-audio-extensions">Web Audio extensions</h2>
-
-This section describes how a web developer can assign a <a>media session</a> to
-an {{AudioContext}} object and how, once attached, the {{AudioContext}} can
-control state of a <a>media session</a>.
-
-<h3 id="extensions-to-the-audiocontext-interface">Extensions to the
-{{AudioContext}} interface</h3>
+<h2 id="extensions-to-the-audiocontext-interface">Extensions to the
+{{AudioContext}} interface</h2>
 
 <pre class="idl">
 partial interface AudioContext {
@@ -1356,11 +1334,8 @@ agent must run the following steps:
   </li>
 </ol>
 
-<h3 id="web-audio-and-the-media-session-lifecycle">Web Audio and the media
-session lifecycle</h3>
-
-<h4 id="activating-a-media-session-from-an-audiocontext-object">Activating a
-media session from an {{AudioContext}} object</h4>
+<h3 id="activating-a-media-session-from-an-audiocontext-object">Activating a
+media session from an {{AudioContext}} object</h3>
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 
@@ -1391,8 +1366,8 @@ script and that {{AudioContext}} object's {{state}} attribute is
 </ol>
 
 
-<h4 id="interrupting-a-media-session-from-an-audiocontext-object">Interrupting a
-media session from an {{AudioContext}} object</h4>
+<h3 id="interrupting-a-media-session-from-an-audiocontext-object">Interrupting a
+media session from an {{AudioContext}} object</h3>
 
 When the user agent is to <dfn>suspend a web audio object</dfn> for a given
 {{AudioContext}} object it must invoke that {{AudioContext}} object's
@@ -1429,8 +1404,8 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 {{AudioContext}} object it must invoke that {{AudioContext}} object's
 {{resume()}} method.
 
-<h4 id="deactivating-a-media-session-from-an-audiocontext-object">Deactivating a
-media session from an {{AudioContext}} object</h4>
+<h3 id="deactivating-a-media-session-from-an-audiocontext-object">Deactivating a
+media session from an {{AudioContext}} object</h3>
 
 When an {{AudioContext}} object's {{state}} attribute transitions to
 &quot;closed&quot;, the user agent must <a>release web audio object from its

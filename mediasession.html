@@ -98,52 +98,36 @@ notification areas and on lock screens of mobile devices.</p>
     <li><a href="#conformance"><span class="secno">2</span> <span class="content">Conformance</span></a>
     <li><a href="#dependencies"><span class="secno">3</span> <span class="content">Dependencies</span></a>
     <li>
-     <a href="#media-sessions"><span class="secno">4</span> <span class="content">Media sessions</span></a>
+     <a href="#the-mediasession-interface"><span class="secno">4</span> <span class="content">The <code class="idl"><span>MediaSession</span></code> interface</span></a>
      <ul class="toc">
-      <li>
-       <a href="#the-mediasession-interface"><span class="secno">4.1</span> <span class="content">The <code class="idl"><span>MediaSession</span></code> interface</span></a>
-       <ul class="toc">
-        <li><a href="#mediasession-constructors"><span class="secno">4.1.1</span> <span class="content">Constructors</span></a>
-        <li><a href="#media-session-states"><span class="secno">4.1.2</span> <span class="content">States</span></a>
-        <li><a href="#media-session-kinds"><span class="secno">4.1.3</span> <span class="content">Kinds</span></a>
-        <li><a href="#media-session-participants"><span class="secno">4.1.4</span> <span class="content">Participants</span></a>
-        <li><a href="#activating-a-media-session"><span class="secno">4.1.5</span> <span class="content">Activating a media session</span></a>
-        <li><a href="#interrupting-a-media-session"><span class="secno">4.1.6</span> <span class="content">Interrupting a media session</span></a>
-        <li><a href="#deactivating-a-media-session"><span class="secno">4.1.7</span> <span class="content">Deactivating a media session</span></a>
-        <li><a href="#mediasession-object-members"><span class="secno">4.1.8</span> <span class="content">Object members</span></a>
-       </ul>
+      <li><a href="#mediasession-constructors"><span class="secno">4.1</span> <span class="content">Constructors</span></a>
+      <li><a href="#media-session-states"><span class="secno">4.2</span> <span class="content">States</span></a>
+      <li><a href="#media-session-kinds"><span class="secno">4.3</span> <span class="content">Kinds</span></a>
+      <li><a href="#media-session-participants"><span class="secno">4.4</span> <span class="content">Participants</span></a>
+      <li><a href="#activating-a-media-session"><span class="secno">4.5</span> <span class="content">Activating a media session</span></a>
+      <li><a href="#interrupting-a-media-session"><span class="secno">4.6</span> <span class="content">Interrupting a media session</span></a>
+      <li><a href="#deactivating-a-media-session"><span class="secno">4.7</span> <span class="content">Deactivating a media session</span></a>
+      <li><a href="#mediasession-object-members"><span class="secno">4.8</span> <span class="content">Object members</span></a>
      </ul>
     <li>
-     <a href="#media-element-extensions"><span class="secno">5</span> <span class="content">Media element extensions</span></a>
+     <a href="#extensions-to-the-htmlmediaelement-interface"><span class="secno">5</span> <span class="content">Extensions to the <code class="idl"><span>HTMLMediaElement</span></code> interface</span></a>
      <ul class="toc">
-      <li><a href="#extensions-to-the-htmlmediaelement-interface"><span class="secno">5.1</span> <span class="content">Extensions to the <code class="idl"><span>HTMLMediaElement</span></code> interface</span></a>
-      <li>
-       <a href="#media-elements-and-the-media-session-lifecycle"><span class="secno">5.2</span> <span class="content">Media elements and the
-media session lifecycle</span></a>
-       <ul class="toc">
-        <li><a href="#activating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2.1</span> <span class="content">Activating a
+      <li><a href="#activating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.1</span> <span class="content">Activating a
 media session from an <code class="idl"><span>HTMLMediaElement</span></code> object</span></a>
-        <li><a href="#interrupting-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2.2</span> <span class="content">Interrupting a
+      <li><a href="#interrupting-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2</span> <span class="content">Interrupting a
 media session from an <code class="idl"><span>HTMLMediaElement</span></code> object</span></a>
-        <li><a href="#deactivating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2.3</span> <span class="content">Deactivating a
+      <li><a href="#deactivating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.3</span> <span class="content">Deactivating a
 media session from an <code class="idl"><span>HTMLMediaElement</span></code> object</span></a>
-       </ul>
      </ul>
     <li>
-     <a href="#web-audio-extensions"><span class="secno">6</span> <span class="content">Web Audio extensions</span></a>
+     <a href="#extensions-to-the-audiocontext-interface"><span class="secno">6</span> <span class="content">Extensions to the <code class="idl"><span>AudioContext</span></code> interface</span></a>
      <ul class="toc">
-      <li><a href="#extensions-to-the-audiocontext-interface"><span class="secno">6.1</span> <span class="content">Extensions to the <code class="idl"><span>AudioContext</span></code> interface</span></a>
-      <li>
-       <a href="#web-audio-and-the-media-session-lifecycle"><span class="secno">6.2</span> <span class="content">Web Audio and the media
-session lifecycle</span></a>
-       <ul class="toc">
-        <li><a href="#activating-a-media-session-from-an-audiocontext-object"><span class="secno">6.2.1</span> <span class="content">Activating a
+      <li><a href="#activating-a-media-session-from-an-audiocontext-object"><span class="secno">6.1</span> <span class="content">Activating a
 media session from an <code class="idl"><span>AudioContext</span></code> object</span></a>
-        <li><a href="#interrupting-a-media-session-from-an-audiocontext-object"><span class="secno">6.2.2</span> <span class="content">Interrupting a
+      <li><a href="#interrupting-a-media-session-from-an-audiocontext-object"><span class="secno">6.2</span> <span class="content">Interrupting a
 media session from an <code class="idl"><span>AudioContext</span></code> object</span></a>
-        <li><a href="#deactivating-a-media-session-from-an-audiocontext-object"><span class="secno">6.2.3</span> <span class="content">Deactivating a
+      <li><a href="#deactivating-a-media-session-from-an-audiocontext-object"><span class="secno">6.3</span> <span class="content">Deactivating a
 media session from an <code class="idl"><span>AudioContext</span></code> object</span></a>
-       </ul>
      </ul>
     <li>
      <a href="#examples"><span class="secno">7</span> <span class="content">Examples</span></a>
@@ -222,11 +206,7 @@ with custom properties or functions in JavaScript.</p>
    <h2 class="heading settled" data-level="3" id="dependencies"><span class="secno">3. </span><span class="content">Dependencies</span><a class="self-link" href="#dependencies"></a></h2>
    <p>The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a></p>
-   <h2 class="heading settled" data-level="4" id="media-sessions"><span class="secno">4. </span><span class="content">Media sessions</span><a class="self-link" href="#media-sessions"></a></h2>
-   <p>A <a data-link-type="dfn" href="#media-session">media session</a> represents a participant in the media playback
-environment of the platform. It is associated with zero or more <a data-link-type="dfn" href="#audio-producing-object">audio-producing objects</a> and has a <a data-link-type="dfn" href="#media-session-kind">media session kind</a> that
-determines the interactions with the underlying platform.</p>
-   <h3 class="heading settled" data-level="4.1" id="the-mediasession-interface"><span class="secno">4.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> interface</span><a class="self-link" href="#the-mediasession-interface"></a></h3>
+   <h2 class="heading settled" data-level="4" id="the-mediasession-interface"><span class="secno">4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> interface</span><a class="self-link" href="#the-mediasession-interface"></a></h2>
 <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <dfn class="idl-code" data-dfn-for="MediaSession/MediaSession(kind)" data-dfn-type="argument" data-export="" id="dom-mediasession-mediasession-kind-kind">kind<a class="self-link" href="#dom-mediasession-mediasession-kind-kind"></a></dfn> = "content")]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession<a class="self-link" href="#mediasession"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSessionKind " href="#dom-mediasession-kind">kind</a>;
@@ -243,7 +223,7 @@ enum <dfn class="idl-code" data-dfn-type="enum" data-export="" id="enumdef-media
 </pre>
    <p><code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> objects are simply known as <dfn data-dfn-type="dfn" data-noexport="" id="media-session">media
 sessions<a class="self-link" href="#media-session"></a></dfn>.</p>
-   <h4 class="heading settled" data-level="4.1.1" id="mediasession-constructors"><span class="secno">4.1.1. </span><span class="content">Constructors</span><a class="self-link" href="#mediasession-constructors"></a></h4>
+   <h3 class="heading settled" data-level="4.1" id="mediasession-constructors"><span class="secno">4.1. </span><span class="content">Constructors</span><a class="self-link" href="#mediasession-constructors"></a></h3>
    <dl class="domintro">
     <dt> <code><var>session</var> = new <a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">MediaSession</a>([<var>kind</var>])</code> 
     <dd> Returns a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object. 
@@ -256,7 +236,7 @@ sessions<a class="self-link" href="#media-session"></a></dfn>.</p>
     <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>. 
     <li> Return <var>media session</var>. 
    </ol>
-   <h4 class="heading settled" data-level="4.1.2" id="media-session-states"><span class="secno">4.1.2. </span><span class="content">States</span><a class="self-link" href="#media-session-states"></a></h4>
+   <h3 class="heading settled" data-level="4.2" id="media-session-states"><span class="secno">4.2. </span><span class="content">States</span><a class="self-link" href="#media-session-states"></a></h3>
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-state">current state<a class="self-link" href="#current-state"></a></dfn> that describes its current
 status with respect to any platform-level interactions and interactions with
 other <a data-link-type="dfn" href="#media-session">media sessions</a>. The possible values are as follows:</p>
@@ -271,7 +251,7 @@ other <a data-link-type="dfn" href="#media-session">media sessions</a>. The poss
     media focus and its <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a> are either <a data-link-type="dfn" href="#pause">paused</a> or <a data-link-type="dfn" href="#duck">ducked</a> based on the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#current-media-session-type">current media
     session type</a>. 
    </dl>
-   <h4 class="heading settled" data-level="4.1.3" id="media-session-kinds"><span class="secno">4.1.3. </span><span class="content">Kinds</span><a class="self-link" href="#media-session-kinds"></a></h4>
+   <h3 class="heading settled" data-level="4.3" id="media-session-kinds"><span class="secno">4.3. </span><span class="content">Kinds</span><a class="self-link" href="#media-session-kinds"></a></h3>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session-kind">media session kind<a class="self-link" href="#media-session-kind"></a></dfn> is a keyword that maps to a well-defined
 interaction state for a <a data-link-type="dfn" href="#media-session">media session</a> – called its <dfn data-dfn-type="dfn" data-noexport="" id="media-session-type">media session
 type<a class="self-link" href="#media-session-type"></a></dfn> – that user agents use to enforce platform-specific interaction and
@@ -361,7 +341,7 @@ fourth columns.</p>
        </ul>
       <td> UI sounds. In-game sound effects and background music. 
    </table>
-   <h4 class="heading settled" data-level="4.1.4" id="media-session-participants"><span class="secno">4.1.4. </span><span class="content">Participants</span><a class="self-link" href="#media-session-participants"></a></h4>
+   <h3 class="heading settled" data-level="4.4" id="media-session-participants"><span class="secno">4.4. </span><span class="content">Participants</span><a class="self-link" href="#media-session-participants"></a></h3>
    <p>An <dfn data-dfn-type="dfn" data-noexport="" id="audio-producing-object">audio-producing object<a class="self-link" href="#audio-producing-object"></a></dfn> is any object or element that is capable of
 emitting sound within the user agent and is therefore also potentially capable
 of interacting with the media focus system available in different underlying
@@ -396,7 +376,7 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
    <p class="note" role="note"> When an <a data-link-type="dfn" href="#audio-producing-object">audio-producing object</a> is <a data-link-type="dfn" href="#duck">ducked</a> any reduction
   in volume applied by the user agent is not intended to be observable to web
   pages. </p>
-   <h4 class="heading settled" data-level="4.1.5" id="activating-a-media-session"><span class="secno">4.1.5. </span><span class="content">Activating a media session</span><a class="self-link" href="#activating-a-media-session"></a></h4>
+   <h3 class="heading settled" data-level="4.5" id="activating-a-media-session"><span class="secno">4.5. </span><span class="content">Activating a media session</span><a class="self-link" href="#activating-a-media-session"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-activation-algorithm">media session activation algorithm<a class="self-link" href="#media-session-activation-algorithm"></a></dfn> takes one argument, <var>media session</var>, and consists of the following steps:</p>
    <ol>
     <li> If <var>media session</var> is already <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then return success. 
@@ -435,7 +415,7 @@ the original corresponding <a data-link-type="dfn" href="#duck">duck</a> request
     <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then return
     success. 
    </ol>
-   <h4 class="heading settled" data-level="4.1.6" id="interrupting-a-media-session"><span class="secno">4.1.6. </span><span class="content">Interrupting a media session</span><a class="self-link" href="#interrupting-a-media-session"></a></h4>
+   <h3 class="heading settled" data-level="4.6" id="interrupting-a-media-session"><span class="secno">4.6. </span><span class="content">Interrupting a media session</span><a class="self-link" href="#interrupting-a-media-session"></a></h3>
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> may be interrupted at any time after its <a data-link-type="dfn" href="#media-session-activation-algorithm">media session activation algorithm</a> has been run. This typically occurs
 when another application or another <a data-link-type="dfn" href="#media-session">media session</a> requests and is granted
 a level of platform media focus that affects the <a data-link-type="dfn" href="#media-session">media session</a> based on
@@ -600,7 +580,7 @@ user agent must run the following steps:</p>
        </ol>
      </ol>
    </ol>
-   <h4 class="heading settled" data-level="4.1.7" id="deactivating-a-media-session"><span class="secno">4.1.7. </span><span class="content">Deactivating a media session</span><a class="self-link" href="#deactivating-a-media-session"></a></h4>
+   <h3 class="heading settled" data-level="4.7" id="deactivating-a-media-session"><span class="secno">4.7. </span><span class="content">Deactivating a media session</span><a class="self-link" href="#deactivating-a-media-session"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="media-session-deactivation-algorithm">media session deactivation algorithm<a class="self-link" href="#media-session-deactivation-algorithm"></a></dfn> takes one argument, <var>media session</var>, and consists of the following steps.</p>
    <ol>
     <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-state">current state</a> is <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>, then terminate these
@@ -624,7 +604,7 @@ user agent must run the following steps:</p>
       algorithm</a> is run against <var>media session</var> that we will
       re-request media focus according to the steps defined in that algorithm. </p>
    </ol>
-   <h4 class="heading settled" data-level="4.1.8" id="mediasession-object-members"><span class="secno">4.1.8. </span><span class="content">Object members</span><a class="self-link" href="#mediasession-object-members"></a></h4>
+   <h3 class="heading settled" data-level="4.8" id="mediasession-object-members"><span class="secno">4.8. </span><span class="content">Object members</span><a class="self-link" href="#mediasession-object-members"></a></h3>
    <dl class="domintro">
     <dt> <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code></code> 
     <dd> Returns the <a data-link-type="dfn" href="#media-session-kind">media session kind</a> of the <a data-link-type="dfn" href="#media-session">media session</a>. 
@@ -644,11 +624,7 @@ agent must run the following steps:</p>
     <li> Run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session deactivation algorithm</a> for <var>media
     session</var>. 
    </ol>
-   <h2 class="heading settled" data-level="5" id="media-element-extensions"><span class="secno">5. </span><span class="content">Media element extensions</span><a class="self-link" href="#media-element-extensions"></a></h2>
-   <p>This section describes how a web developer can assign a <a data-link-type="dfn" href="#media-session">media session</a> to
-a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> and how, once attached, the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> can
-control state of a <a data-link-type="dfn" href="#media-session">media session</a>.</p>
-   <h3 class="heading settled" data-level="5.1" id="extensions-to-the-htmlmediaelement-interface"><span class="secno">5.1. </span><span class="content">Extensions to the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface</span><a class="self-link" href="#extensions-to-the-htmlmediaelement-interface"></a></h3>
+   <h2 class="heading settled" data-level="5" id="extensions-to-the-htmlmediaelement-interface"><span class="secno">5. </span><span class="content">Extensions to the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface</span><a class="self-link" href="#extensions-to-the-htmlmediaelement-interface"></a></h2>
 <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
   // media session
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
@@ -678,10 +654,8 @@ otherwise. On setting, the user agent must run the following steps:</p>
     <li> If <var>old media session</var> is not null and no longer has one or more <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>, then run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session
     deactivation algorithm</a> for <var>old media session</var>. 
    </ol>
-   <h3 class="heading settled" data-level="5.2" id="media-elements-and-the-media-session-lifecycle"><span class="secno">5.2. </span><span class="content">Media elements and the
-media session lifecycle</span><a class="self-link" href="#media-elements-and-the-media-session-lifecycle"></a></h3>
-   <h4 class="heading settled" data-level="5.2.1" id="activating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2.1. </span><span class="content">Activating a
-media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#activating-a-media-session-from-an-htmlmediaelement-object"></a></h4>
+   <h3 class="heading settled" data-level="5.1" id="activating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.1. </span><span class="content">Activating a
+media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#activating-a-media-session-from-an-htmlmediaelement-object"></a></h3>
    <p>When the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is invoked from script —
 or a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is otherwise played from the web page (e.g. via its <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a></code>) — and that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a></code> attribute is true
 and its <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a></code> attribute has the value <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a></code> or <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a></code> then the user agent must run the
@@ -696,8 +670,8 @@ following steps, passing in <a data-link-type="dfn" href="https://html.spec.what
     <li> If <var>activated</var> is failure, <a data-link-type="dfn" href="#pause">pause</a> <var>current media
     element</var>. 
    </ol>
-   <h4 class="heading settled" data-level="5.2.2" id="interrupting-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2.2. </span><span class="content">Interrupting a
-media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#interrupting-a-media-session-from-an-htmlmediaelement-object"></a></h4>
+   <h3 class="heading settled" data-level="5.2" id="interrupting-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2. </span><span class="content">Interrupting a
+media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#interrupting-a-media-session-from-an-htmlmediaelement-object"></a></h3>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="pause-a-media-element">pause a media element<a class="self-link" href="#pause-a-media-element"></a></dfn> for a given <var>media element</var> it must run that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal
 pause steps</a>.</p>
    <p>After the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a></code> method on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has been invoked — or a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is otherwise paused from the web page (e.g. via its <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a></code>) — and that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> has a <a data-link-type="dfn" href="#current-media-session-type">current media session
@@ -711,8 +685,8 @@ each <a data-link-type="dfn" href="#media-session">media session</a> as <var>med
     <p>After we have completed this process, the original <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a> will have returned to a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
    </div>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="unpause-a-media-element">unpause a media element<a class="self-link" href="#unpause-a-media-element"></a></dfn> for a given <var>media element</var> it must invoke that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a></code> method.</p>
-   <h4 class="heading settled" data-level="5.2.3" id="deactivating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.2.3. </span><span class="content">Deactivating a
-media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#deactivating-a-media-session-from-an-htmlmediaelement-object"></a></h4>
+   <h3 class="heading settled" data-level="5.3" id="deactivating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.3. </span><span class="content">Deactivating a
+media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#deactivating-a-media-session-from-an-htmlmediaelement-object"></a></h3>
    <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">playback has ended</a>, the
 user agent must <a data-link-type="dfn" href="#release-media-element-from-its-media-session">release media element from its media session</a>.</p>
    <p>Any time a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">load
@@ -734,11 +708,7 @@ steps:</p>
     <li> Run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session deactivation algorithm</a> for <var>media
     session</var>. 
    </ol>
-   <h2 class="heading settled" data-level="6" id="web-audio-extensions"><span class="secno">6. </span><span class="content">Web Audio extensions</span><a class="self-link" href="#web-audio-extensions"></a></h2>
-   <p>This section describes how a web developer can assign a <a data-link-type="dfn" href="#media-session">media session</a> to
-an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object and how, once attached, the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> can
-control state of a <a data-link-type="dfn" href="#media-session">media session</a>.</p>
-   <h3 class="heading settled" data-level="6.1" id="extensions-to-the-audiocontext-interface"><span class="secno">6.1. </span><span class="content">Extensions to the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> interface</span><a class="self-link" href="#extensions-to-the-audiocontext-interface"></a></h3>
+   <h2 class="heading settled" data-level="6" id="extensions-to-the-audiocontext-interface"><span class="secno">6. </span><span class="content">Extensions to the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> interface</span><a class="self-link" href="#extensions-to-the-audiocontext-interface"></a></h2>
 <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a> {
   // media session
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-audiocontext-session">session</a>;
@@ -767,10 +737,8 @@ agent must run the following steps:</p>
     <li> If <var>old media session</var> is not null and no longer has one or more <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>, then run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session
     deactivation algorithm</a> for <var>old media session</var>. 
    </ol>
-   <h3 class="heading settled" data-level="6.2" id="web-audio-and-the-media-session-lifecycle"><span class="secno">6.2. </span><span class="content">Web Audio and the media
-session lifecycle</span><a class="self-link" href="#web-audio-and-the-media-session-lifecycle"></a></h3>
-   <h4 class="heading settled" data-level="6.2.1" id="activating-a-media-session-from-an-audiocontext-object"><span class="secno">6.2.1. </span><span class="content">Activating a
-media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#activating-a-media-session-from-an-audiocontext-object"></a></h4>
+   <h3 class="heading settled" data-level="6.1" id="activating-a-media-session-from-an-audiocontext-object"><span class="secno">6.1. </span><span class="content">Activating a
+media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#activating-a-media-session-from-an-audiocontext-object"></a></h3>
    <p>When the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a></code> method on an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object is invoked from
 script and that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute is
 "suspended" then the user agent must run the following steps:</p>
@@ -784,8 +752,8 @@ script and that <code class="idl"><a data-link-type="idl" href="https://webaudio
     activation algorithm</a> for <var>media session</var>. 
     <li> If <var>activated</var> is failure, <a data-link-type="dfn" href="#pause">pause</a> <var>audio object</var>. 
    </ol>
-   <h4 class="heading settled" data-level="6.2.2" id="interrupting-a-media-session-from-an-audiocontext-object"><span class="secno">6.2.2. </span><span class="content">Interrupting a
-media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#interrupting-a-media-session-from-an-audiocontext-object"></a></h4>
+   <h3 class="heading settled" data-level="6.2" id="interrupting-a-media-session-from-an-audiocontext-object"><span class="secno">6.2. </span><span class="content">Interrupting a
+media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#interrupting-a-media-session-from-an-audiocontext-object"></a></h3>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="suspend-a-web-audio-object">suspend a web audio object<a class="self-link" href="#suspend-a-web-audio-object"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object it must invoke that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-suspend-Promise-void">suspend()</a></code> method.</p>
    <p>After the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-suspend-Promise-void">suspend()</a></code> method on an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object has been invoked
 and that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object has a <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> set to <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>, then the
@@ -798,8 +766,8 @@ each <a data-link-type="dfn" href="#media-session">media session</a> as <var>med
     <p>After we have completed this process, the original <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code>-based <a data-link-type="dfn" href="#media-session">media session</a> will have a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code> and all <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code> <a data-link-type="dfn" href="#media-session">media sessions</a> will have returned to a <a data-link-type="dfn" href="#current-state">current state</a> of <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>.</p>
    </div>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="resume-a-web-audio-object">resume a web audio object<a class="self-link" href="#resume-a-web-audio-object"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object it must invoke that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a></code> method.</p>
-   <h4 class="heading settled" data-level="6.2.3" id="deactivating-a-media-session-from-an-audiocontext-object"><span class="secno">6.2.3. </span><span class="content">Deactivating a
-media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#deactivating-a-media-session-from-an-audiocontext-object"></a></h4>
+   <h3 class="heading settled" data-level="6.3" id="deactivating-a-media-session-from-an-audiocontext-object"><span class="secno">6.3. </span><span class="content">Deactivating a
+media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#deactivating-a-media-session-from-an-audiocontext-object"></a></h3>
    <p>When an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute transitions to
 "closed", the user agent must <a data-link-type="dfn" href="#release-web-audio-object-from-its-media-session">release web audio object from its
 media session</a>.</p>
@@ -887,63 +855,63 @@ neighboring rights to this work.</p>
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
-   <li><a href="#active-media-session-state">active media session state</a><span>, in §4.1.2</span>
-   <li><a href="#ambient-attribute-value">ambient attribute value</a><span>, in §4.1.3</span>
-   <li><a href="#ambient-media-state">ambient media state</a><span>, in §4.1.3</span>
-   <li><a href="#audio-producing-object">audio-producing object</a><span>, in §4.1.4</span>
-   <li><a href="#audio-producing-participants">audio-producing participants</a><span>, in §4.1.4</span>
-   <li><a href="#content-attribute-value">content attribute value</a><span>, in §4.1.3</span>
-   <li><a href="#content-media-state">content media state</a><span>, in §4.1.3</span>
-   <li><a href="#current-media-session">current media session</a><span>, in §4.1.4</span>
-   <li><a href="#current-media-session-type">current media session type</a><span>, in §4.1.3</span>
-   <li><a href="#current-state">current state</a><span>, in §4.1.2</span>
-   <li><a href="#dom-mediasession-deactivate">deactivate()</a><span>, in §4.1.8</span>
-   <li><a href="#duck">duck</a><span>, in §4.1.4</span>
-   <li><a href="#idle-media-session-state">idle media session state</a><span>, in §4.1.2</span>
-   <li><a href="#indefinitely-pause">indefinitely pause</a><span>, in §4.1.4</span>
-   <li><a href="#interrupted-media-session-state">interrupted media session state</a><span>, in §4.1.2</span>
+   <li><a href="#active-media-session-state">active media session state</a><span>, in §4.2</span>
+   <li><a href="#ambient-attribute-value">ambient attribute value</a><span>, in §4.3</span>
+   <li><a href="#ambient-media-state">ambient media state</a><span>, in §4.3</span>
+   <li><a href="#audio-producing-object">audio-producing object</a><span>, in §4.4</span>
+   <li><a href="#audio-producing-participants">audio-producing participants</a><span>, in §4.4</span>
+   <li><a href="#content-attribute-value">content attribute value</a><span>, in §4.3</span>
+   <li><a href="#content-media-state">content media state</a><span>, in §4.3</span>
+   <li><a href="#current-media-session">current media session</a><span>, in §4.4</span>
+   <li><a href="#current-media-session-type">current media session type</a><span>, in §4.3</span>
+   <li><a href="#current-state">current state</a><span>, in §4.2</span>
+   <li><a href="#dom-mediasession-deactivate">deactivate()</a><span>, in §4.8</span>
+   <li><a href="#duck">duck</a><span>, in §4.4</span>
+   <li><a href="#idle-media-session-state">idle media session state</a><span>, in §4.2</span>
+   <li><a href="#indefinitely-pause">indefinitely pause</a><span>, in §4.4</span>
+   <li><a href="#interrupted-media-session-state">interrupted media session state</a><span>, in §4.2</span>
    <li>
     kind
     <ul>
-     <li><a href="#dom-mediasession-mediasession-kind-kind">argument for MediaSession/MediaSession(kind)</a><span>, in §4.1</span>
-     <li><a href="#dom-mediasession-kind">attribute for MediaSession</a><span>, in §4.1.8</span>
+     <li><a href="#dom-mediasession-mediasession-kind-kind">argument for MediaSession/MediaSession(kind)</a><span>, in §4</span>
+     <li><a href="#dom-mediasession-kind">attribute for MediaSession</a><span>, in §4.8</span>
     </ul>
-   <li><a href="#mediasession">MediaSession</a><span>, in §4.1</span>
-   <li><a href="#media-session-activation-algorithm">media session activation algorithm</a><span>, in §4.1.5</span>
-   <li><a href="#media-session-continuation-algorithm">media session continuation algorithm</a><span>, in §4.1.6</span>
-   <li><a href="#media-session-deactivation-algorithm">media session deactivation algorithm</a><span>, in §4.1.7</span>
-   <li><a href="#media-session-interruption-algorithm">media session interruption algorithm</a><span>, in §4.1.6</span>
-   <li><a href="#enumdef-mediasessionkind">MediaSessionKind</a><span>, in §4.1</span>
-   <li><a href="#dom-mediasession-mediasession">MediaSession(kind)</a><span>, in §4.1.1</span>
-   <li><a href="#media-session-kind">media session kind</a><span>, in §4.1.3</span>
+   <li><a href="#mediasession">MediaSession</a><span>, in §4</span>
+   <li><a href="#media-session-activation-algorithm">media session activation algorithm</a><span>, in §4.5</span>
+   <li><a href="#media-session-continuation-algorithm">media session continuation algorithm</a><span>, in §4.6</span>
+   <li><a href="#media-session-deactivation-algorithm">media session deactivation algorithm</a><span>, in §4.7</span>
+   <li><a href="#media-session-interruption-algorithm">media session interruption algorithm</a><span>, in §4.6</span>
+   <li><a href="#enumdef-mediasessionkind">MediaSessionKind</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-mediasession">MediaSession(kind)</a><span>, in §4.1</span>
+   <li><a href="#media-session-kind">media session kind</a><span>, in §4.3</span>
    <li><a href="#media-session">media
-sessions</a><span>, in §4.1</span>
+sessions</a><span>, in §4</span>
    <li><a href="#media-session-type">media session
-type</a><span>, in §4.1.3</span>
-   <li><a href="#pause">pause</a><span>, in §4.1.4</span>
-   <li><a href="#pause-a-media-element">pause a media element</a><span>, in §5.2.2</span>
+type</a><span>, in §4.3</span>
+   <li><a href="#pause">pause</a><span>, in §4.4</span>
+   <li><a href="#pause-a-media-element">pause a media element</a><span>, in §5.2</span>
    <li><a href="#release-media-element-from-its-media-session">release media element from its media
-session</a><span>, in §5.2.3</span>
+session</a><span>, in §5.3</span>
    <li><a href="#release-web-audio-object-from-its-media-session">release web audio object from its media
-session</a><span>, in §6.2.3</span>
-   <li><a href="#resume-a-web-audio-object">resume a web audio object</a><span>, in §6.2.2</span>
-   <li><a href="#resume-list">resume list</a><span>, in §4.1.4</span>
+session</a><span>, in §6.3</span>
+   <li><a href="#resume-a-web-audio-object">resume a web audio object</a><span>, in §6.2</span>
+   <li><a href="#resume-list">resume list</a><span>, in §4.4</span>
    <li>
     session
     <ul>
-     <li><a href="#dom-htmlmediaelement-session">attribute for HTMLMediaElement</a><span>, in §5.1</span>
-     <li><a href="#dom-audiocontext-session">attribute for AudioContext</a><span>, in §6.1</span>
+     <li><a href="#dom-htmlmediaelement-session">attribute for HTMLMediaElement</a><span>, in §5</span>
+     <li><a href="#dom-audiocontext-session">attribute for AudioContext</a><span>, in §6</span>
     </ul>
-   <li><a href="#suspend-a-web-audio-object">suspend a web audio object</a><span>, in §6.2.2</span>
+   <li><a href="#suspend-a-web-audio-object">suspend a web audio object</a><span>, in §6.2</span>
    <li><a href="#transient-attribute-value">transient attribute
-      value</a><span>, in §4.1.3</span>
-   <li><a href="#transient-media-state">transient media state</a><span>, in §4.1.3</span>
+      value</a><span>, in §4.3</span>
+   <li><a href="#transient-media-state">transient media state</a><span>, in §4.3</span>
    <li><a href="#transient-solo-attribute-value">transient-solo attribute
-      value</a><span>, in §4.1.3</span>
-   <li><a href="#transient-solo-media-state">transient solo media state</a><span>, in §4.1.3</span>
-   <li><a href="#unduck">unduck</a><span>, in §4.1.4</span>
-   <li><a href="#unpause">unpause</a><span>, in §4.1.4</span>
-   <li><a href="#unpause-a-media-element">unpause a media element</a><span>, in §5.2.2</span>
+      value</a><span>, in §4.3</span>
+   <li><a href="#transient-solo-media-state">transient solo media state</a><span>, in §4.3</span>
+   <li><a href="#unduck">unduck</a><span>, in §4.4</span>
+   <li><a href="#unpause">unpause</a><span>, in §4.4</span>
+   <li><a href="#unpause-a-media-element">unpause a media element</a><span>, in §5.2</span>
   </ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
