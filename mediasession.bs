@@ -196,38 +196,6 @@ environment of the platform. It is associated with zero or more
 <a>audio-producing objects</a> and has a <a>media session kind</a> that
 determines the interactions with the underlying platform.
 
-<h3 id="media-session-states">States</h3>
-
-A <a>media session</a> has a <dfn>current state</dfn> that describes its current
-status with respect to any platform-level interactions and interactions with
-other <a>media sessions</a>. The possible values are as follows:
-
-<dl>
-  <dt>
-    <dfn lt="idle media session state"><code>idle</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> does not have any platform-level media focus nor is
-    it in a suspended state.
-  </dd>
-  <dt>
-    <dfn lt="active media session state"><code>active</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> currently has platform-level media focus.
-  </dd>
-  <dt>
-    <dfn lt="interrupted media session state"><code>interrupted</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> is currently suspended from having platform-level
-    media focus and its <a>audio-producing participants</a> are either <a
-    lt="pause">paused</a> or
-    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>current media
-    session type</a>.
-  </dd>
-</dl>
-
 <h3 id="media-session-types">Types</h3>
 
 A <dfn>media session kind</dfn> is a keyword that maps to a well-defined
@@ -1073,6 +1041,38 @@ constructor, when invoked, must run these steps:
     Return <var>media session</var>.
   </li>
 </ol>
+
+<h4 id="media-session-states">States</h4>
+
+A <a>media session</a> has a <dfn>current state</dfn> that describes its current
+status with respect to any platform-level interactions and interactions with
+other <a>media sessions</a>. The possible values are as follows:
+
+<dl>
+  <dt>
+    <dfn lt="idle media session state"><code>idle</code></dfn>
+  </dt>
+  <dd>
+    The <a>media session</a> does not have any platform-level media focus nor is
+    it in a suspended state.
+  </dd>
+  <dt>
+    <dfn lt="active media session state"><code>active</code></dfn>
+  </dt>
+  <dd>
+    The <a>media session</a> currently has platform-level media focus.
+  </dd>
+  <dt>
+    <dfn lt="interrupted media session state"><code>interrupted</code></dfn>
+  </dt>
+  <dd>
+    The <a>media session</a> is currently suspended from having platform-level
+    media focus and its <a>audio-producing participants</a> are either <a
+    lt="pause">paused</a> or
+    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>current media
+    session type</a>.
+  </dd>
+</dl>
 
 <h4 id="mediasession-object-members">Object members</h4>
 
