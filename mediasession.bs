@@ -44,7 +44,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: media element load algorithm
             text: potentially playing
             text: ended playback
-            text: paused; url: #dom-media-paused
             text: internal pause steps
         urlPrefix: infrastructure.html
             text: enumerated attribute

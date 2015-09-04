@@ -69,7 +69,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-mediasession.svg"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-09-03">3 September 2015</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-09-04">4 September 2015</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -288,8 +288,8 @@ fourth columns.</p>
         <li> Reacts to changes in both hardware and software-based media key
           buttons when <a href="#activating-a-media-session">playback
           begins</a>. 
-        <li> <a data-link-type="dfn" href="#duck">Ducks</a> itself when <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> itself when <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> content is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
-        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
+        <li> <a data-link-type="dfn" href="#duck">Ducks</a> itself when <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> itself when <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
+        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
         <li> Continues playing normally when <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. 
        </ul>
       <td> Music, podcasts, radio streams. 
@@ -299,13 +299,13 @@ fourth columns.</p>
       <td> <dfn data-dfn-type="dfn" data-lt="transient media state" data-noexport="" id="transient-media-state">Transient<a class="self-link" href="#transient-media-state"></a></dfn> 
       <td>
        <ul>
-        <li> <a data-link-type="dfn" href="#duck">Ducks</a> all other <a data-link-type="dfn" href="#audio_producing-participants">active</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a href="#activating-a-media-session">playback begins</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> all other <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>. 
+        <li> <a data-link-type="dfn" href="#duck">Ducks</a> all other <a data-link-type="dfn" href="#audio_producing-participants">active</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a href="#activating-a-media-session">playback begins</a>. <a data-link-type="dfn" href="#unduck">Unducks</a> all other <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> content when <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>. 
         <li> Does not display lock-screen and notification area user interfaces
           when <a href="#activating-a-media-session">playback begins</a>. 
         <li> Does not react to changes in both hardware and software-based media
           key buttons when <a href="#activating-a-media-session">playback
           begins</a>. 
-        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
+        <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
         <li> Continues playing normally when other <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> or <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. 
        </ul>
       <td> Notification sounds. Spoken driving directions where playback of music in
@@ -317,14 +317,14 @@ fourth columns.</p>
       <td>
        <ul>
         <li> <a data-link-type="dfn" href="#pause">Pauses</a> all other <a data-link-type="dfn" href="#audio_producing-participants">active</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content when <a href="#activating-a-media-session">playback
-          begins</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> all <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content when <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>. 
+          begins</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> all <a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a> <code><a data-link-type="dfn" href="#content-media-state">Content</a></code>, <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> and <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content when <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">playback ends</a>. 
         <li> Does not display lock-screen and notification area user interfaces
           when <a href="#activating-a-media-session">playback begins</a>. 
         <li> Does not react to changes in both hardware and software-based media
           key buttons when <a href="#activating-a-media-session">playback
           begins</a>. 
         <li> <a data-link-type="dfn" href="#pause">Pauses</a> itself when other <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. <a data-link-type="dfn" href="#unpause">Unpauses</a> itself when other <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient
-          Solo</a></code> content is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
+          Solo</a></code> content is <a data-link-type="dfn" href="#pause">paused</a> or <a href="#deactivating-a-media-session">ends playback</a>. 
         <li> Continues playing normally when <code><a data-link-type="dfn" href="#ambient-media-state">Ambient</a></code> content <a href="#interrupting-a-media-session">starts interrupting</a>. 
        </ul>
       <td> Playback of driving directions. Other spoken notifications. 
