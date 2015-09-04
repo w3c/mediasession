@@ -227,13 +227,7 @@ sessions<a class="self-link" href="#media-session"></a></dfn>.</p>
     <dt> <code><var>session</var> = new <a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">MediaSession</a>([<var>kind</var>])</code> 
     <dd> Returns a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object. 
    </dl>
-   <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasession">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasession"></a></dfn> constructor, when invoked, must run these steps:</p>
-   <ol>
-    <li> Let <var>media session</var> be a new <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object. 
-    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#kind">kind</a> to <var>kind</var>. 
-    <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#state">state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>. 
-    <li> Return <var>media session</var>. 
-   </ol>
+   <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasession">MediaSession(<var>kind</var>)<a class="self-link" href="#dom-mediasession-mediasession"></a></dfn> constructor, when invoked, must return a new <a data-link-type="dfn" href="#media-session">media session</a> whose <a data-link-type="dfn" href="#kind">kind</a> is <var>kind</var>, and <a data-link-type="dfn" href="#state">state</a> is <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
    <h3 class="heading settled" data-level="4.2" id="media-session-states"><span class="secno">4.2. </span><span class="content">States</span><a class="self-link" href="#media-session-states"></a></h3>
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-for="MediaSession" data-dfn-type="dfn" data-noexport="" id="state">state<a class="self-link" href="#state"></a></dfn> that describes
 its current status with respect to any platform-level interactions and
