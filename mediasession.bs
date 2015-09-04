@@ -198,31 +198,6 @@ determines the interactions with the underlying platform.
 
 <h3 id="media-session-lifecycle">Lifecycle</h3>
 
-When the <a>media session activation algorithm</a> is run a <a>media
-session</a>'s <a>current state</a> may be set from <code><a lt="idle media
-session state">idle</a></code> to
-<code><a lt="active media session state">active</a></code>.
-
-When the <a>media session interruption algorithm</a> is run a <a>media
-session</a>'s <a>current state</a> may be set from
-<code><a lt="active media session state">active</a></code> to either <code><a
-lt="idle media session state">idle</a></code> or <code><a lt="interrupted media
-session state">interrupted</a></code> depending on its associated <a>media
-session kind</a>.
-
-When the <a>media session continuation algorithm</a> is run a <a>media
-session</a>'s <a>current state</a> may be set from <code><a lt="interrupted
-media session state">interrupted</a></code>
-to <code><a lt="active media session state">active</a></code>.
-
-When the <a>media session deactivation algorithm</a> is run a <a>media
-session</a>'s
-<a>current state</a>
-may be set from either <code><a lt="active media session
-state">active</a></code> or <code><a lt="interrupted media session
-state">interrupted</a></code> to
-<code><a lt="idle media session state">idle</a></code>.
-
 <h4 id="activating-a-media-session">Activating a media session</h4>
 
 The <dfn>media session activation algorithm</dfn> takes one argument,
