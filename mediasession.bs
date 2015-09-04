@@ -223,7 +223,7 @@ sessions</dfn>.
 </dl>
 
 The
-<dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
+<dfn constructor for="MediaSession">MediaSession(<var>kind</var>)</dfn>
 constructor, when invoked, must run these steps:
 
 <ol>
