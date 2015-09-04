@@ -254,19 +254,18 @@ follows:</p>
    <h3 class="heading settled" data-level="4.3" id="media-session-kinds"><span class="secno">4.3. </span><span class="content">Kinds</span><a class="self-link" href="#media-session-kinds"></a></h3>
    <dl class="domintro">
     <dt> <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-kind">kind</a></code></code> 
-    <dd> Returns the <a data-link-type="dfn" href="#media-session-kind">media session kind</a> of the <a data-link-type="dfn" href="#media-session">media session</a>. 
+    <dd> Returns the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#kind">kind</a>. 
    </dl>
-   <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn> attribute must return the <a data-link-type="dfn" href="#media-session-kind">media session kind</a> of the <a data-link-type="dfn" href="#media-session">media session</a> that was set when the object was created.</p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="media-session-kind">media session kind<a class="self-link" href="#media-session-kind"></a></dfn> is a keyword that maps to a well-defined
-interaction state for a <a data-link-type="dfn" href="#media-session">media session</a> – called its <dfn data-dfn-type="dfn" data-noexport="" id="media-session-type">media session
-type<a class="self-link" href="#media-session-type"></a></dfn> – that user agents use to enforce platform-specific interaction and
-interoperation between media content.</p>
+   <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn> attribute must return the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#kind">kind</a>.</p>
+   <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-for="MediaSession" data-dfn-type="dfn" data-noexport="" id="kind">kind<a class="self-link" href="#kind"></a></dfn> that maps to a
+well-defined interaction state for a <a data-link-type="dfn" href="#media-session">media session</a> – called its <dfn data-dfn-type="dfn" data-noexport="" id="media-session-type">media session type<a class="self-link" href="#media-session-type"></a></dfn> – that user agents use to enforce
+platform-specific interaction and interoperation between media content.</p>
    <p>A <a data-link-type="dfn" href="#media-session">media session</a> has a <dfn data-dfn-type="dfn" data-noexport="" id="current-media-session-type">current media session type<a class="self-link" href="#current-media-session-type"></a></dfn> that is set
 when a new <a data-link-type="dfn" href="#media-session">media session</a> is created.</p>
-   <p>The following table lists the available <a data-link-type="dfn" href="#media-session-kind">media session kinds</a> keywords and
-their corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> states — the keywords in the
-left column map to the states in the cell in the second column on the same row
-as the keyword. <a data-link-type="dfn" href="#media-session-kind">Media session kinds</a> and <a data-link-type="dfn" href="#media-session-type">media session types</a> should be used based on their preferred definitions in the table’s third and
+   <p>The following table lists the available <a data-link-type="dfn" href="#kind">kind</a> keywords and their
+corresponding <a data-link-type="dfn" href="#media-session-type">media session type</a> states — the keywords in the left
+column map to the states in the cell in the second column on the same row as the
+keyword. <a data-link-type="dfn" href="#kind">Kinds</a> and <a data-link-type="dfn" href="#media-session-type">media session types</a> should be used based on their preferred definitions in the table’s third and
 fourth columns.</p>
    <table>
     <tbody>
@@ -436,12 +435,12 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
    <ol>
     <li> If <var>media session</var>’s <a data-link-type="dfn" href="#state">state</a> is not <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>, then terminate
     these steps. 
-    <li> Let <var>interrupting media session kind</var> be the <a data-link-type="dfn" href="#media-session-kind">media session
-    kind</a> that triggered this interruption. 
+    <li> Let <var>interrupting kind</var> be the <a data-link-type="dfn" href="#kind">kind</a> that triggered this
+    interruption. 
     <li>
       Run these substeps: 
      <dl class="switch">
-      <dt> If <var>interrupting media session kind</var> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> 
+      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#content-media-state">Content</a></code> 
       <dd>
        <ol>
         <li>
@@ -459,7 +458,7 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
             prevent any hardware and/or software media keys from controlling
             playback of <var>media session</var>’s <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>. 
        </ol>
-      <dt> If <var>interrupting media session kind</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> 
+      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> 
       <dd>
        <ol>
         <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
@@ -484,7 +483,7 @@ sessions</a>, passing in each <a data-link-type="dfn" href="#media-session">medi
               re-activate this <a data-link-type="dfn" href="#media-session">media session</a> according to the steps
               defined in that algorithm. </p>
        </ol>
-      <dt> If <var>interrupting media session kind</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> 
+      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> 
       <dd>
        <ol>
         <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
@@ -518,12 +517,12 @@ then the user agent must run the <a data-link-type="dfn" href="#media-session-co
    <ol>
     <li> If <var>media session</var>’s <a data-link-type="dfn" href="#state">state</a> is not <code><a data-link-type="dfn" href="#interrupted-media-session-state">interrupted</a></code>, then
     terminate these steps. 
-    <li> Let <var>interrupting media session kind</var> be the <a data-link-type="dfn" href="#media-session-kind">media session
-    kind</a> that initially triggered this interruption. 
+    <li> Let <var>interrupting kind</var> be the <a data-link-type="dfn" href="#kind">kind</a> that initially triggered
+    this interruption. 
     <li>
       Run these substeps: 
      <dl class="switch">
-      <dt> If <var>interrupting media session kind</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> 
+      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-media-state">Transient</a></code> 
       <dd>
        <ol>
         <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
@@ -534,7 +533,7 @@ then the user agent must run the <a data-link-type="dfn" href="#media-session-co
         <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#resume-list">resume list</a> to an empty list. 
         <li> Set <var>media session</var>’s <a data-link-type="dfn" href="#state">state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>. 
        </ol>
-      <dt> If <var>interrupting media session kind</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> 
+      <dt> If <var>interrupting kind</var> is <code><a data-link-type="dfn" href="#transient-solo-media-state">Transient Solo</a></code> 
       <dd>
        <ol>
         <li> If <var>media session</var>’s <a data-link-type="dfn" href="#current-media-session-type">current media session type</a> is
@@ -873,6 +872,7 @@ neighboring rights to this work.</p>
     <ul>
      <li><a href="#dom-mediasession-mediasession-kind-kind">argument for MediaSession/MediaSession(kind)</a><span>, in §4</span>
      <li><a href="#dom-mediasession-kind">attribute for MediaSession</a><span>, in §4.3</span>
+     <li><a href="#kind">dfn for MediaSession</a><span>, in §4.3</span>
     </ul>
    <li><a href="#mediasession">MediaSession</a><span>, in §4</span>
    <li><a href="#media-session-activation-algorithm">media session activation algorithm</a><span>, in §4.5</span>
@@ -881,11 +881,9 @@ neighboring rights to this work.</p>
    <li><a href="#media-session-interruption-algorithm">media session interruption algorithm</a><span>, in §4.6</span>
    <li><a href="#enumdef-mediasessionkind">MediaSessionKind</a><span>, in §4</span>
    <li><a href="#dom-mediasession-mediasession">MediaSession(kind)</a><span>, in §4.1</span>
-   <li><a href="#media-session-kind">media session kind</a><span>, in §4.3</span>
    <li><a href="#media-session">media
 sessions</a><span>, in §4</span>
-   <li><a href="#media-session-type">media session
-type</a><span>, in §4.3</span>
+   <li><a href="#media-session-type">media session type</a><span>, in §4.3</span>
    <li><a href="#pause">pause</a><span>, in §4.4</span>
    <li><a href="#pause-a-media-element">pause a media element</a><span>, in §5.2</span>
    <li><a href="#release-media-element-from-its-media-session">release media element from its media

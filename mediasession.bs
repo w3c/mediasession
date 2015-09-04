@@ -283,27 +283,25 @@ follows:
     <code><var>session</var> . {{MediaSession/kind}}</code>
   </dt>
   <dd>
-    Returns the <a>media session kind</a> of the
-    <a>media session</a>.
+    Returns the <a>media session</a>'s <a>kind</a>.
   </dd>
 </dl>
 
 The <dfn attribute for="MediaSession" lt="kind"><code>kind</code></dfn>
-attribute must return the <a>media session kind</a> of the <a>media session</a>
-that was set when the object was created.
+attribute must return the <a>media session</a>'s <a>kind</a>.
 
-A <dfn>media session kind</dfn> is a keyword that maps to a well-defined
-interaction state for a <a>media session</a> – called its <dfn>media session
-type</dfn> – that user agents use to enforce platform-specific interaction and
-interoperation between media content.
+A <a>media session</a> has a <dfn for="MediaSession">kind</dfn> that maps to a
+well-defined interaction state for a <a>media session</a> – called its
+<dfn>media session type</dfn> – that user agents use to enforce
+platform-specific interaction and interoperation between media content.
 
 A <a>media session</a> has a <dfn>current media session type</dfn> that is set
 when a new <a>media session</a> is created.
 
-The following table lists the available <a>media session kinds</a> keywords and
-their corresponding <a>media session type</a> states — the keywords in the
-left column map to the states in the cell in the second column on the same row
-as the keyword. <a>Media session kinds</a> and <a>media session types</a>
+The following table lists the available <a>kind</a> keywords and their
+corresponding <a>media session type</a> states — the keywords in the left
+column map to the states in the cell in the second column on the same row as the
+keyword. <a>Kinds</a> and <a>media session types</a>
 should be used based on their preferred definitions in the table’s third and
 fourth columns.
 
@@ -696,8 +694,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
     these steps.
   </li>
   <li>
-    Let <var>interrupting media session kind</var> be the <a>media session
-    kind</a> that triggered this interruption.
+    Let <var>interrupting kind</var> be the <a>kind</a> that triggered this
+    interruption.
 
     <!-- TODO(philipj): The interruption may not come from another media session
     at all. https://github.com/whatwg/mediasession/issues/100 -->
@@ -707,8 +705,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
 
     <dl class=switch>
       <dt>
-        If <var>interrupting media session kind</var> is <code><a lt="content
-        media state">Content</a></code>
+        If <var>interrupting kind</var> is <code><a lt="content media
+        state">Content</a></code>
       </dt>
       <dd>
         <ol>
@@ -743,8 +741,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>interrupting media session kind</var> is <code><a lt="transient
-        media state">Transient</a></code>
+        If <var>interrupting kind</var> is <code><a lt="transient media
+        state">Transient</a></code>
       </dt>
       <dd>
         <ol>
@@ -789,8 +787,8 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>interrupting media session kind</var> is <code><a lt="transient
-        solo media state">Transient Solo</a></code>
+        If <var>interrupting kind</var> is <code><a lt="transient solo media
+        state">Transient Solo</a></code>
       </dt>
       <dd>
         <ol>
@@ -857,8 +855,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
     terminate these steps.
   </li>
   <li>
-    Let <var>interrupting media session kind</var> be the <a>media session
-    kind</a> that initially triggered this interruption.
+    Let <var>interrupting kind</var> be the <a>kind</a> that initially triggered
+    this interruption.
 
     <!-- TODO(philipj): The interruption may not come from another media session
     at all. https://github.com/whatwg/mediasession/issues/100 -->
@@ -868,8 +866,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 
     <dl class=switch>
       <dt>
-        If <var>interrupting media session kind</var> is <code><a lt="transient
-        media state">Transient</a></code>
+        If <var>interrupting kind</var> is <code><a lt="transient media
+        state">Transient</a></code>
       </dt>
       <dd>
         <ol>
@@ -893,8 +891,8 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
         </ol>
       </dd>
       <dt>
-        If <var>interrupting media session kind</var> is <code><a lt="transient
-        solo media state">Transient Solo</a></code>
+        If <var>interrupting kind</var> is <code><a lt="transient solo media
+        state">Transient Solo</a></code>
       </dt>
       <dd>
         <ol>
