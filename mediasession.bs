@@ -196,7 +196,388 @@ environment of the platform. It is associated with zero or more
 <a>audio-producing objects</a> and has a <a>media session kind</a> that
 determines the interactions with the underlying platform.
 
-<h3 id="media-session-lifecycle">Lifecycle</h3>
+<h3 id="the-mediasession-interface">The {{MediaSession}} interface</h3>
+
+<pre class="idl">
+[Constructor(optional MediaSessionKind kind = "content")]
+interface MediaSession {
+  readonly attribute MediaSessionKind kind;
+
+  void deactivate();
+};
+
+enum MediaSessionKind {
+  "content",
+  "transient",
+  "transient-solo",
+  "ambient"
+};
+</pre>
+
+{{MediaSession}} objects are simply known as <dfn id="media-session">media
+sessions</dfn>.
+
+<h4 id="mediasession-constructors">Constructors</h4>
+
+<dl class=domintro>
+  <dt>
+    <code><var>session</var> = new <a constructor
+    lt="MediaSession()">MediaSession</a>([<var>kind</var>])</code>
+  </dt>
+  <dd>
+    Returns a new {{MediaSession}} object.
+  </dd>
+</dl>
+
+The
+<dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
+constructor, when invoked, must run these steps:
+
+<ol>
+  <li>
+    Let <var>media session</var> be a new {{MediaSession}} object.
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>current media session type</a> to the
+    corresponding <a>media session type</a> of <var>kind</var>.
+  </li>
+  <li>
+    Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
+    media session state">idle</a></code>.
+  </li>
+  <li>
+    Return <var>media session</var>.
+  </li>
+</ol>
+
+<h4 id="media-session-states">States</h4>
+
+A <a>media session</a> has a <dfn>current state</dfn> that describes its current
+status with respect to any platform-level interactions and interactions with
+other <a>media sessions</a>. The possible values are as follows:
+
+<dl>
+  <dt>
+    <dfn lt="idle media session state"><code>idle</code></dfn>
+  </dt>
+  <dd>
+    The <a>media session</a> does not have any platform-level media focus nor is
+    it in a suspended state.
+  </dd>
+  <dt>
+    <dfn lt="active media session state"><code>active</code></dfn>
+  </dt>
+  <dd>
+    The <a>media session</a> currently has platform-level media focus.
+  </dd>
+  <dt>
+    <dfn lt="interrupted media session state"><code>interrupted</code></dfn>
+  </dt>
+  <dd>
+    The <a>media session</a> is currently suspended from having platform-level
+    media focus and its <a>audio-producing participants</a> are either <a
+    lt="pause">paused</a> or
+    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>current media
+    session type</a>.
+  </dd>
+</dl>
+
+<h4 id="media-session-kinds">Kinds</h4>
+
+A <dfn>media session kind</dfn> is a keyword that maps to a well-defined
+interaction state for a <a>media session</a> – called its <dfn>media session
+type</dfn> – that user agents use to enforce platform-specific interaction and
+interoperation between media content.
+
+A <a>media session</a> has a <dfn>current media session type</dfn> that is set
+when a new <a>media session</a> is created.
+
+The following table lists the available <a>media session kinds</a> keywords and
+their corresponding <a>media session type</a> states — the keywords in the
+left column map to the states in the cell in the second column on the same row
+as the keyword. <a>Media session kinds</a> and <a>media session types</a>
+should be used based on their preferred definitions in the table’s third and
+fourth columns.
+
+<table>
+  <tr>
+    <th>Kind</th>
+    <th>State</th>
+    <th>Definition</th>
+    <th>Examples</th>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="content attribute value"><code>content</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="content media state">Content</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          <a>Indefinitely pauses</a> all other <a lt="audio-producing
+          participants">active</a> <code><a lt="content media
+          state">Content</a></code> content when <a
+          href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Displays lock-screen and notification area user interfaces when
+          <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Reacts to changes in both hardware and software-based media key
+          buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Ducks</a> itself when <code><a lt="transient media
+          state">Transient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unducks</a>
+          itself when <code><a lt="transient media state">Transient</a></code>
+          content is <a>paused</a> or <a
+          href="#deactivating-a-media-session">ends playback</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unpauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content is <a>paused</a> or <a
+          href="#deactivating-a-media-session">ends playback</a>.
+        </li>
+        <li>
+          Continues playing normally when <code><a lt="ambient media
+          state">Ambient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+        </li>
+      </ul>
+    </td>
+    <td>
+      Music, podcasts, radio streams.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="transient attribute
+      value"><code>transient</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="transient media state">Transient</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          <a>Ducks</a> all other <a lt="audio-producing participants">active</a>
+          <code><a lt="content media state">Content</a></code> content when
+          <a href="#activating-a-media-session">playback begins</a>.
+          <a>Unducks</a> all other <a lt="interrupted media session
+          state">interrupted</a> <code><a lt="content media
+          state">Content</a></code> content when <a>paused</a> or <a
+          href="#deactivating-a-media-session">playback ends</a>.
+        </li>
+        <li>
+          Does not display lock-screen and notification area user interfaces
+          when <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Does not react to changes in both hardware and software-based media
+          key buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unpauses</a> itself when <code><a lt="transient solo media
+          state">Transient Solo</a></code> content is <a>paused</a> or <a
+          href="#deactivating-a-media-session">ends playback</a>.
+        </li>
+        <li>
+          Continues playing normally when other <code><a lt="transient media
+          state">Transient</a></code> or <code><a lt="ambient media
+          state">Ambient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+        </li>
+      </ul>
+    </td>
+    <td>
+      Notification sounds. Spoken driving directions where playback of music in
+      the background is acceptable.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="transient-solo attribute
+      value"><code>transient-solo</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="transient solo media state">Transient Solo</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          <a>Pauses</a> all other <a lt="audio-producing
+          participants">active</a>
+          <code><a lt="content media state">Content</a></code>, <code><a
+          lt="transient media state">Transient</a></code> and
+          <code><a lt="transient solo media state">Transient Solo</a></code>
+          content when <a href="#activating-a-media-session">playback
+          begins</a>.
+          <a>Unpauses</a> all <a lt="interrupted media session
+          state">interrupted</a>
+          <code><a lt="content media state">Content</a></code>, <code><a
+          lt="transient media state">Transient</a></code> and <code><a
+          lt="transient solo media state">Transient Solo</a></code>
+          content when <a>paused</a> or <a
+          href="#deactivating-a-media-session">playback ends</a>.
+        </li>
+        <li>
+          Does not display lock-screen and notification area user interfaces
+          when <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Does not react to changes in both hardware and software-based media
+          key buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when other <code><a lt="transient solo media
+          state">Transient Solo</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+          <a>Unpauses</a>
+          itself when other <code><a lt="transient solo media state">Transient
+          Solo</a></code> content is <a>paused</a> or <a
+          href="#deactivating-a-media-session">ends playback</a>.
+        </li>
+        <li>
+          Continues playing normally when <code><a lt="ambient media
+          state">Ambient</a></code> content <a
+          href="#interrupting-a-media-session">starts interrupting</a>.
+        </li>
+      </ul>
+    </td>
+    <td>
+      Playback of driving directions. Other spoken notifications.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &quot;<dfn lt="ambient attribute value"><code>ambient</code></dfn>&quot;
+    </td>
+    <td>
+      <dfn lt="ambient media state">Ambient</dfn>
+    </td>
+    <td>
+      <ul>
+        <li>
+          Does not interact with any other
+          <code><a lt="content media state">Content</a></code>, <code><a
+          lt="transient media state">Transient</a></code>,
+          <code><a lt="transient solo media state">Transient Solo</a></code> or
+          <code><a lt="ambient media state">Ambient</a></code> content during
+          playback.
+        </li>
+        <li>
+          Does not display lock-screen and notification area user interfaces
+          when <a href="#activating-a-media-session">playback begins</a>.
+        </li>
+        <li>
+          Does not react to changes in both hardware and software-based media
+          key buttons when <a href="#activating-a-media-session">playback
+          begins</a>.
+        </li>
+        <li>
+          <a>Pauses</a> itself when its <a>top-level browsing context</a> is not
+          visible (i.e. the page is placed in the background or the user agent
+          is minimized or the screen is switched off). <a>Unpauses</a> itself
+          when its
+          <a>top-level browsing context</a> is at least partially visible on at
+          least one screen again (i.e. the user agent is in the foreground and
+          the page is focused again).
+        </li>
+      </ul>
+    </td>
+    <td>
+      UI sounds. In-game sound effects and background music.
+    </td>
+  </tr>
+</table>
+
+<h4 id="media-session-participants">Participants</h4>
+
+An <dfn>audio-producing object</dfn> is any object or element that is capable of
+emitting sound within the user agent and is therefore also potentially capable
+of interacting with the media focus system available in different underlying
+platforms.
+
+An <a>audio-producing object</a> may have a <dfn>current media session</dfn>,
+which is a <a>media session</a>.
+
+A <a>media session</a> may have one or more <a>audio-producing objects</a>
+attached to it; called its <dfn>audio-producing participants</dfn>. A <a>media
+session</a> must keep a list of its <a>audio-producing participants</a> that
+consists of zero of more <a>audio-producing objects</a>.
+
+A <a>media session</a> has a <dfn>resume list</dfn> that is used internally to
+restore <a>audio-producing participants</a> at the end of an interruption that
+were playing, or were otherwise running, when that interruption started. The
+<a>resume list</a> may consist of zero or more <a>audio-producing objects</a>
+that must also be present in the <a>media session</a>'s list of
+<a>audio-producing participants</a>. When a new <a>media session</a> is created
+its <a>resume list</a> must be empty.
+
+When the user agent is to <dfn>pause</dfn> a given <var>audio-producing
+object</var> it must run the following steps:
+
+<ol>
+  <li>
+    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
+    <a lt="pause a media element">pause media element</a>
+    <var>audio-producing object</var> and terminate these steps.
+  </li>
+  <li>
+    If <var>audio-producing object</var> is an {{AudioContext}} object, then
+    <a lt="suspend a web audio object">suspend web audio object</a>
+    <var>audio-producing object</var> and terminate these steps.
+  </li>
+</ol>
+
+When the user agent is to <dfn>indefinitely pause</dfn> a given
+<var>audio-producing object</var>, the user agent must <a>pause</a>
+<var>audio-producing object</var> and, then proceed to remove it from its
+<a>current media session</a>'s list of
+<a>audio-producing participants</a>.
+
+When the user agent is to <dfn>unpause</dfn> a given <var>audio-producing
+object</var> it must run the following steps:
+
+<ol>
+  <li>
+    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
+    <a lt="unpause a media element">unpause media element</a>
+    <var>audio-producing object</var> and terminate these steps.
+  </li>
+  <li>
+    If <var>audio-producing object</var> is an {{AudioContext}} object, then
+    <a lt="resume a web audio object">resume web audio object</a>
+    <var>audio-producing object</var> and terminate these steps.
+  </li>
+</ol>
+
+When an <a>audio-producing object</a> is to <dfn>duck</dfn> the user agent must
+ensure its output volume is lowered.
+
+When an <a>audio-producing object</a> is to <dfn>unduck</dfn> the user agent
+should restore its output volume to the same level that was observed prior to
+the original corresponding <a>duck</a> request.
+
+<p class=note>
+  When an <a>audio-producing object</a> is <a lt="duck">ducked</a> any reduction
+  in volume applied by the user agent is not intended to be observable to web
+  pages.
+</p>
 
 <h4 id="activating-a-media-session">Activating a media session</h4>
 
@@ -665,389 +1046,6 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
     </p>
   </li>
 </ol>
-
-<h3 id="the-mediasession-interface">The {{MediaSession}} interface</h3>
-
-<pre class="idl">
-[Constructor(optional MediaSessionKind kind = "content")]
-interface MediaSession {
-  readonly attribute MediaSessionKind kind;
-
-  void deactivate();
-};
-
-enum MediaSessionKind {
-  "content",
-  "transient",
-  "transient-solo",
-  "ambient"
-};
-</pre>
-
-{{MediaSession}} objects are simply known as <dfn id="media-session">media
-sessions</dfn>.
-
-<h4 id="mediasession-constructors">Constructors</h4>
-
-<dl class=domintro>
-  <dt>
-    <code><var>session</var> = new <a constructor
-    lt="MediaSession()">MediaSession</a>([<var>kind</var>])</code>
-  </dt>
-  <dd>
-    Returns a new {{MediaSession}} object.
-  </dd>
-</dl>
-
-The
-<dfn constructor for=MediaSession>MediaSession(<var>kind</var>)</dfn>
-constructor, when invoked, must run these steps:
-
-<ol>
-  <li>
-    Let <var>media session</var> be a new {{MediaSession}} object.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>current media session type</a> to the
-    corresponding <a>media session type</a> of <var>kind</var>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>current state</a> to <code><a lt="idle
-    media session state">idle</a></code>.
-  </li>
-  <li>
-    Return <var>media session</var>.
-  </li>
-</ol>
-
-<h4 id="media-session-states">States</h4>
-
-A <a>media session</a> has a <dfn>current state</dfn> that describes its current
-status with respect to any platform-level interactions and interactions with
-other <a>media sessions</a>. The possible values are as follows:
-
-<dl>
-  <dt>
-    <dfn lt="idle media session state"><code>idle</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> does not have any platform-level media focus nor is
-    it in a suspended state.
-  </dd>
-  <dt>
-    <dfn lt="active media session state"><code>active</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> currently has platform-level media focus.
-  </dd>
-  <dt>
-    <dfn lt="interrupted media session state"><code>interrupted</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> is currently suspended from having platform-level
-    media focus and its <a>audio-producing participants</a> are either <a
-    lt="pause">paused</a> or
-    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>current media
-    session type</a>.
-  </dd>
-</dl>
-
-<h4 id="media-session-kinds">Kinds</h4>
-
-A <dfn>media session kind</dfn> is a keyword that maps to a well-defined
-interaction state for a <a>media session</a> – called its <dfn>media session
-type</dfn> – that user agents use to enforce platform-specific interaction and
-interoperation between media content.
-
-A <a>media session</a> has a <dfn>current media session type</dfn> that is set
-when a new <a>media session</a> is created.
-
-The following table lists the available <a>media session kinds</a> keywords and
-their corresponding <a>media session type</a> states — the keywords in the
-left column map to the states in the cell in the second column on the same row
-as the keyword. <a>Media session kinds</a> and <a>media session types</a>
-should be used based on their preferred definitions in the table’s third and
-fourth columns.
-
-<table>
-  <tr>
-    <th>Kind</th>
-    <th>State</th>
-    <th>Definition</th>
-    <th>Examples</th>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="content attribute value"><code>content</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="content media state">Content</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          <a>Indefinitely pauses</a> all other <a lt="audio-producing
-          participants">active</a> <code><a lt="content media
-          state">Content</a></code> content when <a
-          href="#activating-a-media-session">playback begins</a>.
-        </li>
-        <li>
-          Displays lock-screen and notification area user interfaces when
-          <a href="#activating-a-media-session">playback begins</a>.
-        </li>
-        <li>
-          Reacts to changes in both hardware and software-based media key
-          buttons when <a href="#activating-a-media-session">playback
-          begins</a>.
-        </li>
-        <li>
-          <a>Ducks</a> itself when <code><a lt="transient media
-          state">Transient</a></code> content <a
-          href="#interrupting-a-media-session">starts interrupting</a>.
-          <a>Unducks</a>
-          itself when <code><a lt="transient media state">Transient</a></code>
-          content is <a>paused</a> or <a
-          href="#deactivating-a-media-session">ends playback</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
-          href="#interrupting-a-media-session">starts interrupting</a>.
-          <a>Unpauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content is <a>paused</a> or <a
-          href="#deactivating-a-media-session">ends playback</a>.
-        </li>
-        <li>
-          Continues playing normally when <code><a lt="ambient media
-          state">Ambient</a></code> content <a
-          href="#interrupting-a-media-session">starts interrupting</a>.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Music, podcasts, radio streams.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="transient attribute
-      value"><code>transient</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="transient media state">Transient</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          <a>Ducks</a> all other <a lt="audio-producing participants">active</a>
-          <code><a lt="content media state">Content</a></code> content when
-          <a href="#activating-a-media-session">playback begins</a>.
-          <a>Unducks</a> all other <a lt="interrupted media session
-          state">interrupted</a> <code><a lt="content media
-          state">Content</a></code> content when <a>paused</a> or <a
-          href="#deactivating-a-media-session">playback ends</a>.
-        </li>
-        <li>
-          Does not display lock-screen and notification area user interfaces
-          when <a href="#activating-a-media-session">playback begins</a>.
-        </li>
-        <li>
-          Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#activating-a-media-session">playback
-          begins</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
-          href="#interrupting-a-media-session">starts interrupting</a>.
-          <a>Unpauses</a> itself when <code><a lt="transient solo media
-          state">Transient Solo</a></code> content is <a>paused</a> or <a
-          href="#deactivating-a-media-session">ends playback</a>.
-        </li>
-        <li>
-          Continues playing normally when other <code><a lt="transient media
-          state">Transient</a></code> or <code><a lt="ambient media
-          state">Ambient</a></code> content <a
-          href="#interrupting-a-media-session">starts interrupting</a>.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Notification sounds. Spoken driving directions where playback of music in
-      the background is acceptable.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="transient-solo attribute
-      value"><code>transient-solo</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="transient solo media state">Transient Solo</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          <a>Pauses</a> all other <a lt="audio-producing
-          participants">active</a>
-          <code><a lt="content media state">Content</a></code>, <code><a
-          lt="transient media state">Transient</a></code> and
-          <code><a lt="transient solo media state">Transient Solo</a></code>
-          content when <a href="#activating-a-media-session">playback
-          begins</a>.
-          <a>Unpauses</a> all <a lt="interrupted media session
-          state">interrupted</a>
-          <code><a lt="content media state">Content</a></code>, <code><a
-          lt="transient media state">Transient</a></code> and <code><a
-          lt="transient solo media state">Transient Solo</a></code>
-          content when <a>paused</a> or <a
-          href="#deactivating-a-media-session">playback ends</a>.
-        </li>
-        <li>
-          Does not display lock-screen and notification area user interfaces
-          when <a href="#activating-a-media-session">playback begins</a>.
-        </li>
-        <li>
-          Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#activating-a-media-session">playback
-          begins</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when other <code><a lt="transient solo media
-          state">Transient Solo</a></code> content <a
-          href="#interrupting-a-media-session">starts interrupting</a>.
-          <a>Unpauses</a>
-          itself when other <code><a lt="transient solo media state">Transient
-          Solo</a></code> content is <a>paused</a> or <a
-          href="#deactivating-a-media-session">ends playback</a>.
-        </li>
-        <li>
-          Continues playing normally when <code><a lt="ambient media
-          state">Ambient</a></code> content <a
-          href="#interrupting-a-media-session">starts interrupting</a>.
-        </li>
-      </ul>
-    </td>
-    <td>
-      Playback of driving directions. Other spoken notifications.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      &quot;<dfn lt="ambient attribute value"><code>ambient</code></dfn>&quot;
-    </td>
-    <td>
-      <dfn lt="ambient media state">Ambient</dfn>
-    </td>
-    <td>
-      <ul>
-        <li>
-          Does not interact with any other
-          <code><a lt="content media state">Content</a></code>, <code><a
-          lt="transient media state">Transient</a></code>,
-          <code><a lt="transient solo media state">Transient Solo</a></code> or
-          <code><a lt="ambient media state">Ambient</a></code> content during
-          playback.
-        </li>
-        <li>
-          Does not display lock-screen and notification area user interfaces
-          when <a href="#activating-a-media-session">playback begins</a>.
-        </li>
-        <li>
-          Does not react to changes in both hardware and software-based media
-          key buttons when <a href="#activating-a-media-session">playback
-          begins</a>.
-        </li>
-        <li>
-          <a>Pauses</a> itself when its <a>top-level browsing context</a> is not
-          visible (i.e. the page is placed in the background or the user agent
-          is minimized or the screen is switched off). <a>Unpauses</a> itself
-          when its
-          <a>top-level browsing context</a> is at least partially visible on at
-          least one screen again (i.e. the user agent is in the foreground and
-          the page is focused again).
-        </li>
-      </ul>
-    </td>
-    <td>
-      UI sounds. In-game sound effects and background music.
-    </td>
-  </tr>
-</table>
-
-<h4 id="media-session-participants">Participants</h4>
-
-An <dfn>audio-producing object</dfn> is any object or element that is capable of
-emitting sound within the user agent and is therefore also potentially capable
-of interacting with the media focus system available in different underlying
-platforms.
-
-An <a>audio-producing object</a> may have a <dfn>current media session</dfn>,
-which is a <a>media session</a>.
-
-A <a>media session</a> may have one or more <a>audio-producing objects</a>
-attached to it; called its <dfn>audio-producing participants</dfn>. A <a>media
-session</a> must keep a list of its <a>audio-producing participants</a> that
-consists of zero of more <a>audio-producing objects</a>.
-
-A <a>media session</a> has a <dfn>resume list</dfn> that is used internally to
-restore <a>audio-producing participants</a> at the end of an interruption that
-were playing, or were otherwise running, when that interruption started. The
-<a>resume list</a> may consist of zero or more <a>audio-producing objects</a>
-that must also be present in the <a>media session</a>'s list of
-<a>audio-producing participants</a>. When a new <a>media session</a> is created
-its <a>resume list</a> must be empty.
-
-When the user agent is to <dfn>pause</dfn> a given <var>audio-producing
-object</var> it must run the following steps:
-
-<ol>
-  <li>
-    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
-    <a lt="pause a media element">pause media element</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-  <li>
-    If <var>audio-producing object</var> is an {{AudioContext}} object, then
-    <a lt="suspend a web audio object">suspend web audio object</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-</ol>
-
-When the user agent is to <dfn>indefinitely pause</dfn> a given
-<var>audio-producing object</var>, the user agent must <a>pause</a>
-<var>audio-producing object</var> and, then proceed to remove it from its
-<a>current media session</a>'s list of
-<a>audio-producing participants</a>.
-
-When the user agent is to <dfn>unpause</dfn> a given <var>audio-producing
-object</var> it must run the following steps:
-
-<ol>
-  <li>
-    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
-    <a lt="unpause a media element">unpause media element</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-  <li>
-    If <var>audio-producing object</var> is an {{AudioContext}} object, then
-    <a lt="resume a web audio object">resume web audio object</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-</ol>
-
-When an <a>audio-producing object</a> is to <dfn>duck</dfn> the user agent must
-ensure its output volume is lowered.
-
-When an <a>audio-producing object</a> is to <dfn>unduck</dfn> the user agent
-should restore its output volume to the same level that was observed prior to
-the original corresponding <a>duck</a> request.
-
-<p class=note>
-  When an <a>audio-producing object</a> is <a lt="duck">ducked</a> any reduction
-  in volume applied by the user agent is not intended to be observable to web
-  pages.
-</p>
 
 <h4 id="mediasession-object-members">Object members</h4>
 
