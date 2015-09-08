@@ -282,8 +282,8 @@ follows:
 <h3 id="media-session-kinds">Kinds</h3>
 
 A <a>media session</a> has a <dfn for="MediaSession">kind</dfn> which is one of
-"<code><a>content</a></code>", "<code><a>transient</a></code>",
-"<code><a>transient-solo</a></code>" and "<code><a>ambient</a></code>".
+"<code><dfn>content</dfn></code>", "<code><dfn>transient</dfn></code>",
+"<code><dfn>transient-solo</dfn></code>" and "<code><dfn>ambient</dfn></code>".
 
 <div class="note">
   The following table lists the available <a>kinds</a>, their associated
@@ -297,7 +297,7 @@ A <a>media session</a> has a <dfn for="MediaSession">kind</dfn> which is one of
     </tr>
     <tr>
       <td>
-        "<code><dfn>content</dfn></code>"
+        "<code><a>content</a></code>"
       </td>
       <td>
         <ul>
@@ -344,7 +344,7 @@ A <a>media session</a> has a <dfn for="MediaSession">kind</dfn> which is one of
     </tr>
     <tr>
       <td>
-        "<code><dfn>transient</dfn></code>"
+        "<code><a>transient</a></code>"
       </td>
       <td>
         <ul>
@@ -391,7 +391,7 @@ A <a>media session</a> has a <dfn for="MediaSession">kind</dfn> which is one of
     </tr>
     <tr>
       <td>
-        "<code><dfn>transient-solo</dfn></code>"
+        "<code><a>transient-solo</a></code>"
       </td>
       <td>
         <ul>
@@ -438,7 +438,7 @@ A <a>media session</a> has a <dfn for="MediaSession">kind</dfn> which is one of
     </tr>
     <tr>
       <td>
-        "<code><dfn>ambient</dfn></code>"
+        "<code><a>ambient</a></code>"
       </td>
       <td>
         <ul>
