@@ -207,7 +207,7 @@ enum MediaSessionKind {
 };
 </pre>
 
-{{MediaSession}} objects are simply known as <dfn id="media-session">media
+{{MediaSession}} objects are simply known as <dfn lt="media session">media
 sessions</dfn>.
 
 <dl class=domintro>
