@@ -72,6 +72,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: readyState; for: HTMLMediaElement; url: #dom-media-readystate
             text: HAVE_FUTURE_DATA; for: HTMLMediaElement; url: #dom-media-have_future_data
             text: HAVE_ENOUGH_DATA; for: HTMLMediaElement; url: #dom-media-have_enough_data
+    type: event
+        urlPrefix: embedded-content.html
             text: pause; url: #event-media-pause
             text: play; url: #event-media-play
 urlPrefix: https://url.spec.whatwg.org/;
@@ -111,10 +113,12 @@ urlPrefix: http://www.w3.org/TR/DOM-Level-3-Events-key/; spec: dom-level-3-event
         text: MediaTrackNext; url: MediaTrackNext
 urlPrefix: http://www.w3.org/TR/page-visibility/; spec: PAGE-VISIBILITY
     type: attribute
-        text: visibilitychange; url: #sec-visibilitychange-event
         text: visibilityState; url: #dom-document-visibilitystate
-        text: visible; url: #pv-page-visible
-        text: hidden; url: #pv-page-hidden
+    type: event
+        text: visibilitychange; url: #sec-visibilitychange-event
+    type: enum; urlPrefix: #pv-page-
+        text: visible
+        text: hidden
 </pre>
 
 <h2 id="introduction">Introduction</h2>
