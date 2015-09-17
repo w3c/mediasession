@@ -624,7 +624,6 @@ user agent must run the following steps:</p>
    </ol>
    <h2 class="heading settled" data-level="5" id="extensions-to-the-htmlmediaelement-interface"><span class="secno">5. </span><span class="content">Extensions to the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> interface</span><a class="self-link" href="#extensions-to-the-htmlmediaelement-interface"></a></h2>
 <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
-  // media session
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 </pre>
@@ -632,8 +631,8 @@ user agent must run the following steps:</p>
     <dt> <code><var>media</var> . <code class="idl"><a data-link-type="idl" href="#dom-htmlmediaelement-session">session</a></code></code> [ = <code> session</code> ] 
     <dd>
       Returns the <a data-link-type="dfn" href="#current-media-session">current media session</a> for the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, if
-    any; returns null otherwise. 
-     <p>Can be set, to set an explicit <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code>.</p>
+    any, or null otherwise. 
+     <p>Can be set, to change the <a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
    </dl>
    <p>The <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" id="dom-htmlmediaelement-session"><code>session</code><a class="self-link" href="#dom-htmlmediaelement-session"></a></dfn> attribute on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, on
 getting, must return the element’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, or null
@@ -711,7 +710,6 @@ steps:</p>
    </ol>
    <h2 class="heading settled" data-level="6" id="extensions-to-the-audiocontext-interface"><span class="secno">6. </span><span class="content">Extensions to the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> interface</span><a class="self-link" href="#extensions-to-the-audiocontext-interface"></a></h2>
 <pre class="idl">partial interface <a class="idl-code" data-link-type="interface" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a> {
-  // media session
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-audiocontext-session">session</a>;
 };
 </pre>
@@ -719,8 +717,8 @@ steps:</p>
     <dt> <code><var>context</var> . <code class="idl"><a data-link-type="idl" href="#dom-audiocontext-session">session</a></code></code> [ = <code> session</code> ] 
     <dd>
       Returns the <a data-link-type="dfn" href="#current-media-session">current media session</a> for the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object, if
-    any; returns null otherwise. 
-     <p>Can be set, to set an explicit <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code>.</p>
+    any, or null otherwise. 
+     <p>Can be set, to change the <a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
    </dl>
    <p>The <dfn class="idl-code" data-dfn-for="AudioContext" data-dfn-type="attribute" data-export="" id="dom-audiocontext-session"><code>session</code><a class="self-link" href="#dom-audiocontext-session"></a></dfn> attribute on an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object, on getting, must return the object’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, or null otherwise. On setting, the user
 agent must run the following steps:</p>
@@ -987,12 +985,10 @@ enum <a href="#enumdef-mediasessionkind">MediaSessionKind</a> {
 };
 
 partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a> {
-  // media session
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-htmlmediaelement-session">session</a>;
 };
 
 partial interface <a class="idl-code" data-link-type="interface" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a> {
-  // media session
   attribute <a data-link-type="idl-name" href="#mediasession">MediaSession</a>? <a class="idl-code" data-link-type="attribute" data-type="MediaSession? " href="#dom-audiocontext-session">session</a>;
 };
 
