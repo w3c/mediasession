@@ -738,7 +738,7 @@ agent must run the following steps:</p>
    <h3 class="heading settled" data-level="6.1" id="activating-a-media-session-from-an-audiocontext-object"><span class="secno">6.1. </span><span class="content">Activating a
 media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#activating-a-media-session-from-an-audiocontext-object"></a></h3>
    <p>When the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a></code> method on an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object is invoked from
-script and that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute is "suspended"
+script and that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute is "<code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.suspended">suspended</a></code>"
 then the user agent must run the following steps:</p>
    <ol>
     <li> Let <var>audio object</var> be the current <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object. 
@@ -770,8 +770,9 @@ each <a data-link-type="dfn" href="#media-session">media session</a> as <var>med
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="resume-a-web-audio-object">resume a web audio object<a class="self-link" href="#resume-a-web-audio-object"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object it must invoke that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a></code> method.</p>
    <h3 class="heading settled" data-level="6.3" id="deactivating-a-media-session-from-an-audiocontext-object"><span class="secno">6.3. </span><span class="content">Deactivating a
 media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#deactivating-a-media-session-from-an-audiocontext-object"></a></h3>
-   <p>When an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute transitions to "closed",
-the user agent must <a data-link-type="dfn" href="#release-web-audio-object-from-its-media-session">release web audio object from its media session</a>.</p>
+   <p>When an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute transitions to
+"<code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.closed">closed</a></code>", the user agent must <a data-link-type="dfn" href="#release-web-audio-object-from-its-media-session">release web audio object from its media
+session</a>.</p>
    <p>When an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#remove-an-element-from-a-document">removed from a <code>Document</code></a> and is not attached to
 another <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a></code>, then <a data-link-type="dfn" href="#release-web-audio-object-from-its-media-session">release web audio object from its media
 session</a>.</p>
@@ -941,9 +942,11 @@ session</a><span>, in §6.3</span>
     <a data-link-type="biblio" href="#biblio-webaudio">[webaudio]</a> defines the following terms:
     <ul>
      <li><a href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a>
+     <li><a href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.closed">closed</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-suspend-Promise-void">suspend()</a>
+     <li><a href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.suspended">suspended</a>
     </ul>
    <li>
     <a data-link-type="biblio" href="#biblio-dom-ls">[dom-ls]</a> defines the following terms:

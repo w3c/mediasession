@@ -99,6 +99,9 @@ urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
         text: AudioContext
     type: attribute; urlPrefix: #widl-
         text: state; url: AudioContext-state
+    type: enum; urlPrefix: #idl-def-AudioContextState.
+        text: suspended
+        text: closed
     type: method; urlPrefix: #widl-
         text: suspend(); url: AudioContext-suspend-Promise-void
         text: resume(); url: AudioContext-resume-Promise-void
@@ -1267,7 +1270,7 @@ media session from an {{AudioContext}} object</h3>
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 
 When the {{resume()}} method on an {{AudioContext}} object is invoked from
-script and that {{AudioContext}} object's {{state}} attribute is "suspended"
+script and that {{AudioContext}} object's {{state}} attribute is "{{suspended}}"
 then the user agent must run the following steps:
 
 <ol>
@@ -1333,8 +1336,9 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 <h3 id="deactivating-a-media-session-from-an-audiocontext-object">Deactivating a
 media session from an {{AudioContext}} object</h3>
 
-When an {{AudioContext}} object's {{state}} attribute transitions to "closed",
-the user agent must <a>release web audio object from its media session</a>.
+When an {{AudioContext}} object's {{state}} attribute transitions to
+"{{closed}}", the user agent must <a>release web audio object from its media
+session</a>.
 
 When an {{AudioContext}} object is <a lt="remove an element from a
 document">removed from a <code>Document</code></a> and is not attached to
