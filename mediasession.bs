@@ -1024,7 +1024,6 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
 
 <pre class="idl">
 partial interface HTMLMediaElement {
-  // media session
   attribute MediaSession? session;
 };
 </pre>
@@ -1036,9 +1035,9 @@ partial interface HTMLMediaElement {
   </dt>
   <dd>
     Returns the <a>current media session</a> for the <a>media element</a>, if
-    any; returns null otherwise.
+    any, or null otherwise.
 
-    Can be set, to set an explicit {{MediaSession}}.
+    Can be set, to change the <a>current media session</a>.
   </dd>
 </dl>
 
@@ -1203,7 +1202,6 @@ steps:
 
 <pre class="idl">
 partial interface AudioContext {
-  // media session
   attribute MediaSession? session;
 };
 </pre>
@@ -1215,9 +1213,9 @@ partial interface AudioContext {
   </dt>
   <dd>
     Returns the <a>current media session</a> for the {{AudioContext}} object, if
-    any; returns null otherwise.
+    any, or null otherwise.
 
-    Can be set, to set an explicit {{MediaSession}}.
+    Can be set, to change the <a>current media session</a>.
   </dd>
 </dl>
 
