@@ -889,14 +889,14 @@ The <dfn>media session continuation algorithm</dfn> takes one argument,
 
 <br>
 
-After a {{visibilitychange}} event [[PAGE-VISIBILITY]] has been fired at a
-<a>top-level browsing context</a>, known as <var>the browsing context</var>, the
-user agent must run the following steps:
+After a {{visibilitychange}} event has been fired at a <a>top-level browsing
+context</a>, known as <var>the browsing context</var>, the user agent must run
+the following steps:
 
 <ol>
   <li>
-    If {{visibilityState}} is not "{{hidden}}" or "{{visible}}"
-    [[PAGE-VISIBILITY]], then terminate these steps.
+    If {{visibilityState}} is not "{{hidden}}" or "{{visible}}", then terminate
+    these steps.
   </li>
   <li>
     For each <a>media session</a> in <var>the browsing context</var> with a
@@ -907,9 +907,9 @@ user agent must run the following steps:
         Let <var>s</var> be the current <a>media session</a>.
       </li>
       <li>
-        If {{visibilityState}} is "{{hidden}}" [[PAGE-VISIBILITY]] and
-        <var>s</var>'s <a>state</a> is <code><a lt="active media session
-        state">active</a></code>, then run the following substeps:
+        If {{visibilityState}} is "{{hidden}}" and <var>s</var>'s <a>state</a>
+        is <code><a lt="active media session state">active</a></code>, then run
+        the following substeps:
 
         <ol>
           <li>
@@ -945,9 +945,9 @@ user agent must run the following steps:
       </li>
 
       <li>
-        If {{visibilityState}} is "{{visible}}" [[PAGE-VISIBILITY]] and
-        <var>s</var>'s <a>state</a> is <code><a lt="interrupted media session
-        state">interrupted</a></code>, then run the following substeps:
+        If {{visibilityState}} is "{{visible}}" and <var>s</var>'s <a>state</a>
+        is <code><a lt="interrupted media session state">interrupted</a></code>,
+        then run the following substeps:
 
         <ol>
           <li>
