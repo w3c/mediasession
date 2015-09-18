@@ -1122,35 +1122,6 @@ When the user agent is to <dfn>pause a media element</dfn> for a given
 pause steps</a>.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
-<!-- https://github.com/whatwg/mediasession/issues/66 -->
-
-After the {{pause()}} method on a <a>media element</a> has been invoked — or a
-<a>media element</a> is otherwise paused from the web page (e.g. via its
-{{controls}}) — and that <a>media element</a> has a <a>kind</a> set to
-"<code><a>transient</a></code>" or "<code><a>transient-solo</a></code>", then
-the user agent must immediately run the <a>media session deactivation
-algorithm</a>
-for
-<a>media element</a>'s
-<a>current media session</a>. Then, for all other <a>media sessions</a>, the
-user agent must run the <a>media session continuation algorithm</a>, passing in
-each <a>media session</a> as <var>media session</var>.
-
-<div class="note">
-  This prevents "<code><a>transient</a></code>" or
-  "<code><a>transient-solo</a></code>"-based
-  <a>media sessions</a> from indefinitely blocking the continuation of other
-  <code><a lt="interrupted media session state">interrupted</a></code> <a>media
-  sessions</a> when they are indefinitely paused.
-
-  After we have completed this process, the original
-  "<code><a>transient</a></code>" or "<code><a>transient-solo</a></code>"-based
-  <a>media session</a> will have a <a>state</a> of <code><a lt="idle media
-  session state">idle</a></code> and all <code><a lt="interrupted media session
-  state">interrupted</a></code> <a>media sessions</a>
-  will have returned to a <a>state</a> of <code><a lt="active media session
-  state">active</a></code>.
-</div>
 
 When the user agent is to <dfn>unpause a media element</dfn> for a given
 <var>media element</var> it must invoke that <a>media element</a>'s {{play()}}
@@ -1277,32 +1248,6 @@ media session from an {{AudioContext}} object</h3>
 When the user agent is to <dfn>suspend a web audio object</dfn> for a given
 {{AudioContext}} object it must invoke that {{AudioContext}} object's
 {{suspend()}} method.
-
-After the {{suspend()}} method on an {{AudioContext}} object has been invoked
-and that {{AudioContext}} object has a <a>kind</a> set to
-"<code><a>transient</a></code>" or "<code><a>transient-solo</a></code>", then
-the user agent must immediately run the <a>media session deactivation
-algorithm</a>
-for {{AudioContext}} object's
-<a>current media session</a>. Then, for all other <a>media sessions</a>, the
-user agent must run the <a>media session continuation algorithm</a>, passing in
-each <a>media session</a> as <var>media session</var>.
-
-<div class="note">
-  This prevents "<code><a>transient</a></code>" or
-  "<code><a>transient-solo</a></code>"-based
-  <a>media sessions</a> from indefinitely blocking the continuation of other
-  <code><a lt="interrupted media session state">interrupted</a></code> <a>media
-  sessions</a> when they are indefinitely paused.
-
-  After we have completed this process, the original
-  "<code><a>transient</a></code>" or "<code><a>transient-solo</a></code>"-based
-  <a>media session</a> will have a <a>state</a> of <code><a lt="idle media
-  session state">idle</a></code> and all <code><a lt="interrupted media session
-  state">interrupted</a></code> <a>media sessions</a>
-  will have returned to a <a>state</a> of <code><a lt="active media session
-  state">active</a></code>.
-</div>
 
 When the user agent is to <dfn>resume a web audio object</dfn> for a given
 {{AudioContext}} object it must invoke that {{AudioContext}} object's
