@@ -19,6 +19,11 @@ Boilerplate: omit conformance, omit feedback-header
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
 
+<style>
+  /* https://github.com/tabatkins/bikeshed/issues/485 */
+  .example .self-link { display: none; }
+</style>
+
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
     type: interface
@@ -1347,74 +1352,54 @@ steps:
 
 <h2 id="examples">Examples</h2>
 
-<em>This section and all its subsections are non-normative.</em>
+<em>This section is non-normative.</em>
 
-<h3 id="example-setting-up-a-media-session">Setting up a media session</h3>
+<div class="example">
+  For music or podcasts, using a <a>media session</a> of <a>kind</a>
+  "<code><a>content</a></code>" can be appropriate.
 
-As both <code><a element>audio</a></code> and <code><a element>video</a></code>
-elements implement the {{HTMLMediaElement}} interface, these element's
-{{HTMLMediaElement/session}} attribute can be set via JavaScript to associate
-that <code><a element>audio</a></code> or <code><a element>video</a></code>
-element to a <a>media session</a>:
-
-<pre class="lang-javascript">
-var myAudio = document.createElement("audio");
-myAudio.src = "podcast.mp3";
-
-var mySession = new MediaSession("content");
-
-myAudio.session = mySession;
-
-myAudio.play(); // Go!
+  <pre class="lang-javascript">
+    var audio = document.createElement("audio");
+    audio.src = "podcast.mp3";
+    audio.session = new MediaSession(); // "content" is the default kind
+    audio.play();
   </pre>
+</div>
 
-A <a>media session</a> can also be assigned to one or more <code><a
-element>audio</a></code> and <code><a element>video</a></code>
-elements by setting their respective {{HTMLMediaElement/session}} attributes to
-the same {{MediaSession}} object in JavaScript:
+<div class="example">
+  For playlists or chapters of an audio book, multiple <a>media elements</a> can
+  share a single <a>media session</a>.
 
-<pre class="lang-javascript">
-var myAudio = document.createElement("audio");
-myAudio.src = "track1_audio.mp3";
+  <pre class="lang-javascript">
+    var audio1 = document.createElement("audio");
+    audio1.src = "chapter1.mp3";
 
-var myVideo = document.createElement("audio");
-myVideo.src = "track1_video.mp3";
+    var audio2 = document.createElement("audio");
+    audio2.src = "chapter2.mp3";
 
-var mySession = new MediaSession();
+    audio1.session = audio2.session = new MediaSession();
 
-myAudio.session = mySession;
-myVideo.session = mySession;
-
-myAudio.play(); // Go!
-myVideo.play(); // Go!
+    audio1.play();
+    audio1.addEventListener("ended", function() {
+      audio2.play();
+    });
   </pre>
+</div>
 
-An {{AudioContext}} object's {{HTMLMediaElement/session}} attribute can be set
-via JavaScript to associate that object to a <a>media session</a>:
+<div class="example">
+  For games, using a <a>media session</a> of <a>kind</a>
+  "<code><a>ambient</a></code>" can be appropriate. Because {{AudioContext}}
+  objects are created in the "{{running}}" state, it's necessary to suspend
+  before setting the session.
 
-<pre class="lang-javascript">
-var audioCtx = new AudioContext();
-
-audioCtx.session = new MediaSession("ambient");
-
-audioCtx.resume(); // Go!
+  <pre class="lang-javascript">
+    var context = new AudioContext();
+    context.suspend().then(function() {
+      context.session = new MediaSession("ambient");
+      context.resume();
+    });
   </pre>
-
-It is also possible to add multiple {{HTMLMediaElement}} and {{AudioContext}}
-objects to a single <a>media session</a>:
-
-<pre class="lang-javascript">
-var myAudio = document.createElement("audio");
-myAudio.src = "track1_audio.mp3";
-
-var audioCtx = new AudioContext("transient-solo");
-
-myAudio.session = mySession;
-audioCtx.session = mySession;
-
-myAudio.play(); // Go!
-audioCtx.resume(); // Go!
-  </pre>
+</div>
 
 <h2 id="acknowledgments" class="no-num">Acknowledgments</h2>
 
