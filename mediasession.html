@@ -632,23 +632,16 @@ user agent must run the following steps:</p>
       Returns the <a data-link-type="dfn" href="#current-media-session">current media session</a> for the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, if
     any, or null otherwise. 
      <p>Can be set, to change the <a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
+     <p>Throws an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> exception if the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-networkstate">networkState</a></code> is <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_loading">NETWORK_LOADING</a></code> or <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_idle">NETWORK_IDLE</a></code>.</p>
    </dl>
    <p>The <dfn class="idl-code" data-dfn-for="HTMLMediaElement" data-dfn-type="attribute" data-export="" id="dom-htmlmediaelement-session"><code>session</code><a class="self-link" href="#dom-htmlmediaelement-session"></a></dfn> attribute on a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>, on
 getting, must return the element’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, or null
 otherwise. On setting, the user agent must run the following steps:</p>
    <ol>
-    <li> Let <var>m</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> in question. 
-    <li> Let <var>old media session</var> be <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media
-    session</a>, if it has one, and null otherwise. 
-    <li> Let <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> be the new value. 
-    <li> Let <var>new media session</var> be <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media
-    session</a>. 
-    <li> <var>Update media sessions</var>: If <var>old media session</var> and <var>new media session</var> are the same (whether both null or both the
-    same <a data-link-type="dfn" href="#media-session">media session</a>), then terminate these steps. 
-    <li> If <var>m</var> is an <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participant</a> of <var>old media session</var>, then <a data-link-type="dfn" href="#pause">pause</a> <var>m</var> and remove <var>m</var> from <var>old media session</var>’s list of <a data-link-type="dfn" href="#audio-producing-participants">audio-producing
-    participants</a>. 
-    <li> If <var>old media session</var> is not null and no longer has one or more <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>, then run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session
-    deactivation algorithm</a> for <var>old media session</var>. 
+    <li> If the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-networkstate">networkState</a></code> is <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_loading">NETWORK_LOADING</a></code> or <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_idle">NETWORK_IDLE</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> exception and abort these
+    steps. 
+    <li> Set the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to the new
+    value. 
    </ol>
    <h3 class="heading settled" data-level="5.1" id="activating-a-media-session-from-an-htmlmediaelement-object"><span class="secno">5.1. </span><span class="content">Activating a
 media session from an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a></code> object</span><a class="self-link" href="#activating-a-media-session-from-an-htmlmediaelement-object"></a></h3>
@@ -915,6 +908,8 @@ session</a><span>, in §6.3</span>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_idle">NETWORK_IDLE</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_loading">NETWORK_LOADING</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#audio">audio</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#case-sensitivity-and-string-comparison">case-sensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a>
@@ -922,6 +917,7 @@ session</a><span>, in §6.3</span>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal pause steps</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">media element load algorithm</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-networkstate">networkState</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-pause">pause()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a>

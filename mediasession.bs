@@ -72,6 +72,9 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: readyState; for: HTMLMediaElement; url: #dom-media-readystate
             text: HAVE_FUTURE_DATA; for: HTMLMediaElement; url: #dom-media-have_future_data
             text: HAVE_ENOUGH_DATA; for: HTMLMediaElement; url: #dom-media-have_enough_data
+            text: networkState; for: HTMLMediaElement; url: #dom-media-networkstate
+            text: NETWORK_LOADING; for: HTMLMediaElement; url: #dom-media-network_loading
+            text: NETWORK_IDLE; for: HTMLMediaElement; url: #dom-media-network_idle
     type: event
         urlPrefix: embedded-content.html
             text: pause; url: #event-media-pause
@@ -122,6 +125,9 @@ urlPrefix: http://www.w3.org/TR/page-visibility/; spec: PAGE-VISIBILITY
     type: enum; urlPrefix: #pv-page-
         text: visible
         text: hidden
+urlPrefix: https://heycam.github.io/webidl/
+    type: exception
+        text: InvalidStateError
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -1045,6 +1051,9 @@ partial interface HTMLMediaElement {
     any, or null otherwise.
 
     Can be set, to change the <a>current media session</a>.
+
+    Throws an {{InvalidStateError}} exception if the <a>media element</a>'s
+    {{networkState}} is {{NETWORK_LOADING}} or {{NETWORK_IDLE}}.
   </dd>
 </dl>
 
@@ -1055,34 +1064,13 @@ otherwise. On setting, the user agent must run the following steps:
 
 <ol>
   <li>
-    Let <var>m</var> be the <a>media element</a> in question.
+    If the <a>media element</a>'s {{networkState}} is {{NETWORK_LOADING}} or
+    {{NETWORK_IDLE}}, throw an {{InvalidStateError}} exception and abort these
+    steps.
   </li>
   <li>
-    Let <var>old media session</var> be <var>m</var>'s <a>current media
-    session</a>, if it has one, and null otherwise.
-  </li>
-  <li>
-    Let <var>m</var>'s <a>current media session</a> be the new value.
-  </li>
-  <li>
-    Let <var>new media session</var> be <var>m</var>'s <a>current media
-    session</a>.
-  </li>
-  <li>
-    <var>Update media sessions</var>: If <var>old media session</var> and
-    <var>new media session</var> are the same (whether both null or both the
-    same <a>media session</a>), then terminate these steps.
-  </li>
-  <li>
-    If <var>m</var> is an <a>audio-producing participant</a> of
-    <var>old media session</var>, then <a>pause</a> <var>m</var> and remove
-    <var>m</var> from <var>old media session</var>'s list of <a>audio-producing
-    participants</a>.
-  </li>
-  <li>
-    If <var>old media session</var> is not null and no longer has one or more
-    <a>audio-producing participants</a>, then run the <a>media session
-    deactivation algorithm</a> for <var>old media session</var>.
+    Set the <a>media elements</a>'s <a>current media session</a> to the new
+    value.
   </li>
 </ol>
 
