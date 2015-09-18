@@ -675,9 +675,6 @@ user agent must <a data-link-type="dfn" href="#release-media-element-from-its-me
    <p>Any time a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">load
 algorithm</a> is run by the user agent, it must <a data-link-type="dfn" href="#release-media-element-from-its-media-session">release media element from
 its media session</a>.</p>
-   <p>When a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#remove-an-element-from-a-document">removed
-from a <code>Document</code></a> and is not attached to another <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a></code>,
-then <a data-link-type="dfn" href="#release-media-element-from-its-media-session">release media element from its media session</a>.</p>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="release-media-element-from-its-media-session">release media element from its media
 session<a class="self-link" href="#release-media-element-from-its-media-session"></a></dfn> for a given <var>media element</var> it must run the following
 steps:</p>
@@ -735,9 +732,6 @@ media session from an <code class="idl"><a data-link-type="idl" href="https://we
 media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#deactivating-a-media-session-from-an-audiocontext-object"></a></h3>
    <p>When an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute transitions to
 "<code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.closed">closed</a></code>", the user agent must <a data-link-type="dfn" href="#release-web-audio-object-from-its-media-session">release web audio object from its media
-session</a>.</p>
-   <p>When an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#remove-an-element-from-a-document">removed from a <code>Document</code></a> and is not attached to
-another <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a></code>, then <a data-link-type="dfn" href="#release-web-audio-object-from-its-media-session">release web audio object from its media
 session</a>.</p>
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="release-web-audio-object-from-its-media-session">release web audio object from its media
 session<a class="self-link" href="#release-web-audio-object-from-its-media-session"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object it must run the following
@@ -862,7 +856,6 @@ session</a><span>, in §6.3</span>
    <li>
     <a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
-     <li><a href="https://html.spec.whatwg.org/multipage/dom.html#document">Document</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_enough_data">HAVE_ENOUGH_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-have_future_data">HAVE_FUTURE_DATA</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a>
@@ -878,7 +871,6 @@ session</a><span>, in §6.3</span>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#remove-an-element-from-a-document">remove an element from a document</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>
     </ul>
    <li>
