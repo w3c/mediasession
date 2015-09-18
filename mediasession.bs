@@ -1138,10 +1138,6 @@ Any time a <a>media element</a>'s <a lt="media element load algorithm">load
 algorithm</a> is run by the user agent, it must <a>release media element from
 its media session</a>.
 
-When a <a>media element</a> is <a lt="remove an element from a document">removed
-from a <code>Document</code></a> and is not attached to another {{Document}},
-then <a>release media element from its media session</a>.
-
 When the user agent is to <dfn>release media element from its media
 session</dfn> for a given <var>media element</var> it must run the following
 steps:
@@ -1258,11 +1254,6 @@ media session from an {{AudioContext}} object</h3>
 
 When an {{AudioContext}} object's {{state}} attribute transitions to
 "{{closed}}", the user agent must <a>release web audio object from its media
-session</a>.
-
-When an {{AudioContext}} object is <a lt="remove an element from a
-document">removed from a <code>Document</code></a> and is not attached to
-another {{Document}}, then <a>release web audio object from its media
 session</a>.
 
 When the user agent is to <dfn>release web audio object from its media
