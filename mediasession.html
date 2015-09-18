@@ -711,22 +711,15 @@ steps:</p>
       Returns the <a data-link-type="dfn" href="#current-media-session">current media session</a> for the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object, if
     any, or null otherwise. 
      <p>Can be set, to change the <a data-link-type="dfn" href="#current-media-session">current media session</a>.</p>
+     <p>Throws an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> exception if the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute is "<code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.running">running</a></code>".</p>
    </dl>
    <p>The <dfn class="idl-code" data-dfn-for="AudioContext" data-dfn-type="attribute" data-export="" id="dom-audiocontext-session"><code>session</code><a class="self-link" href="#dom-audiocontext-session"></a></dfn> attribute on an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object, on getting, must return the object’s <a data-link-type="dfn" href="#current-media-session">current media session</a>, if any, or null otherwise. On setting, the user
 agent must run the following steps:</p>
    <ol>
-    <li> Let <var>m</var> be the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object in question. 
-    <li> Let <var>old media session</var> be <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media
-    session</a>, if it has one, and null otherwise. 
-    <li> Let <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media session</a> be the new value. 
-    <li> Let <var>new media session</var> be <var>m</var>’s <a data-link-type="dfn" href="#current-media-session">current media
-    session</a>. 
-    <li> <var>Update media sessions</var>: If <var>old media session</var> and <var>new media session</var> are the same (whether both null or both the
-    same <a data-link-type="dfn" href="#media-session">media session</a>), then terminate these steps. 
-    <li> If <var>m</var> is an <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participant</a> of <var>old media session</var>, then <a data-link-type="dfn" href="#pause">pause</a> <var>m</var> and remove <var>m</var> from <var>old media session</var>’s list of <a data-link-type="dfn" href="#audio-producing-participants">audio-producing
-    participants</a>. 
-    <li> If <var>old media session</var> is not null and no longer has one or more <a data-link-type="dfn" href="#audio-producing-participants">audio-producing participants</a>, then run the <a data-link-type="dfn" href="#media-session-deactivation-algorithm">media session
-    deactivation algorithm</a> for <var>old media session</var>. 
+    <li> If the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a></code> attribute is "<code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.running">running</a></code>", throw
+    an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> exception and abort these steps. 
+    <li> Set the <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <a data-link-type="dfn" href="#current-media-session">current media session</a> to the new
+    value. 
    </ol>
    <h3 class="heading settled" data-level="6.1" id="activating-a-media-session-from-an-audiocontext-object"><span class="secno">6.1. </span><span class="content">Activating a
 media session from an <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object</span><a class="self-link" href="#activating-a-media-session-from-an-audiocontext-object"></a></h3>
@@ -940,6 +933,7 @@ session</a><span>, in §6.3</span>
      <li><a href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.closed">closed</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a>
+     <li><a href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.running">running</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-state">state</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-suspend-Promise-void">suspend()</a>
      <li><a href="https://webaudio.github.io/web-audio-api/#idl-def-AudioContextState.suspended">suspended</a>

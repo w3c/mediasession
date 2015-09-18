@@ -104,6 +104,7 @@ urlPrefix: https://webaudio.github.io/web-audio-api/; spec: WEBAUDIO
         text: state; url: AudioContext-state
     type: enum; urlPrefix: #idl-def-AudioContextState.
         text: suspended
+        text: running
         text: closed
     type: method; urlPrefix: #widl-
         text: suspend(); url: AudioContext-suspend-Promise-void
@@ -1211,6 +1212,9 @@ partial interface AudioContext {
     any, or null otherwise.
 
     Can be set, to change the <a>current media session</a>.
+
+    Throws an {{InvalidStateError}} exception if the {{AudioContext}} object's
+    {{state}} attribute is "{{running}}".
   </dd>
 </dl>
 
@@ -1221,34 +1225,12 @@ agent must run the following steps:
 
 <ol>
   <li>
-    Let <var>m</var> be the {{AudioContext}} object in question.
+    If the {{AudioContext}} object's {{state}} attribute is "{{running}}", throw
+    an {{InvalidStateError}} exception and abort these steps.
   </li>
   <li>
-    Let <var>old media session</var> be <var>m</var>'s <a>current media
-    session</a>, if it has one, and null otherwise.
-  </li>
-  <li>
-    Let <var>m</var>'s <a>current media session</a> be the new value.
-  </li>
-  <li>
-    Let <var>new media session</var> be <var>m</var>'s <a>current media
-    session</a>.
-  </li>
-  <li>
-    <var>Update media sessions</var>: If <var>old media session</var> and
-    <var>new media session</var> are the same (whether both null or both the
-    same <a>media session</a>), then terminate these steps.
-  </li>
-  <li>
-    If <var>m</var> is an <a>audio-producing participant</a> of
-    <var>old media session</var>, then <a>pause</a> <var>m</var> and remove
-    <var>m</var> from <var>old media session</var>'s list of <a>audio-producing
-    participants</a>.
-  </li>
-  <li>
-    If <var>old media session</var> is not null and no longer has one or more
-    <a>audio-producing participants</a>, then run the <a>media session
-    deactivation algorithm</a> for <var>old media session</var>.
+    Set the {{AudioContext}} object's <a>current media session</a> to the new
+    value.
   </li>
 </ol>
 
