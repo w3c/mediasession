@@ -73,7 +73,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-mediasession.svg"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-09-25">25 September 2015</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-10-01">1 October 2015</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -237,7 +237,7 @@ invoked, must run these steps:</p>
     <li> Let <var>promise</var> be a new promise. 
     <li> Return <var>promise</var>, and run the remaining steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>. 
     <li> <a data-link-type="dfn" href="#activate">Activate</a> <var>media session</var>. 
-    <li> If <a data-link-type="dfn" href="#activate">activate</a> failed, reject <var>promise</var> with a <code>TypeError</code>. 
+    <li> Issue: If <a data-link-type="dfn" href="#activate">activate</a> failed, reject <var>promise</var> with a <code>DOMException</code> or a <code>TypeError</code>. 
     <li> Otherwise, fulfill <var>promise</var> with undefined. 
    </ol>
    <p class="note" role="note">Note: <code class="idl"><a data-link-type="idl" href="#dom-mediasession-activate">activate()</a></code> can fail if there is an ongoing high-priority activity,
