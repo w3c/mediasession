@@ -215,7 +215,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 interface MediaSession {
   readonly attribute MediaSessionKind kind;
 
-  void deactivate();
+  Promise&lt;void> activate();
+  Promise&lt;void> deactivate();
 };
 
 enum MediaSessionKind {
@@ -244,13 +245,18 @@ sessions</dfn>.
     Returns the <a>media session</a>'s <a>kind</a>.
   </dd>
   <dt>
+    <code><var>session</var> . {{MediaSession/activate()}}</code>
+  </dt>
+  <dd>
+    Requests platform-level media focus and sets the <a>media session</a>'s
+    <a>state</a> to <code><a lt="active media session state">active</a></code>.
+  </dd>
+  <dt>
     <code><var>session</var> . {{MediaSession/deactivate()}}</code>
   </dt>
   <dd>
-    Releases platform-level media focus, sets the <a>media session</a>'s
-    <a>state</a> to <code><a lt="idle media session state">idle</a></code> and
-    applies any changes necessary to its
-    <a>audio-producing participants</a>.
+    Releases platform-level media focus and sets the <a>media session</a>'s
+    <a>state</a> to <code><a lt="idle media session state">idle</a></code>.
   </dd>
 </dl>
 
@@ -263,8 +269,56 @@ session state">idle</a></code>.
 The <dfn attribute for="MediaSession"><code>kind</code></dfn>
 attribute must return the <a>media session</a>'s <a>kind</a>.
 
+The <dfn method for="MediaSession"><code>activate()</code></dfn> method, when
+invoked, must run these steps:
+
+<ol>
+  <li>
+    Let <var>media session</var> be the <a>context object</a>.
+  </li>
+  <li>
+    Let <var>promise</var> be a new promise.
+  </li>
+  <li>
+    Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
+  </li>
+  <li>
+    <a>Activate</a> <var>media session</var>.
+  </li>
+  <li>
+    Issue: If <a>activate</a> failed, reject <var>promise</var> with a
+    <code>DOMException</code> or a <code>TypeError</code>.
+  </li>
+  <li>
+    Otherwise, fulfill <var>promise</var> with undefined.
+  </li>
+</ol>
+
+Note: {{activate()}} can fail if there is an ongoing high-priority activity,
+e.g. a phone call.
+
 The <dfn method for="MediaSession"><code>deactivate()</code></dfn> method, when
-invoked, must <a>deactivate</a> the <a>context object</a>.
+invoked, must run these steps:
+
+<ol>
+  <li>
+    Let <var>media session</var> be the <a>context object</a>.
+  </li>
+  <li>
+    Let <var>promise</var> be a new promise.
+  </li>
+  <li>
+    Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
+  </li>
+  <li>
+    <a>Deactivate</a> <var>media session</var>.
+  </li>
+  <li>
+    Fulfill <var>promise</var> with undefined.
+  </li>
+</ol>
+
+Note: Unlike {{activate()}}, {{deactivate()}} cannot fail.
 
 <h3 id="media-session-states">States</h3>
 
@@ -570,8 +624,7 @@ the original corresponding <a>duck</a> request.
 
 <h3 id="activating-a-media-session">Activating a media session</h3>
 
-The <dfn>media session activation algorithm</dfn> takes one argument,
-<var>media session</var>, and consists of the following steps:
+To <dfn>activate</dfn> a <var>media session</var>, run these steps:
 
 <ol>
   <li>
@@ -647,11 +700,11 @@ The <dfn>media session activation algorithm</dfn> takes one argument,
 
 <h3 id="interrupting-a-media-session">Interrupting a media session</h3>
 
-A <a>media session</a> may be interrupted at any time after its
-<a>media session activation algorithm</a> has been run. This typically occurs
-when another application or another <a>media session</a> requests and is granted
-a level of platform media focus that affects the <a>media session</a> based on
-its <a>kind</a>.
+An <code><a lt="active media session state">active</a></code> <a>media
+session</a> may be interrupted at any time. This typically occurs when another
+application or another <a>media session</a> requests and is granted a level of
+platform media focus that affects the <a>media session</a> based on its
+<a>kind</a>.
 
 Interruptions can be both transient or permanent. A transient interruption means
 we can either choose to <a>duck</a> our media content and continue playing it
@@ -699,10 +752,9 @@ The <dfn>media session interruption algorithm</dfn> takes one argument,
             state">idle</a></code>.
 
             <p class="note">
-              This implies that the next time the <a>media session activation
-              algorithm</a> is run against <var>media session</var> that we will
-              re-request media focus according to the steps defined in that
-              algorithm.
+              This implies that the next time the <var>media session</var> is
+              <a>activated</a>, that we will re-request media focus according to
+              the steps defined in that algorithm.
             </p>
           </li>
           <li>
@@ -1031,9 +1083,9 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
     <code><a lt="idle media session state">idle</a></code>.
 
     <p class="note">
-      This implies that the next time the <a>media session activation
-      algorithm</a> is run against <var>media session</var> that we will
-      re-request media focus according to the steps defined in that algorithm.
+      This implies that the next time the <var>media session</var> is
+      <a>activated</a>, that we will re-request media focus according to the
+      steps defined in that algorithm.
     </p>
   </li>
 </ol>
@@ -1103,13 +1155,14 @@ following steps, passing in <a>media element</a> as <var>media element</var>:
     element</var> to this list.
   </li>
   <li>
-    Let <var>activated</var> be the result of running the <a>media session
-    activation algorithm</a> for <var>media session</var>.
+    <a>Activate</a> <var>media session</var>.
   </li>
   <li>
-    If <var>activated</var> is failure, <a>pause</a> <var>current media
-    element</var>.
+    If <a>activate</a> failed, <a>pause</a> <var>media element</var>.
   </li>
+  <!-- TODO(philipj): Integrate with HTML to better precisely when implicit
+  activation happens and clarify that it's only the paused attribute that's
+  temporarily paused, there should be no actual playback, however short. -->
 </ol>
 
 
@@ -1206,38 +1259,6 @@ agent must run the following steps:
   </li>
 </ol>
 
-<h3 id="activating-a-media-session-from-an-audiocontext-object">Activating a
-media session from an {{AudioContext}} object</h3>
-
-<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
-
-When the {{resume()}} method on an {{AudioContext}} object is invoked from
-script and that {{AudioContext}} object's {{state}} attribute is "{{suspended}}"
-then the user agent must run the following steps:
-
-<ol>
-  <li>
-    Let <var>audio object</var> be the current {{AudioContext}} object.
-  </li>
-  <li>
-    Let <var>media session</var> be the value of <var>audio object</var>'s
-    <a>current media session</a>.
-  </li>
-  <li>
-    If <var>audio object</var> is not currently in <var>media session</var>'s
-    list of <a>audio-producing participants</a>, then append <var>audio
-    object</var> to this list.
-  </li>
-  <li>
-    Let <var>activated</var> be the result of running the <a>media session
-    activation algorithm</a> for <var>media session</var>.
-  </li>
-  <li>
-    If <var>activated</var> is failure, <a>pause</a> <var>audio object</var>.
-  </li>
-</ol>
-
-
 <h3 id="interrupting-a-media-session-from-an-audiocontext-object">Interrupting a
 media session from an {{AudioContext}} object</h3>
 
@@ -1248,43 +1269,6 @@ When the user agent is to <dfn>suspend a web audio object</dfn> for a given
 When the user agent is to <dfn>resume a web audio object</dfn> for a given
 {{AudioContext}} object it must invoke that {{AudioContext}} object's
 {{resume()}} method.
-
-<h3 id="deactivating-a-media-session-from-an-audiocontext-object">Deactivating a
-media session from an {{AudioContext}} object</h3>
-
-When an {{AudioContext}} object's {{state}} attribute transitions to
-"{{closed}}", the user agent must <a>release web audio object from its media
-session</a>.
-
-When the user agent is to <dfn>release web audio object from its media
-session</dfn> for a given {{AudioContext}} object it must run the following
-steps:
-
-<ol>
-  <li>
-    Let <var>audio object</var> be the current {{AudioContext}} object.
-  </li>
-  <li>
-    Let <var>media session</var> be the value of <var>audio object</var>'s
-    <a>current media session</a>.
-  </li>
-  <li>
-    If <var>audio object</var> is not currently in <var>media session</var>'s
-    list of <a>audio-producing participants</a>, then terminate these steps.
-  </li>
-  <li>
-    If <var>audio object</var> is in <var>media session</var>'s <a>resume
-    list</a> then remove it from this list.
-  </li>
-  <li>
-    Remove <var>audio object</var> from <var>media session</var>'s list of
-    <a>audio-producing participants</a>.
-  </li>
-  <li>
-    Run the <a>media session deactivation algorithm</a> for <var>media
-    session</var>.
-  </li>
-</ol>
 
 <h2 id="examples">Examples</h2>
 
