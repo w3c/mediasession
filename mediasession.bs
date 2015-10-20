@@ -1137,9 +1137,9 @@ media session from an {{HTMLMediaElement}} object</h3>
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
 
-When the {{play()}} method on a <a>media element</a> is invoked from script —
+When the {{play()}} method on a <a>media element</a> is invoked from script –
 or a <a>media element</a> is otherwise played from the web page (e.g. via its
-{{controls}}) — and that <a>media element</a>'s {{paused}} attribute is true
+{{controls}}) – and that <a>media element</a>'s {{paused}} attribute is true
 and its {{HTMLMediaElement/readyState}} attribute has the value
 {{HAVE_FUTURE_DATA}} or {{HAVE_ENOUGH_DATA}} then the user agent must run the
 following steps, passing in <a>media element</a> as <var>media element</var>:
