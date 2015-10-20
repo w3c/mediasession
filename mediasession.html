@@ -237,7 +237,7 @@ invoked, must run these steps:</p>
     <li> Let <var>promise</var> be a new promise. 
     <li> Return <var>promise</var>, and run the remaining steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>. 
     <li> <a data-link-type="dfn" href="#activate">Activate</a> <var>media session</var>. 
-    <li> Issue: If <a data-link-type="dfn" href="#activate">activate</a> failed, reject <var>promise</var> with a <code>DOMException</code> or a <code>TypeError</code>. 
+    <li> If <a data-link-type="dfn" href="#activate">activate</a> failed, reject <var>promise</var> with an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> exception. 
     <li> Otherwise, fulfill <var>promise</var> with undefined. 
    </ol>
    <p class="note" role="note">Note: <code class="idl"><a data-link-type="idl" href="#dom-mediasession-activate">activate()</a></code> can fail if there is an ongoing high-priority activity,
