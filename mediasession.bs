@@ -286,8 +286,8 @@ invoked, must run these steps:
     <a>Activate</a> <var>media session</var>.
   </li>
   <li>
-    Issue: If <a>activate</a> failed, reject <var>promise</var> with a
-    <code>DOMException</code> or a <code>TypeError</code>.
+    If <a>activate</a> failed, reject <var>promise</var> with an
+    {{InvalidStateError}} exception.
   </li>
   <li>
     Otherwise, fulfill <var>promise</var> with undefined.
