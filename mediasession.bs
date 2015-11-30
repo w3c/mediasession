@@ -14,6 +14,7 @@ Abstract: notification areas and on lock screens of mobile devices.
 !Participate: <a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)
 !Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 !Version History: <a href="https://github.com/whatwg/mediasession/commits">https://github.com/whatwg/mediasession/commits</a>
+Ignored Vars: context, media
 Boilerplate: omit conformance, omit feedback-header
 </pre>
 
