@@ -215,6 +215,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 [Constructor(optional MediaSessionKind kind = "content")]
 interface MediaSession {
   readonly attribute MediaSessionKind kind;
+  attribute MediaMetadata? metadata;
 
   Promise&lt;void> activate();
   Promise&lt;void> deactivate();
@@ -231,6 +232,9 @@ enum MediaSessionKind {
 {{MediaSession}} objects are simply known as <dfn lt="media session">media
 sessions</dfn>.
 
+A <a>media session</a> has <dfn lt="media session metadata">metadata</dfn>,
+which is either a {{MediaMetadata}} object or null.
+
 <dl class=domintro>
   <dt>
     <code><var>session</var> = new <a constructor
@@ -244,6 +248,15 @@ sessions</dfn>.
   </dt>
   <dd>
     Returns the <a>media session</a>'s <a>kind</a>.
+  </dd>
+  <dt>
+    <code><var>session</var> . {{MediaSession/metadata}}</code>
+  </dt>
+  <dd>
+    Returns the <a>media session</a>'s {{MediaMetadata}} object, if any, or null
+    otherwise.
+
+    Can be set, to a {{MediaMetadata}} object or null.
   </dd>
   <dt>
     <code><var>session</var> . {{MediaSession/activate()}}</code>
@@ -269,6 +282,11 @@ session state">idle</a></code>.
 
 The <dfn attribute for="MediaSession"><code>kind</code></dfn>
 attribute must return the <a>media session</a>'s <a>kind</a>.
+
+The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute, on
+getting, must return the <a>media session</a>'s <a lt="media session
+metadata">metadata</a>. On setting, the <a>media session</a>'s <a lt="media
+session metadata">metadata</a> must be set to the new value.
 
 The <dfn method for="MediaSession"><code>activate()</code></dfn> method, when
 invoked, must run these steps:
@@ -654,7 +672,8 @@ To <dfn>activate</dfn> a <var>media session</var>, run these steps:
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform's
             notifications area and/or show an ongoing media interface in the
-            underlying platform's lock screen area.
+            underlying platform's lock screen area, using any
+            available <a lt="media session metadata">metadata</a>.
           </li>
         </ol>
       </dd>
@@ -1091,6 +1110,43 @@ The <dfn>media session deactivation algorithm</dfn> takes one argument,
   </li>
 </ol>
 
+<h2 id="the-mediametadata-interface">The {{MediaMetadata}} interface</h2>
+
+<pre class="idl">
+
+[Constructor(MediaMetadataInit init)]
+interface MediaMetadata {
+  readonly attribute DOMString title;
+  readonly attribute DOMString artist;
+  readonly attribute DOMString album;
+};
+
+dictionary MediaMetadataInit {
+  DOMString title = "";
+  DOMString artist = "";
+  DOMString album = "";
+};
+</pre>
+
+The <dfn constructor
+for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
+constructor, when invoked, must run the following steps:
+
+<ol>
+  <li>
+    Let <var>metadata</var> be a new {{MediaMetadata}} object.
+  </li>
+  <li>
+    Set <var>metadata</var>'s {{MediaMetadata/title}}, {{MediaMetadata/artist}},
+    and {{MediaMetadata/album}} attributes to the values of <var>init</var>'s
+    {{MediaMetadataInit/title}}, {{MediaMetadataInit/artist}}, and
+    {{MediaMetadataInit/album}} members, respectively.
+  </li>
+  <li>
+    Return <var>metadata</var>.
+  </li>
+</ol>
+
 <h2 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
 {{HTMLMediaElement}} interface</h2>
 
@@ -1285,6 +1341,16 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
     audio.session = new MediaSession(); // "content" is the default kind
     audio.play();
   </pre>
+
+  If metadata is available, providing it will allow for a richer user interface:
+
+  <pre class="lang-javascript">
+    audio.session.metadata = new MediaMetadata({
+      title: "Episode Title",
+      artist: "Podcast Host",
+      album: "Podcast Title",
+    });
+  </pre>
 </div>
 
 <div class="example">
@@ -1304,6 +1370,22 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
     audio1.addEventListener("ended", function() {
       audio2.play();
     });
+  </pre>
+
+  Because the session is shared, the metadata must be updated to reflect what is
+  currently playing.
+
+  <pre class="lang-javascript">
+    function updateMetadata(event) {
+      audio1.session.metadata = new MediaMetadata({
+        title: event.target == audio1 ? "Chapter 1" : "Chapter 2",
+        artist: "An Author",
+        album: "A Book",
+      });
+    }
+
+    audio1.addEventListener("play", updateMetadata);
+    audio2.addEventListener("play", updateMetadata);
   </pre>
 </div>
 
