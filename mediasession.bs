@@ -672,8 +672,8 @@ To <dfn>activate</dfn> a <var>media session</var>, run these steps:
             Optionally, based on platform conventions, the user agent may show
             an ongoing media interface in the underlying platform's
             notifications area and/or show an ongoing media interface in the
-            underlying platform's lock screen area, using any
-            available <a lt="media session metadata">metadata</a>.
+            underlying platform's lock screen area, using any available <a
+            lt="media session metadata">metadata</a>.
           </li>
         </ol>
       </dd>
