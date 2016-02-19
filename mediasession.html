@@ -1,6 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>Media Session Standard</title>
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
@@ -68,12 +69,11 @@
         code.highlight { padding: .1em; border-radius: .3em; }
         pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
         </style>
- </head>
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-mediasession.svg"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-05">5 February 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-18">18 February 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -140,6 +140,7 @@ media session from an <code class="idl"><span>AudioContext</span></code> object<
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
    </ol>
@@ -233,7 +234,10 @@ which is either a <code class="idl"><a data-link-type="idl" href="#mediametadata
     otherwise. 
      <p>Can be set, to a <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> object or null.</p>
     <dt> <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-activate">activate()</a></code></code> 
-    <dd> Requests platform-level media focus and sets the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#mediasession-state">state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>. 
+    <dd>
+      Requests platform-level media focus and sets the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#mediasession-state">state</a> to <code><a data-link-type="dfn" href="#active-media-session-state">active</a></code>. 
+     <p>Throws a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notallowederror">NotAllowedError</a></code> exception if the request was denied by the user
+    agent or the platform.</p>
     <dt> <code><var>session</var> . <code class="idl"><a data-link-type="idl" href="#dom-mediasession-deactivate">deactivate()</a></code></code> 
     <dd> Releases platform-level media focus and sets the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#mediasession-state">state</a> to <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>. 
    </dl>
@@ -248,7 +252,7 @@ invoked, must run these steps:</p>
     <li> Let <var>promise</var> be a new promise. 
     <li> Return <var>promise</var>, and run the remaining steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>. 
     <li> <a data-link-type="dfn" href="#activate">Activate</a> <var>media session</var>. 
-    <li> If <a data-link-type="dfn" href="#activate">activate</a> failed, reject <var>promise</var> with an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> exception. 
+    <li> If <a data-link-type="dfn" href="#activate">activate</a> failed, reject <var>promise</var> with a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notallowederror">NotAllowedError</a></code> exception. 
     <li> Otherwise, fulfill <var>promise</var> with undefined. 
    </ol>
    <p class="note" role="note">Note: <code class="idl"><a data-link-type="idl" href="#dom-mediasession-activate">activate()</a></code> can fail if there is an ongoing high-priority activity,
@@ -954,14 +958,17 @@ session</a><span>, in §6.3</span>
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WebIDL]
    <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 4 August 2015. WD. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
-   <dt id="biblio-dom-ls"><a class="self-link" href="#biblio-dom-ls"></a>[DOM-LS]
-   <dd>Document Object Model URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-page-visibility"><a class="self-link" href="#biblio-page-visibility"></a>[PAGE-VISIBILITY]
    <dd>Jatinder Mann; Arvind Jain. <a href="http://www.w3.org/TR/page-visibility/">Page Visibility (Second Edition)</a>. 29 October 2013. REC. URL: <a href="http://www.w3.org/TR/page-visibility/">http://www.w3.org/TR/page-visibility/</a>
    <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webaudio"><a class="self-link" href="#biblio-webaudio"></a>[WEBAUDIO]
    <dd>Paul Adenot; Chris Wilson; Chris Rogers. <a href="https://webaudio.github.io/web-audio-api/">Web Audio API</a>. 8 December 2015. WD. URL: <a href="https://webaudio.github.io/web-audio-api/">https://webaudio.github.io/web-audio-api/</a>
+  </dl>
+  <h3 class="no-num heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <dl>
+   <dt id="biblio-dom-ls"><a class="self-link" href="#biblio-dom-ls"></a>[DOM-LS]
+   <dd>Document Object Model URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
   </dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-mediasession-mediasession">Constructor</a>(optional <a data-link-type="idl-name" href="#enumdef-mediasessionkind">MediaSessionKind</a> <a href="#dom-mediasession-mediasession-kind-kind">kind</a> = "content")]
@@ -1002,5 +1009,3 @@ partial interface <a class="idl-code" data-link-type="interface" href="https://w
 };
 
 </pre>
- </body>
-</html>
