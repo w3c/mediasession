@@ -58,3 +58,8 @@ Update `mediasession.bs`, then run `make` to format `mediasession.bs` and genera
 To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/prespec/docs/install.md) and then run `bikeshed spec` in the working directory.
 
 Everyone is welcome to contribute! However, by contributing you are agreeing to the [CC0 license](LICENSE).
+
+## Code of conduct
+
+We are committed to providing a friendly, safe and welcoming environment for all. Please read and
+respect the [WHATWG Code of Conduct](https://wiki.whatwg.org/wiki/Code_of_Conduct).
