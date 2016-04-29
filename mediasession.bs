@@ -88,6 +88,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
 urlPrefix: https://url.spec.whatwg.org/;
     type: dfn; urlPrefix: #concept-
         text: url parser
+        text: url serializer
         text: event listener
 urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
     type: dfn; urlPrefix: #concept-
@@ -289,8 +290,18 @@ attribute must return the <a>media session</a>'s <a>kind</a>.
 
 The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute, on
 getting, must return the <a>media session</a>'s <a lt="media session
-metadata">metadata</a>. On setting, the <a>media session</a>'s <a lt="media
-session metadata">metadata</a> must be set to the new value.
+metadata">metadata</a>. On setting, user agent must run the following steps:
+
+<ol>
+  <li>
+    Set the <a>media session</a>'s <a lt="media session metadata">metadata</a>
+    to the new value.
+  </li>
+  <li>
+    Run the <a>fetch steps</a> for <a>media session</a>'s <a lt="media session
+    metadata">metadata</a>.
+  </li>
+</ol>
 
 The <dfn method for="MediaSession"><code>activate()</code></dfn> method, when
 invoked, must run these steps:
@@ -1134,6 +1145,12 @@ dictionary MediaMetadataInit {
 };
 </pre>
 
+A {{MediaMetadata}} object has a <dfn for="MediaMetadata">title</dfn>, an <dfn
+for="MediaMetadata">artist</dfn>, and an <dfn for="MediaMetadata">album</dfn>.
+
+A {{MediaMetadata}} object <em>can</em> have an <dfn for="MediaMetadata">artwork
+URL</dfn> and a <dfn for="MediaMetadata">artwork resource</dfn>.
+
 The <dfn constructor
 for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
 constructor, when invoked, must run the following steps:
@@ -1143,15 +1160,15 @@ constructor, when invoked, must run the following steps:
     Let <var>metadata</var> be a new {{MediaMetadata}} object.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaMetadata/title}} to <var>init</var>'s
+    Set <var>metadata</var>'s <a>title</a> to <var>init</var>'s
     <code>title</code>.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaMetadata/artist}} to <var>init</var>'s
+    Set <var>metadata</var>'s <a>artist</a> to <var>init</var>'s
     <code>artist</code>.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaMetadata/album}} to <var>init</var>'s
+    Set <var>metadata</var>'s <a>album</a> to <var>init</var>'s
     <code>album</code>.
   </li>
   <li>
@@ -1169,29 +1186,32 @@ constructor, when invoked, must run the following steps:
   </li>
 </ol>
 
+The <dfn attribute for="MediaMetadata"><code>title</code></dfn> attribute must
+return the {{MediaMetadata}} objects's <a>title</a>.
+
+The <dfn attribute for="MediaMetadata"><code>artist</code></dfn> attribute must
+return the {{MediaMetadata}} objects's <a>artist</a>.
+
+The <dfn attribute for="MediaMetadata"><code>album</code></dfn> attribute must
+return the {{MediaMetadata}} objects's <a>album</a>.
+
+The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn> attribute must
+return the {{MediaMetadata}} objects's <a>artwork URL</a>, <a lt="url
+serializer">serialized</a>, and the empty string if there is no <a>artwork
+URL</a> otherwise.
+
 The <dfn>fetch steps</dfn> for a given {{MediaMetadata}} object
 <var>metadata</var> are:
 
 <ol>
   <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
   <li>
-    If <var>metadata</var>'s <a>artwork URL</a> is empty, then terminate these
+    If <var>metadata</var> has no <a>artwork URL</a>, then terminate these
     steps.
   </li>
   <li>
-    If the platform supports displaying media artwork, let <var>request</var> be
-    a new <a>request</a> whose method is &quot;<code>GET</code>&quot;,
-    <a>url</a> is <var>metadata</var>'s <a>artwork URL</a>, <a>context</a> is
-    &quot;<code>image</code>&quot;, <a>context frame type</a> is
-    &quot;<code>none</code>&quot;, <a>origin</a> is the current <a>entry
-    settings object</a>'s <a
-    href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>,
-    <a>force <code>Origin</code> header flag</a> is set, and referrer is <var>no
-    referrer</var>. Otherwise, if the platform does not support displaying media
-    artwork, terminate these steps.
-  </li>
-  <li>
-    <a>Fetch</a> <var>request</var>.
+    If the platform supports displaying media artwork, <a>fetch</a>
+    <var>metadata</var>'s <a>artwork URL</a>.
 
     Then, <a>in parallel</a>:
 
