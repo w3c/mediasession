@@ -1368,7 +1368,8 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
     var audio2 = document.createElement("audio");
     audio2.src = "chapter2.mp3";
 
-    audio1.session = audio2.session = new MediaSession();
+    var sharedSession = new MediaSession();
+    audio1.session = audio2.session = sharedSession;
 
     audio1.play();
     audio1.addEventListener("ended", function() {
@@ -1381,7 +1382,7 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 
   <pre class="lang-javascript">
     function updateMetadata(event) {
-      audio1.session.metadata = new MediaMetadata({
+      sharedSession.metadata = new MediaMetadata({
         title: event.target == audio1 ? "Chapter 1" : "Chapter 2",
         artist: "An Author",
         album: "A Book",
