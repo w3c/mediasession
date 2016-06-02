@@ -1136,20 +1136,20 @@ interface MediaMetadata {
   readonly attribute DOMString title;
   readonly attribute DOMString artist;
   readonly attribute DOMString album;
-  readonly attribute sequence&lt;MediaArtwork> artworks;
+  readonly attribute FrozenArray&lt;MediaArtwork> artworks;
 };
 
 dictionary MediaMetadataInit {
   DOMString title = "";
   DOMString artist = "";
   DOMString album = "";
-  sequence&lt;MediaArtworkInit>? artworks;
+  sequence&lt;MediaArtworkInit> artworks = [];
 };
 </pre>
 
 A {{MediaMetadata}} object has a <dfn for="MediaMetadata">title</dfn>, an <dfn
 for="MediaMetadata">artist</dfn>, an <dfn for="MediaMetadata">album</dfn> and a
-sequence of <dfn for="MediaMetadata">artwork</dfn>s.
+FrozenArray of <dfn for="MediaMetadata" title="artwork">artworks</dfn>.
 
 The <dfn constructor
 for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
@@ -1210,7 +1210,7 @@ The <dfn>fetch steps</dfn> for a given {{MediaMetadata}} object
     from <var>metadata</var>'s <a><code>artworks</code></a>.
   </li>
   <li>
-    <a lt="fetch">Fetch</a> <a>prefered artwork</a>'s {{MediaArtwork/src}}.
+    <a title="fetch">Fetch</a> <a>prefered artwork</a>'s {{MediaArtwork/src}}.
 
     Then, <a>in parallel</a>:
 
@@ -1281,7 +1281,7 @@ constructor, when invoked, must run the following steps:
 
 The MediaArtwork <a attribute for="MediaArtwork">src</a>, <a attribute
 for="MediaArtwork">sizes</a> and <a attribute for="MediaArtwork">type</a>
-conforms to the <a>image object</a>s in Web App Manifest.
+inspired from the <a>image object</a>s in Web App Manifest.
 
 The <dfn attribute for="MediaArtwork">src</dfn> attribute must return the
 {{MediaArtwork}} object's <a for="MediaArtwork">source</a>. It is a URL from
@@ -1300,8 +1300,9 @@ available, a user agent may use the value to decide which icon is most suitable
 for a display context (and ignore any that are inappropriate).
 
 The <dfn attribute for="MediaArtwork">type</dfn> attribute must return the
-{{MediaArtwork}} object's <a for="MediaArtwork">type</a>. It is a MIME type for
-deciding the media type of the image.
+{{MediaArtwork}} object's <a for="MediaArtwork">type</a>. It is a hint as to the
+media type of the image. The purpose of attribute is to allow a user agent to
+ignore images of media types it does not support.
 
 <h2 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
 {{HTMLMediaElement}} interface</h2>
@@ -1505,11 +1506,36 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
       title: "Episode Title",
       artist: "Podcast Host",
       album: "Podcast Title",
-      artworks: {
-        src:"podcast.jpg"
-      }
+      artworks: [{src: "podcast.jpg"}]
     });
   </pre>
+
+  Alternatively, providing multiple artworks in the metadata can let the user
+  agent be able to select different artworks for different display purposes:
+
+  <pre class="lang-javascript">
+    audio.session.metadata = new MediaMetadata({
+      title: "Episode Title",
+      artist: "Podcast Host",
+      album: "Podcast Title",
+      artworks: [
+        {src: "podcast.jpg", sizes: "128x128", type: "image/jpeg"},
+        {src: "podcast_hd.jpg", sizes: "256x256"},
+        {src: "podcast_xhd.jpg", sizes: "1024x1024", type: "image/jpeg"},
+        {src: "podcast.png", sizes: "128x128", type: "image/png"},
+        {src: "podcast_hd.png", sizes: "256x256", type: "image/png"},
+        {src: "podcast.ico", sizes: "128x128 256x256", type: "image/x-icon"}
+      ]
+    });
+  </pre>
+
+  For example, if the user agent wants to use an image as icon, it may choose
+  <code>"podcast.jpg"</code> or <code>"podcast.png"</code> for a
+  low-pixel-density screen, and <code>"podcast_hd.jpg"</code>
+  or <code>"podcast_hd.png"</code> for a high-pixel-density screen. If the user
+  agent want to use an image for lockscreen background,
+  <code>"podcast_xhd.jpg"</code> will be prefered.
+
 </div>
 
 <div class="example">
@@ -1541,9 +1567,7 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
         title: event.target == audio1 ? "Chapter 1" : "Chapter 2",
         artist: "An Author",
         album: "A Book",
-        artworks: {
-          src: "cover.jpg"
-        }
+        artworks: [{src: "cover.jpg"}]
       });
     }
 
