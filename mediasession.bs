@@ -41,10 +41,13 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
     type: dfn
         urlPrefix: infrastructure.html
             text: case-sensitive; url: #case-sensitivity-and-string-comparison
+            text: ASCII case-insensitive; url: #ascii-case-insensitive
             text: reflect
             text: limited to only known values
             text: remove an element from a document; url: #remove-an-element-from-a-document
             text: in parallel
+            text: unordered set of unique space-separated tokens; url: #unordered-set-of-unique-space-separated-tokens
+            text: document base url
         urlPrefix: embedded-content.html
             text: media element
             text: media element load algorithm
@@ -67,6 +70,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: task
             text: task source
             text: DOM manipulation task source
+        urlPrefix: semantics.html
+            text: link; for: HTMLLinkElement; url:#the-link-element
     type: method
         urlPrefix: embedded-content.html
             text: play(); for: HTMLMediaElement; url: #dom-media-play
@@ -81,6 +86,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: networkState; for: HTMLMediaElement; url: #dom-media-networkstate
             text: NETWORK_LOADING; for: HTMLMediaElement; url: #dom-media-network_loading
             text: NETWORK_IDLE; for: HTMLMediaElement; url: #dom-media-network_idle
+        urlPrefix: semantics.html
+            text: sizes; for: HTMLLinkElement; url: #attr-link-sizes;
     type: event
         urlPrefix: embedded-content.html
             text: pause; url: #event-media-pause
@@ -89,6 +96,9 @@ urlPrefix: https://url.spec.whatwg.org/;
     type: dfn; urlPrefix: #concept-
         text: url parser
         text: event listener
+    type: dfn
+        text: absolute URL; url: #syntax-url-absolute
+        text: relative URL; url: #syntax-url-relative
 urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
     type: dfn; urlPrefix: #concept-
         text: fetch
@@ -132,7 +142,7 @@ urlPrefix: http://www.w3.org/TR/page-visibility/; spec: PAGE-VISIBILITY
     type: enum; urlPrefix: #pv-page-
         text: visible
         text: hidden
-urlPrefix: http://www.w3.org/TR/appmanifest/; spec: appmanifest
+urlPrefix: https://www.w3.org/TR/appmanifest/; spec: appmanifest
     type: dfn
         text: image object; url: #dfn-image-object
 urlPrefix: https://heycam.github.io/webidl/
@@ -292,18 +302,7 @@ attribute must return the <a>media session</a>'s <a>kind</a>.
 
 The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute, on
 getting, must return the <a>media session</a>'s <a lt="media session
-metadata">metadata</a>. On setting, the user agent must run the following steps:
-
-<ol>
-  <li>
-    Set the <a>media session</a>'s <a lt="media session metadata">metadata</a>
-    to the new value.
-  </li>
-  <li>
-    Run the <a>fetch steps</a> for <a>media session</a>'s <a lt="media session
-    metadata">metadata</a>.
-  </li>
-</ol>
+metadata">metadata</a>.
 
 The <dfn method for="MediaSession"><code>activate()</code></dfn> method, when
 invoked, must run these steps:
@@ -1136,20 +1135,21 @@ interface MediaMetadata {
   readonly attribute DOMString title;
   readonly attribute DOMString artist;
   readonly attribute DOMString album;
-  readonly attribute FrozenArray&lt;MediaArtwork> artworks;
+  [SameObject] readonly attribute FrozenArray&lt;MediaArtwork> artwork;
 };
 
 dictionary MediaMetadataInit {
   DOMString title = "";
   DOMString artist = "";
   DOMString album = "";
-  sequence&lt;MediaArtworkInit> artworks = [];
+  sequence&lt;MediaArtworkInit> artwork = [];
 };
 </pre>
 
 A {{MediaMetadata}} object has a <dfn for="MediaMetadata">title</dfn>, an <dfn
 for="MediaMetadata">artist</dfn>, an <dfn for="MediaMetadata">album</dfn> and a
-FrozenArray of <dfn for="MediaMetadata" title="artwork">artworks</dfn>.
+FrozenArray of <dfn for="MediaMetadata" title="artwork image">artwork
+images</dfn>.
 
 The <dfn constructor
 for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
@@ -1172,8 +1172,8 @@ constructor, when invoked, must run the following steps:
     <var>init</var>'s {{MediaMetadataInit/album}}.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaMetadata/artworks}} using <var>init</var>'s
-    {{MediaMetadataInit/artworks}} by calling the
+    Set <var>metadata</var>'s {{MediaMetadata/artwork}} using <var>init</var>'s
+    {{MediaMetadataInit/artwork}} by calling the
     <a><code>MediaArtwork(init)</code></a> constructor.
   </li>
   <li>
@@ -1190,27 +1190,31 @@ return the {{MediaMetadata}} objects's <a>artist</a>.
 The <dfn attribute for="MediaMetadata"><code>album</code></dfn> attribute must
 return the {{MediaMetadata}} objects's <a>album</a>.
 
-The <dfn attribute for="MediaMetadata"><code>artworks</code></dfn> attribute
-must return the {{MediaMetadata}} objects's <a>artwork</a>s, as a sequence of
-{{MediaArtwork}}s. The <a attribute for="MediaMetadata">artworks</a> attribute
-can be empty.
+The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn>
+attribute must return the {{MediaMetadata}} objects's <a for="MediaMetadata"
+title="artwork image">artwork images</a>, as a FrozenArray of {{MediaArtwork}}s.
+The <a attribute for="MediaMetadata">artwork</a> attribute can be empty.
 
-The <dfn>fetch steps</dfn> for a given {{MediaMetadata}} object
-<var>metadata</var> are:
+When the user agent wants to display the {{MediaSession}}'s artwork
+as specified in it's <var>metadata</var>, it is recommended to run the
+following <dfn>fetch steps</dfn>:
 
 <ol>
   <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
   <li>
-    If <var>metadata</var>'s <a><code>artworks</code></a> is empty, then
-    terminate these steps.
+    If <var>metadata</var>'s <a attribute
+    for="MediaMetadata"><code>artwork</code></a> is empty, then terminate these
+    steps.
   </li>
   <li>
     If the platform supports displaying media artwork, select a <dfn>prefered
-    artwork</dfn>
-    from <var>metadata</var>'s <a><code>artworks</code></a>.
+    artwork image</dfn>
+    from <var>metadata</var>'s <a attribute
+    for="MediaMetadata"><code>artwork</code></a>.
   </li>
   <li>
-    <a title="fetch">Fetch</a> <a>prefered artwork</a>'s {{MediaArtwork/src}}.
+    <a title="fetch">Fetch</a> <a>prefered artwork image</a>'s
+    {{MediaArtwork/src}}.
 
     Then, <a>in parallel</a>:
 
@@ -1224,9 +1228,9 @@ The <dfn>fetch steps</dfn> for a given {{MediaMetadata}} object
         resource as image.
       </li>
       <li>
-        If the image format is supported, use the image as the artwork for
-        display. (Otherwise the user agent can select another <a>prefered
-        artwork</a> and try again.)
+        If the image format is supported, use the image as the artwork
+        for display. (Otherwise the fetch step fails and the user
+        agent may take fallback actions.)
       </li>
     </ol>
   </li>
@@ -1238,13 +1242,13 @@ The <dfn>fetch steps</dfn> for a given {{MediaMetadata}} object
 
 [Constructor(MediaArtworkInit init)]
 interface MediaArtwork {
-  readonly attribute DOMString src;
+  readonly attribute USVString src;
   readonly attribute DOMString sizes;
   readonly attribute DOMString type;
 };
 
 dictionary MediaArtworkInit {
-  DOMString src = "";
+  USVString src = "";
   DOMString sizes = "";
   DOMString type = "";
 };
@@ -1254,7 +1258,7 @@ A {{MediaArtwork}} object has a <dfn for="MediaArtwork">source</dfn>, a list of
 <dfn for="MediaArtwork">sizes</dfn>, and a <dfn for="MediaArtwork">type</dfn>.
 
 The <dfn constructor
-for="MediaArtwork"><code>MediaMetadata(<var>init</var>)</code></dfn>
+for="MediaArtwork"><code>MediaArtwork(<var>init</var>)</code></dfn>
 constructor, when invoked, must run the following steps:
 
 <ol>
@@ -1262,8 +1266,10 @@ constructor, when invoked, must run the following steps:
     Let <var>metadata</var> be a new {{MediaArtwork}} object.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaArtwork/src}} to <var>init</var>'s
-    {{MediaArtworkInit/src}}.
+    Set <var>metadata</var>'s {{MediaArtwork/src}}
+    to <var>init</var>'s {{MediaArtworkInit/src}}. If the URL is a
+    <a>relative URL</a>, it must be resolved to an <a>absolute URL</a> using
+    the <a>document base URL</a>.
   </li>
   <li>
     Set <var>metadata</var>'s {{MediaArtwork/sizes}} to <var>init</var>'s
@@ -1288,16 +1294,23 @@ The <dfn attribute for="MediaArtwork">src</dfn> attribute must return the
 which the user agent can fetch the image's data.
 
 The <dfn attribute for="MediaArtwork">sizes</dfn> attribute must return the
-{{MediaArtwork}} object's <a for="MediaArtwork">sizes</a>. It is a string
-consisting of an unordered set of unique space-separated tokens which are AScII
-case insensitive that represents the dimensions of an image. Each keyword is
-either an ASCII case-insensitive match for the string "any", or a value that
-consists of two valid non-negative integers that do not have a leading U+0030
-DIGIT ZERO (0) character and that are separated by a single U+0078 LATIN SMALL
-LETTER X or U+0058 LATIN CAPITAL LETTER X character. The keywords represent icon
-sizes in raw pixels (as opposed to CSS pixels). When multiple image objects are
-available, a user agent may use the value to decide which icon is most suitable
-for a display context (and ignore any that are inappropriate).
+{{MediaArtwork}} object's <a for="MediaArtwork">sizes</a>. It follows the spec
+of <a attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in HTML
+<a for="HTMLLinkElement"><code>link</code></a> element, which is a
+string consisting of an <a>unordered set of unique space-separated
+tokens</a> which are <a>ASCII case-insensitive</a> that represents the
+dimensions of an image. Each keyword is either an <a>ASCII
+case-insensitive</a> match for the string "any", or a value that
+consists of two valid non-negative integers that do not have a leading
+U+0030 DIGIT ZERO (0) character and that are separated by a single
+U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X
+character. The keywords represent icon sizes in raw pixels (as opposed
+to CSS pixels). When multiple image objects are available, a user
+agent may use the value to decide which icon is most suitable for a
+display context (and ignore any that are inappropriate). The parsing
+steps for the <a attribute for="MediaArtwork">sizes</a> attribute must
+follow <a attribute for="HTMLLinkElement" lt="sizes">the parsing steps
+for HTML <code>link</code> element <code>sizes</code> attribute</a>.
 
 The <dfn attribute for="MediaArtwork">type</dfn> attribute must return the
 {{MediaArtwork}} object's <a for="MediaArtwork">type</a>. It is a hint as to the
@@ -1506,19 +1519,21 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
       title: "Episode Title",
       artist: "Podcast Host",
       album: "Podcast Title",
-      artworks: [{src: "podcast.jpg"}]
+      artwork: [{src: "podcast.jpg"}]
     });
   </pre>
 
-  Alternatively, providing multiple artworks in the metadata can let the user
-  agent be able to select different artworks for different display purposes:
+  Alternatively, providing multiple <a for="MediaMetadata" title="artwork
+  image">artwork images</a> in the metadata can let the user agent be able to
+  select different artwork images for different display purposes and better fit
+  for different screens:
 
   <pre class="lang-javascript">
     audio.session.metadata = new MediaMetadata({
       title: "Episode Title",
       artist: "Podcast Host",
       album: "Podcast Title",
-      artworks: [
+      artwork: [
         {src: "podcast.jpg", sizes: "128x128", type: "image/jpeg"},
         {src: "podcast_hd.jpg", sizes: "256x256"},
         {src: "podcast_xhd.jpg", sizes: "1024x1024", type: "image/jpeg"},
@@ -1567,7 +1582,7 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
         title: event.target == audio1 ? "Chapter 1" : "Chapter 2",
         artist: "An Author",
         album: "A Book",
-        artworks: [{src: "cover.jpg"}]
+        artwork: [{src: "cover.jpg"}]
       });
     }
 

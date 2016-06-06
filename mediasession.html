@@ -225,7 +225,7 @@
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-mediasession.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Media Session</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-06-02">2 June 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-06-08">8 June 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -396,11 +396,7 @@ which is either a <code class="idl"><a data-link-type="idl" href="#mediametadata
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="constructor" data-export="" id="dom-mediasession-mediasession"><code>MediaSession(<var>kind</var>)</code><a class="self-link" href="#dom-mediasession-mediasession"></a></dfn> constructor, when invoked, must return a new <a data-link-type="dfn" href="#media-session">media session</a> whose <a data-link-type="dfn" href="#mediasession-kind">kind</a> is <var>kind</var>, and <a data-link-type="dfn" href="#mediasession-state">state</a> is <code><a data-link-type="dfn" href="#idle-media-session-state">idle</a></code>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-kind"><code>kind</code><a class="self-link" href="#dom-mediasession-kind"></a></dfn> attribute must return the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#mediasession-kind">kind</a>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-metadata"><code>metadata</code><a class="self-link" href="#dom-mediasession-metadata"></a></dfn> attribute, on
-getting, must return the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-session-metadata">metadata</a>. On setting, the user agent must run the following steps:</p>
-   <ol>
-    <li> Set the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-session-metadata">metadata</a> to the new value. 
-    <li> Run the <a data-link-type="dfn" href="#fetch-steps">fetch steps</a> for <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-session-metadata">metadata</a>. 
-   </ol>
+getting, must return the <a data-link-type="dfn" href="#media-session">media session</a>’s <a data-link-type="dfn" href="#media-session-metadata">metadata</a>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export="" id="dom-mediasession-activate"><code>activate()</code><a class="self-link" href="#dom-mediasession-activate"></a></dfn> method, when
 invoked, must run these steps:</p>
    <ol>
@@ -817,25 +813,26 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="med
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediametadata-title">title</a>;
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediametadata-artist">artist</a>;
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediametadata-album">album</a>;
-  readonly attribute FrozenArray&lt;<a data-link-type="idl-name" href="#mediaartwork">MediaArtwork</a>> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<MediaArtwork>" href="#dom-mediametadata-artworks">artworks</a>;
+  [SameObject] readonly attribute FrozenArray&lt;<a data-link-type="idl-name" href="#mediaartwork">MediaArtwork</a>> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<MediaArtwork>" href="#dom-mediametadata-artwork">artwork</a>;
 };
 
 dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-mediametadatainit">MediaMetadataInit<a class="self-link" href="#dictdef-mediametadatainit"></a></dfn> {
   DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadataInit" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadatainit-title">title<a class="self-link" href="#dom-mediametadatainit-title"></a></dfn> = "";
   DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadataInit" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadatainit-artist">artist<a class="self-link" href="#dom-mediametadatainit-artist"></a></dfn> = "";
   DOMString <dfn class="idl-code" data-default="&quot;&quot;" data-dfn-for="MediaMetadataInit" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-mediametadatainit-album">album<a class="self-link" href="#dom-mediametadatainit-album"></a></dfn> = "";
-  sequence&lt;<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a>> <dfn class="idl-code" data-default="None" data-dfn-for="MediaMetadataInit" data-dfn-type="dict-member" data-export="" data-type="sequence<MediaArtworkInit> " id="dom-mediametadatainit-artworks">artworks<a class="self-link" href="#dom-mediametadatainit-artworks"></a></dfn> = [];
+  sequence&lt;<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a>> <dfn class="idl-code" data-default="None" data-dfn-for="MediaMetadataInit" data-dfn-type="dict-member" data-export="" data-type="sequence<MediaArtworkInit> " id="dom-mediametadatainit-artwork">artwork<a class="self-link" href="#dom-mediametadatainit-artwork"></a></dfn> = [];
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> object has a <dfn data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-title">title<a class="self-link" href="#mediametadata-title"></a></dfn>, an <dfn data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-artist">artist<a class="self-link" href="#mediametadata-artist"></a></dfn>, an <dfn data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-album">album<a class="self-link" href="#mediametadata-album"></a></dfn> and a
-FrozenArray of <dfn data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-artworks" title="artwork">artworks<a class="self-link" href="#mediametadata-artworks"></a></dfn>.</p>
+FrozenArray of <dfn data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-artwork-images" title="artwork image">artwork
+images<a class="self-link" href="#mediametadata-artwork-images"></a></dfn>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="constructor" data-export="" id="dom-mediametadata-mediametadata"><code>MediaMetadata(<var>init</var>)</code><a class="self-link" href="#dom-mediametadata-mediametadata"></a></dfn> constructor, when invoked, must run the following steps:</p>
    <ol>
     <li> Let <var>metadata</var> be a new <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> object. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-title">title</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-title">title</a></code>. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artist">artist</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-artist">artist</a></code>. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-album">album</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-album">album</a></code>. 
-    <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artworks">artworks</a></code> using <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-artworks">artworks</a></code> by calling the <a data-link-type="functionish" href="#dom-mediaartwork-mediaartwork"><code>MediaArtwork(init)</code></a> constructor. 
+    <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artwork">artwork</a></code> using <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-artwork">artwork</a></code> by calling the <a data-link-type="functionish" href="#dom-mediaartwork-mediaartwork"><code>MediaArtwork(init)</code></a> constructor. 
     <li> Return <var>metadata</var>. 
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-title"><code>title</code><a class="self-link" href="#dom-mediametadata-title"></a></dfn> attribute must
@@ -844,29 +841,30 @@ return the <code class="idl"><a data-link-type="idl" href="#mediametadata">Media
 return the <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-artist">artist</a>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-album"><code>album</code><a class="self-link" href="#dom-mediametadata-album"></a></dfn> attribute must
 return the <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-album">album</a>.</p>
-   <p>The <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-artworks"><code>artworks</code><a class="self-link" href="#dom-mediametadata-artworks"></a></dfn> attribute
-must return the <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-artworks">artwork</a>s, as a sequence of <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code>s. The <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artworks">artworks</a> attribute
-can be empty.</p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="fetch-steps">fetch steps<a class="self-link" href="#fetch-steps"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> object <var>metadata</var> are:</p>
+   <p>The <dfn class="idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-artwork"><code>artwork</code><a class="self-link" href="#dom-mediametadata-artwork"></a></dfn> attribute must return the <code class="idl"><a data-link-type="idl" href="#mediametadata">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-artwork-images" title="artwork image">artwork images</a>, as a FrozenArray of <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code>s.
+The <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork">artwork</a> attribute can be empty.</p>
+   <p>When the user agent wants to display the <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code>'s artwork
+as specified in it’s <var>metadata</var>, it is recommended to run the
+following <dfn data-dfn-type="dfn" data-noexport="" id="fetch-steps">fetch steps<a class="self-link" href="#fetch-steps"></a></dfn>:</p>
    <ol>
-    <li> If <var>metadata</var>’s <a data-link-type="dfn" href="#mediametadata-artworks"><code>artworks</code></a> is empty, then
-    terminate these steps. 
-    <li> If the platform supports displaying media artwork, select a <dfn data-dfn-type="dfn" data-noexport="" id="prefered-artwork">prefered
-    artwork<a class="self-link" href="#prefered-artwork"></a></dfn> from <var>metadata</var>’s <a data-link-type="dfn" href="#mediametadata-artworks"><code>artworks</code></a>. 
+    <li> If <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork"><code>artwork</code></a> is empty, then terminate these
+    steps. 
+    <li> If the platform supports displaying media artwork, select a <dfn data-dfn-type="dfn" data-noexport="" id="prefered-artwork-image">prefered
+    artwork image<a class="self-link" href="#prefered-artwork-image"></a></dfn> from <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork"><code>artwork</code></a>. 
     <li>
-      <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" title="fetch">Fetch</a> <a data-link-type="dfn" href="#prefered-artwork">prefered artwork</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartwork-src">src</a></code>. 
+      <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" title="fetch">Fetch</a> <a data-link-type="dfn" href="#prefered-artwork-image">prefered artwork image</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartwork-src">src</a></code>. 
      <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
      <ol>
       <li> Wait for the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>. 
       <li> If the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-internal-response">internal response</a>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-type">type</a> is <i>default</i>, attempt to decode the
         resource as image. 
-      <li> If the image format is supported, use the image as the artwork for
-        display. (Otherwise the user agent can select another <a data-link-type="dfn" href="#prefered-artwork">prefered
-        artwork</a> and try again.) 
+      <li> If the image format is supported, use the image as the artwork
+        for display. (Otherwise the fetch step fails and the user
+        agent may take fallback actions.) 
      </ol>
    </ol>
    <h2 class="heading settled" data-level="6" id="the-mediaartwork-interface"><span class="secno">6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code> interface</span><a class="self-link" href="#the-mediaartwork-interface"></a></h2>
-<pre class="idl def">[<dfn class="idl-code" data-dfn-for="MediaArtwork" data-dfn-type="constructor" data-export="" data-lt="MediaArtwork(init)" id="dom-mediaartwork-mediaartwork">Constructor<a class="self-link" href="#dom-mediaartwork-mediaartwork"></a></dfn>(<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a> <dfn class="idl-code" data-dfn-for="MediaArtwork/MediaArtwork(init)" data-dfn-type="argument" data-export="" id="dom-mediaartwork-mediaartwork-init-init">init<a class="self-link" href="#dom-mediaartwork-mediaartwork-init-init"></a></dfn>)]
+<pre class="idl def">[<a class="idl-code" data-link-type="constructor" href="#dom-mediaartwork-mediaartwork">Constructor</a>(<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a> <dfn class="idl-code" data-dfn-for="MediaArtwork/MediaArtwork(init)" data-dfn-type="argument" data-export="" id="dom-mediaartwork-mediaartwork-init-init">init<a class="self-link" href="#dom-mediaartwork-mediaartwork-init-init"></a></dfn>)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="mediaartwork">MediaArtwork<a class="self-link" href="#mediaartwork"></a></dfn> {
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediaartwork-src">src</a>;
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediaartwork-sizes">sizes</a>;
@@ -880,27 +878,34 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="d
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code> object has a <dfn data-dfn-for="MediaArtwork" data-dfn-type="dfn" data-noexport="" id="mediaartwork-source">source<a class="self-link" href="#mediaartwork-source"></a></dfn>, a list of <dfn data-dfn-for="MediaArtwork" data-dfn-type="dfn" data-noexport="" id="mediaartwork-sizes">sizes<a class="self-link" href="#mediaartwork-sizes"></a></dfn>, and a <dfn data-dfn-for="MediaArtwork" data-dfn-type="dfn" data-noexport="" id="mediaartwork-type">type<a class="self-link" href="#mediaartwork-type"></a></dfn>.</p>
-   <p>The <dfn class="idl-code" data-dfn-for="MediaArtwork" data-dfn-type="constructor" data-export="" id="dom-mediaartwork-mediametadata"><code>MediaMetadata(<var>init</var>)</code><a class="self-link" href="#dom-mediaartwork-mediametadata"></a></dfn> constructor, when invoked, must run the following steps:</p>
+   <p>The <dfn class="idl-code" data-dfn-for="MediaArtwork" data-dfn-type="constructor" data-export="" id="dom-mediaartwork-mediaartwork"><code>MediaArtwork(<var>init</var>)</code><a class="self-link" href="#dom-mediaartwork-mediaartwork"></a></dfn> constructor, when invoked, must run the following steps:</p>
    <ol>
     <li> Let <var>metadata</var> be a new <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code> object. 
-    <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartwork-src">src</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartworkinit-src">src</a></code>. 
+    <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartwork-src">src</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartworkinit-src">src</a></code>. If the URL is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#syntax-url-relative">relative URL</a>, it must be resolved to an <a data-link-type="dfn" href="https://url.spec.whatwg.org/#syntax-url-absolute">absolute URL</a> using
+    the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#document-base-url">document base URL</a>. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartwork-sizes">sizes</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartworkinit-sizes">sizes</a></code>. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartwork-type">type</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaartworkinit-type">type</a></code>. 
     <li> Return <var>metadata</var>. 
    </ol>
-   <p>The MediaArtwork <a class="idl-code" data-link-type="attribute" href="#dom-mediaartwork-src">src</a>, <a class="idl-code" data-link-type="attribute" href="#dom-mediaartwork-sizes">sizes</a> and <a class="idl-code" data-link-type="attribute" href="#dom-mediaartwork-type">type</a> inspired from the <a data-link-type="dfn" href="http://www.w3.org/TR/appmanifest/#dfn-image-object">image object</a>s in Web App Manifest.</p>
+   <p>The MediaArtwork <a class="idl-code" data-link-type="attribute" href="#dom-mediaartwork-src">src</a>, <a class="idl-code" data-link-type="attribute" href="#dom-mediaartwork-sizes">sizes</a> and <a class="idl-code" data-link-type="attribute" href="#dom-mediaartwork-type">type</a> inspired from the <a data-link-type="dfn" href="https://www.w3.org/TR/appmanifest/#dfn-image-object">image object</a>s in Web App Manifest.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaArtwork" data-dfn-type="attribute" data-export="" id="dom-mediaartwork-src">src<a class="self-link" href="#dom-mediaartwork-src"></a></dfn> attribute must return the <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code> object’s <a data-link-type="dfn" href="#mediaartwork-source">source</a>. It is a URL from
 which the user agent can fetch the image’s data.</p>
-   <p>The <dfn class="idl-code" data-dfn-for="MediaArtwork" data-dfn-type="attribute" data-export="" id="dom-mediaartwork-sizes">sizes<a class="self-link" href="#dom-mediaartwork-sizes"></a></dfn> attribute must return the <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code> object’s <a data-link-type="dfn" href="#mediaartwork-sizes">sizes</a>. It is a string
-consisting of an unordered set of unique space-separated tokens which are AScII
-case insensitive that represents the dimensions of an image. Each keyword is
-either an ASCII case-insensitive match for the string "any", or a value that
-consists of two valid non-negative integers that do not have a leading U+0030
-DIGIT ZERO (0) character and that are separated by a single U+0078 LATIN SMALL
-LETTER X or U+0058 LATIN CAPITAL LETTER X character. The keywords represent icon
-sizes in raw pixels (as opposed to CSS pixels). When multiple image objects are
-available, a user agent may use the value to decide which icon is most suitable
-for a display context (and ignore any that are inappropriate).</p>
+   <p>The <dfn class="idl-code" data-dfn-for="MediaArtwork" data-dfn-type="attribute" data-export="" id="dom-mediaartwork-sizes">sizes<a class="self-link" href="#dom-mediaartwork-sizes"></a></dfn> attribute must return the <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code> object’s <a data-link-type="dfn" href="#mediaartwork-sizes">sizes</a>. It follows the spec
+of <a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/semantics.html#attr-link-sizes"><code>sizes</code></a> attribute in HTML <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/semantics.html#the-link-element"><code>link</code></a> element, which is a
+string consisting of an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated
+tokens</a> which are <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> that represents the
+dimensions of an image. Each keyword is either an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#ascii-case-insensitive">ASCII
+case-insensitive</a> match for the string "any", or a value that
+consists of two valid non-negative integers that do not have a leading
+U+0030 DIGIT ZERO (0) character and that are separated by a single
+U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X
+character. The keywords represent icon sizes in raw pixels (as opposed
+to CSS pixels). When multiple image objects are available, a user
+agent may use the value to decide which icon is most suitable for a
+display context (and ignore any that are inappropriate). The parsing
+steps for the <a class="idl-code" data-link-type="attribute" href="#dom-mediaartwork-sizes">sizes</a> attribute must
+follow <a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/semantics.html#attr-link-sizes">the parsing steps
+for HTML <code>link</code> element <code>sizes</code> attribute</a>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="MediaArtwork" data-dfn-type="attribute" data-export="" id="dom-mediaartwork-type">type<a class="self-link" href="#dom-mediaartwork-type"></a></dfn> attribute must return the <code class="idl"><a data-link-type="idl" href="#mediaartwork">MediaArtwork</a></code> object’s <a data-link-type="dfn" href="#mediaartwork-type">type</a>. It is a hint as to the
 media type of the image. The purpose of attribute is to allow a user agent to
 ignore images of media types it does not support.</p>
@@ -992,8 +997,8 @@ media session from an <code class="idl"><a data-link-type="idl" href="https://we
    <p>When the user agent is to <dfn data-dfn-type="dfn" data-noexport="" id="resume-a-web-audio-object">resume a web audio object<a class="self-link" href="#resume-a-web-audio-object"></a></dfn> for a given <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object it must invoke that <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#audiocontext">AudioContext</a></code> object’s <code class="idl"><a data-link-type="idl" href="https://webaudio.github.io/web-audio-api/#widl-AudioContext-resume-Promise-void">resume()</a></code> method.</p>
    <h2 class="heading settled" data-level="9" id="examples"><span class="secno">9. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <p><em>This section is non-normative.</em></p>
-   <div class="example" id="example-8205a328">
-    <a class="self-link" href="#example-8205a328"></a> For music or podcasts, using a <a data-link-type="dfn" href="#media-session">media session</a> of <a data-link-type="dfn" href="#mediasession-kind">kind</a> "<code><a data-link-type="dfn" href="#content">content</a></code>" can be appropriate. 
+   <div class="example" id="example-5fad9406">
+    <a class="self-link" href="#example-5fad9406"></a> For music or podcasts, using a <a data-link-type="dfn" href="#media-session">media session</a> of <a data-link-type="dfn" href="#mediasession-kind">kind</a> "<code><a data-link-type="dfn" href="#content">content</a></code>" can be appropriate. 
 <pre class="lang-javascript highlight"><span></span><span class="kd">var</span> <span class="nx">audio</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"audio"</span><span class="p">);</span>
 <span class="nx">audio</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"podcast.mp3"</span><span class="p">;</span>
 <span class="nx">audio</span><span class="p">.</span><span class="nx">session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MediaSession</span><span class="p">();</span> <span class="c1">// "content" is the default kind</span>
@@ -1003,15 +1008,17 @@ media session from an <code class="idl"><a data-link-type="idl" href="https://we
   <span class="nx">title</span><span class="o">:</span> <span class="s2">"Episode Title"</span><span class="p">,</span>
   <span class="nx">artist</span><span class="o">:</span> <span class="s2">"Podcast Host"</span><span class="p">,</span>
   <span class="nx">album</span><span class="o">:</span> <span class="s2">"Podcast Title"</span><span class="p">,</span>
-  <span class="nx">artworks</span><span class="o">:</span> <span class="p">[{</span><span class="nx">src</span><span class="o">:</span> <span class="s2">"podcast.jpg"</span><span class="p">}]</span>
+  <span class="nx">artwork</span><span class="o">:</span> <span class="p">[{</span><span class="nx">src</span><span class="o">:</span> <span class="s2">"podcast.jpg"</span><span class="p">}]</span>
 <span class="p">});</span></pre>
-    <p>Alternatively, providing multiple artworks in the metadata can let the user
-  agent be able to select different artworks for different display purposes:</p>
+    <p>Alternatively, providing multiple <a data-link-type="dfn" href="#mediametadata-artwork-images" title="artwork
+  image">artwork images</a> in the metadata can let the user agent be able to
+  select different artwork images for different display purposes and better fit
+  for different screens:</p>
 <pre class="lang-javascript highlight"><span></span><span class="nx">audio</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">metadata</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MediaMetadata</span><span class="p">({</span>
   <span class="nx">title</span><span class="o">:</span> <span class="s2">"Episode Title"</span><span class="p">,</span>
   <span class="nx">artist</span><span class="o">:</span> <span class="s2">"Podcast Host"</span><span class="p">,</span>
   <span class="nx">album</span><span class="o">:</span> <span class="s2">"Podcast Title"</span><span class="p">,</span>
-  <span class="nx">artworks</span><span class="o">:</span> <span class="p">[</span>
+  <span class="nx">artwork</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span><span class="nx">src</span><span class="o">:</span> <span class="s2">"podcast.jpg"</span><span class="p">,</span> <span class="nx">sizes</span><span class="o">:</span> <span class="s2">"128x128"</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">"image/jpeg"</span><span class="p">},</span>
     <span class="p">{</span><span class="nx">src</span><span class="o">:</span> <span class="s2">"podcast_hd.jpg"</span><span class="p">,</span> <span class="nx">sizes</span><span class="o">:</span> <span class="s2">"256x256"</span><span class="p">},</span>
     <span class="p">{</span><span class="nx">src</span><span class="o">:</span> <span class="s2">"podcast_xhd.jpg"</span><span class="p">,</span> <span class="nx">sizes</span><span class="o">:</span> <span class="s2">"1024x1024"</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">"image/jpeg"</span><span class="p">},</span>
@@ -1024,8 +1031,8 @@ media session from an <code class="idl"><a data-link-type="idl" href="https://we
   low-pixel-density screen, and <code>"podcast_hd.jpg"</code> or <code>"podcast_hd.png"</code> for a high-pixel-density screen. If the user
   agent want to use an image for lockscreen background, <code>"podcast_xhd.jpg"</code> will be prefered.</p>
    </div>
-   <div class="example" id="example-e84dc250">
-    <a class="self-link" href="#example-e84dc250"></a> For playlists or chapters of an audio book, multiple <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> can
+   <div class="example" id="example-c5521ca0">
+    <a class="self-link" href="#example-c5521ca0"></a> For playlists or chapters of an audio book, multiple <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> can
   share a single <a data-link-type="dfn" href="#media-session">media session</a>. 
 <pre class="lang-javascript highlight"><span></span><span class="kd">var</span> <span class="nx">audio1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"audio"</span><span class="p">);</span>
 <span class="nx">audio1</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"chapter1.mp3"</span><span class="p">;</span>
@@ -1047,7 +1054,7 @@ media session from an <code class="idl"><a data-link-type="idl" href="https://we
     <span class="nx">title</span><span class="o">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span> <span class="o">==</span> <span class="nx">audio1</span> <span class="o">?</span> <span class="s2">"Chapter 1"</span> <span class="o">:</span> <span class="s2">"Chapter 2"</span><span class="p">,</span>
     <span class="nx">artist</span><span class="o">:</span> <span class="s2">"An Author"</span><span class="p">,</span>
     <span class="nx">album</span><span class="o">:</span> <span class="s2">"A Book"</span><span class="p">,</span>
-    <span class="nx">artworks</span><span class="o">:</span> <span class="p">[{</span><span class="nx">src</span><span class="o">:</span> <span class="s2">"cover.jpg"</span><span class="p">}]</span>
+    <span class="nx">artwork</span><span class="o">:</span> <span class="p">[{</span><span class="nx">src</span><span class="o">:</span> <span class="s2">"cover.jpg"</span><span class="p">}]</span>
   <span class="p">});</span>
 <span class="p">}</span>
 
@@ -1109,12 +1116,13 @@ neighboring rights to this work.</p>
      <li><a href="#dom-mediametadata-artist">attribute for MediaMetadata</a><span>, in §5</span>
     </ul>
    <li>
-    artworks
+    artwork
     <ul>
-     <li><a href="#dom-mediametadatainit-artworks">dict-member for MediaMetadataInit</a><span>, in §5</span>
-     <li><a href="#mediametadata-artworks">dfn for MediaMetadata</a><span>, in §5</span>
-     <li><a href="#dom-mediametadata-artworks">attribute for MediaMetadata</a><span>, in §5</span>
+     <li><a href="#dom-mediametadatainit-artwork">dict-member for MediaMetadataInit</a><span>, in §5</span>
+     <li><a href="#dom-mediametadata-artwork">attribute for MediaMetadata</a><span>, in §5</span>
     </ul>
+   <li><a href="#mediametadata-artwork-images">artwork
+images</a><span>, in §5</span>
    <li><a href="#audio-producing-object">audio-producing object</a><span>, in §4.3</span>
    <li><a href="#audio-producing-participants">audio-producing participants</a><span>, in §4.3</span>
    <li>
@@ -1142,12 +1150,7 @@ neighboring rights to this work.</p>
    <li><a href="#dictdef-mediaartworkinit">MediaArtworkInit</a><span>, in §6</span>
    <li><a href="#dom-mediaartwork-mediaartwork">MediaArtwork(init)</a><span>, in §6</span>
    <li><a href="#mediametadata">MediaMetadata</a><span>, in §5</span>
-   <li>
-    MediaMetadata(init)
-    <ul>
-     <li><a href="#dom-mediametadata-mediametadata">constructor for MediaMetadata</a><span>, in §5</span>
-     <li><a href="#dom-mediaartwork-mediametadata">constructor for MediaArtwork</a><span>, in §6</span>
-    </ul>
+   <li><a href="#dom-mediametadata-mediametadata">MediaMetadata(init)</a><span>, in §5</span>
    <li><a href="#dictdef-mediametadatainit">MediaMetadataInit</a><span>, in §5</span>
    <li><a href="#media-session">media session</a><span>, in §4</span>
    <li><a href="#mediasession">MediaSession</a><span>, in §4</span>
@@ -1160,8 +1163,8 @@ neighboring rights to this work.</p>
    <li><a href="#dom-mediasession-metadata">metadata</a><span>, in §4</span>
    <li><a href="#pause">pause</a><span>, in §4.3</span>
    <li><a href="#pause-a-media-element">pause a media element</a><span>, in §7.2</span>
-   <li><a href="#prefered-artwork">prefered
-    artwork</a><span>, in §5</span>
+   <li><a href="#prefered-artwork-image">prefered
+    artwork image</a><span>, in §5</span>
    <li><a href="#release-media-element-from-its-media-session">release media element from its media
 session</a><span>, in §7.3</span>
    <li><a href="#resume-a-web-audio-object">resume a web audio object</a><span>, in §8.1</span>
@@ -1238,18 +1241,23 @@ session</a><span>, in §7.3</span>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlmediaelement">HTMLMediaElement</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_idle">NETWORK_IDLE</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-network_loading">NETWORK_LOADING</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#ascii-case-insensitive">ascii case-insensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#case-sensitivity-and-string-comparison">case-sensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-media-controls">controls</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#document-base-url">document base url</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#ended-playback">ended playback</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#internal-pause-steps">internal pause steps</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-link-element">link</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm">media element load algorithm</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-networkstate">networkState</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-paused">paused</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play">play()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate">readyState</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#attr-link-sizes">sizes</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a>
     </ul>
    <li>
     <a data-link-type="biblio">[page-visibility]</a> defines the following terms:
@@ -1271,7 +1279,7 @@ session</a><span>, in §7.3</span>
    <li>
     <a data-link-type="biblio">[appmanifest]</a> defines the following terms:
     <ul>
-     <li><a href="http://www.w3.org/TR/appmanifest/#dfn-image-object">image object</a>
+     <li><a href="https://www.w3.org/TR/appmanifest/#dfn-image-object">image object</a>
     </ul>
    <li>
     <a data-link-type="biblio">[WHATWG-DOM]</a> defines the following terms:
@@ -1321,17 +1329,17 @@ interface <a href="#mediametadata">MediaMetadata</a> {
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediametadata-title">title</a>;
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediametadata-artist">artist</a>;
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediametadata-album">album</a>;
-  readonly attribute FrozenArray&lt;<a data-link-type="idl-name" href="#mediaartwork">MediaArtwork</a>> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<MediaArtwork>" href="#dom-mediametadata-artworks">artworks</a>;
+  [SameObject] readonly attribute FrozenArray&lt;<a data-link-type="idl-name" href="#mediaartwork">MediaArtwork</a>> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<MediaArtwork>" href="#dom-mediametadata-artwork">artwork</a>;
 };
 
 dictionary <a href="#dictdef-mediametadatainit">MediaMetadataInit</a> {
   DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadatainit-title">title</a> = "";
   DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadatainit-artist">artist</a> = "";
   DOMString <a data-default="&quot;&quot;" data-type="DOMString " href="#dom-mediametadatainit-album">album</a> = "";
-  sequence&lt;<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a>> <a data-default="None" data-type="sequence<MediaArtworkInit> " href="#dom-mediametadatainit-artworks">artworks</a> = [];
+  sequence&lt;<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a>> <a data-default="None" data-type="sequence<MediaArtworkInit> " href="#dom-mediametadatainit-artwork">artwork</a> = [];
 };
 
-[<a href="#dom-mediaartwork-mediaartwork">Constructor</a>(<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a> <a href="#dom-mediaartwork-mediaartwork-init-init">init</a>)]
+[<a class="idl-code" data-link-type="constructor" href="#dom-mediaartwork-mediaartwork">Constructor</a>(<a data-link-type="idl-name" href="#dictdef-mediaartworkinit">MediaArtworkInit</a> <a href="#dom-mediaartwork-mediaartwork-init-init">init</a>)]
 interface <a href="#mediaartwork">MediaArtwork</a> {
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediaartwork-src">src</a>;
   readonly attribute DOMString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dom-mediaartwork-sizes">sizes</a>;
