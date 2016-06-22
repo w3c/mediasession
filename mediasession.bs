@@ -92,7 +92,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
         urlPrefix: embedded-content.html
             text: pause; url: #event-media-pause
             text: play; url: #event-media-play
-urlPrefix: https://url.spec.whatwg.org/;
+urlPrefix: https://url.spec.whatwg.org/; spec: URL
     type: dfn; urlPrefix: #concept-
         text: url parser
         text: event listener
@@ -1135,14 +1135,14 @@ interface MediaMetadata {
   readonly attribute DOMString title;
   readonly attribute DOMString artist;
   readonly attribute DOMString album;
-  [SameObject] readonly attribute FrozenArray&lt;MediaArtwork> artwork;
+  [SameObject] readonly attribute FrozenArray&lt;MediaImage> artwork;
 };
 
 dictionary MediaMetadataInit {
   DOMString title = "";
   DOMString artist = "";
   DOMString album = "";
-  sequence&lt;MediaArtworkInit> artwork = [];
+  sequence&lt;MediaImageInit> artwork = [];
 };
 </pre>
 
@@ -1174,7 +1174,7 @@ constructor, when invoked, must run the following steps:
   <li>
     Set <var>metadata</var>'s {{MediaMetadata/artwork}} using <var>init</var>'s
     {{MediaMetadataInit/artwork}} by calling the
-    <a><code>MediaArtwork(init)</code></a> constructor.
+    <a><code>MediaImage(init)</code></a> constructor.
   </li>
   <li>
     Return <var>metadata</var>.
@@ -1192,12 +1192,12 @@ return the {{MediaMetadata}} objects's <a>album</a>.
 
 The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn>
 attribute must return the {{MediaMetadata}} objects's <a for="MediaMetadata"
-title="artwork image">artwork images</a>, as a FrozenArray of {{MediaArtwork}}s.
+title="artwork image">artwork images</a>, as a FrozenArray of {{MediaImage}}s.
 The <a attribute for="MediaMetadata">artwork</a> attribute can be empty.
 
-When the user agent wants to display the {{MediaSession}}'s artwork
-as specified in it's <var>metadata</var>, it is recommended to run the
-following <dfn>fetch steps</dfn>:
+When a user agent wants to display the {{MediaSession}}'s artwork as specified
+in it's <var>metadata</var>, it is recommended to run the following <dfn>fetch
+steps</dfn>:
 
 <ol>
   <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
@@ -1214,7 +1214,7 @@ following <dfn>fetch steps</dfn>:
   </li>
   <li>
     <a title="fetch">Fetch</a> <a>prefered artwork image</a>'s
-    {{MediaArtwork/src}}.
+    {{MediaImage/src}}.
 
     Then, <a>in parallel</a>:
 
@@ -1228,56 +1228,58 @@ following <dfn>fetch steps</dfn>:
         resource as image.
       </li>
       <li>
-        If the image format is supported, use the image as the artwork
-        for display. (Otherwise the fetch step fails and the user
-        agent may take fallback actions.)
+        If the image format is supported, use the image as the artwork for
+        display. Otherwise the <a>fetch steps</a> fail and terminate.
       </li>
     </ol>
   </li>
 </ol>
 
-<h2 id="the-mediaartwork-interface">The {{MediaArtwork}} interface</h2>
+If no artwork images are fetched in the <a>fetch steps</a>, the user agent may
+have fallback behavior such as displaying an default image as artwork.
+
+<h2 id="the-mediaimage-interface">The {{MediaImage}} interface</h2>
 
 <pre class="idl">
 
-[Constructor(MediaArtworkInit init)]
-interface MediaArtwork {
+[Constructor(MediaImageInit init)]
+interface MediaImage {
   readonly attribute USVString src;
   readonly attribute DOMString sizes;
   readonly attribute DOMString type;
 };
 
-dictionary MediaArtworkInit {
+dictionary MediaImageInit {
   USVString src = "";
   DOMString sizes = "";
   DOMString type = "";
 };
 </pre>
 
-A {{MediaArtwork}} object has a <dfn for="MediaArtwork">source</dfn>, a list of
-<dfn for="MediaArtwork">sizes</dfn>, and a <dfn for="MediaArtwork">type</dfn>.
+A {{MediaImage}} object has a <dfn for="MediaImage">source</dfn>, a list of
+<dfn for="MediaImage">sizes</dfn>, and a <dfn for="MediaImage">type</dfn>.
 
 The <dfn constructor
-for="MediaArtwork"><code>MediaArtwork(<var>init</var>)</code></dfn>
+for="MediaImage"><code>MediaImage(<var>init</var>)</code></dfn>
 constructor, when invoked, must run the following steps:
 
 <ol>
   <li>
-    Let <var>metadata</var> be a new {{MediaArtwork}} object.
+    Let <var>metadata</var> be a new {{MediaImage}} object.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaArtwork/src}}
-    to <var>init</var>'s {{MediaArtworkInit/src}}. If the URL is a
-    <a>relative URL</a>, it must be resolved to an <a>absolute URL</a> using
-    the <a>document base URL</a>.
+    Set <var>metadata</var>'s {{MediaImage/src}} to <var>init</var>'s
+    {{MediaImageInit/src}}. If the URL is a
+    <a>relative URL</a>, it must be resolved to an <a>absolute URL</a> using the
+    <a>document base URL</a>.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaArtwork/sizes}} to <var>init</var>'s
-    {{MediaArtworkInit/sizes}}.
+    Set <var>metadata</var>'s {{MediaImage/sizes}} to <var>init</var>'s
+    {{MediaImageInit/sizes}}.
   </li>
   <li>
-    Set <var>metadata</var>'s {{MediaArtwork/type}} to <var>init</var>'s
-    {{MediaArtworkInit/type}}.
+    Set <var>metadata</var>'s {{MediaImage/type}} to <var>init</var>'s
+    {{MediaImageInit/type}}.
   </li>
   <li>
     Return <var>metadata</var>.
@@ -1285,37 +1287,36 @@ constructor, when invoked, must run the following steps:
 </ol>
 
 
-The MediaArtwork <a attribute for="MediaArtwork">src</a>, <a attribute
-for="MediaArtwork">sizes</a> and <a attribute for="MediaArtwork">type</a>
-inspired from the <a>image object</a>s in Web App Manifest.
+The MediaImage <a attribute for="MediaImage">src</a>, <a attribute
+for="MediaImage">sizes</a> and <a attribute for="MediaImage">type</a>
+inspired from the <a lt="image object">image objects</a> in Web App Manifest.
 
-The <dfn attribute for="MediaArtwork">src</dfn> attribute must return the
-{{MediaArtwork}} object's <a for="MediaArtwork">source</a>. It is a URL from
-which the user agent can fetch the image's data.
+The <dfn attribute for="MediaImage">src</dfn> attribute must return the
+{{MediaImage}} object's <a for="MediaImage">source</a>. It is a URL from which
+the user agent can fetch the image's data.
 
-The <dfn attribute for="MediaArtwork">sizes</dfn> attribute must return the
-{{MediaArtwork}} object's <a for="MediaArtwork">sizes</a>. It follows the spec
-of <a attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in HTML
-<a for="HTMLLinkElement"><code>link</code></a> element, which is a
-string consisting of an <a>unordered set of unique space-separated
-tokens</a> which are <a>ASCII case-insensitive</a> that represents the
-dimensions of an image. Each keyword is either an <a>ASCII
-case-insensitive</a> match for the string "any", or a value that
-consists of two valid non-negative integers that do not have a leading
-U+0030 DIGIT ZERO (0) character and that are separated by a single
-U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X
-character. The keywords represent icon sizes in raw pixels (as opposed
-to CSS pixels). When multiple image objects are available, a user
-agent may use the value to decide which icon is most suitable for a
-display context (and ignore any that are inappropriate). The parsing
-steps for the <a attribute for="MediaArtwork">sizes</a> attribute must
-follow <a attribute for="HTMLLinkElement" lt="sizes">the parsing steps
-for HTML <code>link</code> element <code>sizes</code> attribute</a>.
+The <dfn attribute for="MediaImage">sizes</dfn> attribute must return the
+{{MediaImage}} object's <a for="MediaImage">sizes</a>. It follows the spec of <a
+attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in HTML
+<a for="HTMLLinkElement"><code>link</code></a> element, which is a string
+consisting of an <a>unordered set of unique space-separated tokens</a> which are
+<a>ASCII case-insensitive</a> that represents the dimensions of an image. Each
+keyword is either an <a>ASCII case-insensitive</a> match for the string "any",
+or a value that consists of two valid non-negative integers that do not have a
+leading U+0030 DIGIT ZERO (0) character and that are separated by a single
+U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The
+keywords represent icon sizes in raw pixels (as opposed to CSS pixels). When
+multiple image objects are available, a user agent may use the value to decide
+which icon is most suitable for a display context (and ignore any that are
+inappropriate). The parsing steps for the <a attribute
+for="MediaImage">sizes</a> attribute must follow <a attribute
+for="HTMLLinkElement" lt="sizes">the parsing steps for HTML <code>link</code>
+element <code>sizes</code> attribute</a>.
 
-The <dfn attribute for="MediaArtwork">type</dfn> attribute must return the
-{{MediaArtwork}} object's <a for="MediaArtwork">type</a>. It is a hint as to the
-media type of the image. The purpose of attribute is to allow a user agent to
-ignore images of media types it does not support.
+The <dfn attribute for="MediaImage">type</dfn> attribute must return the
+{{MediaImage}} object's <a for="MediaImage">type</a>. It is a hint as to the
+media type of the image. The purpose of this attribute is to allow a user agent
+to ignore images of media types it does not support.
 
 <h2 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
 {{HTMLMediaElement}} interface</h2>
