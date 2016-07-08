@@ -26,6 +26,10 @@ cd ..
 # Clean out existing contents
 rm -rf out/* || exit 0
 
+# Re-format.
+
+./format.py index.bs
+
 # Re-generating.
 curl https://api.csswg.org/bikeshed/ -f -F file=@index.bs > out/index.html;
 
