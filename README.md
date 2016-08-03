@@ -1,6 +1,6 @@
 # Media Session Standard
 
-https://mediasession.spec.whatwg.org/
+https://wicg.github.io/mediasession/
 
 This standardization project aims to add support for media keys and audio focus to the Web. Media keys, like play, pause, fast forward and rewind, are found on keyboards, headsets, remote controls, and on lock screens of mobile devices. Audio focus is the system which ensures that application do not play over each other and that only one application at a time responds to media key events. It allows one application to pause when another application begins playback, or to duck (lower volume) for a short notification.
 
@@ -62,4 +62,4 @@ Everyone is welcome to contribute! However, by contributing you are agreeing to 
 ## Code of conduct
 
 We are committed to providing a friendly, safe and welcoming environment for all. Please read and
-respect the [WHATWG Code of Conduct](https://wiki.whatwg.org/wiki/Code_of_Conduct).
+respect the [W3C Code of Conduct](https://www.w3.org/Consortium/cepc/).
