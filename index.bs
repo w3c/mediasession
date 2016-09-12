@@ -14,7 +14,7 @@ Abstract: notification areas and on lock screens of mobile devices.
 !Participate: <a href="https://github.com/whatwg/mediasession/issues/new">File an issue</a> (<a href="https://github.com/whatwg/mediasession/issues?state=open">open issues</a>)
 !Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 !Version History: <a href="https://github.com/whatwg/mediasession/commits">https://github.com/whatwg/mediasession/commits</a>
-Ignored Vars: context, media
+Ignored Vars: context, media, session
 Boilerplate: omit conformance, omit feedback-header
 </pre>
 
@@ -155,35 +155,12 @@ urlPrefix: https://heycam.github.io/webidl/
 
 <em>This section is non-normative.</em>
 
-Media is used extensively today on the web to play a variety of different types
-of content. It is often used to play music, podcasts and radio content. At other
-times web media is used to provide background music, sound effects, notification
-sounds and to render WebRTC media stream content.
-
-When playing media on the web, developers are currently forced to adopt a single
-default platform modality for playing all media content. On the other hand,
-native applications can access much richer media integration options with an
-underlying platform. On mobile devices, native application developers can
-request many different forms of media integration with the platform to obtain
-access to headphone buttons, lock screens and notification areas as needed. On
-desktop devices, native applications have access to keyboard media key events.
-Native application developers can specify the conditions in which media content
-should pause or duck on audio interruptions (i.e. pause or lower the volume for
-the duration of an interruption), continue playing out when application focus is
-lost or the device screen is switched off and interface with internal and
-external remote controllers.
-
-This specification provides these platform media integration features for web
-media. By allowing web developers to express the intended usage of their media
-content, user agents can supply the most suitable platform-level interactions
-for that content and enforce logical interoperation behavior on the current
-platform between any number of different sources of media.
-
-This specification describes the mechanism that allows web developers to specify
-the most appropriate kind for their media content and for user agents to then
-use these supplied hints to enforce how different sources of web media should
-interact with each other, other native media content and the underlying
-platform.
+Media is used extensively today, and the Web is one of the primary means of
+consuming media content. Many platforms can display media metadata, such as
+title, artist, album and album art on various UI elements such as notification,
+media control center, device lockscreen and wearable devices. This specification
+aims to enable web pages to specify the media metadata to be displayed in
+platform UI, which helps in improving the user experience.
 
 <h2 id="conformance">Conformance</h2>
 
@@ -226,22 +203,19 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 <h2 id="the-mediasession-interface">The {{MediaSession}} interface</h2>
 
 <pre class="idl">
-[Constructor(optional MediaSessionKind kind = "content")]
-interface MediaSession {
-  readonly attribute MediaSessionKind kind;
-  attribute MediaMetadata? metadata;
-
-  Promise&lt;void> activate();
-  Promise&lt;void> deactivate();
+[Exposed=(Window)]
+partial interface Navigator {
+  readonly attribute MediaSession mediaSession;
 };
 
-enum MediaSessionKind {
-  "content",
-  "transient",
-  "transient-solo",
-  "ambient"
+interface MediaSession {
+  attribute MediaMetadata? metadata;
 };
 </pre>
+
+The <dfn attribute for="Navigator"><code>mediaSession</code></dfn> attribute is
+to retrive an instance of the {{MediaSession}} interface. The attribute MUST
+return the {{MediaSession}} instance associated with the {{Navigator}} object.
 
 {{MediaSession}} objects are simply known as <dfn lt="media session">media
 sessions</dfn>.
@@ -251,19 +225,6 @@ which is either a {{MediaMetadata}} object or null.
 
 <dl class=domintro>
   <dt>
-    <code><var>session</var> = new <a constructor
-    lt="MediaSession()">MediaSession</a>([<var>kind</var>])</code>
-  </dt>
-  <dd>
-    Returns a new {{MediaSession}} object.
-  </dd>
-  <dt>
-    <code><var>session</var> . {{MediaSession/kind}}</code>
-  </dt>
-  <dd>
-    Returns the <a>media session</a>'s <a>kind</a>.
-  </dd>
-  <dt>
     <code><var>session</var> . {{MediaSession/metadata}}</code>
   </dt>
   <dd>
@@ -272,865 +233,17 @@ which is either a {{MediaMetadata}} object or null.
 
     Can be set, to a {{MediaMetadata}} object or null.
   </dd>
-  <dt>
-    <code><var>session</var> . {{MediaSession/activate()}}</code>
-  </dt>
-  <dd>
-    Requests platform-level media focus and sets the <a>media session</a>'s
-    <a>state</a> to <code><a lt="active media session state">active</a></code>.
-
-    Throws a {{NotAllowedError}} exception if the request was denied by the user
-    agent or the platform.
-  </dd>
-  <dt>
-    <code><var>session</var> . {{MediaSession/deactivate()}}</code>
-  </dt>
-  <dd>
-    Releases platform-level media focus and sets the <a>media session</a>'s
-    <a>state</a> to <code><a lt="idle media session state">idle</a></code>.
-  </dd>
 </dl>
-
-The <dfn constructor
-for="MediaSession"><code>MediaSession(<var>kind</var>)</code></dfn>
-constructor, when invoked, must return a new <a>media session</a> whose
-<a>kind</a> is <var>kind</var>, and <a>state</a> is <code><a lt="idle media
-session state">idle</a></code>.
-
-The <dfn attribute for="MediaSession"><code>kind</code></dfn>
-attribute must return the <a>media session</a>'s <a>kind</a>.
 
 The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute, on
 getting, must return the <a>media session</a>'s <a lt="media session
 metadata">metadata</a>.
 
-The <dfn method for="MediaSession"><code>activate()</code></dfn> method, when
-invoked, must run these steps:
-
-<ol>
-  <li>
-    Let <var>media session</var> be the <a>context object</a>.
-  </li>
-  <li>
-    Let <var>promise</var> be a new promise.
-  </li>
-  <li>
-    Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
-  </li>
-  <li>
-    <a>Activate</a> <var>media session</var>.
-  </li>
-  <li>
-    If <a>activate</a> failed, reject <var>promise</var> with a
-    {{NotAllowedError}} exception.
-  </li>
-  <li>
-    Otherwise, fulfill <var>promise</var> with undefined.
-  </li>
-</ol>
-
-Note: {{activate()}} can fail if there is an ongoing high-priority activity,
-e.g. a phone call.
-
-The <dfn method for="MediaSession"><code>deactivate()</code></dfn> method, when
-invoked, must run these steps:
-
-<ol>
-  <li>
-    Let <var>media session</var> be the <a>context object</a>.
-  </li>
-  <li>
-    Let <var>promise</var> be a new promise.
-  </li>
-  <li>
-    Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
-  </li>
-  <li>
-    <a>Deactivate</a> <var>media session</var>.
-  </li>
-  <li>
-    Fulfill <var>promise</var> with undefined.
-  </li>
-</ol>
-
-Note: Unlike {{activate()}}, {{deactivate()}} cannot fail.
-
-<h3 id="media-session-states">States</h3>
-
-A <a>media session</a> has a <dfn for="MediaSession">state</dfn> that describes
-its current status with respect to any platform-level interactions and
-interactions with other <a>media sessions</a>. The possible values are as
-follows:
-
-<dl>
-  <dt>
-    <dfn lt="idle media session state"><code>idle</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> does not have any platform-level media focus nor is
-    it in a suspended state.
-  </dd>
-  <dt>
-    <dfn lt="active media session state"><code>active</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> currently has platform-level media focus.
-  </dd>
-  <dt>
-    <dfn lt="interrupted media session state"><code>interrupted</code></dfn>
-  </dt>
-  <dd>
-    The <a>media session</a> is currently suspended from having platform-level
-    media focus and its <a>audio-producing participants</a> are either <a
-    lt="pause">paused</a> or
-    <a lt="duck">ducked</a> based on the <a>media session</a>'s <a>kind</a>.
-  </dd>
-</dl>
-
-<h3 id="media-session-kinds">Kinds</h3>
-
-A <a>media session</a> has a <dfn for="MediaSession">kind</dfn> which is one of
-"<code><dfn>content</dfn></code>", "<code><dfn>transient</dfn></code>",
-"<code><dfn>transient-solo</dfn></code>" and "<code><dfn>ambient</dfn></code>".
-
-<div class="note">
-  The following table lists the available <a>kinds</a>, their associated
-  behavior, and examples of when they are appropriate to use.
-
-  <table>
-    <tr>
-      <th>Kind</th>
-      <th>Behavior</th>
-      <th>Examples</th>
-    </tr>
-    <tr>
-      <td>
-        "<code><a>content</a></code>"
-      </td>
-      <td>
-        <ul>
-          <li>
-            <a>Indefinitely pauses</a> all other <a lt="audio-producing
-            participants">active</a> "<code><a>content</a></code>" content when
-            <a href="#activating-a-media-session">playback begins</a>.
-          </li>
-          <li>
-            Displays lock-screen and notification area user interfaces when
-            <a href="#activating-a-media-session">playback begins</a>.
-          </li>
-          <li>
-            Reacts to changes in both hardware and software-based media key
-            buttons when <a href="#activating-a-media-session">playback
-            begins</a>.
-          </li>
-          <li>
-            <a>Ducks</a> itself when "<code><a>transient</a></code>" content <a
-            href="#interrupting-a-media-session">starts interrupting</a>.
-            <a>Unducks</a>
-            itself when "<code><a>transient</a></code>" content is <a>paused</a>
-            or <a href="#deactivating-a-media-session">ends playback</a>.
-          </li>
-          <li>
-            <a>Pauses</a> itself when "<code><a>transient-solo</a></code>"
-            content <a href="#interrupting-a-media-session">starts
-            interrupting</a>.
-            <a>Unpauses</a> itself when "<code><a>transient-solo</a></code>"
-            content is
-            <a>paused</a> or <a href="#deactivating-a-media-session">ends
-            playback</a>.
-          </li>
-          <li>
-            Continues playing normally when "<code><a>ambient</a></code>"
-            content <a href="#interrupting-a-media-session">starts
-            interrupting</a>.
-          </li>
-        </ul>
-      </td>
-      <td>
-        Music, podcasts, radio streams.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        "<code><a>transient</a></code>"
-      </td>
-      <td>
-        <ul>
-          <li>
-            <a>Ducks</a> all other <a lt="audio-producing
-            participants">active</a>
-            "<code><a>content</a></code>" content when
-            <a href="#activating-a-media-session">playback begins</a>.
-            <a>Unducks</a> all other <a lt="interrupted media session
-            state">interrupted</a> "<code><a>content</a></code>" content when
-            <a>paused</a> or <a href="#deactivating-a-media-session">playback
-            ends</a>.
-          </li>
-          <li>
-            Does not display lock-screen and notification area user interfaces
-            when <a href="#activating-a-media-session">playback begins</a>.
-          </li>
-          <li>
-            Does not react to changes in both hardware and software-based media
-            key buttons when <a href="#activating-a-media-session">playback
-            begins</a>.
-          </li>
-          <li>
-            <a>Pauses</a> itself when "<code><a>transient-solo</a></code>"
-            content <a href="#interrupting-a-media-session">starts
-            interrupting</a>.
-            <a>Unpauses</a> itself when "<code><a>transient-solo</a></code>"
-            content is
-            <a>paused</a> or <a href="#deactivating-a-media-session">ends
-            playback</a>.
-          </li>
-          <li>
-            Continues playing normally when other
-            "<code><a>transient</a></code>" or "<code><a>ambient</a></code>"
-            content <a href="#interrupting-a-media-session">starts
-            interrupting</a>.
-          </li>
-        </ul>
-      </td>
-      <td>
-        Notification sounds. Spoken driving directions where playback of music
-        in the background is acceptable.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        "<code><a>transient-solo</a></code>"
-      </td>
-      <td>
-        <ul>
-          <li>
-            <a>Pauses</a> all other <a lt="audio-producing
-            participants">active</a>
-            "<code><a>content</a></code>", "<code><a>transient</a></code>" and
-            "<code><a>transient-solo</a></code>" content when <a
-            href="#activating-a-media-session">playback begins</a>.
-            <a>Unpauses</a> all <a lt="interrupted media session
-            state">interrupted</a>
-            "<code><a>content</a></code>", "<code><a>transient</a></code>" and
-            "<code><a>transient-solo</a></code>" content when <a>paused</a> or
-            <a href="#deactivating-a-media-session">playback ends</a>.
-          </li>
-          <li>
-            Does not display lock-screen and notification area user interfaces
-            when <a href="#activating-a-media-session">playback begins</a>.
-          </li>
-          <li>
-            Does not react to changes in both hardware and software-based media
-            key buttons when <a href="#activating-a-media-session">playback
-            begins</a>.
-          </li>
-          <li>
-            <a>Pauses</a> itself when other "<code><a>transient-solo</a></code>"
-            content <a href="#interrupting-a-media-session">starts
-            interrupting</a>.
-            <a>Unpauses</a>
-            itself when other "<code><a>transient-solo</a></code>" content is
-            <a>paused</a> or <a href="#deactivating-a-media-session">ends
-            playback</a>.
-          </li>
-          <li>
-            Continues playing normally when "<code><a>ambient</a></code>"
-            content <a href="#interrupting-a-media-session">starts
-            interrupting</a>.
-          </li>
-        </ul>
-      </td>
-      <td>
-        Playback of driving directions. Other spoken notifications.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        "<code><a>ambient</a></code>"
-      </td>
-      <td>
-        <ul>
-          <li>
-            Does not interact with any other "<code><a>content</a></code>",
-            "<code><a>transient</a></code>",
-            "<code><a>transient-solo</a></code>" or
-            "<code><a>ambient</a></code>" content during playback.
-          </li>
-          <li>
-            Does not display lock-screen and notification area user interfaces
-            when <a href="#activating-a-media-session">playback begins</a>.
-          </li>
-          <li>
-            Does not react to changes in both hardware and software-based media
-            key buttons when <a href="#activating-a-media-session">playback
-            begins</a>.
-          </li>
-          <li>
-            <a>Pauses</a> itself when its <a>top-level browsing context</a> is
-            not visible (i.e. the page is placed in the background or the user
-            agent is minimized or the screen is switched off). <a>Unpauses</a>
-            itself when its
-            <a>top-level browsing context</a> is at least partially visible on
-            at least one screen again (i.e. the user agent is in the foreground
-            and the page is focused again).
-          </li>
-        </ul>
-      </td>
-      <td>
-        UI sounds. In-game sound effects and background music.
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h3 id="media-session-participants">Participants</h3>
-
-An <dfn>audio-producing object</dfn> is any object or element that is capable of
-emitting sound within the user agent and is therefore also potentially capable
-of interacting with the media focus system available in different underlying
-platforms.
-
-An <a>audio-producing object</a> may have a <dfn>current media session</dfn>,
-which is a <a>media session</a>.
-
-A <a>media session</a> may have one or more <a>audio-producing objects</a>
-attached to it; called its <dfn>audio-producing participants</dfn>. A <a>media
-session</a> must keep a list of its <a>audio-producing participants</a> that
-consists of zero of more <a>audio-producing objects</a>.
-
-A <a>media session</a> has a <dfn>resume list</dfn> that is used internally to
-restore <a>audio-producing participants</a> at the end of an interruption that
-were playing, or were otherwise running, when that interruption started. The
-<a>resume list</a> may consist of zero or more <a>audio-producing objects</a>
-that must also be present in the <a>media session</a>'s list of
-<a>audio-producing participants</a>. When a new <a>media session</a> is created
-its <a>resume list</a> must be empty.
-
-When the user agent is to <dfn>pause</dfn> a given <var>audio-producing
-object</var> it must run the following steps:
-
-<ol>
-  <li>
-    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
-    <a lt="pause a media element">pause media element</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-  <li>
-    If <var>audio-producing object</var> is an {{AudioContext}} object, then
-    <a lt="suspend a web audio object">suspend web audio object</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-</ol>
-
-When the user agent is to <dfn>indefinitely pause</dfn> a given
-<var>audio-producing object</var>, the user agent must <a>pause</a>
-<var>audio-producing object</var> and, then proceed to remove it from its
-<a>current media session</a>'s list of
-<a>audio-producing participants</a>.
-
-When the user agent is to <dfn>unpause</dfn> a given <var>audio-producing
-object</var> it must run the following steps:
-
-<ol>
-  <li>
-    If <var>audio-producing object</var> is an {{HTMLMediaElement}} object, then
-    <a lt="unpause a media element">unpause media element</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-  <li>
-    If <var>audio-producing object</var> is an {{AudioContext}} object, then
-    <a lt="resume a web audio object">resume web audio object</a>
-    <var>audio-producing object</var> and terminate these steps.
-  </li>
-</ol>
-
-When an <a>audio-producing object</a> is to <dfn>duck</dfn> the user agent must
-ensure its output volume is lowered.
-
-When an <a>audio-producing object</a> is to <dfn>unduck</dfn> the user agent
-should restore its output volume to the same level that was observed prior to
-the original corresponding <a>duck</a> request.
-
-<p class=note>
-  When an <a>audio-producing object</a> is <a lt="duck">ducked</a> any reduction
-  in volume applied by the user agent is not intended to be observable to web
-  pages.
-</p>
-
-<h3 id="activating-a-media-session">Activating a media session</h3>
-
-To <dfn>activate</dfn> a <var>media session</var>, run these steps:
-
-<ol>
-  <li>
-    If <var>media session</var> is already <code><a lt="active media session
-    state">active</a></code>, then return success.
-  </li>
-  <li>
-    Optionally, based on platform conventions, request the most appropriate
-    platform-level media focus for <var>media session</var> based on its
-    <a>kind</a>.
-
-    If this step is run and platform-level media focus can not be obtained for
-    any reason, then return failure.
-  </li>
-  <li>
-    Run these substeps:
-
-    <dl class=switch>
-      <dt>
-        If <var>media session</var>'s <a>kind</a> is
-        "<code><a>content</a></code>"
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            Optionally, based on platform conventions, the user agent may show
-            an ongoing media interface in the underlying platform's
-            notifications area and/or show an ongoing media interface in the
-            underlying platform's lock screen area, using any available <a
-            lt="media session metadata">metadata</a>.
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>media session</var>'s <a>kind</a> is
-        "<code><a>transient</a></code>" or "<code><a>transient-solo</a></code>"
-      </dt>
-      <dd class="note">
-        The user agent should not provide user access to any hardware or
-        software media keys and not display any ongoing media interface in the
-        underlying platform's notifications area or show any ongoing media
-        interface in the underlying platform's lock screen area for
-        "<code><a>transient</a></code>" or
-        "<code><a>transient-solo</a></code>"-based
-        <a>media sessions</a>.
-      </dd>
-      <dt>
-        If <var>media session</var>'s <a>kind</a> is
-        "<code><a>ambient</a></code>"
-      </dt>
-      <dd>
-        If <var>media session</var>'s <a>top-level browsing context</a> is not
-        at least partially visible on at least one screen, then return failure.
-
-        <p class="note">
-          The user agent should not provide user access to any hardware or
-          software media keys and not display any ongoing media interface in the
-          underlying platform's notifications area or show any ongoing media
-          interface in the underlying platform's lock screen area for
-          "<code><a>ambient</a></code>"-based <a>media sessions</a>.
-        </p>
-      </dd>
-    </dl>
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>resume list</a> to an empty list.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>state</a> to
-    <code><a lt="active media session state">active</a></code>, then return
-    success.
-  </li>
-</ol>
-
-<h3 id="interrupting-a-media-session">Interrupting a media session</h3>
-
-An <code><a lt="active media session state">active</a></code> <a>media
-session</a> may be interrupted at any time. This typically occurs when another
-application or another <a>media session</a> requests and is granted a level of
-platform media focus that affects the <a>media session</a> based on its
-<a>kind</a>.
-
-Interruptions can be both transient or permanent. A transient interruption means
-we can either choose to <a>duck</a> our media content and continue playing it
-out at a reduced volume for the duration of the interruption; or <a>pause</a>
-our media content for the duration of the interruption and, then, resume
-playback when that interruption ends. A permanent interruption means we must <a
-lt="indefinitely pause">pause our media content indefinitely</a>.
-
-When a start-of-interruption notification event is received from the platform,
-then the user agent must run the
-<a>media session interruption algorithm</a> against all known <a>media
-sessions</a>, passing in each <a>media session</a> as <var>media session</var>.
-
-The <dfn>media session interruption algorithm</dfn> takes one argument,
-<var>media session</var>, and consists of the following steps.
-
-<ol>
-  <li>
-    If <var>media session</var>'s <a>state</a> is not
-    <code><a lt="active media session state">active</a></code>, then terminate
-    these steps.
-  </li>
-  <li>
-    Let <var>interrupting kind</var> be the <a>kind</a> that triggered this
-    interruption.
-
-    <!-- TODO(philipj): The interruption may not come from another media session
-    at all. https://github.com/whatwg/mediasession/issues/100 -->
-  </li>
-  <li>
-    Run these substeps:
-
-    <dl class=switch>
-      <dt>
-        If <var>interrupting kind</var> is "<code><a>content</a></code>"
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>media session</var>'s <a>kind</a> is
-            "<code><a>content</a></code>" then
-            <a>indefinitely pause</a> all of <var>media session</var>'s
-            <a>audio-producing participants</a> and set <var>media
-            session</var>'s <a>state</a> to <code><a lt="idle media session
-            state">idle</a></code>.
-
-            <p class="note">
-              This implies that the next time the <var>media session</var> is
-              <a>activated</a>, that we will re-request media focus according to
-              the steps defined in that algorithm.
-            </p>
-          </li>
-          <li>
-            Optionally, based on platform conventions, the user agent must
-            remove any previously established ongoing media interface in the
-            underlying platform's notifications area and any ongoing media
-            interface in the underlying platform's lock screen area for
-            <var>media session</var>, if any.
-          </li>
-          <li>
-            Optionally, based on platform conventions, the user agent must
-            prevent any hardware and/or software media keys from controlling
-            playback of
-            <var>media session</var>'s <a>audio-producing participants</a>.
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>interrupting kind</var> is "<code><a>transient</a></code>"
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>media session</var>'s <a>kind</a> is not
-            "<code><a>content</a></code>", then terminate these steps.
-          </li>
-
-          <li>
-            For each <var>audio-producing object</var> in <var>media
-            session</var>'s list of <a>audio-producing participants</a>:
-
-            <ol>
-              <li>
-                If <var>audio-producing object</var> is not currently playing,
-                or is not otherwise running, then terminate these substeps and
-                continue at the next available <var>audio-producing
-                object</var>.
-              </li>
-              <li>
-                <a>Duck</a> <var>audio-producing object</var>.
-              </li>
-              <li>
-                Add <var>audio-producing object</var> to <var>media
-                session</var>'s <a>resume list</a>.
-              </li>
-            </ol>
-          </li>
-          <li>
-            Set <var>media session</var>'s <a>state</a> to <code><a
-            lt="interrupted media session state">interrupted</a></code>.
-
-            <p class="note">
-              This implies that the next time the <a>media session continuation
-              algorithm</a> is run for <var>media session</var> that we will
-              re-activate this <a>media session</a> according to the steps
-              defined in that algorithm.
-            </p>
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>interrupting kind</var> is "<code><a>transient-solo</a></code>"
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>media session</var>'s <a>kind</a> is not
-            "<code><a>content</a></code>", "<code><a>transient</a></code>" or
-            "<code><a>transient-solo</a></code>", then terminate these steps.
-          </li>
-
-          <li>
-            For each <var>audio-producing object</var> in <var>media
-            session</var>'s list of <a>audio-producing participants</a>:
-
-            <ol>
-              <li>
-                If <var>audio-producing object</var> is not currently playing,
-                or is not otherwise running, then terminate these substeps and
-                continue at the next available <var>audio-producing
-                object</var>.
-              </li>
-              <li>
-                <a>Pause</a> <var>audio-producing object</var>.
-              </li>
-              <li>
-                Add <var>audio-producing object</var> to <var>media
-                session</var>'s <a>resume list</a>.
-              </li>
-            </ol>
-          </li>
-          <li>
-            Set <var>media session</var>'s <a>state</a> to <code><a
-            lt="interrupted media session state">interrupted</a></code>.
-
-            <p class="note">
-              This implies that the next time the <a>media session continuation
-              algorithm</a> is run for <var>media session</var> that we will
-              re-activate this <a>media session</a> according to the steps
-              defined in that algorithm.
-            </p>
-          </li>
-        </ol>
-      </dd>
-    </dl>
-  </li>
-</ol>
-
-<p>&nbsp;</p>
-
-When an end-of-interruption notification event is received from the platform,
-then the user agent must run the <a>media session continuation algorithm</a>
-against all known <a>media sessions</a>, passing in each <a>media session</a> as
-<var>media session</var>.
-
-The <dfn>media session continuation algorithm</dfn> takes one argument,
-<var>media session</var>, and consists of the following steps.
-
-<ol>
-  <li>
-    If <var>media session</var>'s <a>state</a> is not
-    <code><a lt="interrupted media session state">interrupted</a></code>, then
-    terminate these steps.
-  </li>
-  <li>
-    Let <var>interrupting kind</var> be the <a>kind</a> that initially triggered
-    this interruption.
-
-    <!-- TODO(philipj): The interruption may not come from another media session
-    at all. https://github.com/whatwg/mediasession/issues/100 -->
-  </li>
-  <li>
-    Run these substeps:
-
-    <dl class=switch>
-      <dt>
-        If <var>interrupting kind</var> is "<code><a>transient</a></code>"
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>media session</var>'s <a>kind</a> is not
-            "<code><a>content</a></code>", then terminate these steps.
-          </li>
-          <li>
-            <a>Unduck</a> each <var>audio-producing object</var> in <var>media
-            session</var>'s <a>resume list</a>.
-          </li>
-          <li>
-            Set <var>media session</var>'s <a>resume list</a> to an empty list.
-          </li>
-          <li>
-            Set <var>media session</var>'s <a>state</a> to <code><a lt="active
-            media session state">active</a></code>.
-          </li>
-        </ol>
-      </dd>
-      <dt>
-        If <var>interrupting kind</var> is "<code><a>transient-solo</a></code>"
-      </dt>
-      <dd>
-        <ol>
-          <li>
-            If <var>media session</var>'s <a>kind</a> is not
-            "<code><a>content</a></code>", "<code><a>transient</a></code>", or
-            "<code><a>transient-solo</a></code>", then terminate these steps.
-          </li>
-          <li>
-            <a>Unpause</a> each <var>audio-producing object</var> in <var>media
-            session</var>'s <a>resume list</a>.
-          </li>
-          <li>
-            Set <var>media session</var>'s <a>resume list</a> to an empty list.
-          </li>
-          <li>
-            Set <var>media session</var>'s <a>state</a> to <code><a lt="active
-            media session state">active</a></code>.
-          </li>
-        </ol>
-      </dd>
-    </dl>
-  </li>
-</ol>
-
-<br>
-
-After a {{visibilitychange}} event has been fired at a <a>top-level browsing
-context</a>, known as <var>the browsing context</var>, the user agent must run
-the following steps:
-
-<ol>
-  <li>
-    If {{visibilityState}} is not "{{hidden}}" or "{{visible}}", then terminate
-    these steps.
-  </li>
-  <li>
-    For each <a>media session</a> in <var>the browsing context</var> with a
-    <a>kind</a> of "<code><a>ambient</a></code>" run the following substeps:
-
-    <ol>
-      <li>
-        Let <var>s</var> be the current <a>media session</a>.
-      </li>
-      <li>
-        If {{visibilityState}} is "{{hidden}}" and <var>s</var>'s <a>state</a>
-        is <code><a lt="active media session state">active</a></code>, then run
-        the following substeps:
-
-        <ol>
-          <li>
-            For each <var>audio-producing object</var> in <var>s</var>'s list of
-            <a>audio-producing participants</a>, run the following substeps:
-
-            <ol>
-              <li>
-                If <var>audio-producing object</var> is not currently playing,
-                or is not otherwise running, then terminate these substeps and
-                continue at the next available <var>audio-producing
-                object</var>.
-              </li>
-              <li>
-                <a>Pause</a> <var>audio-producing object</var>.
-              </li>
-              <li>
-                Add <var>audio-producing object</var> to <var>media
-                session</var>'s <a>resume list</a>.
-              </li>
-            </ol>
-          </li>
-          <li>
-            Set <var>s</var>'s
-            <a>state</a> to <code><a lt="interrupted media session
-            state">interrupted</a></code>.
-          </li>
-          <li>
-            Terminate these substeps and continue at the next available
-            <a>media session</a>.
-          </li>
-        </ol>
-      </li>
-
-      <li>
-        If {{visibilityState}} is "{{visible}}" and <var>s</var>'s <a>state</a>
-        is <code><a lt="interrupted media session state">interrupted</a></code>,
-        then run the following substeps:
-
-        <ol>
-          <li>
-            <a>Unpause</a> each <var>audio-producing object</var> in
-            <var>s</var>'s <a>resume list</a>.
-          </li>
-          <li>
-            Set <var>s</var>'s <a>resume list</a> to an empty list.
-          </li>
-          <li>
-            Set <var>s</var>'s <a>state</a> to <code><a lt="active media session
-            state">active</a></code>.
-          </li>
-          <li>
-            Terminate these substeps and continue at the next available
-            <a>media session</a>.
-          </li>
-        </ol>
-      </li>
-    </ol>
-  </li>
-</ol>
-
-<h3 id="deactivating-a-media-session">Deactivating a media session</h3>
-
-To <dfn>deactivate</dfn> a <var>media session</var>, run these steps:
-
-<ol>
-  <li>
-    <a>Indefinitely pause</a> all of <var>media session</var>'s
-    <a>audio-producing participants</a>.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>resume list</a> to an empty list.
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>audio-producing participants</a>
-    to an empty list.
-  </li>
-  <li>
-    Run the <a>media session deactivation algorithm</a> for <var>media
-    session</var>.
-  </li>
-</ol>
-
-The <dfn>media session deactivation algorithm</dfn> takes one argument,
-<var>media session</var>, and consists of the following steps.
-
-<ol>
-  <li>
-    If <var>media session</var>'s <a>state</a> is
-    <code><a lt="idle media session state">idle</a></code>, then terminate these
-    steps.
-  </li>
-  <li>
-    If <var>media session</var> still has one or more <a>audio-producing
-    participants</a>, then terminate these steps.
-  </li>
-  <li>
-    Optionally, based on platform conventions, the user agent must release any
-    currently held platform media focus for <var>media session</var>.
-  </li>
-  <li>
-    Optionally, based on platform conventions, the user agent must remove any
-    previously established ongoing media interface in the underlying platform's
-    notifications area and any ongoing media interface in the underlying
-    platform's lock screen area for <var>media session</var>, if any.
-  </li>
-  <li>
-    Optionally, based on platform conventions, the user agent must prevent any
-    hardware and/or software media keys from controlling playback of
-    <var>media session</var>'s <a>audio-producing participants</a>.
-
-    <p class="note">
-      If the algorithm reaches this step then <var>media session</var> can not
-      have any remaining <a>audio-producing participants</a>.
-    </p>
-  </li>
-  <li>
-    Set <var>media session</var>'s <a>state</a> to
-    <code><a lt="idle media session state">idle</a></code>.
-
-    <p class="note">
-      This implies that the next time the <var>media session</var> is
-      <a>activated</a>, that we will re-request media focus according to the
-      steps defined in that algorithm.
-    </p>
-  </li>
-</ol>
-
 <h2 id="the-mediametadata-interface">The {{MediaMetadata}} interface</h2>
 
 <pre class="idl">
 
-[Constructor(MediaMetadataInit init)]
+[Constructor(optional MediaMetadataInit init)]
 interface MediaMetadata {
   readonly attribute DOMString title;
   readonly attribute DOMString artist;
@@ -1195,54 +308,11 @@ attribute must return the {{MediaMetadata}} objects's <a for="MediaMetadata"
 title="artwork image">artwork images</a>, as a FrozenArray of {{MediaImage}}s.
 The <a attribute for="MediaMetadata">artwork</a> attribute can be empty.
 
-When a user agent wants to display the {{MediaSession}}'s artwork as specified
-in it's <var>metadata</var>, it is recommended to run the following <dfn>fetch
-steps</dfn>:
-
-<ol>
-  <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
-  <li>
-    If <var>metadata</var>'s <a attribute
-    for="MediaMetadata"><code>artwork</code></a> is empty, then terminate these
-    steps.
-  </li>
-  <li>
-    If the platform supports displaying media artwork, select a <dfn>prefered
-    artwork image</dfn>
-    from <var>metadata</var>'s <a attribute
-    for="MediaMetadata"><code>artwork</code></a>.
-  </li>
-  <li>
-    <a title="fetch">Fetch</a> <a>prefered artwork image</a>'s
-    {{MediaImage/src}}.
-
-    Then, <a>in parallel</a>:
-
-    <ol>
-      <li>
-        Wait for the <a>response</a>.
-      </li>
-      <li>
-        If the <a>response</a>'s <a>internal response</a>'s
-        <a lt="response type">type</a> is <i>default</i>, attempt to decode the
-        resource as image.
-      </li>
-      <li>
-        If the image format is supported, use the image as the artwork for
-        display. Otherwise the <a>fetch steps</a> fail and terminate.
-      </li>
-    </ol>
-  </li>
-</ol>
-
-If no artwork images are fetched in the <a>fetch steps</a>, the user agent may
-have fallback behavior such as displaying an default image as artwork.
-
 <h2 id="the-mediaimage-interface">The {{MediaImage}} interface</h2>
 
 <pre class="idl">
 
-[Constructor(MediaImageInit init)]
+[Constructor(optional MediaImageInit init)]
 interface MediaImage {
   readonly attribute USVString src;
   readonly attribute DOMString sizes;
@@ -1318,205 +388,114 @@ The <dfn attribute for="MediaImage">type</dfn> attribute must return the
 media type of the image. The purpose of this attribute is to allow a user agent
 to ignore images of media types it does not support.
 
-<h2 id="extensions-to-the-htmlmediaelement-interface">Extensions to the
-{{HTMLMediaElement}} interface</h2>
+<h2 id="processing-model">Processing model</h2>
 
-<pre class="idl">
-partial interface HTMLMediaElement {
-  attribute MediaSession? session;
-};
-</pre>
+As there is a {{Window}} object per <a>browsing context</a>, the <a>top-level
+browsing context</a> and each <a>nested browsing context</a> will have an
+associated {{MediaSession}} object. For each tab, the user agent MUST select the
+{{MediaSession}} object of the <a>top-level browsing context</a> to represent
+the tab. The selected {{MediaSession}} object is called <dfn lt="tab-level
+active media session">tab-level active media session</dfn>.
 
-<dl class=domintro>
-  <dt>
-    <code><var>media</var> . {{HTMLMediaElement/session}}</code> [ = <code>
-    session</code> ]
-  </dt>
-  <dd>
-    Returns the <a>current media session</a> for the <a>media element</a>, if
-    any, or null otherwise.
+<p class="issue" id="whether-allow-child-frame-media-session">
+  It is still an open question whether an {{MediaSession}} object is allowed to
+  become the <a>tab-level active media session</a>. See the <a
+  href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>.
+</p>
 
-    Can be set, to change the <a>current media session</a>.
+When the user agent has multiple tabs, the user agent MUST select the <a>most
+meaningful audio-producing tab</a> and present the <a>tab-level active media
+session</a> to the platform, which MAY be displayed in the platform UI depending
+on platform conventions. The <dfn>most meaningful audio-producing tab</dfn> is
+the tab which is producing the most meaningful audio to the user. The user agent
+SHOULD select the <a>most meaningful audio-producing tab</a> based on platform
+conventions and the preferred user experience. The <a>most meaningful
+audio-producing tab</a> can be null.
 
-    Throws an {{InvalidStateError}} exception if the <a>media element</a>'s
-    {{networkState}} is {{NETWORK_LOADING}} or {{NETWORK_IDLE}}.
-  </dd>
-</dl>
-
-The <dfn attribute for="HTMLMediaElement"
-lt="session"><code>session</code></dfn> attribute on a <a>media element</a>, on
-getting, must return the element's <a>current media session</a>, if any, or null
-otherwise. On setting, the user agent must run the following steps:
-
-<ol>
-  <li>
-    If the <a>media element</a>'s {{networkState}} is {{NETWORK_LOADING}} or
-    {{NETWORK_IDLE}}, throw an {{InvalidStateError}} exception and abort these
-    steps.
-  </li>
-  <li>
-    Set the <a>media elements</a>'s <a>current media session</a> to the new
-    value.
-  </li>
-</ol>
-
-<h3 id="activating-a-media-session-from-an-htmlmediaelement-object">Activating a
-media session from an {{HTMLMediaElement}} object</h3>
-
-<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
-
-When the {{play()}} method on a <a>media element</a> is invoked from script –
-or a <a>media element</a> is otherwise played from the web page (e.g. via its
-{{controls}}) – and that <a>media element</a>'s {{paused}} attribute is true
-and its {{HTMLMediaElement/readyState}} attribute has the value
-{{HAVE_FUTURE_DATA}} or {{HAVE_ENOUGH_DATA}} then the user agent must run the
-following steps, passing in <a>media element</a> as <var>media element</var>:
+Whenever the <a>most meaningful audio-producing tab</a> changes or setting <a
+attribute for="MediaSession"><code>metadata</code></a> of the <a>most meaningful
+audio-producing tab</a>, the user agent MUST run the <dfn>update metadata
+algorithm</dfn>, the steps are as follows:
 
 <ol>
   <li>
-    Let <var>media session</var> be the value of <var>media element</var>'s
-    <a>current media session</a>.
+    If the <a>most meaningful audio-producing tab</a> is null, unset the media
+    metadata presented to the platform, and terminate these steps.
   </li>
   <li>
-    If <var>media element</var> is not currently in <var>media session</var>'s
-    list of <a>audio-producing participants</a>, then append <var>media
-    element</var> to this list.
+    If the <a attribute for="MediaSession"><code>metadata</code></a> for the
+    <a>tab-level active media session</a> of the <a>most meaningful
+    audio-producing tab</a> is null, unset the media metadata presented to the
+    platform, and terminate these steps.
   </li>
   <li>
-    <a>Activate</a> <var>media session</var>.
+    Update the media metadata presented to the platform to match the <a
+    attribute for="MediaSession"><code>metadata</code></a> for the
+    <a>tab-level active media session</a> of the <a>most meaningful
+    audio-producing tab</a>.
   </li>
   <li>
-    If <a>activate</a> failed, <a>pause</a> <var>media element</var>.
+    If the user agent wants to display <a>artwork image</a>, it is recommended
+    to run the <a>fetch image algorithm</a>.
   </li>
-  <!-- TODO(philipj): Integrate with HTML to better precisely when implicit
-  activation happens and clarify that it's only the paused attribute that's
-  temporarily paused, there should be no actual playback, however short. -->
 </ol>
 
-
-<h3
-id="interrupting-a-media-session-from-an-htmlmediaelement-object">Interrupting a
-media session from an {{HTMLMediaElement}} object</h3>
-
-When the user agent is to <dfn>pause a media element</dfn> for a given
-<var>media element</var> it must run that <a>media element</a>'s <a>internal
-pause steps</a>.
-
-<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=28625 -->
-
-When the user agent is to <dfn>unpause a media element</dfn> for a given
-<var>media element</var> it must invoke that <a>media element</a>'s {{play()}}
-method.
-
-<h3
-id="deactivating-a-media-session-from-an-htmlmediaelement-object">Deactivating a
-media session from an {{HTMLMediaElement}} object</h3>
-
-When a <a>media element</a>'s <a lt="ended playback">playback has ended</a>, the
-user agent must <a>release media element from its media session</a>.
-
-Any time a <a>media element</a>'s <a lt="media element load algorithm">load
-algorithm</a> is run by the user agent, it must <a>release media element from
-its media session</a>.
-
-When the user agent is to <dfn>release media element from its media
-session</dfn> for a given <var>media element</var> it must run the following
-steps:
+The recommended <dfn>fetch image algorithm</dfn> is as follows:
 
 <ol>
+  <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
   <li>
-    Let <var>media session</var> be the value of <var>media element</var>'s
-    <a>current media session</a>.
+    If there are other <a>fetch image algorithm</a> running, cancel existing
+    algorithm execution instances.
   </li>
   <li>
-    If <var>media element</var> is not currently in <var>media session</var>'s
-    list of <a>audio-producing participants</a>, then terminate these steps.
+    If <var>metadata</var>'s <a attribute
+    for="MediaMetadata"><code>artwork</code></a> of the <a>tab-level active
+    media session</a> of the <a>most meaningful audio-producing tab</a> is
+    empty, then terminate these steps.
   </li>
   <li>
-    If <var>media element</var> is in <var>media session</var>'s <a>resume
-    list</a> then remove it from this list.
+    If the platform supports displaying media artwork, select a <dfn>prefered
+    artwork image</dfn>
+    from <var>metadata</var>'s <a attribute
+    for="MediaMetadata"><code>artwork</code></a> of the <a>tab-level active
+    media session</a> of the <a>most meaningful audio-producing tab</a>.
   </li>
   <li>
-    Remove <var>media element</var> from <var>media session</var>'s list of
-    <a>audio-producing participants</a>.
-  </li>
-  <li>
-    Run the <a>media session deactivation algorithm</a> for <var>media
-    session</var>.
-  </li>
-</ol>
+    <a title="fetch">Fetch</a> the <a>prefered artwork image</a>'s
+    {{MediaImage/src}}.
 
-<h2 id="extensions-to-the-audiocontext-interface">Extensions to the
-{{AudioContext}} interface</h2>
+    Then, <a>in parallel</a>:
 
-<pre class="idl">
-partial interface AudioContext {
-  attribute MediaSession? session;
-};
-</pre>
-
-<dl class=domintro>
-  <dt>
-    <code><var>context</var> . {{AudioContext/session}}</code> [ = <code>
-    session</code> ]
-  </dt>
-  <dd>
-    Returns the <a>current media session</a> for the {{AudioContext}} object, if
-    any, or null otherwise.
-
-    Can be set, to change the <a>current media session</a>.
-
-    Throws an {{InvalidStateError}} exception if the {{AudioContext}} object's
-    {{state}} attribute is "{{running}}".
-  </dd>
-</dl>
-
-The <dfn attribute for="AudioContext" lt="session"><code>session</code></dfn>
-attribute on an {{AudioContext}} object, on getting, must return the object's
-<a>current media session</a>, if any, or null otherwise. On setting, the user
-agent must run the following steps:
-
-<ol>
-  <li>
-    If the {{AudioContext}} object's {{state}} attribute is "{{running}}", throw
-    an {{InvalidStateError}} exception and abort these steps.
-  </li>
-  <li>
-    Set the {{AudioContext}} object's <a>current media session</a> to the new
-    value.
+    <ol>
+      <li>
+        Wait for the <a>response</a>.
+      </li>
+      <li>
+        If the <a>response</a>'s <a>internal response</a>'s
+        <a lt="response type">type</a> is <i>default</i>, attempt to decode the
+        resource as image.
+      </li>
+      <li>
+        If the image format is supported, use the image as the artwork for
+        display in platform UI. Otherwise the <a>fetch image algorithm</a> fail
+        and terminate.
+      </li>
+    </ol>
   </li>
 </ol>
 
-<h3 id="interrupting-a-media-session-from-an-audiocontext-object">Interrupting a
-media session from an {{AudioContext}} object</h3>
-
-When the user agent is to <dfn>suspend a web audio object</dfn> for a given
-{{AudioContext}} object it must invoke that {{AudioContext}} object's
-{{suspend()}} method.
-
-When the user agent is to <dfn>resume a web audio object</dfn> for a given
-{{AudioContext}} object it must invoke that {{AudioContext}} object's
-{{resume()}} method.
+If no artwork images are fetched in the <a>fetch image algorithm</a>, the user
+agent MAY have fallback behavior such as displaying an default image as artwork.
 
 <h2 id="examples">Examples</h2>
 
 <em>This section is non-normative.</em>
 
-<div class="example">
-  For music or podcasts, using a <a>media session</a> of <a>kind</a>
-  "<code><a>content</a></code>" can be appropriate.
+<div class="example" id="example-setting-metadata">
 
   <pre class="lang-javascript">
-    var audio = document.createElement("audio");
-    audio.src = "podcast.mp3";
-    audio.session = new MediaSession(); // "content" is the default kind
-    audio.play();
-  </pre>
-
-  If metadata is available, providing it will allow for a richer user interface:
-
-  <pre class="lang-javascript">
-    audio.session.metadata = new MediaMetadata({
+    window.navigator.mediaSession.metadata = new MediaMetadata({
       title: "Episode Title",
       artist: "Podcast Host",
       album: "Podcast Title",
@@ -1530,7 +509,7 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
   for different screens:
 
   <pre class="lang-javascript">
-    audio.session.metadata = new MediaMetadata({
+    window.navigator.mediaSession.metadata = new MediaMetadata({
       title: "Episode Title",
       artist: "Podcast Host",
       album: "Podcast Title",
@@ -1554,7 +533,7 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 
 </div>
 
-<div class="example">
+<div class="example" id="example-changing-metadata">
   For playlists or chapters of an audio book, multiple <a>media elements</a> can
   share a single <a>media session</a>.
 
@@ -1564,9 +543,6 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 
     var audio2 = document.createElement("audio");
     audio2.src = "chapter2.mp3";
-
-    var sharedSession = new MediaSession();
-    audio1.session = audio2.session = sharedSession;
 
     audio1.play();
     audio1.addEventListener("ended", function() {
@@ -1579,7 +555,7 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 
   <pre class="lang-javascript">
     function updateMetadata(event) {
-      sharedSession.metadata = new MediaMetadata({
+      window.navigator.mediaSession.metadata = new MediaMetadata({
         title: event.target == audio1 ? "Chapter 1" : "Chapter 2",
         artist: "An Author",
         album: "A Book",
@@ -1589,21 +565,6 @@ When the user agent is to <dfn>resume a web audio object</dfn> for a given
 
     audio1.addEventListener("play", updateMetadata);
     audio2.addEventListener("play", updateMetadata);
-  </pre>
-</div>
-
-<div class="example">
-  For games, using a <a>media session</a> of <a>kind</a>
-  "<code><a>ambient</a></code>" can be appropriate. Because {{AudioContext}}
-  objects are created in the "{{running}}" state, it's necessary to suspend
-  before setting the session.
-
-  <pre class="lang-javascript">
-    var context = new AudioContext();
-    context.suspend().then(function() {
-      context.session = new MediaSession("ambient");
-      context.resume();
-    });
   </pre>
 </div>
 
