@@ -34,8 +34,8 @@ respond to these controls, especially for commands such as "play/pause",
 "previous/next track" and "seek back/forward".
 
 The MediaSession API gives pages the ability to respond to platform media
-controls. By implementing the API, the user agent will act as a proxy and pass
-the media control events to web pages, so that the pages can perform
+controls. By implementing the API, the user agent will act as a proxy and
+pass the media controls to web pages, so that the pages can perform
 corresponding actions.
 
 For example, a podcast website can tell the user agent that it wants to receive
@@ -67,7 +67,15 @@ the following:
 ```javascript
 interface MediaSession {
     attribute MediaMetadata? metadata;
-    // TODO: define API for media controls.
+
+    attribute EventHandler onplay;
+    attribute EventHandler onpause;
+    attribute EventHandler onplaypause;
+    attribute EventHandler onprevioustrack;
+    attribute EventHandler onnexttrack;
+    attribute EventHandler onseekforward;
+    attribute EventHandler onseekbackward;
+    ...
 };
 ```
 
@@ -96,31 +104,85 @@ interface MediaMetadata {
 
 ### Media controls
 
-**Note** The spec will handle these use cases but not as part of the first
-iteration.
+**Note** The API for media controls is still under development and may not be
+stable.
 
-The interfaces for media controls will be part of the `MediaSession` interface,
-but the details are not decided yet. In general, the page should tell which
-media controls it would like to receive, and register corresponding callbacks to
-`MediaSession`. Then the user agent should listen to these events from the
-platform and notify the page by calling the registered callbacks.
+The API for media controls should work as follows:
 
-**Note** Websites might ignore some media control events, especially
-  "pause". These events should be intervened by the user agent or the platform,
-  and should not be handled by the websites, or maybe we should do both handling
-  the events in the user agent and notifying the page about the event. This is
-  still an open question.
+* The page registers event handlers for media control actions. A page
+  registering an event handler for a media control action implies it supports
+  that action.
+* The user agent displays on UI for those controls (if applicable) and registers
+  callbacks for those controls to the platform (if applicable).
+* When the user initiates media control actions through UI or platform
+  facilities, the user agent forwards the media control action to the page by
+  calling the corresponding handler.
+
+It is up to the user agent to decide which controls to show for in the UI and
+register listeners to the platform. This may vary depending on UI concerns and
+platform capabilities.
+
+The user agent may have fallback behavior for some actions. There might be
+useful in several use cases where the page wants to use or override the default
+fallback behavior. The page can call `preventDefault()` in the event handler to
+avoid the fallback behavior.
+
+**Note** A possible issue with the above solution is that the user agent cannot
+  know whether a event handler has `preventDefault()` until it calls the
+  handler. After it's executed, the event handler may already run some steps,
+  while the user agent can hardly know what steps are executed. Then the user
+  agent may see `preventDefault()` is not called and do some fallback behavior.
+  Suppose the user agent has a fallback `seekforward` implementation, and a page
+  also does change the playback position for `seekforward`, then the playback
+  position will be forwarded twice. This might end up with pages calling
+  `preventDefault()` every time.
+
+**Note** Websites might ignore some media control actions, especially
+  "pause". In this case we might want to intervene these actions in the user
+  agent or the platform. Another option is to handle these actions in the user
+  agent and not exposing to the page at all. This is still an open question. See
+  https://github.com/WICG/mediasession/issues/69
+
+For action `play` and `pause`, the user agent need to use its best guess to
+decide whether the page is playing or paused. We are considering add a boolean
+attribute `playbackState` to let the page tell the playback state correctly. In
+many cases, `play` and `pause` share the same media button. When the button is
+pressed, the user agent should fire `pause` action when the page is playing and
+fire `play` when the page is paused.
+
+**Note** It is still an open question whether we need action `playpause`. The
+  difference between `play`+`pause` and `playpause` is where the playback is
+  decided. For `playpause`, it is decided by the page. For `play`+`pause`, it is
+  decided by the user agent, but the page could possibly tell the playback state
+  via a new attribute `playbackState`. See
+  https://github.com/WICG/mediasession/issues/141
+
+Here's an example for media controls:
+
+```
+// Suppose |audio| is an audio element and |session| is a MediaSession object.
+session.onplay = function() {
+    preventDefault();
+    audio.play();
+};
+
+session.onpause = function() {
+    preventDefault();
+    audio.pause();
+};
+
+```
 
 ### `MediaSession` routing
 
 It usually makes more sense to display the media metadata of one page and let
-only that page respond to media controls than doing that for multiple pages at
-the same time. Since multiple tabs can have `MediaSession` objects, the user
-agent should have a routing mechanism to select one `MediaSession`. The media
-metadata of the selected `MediaSession` will be passed to the platform for UI
-display, and all media controls are routed to that `MediaSession`. The user
-agent should give control to the page or component that is currently playing the
-most meaningful media to the user. If the AudioFocus API (see
+only that page respond to media control actions than doing that for multiple
+pages at the same time. Since multiple tabs can have `MediaSession` objects, the
+user agent should have a routing mechanism to select one `MediaSession`. The
+media metadata of the selected `MediaSession` will be passed to the platform for
+UI display, and all media control actions are routed to that `MediaSession`. The
+user agent should give control to the page or component that is currently
+playing the most meaningful media to the user. If the AudioFocus API (see
 [below](#sec-audiofocus-api)) is being used, it is defined by the
 API. Otherwise, the user agent should route `MediaSession` based on platform
 conventions and the preferred user experience.
@@ -134,9 +196,9 @@ user-constructible, the discussions are as follows:
 
 If we consider each page as an application, it is straightforward that each page
 has only one `MediaSession`, and the page takes full responsibility of setting
-the media metadata and responds to media controls. In this way, we can make
-`MediaSession` a global object, and it is not user-constructible. For this we
-provide a partial interface to the Navigator object:
+the media metadata and responds to media control actions. In this way, we can
+make `MediaSession` a global object, and it is not user-constructible. For this
+we provide a partial interface to the Navigator object:
 
 ```javascript
 partial interface Navigator {
@@ -163,7 +225,7 @@ each other. In this way, the `MediaSession` interface will look like this:
 [Constructor()]
 interface MediaSession {
     attribute MediaMetadata? metadata;
-    // TODO: define API for media controls.
+    // Omitting media control APIs
 
     Promise<void> activate();
     void deactivate();
@@ -207,8 +269,8 @@ all. For example, the user plays a embedded YouTube video on Facebook, and
 YouTube sets the album art to a YouTube logo, the user will be confused if the
 platform UI shows an YouTube image, while it actually comes from Facebook. On
 the opposite, if a website has an embedded music player, it might want to show
-the metadata from the embedded music player, and let it respond to media
-controls.
+the metadata from the embedded music player, and let it respond to media control
+actions.
 
 Since this is an UX decision, we need UA feedback to decide the default behavior
 in the spec.
@@ -217,7 +279,7 @@ in the spec.
 
 Here is a summary of the open questions mentioned above.
 
-* What should we do if the page ignores some important media control events such
+* What should we do if the page ignores some important media control handlers such
   as "pause"?
 * Making `MediaSession` a global instance or a user-constructible object?
 * Letting iframes use `MediaSession` or not?
