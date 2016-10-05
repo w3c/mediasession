@@ -26,6 +26,24 @@ Boilerplate: omit conformance, omit feedback-header
   .example .self-link { display: none; }
 </style>
 
+<style>
+table {
+  border-collapse: collapse;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  text-align: left;
+}
+table caption {
+  font-weight: bold;
+  padding: 3px;
+  text-align: left;
+}
+table td, table th {
+  border: 1px solid black;
+  padding: 3px;
+}
+</style>
+
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
     type: interface
@@ -63,6 +81,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
         urlPrefix: webappapis.html
             text: API base URL
             text: entry settings object
+            text: event handler
             text: event handlers
             text: event handler event type
             text: event handler content attributes
@@ -161,7 +180,8 @@ consuming media content. Many platforms can display media metadata, such as
 title, artist, album and album art on various UI elements such as notification,
 media control center, device lockscreen and wearable devices. This specification
 aims to enable web pages to specify the media metadata to be displayed in
-platform UI, which helps in improving the user experience.
+platform UI, and respond to media controls which may come from platform UI or
+media keys, therefore improves the user experience.
 
 <h2 id="conformance">Conformance</h2>
 
@@ -209,8 +229,17 @@ partial interface Navigator {
   readonly attribute MediaSession mediaSession;
 };
 
-interface MediaSession {
+[Exposed=Window]
+interface MediaSession : EventHandler {
   attribute MediaMetadata? metadata;
+
+  attribute EventHandler onplay;
+  attribute EventHandler onpause;
+  attribute EventHandler onplaypause;
+  attribute EventHandler onprevioustrack;
+  attribute EventHandler onnexttrack;
+  attribute EventHandler onseekforward;
+  attribute EventHandler onseekbackward;
 };
 </pre>
 
@@ -239,6 +268,9 @@ which is either a {{MediaMetadata}} object or null.
 The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute, on
 getting, must return the <a>media session</a>'s <a lt="media session
 metadata">metadata</a>.
+
+There are a batch of <a>event handlers</a>, which are used for media controls.
+These <a>event handlers</a> are defined in [[#media-controls]].
 
 <h2 id="the-mediametadata-interface">The {{MediaMetadata}} interface</h2>
 
@@ -389,6 +421,162 @@ The <dfn attribute for="MediaImage">type</dfn> attribute must return the
 media type of the image. The purpose of this attribute is to allow a user agent
 to ignore images of media types it does not support.
 
+<h2 id="media-controls">Media Controls</h2>
+
+In the {{MediaSession}} interface, there are a bunch of <a>event handlers</a>
+which are used for media controls. They enable the page to listen to <a
+lt="media control action">media control actions</a> from hardware or software
+media interfaces on the platform. A <dfn>media control action</dfn> is a user
+command to perform media-related actions, such as play/pause media playback and
+switching media tracks. <a lt="media control action">Media control actions</a>
+MAY come from various hardware and software interfaces on the platform,
+including media keys or buttons on the keyboard, headphone, remote controller,
+notification or lock screen.
+
+For each <a>media control action</a>, there is a corresponding <a>event
+handler</a> called a <dfn>media control event handler</dfn>.
+
+The <a>media control event handler</a> allows a page to register callbacks when
+the action is fired. On set, the page declares it supports the corresponding
+<a>media control action</a>, and the user agent could display a button for the
+action on platform UI and/or register listeners for the action to the platform,
+and forward the corresponding <a>media control action</a> to the <a>media
+control event handler</a> when the it is received.
+
+The list of <a lt="media control action">media control actions</a> is as
+follows:
+
+<table>
+  <tr>
+    <th>
+      <a>event handler event type</a>
+    </th>
+    <th>
+      Interface
+    </th>
+    <th>
+      <a>Event handler</a>
+    </th>
+    <th>
+      Fired when...
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event play"><code>play</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onplay}}
+    </td>
+    <td>
+      The user presses the "play" media key or button on any hardware or
+      software media interface.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event pause"><code>pause</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onpause}}
+    </td>
+    <td>
+      The user presses the "pause" media key or button on any hardware or
+      software media interface.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event playpause"><code>playpause</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onplaypause}}
+    </td>
+    <td>
+      The user presses the "play/pause" media key or button on any hardware or
+      software media interface.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event previoustrack"><code>previoustrack</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onprevioustrack}}
+    </td>
+    <td>
+      The user presses the "previous track" media key or button on any hardware
+      or software media interface.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event nexttrack"><code>nexttrack</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onnexttrack}}
+    </td>
+    <td>
+      The user presses the "next track" media key or button on any hardware or
+      software media interface.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event seekforward"><code>seekforward</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onseekforward}}
+    </td>
+    <td>
+      The user presses the "seek forward" media key or button on any hardware or
+      software media interface.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event seekbackward"><code>seekbackward</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onseekbackward}}
+    </td>
+    <td>
+      The user presses the "seek backward" media key or button on any hardware
+      or software media interface.
+    </td>
+  </tr>
+</table>
+
+<p class="issue" id="whether-allow-page-listen-play-pause">
+  It is still an open question whether to allow pages to handle <a lt="event
+  play">play</a>, <a lt="event pause">pause</a> and <a lt="event
+  playpause">playpause</a> actions. The user agent MAY either intercept these
+  actions and handle them within the user agent, or forward these actions to the
+  page and let the page handle them. See <a
+  href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>.
+</p>
+
 <h2 id="processing-model">Processing model</h2>
 
 As there is a {{Window}} object per <a>browsing context</a>, the <a>top-level
@@ -404,19 +592,39 @@ active media session">tab-level active media session</dfn>.
   href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>.
 </p>
 
-When the user agent has multiple tabs, the user agent MUST select the <a>most
-meaningful audio-producing tab</a> and present the <a>tab-level active media
-session</a> to the platform, which MAY be displayed in the platform UI depending
-on platform conventions. The <dfn>most meaningful audio-producing tab</dfn> is
-the tab which is producing the most meaningful audio to the user. The user agent
-SHOULD select the <a>most meaningful audio-producing tab</a> based on platform
-conventions and the preferred user experience. The <a>most meaningful
-audio-producing tab</a> can be null.
+When the user agent has multiple tabs, the user agent MUST select the <dfn>most
+meaningful audio-producing tab</dfn>, which is producing the most meaningful
+audio to the user. The user agent SHOULD select the <a>most meaningful
+audio-producing tab</a> based on platform conventions and the preferred user
+experience. The <a>most meaningful audio-producing tab</a> can be null. The
+<a>tab-level active media session</a> of the <a>most meaningful audio-producing
+tab</a> is called the <dfn>most meaningful media session</dfn>.
 
-Whenever the <a>most meaningful audio-producing tab</a> changes or setting <a
-attribute for="MediaSession"><code>metadata</code></a> of the <a>most meaningful
-audio-producing tab</a>, the user agent MUST run the <dfn>update metadata
-algorithm</dfn>, the steps are as follows:
+The user agent then MUST always route the <a>most meaningful media session</a>
+to the platform, which means:
+
+<ol>
+  <li>
+    If possible, the user agent SHOULD present the <a attribute
+    for="MediaSession"><code>metadata</code></a>
+    of the <a>most meaningful media session</a> to the platform for display
+    purpose. This MUST not be done for all other <a>media sessions</a>.
+  </li>
+  <li>
+    If possible, the user agent SHOULD register listeners to the platform for
+    the <a>most meaningful media session</a>, display corresponding UI buttons
+    if needed, and forward all <a lt="media control action">media control
+    actions</a> to the <a>most meaningful media session</a>. This MUST not be
+    done for all other <a>media sessions</a>.
+  </li>
+</ol>
+
+The media metadata for the <a>most meaningful audio-producing tab</a> MAY be
+displayed in the platform UI depending on platform conventions. Whenever the
+<a>most meaningful media session</a> changes or setting <a attribute
+for="MediaSession"><code>metadata</code></a> of the <a>most meaningful media
+session</a>, the user agent MUST run the <dfn>update metadata algorithm</dfn>.
+The steps are as follows:
 
 <ol>
   <li>
@@ -424,10 +632,9 @@ algorithm</dfn>, the steps are as follows:
     metadata presented to the platform, and terminate these steps.
   </li>
   <li>
-    If the <a attribute for="MediaSession"><code>metadata</code></a> for the
-    <a>tab-level active media session</a> of the <a>most meaningful
-    audio-producing tab</a> is null, unset the media metadata presented to the
-    platform, and terminate these steps.
+    If the <a attribute for="MediaSession"><code>metadata</code></a> of the
+    <a>most meaningful media session</a> is null, unset the media metadata
+    presented to the platform, and terminate these steps.
   </li>
   <li>
     Update the media metadata presented to the platform to match the <a
@@ -489,11 +696,74 @@ The recommended <dfn>fetch image algorithm</dfn> is as follows:
 If no artwork images are fetched in the <a>fetch image algorithm</a>, the user
 agent MAY have fallback behavior such as displaying an default image as artwork.
 
+Whenever the <a>most meaningful media session</a> changes or the <a>media
+control event handler</a>s of the <a>most meaningful media session</a> change,
+the user agent MUST do the following:
+
+<ol>
+  <li>
+    If the <a>most meaningful media session</a> is null, unregister all media
+    control listeners registered to the platform and remove the related UI
+    buttons for the <a>media control event handlers</a> if displayed.
+  </li>
+  <li>
+    Update the listeners registered to the platform to match the <a>media
+    control event handler</a>s registered to the <a>most meaningful media
+    session</a>.
+  </li>
+  <li>
+    If needed, update the UI buttons displayed on the platform UI to match the
+    <a>media control event handler</a>s.
+  </li>
+</ol>
+
+Please note that a page registering a <a>media control event handler</a>s only
+shows it supports handling the corresponding <a>media control action</a>. It
+does not guarantee that the user agent will display a button in the UI or
+register listeners to the platform for the <a>media control action</a>. The user
+agent MAY select a subset of the registered <a>media control event handler</a>s
+to display UI buttons and/or register event listeners to the platform, based on
+platform capability and conventions, or based on UI concerns.
+
+The user agent MAY have some fallback steps to handle some <a lt="media control
+action">media control actions</a>, such as handling <a lt="event play">play</a>
+in the user agent instead of in the page.
+
+When the user agent receives a <a>media control action</a> from the platform or
+the UI, it MUST run the following steps:
+
+<ol>
+  <li>
+    Create an {{Event}} object for the <a>media control action</a>.
+  </li>
+  <li>
+    Call the corresponding <a>media control event handler</a> of the <a>most
+    meaningful media session</a>.
+  </li>
+  <li>
+    If the user agent has fallback steps to handle the <a>media control
+    action</a>, check the {{Event/defaultPrevented}} attribute of the {{Event}}.
+    If it is false, run the fallback steps.
+  </li>
+</ol>
+
+<p class="issue" id="how-to-prevent-fallback-steps"> It is still an open
+question how to opt in/out of the fallback behavior. Checking
+{{Event/defaultPrevented}} only works after the <a>media control event
+handler</a> is called, thus the page could have already done some steps. This
+might cause the <a>media control action</a> be handled both by the page and the
+user agent, which will produce wrong behavior for events such as <a lt="event
+nexttrack">nexttrack</a> or <a lt="event seekforward">seekforward</a>. See <a
+href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>.
+</p>
+
+
 <h2 id="examples">Examples</h2>
 
 <em>This section is non-normative.</em>
 
 <div class="example" id="example-setting-metadata">
+  Setting <a lt="media session metadata">metadata</a>:
 
   <pre class="lang-javascript">
     window.navigator.mediaSession.metadata = new MediaMetadata({
@@ -535,6 +805,8 @@ agent MAY have fallback behavior such as displaying an default image as artwork.
 </div>
 
 <div class="example" id="example-changing-metadata">
+  Changing <a lt="media session metadata">metadata</a>:
+
   For playlists or chapters of an audio book, multiple <a>media elements</a> can
   share a single <a>media session</a>.
 
@@ -567,6 +839,33 @@ agent MAY have fallback behavior such as displaying an default image as artwork.
     audio1.addEventListener("play", updateMetadata);
     audio2.addEventListener("play", updateMetadata);
   </pre>
+</div>
+
+<div class="example" id="example-media-controls">
+  Handling <a lt="media control action">media control actions</a>:
+<pre>
+var tracks = ["chapter1.mp3", "chapter2.mp3", "chapter3.mp3"];
+var trackId = 0;
+
+var audio = document.createElement("audio");
+audio.src = tracks[trackId];
+
+void updatePlayingMedia() {
+    audio.src = tracks[trackId];
+    // Update metadata (omitted)
+}
+
+window.navigator.mediaSession.onprevioustrack = function() {
+   trackId = (trackId + tracks.length - 1) % tracks.length;
+   updatePlayingMedia();
+}
+
+window.navigator.mediaSession.onnexttrack = function() {
+   trackId = (trackId + 1) % tracks.length;
+   updatePlayingMedia();
+}
+
+</pre>
 </div>
 
 <h2 id="acknowledgments" class="no-num">Acknowledgments</h2>
