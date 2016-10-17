@@ -65,7 +65,7 @@ The `MediaSession` object is the main interface for this API, which looks like
 the following:
 
 ```javascript
-interface MediaSession {
+interface MediaSession : EventTarget {
     attribute MediaMetadata? metadata;
 
     attribute EventHandler onplay;
