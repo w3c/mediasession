@@ -1179,6 +1179,23 @@ Possible extra rowspan handling
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
 </style>
+<style>
+table {
+  border-collapse: collapse;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  text-align: left;
+}
+table caption {
+  font-weight: bold;
+  padding: 3px;
+  text-align: left;
+}
+table td, table th {
+  border: 1px solid black;
+  padding: 3px;
+}
+</style>
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1425,7 +1442,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-10-18">18 October 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-10-21">21 October 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1474,8 +1491,9 @@ notification areas and on lock screens of mobile devices.</p>
     <li><a href="#the-mediasession-interface"><span class="secno">4</span> <span class="content">The <code class="idl"><span>MediaSession</span></code> interface</span></a>
     <li><a href="#the-mediametadata-interface"><span class="secno">5</span> <span class="content">The <code class="idl"><span>MediaMetadata</span></code> interface</span></a>
     <li><a href="#the-mediaimage-interface"><span class="secno">6</span> <span class="content">The <code class="idl"><span>MediaImage</span></code> interface</span></a>
-    <li><a href="#processing-model"><span class="secno">7</span> <span class="content">Processing model</span></a>
-    <li><a href="#examples"><span class="secno">8</span> <span class="content">Examples</span></a>
+    <li><a href="#media-controls"><span class="secno">7</span> <span class="content">Media Controls</span></a>
+    <li><a href="#processing-model"><span class="secno">8</span> <span class="content">Processing model</span></a>
+    <li><a href="#examples"><span class="secno">9</span> <span class="content">Examples</span></a>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1501,7 +1519,8 @@ consuming media content. Many platforms can display media metadata, such as
 title, artist, album and album art on various UI elements such as notification,
 media control center, device lockscreen and wearable devices. This specification
 aims to enable web pages to specify the media metadata to be displayed in
-platform UI, which helps in improving the user experience.</p>
+platform UI, and respond to media controls which may come from platform UI or
+media keys, therefore improves the user experience.</p>
    <h2 class="heading settled" data-level="2" id="conformance"><span class="secno">2. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
    <p>All diagrams, examples, and notes in this specification are non-normative, as
 are all sections explicitly marked non-normative. Everything else in this
@@ -1535,8 +1554,17 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasession" id="ref-for-mediasession-2">MediaSession</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSession" href="#dom-navigator-mediasession" id="ref-for-dom-navigator-mediasession-1">mediaSession</a>;
 };
 
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession</dfn> {
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="mediasession">MediaSession</dfn> : <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> {
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediametadata" id="ref-for-mediametadata-1">MediaMetadata</a>? <a class="nv idl-code" data-link-type="attribute" data-type="MediaMetadata?" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-1">metadata</a>;
+
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onplay">onplay</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onpause">onpause</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onplaypause">onplaypause</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onprevioustrack">onprevioustrack</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onnexttrack">onnexttrack</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onseekforward">onseekforward</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onseekbackward">onseekbackward</dfn>;
 };
 </pre>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="Navigator" data-dfn-type="attribute" data-export="" id="dom-navigator-mediasession"><code>mediaSession</code></dfn> attribute is
@@ -1555,6 +1583,8 @@ which is either a <code class="idl"><a data-link-type="idl" href="#mediametadata
    </dl>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-metadata"><code>metadata</code></dfn> attribute, on
 getting, must return the <a data-link-type="dfn" href="#media-session" id="ref-for-media-session-3">media session</a>’s <a data-link-type="dfn" href="#media-session-metadata" id="ref-for-media-session-metadata-1">metadata</a>.</p>
+   <p>There are a batch of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a>, which are used for media controls.
+These <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> are defined in <a href="#media-controls">§7 Media Controls</a>.</p>
    <h2 class="heading settled" data-level="5" id="the-mediametadata-interface"><span class="secno">5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-5">MediaMetadata</a></code> interface</span><a class="self-link" href="#the-mediametadata-interface"></a></h2>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="constructor" href="#dom-mediametadata-mediametadata" id="ref-for-dom-mediametadata-mediametadata-1">Constructor</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-mediametadatainit" id="ref-for-dictdef-mediametadatainit-1">MediaMetadataInit</a> <dfn class="nv idl-code" data-dfn-for="MediaMetadata/MediaMetadata(init)" data-dfn-type="argument" data-export="" id="dom-mediametadata-mediametadata-init-init">init<a class="self-link" href="#dom-mediametadata-mediametadata-init-init"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="mediametadata">MediaMetadata</dfn> {
@@ -1630,32 +1660,109 @@ inappropriate). The parsing steps for the <a class="idl-code" data-link-type="at
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaImage" data-dfn-type="attribute" data-export="" id="dom-mediaimage-type">type</dfn> attribute must return the <code class="idl"><a data-link-type="idl" href="#mediaimage" id="ref-for-mediaimage-8">MediaImage</a></code> object’s <a data-link-type="dfn" href="#mediaimage-type" id="ref-for-mediaimage-type-1">type</a>. It is a hint as to the
 media type of the image. The purpose of this attribute is to allow a user agent
 to ignore images of media types it does not support.</p>
-   <h2 class="heading settled" data-level="7" id="processing-model"><span class="secno">7. </span><span class="content">Processing model</span><a class="self-link" href="#processing-model"></a></h2>
+   <h2 class="heading settled" data-level="7" id="media-controls"><span class="secno">7. </span><span class="content">Media Controls</span><a class="self-link" href="#media-controls"></a></h2>
+   <p>In the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-6">MediaSession</a></code> interface, there are a bunch of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> which are used for media controls. They enable the page to listen to <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-1">media control actions</a> from hardware or software
+media interfaces on the platform. A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="media-control-action">media control action</dfn> is a user
+command to perform media-related actions, such as play/pause media playback and
+switching media tracks. <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-2">Media control actions</a> MAY come from various hardware and software interfaces on the platform,
+including media keys or buttons on the keyboard, headphone, remote controller,
+notification or lock screen.</p>
+   <p>For each <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-3">media control action</a>, there is a corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler">event
+handler</a> called a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="media-control-event-handler">media control event handler</dfn>.</p>
+   <p>The <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-1">media control event handler</a> allows a page to register callbacks when
+the action is fired. On set, the page declares it supports the corresponding <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-4">media control action</a>, and the user agent could display a button for the
+action on platform UI and/or register listeners for the action to the platform,
+and forward the corresponding <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-5">media control action</a> to the <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-2">media
+control event handler</a> when the it is received.</p>
+   <p>The list of <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-6">media control actions</a> is as
+follows:</p>
+   <table>
+    <tbody>
+     <tr>
+      <th> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a> 
+      <th> Interface 
+      <th> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler">Event handler</a> 
+      <th> Fired when... 
+     <tr>
+      <td> <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="event play" data-noexport="" id="event-play"><code>play</code></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onplay" id="ref-for-dom-mediasession-onplay-1">onplay</a></code> 
+      <td> The user presses the "play" media key or button on any hardware or
+      software media interface. 
+     <tr>
+      <td> <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="event pause" data-noexport="" id="event-pause"><code>pause</code></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onpause" id="ref-for-dom-mediasession-onpause-1">onpause</a></code> 
+      <td> The user presses the "pause" media key or button on any hardware or
+      software media interface. 
+     <tr>
+      <td> <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="event playpause" data-noexport="" id="event-playpause"><code>playpause</code></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onplaypause" id="ref-for-dom-mediasession-onplaypause-1">onplaypause</a></code> 
+      <td> The user presses the "play/pause" media key or button on any hardware or
+      software media interface. 
+     <tr>
+      <td> <dfn data-dfn-type="dfn" data-lt="event previoustrack" data-noexport="" id="event-previoustrack"><code>previoustrack</code><a class="self-link" href="#event-previoustrack"></a></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onprevioustrack" id="ref-for-dom-mediasession-onprevioustrack-1">onprevioustrack</a></code> 
+      <td> The user presses the "previous track" media key or button on any hardware
+      or software media interface. 
+     <tr>
+      <td> <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="event nexttrack" data-noexport="" id="event-nexttrack"><code>nexttrack</code></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onnexttrack" id="ref-for-dom-mediasession-onnexttrack-1">onnexttrack</a></code> 
+      <td> The user presses the "next track" media key or button on any hardware or
+      software media interface. 
+     <tr>
+      <td> <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="event seekforward" data-noexport="" id="event-seekforward"><code>seekforward</code></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onseekforward" id="ref-for-dom-mediasession-onseekforward-1">onseekforward</a></code> 
+      <td> The user presses the "seek forward" media key or button on any hardware or
+      software media interface. 
+     <tr>
+      <td> <dfn data-dfn-type="dfn" data-lt="event seekbackward" data-noexport="" id="event-seekbackward"><code>seekbackward</code><a class="self-link" href="#event-seekbackward"></a></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onseekbackward" id="ref-for-dom-mediasession-onseekbackward-1">onseekbackward</a></code> 
+      <td> The user presses the "seek backward" media key or button on any hardware
+      or software media interface. 
+   </table>
+   <p class="issue" id="whether-allow-page-listen-play-pause"><a class="self-link" href="#whether-allow-page-listen-play-pause"></a> It is still an open question whether to allow pages to handle <a data-link-type="dfn" href="#event-play" id="ref-for-event-play-1">play</a>, <a data-link-type="dfn" href="#event-pause" id="ref-for-event-pause-1">pause</a> and <a data-link-type="dfn" href="#event-playpause" id="ref-for-event-playpause-1">playpause</a> actions. The user agent MAY either intercept these
+  actions and handle them within the user agent, or forward these actions to the
+  page and let the page handle them. See <a href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>. </p>
+   <h2 class="heading settled" data-level="8" id="processing-model"><span class="secno">8. </span><span class="content">Processing model</span><a class="self-link" href="#processing-model"></a></h2>
    <p>As there is a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/browsers.html#window">Window</a></code> object per <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>, the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level
 browsing context</a> and each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">nested browsing context</a> will have an
-associated <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-6">MediaSession</a></code> object. For each tab, the user agent MUST select the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-7">MediaSession</a></code> object of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> to represent
-the tab. The selected <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-8">MediaSession</a></code> object is called <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="tab-level
+associated <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-7">MediaSession</a></code> object. For each tab, the user agent MUST select the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-8">MediaSession</a></code> object of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> to represent
+the tab. The selected <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-9">MediaSession</a></code> object is called <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="tab-level
 active media session" data-noexport="" id="tab-level-active-media-session">tab-level active media session</dfn>.</p>
-   <p class="issue" id="whether-allow-child-frame-media-session"><a class="self-link" href="#whether-allow-child-frame-media-session"></a> It is still an open question whether an <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-9">MediaSession</a></code> object is allowed to
+   <p class="issue" id="whether-allow-child-frame-media-session"><a class="self-link" href="#whether-allow-child-frame-media-session"></a> It is still an open question whether an <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-10">MediaSession</a></code> object is allowed to
   become the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-1">tab-level active media session</a>. See the <a href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>. </p>
-   <p>When the user agent has multiple tabs, the user agent MUST select the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-1">most
-meaningful audio-producing tab</a> and present the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-2">tab-level active media
-session</a> to the platform, which MAY be displayed in the platform UI depending
-on platform conventions. The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="most-meaningful-audio-producing-tab">most meaningful audio-producing tab</dfn> is
-the tab which is producing the most meaningful audio to the user. The user agent
-SHOULD select the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-2">most meaningful audio-producing tab</a> based on platform
-conventions and the preferred user experience. The <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-3">most meaningful
-audio-producing tab</a> can be null.</p>
-   <p>Whenever the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-4">most meaningful audio-producing tab</a> changes or setting <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-3"><code>metadata</code></a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-5">most meaningful
-audio-producing tab</a>, the user agent MUST run the <dfn data-dfn-type="dfn" data-lt="update metadata algorithm" data-noexport="" id="update-metadata-algorithm">update metadata
-algorithm<a class="self-link" href="#update-metadata-algorithm"></a></dfn>, the steps are as follows:</p>
+   <p>When the user agent has multiple tabs, the user agent MUST select the <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="most meaningful audio-producing tab" data-noexport="" id="most-meaningful-audio-producing-tab">most
+meaningful audio-producing tab</dfn>, which is producing the most meaningful
+audio to the user. The user agent SHOULD select the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-1">most meaningful
+audio-producing tab</a> based on platform conventions and the preferred user
+experience. The <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-2">most meaningful audio-producing tab</a> can be null. The <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-2">tab-level active media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-3">most meaningful audio-producing
+tab</a> is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="most-meaningful-media-session">most meaningful media session</dfn>.</p>
+   <p>The user agent then MUST always route the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-1">most meaningful media session</a> to the platform, which means:</p>
    <ol>
-    <li> If the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-6">most meaningful audio-producing tab</a> is null, unset the media
+    <li> If possible, the user agent SHOULD present the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-3"><code>metadata</code></a> of the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-2">most meaningful media session</a> to the platform for display
+    purpose. This MUST not be done for all other <a data-link-type="dfn" href="#media-session" id="ref-for-media-session-4">media sessions</a>. 
+    <li> If possible, the user agent SHOULD register listeners to the platform for
+    the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-3">most meaningful media session</a>, display corresponding UI buttons
+    if needed, and forward all <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-7">media control
+    actions</a> to the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-4">most meaningful media session</a>. This MUST not be
+    done for all other <a data-link-type="dfn" href="#media-session" id="ref-for-media-session-5">media sessions</a>. 
+   </ol>
+   <p>The media metadata for the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-4">most meaningful audio-producing tab</a> MAY be
+displayed in the platform UI depending on platform conventions. Whenever the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-5">most meaningful media session</a> changes or setting <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-4"><code>metadata</code></a> of the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-6">most meaningful media
+session</a>, the user agent MUST run the <dfn data-dfn-type="dfn" data-noexport="" id="update-metadata-algorithm">update metadata algorithm<a class="self-link" href="#update-metadata-algorithm"></a></dfn>.
+The steps are as follows:</p>
+   <ol>
+    <li> If the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-5">most meaningful audio-producing tab</a> is null, unset the media
     metadata presented to the platform, and terminate these steps. 
-    <li> If the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-4"><code>metadata</code></a> for the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-3">tab-level active media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-7">most meaningful
-    audio-producing tab</a> is null, unset the media metadata presented to the
-    platform, and terminate these steps. 
-    <li> Update the media metadata presented to the platform to match the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-5"><code>metadata</code></a> for the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-4">tab-level active media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-8">most meaningful
+    <li> If the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-5"><code>metadata</code></a> of the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-7">most meaningful media session</a> is null, unset the media metadata
+    presented to the platform, and terminate these steps. 
+    <li> Update the media metadata presented to the platform to match the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-6"><code>metadata</code></a> for the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-3">tab-level active media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-6">most meaningful
     audio-producing tab</a>. 
     <li> If the user agent wants to display <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-2">artwork image</a>, it is recommended
     to run the <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm-1">fetch image algorithm</a>. 
@@ -1664,12 +1771,12 @@ algorithm<a class="self-link" href="#update-metadata-algorithm"></a></dfn>, the 
    <ol>
     <li> If there are other <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm-2">fetch image algorithm</a> running, cancel existing
     algorithm execution instances. 
-    <li> If <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork-4"><code>artwork</code></a> of the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-5">tab-level active
-    media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-9">most meaningful audio-producing tab</a> is
+    <li> If <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork-4"><code>artwork</code></a> of the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-4">tab-level active
+    media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-7">most meaningful audio-producing tab</a> is
     empty, then terminate these steps. 
     <li> If the platform supports displaying media artwork, select a <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="prefered artwork image" data-noexport="" id="prefered-artwork-image">prefered
-    artwork image</dfn> from <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork-5"><code>artwork</code></a> of the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-6">tab-level active
-    media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-10">most meaningful audio-producing tab</a>. 
+    artwork image</dfn> from <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork-5"><code>artwork</code></a> of the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-5">tab-level active
+    media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-8">most meaningful audio-producing tab</a>. 
     <li>
       <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" title="fetch">Fetch</a> the <a data-link-type="dfn" href="#prefered-artwork-image" id="ref-for-prefered-artwork-image-1">prefered artwork image</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaimage-src" id="ref-for-dom-mediaimage-src-4">src</a></code>. 
      <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
@@ -1684,10 +1791,45 @@ algorithm<a class="self-link" href="#update-metadata-algorithm"></a></dfn>, the 
    </ol>
    <p>If no artwork images are fetched in the <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm-4">fetch image algorithm</a>, the user
 agent MAY have fallback behavior such as displaying an default image as artwork.</p>
-   <h2 class="heading settled" data-level="8" id="examples"><span class="secno">8. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
+   <p>Whenever the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-8">most meaningful media session</a> changes or the <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-3">media
+control event handler</a>s of the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-9">most meaningful media session</a> change,
+the user agent MUST do the following:</p>
+   <ol>
+    <li> If the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-10">most meaningful media session</a> is null, unregister all media
+    control listeners registered to the platform and remove the related UI
+    buttons for the <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-4">media control event handlers</a> if displayed. 
+    <li> Update the listeners registered to the platform to match the <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-5">media
+    control event handler</a>s registered to the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-11">most meaningful media
+    session</a>. 
+    <li> If needed, update the UI buttons displayed on the platform UI to match the <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-6">media control event handler</a>s. 
+   </ol>
+   <p>Please note that a page registering a <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-7">media control event handler</a>s only
+shows it supports handling the corresponding <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-8">media control action</a>. It
+does not guarantee that the user agent will display a button in the UI or
+register listeners to the platform for the <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-9">media control action</a>. The user
+agent MAY select a subset of the registered <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-8">media control event handler</a>s
+to display UI buttons and/or register event listeners to the platform, based on
+platform capability and conventions, or based on UI concerns.</p>
+   <p>The user agent MAY have some fallback steps to handle some <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-10">media control actions</a>, such as handling <a data-link-type="dfn" href="#event-play" id="ref-for-event-play-2">play</a> in the user agent instead of in the page.</p>
+   <p>When the user agent receives a <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-11">media control action</a> from the platform or
+the UI, it MUST run the following steps:</p>
+   <ol>
+    <li> Create an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> object for the <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-12">media control action</a>. 
+    <li> Call the corresponding <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-9">media control event handler</a> of the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-12">most
+    meaningful media session</a>. 
+    <li> If the user agent has fallback steps to handle the <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-13">media control
+    action</a>, check the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#dom-event-defaultprevented">defaultPrevented</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code>.
+    If it is false, run the fallback steps. 
+   </ol>
+   <p class="issue" id="how-to-prevent-fallback-steps"><a class="self-link" href="#how-to-prevent-fallback-steps"></a> It is still an open
+question how to opt in/out of the fallback behavior. Checking <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#dom-event-defaultprevented">defaultPrevented</a></code> only works after the <a data-link-type="dfn" href="#media-control-event-handler" id="ref-for-media-control-event-handler-10">media control event
+handler</a> is called, thus the page could have already done some steps. This
+might cause the <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-14">media control action</a> be handled both by the page and the
+user agent, which will produce wrong behavior for events such as <a data-link-type="dfn" href="#event-nexttrack" id="ref-for-event-nexttrack-1">nexttrack</a> or <a data-link-type="dfn" href="#event-seekforward" id="ref-for-event-seekforward-1">seekforward</a>. See <a href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>. </p>
+   <h2 class="heading settled" data-level="9" id="examples"><span class="secno">9. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <div class="example" id="example-setting-metadata">
-    <a class="self-link" href="#example-setting-metadata"></a> 
+    <a class="self-link" href="#example-setting-metadata"></a> Setting <a data-link-type="dfn" href="#media-session-metadata" id="ref-for-media-session-metadata-2">metadata</a>: 
 <pre class="lang-javascript highlight">window<span class="p">.</span>navigator<span class="p">.</span>mediaSession<span class="p">.</span>metadata <span class="o">=</span> <span class="k">new</span> MediaMetadata<span class="p">(</span><span class="p">{</span>
   title<span class="o">:</span> <span class="s2">"Episode Title"</span><span class="p">,</span>
   artist<span class="o">:</span> <span class="s2">"Podcast Host"</span><span class="p">,</span>
@@ -1718,8 +1860,9 @@ agent MAY have fallback behavior such as displaying an default image as artwork.
   agent want to use an image for lockscreen background, <code>"podcast_xhd.jpg"</code> will be prefered.</p>
    </div>
    <div class="example" id="example-changing-metadata">
-    <a class="self-link" href="#example-changing-metadata"></a> For playlists or chapters of an audio book, multiple <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> can
-  share a single <a data-link-type="dfn" href="#media-session" id="ref-for-media-session-4">media session</a>. 
+    <a class="self-link" href="#example-changing-metadata"></a> Changing <a data-link-type="dfn" href="#media-session-metadata" id="ref-for-media-session-metadata-3">metadata</a>: 
+    <p>For playlists or chapters of an audio book, multiple <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media elements</a> can
+  share a single <a data-link-type="dfn" href="#media-session" id="ref-for-media-session-6">media session</a>.</p>
 <pre class="lang-javascript highlight"><span class="kd">var</span> audio1 <span class="o">=</span> document<span class="p">.</span>createElement<span class="p">(</span><span class="s2">"audio"</span><span class="p">)</span><span class="p">;</span>
 audio1<span class="p">.</span>src <span class="o">=</span> <span class="s2">"chapter1.mp3"</span><span class="p">;</span>
 
@@ -1744,6 +1887,31 @@ audio1<span class="p">.</span>addEventListener<span class="p">(</span><span clas
 
 audio1<span class="p">.</span>addEventListener<span class="p">(</span><span class="s2">"play"</span><span class="p">,</span> updateMetadata<span class="p">)</span><span class="p">;</span>
 audio2<span class="p">.</span>addEventListener<span class="p">(</span><span class="s2">"play"</span><span class="p">,</span> updateMetadata<span class="p">)</span><span class="p">;</span>
+</pre>
+   </div>
+   <div class="example" id="example-media-controls">
+    <a class="self-link" href="#example-media-controls"></a> Handling <a data-link-type="dfn" href="#media-control-action" id="ref-for-media-control-action-15">media control actions</a>: 
+<pre>var tracks = ["chapter1.mp3", "chapter2.mp3", "chapter3.mp3"];
+var trackId = 0;
+
+var audio = document.createElement("audio");
+audio.src = tracks[trackId];
+
+void updatePlayingMedia() {
+    audio.src = tracks[trackId];
+    // Update metadata (omitted)
+}
+
+window.navigator.mediaSession.onprevioustrack = function() {
+   trackId = (trackId + tracks.length - 1) % tracks.length;
+   updatePlayingMedia();
+}
+
+window.navigator.mediaSession.onnexttrack = function() {
+   trackId = (trackId + 1) % tracks.length;
+   updatePlayingMedia();
+}
+
 </pre>
    </div>
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
@@ -1917,7 +2085,16 @@ neighboring rights to this work.</p>
      <li><a href="#dom-mediametadata-artwork">attribute for MediaMetadata</a><span>, in §5</span>
     </ul>
    <li><a href="#mediametadata-artwork-images">artwork images</a><span>, in §5</span>
-   <li><a href="#fetch-image-algorithm">fetch image algorithm</a><span>, in §7</span>
+   <li><a href="#event-nexttrack">event nexttrack</a><span>, in §7</span>
+   <li><a href="#event-pause">event pause</a><span>, in §7</span>
+   <li><a href="#event-play">event play</a><span>, in §7</span>
+   <li><a href="#event-playpause">event playpause</a><span>, in §7</span>
+   <li><a href="#event-previoustrack">event previoustrack</a><span>, in §7</span>
+   <li><a href="#event-seekbackward">event seekbackward</a><span>, in §7</span>
+   <li><a href="#event-seekforward">event seekforward</a><span>, in §7</span>
+   <li><a href="#fetch-image-algorithm">fetch image algorithm</a><span>, in §8</span>
+   <li><a href="#media-control-action">media control action</a><span>, in §7</span>
+   <li><a href="#media-control-event-handler">media control event handler</a><span>, in §7</span>
    <li><a href="#mediaimage">MediaImage</a><span>, in §6</span>
    <li><a href="#dom-mediaimage-mediaimage">MediaImage(init)</a><span>, in §6</span>
    <li><a href="#dictdef-mediaimageinit">MediaImageInit</a><span>, in §6</span>
@@ -1925,12 +2102,20 @@ neighboring rights to this work.</p>
    <li><a href="#dom-mediametadata-mediametadata">MediaMetadata(init)</a><span>, in §5</span>
    <li><a href="#dictdef-mediametadatainit">MediaMetadataInit</a><span>, in §5</span>
    <li><a href="#media-session">media session</a><span>, in §4</span>
-   <li><a href="#mediasession">MediaSession</a><span>, in §4</span>
    <li><a href="#dom-navigator-mediasession">mediaSession</a><span>, in §4</span>
+   <li><a href="#mediasession">MediaSession</a><span>, in §4</span>
    <li><a href="#media-session-metadata">media session metadata</a><span>, in §4</span>
    <li><a href="#dom-mediasession-metadata">metadata</a><span>, in §4</span>
-   <li><a href="#most-meaningful-audio-producing-tab">most meaningful audio-producing tab</a><span>, in §7</span>
-   <li><a href="#prefered-artwork-image">prefered artwork image</a><span>, in §7</span>
+   <li><a href="#most-meaningful-audio-producing-tab">most meaningful audio-producing tab</a><span>, in §8</span>
+   <li><a href="#most-meaningful-media-session">most meaningful media session</a><span>, in §8</span>
+   <li><a href="#dom-mediasession-onnexttrack">onnexttrack</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-onpause">onpause</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-onplay">onplay</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-onplaypause">onplaypause</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-onprevioustrack">onprevioustrack</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-onseekbackward">onseekbackward</a><span>, in §4</span>
+   <li><a href="#dom-mediasession-onseekforward">onseekforward</a><span>, in §4</span>
+   <li><a href="#prefered-artwork-image">prefered artwork image</a><span>, in §8</span>
    <li>
     sizes
     <ul>
@@ -1945,7 +2130,7 @@ neighboring rights to this work.</p>
      <li><a href="#dom-mediaimageinit-src">dict-member for MediaImageInit</a><span>, in §6</span>
      <li><a href="#dom-mediaimage-src">attribute for MediaImage</a><span>, in §6</span>
     </ul>
-   <li><a href="#tab-level-active-media-session">tab-level active media session</a><span>, in §7</span>
+   <li><a href="#tab-level-active-media-session">tab-level active media session</a><span>, in §8</span>
    <li>
     title
     <ul>
@@ -1960,7 +2145,7 @@ neighboring rights to this work.</p>
      <li><a href="#mediaimage-type">dfn for MediaImage</a><span>, in §6</span>
      <li><a href="#dom-mediaimage-type">attribute for MediaImage</a><span>, in §6</span>
     </ul>
-   <li><a href="#update-metadata-algorithm">update metadata algorithm</a><span>, in §7</span>
+   <li><a href="#update-metadata-algorithm">update metadata algorithm</a><span>, in §8</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1968,6 +2153,11 @@ neighboring rights to this work.</p>
     <a data-link-type="biblio">[appmanifest]</a> defines the following terms:
     <ul>
      <li><a href="https://www.w3.org/TR/appmanifest/#dfn-image-object">image object</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[WHATWG-DOM]</a> defines the following terms:
+    <ul>
+     <li><a href="https://dom.spec.whatwg.org/#dom-event-defaultprevented">defaultPrevented</a>
     </ul>
    <li>
     <a data-link-type="biblio">[FETCH]</a> defines the following terms:
@@ -1980,12 +2170,16 @@ neighboring rights to this work.</p>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#window">Window</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#ascii-case-insensitive">ascii case-insensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#case-sensitivity-and-string-comparison">case-sensitive</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#document-base-url">document base url</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler">event handler</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-link-element">link</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">media element</a>
@@ -2006,6 +2200,11 @@ neighboring rights to this work.</p>
      <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
      <li><a href="https://heycam.github.io/webidl/#SameObject">SameObject</a>
     </ul>
+   <li>
+    <a data-link-type="biblio">[WHATWG-DOM]</a> defines the following terms:
+    <ul>
+     <li><a href="https://dom.spec.whatwg.org/#interface-event">Event</a>
+    </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
@@ -2020,6 +2219,8 @@ neighboring rights to this work.</p>
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
    <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 15 September 2016. PR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dt id="biblio-whatwg-dom">[WHATWG-DOM]
+   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-whatwg-url">[WHATWG-URL]
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
   </dl>
@@ -2029,8 +2230,17 @@ neighboring rights to this work.</p>
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasession">MediaSession</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSession" href="#dom-navigator-mediasession">mediaSession</a>;
 };
 
-<span class="kt">interface</span> <a class="nv" href="#mediasession">MediaSession</a> {
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <a class="nv" href="#mediasession">MediaSession</a> : <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> {
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediametadata">MediaMetadata</a>? <a class="nv idl-code" data-link-type="attribute" data-type="MediaMetadata?" href="#dom-mediasession-metadata">metadata</a>;
+
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onplay">onplay</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onpause">onpause</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onplaypause">onplaypause</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onprevioustrack">onprevioustrack</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onnexttrack">onnexttrack</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onseekforward">onseekforward</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onseekbackward">onseekbackward</a>;
 };
 
 [<a class="nv idl-code" data-link-type="constructor" href="#dom-mediametadata-mediametadata">Constructor</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-mediametadatainit">MediaMetadataInit</a> <a class="nv" href="#dom-mediametadata-mediametadata-init-init">init</a>)]
@@ -2064,14 +2274,65 @@ neighboring rights to this work.</p>
 </pre>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
+   <div class="issue"> It is still an open question whether to allow pages to handle <a data-link-type="dfn" href="#event-play">play</a>, <a data-link-type="dfn" href="#event-pause">pause</a> and <a data-link-type="dfn" href="#event-playpause">playpause</a> actions. The user agent MAY either intercept these
+  actions and handle them within the user agent, or forward these actions to the
+  page and let the page handle them. See <a href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>. <a href="#whether-allow-page-listen-play-pause"> ↵ </a></div>
    <div class="issue"> It is still an open question whether an <code class="idl"><a data-link-type="idl" href="#mediasession">MediaSession</a></code> object is allowed to
   become the <a data-link-type="dfn" href="#tab-level-active-media-session">tab-level active media session</a>. See the <a href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>. <a href="#whether-allow-child-frame-media-session"> ↵ </a></div>
+   <div class="issue"> It is still an open
+question how to opt in/out of the fallback behavior. Checking <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#dom-event-defaultprevented">defaultPrevented</a></code> only works after the <a data-link-type="dfn" href="#media-control-event-handler">media control event
+handler</a> is called, thus the page could have already done some steps. This
+might cause the <a data-link-type="dfn" href="#media-control-action">media control action</a> be handled both by the page and the
+user agent, which will produce wrong behavior for events such as <a data-link-type="dfn" href="#event-nexttrack">nexttrack</a> or <a data-link-type="dfn" href="#event-seekforward">seekforward</a>. See <a href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>. <a href="#how-to-prevent-fallback-steps"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="mediasession">
    <b><a href="#mediasession">#mediasession</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-mediasession-1">4. The MediaSession interface</a> <a href="#ref-for-mediasession-2">(2)</a> <a href="#ref-for-mediasession-3">(3)</a> <a href="#ref-for-mediasession-4">(4)</a> <a href="#ref-for-mediasession-5">(5)</a>
-    <li><a href="#ref-for-mediasession-6">7. Processing model</a> <a href="#ref-for-mediasession-7">(2)</a> <a href="#ref-for-mediasession-8">(3)</a> <a href="#ref-for-mediasession-9">(4)</a>
+    <li><a href="#ref-for-mediasession-6">7. Media Controls</a>
+    <li><a href="#ref-for-mediasession-7">8. Processing model</a> <a href="#ref-for-mediasession-8">(2)</a> <a href="#ref-for-mediasession-9">(3)</a> <a href="#ref-for-mediasession-10">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onplay">
+   <b><a href="#dom-mediasession-onplay">#dom-mediasession-onplay</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onplay-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onpause">
+   <b><a href="#dom-mediasession-onpause">#dom-mediasession-onpause</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onpause-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onplaypause">
+   <b><a href="#dom-mediasession-onplaypause">#dom-mediasession-onplaypause</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onplaypause-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onprevioustrack">
+   <b><a href="#dom-mediasession-onprevioustrack">#dom-mediasession-onprevioustrack</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onprevioustrack-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onnexttrack">
+   <b><a href="#dom-mediasession-onnexttrack">#dom-mediasession-onnexttrack</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onnexttrack-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onseekforward">
+   <b><a href="#dom-mediasession-onseekforward">#dom-mediasession-onseekforward</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onseekforward-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onseekbackward">
+   <b><a href="#dom-mediasession-onseekbackward">#dom-mediasession-onseekbackward</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onseekbackward-1">7. Media Controls</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-navigator-mediasession">
@@ -2084,20 +2345,22 @@ neighboring rights to this work.</p>
    <b><a href="#media-session">#media-session</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-media-session-1">4. The MediaSession interface</a> <a href="#ref-for-media-session-2">(2)</a> <a href="#ref-for-media-session-3">(3)</a>
-    <li><a href="#ref-for-media-session-4">8. Examples</a>
+    <li><a href="#ref-for-media-session-4">8. Processing model</a> <a href="#ref-for-media-session-5">(2)</a>
+    <li><a href="#ref-for-media-session-6">9. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="media-session-metadata">
    <b><a href="#media-session-metadata">#media-session-metadata</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-media-session-metadata-1">4. The MediaSession interface</a>
+    <li><a href="#ref-for-media-session-metadata-2">9. Examples</a> <a href="#ref-for-media-session-metadata-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediasession-metadata">
    <b><a href="#dom-mediasession-metadata">#dom-mediasession-metadata</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediasession-metadata-1">4. The MediaSession interface</a> <a href="#ref-for-dom-mediasession-metadata-2">(2)</a>
-    <li><a href="#ref-for-dom-mediasession-metadata-3">7. Processing model</a> <a href="#ref-for-dom-mediasession-metadata-4">(2)</a> <a href="#ref-for-dom-mediasession-metadata-5">(3)</a>
+    <li><a href="#ref-for-dom-mediasession-metadata-3">8. Processing model</a> <a href="#ref-for-dom-mediasession-metadata-4">(2)</a> <a href="#ref-for-dom-mediasession-metadata-5">(3)</a> <a href="#ref-for-dom-mediasession-metadata-6">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="mediametadata">
@@ -2159,8 +2422,8 @@ neighboring rights to this work.</p>
    <b><a href="#mediametadata-artwork-images">#mediametadata-artwork-images</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-mediametadata-artwork-images-1">5. The MediaMetadata interface</a>
-    <li><a href="#ref-for-mediametadata-artwork-images-2">7. Processing model</a>
-    <li><a href="#ref-for-mediametadata-artwork-images-3">8. Examples</a>
+    <li><a href="#ref-for-mediametadata-artwork-images-2">8. Processing model</a>
+    <li><a href="#ref-for-mediametadata-artwork-images-3">9. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediametadata-mediametadata">
@@ -2191,7 +2454,7 @@ neighboring rights to this work.</p>
    <b><a href="#dom-mediametadata-artwork">#dom-mediametadata-artwork</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediametadata-artwork-1">5. The MediaMetadata interface</a> <a href="#ref-for-dom-mediametadata-artwork-2">(2)</a> <a href="#ref-for-dom-mediametadata-artwork-3">(3)</a>
-    <li><a href="#ref-for-dom-mediametadata-artwork-4">7. Processing model</a> <a href="#ref-for-dom-mediametadata-artwork-5">(2)</a>
+    <li><a href="#ref-for-dom-mediametadata-artwork-4">8. Processing model</a> <a href="#ref-for-dom-mediametadata-artwork-5">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="mediaimage">
@@ -2255,7 +2518,7 @@ neighboring rights to this work.</p>
    <b><a href="#dom-mediaimage-src">#dom-mediaimage-src</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediaimage-src-1">6. The MediaImage interface</a> <a href="#ref-for-dom-mediaimage-src-2">(2)</a> <a href="#ref-for-dom-mediaimage-src-3">(3)</a>
-    <li><a href="#ref-for-dom-mediaimage-src-4">7. Processing model</a>
+    <li><a href="#ref-for-dom-mediaimage-src-4">8. Processing model</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediaimage-sizes">
@@ -2270,28 +2533,80 @@ neighboring rights to this work.</p>
     <li><a href="#ref-for-dom-mediaimage-type-1">6. The MediaImage interface</a> <a href="#ref-for-dom-mediaimage-type-2">(2)</a> <a href="#ref-for-dom-mediaimage-type-3">(3)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="media-control-action">
+   <b><a href="#media-control-action">#media-control-action</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-media-control-action-1">7. Media Controls</a> <a href="#ref-for-media-control-action-2">(2)</a> <a href="#ref-for-media-control-action-3">(3)</a> <a href="#ref-for-media-control-action-4">(4)</a> <a href="#ref-for-media-control-action-5">(5)</a> <a href="#ref-for-media-control-action-6">(6)</a>
+    <li><a href="#ref-for-media-control-action-7">8. Processing model</a> <a href="#ref-for-media-control-action-8">(2)</a> <a href="#ref-for-media-control-action-9">(3)</a> <a href="#ref-for-media-control-action-10">(4)</a> <a href="#ref-for-media-control-action-11">(5)</a> <a href="#ref-for-media-control-action-12">(6)</a> <a href="#ref-for-media-control-action-13">(7)</a> <a href="#ref-for-media-control-action-14">(8)</a>
+    <li><a href="#ref-for-media-control-action-15">9. Examples</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="media-control-event-handler">
+   <b><a href="#media-control-event-handler">#media-control-event-handler</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-media-control-event-handler-1">7. Media Controls</a> <a href="#ref-for-media-control-event-handler-2">(2)</a>
+    <li><a href="#ref-for-media-control-event-handler-3">8. Processing model</a> <a href="#ref-for-media-control-event-handler-4">(2)</a> <a href="#ref-for-media-control-event-handler-5">(3)</a> <a href="#ref-for-media-control-event-handler-6">(4)</a> <a href="#ref-for-media-control-event-handler-7">(5)</a> <a href="#ref-for-media-control-event-handler-8">(6)</a> <a href="#ref-for-media-control-event-handler-9">(7)</a> <a href="#ref-for-media-control-event-handler-10">(8)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="event-play">
+   <b><a href="#event-play">#event-play</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-event-play-1">7. Media Controls</a>
+    <li><a href="#ref-for-event-play-2">8. Processing model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="event-pause">
+   <b><a href="#event-pause">#event-pause</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-event-pause-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="event-playpause">
+   <b><a href="#event-playpause">#event-playpause</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-event-playpause-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="event-nexttrack">
+   <b><a href="#event-nexttrack">#event-nexttrack</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-event-nexttrack-1">8. Processing model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="event-seekforward">
+   <b><a href="#event-seekforward">#event-seekforward</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-event-seekforward-1">8. Processing model</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="tab-level-active-media-session">
    <b><a href="#tab-level-active-media-session">#tab-level-active-media-session</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-tab-level-active-media-session-1">7. Processing model</a> <a href="#ref-for-tab-level-active-media-session-2">(2)</a> <a href="#ref-for-tab-level-active-media-session-3">(3)</a> <a href="#ref-for-tab-level-active-media-session-4">(4)</a> <a href="#ref-for-tab-level-active-media-session-5">(5)</a> <a href="#ref-for-tab-level-active-media-session-6">(6)</a>
+    <li><a href="#ref-for-tab-level-active-media-session-1">8. Processing model</a> <a href="#ref-for-tab-level-active-media-session-2">(2)</a> <a href="#ref-for-tab-level-active-media-session-3">(3)</a> <a href="#ref-for-tab-level-active-media-session-4">(4)</a> <a href="#ref-for-tab-level-active-media-session-5">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="most-meaningful-audio-producing-tab">
    <b><a href="#most-meaningful-audio-producing-tab">#most-meaningful-audio-producing-tab</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-most-meaningful-audio-producing-tab-1">7. Processing model</a> <a href="#ref-for-most-meaningful-audio-producing-tab-2">(2)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-3">(3)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-4">(4)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-5">(5)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-6">(6)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-7">(7)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-8">(8)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-9">(9)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-10">(10)</a>
+    <li><a href="#ref-for-most-meaningful-audio-producing-tab-1">8. Processing model</a> <a href="#ref-for-most-meaningful-audio-producing-tab-2">(2)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-3">(3)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-4">(4)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-5">(5)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-6">(6)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-7">(7)</a> <a href="#ref-for-most-meaningful-audio-producing-tab-8">(8)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="most-meaningful-media-session">
+   <b><a href="#most-meaningful-media-session">#most-meaningful-media-session</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-most-meaningful-media-session-1">8. Processing model</a> <a href="#ref-for-most-meaningful-media-session-2">(2)</a> <a href="#ref-for-most-meaningful-media-session-3">(3)</a> <a href="#ref-for-most-meaningful-media-session-4">(4)</a> <a href="#ref-for-most-meaningful-media-session-5">(5)</a> <a href="#ref-for-most-meaningful-media-session-6">(6)</a> <a href="#ref-for-most-meaningful-media-session-7">(7)</a> <a href="#ref-for-most-meaningful-media-session-8">(8)</a> <a href="#ref-for-most-meaningful-media-session-9">(9)</a> <a href="#ref-for-most-meaningful-media-session-10">(10)</a> <a href="#ref-for-most-meaningful-media-session-11">(11)</a> <a href="#ref-for-most-meaningful-media-session-12">(12)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fetch-image-algorithm">
    <b><a href="#fetch-image-algorithm">#fetch-image-algorithm</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fetch-image-algorithm-1">7. Processing model</a> <a href="#ref-for-fetch-image-algorithm-2">(2)</a> <a href="#ref-for-fetch-image-algorithm-3">(3)</a> <a href="#ref-for-fetch-image-algorithm-4">(4)</a>
+    <li><a href="#ref-for-fetch-image-algorithm-1">8. Processing model</a> <a href="#ref-for-fetch-image-algorithm-2">(2)</a> <a href="#ref-for-fetch-image-algorithm-3">(3)</a> <a href="#ref-for-fetch-image-algorithm-4">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="prefered-artwork-image">
    <b><a href="#prefered-artwork-image">#prefered-artwork-image</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-prefered-artwork-image-1">7. Processing model</a>
+    <li><a href="#ref-for-prefered-artwork-image-1">8. Processing model</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
