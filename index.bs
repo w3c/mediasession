@@ -8,10 +8,10 @@ Editor: Mounir Lamouri, Google Inc., mlamouri@google.com
 Editor: Zhiqiang Zhang, Google Inc., zqzhang@google.com
 Group: wicg
 Logo: https://resources.whatwg.org/logo-mediasession.svg
-Abstract: This specification enables web developers to obtain different levels
-Abstract: of platform media focus, customize available platform media controls,
-Abstract: and access platform media keys such as hardware keys found on
-Abstract: keyboards, headsets, remote controls, and software keys found in
+Abstract: This specification enables web developers to show customize media
+Abstract: metadata shown on platform UI, customize available platform media
+Abstract: controls, and access platform media keys such as hardware keys found
+Abstract: on keyboards, headsets, remote controls, and software keys found in
 Abstract: notification areas and on lock screens of mobile devices.
 !Participate: <a href="https://github.com/WICG/mediasession/issues/new">File an issue</a> (<a href="https://github.com/WICG/mediasession/issues?state=open">open issues</a>)
 !Version History: <a href="https://github.com/WICG/mediasession/commits">https://github.com/WICG/mediasession/commits</a>
@@ -266,7 +266,7 @@ which is either a {{MediaMetadata}} object or null.
 </dl>
 
 The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute, on
-getting, must return the <a>media session</a>'s <a lt="media session
+getting, MUST return the <a>media session</a>'s <a lt="media session
 metadata">metadata</a>.
 
 There are a batch of <a>event handlers</a>, which are used for media controls.
@@ -299,7 +299,7 @@ images</dfn>.
 
 The <dfn constructor
 for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
-constructor, when invoked, must run the following steps:
+constructor, when invoked, MUST run the following steps:
 
 <ol>
   <li>
@@ -327,17 +327,17 @@ constructor, when invoked, must run the following steps:
   </li>
 </ol>
 
-The <dfn attribute for="MediaMetadata"><code>title</code></dfn> attribute must
+The <dfn attribute for="MediaMetadata"><code>title</code></dfn> attribute MUST
 return the {{MediaMetadata}} objects's <a>title</a>.
 
-The <dfn attribute for="MediaMetadata"><code>artist</code></dfn> attribute must
+The <dfn attribute for="MediaMetadata"><code>artist</code></dfn> attribute MUST
 return the {{MediaMetadata}} objects's <a>artist</a>.
 
-The <dfn attribute for="MediaMetadata"><code>album</code></dfn> attribute must
+The <dfn attribute for="MediaMetadata"><code>album</code></dfn> attribute MUST
 return the {{MediaMetadata}} objects's <a>album</a>.
 
 The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn>
-attribute must return the {{MediaMetadata}} objects's <a for="MediaMetadata"
+attribute MUST return the {{MediaMetadata}} objects's <a for="MediaMetadata"
 title="artwork image">artwork images</a>, as a FrozenArray of {{MediaImage}}s.
 The <a attribute for="MediaMetadata">artwork</a> attribute can be empty.
 
@@ -364,7 +364,7 @@ A {{MediaImage}} object has a <dfn for="MediaImage">source</dfn>, a list of
 
 The <dfn constructor
 for="MediaImage"><code>MediaImage(<var>init</var>)</code></dfn>
-constructor, when invoked, must run the following steps:
+constructor, when invoked, MUST run the following steps:
 
 <ol>
   <li>
@@ -373,7 +373,7 @@ constructor, when invoked, must run the following steps:
   <li>
     Set <var>metadata</var>'s {{MediaImage/src}} to <var>init</var>'s
     {{MediaImageInit/src}}. If the URL is a
-    <a>relative URL</a>, it must be resolved to an <a>absolute URL</a> using the
+    <a>relative URL</a>, it MUST be resolved to an <a>absolute URL</a> using the
     <a>document base URL</a>.
   </li>
   <li>
@@ -394,11 +394,11 @@ The MediaImage <a attribute for="MediaImage">src</a>, <a attribute
 for="MediaImage">sizes</a> and <a attribute for="MediaImage">type</a>
 inspired from the <a lt="image object">image objects</a> in Web App Manifest.
 
-The <dfn attribute for="MediaImage">src</dfn> attribute must return the
+The <dfn attribute for="MediaImage">src</dfn> attribute MUST return the
 {{MediaImage}} object's <a for="MediaImage">source</a>. It is a URL from which
 the user agent can fetch the image's data.
 
-The <dfn attribute for="MediaImage">sizes</dfn> attribute must return the
+The <dfn attribute for="MediaImage">sizes</dfn> attribute MUST return the
 {{MediaImage}} object's <a for="MediaImage">sizes</a>. It follows the spec of <a
 attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in HTML
 <a for="HTMLLinkElement"><code>link</code></a> element, which is a string
@@ -409,14 +409,14 @@ or a value that consists of two valid non-negative integers that do not have a
 leading U+0030 DIGIT ZERO (0) character and that are separated by a single
 U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The
 keywords represent icon sizes in raw pixels (as opposed to CSS pixels). When
-multiple image objects are available, a user agent may use the value to decide
+multiple image objects are available, a user agent MAY use the value to decide
 which icon is most suitable for a display context (and ignore any that are
 inappropriate). The parsing steps for the <a attribute
-for="MediaImage">sizes</a> attribute must follow <a attribute
+for="MediaImage">sizes</a> attribute MUST follow <a attribute
 for="HTMLLinkElement" lt="sizes">the parsing steps for HTML <code>link</code>
 element <code>sizes</code> attribute</a>.
 
-The <dfn attribute for="MediaImage">type</dfn> attribute must return the
+The <dfn attribute for="MediaImage">type</dfn> attribute MUST return the
 {{MediaImage}} object's <a for="MediaImage">type</a>. It is a hint as to the
 media type of the image. The purpose of this attribute is to allow a user agent
 to ignore images of media types it does not support.
@@ -643,12 +643,12 @@ The steps are as follows:
     audio-producing tab</a>.
   </li>
   <li>
-    If the user agent wants to display <a>artwork image</a>, it is recommended
+    If the user agent wants to display <a>artwork image</a>, it is RECOMMENDED
     to run the <a>fetch image algorithm</a>.
   </li>
 </ol>
 
-The recommended <dfn>fetch image algorithm</dfn> is as follows:
+The RECOMMENDED <dfn>fetch image algorithm</dfn> is as follows:
 
 <ol>
   <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
