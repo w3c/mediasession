@@ -968,6 +968,8 @@ Possible extra rowspan handling
 		/* Reverse color scheme */
 		color: black;
 		border-color: #3980B5;
+		border-bottom-width: 3px !important;
+		margin-bottom: 0px !important;
 	}
 	.toc a:visited {
 		border-color: #054572;
@@ -1174,7 +1176,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed 1.0.0" name="generator">
+  <meta content="Bikeshed version 645534c1532bca4fdb4f3859efc66268a218d7c8" name="generator">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -1442,7 +1444,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-10-25">25 October 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-11-18">18 November 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1563,8 +1565,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onplaypause">onplaypause</dfn>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onprevioustrack">onprevioustrack</dfn>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onnexttrack">onnexttrack</dfn>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onseekforward">onseekforward</dfn>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onseekbackward">onseekbackward</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" data-type="EventHandler" id="dom-mediasession-onseekforward">onseekforward</dfn>;
 };
 </pre>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="Navigator" data-dfn-type="attribute" data-export="" id="dom-navigator-mediasession"><code>mediaSession</code></dfn> attribute is
@@ -1714,17 +1716,17 @@ follows:</p>
       <td> The user presses the "next track" media key or button on any hardware or
       software media interface. 
      <tr>
-      <td> <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="event seekforward" data-noexport="" id="event-seekforward"><code>seekforward</code></dfn> 
-      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
-      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onseekforward" id="ref-for-dom-mediasession-onseekforward-1">onseekforward</a></code> 
-      <td> The user presses the "seek forward" media key or button on any hardware or
-      software media interface. 
-     <tr>
       <td> <dfn data-dfn-type="dfn" data-lt="event seekbackward" data-noexport="" id="event-seekbackward"><code>seekbackward</code><a class="self-link" href="#event-seekbackward"></a></dfn> 
       <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
       <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onseekbackward" id="ref-for-dom-mediasession-onseekbackward-1">onseekbackward</a></code> 
       <td> The user presses the "seek backward" media key or button on any hardware
       or software media interface. 
+     <tr>
+      <td> <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="event seekforward" data-noexport="" id="event-seekforward"><code>seekforward</code></dfn> 
+      <td> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#interface-event">Event</a></code> 
+      <td> <code class="idl"><a data-link-type="idl" href="#dom-mediasession-onseekforward" id="ref-for-dom-mediasession-onseekforward-1">onseekforward</a></code> 
+      <td> The user presses the "seek forward" media key or button on any hardware or
+      software media interface. 
    </table>
    <p class="issue" id="whether-allow-page-listen-play-pause"><a class="self-link" href="#whether-allow-page-listen-play-pause"></a> It is still an open question whether to allow pages to handle <a data-link-type="dfn" href="#event-play" id="ref-for-event-play-1">play</a>, <a data-link-type="dfn" href="#event-pause" id="ref-for-event-pause-1">pause</a> and <a data-link-type="dfn" href="#event-playpause" id="ref-for-event-playpause-1">playpause</a> actions. The user agent MAY either intercept these
   actions and handle them within the user agent, or forward these actions to the
@@ -2210,15 +2212,15 @@ neighboring rights to this work.</p>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-appmanifest">[APPMANIFEST]
-   <dd>Marcos Caceres; et al. <a href="https://w3c.github.io/manifest/">Web App Manifest</a>. 13 October 2016. WD. URL: <a href="https://w3c.github.io/manifest/">https://w3c.github.io/manifest/</a>
+   <dd>Marcos Caceres; et al. <a href="https://w3c.github.io/manifest/">Web App Manifest</a>. URL: <a href="https://w3c.github.io/manifest/">https://w3c.github.io/manifest/</a>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
-   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 15 September 2016. PR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-whatwg-dom">[WHATWG-DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-whatwg-url">[WHATWG-URL]
@@ -2239,8 +2241,8 @@ neighboring rights to this work.</p>
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onplaypause">onplaypause</a>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onprevioustrack">onprevioustrack</a>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onnexttrack">onnexttrack</a>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onseekforward">onseekforward</a>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onseekbackward">onseekbackward</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv" data-type="EventHandler" href="#dom-mediasession-onseekforward">onseekforward</a>;
 };
 
 [<a class="nv idl-code" data-link-type="constructor" href="#dom-mediametadata-mediametadata">Constructor</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-mediametadatainit">MediaMetadataInit</a> <a class="nv" href="#dom-mediametadata-mediametadata-init-init">init</a>)]
@@ -2323,16 +2325,16 @@ user agent, which will produce wrong behavior for events such as <a data-link-ty
     <li><a href="#ref-for-dom-mediasession-onnexttrack-1">7. Media Controls</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-mediasession-onseekforward">
-   <b><a href="#dom-mediasession-onseekforward">#dom-mediasession-onseekforward</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasession-onseekforward-1">7. Media Controls</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="dom-mediasession-onseekbackward">
    <b><a href="#dom-mediasession-onseekbackward">#dom-mediasession-onseekbackward</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediasession-onseekbackward-1">7. Media Controls</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasession-onseekforward">
+   <b><a href="#dom-mediasession-onseekforward">#dom-mediasession-onseekforward</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasession-onseekforward-1">7. Media Controls</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-navigator-mediasession">
