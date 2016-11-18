@@ -238,8 +238,8 @@ interface MediaSession : EventHandler {
   attribute EventHandler onplaypause;
   attribute EventHandler onprevioustrack;
   attribute EventHandler onnexttrack;
-  attribute EventHandler onseekforward;
   attribute EventHandler onseekbackward;
+  attribute EventHandler onseekforward;
 };
 </pre>
 
@@ -538,21 +538,6 @@ follows:
   </tr>
   <tr>
     <td>
-      <dfn lt="event seekforward"><code>seekforward</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onseekforward}}
-    </td>
-    <td>
-      The user presses the "seek forward" media key or button on any hardware or
-      software media interface.
-    </td>
-  </tr>
-  <tr>
-    <td>
       <dfn lt="event seekbackward"><code>seekbackward</code></dfn>
     </td>
     <td>
@@ -564,6 +549,21 @@ follows:
     <td>
       The user presses the "seek backward" media key or button on any hardware
       or software media interface.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <dfn lt="event seekforward"><code>seekforward</code></dfn>
+    </td>
+    <td>
+      {{Event}}
+    </td>
+    <td>
+      {{MediaSession/onseekforward}}
+    </td>
+    <td>
+      The user presses the "seek forward" media key or button on any hardware or
+      software media interface.
     </td>
   </tr>
 </table>
