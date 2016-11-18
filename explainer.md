@@ -73,8 +73,8 @@ interface MediaSession : EventTarget {
     attribute EventHandler onplaypause;
     attribute EventHandler onprevioustrack;
     attribute EventHandler onnexttrack;
-    attribute EventHandler onseekforward;
     attribute EventHandler onseekbackward;
+    attribute EventHandler onseekforward;
     ...
 };
 ```
