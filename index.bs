@@ -663,14 +663,14 @@ The RECOMMENDED <dfn>fetch image algorithm</dfn> is as follows:
     empty, then terminate these steps.
   </li>
   <li>
-    If the platform supports displaying media artwork, select a <dfn>prefered
+    If the platform supports displaying media artwork, select a <dfn>preferred
     artwork image</dfn>
     from <var>metadata</var>'s <a attribute
     for="MediaMetadata"><code>artwork</code></a> of the <a>tab-level active
     media session</a> of the <a>most meaningful audio-producing tab</a>.
   </li>
   <li>
-    <a title="fetch">Fetch</a> the <a>prefered artwork image</a>'s
+    <a title="fetch">Fetch</a> the <a>preferred artwork image</a>'s
     {{MediaImage/src}}.
 
     Then, <a>in parallel</a>:
@@ -800,7 +800,7 @@ href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>.
   low-pixel-density screen, and <code>"podcast_hd.jpg"</code>
   or <code>"podcast_hd.png"</code> for a high-pixel-density screen. If the user
   agent want to use an image for lockscreen background,
-  <code>"podcast_xhd.jpg"</code> will be prefered.
+  <code>"podcast_xhd.jpg"</code> will be preferred.
 
 </div>
 
