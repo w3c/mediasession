@@ -581,15 +581,19 @@ follows:
 
 As there is a {{Window}} object per <a>browsing context</a>, the <a>top-level
 browsing context</a> and each <a>nested browsing context</a> will have an
-associated {{MediaSession}} object. For each tab, the user agent MUST select the
-{{MediaSession}} object of the <a>top-level browsing context</a> to represent
-the tab. The selected {{MediaSession}} object is called <dfn lt="tab-level
-active media session">tab-level active media session</dfn>.
+associated {{MediaSession}} object. For each tab, the user agent SHOULD select a
+{{MediaSession}} object that best represents the tab. The selected
+{{MediaSession}} object is called <dfn lt="tab-level active media
+session">tab-level active media session</dfn>. The selection of the <a>tab-level
+active media session</a> is up to the user agent and SHOULD base on preferred
+user experience.
 
-<p class="issue" id="whether-allow-child-frame-media-session">
-  It is still an open question whether an {{MediaSession}} object is allowed to
-  become the <a>tab-level active media session</a>. See the <a
-  href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>.
+<p class="issue" id="whether-allow-child-frame-media-session"> It is still an
+open question how to select a {{MediaSession}} object as the <a>tab-level active
+media session</a>. Making the {{MediaSession}} object in a <a>nested browsing
+context</a> as the <a>tab-level active media session</a> can be either good or
+bad in different use cases. See the <a
+href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>.
 </p>
 
 When the user agent has multiple tabs, the user agent MUST select the <dfn>most
