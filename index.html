@@ -1444,7 +1444,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-11-18">18 November 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-11-21">21 November 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1776,11 +1776,11 @@ The steps are as follows:</p>
     <li> If <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork-4"><code>artwork</code></a> of the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-4">tab-level active
     media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-7">most meaningful audio-producing tab</a> is
     empty, then terminate these steps. 
-    <li> If the platform supports displaying media artwork, select a <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="prefered artwork image" data-noexport="" id="prefered-artwork-image">prefered
+    <li> If the platform supports displaying media artwork, select a <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="preferred artwork image" data-noexport="" id="preferred-artwork-image">preferred
     artwork image</dfn> from <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork-5"><code>artwork</code></a> of the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-5">tab-level active
     media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-8">most meaningful audio-producing tab</a>. 
     <li>
-      <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" title="fetch">Fetch</a> the <a data-link-type="dfn" href="#prefered-artwork-image" id="ref-for-prefered-artwork-image-1">prefered artwork image</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaimage-src" id="ref-for-dom-mediaimage-src-4">src</a></code>. 
+      <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" title="fetch">Fetch</a> the <a data-link-type="dfn" href="#preferred-artwork-image" id="ref-for-preferred-artwork-image-1">preferred artwork image</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaimage-src" id="ref-for-dom-mediaimage-src-4">src</a></code>. 
      <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
      <ol>
       <li> Wait for the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>. 
@@ -1859,7 +1859,7 @@ user agent, which will produce wrong behavior for events such as <a data-link-ty
 </pre>
     <p>For example, if the user agent wants to use an image as icon, it may choose <code>"podcast.jpg"</code> or <code>"podcast.png"</code> for a
   low-pixel-density screen, and <code>"podcast_hd.jpg"</code> or <code>"podcast_hd.png"</code> for a high-pixel-density screen. If the user
-  agent want to use an image for lockscreen background, <code>"podcast_xhd.jpg"</code> will be prefered.</p>
+  agent want to use an image for lockscreen background, <code>"podcast_xhd.jpg"</code> will be preferred.</p>
    </div>
    <div class="example" id="example-changing-metadata">
     <a class="self-link" href="#example-changing-metadata"></a> Changing <a data-link-type="dfn" href="#media-session-metadata" id="ref-for-media-session-metadata-3">metadata</a>: 
@@ -2117,7 +2117,7 @@ neighboring rights to this work.</p>
    <li><a href="#dom-mediasession-onprevioustrack">onprevioustrack</a><span>, in §4</span>
    <li><a href="#dom-mediasession-onseekbackward">onseekbackward</a><span>, in §4</span>
    <li><a href="#dom-mediasession-onseekforward">onseekforward</a><span>, in §4</span>
-   <li><a href="#prefered-artwork-image">prefered artwork image</a><span>, in §8</span>
+   <li><a href="#preferred-artwork-image">preferred artwork image</a><span>, in §8</span>
    <li>
     sizes
     <ul>
@@ -2605,10 +2605,10 @@ user agent, which will produce wrong behavior for events such as <a data-link-ty
     <li><a href="#ref-for-fetch-image-algorithm-1">8. Processing model</a> <a href="#ref-for-fetch-image-algorithm-2">(2)</a> <a href="#ref-for-fetch-image-algorithm-3">(3)</a> <a href="#ref-for-fetch-image-algorithm-4">(4)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="prefered-artwork-image">
-   <b><a href="#prefered-artwork-image">#prefered-artwork-image</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="preferred-artwork-image">
+   <b><a href="#preferred-artwork-image">#preferred-artwork-image</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-prefered-artwork-image-1">8. Processing model</a>
+    <li><a href="#ref-for-preferred-artwork-image-1">8. Processing model</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
