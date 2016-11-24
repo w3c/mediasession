@@ -175,6 +175,8 @@ session.onpause = function() {
 
 ### `MediaSession` routing
 
+#### Tab-level `MediaSession` routing
+
 It usually makes more sense to display the media metadata of one page and let
 only that page respond to media control actions than doing that for multiple
 pages at the same time. Since multiple tabs can have `MediaSession` objects, the
@@ -187,12 +189,30 @@ playing the most meaningful media to the user. If the AudioFocus API (see
 API. Otherwise, the user agent should route `MediaSession` based on platform
 conventions and the preferred user experience.
 
+#### Frame-level `MediaSession` routing
+
+Another issue of `MediaSession` routing is how to select a `MediaSession` object
+inside a tab, since `MediaSession` can both exist in the top-level frame and
+child frames. When there are multiple frames having a `MediaSession` object, the
+UA should decide which frame is playing the media content which is the most
+meaningful to the user.
+
+It is still an open question which `MediaSession` should be routed. For example,
+the user plays a embedded YouTube video on Facebook, and YouTube sets the album
+art to a YouTube logo, the user will be confused if the platform UI shows an
+YouTube image, while it actually comes from Facebook. On the opposite, if a
+website has an embedded music player, it might want to show the metadata from
+the embedded music player, and let it respond to media control actions.
+
+Since this is an UX decision, we need UA feedback to decide the default behavior
+in the spec. Currently, it is up to the UA to decide.
+
 ### `MediaSession` as a global instance or a user-constructible object?
 
 It is an open question that we make `MediaSession` a global instance or
 user-constructible, the discussions are as follows:
 
-#### `MediaSession` as a global instance
+#### `MediaSession` as a global instance (current spec)
 
 If we consider each page as an application, it is straightforward that each page
 has only one `MediaSession`, and the page takes full responsibility of setting
@@ -215,7 +235,7 @@ The advantage of this solution is very simple and easy to use, while the
 disadvantage is that it may lack some flexibility, and there might be race
 issues when the metadata is set in multiple places.
 
-#### `MediaSession` as a user-constructible object
+#### `MediaSession` as a user-constructible object (alternative spec)
 
 A more flexible solution is to make `MediaSession` a user-constructible
 object. `MediaSession`s can be activated and deactivated, and they can override
@@ -259,21 +279,6 @@ important, if the user agent does not have an automatic activation mechanism for
 will be very few since the solution is essentially equivalent to having multiple
 `MediaMetadata` objects and setting different metadata to the global
 `MediaSession` instance.
-
-### `MediaSession` in iframes
-
-`MediaSession` objects can both exist in top-level frame and child frames. It is
-an open question whether we should allow child frames to use `MediaSession` in
-an opt-in/opt-out flavor, or not allowing child frames to use `MediaSession` at
-all. For example, the user plays a embedded YouTube video on Facebook, and
-YouTube sets the album art to a YouTube logo, the user will be confused if the
-platform UI shows an YouTube image, while it actually comes from Facebook. On
-the opposite, if a website has an embedded music player, it might want to show
-the metadata from the embedded music player, and let it respond to media control
-actions.
-
-Since this is an UX decision, we need UA feedback to decide the default behavior
-in the spec.
 
 ## Open questions
 
