@@ -297,6 +297,10 @@ for="MediaMetadata">artist</dfn>, an <dfn for="MediaMetadata">album</dfn> and a
 FrozenArray of <dfn for="MediaMetadata" title="artwork image">artwork
 images</dfn>.
 
+A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal to
+<code>null</code> or all its fields are equal to the default value from
+{{MediaMetadataInit}}.
+
 The <dfn constructor
 for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
 constructor, when invoked, MUST run the following steps:
@@ -637,8 +641,8 @@ The steps are as follows:
   </li>
   <li>
     If the <a attribute for="MediaSession"><code>metadata</code></a> of the
-    <a>most meaningful media session</a> is null, unset the media metadata
-    presented to the platform, and terminate these steps.
+    <a>most meaningful media session</a> is an <a>empty metadata</a>, unset the
+    media metadata presented to the platform, and terminate these steps.
   </li>
   <li>
     Update the media metadata presented to the platform to match the <a
