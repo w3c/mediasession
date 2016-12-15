@@ -1630,9 +1630,10 @@ These <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webap
    <p>A <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-4">MediaMetadata</a></code> object has a <dfn class="dfn-paneled" data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-title">title</dfn>, an <dfn class="dfn-paneled" data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-artist">artist</dfn>, an <dfn class="dfn-paneled" data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-noexport="" id="mediametadata-album">album</dfn> and a
 FrozenArray of <dfn class="dfn-paneled" data-dfn-for="MediaMetadata" data-dfn-type="dfn" data-lt="artwork images" data-noexport="" id="mediametadata-artwork-images" title="artwork image">artwork
 images</dfn>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-5">MediaMetadata</a></code> is said to be an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="empty-metadata">empty metadata</dfn> if it is equal to <code>null</code> or all its fields are equal to the default value from <code class="idl"><a data-link-type="idl" href="#dictdef-mediametadatainit" id="ref-for-dictdef-mediametadatainit-2">MediaMetadataInit</a></code>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="constructor" data-export="" id="dom-mediametadata-mediametadata"><code>MediaMetadata(<var>init</var>)</code></dfn> constructor, when invoked, MUST run the following steps:</p>
    <ol>
-    <li> Let <var>metadata</var> be a new <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-5">MediaMetadata</a></code> object. 
+    <li> Let <var>metadata</var> be a new <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-6">MediaMetadata</a></code> object. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-title" id="ref-for-dom-mediametadata-title-2">title</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-title" id="ref-for-dom-mediametadatainit-title-1">title</a></code>. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artist" id="ref-for-dom-mediametadata-artist-2">artist</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-artist" id="ref-for-dom-mediametadatainit-artist-1">artist</a></code>. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-album" id="ref-for-dom-mediametadata-album-2">album</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-album" id="ref-for-dom-mediametadatainit-album-1">album</a></code>. 
@@ -1640,12 +1641,12 @@ images</dfn>.</p>
     <li> Return <var>metadata</var>. 
    </ol>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-title"><code>title</code></dfn> attribute MUST
-return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-6">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title-1">title</a>.</p>
+return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-7">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title-1">title</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-artist"><code>artist</code></dfn> attribute MUST
-return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-7">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist-1">artist</a>.</p>
+return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-8">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist-1">artist</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-album"><code>album</code></dfn> attribute MUST
-return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-8">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album-1">album</a>.</p>
-   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-artwork"><code>artwork</code></dfn> attribute MUST return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-9">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-1" title="artwork image">artwork images</a>, as a FrozenArray of <code class="idl"><a data-link-type="idl" href="#mediaimage" id="ref-for-mediaimage-2">MediaImage</a></code>s.
+return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-9">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album-1">album</a>.</p>
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export="" id="dom-mediametadata-artwork"><code>artwork</code></dfn> attribute MUST return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-10">MediaMetadata</a></code> objects’s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-1" title="artwork image">artwork images</a>, as a FrozenArray of <code class="idl"><a data-link-type="idl" href="#mediaimage" id="ref-for-mediaimage-2">MediaImage</a></code>s.
 The <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork-3">artwork</a> attribute can be empty.</p>
    <h2 class="heading settled" data-level="6" id="the-mediaimage-interface"><span class="secno">6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediaimage" id="ref-for-mediaimage-3">MediaImage</a></code> interface</span><a class="self-link" href="#the-mediaimage-interface"></a></h2>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="constructor" href="#dom-mediaimage-mediaimage" id="ref-for-dom-mediaimage-mediaimage-2">Constructor</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-mediaimageinit" id="ref-for-dictdef-mediaimageinit-2">MediaImageInit</a> <dfn class="nv idl-code" data-dfn-for="MediaImage/MediaImage(init)" data-dfn-type="argument" data-export="" id="dom-mediaimage-mediaimage-init-init">init<a class="self-link" href="#dom-mediaimage-mediaimage-init-init"></a></dfn>)]
@@ -1792,8 +1793,8 @@ The steps are as follows:</p>
    <ol>
     <li> If the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-5">most meaningful audio-producing tab</a> is null, unset the media
     metadata presented to the platform, and terminate these steps. 
-    <li> If the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-4"><code>metadata</code></a> of the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-8">most meaningful media session</a> is null, unset the media metadata
-    presented to the platform, and terminate these steps. 
+    <li> If the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-4"><code>metadata</code></a> of the <a data-link-type="dfn" href="#most-meaningful-media-session" id="ref-for-most-meaningful-media-session-8">most meaningful media session</a> is an <a data-link-type="dfn" href="#empty-metadata" id="ref-for-empty-metadata-1">empty metadata</a>, unset the
+    media metadata presented to the platform, and terminate these steps. 
     <li> Update the media metadata presented to the platform to match the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata-5"><code>metadata</code></a> for the <a data-link-type="dfn" href="#tab-level-active-media-session" id="ref-for-tab-level-active-media-session-5">tab-level active media session</a> of the <a data-link-type="dfn" href="#most-meaningful-audio-producing-tab" id="ref-for-most-meaningful-audio-producing-tab-6">most meaningful
     audio-producing tab</a>. 
     <li> If the user agent wants to display <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-2">artwork image</a>, it is RECOMMENDED
@@ -2138,6 +2139,7 @@ neighboring rights to this work.</p>
      <li><a href="#dom-mediametadata-artwork">attribute for MediaMetadata</a><span>, in §5</span>
     </ul>
    <li><a href="#mediametadata-artwork-images">artwork images</a><span>, in §5</span>
+   <li><a href="#empty-metadata">empty metadata</a><span>, in §5</span>
    <li><a href="#event-nexttrack">event nexttrack</a><span>, in §7</span>
    <li><a href="#event-pause">event pause</a><span>, in §7</span>
    <li><a href="#event-play">event play</a><span>, in §7</span>
@@ -2472,13 +2474,13 @@ actions</a> <a href="#ref-for-dom-mediasessionplaybackstate-playing-5">(2)</a>
    <b><a href="#mediametadata">#mediametadata</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-mediametadata-1">4. The MediaSession interface</a> <a href="#ref-for-mediametadata-2">(2)</a>
-    <li><a href="#ref-for-mediametadata-3">5. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-4">(2)</a> <a href="#ref-for-mediametadata-5">(3)</a> <a href="#ref-for-mediametadata-6">(4)</a> <a href="#ref-for-mediametadata-7">(5)</a> <a href="#ref-for-mediametadata-8">(6)</a> <a href="#ref-for-mediametadata-9">(7)</a>
+    <li><a href="#ref-for-mediametadata-3">5. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-4">(2)</a> <a href="#ref-for-mediametadata-5">(3)</a> <a href="#ref-for-mediametadata-6">(4)</a> <a href="#ref-for-mediametadata-7">(5)</a> <a href="#ref-for-mediametadata-8">(6)</a> <a href="#ref-for-mediametadata-9">(7)</a> <a href="#ref-for-mediametadata-10">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-mediametadatainit">
    <b><a href="#dictdef-mediametadatainit">#dictdef-mediametadatainit</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-mediametadatainit-1">5. The MediaMetadata interface</a>
+    <li><a href="#ref-for-dictdef-mediametadatainit-1">5. The MediaMetadata interface</a> <a href="#ref-for-dictdef-mediametadatainit-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediametadatainit-title">
@@ -2529,6 +2531,12 @@ actions</a> <a href="#ref-for-dom-mediasessionplaybackstate-playing-5">(2)</a>
     <li><a href="#ref-for-mediametadata-artwork-images-1">5. The MediaMetadata interface</a>
     <li><a href="#ref-for-mediametadata-artwork-images-2">8.3. Processing media session metadata</a>
     <li><a href="#ref-for-mediametadata-artwork-images-3">9. Examples</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="empty-metadata">
+   <b><a href="#empty-metadata">#empty-metadata</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-empty-metadata-1">8.3. Processing media session metadata</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediametadata-mediametadata">
