@@ -65,12 +65,19 @@ The `MediaSession` object is the main interface for this API, which looks like
 the following:
 
 ```javascript
+enum MediaSessionPlaybackState {
+  "none",
+  "paused",
+  "playing"
+};
+
 interface MediaSession : EventTarget {
     attribute MediaMetadata? metadata;
 
+    attribute MediaSessionPlaybackState playbackState;  // defaults to "none"
+
     attribute EventHandler onplay;
     attribute EventHandler onpause;
-    attribute EventHandler onplaypause;
     attribute EventHandler onprevioustrack;
     attribute EventHandler onnexttrack;
     attribute EventHandler onseekbackward;
@@ -143,19 +150,16 @@ avoid the fallback behavior.
   agent and not exposing to the page at all. This is still an open question. See
   https://github.com/WICG/mediasession/issues/69
 
-For action `play` and `pause`, the user agent need to use its best guess to
-decide whether the page is playing or paused. We are considering add a boolean
-attribute `playbackState` to let the page tell the playback state correctly. In
-many cases, `play` and `pause` share the same media button. When the button is
-pressed, the user agent should fire `pause` action when the page is playing and
-fire `play` when the page is paused.
-
-**Note** It is still an open question whether we need action `playpause`. The
-  difference between `play`+`pause` and `playpause` is where the playback is
-  decided. For `playpause`, it is decided by the page. For `play`+`pause`, it is
-  decided by the user agent, but the page could possibly tell the playback state
-  via a new attribute `playbackState`. See
-  https://github.com/WICG/mediasession/issues/141
+For action `play` and `pause`, in many situations, `play` and `pause` share the
+same media button. When the button is pressed, the user agent should fire
+`pause` action when the page is playing and fire `play` when the page is paused.
+The page can use the `playbackState` attribute to tell the UA about the current
+playback state. If it's currently playing, the user agent will send pause events
+to the page and if it's currently paused, the user agent will send play events
+to the page. The default `playbackState` is `none`, representing no active media
+session. The `playbackState` attribute is a hint to the UA which could ignore it
+in case of, for example, a page appears to be playing but has a `playbackState`
+set to `paused`.
 
 Here's an example for media controls:
 

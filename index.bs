@@ -149,11 +149,6 @@ urlPrefix: https://dom.spec.whatwg.org/; spec: WHATWG-DOM
     type: interface; urlPrefix: #interface-
         text: EventTarget
         text: Event
-urlPrefix: http://www.w3.org/TR/DOM-Level-3-Events-key/; spec: dom-level-3-events-key
-    type: attribute; urlPrefix: #key-
-        text: MediaPlayPause; url: MediaPlayPause
-        text: MediaTrackPrevious; url: MediaTrackPrevious
-        text: MediaTrackNext; url: MediaTrackNext
 urlPrefix: http://www.w3.org/TR/page-visibility/; spec: PAGE-VISIBILITY
     type: attribute
         text: visibilityState; url: #dom-document-visibilitystate
@@ -229,13 +224,20 @@ partial interface Navigator {
   readonly attribute MediaSession mediaSession;
 };
 
+enum MediaSessionPlaybackState {
+  "none",
+  "paused",
+  "playing"
+};
+
 [Exposed=Window]
 interface MediaSession : EventHandler {
   attribute MediaMetadata? metadata;
 
+  attribute MediaSessionPlaybackState playbackState;
+
   attribute EventHandler onplay;
   attribute EventHandler onpause;
-  attribute EventHandler onplaypause;
   attribute EventHandler onprevioustrack;
   attribute EventHandler onnexttrack;
   attribute EventHandler onseekbackward;
@@ -250,24 +252,38 @@ return the {{MediaSession}} instance associated with the {{Navigator}} object.
 {{MediaSession}} objects are simply known as <dfn lt="media session">media
 sessions</dfn>.
 
-A <a>media session</a> has <dfn lt="media session metadata">metadata</dfn>,
-which is either a {{MediaMetadata}} object or null.
+The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute
+represents the <dfn lt="media session metadata">metadata</dfn> of the <a>media
+session</a>. On getting, MUST return the <a>media session</a>'s <a lt="media
+session metadata">metadata</a>, if any, or null otherwise. It can be set to a
+{{MediaMetadata}} object or null.
 
-<dl class=domintro>
-  <dt>
-    <code><var>session</var> . {{MediaSession/metadata}}</code>
-  </dt>
-  <dd>
-    Returns the <a>media session</a>'s {{MediaMetadata}} object, if any, or null
-    otherwise.
+The <dfn attribute for="MediaSession"><code>playbackState</code></dfn> attribute
+represents the <dfn lt="playback state">playback state</dfn> of the <a>media
+session</a>. The default value is <a enum-value
+for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST update
+the <a>most meaningful media session</a> and run the <a>media control actions
+update algorithm</a> if needed. On getting, the user agent MUST return the last
+valid value that was set. If none, it MUST return <a enum-value
+for="MediaSessionPlaybackState">none</a>.
 
-    Can be set, to a {{MediaMetadata}} object or null.
-  </dd>
-</dl>
+The {{MediaSessionPlaybackState}} enum is used to indicate the <a>playback
+state</a>, the values are described as follows:
 
-The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute, on
-getting, MUST return the <a>media session</a>'s <a lt="media session
-metadata">metadata</a>.
+<ul>
+  <li>
+    <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the page
+    does not specify whether it's playing or paused.
+  </li>
+  <li>
+    <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the page
+    is currently playing media and it can be paused.
+  </li>
+  <li>
+    <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the page
+    has paused media and it can be resumed.
+  </li>
+</ul>
 
 There are a batch of <a>event handlers</a>, which are used for media controls.
 These <a>event handlers</a> are defined in [[#media-controls]].
@@ -493,21 +509,6 @@ follows:
   </tr>
   <tr>
     <td>
-      <dfn lt="event playpause"><code>playpause</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onplaypause}}
-    </td>
-    <td>
-      The user presses the "play/pause" media key or button on any hardware or
-      software media interface.
-    </td>
-  </tr>
-  <tr>
-    <td>
       <dfn lt="event previoustrack"><code>previoustrack</code></dfn>
     </td>
     <td>
@@ -568,16 +569,25 @@ follows:
   </tr>
 </table>
 
-<p class="issue" id="whether-allow-page-listen-play-pause">
-  It is still an open question whether to allow pages to handle <a lt="event
-  play">play</a>, <a lt="event pause">pause</a> and <a lt="event
-  playpause">playpause</a> actions. The user agent MAY either intercept these
-  actions and handle them within the user agent, or forward these actions to the
-  page and let the page handle them. See <a
-  href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>.
-</p>
-
 <h2 id="processing-model">Processing model</h2>
+
+<h3 id="determining-actual-playback-state">Determining the <a>actual playback
+state</a></h3>
+
+The <a attribute for="MediaSession">playbackState</a> attribute is to let the
+page specify the current <a>playback state</a>. However the <a>playback
+state</a> is a hint from the page and and MAY be overriden by the user agent.
+The state after user agent override is called <a>actual playback state</a>.
+
+The <dfn>actual playback state</dfn> SHOULD return the last value that was set
+on <a attribute for="MediaSession">playbackState</a>. If the user agent believes
+the actual playback state is <a enum-value
+for="MediaSessionPlaybackState">playing</a> and the <a attribute
+for="MediaSession">playbackState</a> returns a different value, it MAY return <a
+enum-value for="MediaSessionPlaybackState">playing</a> instead.
+
+
+<h3 id="media-session-routing">Media session routing</h3>
 
 As there is a {{Window}} object per <a>browsing context</a>, the <a>top-level
 browsing context</a> and each <a>nested browsing context</a> will have an
@@ -622,6 +632,8 @@ to the platform, which means:
     done for all other <a>media sessions</a>.
   </li>
 </ol>
+
+<h3 id="processing-media-metadata">Processing <a>media session metadata</a></h3>
 
 The media metadata for the <a>most meaningful audio-producing tab</a> MAY be
 displayed in the platform UI depending on platform conventions. Whenever the
@@ -700,9 +712,14 @@ The RECOMMENDED <dfn>fetch image algorithm</dfn> is as follows:
 If no artwork images are fetched in the <a>fetch image algorithm</a>, the user
 agent MAY have fallback behavior such as displaying an default image as artwork.
 
-Whenever the <a>most meaningful media session</a> changes or the <a>media
-control event handler</a>s of the <a>most meaningful media session</a> change,
-the user agent MUST do the following:
+<h3 id="processing-media-control-actions">Processing <a>media control
+actions</a></h3>
+
+Whenever the <a>most meaningful media session</a> changes, the <a>actual
+playback state</a> of the <a>most meaningful media session</a> changes or the
+<a>media control event handler</a>s of the <a>most meaningful media session</a>
+change, the user agent MUST run the <dfn>media control actions update
+algorithm</dfn>:
 
 <ol>
   <li>
@@ -717,7 +734,29 @@ the user agent MUST do the following:
   </li>
   <li>
     If needed, update the UI buttons displayed on the platform UI to match the
-    <a>media control event handler</a>s.
+    <a>media control event handler</a>s. If the user agent wants to show UI
+    buttons for both <a>event play</a> and <a>event pause</a> but they share the
+    same place on the platform UI. The user agent could either:
+    <ul>
+      <li>
+        Show only one button for either <a>event play</a> or <a>event pause</a>
+        depending on the <a>actual playback state</a> of the <a>most meaningful
+        media session</a>:
+        <ul>
+          <li>
+            If the <a>actual playback state</a> is <a enum-value
+            for="MediaSessionPlaybackState">playing</a>, show a button for
+            <a>event pause</a>.
+          </li>
+          <li>
+            Otherwise, show a button for <a>event play</a>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Show a joint button for <a>event play</a> and <a>event pause</a>.
+      </li>
+    </ul>
   </li>
 </ol>
 
@@ -741,8 +780,8 @@ the UI, it MUST run the following steps:
     Create an {{Event}} object for the <a>media control action</a>.
   </li>
   <li>
-    Call the corresponding <a>media control event handler</a> of the <a>most
-    meaningful media session</a>.
+    Dispatch the {{Event}} to the corresponding <a>media control event
+    handler</a> of the <a>most meaningful media session</a>.
   </li>
   <li>
     If the user agent has fallback steps to handle the <a>media control
@@ -750,6 +789,14 @@ the UI, it MUST run the following steps:
     If it is false, run the fallback steps.
   </li>
 </ol>
+
+Sometimes the user agent can receive a joint command for <a>event play</a> and
+<a>event pause</a>, such as a headset button click. In this case, the user agent
+MUST dispatch either a <a>event play</a> or <a>event pause</a> to the <a>media
+control event handler</a> of the <a>most meaningful media session</a> based on
+the <a>actual playback state</a>. If the <a>actual playback state</a> is
+<a enum-value for="MediaSessionPlaybackState">playing</a>, send <a>event
+pause</a>. Otherwise, send <a>event play</a>.
 
 <p class="issue" id="how-to-prevent-fallback-steps"> It is still an open
 question how to opt in/out of the fallback behavior. Checking
@@ -760,7 +807,6 @@ user agent, which will produce wrong behavior for events such as <a lt="event
 nexttrack">nexttrack</a> or <a lt="event seekforward">seekforward</a>. See <a
 href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>.
 </p>
-
 
 <h2 id="examples">Examples</h2>
 
