@@ -245,18 +245,49 @@ interface MediaSession : EventHandler {
 };
 </pre>
 
-The <dfn attribute for="Navigator"><code>mediaSession</code></dfn> attribute is
-to retrive an instance of the {{MediaSession}} interface. The attribute MUST
-return the {{MediaSession}} instance associated with the {{Navigator}} object.
+<p>
+  A {{MediaSession}} objects represents a media session for a given document and
+  allows a document to communicate to the user agent some information about the
+  playback and how to handle it.
+</p>
 
-{{MediaSession}} objects are simply known as <dfn lt="media session">media
-sessions</dfn>.
+<p>
+  A {{MediaSession}} has an associated <dfn for="MediaSession">metadata</dfn>
+  object represented by a {{MediaMetadata}}. It is initialy <code>null</code>.
+</p>
 
-The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute
-represents the <dfn lt="media session metadata">metadata</dfn> of the <a>media
-session</a>. On getting, MUST return the <a>media session</a>'s <a lt="media
-session metadata">metadata</a>, if any, or null otherwise. It can be set to a
-{{MediaMetadata}} object or null.
+<p>
+  The <dfn attribute for="Navigator"><code>mediaSession</code></dfn> attribute
+  MUST return the {{MediaSession}} instance associated with the {{Navigator}}
+  object.
+</p>
+
+<p>
+  The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute
+  reflects the {{MediaSession}}'s <a for=MediaSession>metadata</a>. On getting,
+  it MUST return the {{MediaSession}}'s <a for=MediaSession>metadata</a>. On
+  setting it MUST run the following steps with <var>value</var> being the new
+  value being set:
+  <ol>
+    <li>
+      If the {{MediaSession}}'s <a for=MediaSession>metadata</a> is not
+      <code>null</code>, set its <a for=MediaMetadata>media session</a> to
+      <code>null</code>.
+    </li>
+    <li>
+      Set the {{MediaSession}}'s <a for=MediaSession>metadata</a> to
+      <var>value</var>.
+    </li>
+    <li>
+      If the {{MediaSession}}'s <a for=MediaSession>metadata</a> is not
+      <code>null</code>, set its <a for=MediaMetadata>media session</a> to the
+      current {{MediaSession}}.
+    </li>
+    <li>
+      <a>In parallel</a>, run the <a>update metadata algorithm</a>.
+    </li>
+  </ol>
+</p>
 
 The <dfn attribute for="MediaSession"><code>playbackState</code></dfn> attribute
 represents the <dfn lt="playback state">playback state</dfn> of the <a>media
@@ -294,10 +325,10 @@ These <a>event handlers</a> are defined in [[#media-controls]].
 
 [Constructor(optional MediaMetadataInit init)]
 interface MediaMetadata {
-  readonly attribute DOMString title;
-  readonly attribute DOMString artist;
-  readonly attribute DOMString album;
-  [SameObject] readonly attribute FrozenArray&lt;MediaImage> artwork;
+  attribute DOMString title;
+  attribute DOMString artist;
+  attribute DOMString album;
+  attribute FrozenArray&lt;MediaImage> artwork;
 };
 
 dictionary MediaMetadataInit {
@@ -308,58 +339,130 @@ dictionary MediaMetadataInit {
 };
 </pre>
 
-A {{MediaMetadata}} object has a <dfn for="MediaMetadata">title</dfn>, an <dfn
-for="MediaMetadata">artist</dfn>, an <dfn for="MediaMetadata">album</dfn> and a
-FrozenArray of <dfn for="MediaMetadata" title="artwork image">artwork
-images</dfn>.
+<p>
+  A {{MediaMetadata}} object is a representation of the metadata associated with
+  a {{MediaSession}} that can be used by user agents to provide customized user
+  interface.
+</p>
 
-A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal to
-<code>null</code> or all its fields are equal to the default value from
-{{MediaMetadataInit}}.
+<p>
+  A {{MediaMetadata}} can have an associated <dfn for="MediaMetadata">media
+  session</dfn>.
+</p>
 
-The <dfn constructor
-for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
-constructor, when invoked, MUST run the following steps:
+<p>
+  A {{MediaMetadata}} has an associated <dfn for="MediaMetadata">title</dfn>,
+  <dfn for="MediaMetadata">artist</dfn> and <dfn for="MediaMetadata">album</dfn>
+  which are DOMString.
+</p>
 
-<ol>
-  <li>
-    Let <var>metadata</var> be a new {{MediaMetadata}} object.
-  </li>
-  <li>
-    Set <var>metadata</var>'s {{MediaMetadata/title}} to <var>init</var>'s
-    {{MediaMetadataInit/title}}.
-  </li>
-  <li>
-    Set <var>metadata</var>'s {{MediaMetadata/artist}} to <var>init</var>'s
-    {{MediaMetadataInit/artist}}.
-  </li>
-  <li>
-    Set <var>metadata</var>'s {{MediaMetadata/album}} to
-    <var>init</var>'s {{MediaMetadataInit/album}}.
-  </li>
-  <li>
-    Set <var>metadata</var>'s {{MediaMetadata/artwork}} using <var>init</var>'s
-    {{MediaMetadataInit/artwork}} by calling the
-    <a><code>MediaImage(init)</code></a> constructor.
-  </li>
-  <li>
-    Return <var>metadata</var>.
-  </li>
-</ol>
+<p>
+  A {{MediaMetadata}} has an associated <dfn for="MediaMetadata" title="artwork
+  image">artwork images</dfn> which is a FrozenArray of {{MediaImage}}s.
+</p>
 
-The <dfn attribute for="MediaMetadata"><code>title</code></dfn> attribute MUST
-return the {{MediaMetadata}} objects's <a>title</a>.
+<p>
+  A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal
+  to <code>null</code> or all the following conditions are true:
+  <ul>
+    <li>It's <a for=MediaMetadata>title</a> is the empty string.</li>
+    <li>It's <a for=MediaMetadata>artist</a> is the empty string.</li>
+    <li>It's <a for=MediaMetadata>album</a> is the empty string.</li>
+    <li>It's <a for=MediaMetadata title='artwork image'>artwork images</a>
+    length is <code>0</code>.</li>
+  </ul>
+</p>
 
-The <dfn attribute for="MediaMetadata"><code>artist</code></dfn> attribute MUST
-return the {{MediaMetadata}} objects's <a>artist</a>.
+<p>
+  The <dfn constructor
+  for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
+  constructor, when invoked, MUST run the following steps:
 
-The <dfn attribute for="MediaMetadata"><code>album</code></dfn> attribute MUST
-return the {{MediaMetadata}} objects's <a>album</a>.
+  <ol>
+    <li>
+      Let <var>metadata</var> be a new {{MediaMetadata}} object.
+    </li>
+    <li>
+      Set <var>metadata</var>'s {{MediaMetadata/title}} to <var>init</var>'s
+      {{MediaMetadataInit/title}}.
+    </li>
+    <li>
+      Set <var>metadata</var>'s {{MediaMetadata/artist}} to <var>init</var>'s
+      {{MediaMetadataInit/artist}}.
+    </li>
+    <li>
+      Set <var>metadata</var>'s {{MediaMetadata/album}} to
+      <var>init</var>'s {{MediaMetadataInit/album}}.
+    </li>
+    <li>
+      Set <var>metadata</var>'s {{MediaMetadata/artwork}} using
+      <var>init</var>'s {{MediaMetadataInit/artwork}} by calling the
+      <a><code>MediaImage(init)</code></a> constructor.
+    </li>
+    <li>
+      Return <var>metadata</var>.
+    </li>
+  </ol>
+</p>
 
-The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn>
-attribute MUST return the {{MediaMetadata}} objects's <a for="MediaMetadata"
-title="artwork image">artwork images</a>, as a FrozenArray of {{MediaImage}}s.
-The <a attribute for="MediaMetadata">artwork</a> attribute can be empty.
+<p>
+  The <dfn attribute for="MediaMetadata"><code>title</code></dfn> attribute
+  reflects the {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On getting,
+  it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On
+  setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>title</a> to
+  the given value.
+</p>
+
+<p>
+  The <dfn attribute for="MediaMetadata"><code>artist</code></dfn> attribute
+  reflects the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On getting,
+  it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On
+  setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>
+  to the given value.
+</p>
+
+<p>
+  The <dfn attribute for="MediaMetadata"><code>album</code></dfn> attribute
+  reflects the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On getting,
+  it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On
+  setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>album</a> to
+  the given value.
+</p>
+
+<p>
+  The <dfn attribute for="MediaMetadata"><code>artwork images</code></dfn>
+  attribute reflects the {{MediaMetadata}}'s <a for=MediaMetadata>artwork
+  images</a>. On getting, it MUST return the {{MediaMetadata}}'s <a
+  for=MediaMetadata>artwork images</a>. On setting, it MUST set the
+  {{MediaMetadata}}'s <a for=MediaMetadata>artwork images</a> to the given
+  value.
+</p>
+
+<p>
+  When {{MediaMetadata}}'s <a for=MediaMetadata>title</a>, <a
+  for=MediaMetadata>artist</a>, <a for=MediaMetadata>album</a> or <a
+  for=MediaMetadata>artwork images</a> are modified, the user agent MUST run the
+  following steps:
+  <ol>
+    <li>
+      If the intance has no associated <a for=MediaMetadata>media session</a>,
+      abort these steps.
+    </li>
+    <li>
+      Otherwise, <a>queue a task</a> to run the following substeps:
+      <ol>
+        <li>
+          If the instance no longer has an associated <a for=MediaMetadata>media
+          session</a>, abort these steps.
+        </li>
+        <li>
+          Otherwise, <a>in parallel</a>, run the <a>update metadata
+          algorithm</a>.
+        </li>
+      </ol>
+    </li>
+  </ol>
+</p>
 
 <h2 id="the-mediaimage-interface">The {{MediaImage}} interface</h2>
 
@@ -626,18 +729,18 @@ to the platform, which means:
     If possible, the user agent SHOULD present the <a attribute
     for="MediaSession"><code>metadata</code></a>
     of the <a>most meaningful media session</a> to the platform for display
-    purpose. This MUST not be done for all other <a>media sessions</a>.
+    purpose. This MUST not be done for all other {{MediaSession}} instances.
   </li>
   <li>
     If possible, the user agent SHOULD register listeners to the platform for
     the <a>most meaningful media session</a>, display corresponding UI buttons
     if needed, and forward all <a lt="media control action">media control
     actions</a> to the <a>most meaningful media session</a>. This MUST not be
-    done for all other <a>media sessions</a>.
+    done for all other {{MediaSession}} instances.
   </li>
 </ol>
 
-<h3 id="processing-media-metadata">Processing <a>media session metadata</a></h3>
+<h3 id="processing-media-metadata">Processing metadata</h3>
 
 The media metadata for the <a>most meaningful audio-producing tab</a> MAY be
 displayed in the platform UI depending on platform conventions. Whenever the
@@ -817,7 +920,7 @@ href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>.
 <em>This section is non-normative.</em>
 
 <div class="example" id="example-setting-metadata">
-  Setting <a lt="media session metadata">metadata</a>:
+  Setting <a for=MediaSession>metadata</a>:
 
   <pre class="lang-javascript">
     window.navigator.mediaSession.metadata = new MediaMetadata({
@@ -859,7 +962,7 @@ href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>.
 </div>
 
 <div class="example" id="example-changing-metadata">
-  Changing <a lt="media session metadata">metadata</a>:
+  Changing <a for=MediaSession>metadata</a>:
 
   For playlists or chapters of an audio book, multiple <a>media elements</a> can
   share a single <a>media session</a>.
