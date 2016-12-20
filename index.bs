@@ -230,18 +230,24 @@ enum MediaSessionPlaybackState {
   "playing"
 };
 
+enum MediaSessionAction {
+  "play",
+  "pause",
+  "seekbackward",
+  "seekforward",
+  "previoustrack",
+  "nexttrack",
+};
+
+callback MediaSessionActionHandler = void();
+
 [Exposed=Window]
 interface MediaSession : EventHandler {
   attribute MediaMetadata? metadata;
 
   attribute MediaSessionPlaybackState playbackState;
 
-  attribute EventHandler onplay;
-  attribute EventHandler onpause;
-  attribute EventHandler onprevioustrack;
-  attribute EventHandler onnexttrack;
-  attribute EventHandler onseekbackward;
-  attribute EventHandler onseekforward;
+  void setActionHandler(MediaSessionAction action, MediaSessionActionHandler? handler);
 };
 </pre>
 
@@ -289,35 +295,42 @@ interface MediaSession : EventHandler {
   </ol>
 </p>
 
-The <dfn attribute for="MediaSession"><code>playbackState</code></dfn> attribute
-represents the <dfn lt="playback state">playback state</dfn> of the <a>media
-session</a>. The default value is <a enum-value
-for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST update
-the <a>active media session</a> and run the <a>media control actions update
-algorithm</a> if needed. On getting, the user agent MUST return the last valid
-value that was set. If none, it MUST return <a enum-value
-for="MediaSessionPlaybackState">none</a>.
+<p>
+  The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
+  attribute represents the <dfn lt="playback state">playback state</dfn> of the
+  <a>media session</a>. The default value is <a enum-value
+  for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST
+  update the <a>active media session</a> and run the <a>media session actions
+  update algorithm</a> if needed. On getting, the user agent MUST return the
+  last valid value that was set. If none, it MUST return <a enum-value
+  for="MediaSessionPlaybackState">none</a>.
+</p>
 
-The {{MediaSessionPlaybackState}} enum is used to indicate the <a>playback
-state</a>, the values are described as follows:
+<p>
+  The {{MediaSessionPlaybackState}} enum is used to indicate the <a>playback
+  state</a>, the values are described as follows:
 
-<ul>
-  <li>
-    <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the page
-    does not specify whether it's playing or paused.
-  </li>
-  <li>
-    <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the page
-    is currently playing media and it can be paused.
-  </li>
-  <li>
-    <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the page
-    has paused media and it can be resumed.
-  </li>
-</ul>
+  <ul>
+    <li>
+      <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the page
+      does not specify whether it's playing or paused.
+    </li>
+    <li>
+      <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the
+      page is currently playing media and it can be paused.
+    </li>
+    <li>
+      <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the
+      page has paused media and it can be resumed.
+    </li>
+  </ul>
+</p>
 
-There are a batch of <a>event handlers</a>, which are used for media controls.
-These <a>event handlers</a> are defined in [[#media-controls]].
+<p>
+  The <dfn method for=MediaSession>setActionHandler()</dfn> method, when
+  invoked, MUST run the <a>update action handler algorithm</a> with
+  <var>action</var> and <var>handler</var> on the {{MediaSession}}.
+</p>
 
 <h2 id="the-mediametadata-interface">The {{MediaMetadata}} interface</h2>
 
@@ -546,153 +559,187 @@ to ignore images of media types it does not support.
 
 <h2 id="media-controls">Media Controls</h2>
 
-In the {{MediaSession}} interface, there are a bunch of <a>event handlers</a>
-which are used for media controls. They enable the page to listen to <a
-lt="media control action">media control actions</a> from hardware or software
-media interfaces on the platform. A <dfn>media control action</dfn> is a user
-command to perform media-related actions, such as play/pause media playback and
-switching media tracks. <a lt="media control action">Media control actions</a>
-MAY come from various hardware and software interfaces on the platform,
-including media keys or buttons on the keyboard, headphone, remote controller,
-notification or lock screen.
+<p>
+  A <dfn>media session action</dfn> is an action that the page can handle in
+  order for the user to interact with the {{MediaSession}}. For example, a page
+  can handle some actions that will then be triggered when the user presses
+  buttons from a headset or other remote device.
+</p>
 
-For each <a>media control action</a>, there is a corresponding <a>event
-handler</a> called a <dfn>media control event handler</dfn>.
+<p>
+  A <dfn title='media session action source'>media session action source</dfn>
+  is a source that might produce a <a>media session action</a>. Such source can
+  be the platform or the UI surfaces created by the user agent.
+</p>
 
-The <a>media control event handler</a> allows a page to register callbacks when
-the action is fired. On set, the page declares it supports the corresponding
-<a>media control action</a>, and the user agent could display a button for the
-action on platform UI and/or register listeners for the action to the platform,
-and forward the corresponding <a>media control action</a> to the <a>media
-control event handler</a> when the it is received.
+<p>
+  A <a>media session action</a> is represented by a {{MediaSessionAction}} which
+  can have one of the following value:
+  <ul>
+    <li>
+      <dfn enum-value for=MediaSessionAction>play</dfn>: the action intent is to
+      resume the playback.
+    </li>
+    <li>
+      <dfn enum-value for=MediaSessionAction>pause</dfn>: the action intent is
+      to pause a currently active playback.
+    </li>
+    <li>
+      <dfn enum-value for=MediaSessionAction>seekbackward</dfn>: the action
+      intent is to move the playback time backward by a short period (eg. few
+      seconds).
+    </li>
+    <li>
+      <dfn enum-value for=MediaSessionAction>seekforward</dfn>: the action
+      intent is to move the playback time forward by a short period (eg. few
+      seconds).
+    </li>
+    <li>
+      <dfn enum-value for=MediaSessionAction>previoustrack</dfn>: the action
+      intent is to either start the current playback from the beginning if the
+      playback has a notion of beginning or move to the previous item in the
+      playlist if the playback has a notion of playlist.
+    </li>
+    <li>
+      <dfn enum-value for=MediaSessionAction>nexttrack</dfn>: the action is to
+      move to the playback to the next item in the playlist if the playback has
+      a notion of playlist.
+    </li>
+  </ul>
+</p>
 
-The list of <a lt="media control action">media control actions</a> is as
-follows:
+<p>
+  All {{MediaSession}} have a map of <dfn>supported media session actions</dfn>
+  with, as a key, a <a>media session action</a> and as a value a
+  {{MediaSessionActionHandler}}.
+</p>
 
-<table>
-  <tr>
-    <th>
-      <a>event handler event type</a>
-    </th>
-    <th>
-      Interface
-    </th>
-    <th>
-      <a>Event handler</a>
-    </th>
-    <th>
-      Fired when...
-    </th>
-  </tr>
-  <tr>
-    <td>
-      <dfn lt="event play"><code>play</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onplay}}
-    </td>
-    <td>
-      The user presses the "play" media key or button on any hardware or
-      software media interface.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <dfn lt="event pause"><code>pause</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onpause}}
-    </td>
-    <td>
-      The user presses the "pause" media key or button on any hardware or
-      software media interface.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <dfn lt="event previoustrack"><code>previoustrack</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onprevioustrack}}
-    </td>
-    <td>
-      The user presses the "previous track" media key or button on any hardware
-      or software media interface.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <dfn lt="event nexttrack"><code>nexttrack</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onnexttrack}}
-    </td>
-    <td>
-      The user presses the "next track" media key or button on any hardware or
-      software media interface.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <dfn lt="event seekbackward"><code>seekbackward</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onseekbackward}}
-    </td>
-    <td>
-      The user presses the "seek backward" media key or button on any hardware
-      or software media interface.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <dfn lt="event seekforward"><code>seekforward</code></dfn>
-    </td>
-    <td>
-      {{Event}}
-    </td>
-    <td>
-      {{MediaSession/onseekforward}}
-    </td>
-    <td>
-      The user presses the "seek forward" media key or button on any hardware or
-      software media interface.
-    </td>
-  </tr>
-</table>
+<p>
+  When the <dfn>update action handler algorithm</dfn> on a given
+  {{MediaSession}} with <var>action</var> and <var>handler</var> parameters is
+  invoked, the user agent MUST run the following steps:
+  <ol>
+    <li>
+      If <var>handler</var> is <code>null</code>, remove <var>action</var> from
+      the <a>supported media session action</a> for {{MediaSession}} and abort
+      these steps.
+    </li>
+    <li>
+      Add <var>action</var> to the <a>supported media session actions</a> for
+      {{MediaSession}} and associate to it the <var>handler</var>.
+    </li>
+  </ol>
+</p>
+
+<p>
+  When the <a>supported media session actions</a> are changed, the user agent
+  SHOULD run the <a>media session actions update algorithm</a>. The user agent
+  MAY <a>queue a task</a> in order to run the <a>media session actions update
+  algorithm</a> in order to avoid UI flickering when multiple actions are
+  modified in the same event loop.
+</p>
+
+<p>
+  When the user agent is notified by a <a>media session action source</a> that a
+  <a>media session action</a> named <var>action</var> has been trigerered, the
+  user agent MUST run the <dfn>handle media session action</dfn> steps as
+  follow:
+  <ol>
+    <li>
+      If the <a>active media session</a> is <code>null</code>, abort these
+      steps.
+    </li>
+    <li>
+      Let <var>actions</var> be the <a>active media session</a>'s <a>supported
+      media session actions</a>.
+    </li>
+    <li>
+      If <var>actions</var> does not contain the key <var>action</var>, abort
+      these steps.
+    </li>
+    <li>
+      Let <var>handler</var> be the {{MediaSessionActionHandler}} associated
+      with the key <var>action</var> in <var>actions</var>.
+    </li>
+    <li>
+      Run <var>handler</var>.
+    </li>
+  </ol>
+</p>
+
+<p>
+  When the user agent receives a joint command for <a enum-value
+  for=MediaSessionAction>play</a> and <a enum-value
+  for=MediaSessionAction>pause</a>, such as a headset button click, it MUST run
+  the following steps:
+  <ol>
+    <li>
+      If the <a>active media session</a> is <code>null</code>, abort these
+      steps.
+    </li>
+    <li>
+      Let <var>action</var> be a <a>media session action</a>.
+    </li>
+    <li>
+      If the <a>actual playback state</a> of the <a>active media session</a> is
+      <a enum-value for="MediaSessionPlaybackState">playing</a>, set
+      <var>action</var> to <a enum-value for=MediaSessionAction>pause</a>.
+    </li>
+    <li>
+      Otherwise, set <var>action</var> to <a enum-value
+      for=MediaSessionAction>play</a>.
+    </li>
+    <li>
+      Run the <a>handle media session action</a> steps with <var>action</var>.
+    </li>
+  </ol>
+</p>
+
+<p>
+  It is RECOMMENDED for user agents to implement a default handler for the <a
+  enum-value for=MediaSessionAction>play</a> and <a enum-value
+  for=MediaSessionAction>pause</a> <a>media session actions</a> if none was
+  provided for the <a>active media session</a>.
+</p>
+
+<p>
+  A user agent MAY automatically pause any audible player after a <a enum-value
+  for=MediaSessionAction>pause</a> <a>media session action</a> has been handled
+  by the page.
+</p>
+
+<p class=note>
+  A page should only register a {{MediaSessionActionHandler}} for a <a>media
+  session action</a> when it can handle the action given that the user agent
+  will list this as a <a>supported media session actions</a> and update the
+  <a>media session action sources</a>.
+</p>
 
 <h2 id="processing-model">Processing model</h2>
 
 <h3 id="determining-actual-playback-state">Determining the <a>actual playback
 state</a></h3>
 
-The <a attribute for="MediaSession">playbackState</a> attribute is to let the
-page specify the current <a>playback state</a>. However the <a>playback
-state</a> is a hint from the page and and MAY be overriden by the user agent.
-The state after user agent override is called <a>actual playback state</a>.
+<p>
+  The <a attribute for="MediaSession">playbackState</a> attribute is to let the
+  page specify the current <a>playback state</a>. However the <a>playback
+  state</a> is a hint from the page and and MAY be overriden by the user agent.
+  The state after user agent override is called <a>actual playback state</a>.
+</p>
 
-The <dfn>actual playback state</dfn> SHOULD return the last value that was set
-on <a attribute for="MediaSession">playbackState</a>. If the user agent believes
-the actual playback state is <a enum-value
-for="MediaSessionPlaybackState">playing</a> and the <a attribute
-for="MediaSession">playbackState</a> returns a different value, it MAY return <a
-enum-value for="MediaSessionPlaybackState">playing</a> instead.
+<p>
+  The <dfn>actual playback state</dfn> SHOULD return the last value that was set
+  on <a attribute for="MediaSession">playbackState</a>. If the user agent
+  believes the actual playback state is <a enum-value
+  for="MediaSessionPlaybackState">playing</a> and the <a attribute
+  for="MediaSession">playbackState</a> returns a different value, it MAY return
+  <a enum-value for="MediaSessionPlaybackState">playing</a> instead.
+</p>
 
+<p>
+  When the <a>actual playback state</a> is updated, the user agent agent SHOULD
+  run the <a>media session actions update algorithm</a>.
+</p>
 
 <h3 id="media-session-routing">Media session routing</h3>
 
@@ -712,24 +759,9 @@ by managing <a>audio focus</a>. A tab or <a>browsing context</a> is said to have
 control the media in it. The AudioFocus API targets at this area and could be
 used once it's finished.
 
-The user agent MUST always route the <a>active media session</a>
-to the platform, which means:
-
-<ol>
-  <li>
-    If possible, the user agent SHOULD present the <a attribute
-    for="MediaSession"><code>metadata</code></a>
-    of the <a>active media session</a> to the platform for display purpose. This
-    MUST not be done for all other {{MediaSession}} instances.
-  </li>
-  <li>
-    If possible, the user agent SHOULD register listeners to the platform for
-    the <a>active media session</a>, display corresponding UI buttons if needed,
-    and forward all <a lt="media control action">media control actions</a> to
-    the <a>active media session</a>. This MUST not be done for all other
-    {{MediaSession}} instances.
-  </li>
-</ol>
+Whenever the <a>active media session</a> is changed, the user agent MUST run the
+<a>media session actions update algorithm</a> and the <a>update metadata
+algorithm</a>.
 
 <h3 id="processing-media-metadata">Processing metadata</h3>
 
@@ -808,99 +840,57 @@ The RECOMMENDED <dfn>fetch image algorithm</dfn> is as follows:
 If no artwork images are fetched in the <a>fetch image algorithm</a>, the user
 agent MAY have fallback behavior such as displaying an default image as artwork.
 
-<h3 id="processing-media-control-actions">Processing <a>media control
+<h3 id="processing-media-session-actions">Processing <a>media session
 actions</a></h3>
 
-Whenever the <a>active media session</a> changes, the <a>actual playback
-state</a> of the <a>active media session</a> changes or the
-<a>media control event handler</a>s of the <a>active media session</a>
-change, the user agent MUST run the <dfn>media control actions update
-algorithm</dfn>:
-
-<ol>
-  <li>
-    If the <a>active media session</a> is null, unregister all media control
-    listeners registered to the platform and remove the related UI buttons for
-    the <a>media control event handlers</a> if displayed.
-  </li>
-  <li>
-    Update the listeners registered to the platform to match the <a>media
-    control event handler</a>s registered to the <a>active media session</a>.
-  </li>
-  <li>
-    If needed, update the UI buttons displayed on the platform UI to match the
-    <a>media control event handler</a>s. If the user agent wants to show UI
-    buttons for both <a>event play</a> and <a>event pause</a> but they share the
-    same place on the platform UI. The user agent could either:
-    <ul>
-      <li>
-        Show only one button for either <a>event play</a> or <a>event pause</a>
-        depending on the <a>actual playback state</a> of the <a>active media
-        session</a>:
-        <ul>
-          <li>
-            If the <a>actual playback state</a> is <a enum-value
-            for="MediaSessionPlaybackState">playing</a>, show a button for
-            <a>event pause</a>.
-          </li>
-          <li>
-            Otherwise, show a button for <a>event play</a>.
-          </li>
-        </ul>
-      </li>
-      <li>
-        Show a joint button for <a>event play</a> and <a>event pause</a>.
-      </li>
-    </ul>
-  </li>
-</ol>
-
-Please note that a page registering a <a>media control event handler</a>s only
-shows it supports handling the corresponding <a>media control action</a>. It
-does not guarantee that the user agent will display a button in the UI or
-register listeners to the platform for the <a>media control action</a>. The user
-agent MAY select a subset of the registered <a>media control event handler</a>s
-to display UI buttons and/or register event listeners to the platform, based on
-platform capability and conventions, or based on UI concerns.
-
-The user agent MAY have some fallback steps to handle some <a lt="media control
-action">media control actions</a>, such as handling <a lt="event play">play</a>
-in the user agent instead of in the page.
-
-When the user agent receives a <a>media control action</a> from the platform or
-the UI, it MUST run the following steps:
-
-<ol>
-  <li>
-    Create an {{Event}} object for the <a>media control action</a>.
-  </li>
-  <li>
-    Dispatch the {{Event}} to the corresponding <a>media control event
-    handler</a> of the <a>active media session</a>.
-  </li>
-  <li>
-    If the user agent has fallback steps to handle the <a>media control
-    action</a>, check the {{Event/defaultPrevented}} attribute of the {{Event}}.
-    If it is false, run the fallback steps.
-  </li>
-</ol>
-
-Sometimes the user agent can receive a joint command for <a>event play</a> and
-<a>event pause</a>, such as a headset button click. In this case, the user agent
-MUST dispatch either a <a>event play</a> or <a>event pause</a> to the <a>media
-control event handler</a> of the <a>active media session</a> based on the
-<a>actual playback state</a>. If the <a>actual playback state</a> is
-<a enum-value for="MediaSessionPlaybackState">playing</a>, send <a>event
-pause</a>. Otherwise, send <a>event play</a>.
-
-<p class="issue" id="how-to-prevent-fallback-steps"> It is still an open
-question how to opt in/out of the fallback behavior. Checking
-{{Event/defaultPrevented}} only works after the <a>media control event
-handler</a> is called, thus the page could have already done some steps. This
-might cause the <a>media control action</a> be handled both by the page and the
-user agent, which will produce wrong behavior for events such as <a lt="event
-nexttrack">nexttrack</a> or <a lt="event seekforward">seekforward</a>. See <a
-href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>.
+<p>
+  When the <dfn>media session actions update algorithm</dfn> is invoked, the
+  user agent MUST run the following steps:
+  <ol>
+    <li>
+      Let <var>available actions</var> be an array of <a>media session
+      actions</a>.
+    </li>
+    <li>
+      If the <a>active media session</a> is null, set <var>available
+      actions</var> to the empty array.
+    </li>
+    <li>
+      Otherwise, set the <var>available actions</var> to the list of keys
+      available in the <a>active media session</a>'s <a>supported media session
+      actions</a>.
+    </li>
+    <li>
+      For each <a>media session action source</a> <var>source</var>, run the
+      following substeps:
+      <ol>
+        <li>
+          Optionally, if the <a>active media session</a> is not null:
+          <ol>
+            <li>
+              If the <a>active media session</a>'s <a>actual playback state</a>
+              is <a enum-value for="MediaSessionPlaybackState">playing</a>,
+              remove <a enum-value for=MediaSessionAction>play</a> from
+              <var>available actions</var>.
+            </li>
+            <li>
+              Otherwise, remove <a enum-value for=MediaSessionAction>pause</a>
+              from <var>available actions</var>.
+            </li>
+          </ol>
+        </li>
+        <li>
+          If the <var>source</var> is a UI element created by the user agent, it
+          MAY remove some elements from <var>available actions</var> if there
+          are too many of them compared to the available space.
+        </li>
+        <li>
+          Notify the <var>source</var> with the updated list of <var>available
+          actions</var>.
+        </li>
+      </ol>
+    </li>
+  </ol>
 </p>
 
 <h2 id="examples">Examples</h2>
@@ -987,7 +977,7 @@ href="https://github.com/WICG/mediasession/issues/141">issue on GitHub</a>.
 </div>
 
 <div class="example" id="example-media-controls">
-  Handling <a lt="media control action">media control actions</a>:
+  Handling <a>media session actions</a>:
 <pre>
 var tracks = ["chapter1.mp3", "chapter2.mp3", "chapter3.mp3"];
 var trackId = 0;
