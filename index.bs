@@ -293,9 +293,9 @@ The <dfn attribute for="MediaSession"><code>playbackState</code></dfn> attribute
 represents the <dfn lt="playback state">playback state</dfn> of the <a>media
 session</a>. The default value is <a enum-value
 for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST update
-the <a>most meaningful media session</a> and run the <a>media control actions
-update algorithm</a> if needed. On getting, the user agent MUST return the last
-valid value that was set. If none, it MUST return <a enum-value
+the <a>active media session</a> and run the <a>media control actions update
+algorithm</a> if needed. On getting, the user agent MUST return the last valid
+value that was set. If none, it MUST return <a enum-value
 for="MediaSessionPlaybackState">none</a>.
 
 The {{MediaSessionPlaybackState}} enum is used to indicate the <a>playback
@@ -696,74 +696,64 @@ enum-value for="MediaSessionPlaybackState">playing</a> instead.
 
 <h3 id="media-session-routing">Media session routing</h3>
 
-As there is a {{Window}} object per <a>browsing context</a>, the <a>top-level
-browsing context</a> and each <a>nested browsing context</a> will have an
-associated {{MediaSession}} object. For each tab, the user agent SHOULD select a
-{{MediaSession}} object that best represents the tab. The selected
-{{MediaSession}} object is called <dfn lt="tab-level active media
-session">tab-level active media session</dfn>. The selection of the <a>tab-level
-active media session</a> is up to the user agent and SHOULD base on preferred
-user experience.
+There could be multiple {{MediaSession}} objects existing at the same time since
+the user agent could have multiple tabs, each tab could contain a <a>top-level
+browsing context</a> and multiple <a>nested browsing contexts</a>, and each
+<a>browsing context</a> could have a {{MediaSession}} object.
 
-<p class="issue" id="whether-allow-child-frame-media-session"> It is still an
-open question how to select a {{MediaSession}} object as the <a>tab-level active
-media session</a>. Making the {{MediaSession}} object in a <a>nested browsing
-context</a> as the <a>tab-level active media session</a> can be either good or
-bad in different use cases. See the <a
-href="https://github.com/WICG/mediasession/issues/136">issue on GitHub</a>.
-</p>
+The user agent MUST select at most one of the {{MediaSession}} objects to
+present it to the user, which is called the <dfn>active media session</dfn>. The
+<a>active media session</a> may be null. The selection is up the user agent and
+SHOULD base on preferred user experience.
 
-When the user agent has multiple tabs, the user agent MUST select the <dfn>most
-meaningful audio-producing tab</dfn>, which is producing the most meaningful
-audio to the user. The user agent SHOULD select the <a>most meaningful
-audio-producing tab</a> based on platform conventions and the preferred user
-experience. The <a>most meaningful audio-producing tab</a> can be null. The
-<a>tab-level active media session</a> of the <a>most meaningful audio-producing
-tab</a> is called the <dfn>most meaningful media session</dfn>.
+It is RECOMMENDED that the user agent selects the <a>active media session</a>
+by managing <a>audio focus</a>. A tab or <a>browsing context</a> is said to have
+<dfn>audio focus</dfn> if it is currently playing audio or the user expects to
+control the media in it. The AudioFocus API targets at this area and could be
+used once it's finished.
 
-The user agent then MUST always route the <a>most meaningful media session</a>
+The user agent MUST always route the <a>active media session</a>
 to the platform, which means:
 
 <ol>
   <li>
     If possible, the user agent SHOULD present the <a attribute
     for="MediaSession"><code>metadata</code></a>
-    of the <a>most meaningful media session</a> to the platform for display
-    purpose. This MUST not be done for all other {{MediaSession}} instances.
+    of the <a>active media session</a> to the platform for display purpose. This
+    MUST not be done for all other {{MediaSession}} instances.
   </li>
   <li>
     If possible, the user agent SHOULD register listeners to the platform for
-    the <a>most meaningful media session</a>, display corresponding UI buttons
-    if needed, and forward all <a lt="media control action">media control
-    actions</a> to the <a>most meaningful media session</a>. This MUST not be
-    done for all other {{MediaSession}} instances.
+    the <a>active media session</a>, display corresponding UI buttons if needed,
+    and forward all <a lt="media control action">media control actions</a> to
+    the <a>active media session</a>. This MUST not be done for all other
+    {{MediaSession}} instances.
   </li>
 </ol>
 
 <h3 id="processing-media-metadata">Processing metadata</h3>
 
-The media metadata for the <a>most meaningful audio-producing tab</a> MAY be
-displayed in the platform UI depending on platform conventions. Whenever the
-<a>most meaningful media session</a> changes or setting <a attribute
-for="MediaSession"><code>metadata</code></a> of the <a>most meaningful media
-session</a>, the user agent MUST run the <dfn>update metadata algorithm</dfn>.
-The steps are as follows:
+The media metadata for the <a>active media session</a> MAY be displayed in the
+platform UI depending on platform conventions. Whenever the
+<a>active media session</a> changes or setting <a attribute
+for="MediaSession"><code>metadata</code></a> of the <a>active media session</a>,
+the user agent MUST run the <dfn>update metadata algorithm</dfn>. The steps are
+as follows:
 
 <ol>
   <li>
-    If the <a>most meaningful audio-producing tab</a> is null, unset the media
-    metadata presented to the platform, and terminate these steps.
+    If the <a>active media session</a> is null, unset the media metadata
+    presented to the platform, and terminate these steps.
   </li>
   <li>
     If the <a attribute for="MediaSession"><code>metadata</code></a> of the
-    <a>most meaningful media session</a> is an <a>empty metadata</a>, unset the
-    media metadata presented to the platform, and terminate these steps.
+    <a>active media session</a> is an <a>empty metadata</a>, unset the media
+    metadata presented to the platform, and terminate these steps.
   </li>
   <li>
     Update the media metadata presented to the platform to match the <a
     attribute for="MediaSession"><code>metadata</code></a> for the
-    <a>tab-level active media session</a> of the <a>most meaningful
-    audio-producing tab</a>.
+    <a>active media session</a>.
   </li>
   <li>
     If the user agent wants to display <a>artwork image</a>, it is RECOMMENDED
@@ -781,16 +771,15 @@ The RECOMMENDED <dfn>fetch image algorithm</dfn> is as follows:
   </li>
   <li>
     If <var>metadata</var>'s <a attribute
-    for="MediaMetadata"><code>artwork</code></a> of the <a>tab-level active
-    media session</a> of the <a>most meaningful audio-producing tab</a> is
-    empty, then terminate these steps.
+    for="MediaMetadata"><code>artwork</code></a> of the <a>active media
+    session</a> is empty, then terminate these steps.
   </li>
   <li>
     If the platform supports displaying media artwork, select a <dfn>preferred
     artwork image</dfn>
     from <var>metadata</var>'s <a attribute
-    for="MediaMetadata"><code>artwork</code></a> of the <a>tab-level active
-    media session</a> of the <a>most meaningful audio-producing tab</a>.
+    for="MediaMetadata"><code>artwork</code></a> of the <a>active media
+    session</a>.
   </li>
   <li>
     <a title="fetch">Fetch</a> the <a>preferred artwork image</a>'s
@@ -822,22 +811,21 @@ agent MAY have fallback behavior such as displaying an default image as artwork.
 <h3 id="processing-media-control-actions">Processing <a>media control
 actions</a></h3>
 
-Whenever the <a>most meaningful media session</a> changes, the <a>actual
-playback state</a> of the <a>most meaningful media session</a> changes or the
-<a>media control event handler</a>s of the <a>most meaningful media session</a>
+Whenever the <a>active media session</a> changes, the <a>actual playback
+state</a> of the <a>active media session</a> changes or the
+<a>media control event handler</a>s of the <a>active media session</a>
 change, the user agent MUST run the <dfn>media control actions update
 algorithm</dfn>:
 
 <ol>
   <li>
-    If the <a>most meaningful media session</a> is null, unregister all media
-    control listeners registered to the platform and remove the related UI
-    buttons for the <a>media control event handlers</a> if displayed.
+    If the <a>active media session</a> is null, unregister all media control
+    listeners registered to the platform and remove the related UI buttons for
+    the <a>media control event handlers</a> if displayed.
   </li>
   <li>
     Update the listeners registered to the platform to match the <a>media
-    control event handler</a>s registered to the <a>most meaningful media
-    session</a>.
+    control event handler</a>s registered to the <a>active media session</a>.
   </li>
   <li>
     If needed, update the UI buttons displayed on the platform UI to match the
@@ -847,8 +835,8 @@ algorithm</dfn>:
     <ul>
       <li>
         Show only one button for either <a>event play</a> or <a>event pause</a>
-        depending on the <a>actual playback state</a> of the <a>most meaningful
-        media session</a>:
+        depending on the <a>actual playback state</a> of the <a>active media
+        session</a>:
         <ul>
           <li>
             If the <a>actual playback state</a> is <a enum-value
@@ -888,7 +876,7 @@ the UI, it MUST run the following steps:
   </li>
   <li>
     Dispatch the {{Event}} to the corresponding <a>media control event
-    handler</a> of the <a>most meaningful media session</a>.
+    handler</a> of the <a>active media session</a>.
   </li>
   <li>
     If the user agent has fallback steps to handle the <a>media control
@@ -900,8 +888,8 @@ the UI, it MUST run the following steps:
 Sometimes the user agent can receive a joint command for <a>event play</a> and
 <a>event pause</a>, such as a headset button click. In this case, the user agent
 MUST dispatch either a <a>event play</a> or <a>event pause</a> to the <a>media
-control event handler</a> of the <a>most meaningful media session</a> based on
-the <a>actual playback state</a>. If the <a>actual playback state</a> is
+control event handler</a> of the <a>active media session</a> based on the
+<a>actual playback state</a>. If the <a>actual playback state</a> is
 <a enum-value for="MediaSessionPlaybackState">playing</a>, send <a>event
 pause</a>. Otherwise, send <a>event play</a>.
 
