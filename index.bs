@@ -67,6 +67,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: in parallel
             text: unordered set of unique space-separated tokens; url: #unordered-set-of-unique-space-separated-tokens
             text: document base url
+            text: MIME type
         urlPrefix: embedded-content.html
             text: media element
             text: media element load algorithm
@@ -164,8 +165,9 @@ urlPrefix: https://www.w3.org/TR/appmanifest/; spec: appmanifest
         text: image object; url: #dfn-image-object
 urlPrefix: https://heycam.github.io/webidl/
     type: exception
-        text: InvalidStateError
-        text: NotAllowedError
+        text: URIError
+urlPrefix: https://tc39.github.io/ecma262/#sec-object.; type: dfn
+    text: freeze
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -350,7 +352,7 @@ dictionary MediaMetadataInit {
   DOMString title = "";
   DOMString artist = "";
   DOMString album = "";
-  sequence&lt;MediaImageInit> artwork = [];
+  sequence&lt;MediaImage> artwork = [];
 };
 </pre>
 
@@ -410,15 +412,64 @@ dictionary MediaMetadataInit {
       <var>init</var>'s {{MediaMetadataInit/album}}.
     </li>
     <li>
-      Set <var>metadata</var>'s {{MediaMetadata/artwork}} using
-      <var>init</var>'s {{MediaMetadataInit/artwork}} by calling the
-      <a><code>MediaImage(init)</code></a> constructor.
+      Run the <a>convert artwork algorithm</a> with <var>init</var>'s
+      {MediaMetadataInit/artwork}} as <var>input</var> and set
+      <var>metadata</var>'s {{MediaMetadata/artwork}} as the result.
     </li>
     <li>
       Return <var>metadata</var>.
     </li>
   </ol>
 </p>
+
+When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
+invoked, the user agent MUST run the following steps:
+<ol>
+  <li>
+    Let <var>frozenArtwork</var> be an empty list of type {{MediaImage}}.
+  </li>
+  <li>
+    For each <var>entry</var> in <var>init</var>'s
+    {{MediaMetadataInit/artwork}}, perform the following steps:
+    <ol>
+      <li>
+        Let <var>image</var> be a new {{MediaImage}}.
+      </li>
+      <li>Let <var>baseURL</var> be the API base URL specified by the <a>entry
+      settings object</a>. </li>
+      <li>
+        <a lt="url parser">Parse</a> <var>entry</var>'s {{MediaImage/src}} using
+        <var>baseURL</var>. If it does not return failure, set
+        <var>image</var>'s {{MediaImage/src}} to the return value. Otherwise,
+        throw a <a exception>URIError</a>.
+      </li>
+      <li>
+        Set <var>image</var>'s {{MediaImage/sizes}} to <var>entry</var>'s
+        {{MediaImage/sizes}}.
+      </li>
+      <li>
+        Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
+        {{MediaImage/type}}.
+      </li>
+      <!-- XXX IDL dictionaries are usually returned by value, so don't need to
+      be immutable. But FrozenArray reifies the dictionaries to mutable JS
+      objects accessed by reference, so we explicitly freeze them. It would be
+      better to do this with IDL primitives instead of JS - see
+      https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
+      <li>
+        Call <a lt="freeze">Object.freeze</a> on <var>image</var>, to prevent
+        accidental mutation by scripts.
+      </li>
+      <li>
+        Append <var>image</var> to <var>frozenArtwork</var>.
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a>Create a frozen array</a> from <var>frozenArtwork</var> and return it as
+    the result.
+  </li>
+</ol>
 
 <p>
   The <dfn attribute for="MediaMetadata"><code>title</code></dfn> attribute
@@ -445,12 +496,13 @@ dictionary MediaMetadataInit {
 </p>
 
 <p>
-  The <dfn attribute for="MediaMetadata"><code>artwork images</code></dfn>
+  The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn>
   attribute reflects the {{MediaMetadata}}'s <a for=MediaMetadata>artwork
-  images</a>. On getting, it MUST return the {{MediaMetadata}}'s <a
-  for=MediaMetadata>artwork images</a>. On setting, it MUST set the
-  {{MediaMetadata}}'s <a for=MediaMetadata>artwork images</a> to the given
-  value.
+  images</a>. On getting, it MUST return the {{MediaMetadata}}'s
+  <a for=MediaMetadata>artwork images</a>. On setting, it MUST run the
+  <a>convert artwork algorithm</a> with the new value as <var>input</var>, and
+  set the {MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as the
+  result.
 </p>
 
 <p>
@@ -479,66 +531,28 @@ dictionary MediaMetadataInit {
   </ol>
 </p>
 
-<h2 id="the-mediaimage-interface">The {{MediaImage}} interface</h2>
+<h2 id="the-mediaimage-type">The {{MediaImage}} type</h2>
 
 <pre class="idl">
 
-[Constructor(optional MediaImageInit init)]
-interface MediaImage {
-  readonly attribute USVString src;
-  readonly attribute DOMString sizes;
-  readonly attribute DOMString type;
-};
-
-dictionary MediaImageInit {
-  USVString src = "";
+dictionary MediaImage {
+  required USVString src;
   DOMString sizes = "";
   DOMString type = "";
 };
 </pre>
 
-A {{MediaImage}} object has a <dfn for="MediaImage">source</dfn>, a list of
-<dfn for="MediaImage">sizes</dfn>, and a <dfn for="MediaImage">type</dfn>.
+The {{MediaImage}} dictionary members are inspired from the <a lt="image
+object">image objects</a> in Web App Manifest.
 
-The <dfn constructor
-for="MediaImage"><code>MediaImage(<var>init</var>)</code></dfn>
-constructor, when invoked, MUST run the following steps:
+The <dfn dict-member for="MediaImage">src</dfn> <a>dictionary member</a> is used
+to specify the {{MediaImage}} object's <dfn for="MediaImage">source</dfn>. It is
+a URL from which the user agent can fetch the image's data.
 
-<ol>
-  <li>
-    Let <var>metadata</var> be a new {{MediaImage}} object.
-  </li>
-  <li>
-    Set <var>metadata</var>'s {{MediaImage/src}} to <var>init</var>'s
-    {{MediaImageInit/src}}. If the URL is a
-    <a>relative URL</a>, it MUST be resolved to an <a>absolute URL</a> using the
-    <a>document base URL</a>.
-  </li>
-  <li>
-    Set <var>metadata</var>'s {{MediaImage/sizes}} to <var>init</var>'s
-    {{MediaImageInit/sizes}}.
-  </li>
-  <li>
-    Set <var>metadata</var>'s {{MediaImage/type}} to <var>init</var>'s
-    {{MediaImageInit/type}}.
-  </li>
-  <li>
-    Return <var>metadata</var>.
-  </li>
-</ol>
-
-
-The MediaImage <a attribute for="MediaImage">src</a>, <a attribute
-for="MediaImage">sizes</a> and <a attribute for="MediaImage">type</a>
-inspired from the <a lt="image object">image objects</a> in Web App Manifest.
-
-The <dfn attribute for="MediaImage">src</dfn> attribute MUST return the
-{{MediaImage}} object's <a for="MediaImage">source</a>. It is a URL from which
-the user agent can fetch the image's data.
-
-The <dfn attribute for="MediaImage">sizes</dfn> attribute MUST return the
-{{MediaImage}} object's <a for="MediaImage">sizes</a>. It follows the spec of <a
-attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in HTML
+The <dfn dict-member for="MediaImage">sizes</dfn> <a>dictionary member</a> is
+used to specify the {{MediaImage}} object's {{MediaImage/sizes}}. It follows the
+spec of <a attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in
+HTML
 <a for="HTMLLinkElement"><code>link</code></a> element, which is a string
 consisting of an <a>unordered set of unique space-separated tokens</a> which are
 <a>ASCII case-insensitive</a> that represents the dimensions of an image. Each
@@ -549,15 +563,14 @@ U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The
 keywords represent icon sizes in raw pixels (as opposed to CSS pixels). When
 multiple image objects are available, a user agent MAY use the value to decide
 which icon is most suitable for a display context (and ignore any that are
-inappropriate). The parsing steps for the <a attribute
-for="MediaImage">sizes</a> attribute MUST follow <a attribute
-for="HTMLLinkElement" lt="sizes">the parsing steps for HTML <code>link</code>
-element <code>sizes</code> attribute</a>.
+inappropriate). The parsing steps for the {{MediaImage/sizes}} attribute MUST
+follow <a attribute for="HTMLLinkElement" lt="sizes">the parsing steps for HTML
+<code>link</code> element <code>sizes</code> attribute</a>.
 
-The <dfn attribute for="MediaImage">type</dfn> attribute MUST return the
-{{MediaImage}} object's <a for="MediaImage">type</a>. It is a hint as to the
-media type of the image. The purpose of this attribute is to allow a user agent
-to ignore images of media types it does not support.
+The <dfn dict-member for="MediaImage">type</dfn> <a>dictionary member</a> is
+used to specify the {{MediaImage}} object's <a>MIME type</a>. It is a hint as to
+the media type of the image. The purpose of this attribute is to allow a user
+agent to ignore images of media types it does not support.
 
 <h2 id="media-controls">Media Controls</h2>
 
