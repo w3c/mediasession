@@ -165,7 +165,7 @@ urlPrefix: https://www.w3.org/TR/appmanifest/; spec: appmanifest
         text: image object; url: #dfn-image-object
 urlPrefix: https://heycam.github.io/webidl/
     type: exception
-        text: URIError
+        text: TypeError
 urlPrefix: https://tc39.github.io/ecma262/#sec-object.; type: dfn
     text: freeze
 </pre>
@@ -374,8 +374,8 @@ dictionary MediaMetadataInit {
 </p>
 
 <p>
-  A {{MediaMetadata}} has an associated <dfn for="MediaMetadata" title="artwork
-  image">artwork images</dfn> which is a FrozenArray of {{MediaImage}}s.
+  A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">artwork
+  images</dfn>.
 </p>
 
 <p>
@@ -413,8 +413,9 @@ dictionary MediaMetadataInit {
     </li>
     <li>
       Run the <a>convert artwork algorithm</a> with <var>init</var>'s
-      {MediaMetadataInit/artwork}} as <var>input</var> and set
-      <var>metadata</var>'s {{MediaMetadata/artwork}} as the result.
+      {{MediaMetadataInit/artwork}} as <var>input</var> and set
+      <var>metadata</var>'s <a for="MediaMetadata">artwork images</a> as the
+      result if it succeeded.
     </li>
     <li>
       Return <var>metadata</var>.
@@ -426,10 +427,10 @@ When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
 invoked, the user agent MUST run the following steps:
 <ol>
   <li>
-    Let <var>frozenArtwork</var> be an empty list of type {{MediaImage}}.
+    Let <var>output</var> be an empty list of type {{MediaImage}}.
   </li>
   <li>
-    For each <var>entry</var> in <var>init</var>'s
+    For each <var>entry</var> in <var>input</var>'s
     {{MediaMetadataInit/artwork}}, perform the following steps:
     <ol>
       <li>
@@ -441,7 +442,7 @@ invoked, the user agent MUST run the following steps:
         <a lt="url parser">Parse</a> <var>entry</var>'s {{MediaImage/src}} using
         <var>baseURL</var>. If it does not return failure, set
         <var>image</var>'s {{MediaImage/src}} to the return value. Otherwise,
-        throw a <a exception>URIError</a>.
+        throw a <a exception>TypeError</a> and abort these steps.
       </li>
       <li>
         Set <var>image</var>'s {{MediaImage/sizes}} to <var>entry</var>'s
@@ -451,23 +452,13 @@ invoked, the user agent MUST run the following steps:
         Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
         {{MediaImage/type}}.
       </li>
-      <!-- XXX IDL dictionaries are usually returned by value, so don't need to
-      be immutable. But FrozenArray reifies the dictionaries to mutable JS
-      objects accessed by reference, so we explicitly freeze them. It would be
-      better to do this with IDL primitives instead of JS - see
-      https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
       <li>
-        Call <a lt="freeze">Object.freeze</a> on <var>image</var>, to prevent
-        accidental mutation by scripts.
-      </li>
-      <li>
-        Append <var>image</var> to <var>frozenArtwork</var>.
+        Append <var>image</var> to the <var>output</var>.
       </li>
     </ol>
   </li>
   <li>
-    <a>Create a frozen array</a> from <var>frozenArtwork</var> and return it as
-    the result.
+    Return <var>output</var> as result.
   </li>
 </ol>
 
@@ -497,12 +488,53 @@ invoked, the user agent MUST run the following steps:
 
 <p>
   The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn>
-  attribute reflects the {{MediaMetadata}}'s <a for=MediaMetadata>artwork
-  images</a>. On getting, it MUST return the {{MediaMetadata}}'s
-  <a for=MediaMetadata>artwork images</a>. On setting, it MUST run the
+  attribute reflects the {{MediaMetadata}}'s <a for="MediaMetadata">artwork
+  images</a>. On getting, it MUST return the result of the following steps:
+  <ol>
+    <li>
+      Let <var>frozenArtwork</var> be an empty list of type {{MediaImage}}.
+    </li>
+    <li>
+      For each <var>entry</var> in the {{MediaMetadata}}'s <a
+      for="MediaMetadata">artwork images</a>, perform the following steps:
+      <ol>
+        <li>
+          Let <var>image</var> be a new {{MediaImage}}.
+        </li>
+        <li>
+          Set <var>image</var>'s {{MediaImage/src}} to <var>entry</var>'s
+          {{MediaImage/src}}.
+        </li>
+        <li>
+          Set <var>image</var>'s {{MediaImage/sizes}} to <var>entry</var>'s
+          {{MediaImage/sizes}}.
+        </li>
+        <li>
+          Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
+          {{MediaImage/type}}.
+        </li>
+        <!-- XXX IDL dictionaries are usually returned by value, so don't need
+        to be immutable. But FrozenArray reifies the dictionaries to mutable JS
+        objects accessed by reference, so we explicitly freeze them. It would be
+        better to do this with IDL primitives instead of JS - see
+        https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
+        <li>
+          Call <a lt="freeze">Object.freeze</a> on <var>image</var>, to prevent
+          accidental mutation by scripts.
+        </li>
+        <li>
+          Append <var>image</var> to <var>frozenArtwork</var>.
+        </li>
+      </ol>
+    </li>
+    <li>
+      <a>Create a frozen array</a> from <var>frozenArtwork</var>.
+    </li>
+  </ol>
+  On setting, it MUST run the
   <a>convert artwork algorithm</a> with the new value as <var>input</var>, and
   set the {MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as the
-  result.
+  result if it succeeded.
 </p>
 
 <p>
@@ -531,7 +563,7 @@ invoked, the user agent MUST run the following steps:
   </ol>
 </p>
 
-<h2 id="the-mediaimage-type">The {{MediaImage}} type</h2>
+<h2 id="the-mediaimage-dictionary">The {{MediaImage}} dictionary</h2>
 
 <pre class="idl">
 
@@ -852,8 +884,8 @@ The RECOMMENDED <dfn>fetch image algorithm</dfn> is as follows:
   </li>
 </ol>
 
-If no artwork images are fetched in the <a>fetch image algorithm</a>, the user
-agent MAY have fallback behavior such as displaying an default image as artwork.
+If no images are fetched in the <a>fetch image algorithm</a>, the user agent MAY
+have fallback behavior such as displaying an default image as artwork.
 
 <h3 id="processing-media-session-actions">Processing <a>media session
 actions</a></h3>
