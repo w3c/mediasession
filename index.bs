@@ -1102,7 +1102,7 @@ actions</a></h3>
 
 <div class="example" id="example-media-controls">
   Handling <a>media session actions</a>:
-<pre>
+<pre class='lang-javascript'>
 var tracks = ["chapter1.mp3", "chapter2.mp3", "chapter3.mp3"];
 var trackId = 0;
 
@@ -1114,15 +1114,15 @@ void updatePlayingMedia() {
     // Update metadata (omitted)
 }
 
-window.navigator.mediaSession.onprevioustrack = function() {
+window.navigator.mediaSession.setActionHandler('previoustrack', function() {
    trackId = (trackId + tracks.length - 1) % tracks.length;
    updatePlayingMedia();
-}
+});
 
-window.navigator.mediaSession.onnexttrack = function() {
+window.navigator.mediaSession.setActionHandler('nexttrack', function() {
    trackId = (trackId + 1) % tracks.length;
    updatePlayingMedia();
-}
+});
 
 </pre>
 </div>
