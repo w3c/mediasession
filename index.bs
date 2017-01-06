@@ -92,6 +92,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: DOM manipulation task source
         urlPrefix: semantics.html
             text: link; for: HTMLLinkElement; url:#the-link-element
+        urlPrefix: interaction.html
+            text: trigerred by user activation
     type: method
         urlPrefix: embedded-content.html
             text: play(); for: HTMLMediaElement; url: #dom-media-play
@@ -642,8 +644,8 @@ to ignore images of media types it does not support.
 <p>
   When the user agent is notified by a <a>media session action source</a> that a
   <a>media session action</a> named <var>action</var> has been trigerered, the
-  user agent MUST run the <dfn>handle media session action</dfn> steps as
-  follow:
+  user agent MUST run the <dfn>handle media session action</dfn> steps as follow
+  and consider it <a>triggered by user activation</a>:
   <ol>
     <li>
       If the <a>active media session</a> is <code>null</code>, abort these
