@@ -70,7 +70,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
         urlPrefix: semantics.html
             text: link; for: HTMLLinkElement; url:#the-link-element
         urlPrefix: interaction.html
-            text: trigerred by user activation
+            text: triggered by user activation
     type: attribute
         urlPrefix: semantics.html
             text: sizes; for: HTMLLinkElement; url: #attr-link-sizes;
@@ -240,7 +240,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       The <a attribute for="MediaSession">playbackState</a> attribute is to let
       the page specify the current <a>playback state</a>. However the
-      <a>playback state</a> is a hint from the page and and MAY be overriden by
+      <a>playback state</a> is a hint from the page and and MAY be overridden by
       the user agent. The state after user agent override is called <a>actual
       playback state</a>.
     </p>
@@ -361,7 +361,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     </ol>
 
     If no images are fetched in the <a>fetch image algorithm</a>, the user agent
-    MAY have fallback behavior such as displaying an default image as artwork.
+    MAY have fallback behavior such as displaying a default image as artwork.
   </section>
 
   <section>
@@ -451,7 +451,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       When the user agent is notified by a <a>media session action source</a>
       that a
-      <a>media session action</a> named <var>action</var> has been trigerered,
+      <a>media session action</a> named <var>action</var> has been triggered,
       the user agent MUST run the <dfn>handle media session action</dfn> steps
       as follow and consider it <a>triggered by user activation</a>:
       <ol>
@@ -584,7 +584,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 <h2 id="the-mediasession-interface">The {{MediaSession}} interface</h2>
 
 <pre class="idl">
-[Exposed=(Window)]
+[Exposed=Window]
 partial interface Navigator {
   readonly attribute MediaSession mediaSession;
 };
@@ -624,7 +624,7 @@ interface MediaSession {
 
 <p>
   A {{MediaSession}} has an associated <dfn for="MediaSession">metadata</dfn>
-  object represented by a {{MediaMetadata}}. It is initialy <code>null</code>.
+  object represented by a {{MediaMetadata}}. It is initially <code>null</code>.
 </p>
 
 <p>
@@ -637,7 +637,7 @@ interface MediaSession {
   The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute
   reflects the {{MediaSession}}'s <a for=MediaSession>metadata</a>. On getting,
   it MUST return the {{MediaSession}}'s <a for=MediaSession>metadata</a>. On
-  setting it MUST run the following steps with <var>value</var> being the new
+  setting, it MUST run the following steps with <var>value</var> being the new
   value being set:
   <ol>
     <li>
@@ -905,7 +905,7 @@ invoked, the user agent MUST run the following steps:
   following steps:
   <ol>
     <li>
-      If the intance has no associated <a for=MediaMetadata>media session</a>,
+      If the instance has no associated <a for=MediaMetadata>media session</a>,
       abort these steps.
     </li>
     <li>
@@ -1062,12 +1062,12 @@ void updatePlayingMedia() {
     // Update metadata (omitted)
 }
 
-window.navigator.mediaSession.setActionHandler('previoustrack', function() {
+window.navigator.mediaSession.setActionHandler("previoustrack", function() {
    trackId = (trackId + tracks.length - 1) % tracks.length;
    updatePlayingMedia();
 });
 
-window.navigator.mediaSession.setActionHandler('nexttrack', function() {
+window.navigator.mediaSession.setActionHandler("nexttrack", function() {
    trackId = (trackId + 1) % tracks.length;
    updatePlayingMedia();
 });
