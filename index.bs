@@ -218,6 +218,83 @@ manner.
 The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
+<section>
+  <h2 id='security-privacy-considerations'>Security and Privacy
+  Considerations</h2>
+
+  <em>This section is non-normative.</em>
+
+  <p>
+    The API introduced in this specification have very low impact with regards
+    to security and privacy. Part of the API allows a website to expose metadata
+    that can be used by the user agent. The user agent obviously need to use
+    this data with care. Another part of the API allow a website to received
+    commands from the user via buttons or other form of controls which might
+    sometimes introduce a new input layer between the user and the website.
+  </p>
+
+  <section>
+    <h3 id='user-interface-guidelines'>User interface guidelines</h3>
+
+    <p>
+      The {{MediaMetadata}} introduced in this specification allows a website to
+      offer more information with regards to what is being played. The user
+      agent is meant to use this information in any UI related to media
+      playback, either internal to the user agent or within the platform.
+    </p>
+
+    <p>
+      The {{MediaMetadata}} are expected to be used in the context of media
+      playback, making spoofing harder but because the {{MediaMetadata}} has
+      text fields and image fields, a malicious website could try to spoof
+      another website's identity. It is recommended that the user agent offers a
+      way to find the origin or clearly expose the origin of the website from
+      which the metadata are coming from.
+    </p>
+
+    <p>
+      If a user agent offers a mechanism to go back to a website from a UI
+      element created based on the {{MediaMetadata}}, it is recommended that the
+      action should not be noticeable by the website, thus reducing the changes
+      of spoofing.
+    </p>
+
+    <p>
+      In general, all security and privacy considerations related to the display
+      of notifications from a website should apply here. It is worth noting that
+      the {{MediaMetadata}} offer less customization than regular web
+      notifications, thus would be harder to spoof.
+    </p>
+  </section>
+
+  <section>
+    <h3 id='incognito-mode-privacy'>Incognito mode</h3>
+
+    <p>
+      For privacy purposes, when in incognito mode, the user agent should be
+      careful when sharing the information from {{MediaMetadata}} with the
+      system and make sure they will not be used in a way that would harm the
+      user. Displaying this information in a way that is very visible would be
+      against the user's intent of browsing in incognito mode. When available,
+      the UI elements should be advertized as private to the platform.
+    </p>
+  </section>
+
+  <section>
+    <h3 id='media-session-actions-privacy'>Media Session Actions</h3>
+
+    <p>
+      <a>Media session actions</a> are exposing a new input layer to the web
+      platform. User agents should make sure users are aware that there actions
+      might be routed to the website with the <a>active media session</a>.
+      Especially, when the actions are coming from remote devices such as
+      headset or other remote devices. It is recommended for the user agent to
+      follow the platform conventions when listening to these inputs in order to
+      facilitate the user understanding.
+    </p>
+  </section>
+</section>
+
 <h2 id="the-mediasession-interface">The {{MediaSession}} interface</h2>
 
 <pre class="idl">
