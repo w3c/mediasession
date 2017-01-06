@@ -1622,7 +1622,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <section>
      <h3 class="heading settled" data-level="5.1" id="playback-state-model"><span class="secno">5.1. </span><span class="content">Playback State</span><a class="self-link" href="#playback-state-model"></a></h3>
      <p> The <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate-1">playbackState</a> attribute is to let
-      the page specify the current <a data-link-type="dfn" href="#playback-state" id="ref-for-playback-state-1">playback state</a>. However the <a data-link-type="dfn" href="#playback-state" id="ref-for-playback-state-2">playback state</a> is a hint from the page and and MAY be overriden by
+      the page specify the current <a data-link-type="dfn" href="#playback-state" id="ref-for-playback-state-1">playback state</a>. However the <a data-link-type="dfn" href="#playback-state" id="ref-for-playback-state-2">playback state</a> is a hint from the page and and MAY be overridden by
       the user agent. The state after user agent override is called <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state-1">actual
       playback state</a>. </p>
      <p> The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="actual-playback-state">actual playback state</dfn> SHOULD return the last value that was
@@ -1685,7 +1685,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
        </ol>
      </ol>
      <p>If no images are fetched in the <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm-4">fetch image algorithm</a>, the user agent
-    MAY have fallback behavior such as displaying an default image as artwork.</p>
+    MAY have fallback behavior such as displaying a default image as artwork.</p>
     </section>
     <section>
      <h3 class="heading settled" data-level="5.4" id="actions-model"><span class="secno">5.4. </span><span class="content">Actions</span><a class="self-link" href="#actions-model"></a></h3>
@@ -1733,7 +1733,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
       user agent MAY <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> in order to run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm-4">media session
       actions update algorithm</a> in order to avoid UI flickering when multiple
       actions are modified in the same event loop. </p>
-     <p> When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source-1">media session action source</a> that a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action-5">media session action</a> named <var>action</var> has been trigerered,
+     <p> When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source-1">media session action source</a> that a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action-5">media session action</a> named <var>action</var> has been triggered,
       the user agent MUST run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="handle-media-session-action">handle media session action</dfn> steps
       as follow and consider it <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#triggered-by-user-activation">triggered by user activation</a>: </p>
      <ol>
@@ -1798,7 +1798,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     </section>
    </section>
    <h2 class="heading settled" data-level="6" id="the-mediasession-interface"><span class="secno">6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-9">MediaSession</a></code> interface</span><a class="self-link" href="#the-mediasession-interface"></a></h2>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>)]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Window</span>]
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a> {
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasession" id="ref-for-mediasession-10">MediaSession</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSession" href="#dom-navigator-mediasession" id="ref-for-dom-navigator-mediasession-1">mediaSession</a>;
 };
@@ -1832,13 +1832,13 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <p> A <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-11">MediaSession</a></code> objects represents a media session for a given document and
   allows a document to communicate to the user agent some information about the
   playback and how to handle it. </p>
-   <p> A <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-12">MediaSession</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="MediaSession" data-dfn-type="dfn" data-noexport="" id="mediasession-metadata">metadata</dfn> object represented by a <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-8">MediaMetadata</a></code>. It is initialy <code>null</code>. </p>
+   <p> A <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-12">MediaSession</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="MediaSession" data-dfn-type="dfn" data-noexport="" id="mediasession-metadata">metadata</dfn> object represented by a <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-8">MediaMetadata</a></code>. It is initially <code>null</code>. </p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="Navigator" data-dfn-type="attribute" data-export="" id="dom-navigator-mediasession"><code>mediaSession</code></dfn> attribute
   MUST return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-13">MediaSession</a></code> instance associated with the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a></code> object. </p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export="" id="dom-mediasession-metadata"><code>metadata</code></dfn> attribute
   reflects the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-14">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata-1">metadata</a>. On getting,
   it MUST return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-15">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata-2">metadata</a>. On
-  setting it MUST run the following steps with <var>value</var> being the new
+  setting, it MUST run the following steps with <var>value</var> being the new
   value being set: </p>
    <ol>
     <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-16">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata-3">metadata</a> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session-1">media session</a> to <code>null</code>. 
@@ -1965,7 +1965,7 @@ invoked, the user agent MUST run the following steps:</p>
    <p> When <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-27">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title-5">title</a>, <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist-5">artist</a>, <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album-5">album</a> or <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-7">artwork images</a> are modified, the user agent MUST run the
   following steps: </p>
    <ol>
-    <li> If the intance has no associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session-4">media session</a>,
+    <li> If the instance has no associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session-4">media session</a>,
       abort these steps. 
     <li>
       Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to run the following substeps: 
@@ -2082,12 +2082,12 @@ audio<span class="p">.</span>src <span class="o">=</span> tracks<span class="p">
     <span class="c1">// Update metadata (omitted)
 </span><span class="p">}</span>
 
-window<span class="p">.</span>navigator<span class="p">.</span>mediaSession<span class="p">.</span>setActionHandler<span class="p">(</span><span class="s1">'previoustrack'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+window<span class="p">.</span>navigator<span class="p">.</span>mediaSession<span class="p">.</span>setActionHandler<span class="p">(</span><span class="s2">"previoustrack"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
    trackId <span class="o">=</span> <span class="p">(</span>trackId <span class="o">+</span> tracks<span class="p">.</span>length <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> tracks<span class="p">.</span>length<span class="p">;</span>
    updatePlayingMedia<span class="p">(</span><span class="p">)</span><span class="p">;</span>
 <span class="p">}</span><span class="p">)</span><span class="p">;</span>
 
-window<span class="p">.</span>navigator<span class="p">.</span>mediaSession<span class="p">.</span>setActionHandler<span class="p">(</span><span class="s1">'nexttrack'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+window<span class="p">.</span>navigator<span class="p">.</span>mediaSession<span class="p">.</span>setActionHandler<span class="p">(</span><span class="s2">"nexttrack"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
    trackId <span class="o">=</span> <span class="p">(</span>trackId <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> tracks<span class="p">.</span>length<span class="p">;</span>
    updatePlayingMedia<span class="p">(</span><span class="p">)</span><span class="p">;</span>
 <span class="p">}</span><span class="p">)</span><span class="p">;</span>
@@ -2378,7 +2378,7 @@ support in making this specification happen.</p>
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>)]
+<pre class="idl def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Window</span>]
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a> {
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasession">MediaSession</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSession" href="#dom-navigator-mediasession">mediaSession</a>;
 };
