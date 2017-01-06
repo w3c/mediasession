@@ -606,6 +606,7 @@ enum MediaSessionAction {
 
 callback MediaSessionActionHandler = void();
 
+[Exposed=Window]
 interface MediaSession {
   attribute MediaMetadata? metadata;
 
