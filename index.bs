@@ -701,7 +701,7 @@ interface MediaSession {
 
 <pre class="idl">
 
-[Constructor(optional MediaMetadataInit init)]
+[Constructor(optional MediaMetadataInit init), Exposed=Window]
 interface MediaMetadata {
   attribute DOMString title;
   attribute DOMString artist;
