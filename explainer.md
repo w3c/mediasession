@@ -20,7 +20,7 @@ The MediaSession API gives pages the ability to specify the metadata of the
 currently playing media. The metadata will be passed to the platform, and can be
 displayed in media centers, notification, device lockscreen etc. The user then
 can observe what is currently playing. Here are some screenshots of
-notification, control center and lockscreen for music & podcast applications
+notification, media center and lockscreen for music & podcast applications
 take on Android and iOS:
 
 ![Screenshots](images/screenshots.png)
@@ -46,10 +46,10 @@ can switch tracks when these commands are received.
 
 ## API design
 
-We want to achieve the two objectives in the same API because media metadata and
-media controls are usually bonded together at least with regards to UI elements.
-It is intuitive that a user to control the media whose metadata is displayed on
-platform UI. On Android, the
+This specification solves the two use cases within the same API because media
+metadata and media controls are usually bonded together at least with regards to
+UI elements. It is intuitive that a user to control the media whose metadata is
+displayed on platform UI. On Android, the
 [MediaSession class](https://developer.android.com/reference/android/media/session/MediaSession.html)
 both handles media metadata and media controls, while on iOS,
 [MPNowPlayingInfoCenter](https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPNowPlayingInfoCenter_Class/)
@@ -71,18 +71,23 @@ enum MediaSessionPlaybackState {
   "playing"
 };
 
+enum MediaSessionAction {
+  "play",
+  "pause",
+  "seekbackward",
+  "seekforward",
+  "previoustrack",
+  "nexttrack"
+};
+
+callback MediaSessionActionHandler = void();
+
 interface MediaSession : EventTarget {
     attribute MediaMetadata? metadata;
 
     attribute MediaSessionPlaybackState playbackState;  // defaults to "none"
 
-    attribute EventHandler onplay;
-    attribute EventHandler onpause;
-    attribute EventHandler onprevioustrack;
-    attribute EventHandler onnexttrack;
-    attribute EventHandler onseekbackward;
-    attribute EventHandler onseekforward;
-    ...
+    void setActionHandler(MediaSessionAction action, MediaSessionActionHandler? handler);
 };
 ```
 
@@ -105,151 +110,83 @@ interface MediaMetadata {
     attribute DOMString title;
     attribute DOMString artist;
     attribute DOMString album;
-    attribute MediaImage artwork;  // Omitting MediaImage details
+    attribute FrozenArray<MediaImage> artwork;
+};
+
+dictionary MediaImage {
+  required USVString src;
+  DOMString sizes = "";
+  DOMString type = "";
 };
 ```
 
-### Media controls
+### Media session actions
 
-**Note** The API for media controls is still under development and may not be
-stable.
+The API for media session action work as follows:
 
-The API for media controls should work as follows:
-
-* The page registers event handlers for media control actions. A page
-  registering an event handler for a media control action implies it supports
-  that action.
-* The user agent displays on UI for those controls (if applicable) and registers
-  callbacks for those controls to the platform (if applicable).
-* When the user initiates media control actions through UI or platform
-  facilities, the user agent forwards the media control action to the page by
+* The page registers action handlers for media session actions. A page
+  registering an event handler for a media session action implies it supports
+  this action.
+* If applicable, the user agent displays a UI for these actions.
+* If applicable, the user agent registers callbacks for these actions to the
+  platform.
+* When the user initiates media session actions through UI or platform
+  facilities, the user agent forwards the media session action to the page by
   calling the corresponding handler.
 
-It is up to the user agent to decide which controls to show for in the UI and
+It is up to the user agent to decide which actions to show for in the UI and
 register listeners to the platform. This may vary depending on UI concerns and
 platform capabilities.
 
-The user agent may have fallback behavior for some actions. There might be
-useful in several use cases where the page wants to use or override the default
-fallback behavior. The page can call `preventDefault()` in the event handler to
-avoid the fallback behavior.
+The user agent may have a default handler for `play` and `pause` actions but
+will not handled the other actions. The `playbackState` will be used as a hint
+in order to know which action should be sent to the page.
 
-**Note** A possible issue with the above solution is that the user agent cannot
-  know whether a event handler has `preventDefault()` until it calls the
-  handler. After it's executed, the event handler may already run some steps,
-  while the user agent can hardly know what steps are executed. Then the user
-  agent may see `preventDefault()` is not called and do some fallback behavior.
-  Suppose the user agent has a fallback `seekforward` implementation, and a page
-  also does change the playback position for `seekforward`, then the playback
-  position will be forwarded twice. This might end up with pages calling
-  `preventDefault()` every time.
-
-**Note** Websites might ignore some media control actions, especially
-  "pause". In this case we might want to intervene these actions in the user
-  agent or the platform. Another option is to handle these actions in the user
-  agent and not exposing to the page at all. This is still an open question. See
-  https://github.com/WICG/mediasession/issues/69
-
-For action `play` and `pause`, in many situations, `play` and `pause` share the
-same media button. When the button is pressed, the user agent should fire
-`pause` action when the page is playing and fire `play` when the page is paused.
-The page can use the `playbackState` attribute to tell the UA about the current
-playback state. If it's currently playing, the user agent will send pause events
-to the page and if it's currently paused, the user agent will send play events
-to the page. The default `playbackState` is `none`, representing no active media
-session. The `playbackState` attribute is a hint to the UA which could ignore it
-in case of, for example, a page appears to be playing but has a `playbackState`
-set to `paused`.
-
-Here's an example for media controls:
+This is a usage example of media session actions:
 
 ```
 // Suppose |audio| is an audio element and |session| is a MediaSession object.
-session.onplay = function() {
-    preventDefault();
-    audio.play();
-};
-
-session.onpause = function() {
-    preventDefault();
-    audio.pause();
-};
-
+navigator.mediaSession.setActionHandler('play', _ => audio.play());
+navigator.mediaSession.setActionHandler('pause', _ => audio.pause());
 ```
 
 ### `MediaSession` routing
 
-#### Tab-level `MediaSession` routing
-
 It usually makes more sense to display the media metadata of one page and let
-only that page respond to media control actions than doing that for multiple
+only that page respond to media session actions than doing that for multiple
 pages at the same time. Since multiple tabs can have `MediaSession` objects, the
 user agent should have a routing mechanism to select one `MediaSession`. The
 media metadata of the selected `MediaSession` will be passed to the platform for
-UI display, and all media control actions are routed to that `MediaSession`. The
+UI display, and all media session actions are routed to that `MediaSession`. The
 user agent should give control to the page or component that is currently
 playing the most meaningful media to the user. If the AudioFocus API (see
 [below](#sec-audiofocus-api)) is being used, it is defined by the
 API. Otherwise, the user agent should route `MediaSession` based on platform
 conventions and the preferred user experience.
 
-#### Frame-level `MediaSession` routing
-
-Another issue of `MediaSession` routing is how to select a `MediaSession` object
-inside a tab, since `MediaSession` can both exist in the top-level frame and
-child frames. When there are multiple frames having a `MediaSession` object, the
-UA should decide which frame is playing the media content which is the most
-meaningful to the user.
-
-It is still an open question which `MediaSession` should be routed. For example,
-the user plays a embedded YouTube video on Facebook, and YouTube sets the album
-art to a YouTube logo, the user will be confused if the platform UI shows an
-YouTube image, while it actually comes from Facebook. On the opposite, if a
-website has an embedded music player, it might want to show the metadata from
-the embedded music player, and let it respond to media control actions.
-
-Since this is an UX decision, we need UA feedback to decide the default behavior
-in the spec. Currently, it is up to the UA to decide.
+With regards to frames, the user agent is able to use `MediaSession` information
+coming from a frame. It can also be ignored, allowing the user agent to craft a
+user experience that they believe would work the best for their users. However,
+for privacy purposes, if a frame has audio focus, and its `MediaSession` isn't
+used, the action handlers of another frame such as a parent frame should not be
+used.
 
 ### `MediaSession` as a global instance or a user-constructible object?
 
-It is an open question that we make `MediaSession` a global instance or
-user-constructible, the discussions are as follows:
+The current spec approach is that most websites will only use one `MediaSession`
+instance. Given that most browsers will provide a default `MediaSession` for a
+page when one is provided, having one entry point for each frame is simpler for
+the authors and implementers.
 
-#### `MediaSession` as a global instance (current spec)
-
-If we consider each page as an application, it is straightforward that each page
-has only one `MediaSession`, and the page takes full responsibility of setting
-the media metadata and responds to media control actions. In this way, we can
-make `MediaSession` a global object, and it is not user-constructible. For this
-we provide a partial interface to the Navigator object:
-
-```javascript
-partial interface Navigator {
-  readonly attribute MediaSession? mediaSession;
-};
-```
-
-In this solution, the top-level frame and each child frame will have its own
-`MediaSession` object, and the user agent should decide to select the
-`MediaSession` from which frame to select. The top-level frame `MediaSession` is
-preferred.
-
-The advantage of this solution is very simple and easy to use, while the
-disadvantage is that it may lack some flexibility, and there might be race
-issues when the metadata is set in multiple places.
-
-#### `MediaSession` as a user-constructible object (alternative spec)
-
-A more flexible solution is to make `MediaSession` a user-constructible
-object. `MediaSession`s can be activated and deactivated, and they can override
-each other. In this way, the `MediaSession` interface will look like this:
+However, the current mechanism could be extended to a more flexible solution
+where `MediaSession` can be user-constructible and activated, allowing the
+default object hanging from the `navigator` object to be deactivated.
 
 ```javascript
 [Constructor()]
 interface MediaSession {
     attribute MediaMetadata? metadata;
-    // Omitting media control APIs
+    // ...
 
     Promise<void> activate();
     void deactivate();
@@ -258,20 +195,20 @@ interface MediaSession {
 };
 ```
 
-The page can have multiple `MediaSession`s that exist at the same time, and it
-needs to activate/deactivate them to indicate which one is in use. There will be
-races if multiple `MediaSession`s are active at the same time, and the user
-agent should decide which one to use (preferably the latest one becoming
-active). Note that all this is within a page (tab), and does not conflict with
-`MediaSession` routing.
+This way, the page can have multiple `MediaSession`s that exist at the same
+time, and it needs to activate/deactivate them to indicate which one is in use.
+There might be races if multiple `MediaSession`s are active at the same time in
+which case, the user agent would decide which one to use (preferably the latest
+one becoming active). Note that all this is within a page (tab), and does not
+conflict with `MediaSession` routing.
 
 An example is that suppose a video website plays a pre-roll ad before a video
 plays, it can create one `MediaSession` for the video and one for the ad. The
 page associates the `MediaSession`s to the video/ad state so that the
 corresponding `MediaSession` is only active when the video/ad is playing.
 
-The advantage of this solution is that we can obtain better composability with
-other objects, especially AudioFocusEntry (from the AudioFocus API) objects. The
+The advantage of this solution is that it offers better composability with other
+objects, especially `AudioFocusEntry` (from the AudioFocus API) objects. The
 lifetime of the `MediaSession`s will be linked to these objects and they can be
 activated/deactivated automatically when the associated objects start/stop
 playback.
@@ -280,24 +217,16 @@ The disadvantage of this solution is that it might make the API complex to use,
 and there are still race issues websites need to take care. Also, which is more
 important, if the user agent does not have an automatic activation mechanism for
 `MediaSession` (for example the AudioFocus API is not implemented), the benefit
-will be very few since the solution is essentially equivalent to having multiple
+will be very low since the solution is essentially equivalent to having multiple
 `MediaMetadata` objects and setting different metadata to the global
 `MediaSession` instance.
 
-## Open questions
-
-Here is a summary of the open questions mentioned above.
-
-* What should we do if the page ignores some important media control handlers such
-  as "pause"?
-* Making `MediaSession` a global instance or a user-constructible object?
-* Letting iframes use `MediaSession` or not?
-
 ## <a name="sec-audiofocus-api"></a>The AudioFocus API
 
-The MediaSession API previously has an audio focus managing mechanism. We moved
-audio focus managing into a separate API called AudioFocus API, which is still
-work in progress. The reason for moving the AudioFocus API out are as follows:
+The MediaSession API previously has an audio focus managing mechanism. Audio
+focus management has moved into a separate API called AudioFocus API, which is
+still work in progress. The reason for moving the AudioFocus API out are as
+follows:
 
 * The AudioFocus API is less useful, and the current behavior is usually fine
   for rich media.
@@ -305,8 +234,8 @@ work in progress. The reason for moving the AudioFocus API out are as follows:
   issues.
     * The AudioFocus API has possible compatibility issues with different
       platform.
-    * WebAudio, WebRTC and plugins (e.g. Flash) are audio-producing, but they
-      have a different model than media elements.
+    * Different audio sources have different restrictions and some audio sources
+      can't easily be interrupted (Web Audio, WebRTC, ...).
     * If some websites do not use the AudioFocus API, a good fallback behavior
       still needs to be investigated.
 
