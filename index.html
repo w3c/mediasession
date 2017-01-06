@@ -1785,8 +1785,8 @@ to ignore images of media types it does not support.</p>
   algorithm</a> in order to avoid UI flickering when multiple actions are
   modified in the same event loop. </p>
    <p> When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source-1">media session action source</a> that a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action-4">media session action</a> named <var>action</var> has been trigerered, the
-  user agent MUST run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="handle-media-session-action">handle media session action</dfn> steps as
-  follow: </p>
+  user agent MUST run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="handle-media-session-action">handle media session action</dfn> steps as follow
+  and consider it <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#triggered-by-user-activation">triggered by user activation</a>: </p>
    <ol>
     <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session-2">active media session</a> is <code>null</code>, abort these
       steps. 
@@ -2276,6 +2276,7 @@ neighboring rights to this work.</p>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#attr-link-sizes">sizes</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#triggered-by-user-activation">triggered by user activation</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a>
     </ul>
    <li>
