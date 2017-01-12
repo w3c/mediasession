@@ -513,12 +513,6 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       provided for the <a>active media session</a>.
     </p>
 
-    <p>
-      A user agent MAY automatically pause any audible player after a <a
-      enum-value for=MediaSessionAction>pause</a> <a>media session action</a>
-      has been handled by the page.
-    </p>
-
     <p class=note>
       A page should only register a {{MediaSessionActionHandler}} for a <a>media
       session action</a> when it can handle the action given that the user agent
