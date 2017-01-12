@@ -430,7 +430,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       <ol>
         <li>
           If <var>handler</var> is <code>null</code>, remove <var>action</var>
-          from the <a>supported media session action</a> for {{MediaSession}}
+          from the <a>supported media session actions</a> for {{MediaSession}}
           and abort these steps.
         </li>
         <li>
@@ -894,7 +894,7 @@ invoked, the user agent MUST run the following steps:
   </ol>
   On setting, it MUST run the
   <a>convert artwork algorithm</a> with the new value as <var>input</var>, and
-  set the {MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as the
+  set the {{MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as the
   result if it succeeded.
 </p>
 
