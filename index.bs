@@ -247,17 +247,43 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
     <p>
       The <dfn>actual playback state</dfn> SHOULD return the last value that was
-      set on <a attribute for="MediaSession">playbackState</a>. If the user
-      agent believes the actual playback state is <a enum-value
-      for="MediaSessionPlaybackState">playing</a> and the <a attribute
-      for="MediaSession">playbackState</a> returns a different value, it MAY
-      return
-      <a enum-value for="MediaSessionPlaybackState">playing</a> instead.
+      set on <a>playback state</a>. However, if the user agent believes the
+      <a>actual playback state</a> is <a enum-value
+      for="MediaSessionPlaybackState">playing</a> while the <a>playback
+      state</a> returns a different value, it MAY return
+      <a enum-value for="MediaSessionPlaybackState">playing</a> instead. The
+      user agent MAY have its own way of determining whether the <a>actual
+      playback state</a> should be overriden to <a enum-value
+      for="MediaSessionPlaybackState">playing</a>. The RECOMMENDED way is to
+      detect whether the page is producing sound.
     </p>
 
     <p>
-      When the <a>actual playback state</a> is updated, the user agent agent
-      SHOULD run the <a>media session actions update algorithm</a>.
+      The {{MediaSession/playbackState}} attribute could be useful in the
+      following situations:
+      <ul>
+        <li>
+          The user agent does not have the ability to decide whether the page is
+          playing or not.
+        </li>
+        <li>
+          If a page is seeking or loading media, some user agent might consider
+          the page as <a enum-value for="MediaSessionPlaybackState">paused</a>,
+          but the page expects the seeking or loading to be interrupted by <a
+          enum-value for=MediaSessionAction>pause</a> action.
+        </li>
+        <li>
+          The page wants to do some preparation steps when the media is paused
+          but it expects the preparation steps to be interrupted by <a
+          enum-value for="MediaSessionAction">pause</a> action.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      When the <a>actual playback state</a> of the <a>active media session</a>
+      changes, the user agent SHOULD run the <a>media session actions update
+      algorithm</a>.
     </p>
   </section>
 
@@ -272,8 +298,10 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
     The user agent MUST select at most one of the {{MediaSession}} objects to
     present it to the user, which is called the <dfn>active media session</dfn>.
-    The <a>active media session</a> may be null. The selection is up the user
-    agent and SHOULD base on preferred user experience.
+    The <a>active media session</a> may be null. The selection is up to the user
+    agent and SHOULD base on preferred user experience. Note that the
+    {{MediaSession/playbackState}} attribute does not affect media session
+    routing. It only takes effect for the <a>active media session</a>.
 
     It is RECOMMENDED that the user agent selects the <a>active media
     session</a> by managing <a>audio focus</a>. A tab or <a>browsing context</a>
@@ -658,11 +686,13 @@ interface MediaSession {
   The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
   attribute represents the <dfn lt="playback state">playback state</dfn> of the
   <a>media session</a>. The default value is <a enum-value
-  for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST
-  update the <a>active media session</a> and run the <a>media session actions
-  update algorithm</a> if needed. On getting, the user agent MUST return the
-  last valid value that was set. If none, it MUST return <a enum-value
-  for="MediaSessionPlaybackState">none</a>.
+  for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST run
+  the <a>media session actions update algorithm</a> if the {{MediaSession}}
+  object it belongs to is the <a>active media session</a>. On getting, the user
+  agent MUST return the last valid value that was set. If none, it MUST return
+  <a enum-value for="MediaSessionPlaybackState">none</a>. The
+  {{MediaSession/playbackState}} attribute is a hint for the user agent to
+  determine whether the page is playing or paused.
 </p>
 
 <p>
@@ -1042,31 +1072,56 @@ agent to ignore images of media types it does not support.
   </pre>
 </div>
 
-<div class="example" id="example-media-controls">
+<div class="example" id="example-media-session-actions">
   Handling <a>media session actions</a>:
-<pre class='lang-javascript'>
-var tracks = ["chapter1.mp3", "chapter2.mp3", "chapter3.mp3"];
-var trackId = 0;
+  <pre class="lang-javascript">
+    var tracks = ["chapter1.mp3", "chapter2.mp3", "chapter3.mp3"];
+    var trackId = 0;
 
-var audio = document.createElement("audio");
-audio.src = tracks[trackId];
-
-void updatePlayingMedia() {
+    var audio = document.createElement("audio");
     audio.src = tracks[trackId];
-    // Update metadata (omitted)
-}
 
-window.navigator.mediaSession.setActionHandler("previoustrack", function() {
-   trackId = (trackId + tracks.length - 1) % tracks.length;
-   updatePlayingMedia();
-});
+    void updatePlayingMedia() {
+      audio.src = tracks[trackId];
+      // Update metadata (omitted)
+    }
 
-window.navigator.mediaSession.setActionHandler("nexttrack", function() {
-   trackId = (trackId + 1) % tracks.length;
-   updatePlayingMedia();
-});
+    window.navigator.mediaSession.setActionHandler("previoustrack", function() {
+      trackId = (trackId + tracks.length - 1) % tracks.length;
+      updatePlayingMedia();
+    });
 
-</pre>
+    window.navigator.mediaSession.setActionHandler("nexttrack", function() {
+      trackId = (trackId + 1) % tracks.length;
+      updatePlayingMedia();
+    });
+  </pre>
+</div>
+
+<div class="example" id="example-set-playbackState">
+  Setting {{MediaSession/playbackState}}:
+
+  The user agent might consider the page not be playing when the media is
+  loading or seeking. During this time, the user agent might show only a play
+  button instead of pause button. Therefore the user will not be able to pause
+  the playback before the media has loaded or seeked. The page can override this
+  with {{MediaSession/playbackState}} to show the correct play/pause button.
+  This could also be useful when the user agent do not have the ability for
+  detecting the playback state, or when the page is expecting some preparation
+  work to be interrupted before media starts playing.
+
+  <pre class="lang-javascript">
+    var audio = document.createElement("audio");
+    audio.src = "foo.mp3";
+
+    audio.addEventListener("play", _ => {
+      window.navigator.mediaSession.playbackState = "playing";
+    });
+
+    audio.addEventListener("pause", _ => {
+      window.navigator.mediaSession.playbackState = "paused";
+    });
+  </pre>
 </div>
 
 <h2 id="acknowledgments" class="no-num">Acknowledgments</h2>

@@ -98,8 +98,7 @@ and album art. To set the metadata for a `MediaSession`, the page should create
 a `MediaMetadata` object and assign it to a `MediaSession` object:
 
 ```javascript
-// Let |session| be a MediaSession object
-session.metadata = new MediaMetadata(/* MediaMetadata constructor */);
+window.navigator.mediaSession.metadata = new MediaMetadata(/* MediaMetadata constructor */);
 ```
 
 The `MediaMetadata` interface generally looks like (details are omitted):
@@ -140,14 +139,46 @@ platform capabilities.
 
 The user agent may have a default handler for `play` and `pause` actions but
 will not handled the other actions. The `playbackState` will be used as a hint
-in order to know which action should be sent to the page.
+in order to know which action should be sent to the page. `playbackState` could
+be useful in the following situations:
 
-This is a usage example of media session actions:
+* The UA does not have the ability to decide whether the page is playing or not.
+* The UA considers seeking or loading media as "not playing", but the page
+  expects to be interrupted by pause action.
+* The page just want to do some preparation steps when the media is paused but
+  it expects the preparation steps could be interrupted by pause action.
 
-```
-// Suppose |audio| is an audio element and |session| is a MediaSession object.
+These are some usage examples of media session actions:
+
+Handle media session actions
+```javascript
+// Suppose |audio| is an audio element.
 navigator.mediaSession.setActionHandler('play', _ => audio.play());
 navigator.mediaSession.setActionHandler('pause', _ => audio.pause());
+navigator.mediaSession.setActionHandler('previoustrack', _ => { audio.src = /* some URL */; });
+navigator.mediaSession.setActionHandler('nexttrack', _ => { audio.src = /* some URL */; });
+```
+
+```javascript
+// Use playbackState to override the state guessed by the UA.
+// Suppose |audio| is an audio element.
+
+// The user agent might consider the page not be playing when |audio| is seeking or loading,
+// but the page can override it with playbackState.
+// This could also be useful if the page is doing some praparation before the media plays.
+
+audio.addEventListener("play", _ => { navigator.mediaSession.playbackState = "playing"; });
+audio.addEventListener("pause", _ => { navigator.mediaSession.playbackState = "paused"; });
+
+navigator.mediaSession.setActionHandler('play', _ => audio.play());
+navigator.mediaSession.setActionHandler('pause', _ => audio.pause());
+navigator.mediaSession.setActionHandler('seekforward', _ => {
+    audio.currentTime += 10;
+});
+navigator.mediaSession.setActionHandler('seekbackward', _ => {
+    audio.currentTime -= 10;
+});
+
 ```
 
 ### `MediaSession` routing
