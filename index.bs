@@ -586,7 +586,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 <pre class="idl">
 [Exposed=Window]
 partial interface Navigator {
-  readonly attribute MediaSession mediaSession;
+  [SameObject] readonly attribute MediaSession mediaSession;
 };
 
 enum MediaSessionPlaybackState {
