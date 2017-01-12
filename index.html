@@ -1444,7 +1444,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-06">6 January 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-12">12 January 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1724,7 +1724,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <p> When the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="update-action-handler-algorithm">update action handler algorithm</dfn> on a given <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-6">MediaSession</a></code> with <var>action</var> and <var>handler</var> parameters
       is invoked, the user agent MUST run the following steps: </p>
      <ol>
-      <li> If <var>handler</var> is <code>null</code>, remove <var>action</var> from the <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions-1">supported media session action</a> for <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-7">MediaSession</a></code> and abort these steps. 
+      <li> If <var>handler</var> is <code>null</code>, remove <var>action</var> from the <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions-1">supported media session actions</a> for <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-7">MediaSession</a></code> and abort these steps. 
       <li> Add <var>action</var> to the <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions-2">supported media session actions</a> for <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession-8">MediaSession</a></code> and associate to it the <var>handler</var>. 
      </ol>
      <p></p>
@@ -1959,10 +1959,10 @@ invoked, the user agent MUST run the following steps:</p>
     <li> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-frozen-array">Create a frozen array</a> from <var>frozenArtwork</var>. 
    </ol>
     On setting, it MUST run the <a data-link-type="dfn" href="#convert-artwork-algorithm" id="ref-for-convert-artwork-algorithm-2">convert artwork algorithm</a> with the new value as <var>input</var>, and
-  set the {MediaMetadata}}'s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-6">artwork images</a> as the
+  set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-27">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-6">artwork images</a> as the
   result if it succeeded. 
    <p></p>
-   <p> When <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-27">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title-5">title</a>, <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist-5">artist</a>, <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album-5">album</a> or <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-7">artwork images</a> are modified, the user agent MUST run the
+   <p> When <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata-28">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title-5">title</a>, <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist-5">artist</a>, <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album-5">album</a> or <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images-7">artwork images</a> are modified, the user agent MUST run the
   following steps: </p>
    <ol>
     <li> If the instance has no associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session-4">media session</a>,
@@ -2648,7 +2648,7 @@ support in making this specification happen.</p>
     <li><a href="#ref-for-mediametadata-1">4.1. User interface guidelines</a> <a href="#ref-for-mediametadata-2">(2)</a> <a href="#ref-for-mediametadata-3">(3)</a> <a href="#ref-for-mediametadata-4">(4)</a> <a href="#ref-for-mediametadata-5">(5)</a>
     <li><a href="#ref-for-mediametadata-6">4.2. Incognito mode</a>
     <li><a href="#ref-for-mediametadata-7">6. The MediaSession interface</a> <a href="#ref-for-mediametadata-8">(2)</a>
-    <li><a href="#ref-for-mediametadata-9">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-10">(2)</a> <a href="#ref-for-mediametadata-11">(3)</a> <a href="#ref-for-mediametadata-12">(4)</a> <a href="#ref-for-mediametadata-13">(5)</a> <a href="#ref-for-mediametadata-14">(6)</a> <a href="#ref-for-mediametadata-15">(7)</a> <a href="#ref-for-mediametadata-16">(8)</a> <a href="#ref-for-mediametadata-17">(9)</a> <a href="#ref-for-mediametadata-18">(10)</a> <a href="#ref-for-mediametadata-19">(11)</a> <a href="#ref-for-mediametadata-20">(12)</a> <a href="#ref-for-mediametadata-21">(13)</a> <a href="#ref-for-mediametadata-22">(14)</a> <a href="#ref-for-mediametadata-23">(15)</a> <a href="#ref-for-mediametadata-24">(16)</a> <a href="#ref-for-mediametadata-25">(17)</a> <a href="#ref-for-mediametadata-26">(18)</a> <a href="#ref-for-mediametadata-27">(19)</a>
+    <li><a href="#ref-for-mediametadata-9">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-10">(2)</a> <a href="#ref-for-mediametadata-11">(3)</a> <a href="#ref-for-mediametadata-12">(4)</a> <a href="#ref-for-mediametadata-13">(5)</a> <a href="#ref-for-mediametadata-14">(6)</a> <a href="#ref-for-mediametadata-15">(7)</a> <a href="#ref-for-mediametadata-16">(8)</a> <a href="#ref-for-mediametadata-17">(9)</a> <a href="#ref-for-mediametadata-18">(10)</a> <a href="#ref-for-mediametadata-19">(11)</a> <a href="#ref-for-mediametadata-20">(12)</a> <a href="#ref-for-mediametadata-21">(13)</a> <a href="#ref-for-mediametadata-22">(14)</a> <a href="#ref-for-mediametadata-23">(15)</a> <a href="#ref-for-mediametadata-24">(16)</a> <a href="#ref-for-mediametadata-25">(17)</a> <a href="#ref-for-mediametadata-26">(18)</a> <a href="#ref-for-mediametadata-27">(19)</a> <a href="#ref-for-mediametadata-28">(20)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-mediametadatainit">
