@@ -98,7 +98,7 @@ and album art. To set the metadata for a `MediaSession`, the page should create
 a `MediaMetadata` object and assign it to a `MediaSession` object:
 
 ```javascript
-window.navigator.mediaSession.metadata = new MediaMetadata(/* MediaMetadata constructor */);
+navigator.mediaSession.metadata = new MediaMetadata(/* MediaMetadata constructor */);
 ```
 
 The `MediaMetadata` interface generally looks like (details are omitted):
@@ -137,16 +137,24 @@ It is up to the user agent to decide which actions to show for in the UI and
 register listeners to the platform. This may vary depending on UI concerns and
 platform capabilities.
 
-The user agent may have a default handler for `play` and `pause` actions but
-will not handled the other actions. The `playbackState` will be used as a hint
-in order to know which action should be sent to the page. `playbackState` could
-be useful in the following situations:
+The user agent may have default handlers for `play` and `pause` actions but not
+for the other actions.
 
-* The UA does not have the ability to decide whether the page is playing or not.
-* The UA considers seeking or loading media as "not playing", but the page
-  expects to be interrupted by pause action.
-* The page just want to do some preparation steps when the media is paused but
-  it expects the preparation steps could be interrupted by pause action.
+For `play` and `pause` actions, they are usually shown at the same place in the
+UI, and the platform sometimes send a joint command for those actions (such as a
+headset button click). Therefore, we need to figure out which button to show and
+which action handler to call. If the page is currently playing, the `pause`
+button should be shown and `pause` action handler should be called when the
+joint command is received. If the page is paused, the `play` button should be
+shown and `play` action handler should be called when the joint command is
+received. The UA must have the ability to determine whether the page is playing
+or not. Besides, the `playbackState` will be used as a hint which can override
+the playback state determined by the UA, which could be useful when the page
+want to do some preparation steps when the media is paused but it expects the
+preparation steps could be interrupted by `pause` action. For example, when the
+page is seeking or buffering media, the UA might consider the page as "not
+playing", however the page wants to allow the user to cancel the pending
+playback when the seeking or buffering completes.
 
 These are some usage examples of media session actions:
 
@@ -159,24 +167,31 @@ navigator.mediaSession.setActionHandler('previoustrack', _ => { audio.src = /* s
 navigator.mediaSession.setActionHandler('nexttrack', _ => { audio.src = /* some URL */; });
 ```
 
+Use `playbackState` to override the playback state determined by the UA.
 ```javascript
-// Use playbackState to override the state guessed by the UA.
 // Suppose |audio| is an audio element.
-
-// The user agent might consider the page not be playing when |audio| is seeking or loading,
-// but the page can override it with playbackState.
-// This could also be useful if the page is doing some praparation before the media plays.
-
-audio.addEventListener("play", _ => { navigator.mediaSession.playbackState = "playing"; });
-audio.addEventListener("pause", _ => { navigator.mediaSession.playbackState = "paused"; });
-
-navigator.mediaSession.setActionHandler('play', _ => audio.play());
-navigator.mediaSession.setActionHandler('pause', _ => audio.pause());
-navigator.mediaSession.setActionHandler('seekforward', _ => {
-    audio.currentTime += 10;
+navigator.mediaSession.setActionHandler('play', _ => {
+  // Mark the page as playing even if |audio| is still buffering.
+  navigator.mediaSession.playbackState = "playing";
+  audio.play().catch(_ => {
+    // play() promise rejected. Mark the page as paused
+    navigator.mediaSession.playbackState = "paused";
+  });
 });
+
+navigator.mediaSession.setActionHandler('pause', _ => {
+  navigator.mediaSession.playbackState = "paused";
+  audio.pause();
+});
+
+// Keep |playbackState| while seeking.
+navigator.mediaSession.setActionHandler('seekforward', _ => {
+  audio.currentTime += 10;
+});
+
+// Keep |playbackState| while seeking.
 navigator.mediaSession.setActionHandler('seekbackward', _ => {
-    audio.currentTime -= 10;
+  audio.currentTime -= 10;
 });
 
 ```
