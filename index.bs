@@ -58,6 +58,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: MIME type
         urlPrefix: embedded-content.html
             text: media element
+            text: pause event; url: #event-media-pause
             text: play event; url: #event-media-play
         urlPrefix: browsers.html
             text: browsing context
@@ -241,23 +242,19 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <h3 id='playback-state-model'>Playback State</h3>
 
     <p>
-      The <dfn>playback state</dfn> of a page indicates whether it is playing
-      media or not. In order to make <a enum-value
-      for="MediaSessionAction">play</a> and
+      In order to make <a enum-value for="MediaSessionAction">play</a> and
       <a enum-value for="MediaSessionAction">pause</a> actions work properly,
-      the user agent SHOULD be able to determine the <a>playback state</a> of a
-      page, which is called the <dfn>guessed playback state</dfn>. The
+      the user agent SHOULD be able to determine the of a page is playing media
+      or not, which is called the <dfn>guessed playback state</dfn>. The
       RECOMMENDED way for determining the <a>guessed playback state</a> is to
-      monitor the <a>play event</a> of media elements with <a attribute
-      for="HTMLMediaElement">muted</a>
-      attribute being false. Other information SHOULD also be considered, such
-      as WebAudio and plugins.
+      monitor the <a>play event</a> and <a>pause event</a> of media elements
+      with <a attribute for="HTMLMediaElement">muted</a> attribute being false.
+      Other information SHOULD also be considered, such as WebAudio and plugins.
     </p>
 
     <p>
       The <a attribute for="MediaSession">playbackState</a> attribute specifies
-      the <a>declared playback state</a> from the page. It is a hint from the
-      page and and MAY be overridden by the user agent. The state is combined
+      the <a>declared playback state</a> from the page. The state is combined
       with the <a>guessed playback state</a> to compute the <dfn>actual playback
       state</dfn>, which is a finalized state and will be used for
       <a enum-value for="MediaSessionAction">play</a> and
@@ -280,13 +277,13 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
     <p class=note>
       The {{MediaSession/playbackState}} attribute could be useful when the page
-      wants to do some preparation steps when the media is paused but it expects
+      wants to do some preparation steps when the media is paused but it allows
       the preparation steps to be interrupted by <a enum-value
       for="MediaSessionAction">pause</a> action. For example, when the page is
       seeking or buffering media, the user agent might consider the page as <a
       enum-value for="MediaSessionPlaybackState">paused</a>, however the page
-      wants to allow the user to abort the pending playback when seeking or
-      buffering completes.
+      wants to allow the user to abort these steps so that the playback won't
+      continue after seeking or buffering is finished.
     </p>
 
     <p>
@@ -308,7 +305,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     The user agent MUST select at most one of the {{MediaSession}} objects to
     present it to the user, which is called the <dfn>active media session</dfn>.
     The <a>active media session</a> may be null. The selection is up to the user
-    agent and SHOULD base on preferred user experience. Note that the
+    agent and SHOULD be based on preferred user experience. Note that the
     {{MediaSession/playbackState}} attribute MUST not affect media session
     routing. It only takes effect for the <a>active media session</a>.
 
@@ -694,14 +691,13 @@ interface MediaSession {
 <p>
   The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
   attribute represents the <dfn>declared playback state</dfn> of the <a>media
-  session</a>. The default value is <a enum-value
-  for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST set
-  the IDL attribute to the new value if it is a valid
-  {{MediaSessionPlaybackState}} value. On getting, the user agent MUST return
-  the last valid value that was set. If none, it MUST return
-  <a enum-value for="MediaSessionPlaybackState">none</a>. The
-  {{MediaSession/playbackState}} attribute is a hint for the user agent to
-  determine whether the page is playing or paused.
+  session</a>, by which the page declares it is playing media or not. The
+  initial value is <a enum-value for="MediaSessionPlaybackState">none</a>. On
+  setting, the user agent MUST set the IDL attribute to the new value if it is a
+  valid {{MediaSessionPlaybackState}} value. On getting, the user agent MUST
+  return the last valid value that was set. The {{MediaSession/playbackState}}
+  attribute is a hint for the user agent to determine whether the page is
+  playing or paused.
 </p>
 
 <p class=note>
@@ -710,13 +706,14 @@ interface MediaSession {
 </p>
 
 <p>
-  The {{MediaSessionPlaybackState}} enum is used to indicate the <a>playback
-  state</a>, the values are described as follows:
+  The {{MediaSessionPlaybackState}} enum is used to indicate whether the page is
+  playing media or not, the values are described as follows:
 
   <ul>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the page
-      does not specify whether it's playing or paused.
+      does not specify whether it's playing or paused, it can only be used in
+      the {{MediaSession/playbackState}} attribute.
     </li>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the
