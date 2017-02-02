@@ -152,9 +152,9 @@ or not. Besides, the `playbackState` will be used as a hint which can override
 the playback state determined by the UA, which could be useful when the page
 want to do some preparation steps when the media is paused but it expects the
 preparation steps could be interrupted by `pause` action. For example, when the
-page is seeking or buffering media, the UA might consider the page as "not
-playing", however the page wants to allow the user to cancel the pending
-playback when the seeking or buffering completes.
+page pauses its media and plays a third-party ad in an iframe, the UA might
+consider the session as "not playing", however the page wants to allow the user to
+pause the ad playback and cancel the pending playback after the ad finishes.
 
 These are some usage examples of media session actions:
 
@@ -169,31 +169,48 @@ navigator.mediaSession.setActionHandler('nexttrack', _ => { audio.src = /* some 
 
 Use `playbackState` to override the playback state determined by the UA.
 ```javascript
-// Suppose |audio| is an audio element.
-navigator.mediaSession.setActionHandler('play', _ => {
-  // Mark the page as playing even if |audio| is still buffering.
-  navigator.mediaSession.playbackState = "playing";
-  audio.play().catch(_ => {
-    // play() promise rejected. Mark the page as paused
-    navigator.mediaSession.playbackState = "paused";
-  });
-});
+var adFrame;
 
-navigator.mediaSession.setActionHandler('pause', _ => {
-  navigator.mediaSession.playbackState = "paused";
+// Suppose |audio| is an audio element, and |adFrame| is an iframe for playing ads.
+function pauseAudioAndPlayAd() {
   audio.pause();
-});
+  navigator.mediaSession.playbackState = playing;
 
-// Keep |playbackState| while seeking.
-navigator.mediaSession.setActionHandler('seekforward', _ => {
-  audio.currentTime += 10;
-});
+  setUpAdFrame();
+  adFrame.contentWindow.postMessage("play some ad");
+  navigator.mediaSession.setActionHandler('pause', pauseAd);
+}
 
-// Keep |playbackState| while seeking.
-navigator.mediaSession.setActionHandler('seekbackward', _ => {
-  audio.currentTime -= 10;
-});
+function pauseAd() {
+  adFrame.contentWindow.postMessage("pause the ad");
+  navigator.mediaSession.setActionHandler('play', playAd);
+}
 
+function resumeAd() {
+  adFrame.contentWindow.postMessage("resume the ad");
+  navigator.mediaSession.setActionHandler('pause', pauseAd);
+}
+
+window.onmessage = function(e) {
+  if (e.data === "ad finished") {
+    removeAdFrame();
+
+    // Recover action handlers to control |audio|
+    navigator.mediaSession.setActionHandler('play', audio.play());
+    navigator.mediaSession.setActionHandler('pause', audio.pause());
+  }
+}
+
+function setUpAdFrame() {
+  adFrame = document.createElement('iframe');
+  adFrame.src = "https://example.com/ad-iframe.html";
+  document.body.appendChild(adFrame);
+}
+
+function removeAdFrame() {
+  document.body.removeChild(adFrame);
+  adFrame = null;
+}
 ```
 
 ### `MediaSession` routing

@@ -62,7 +62,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: play event; url: #event-media-play
         urlPrefix: browsers.html
             text: browsing context
-            text: top-level browsing context; url: #top-level-browsing-context
+            text: top-level browsing context
+            text: nested browsing context
         urlPrefix: webappapis.html
             text: API base URL
             text: entry settings object
@@ -244,10 +245,12 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       In order to make <a enum-value for="MediaSessionAction">play</a> and
       <a enum-value for="MediaSessionAction">pause</a> actions work properly,
-      the user agent SHOULD be able to determine the of a page is playing media
-      or not, which is called the <dfn>guessed playback state</dfn>. The
-      RECOMMENDED way for determining the <a>guessed playback state</a> is to
-      monitor the <a>play event</a> and <a>pause event</a> of media elements
+      the user agent SHOULD be able to determine the of a <a>browsing
+      context</a> of the <a>active media session</a>
+      is playing media or not, which is called the <dfn>guessed playback
+      state</dfn>. The RECOMMENDED way for determining the <a>guessed playback
+      state</a> is to monitor the <a>play event</a> and <a>pause event</a> of
+      media elements inside the <a>browsing context</a>
       with <a attribute for="HTMLMediaElement">muted</a> attribute being false.
       Other information SHOULD also be considered, such as WebAudio and plugins.
     </p>
@@ -279,11 +282,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       The {{MediaSession/playbackState}} attribute could be useful when the page
       wants to do some preparation steps when the media is paused but it allows
       the preparation steps to be interrupted by <a enum-value
-      for="MediaSessionAction">pause</a> action. For example, when the page is
-      seeking or buffering media, the user agent might consider the page as <a
-      enum-value for="MediaSessionPlaybackState">paused</a>, however the page
-      wants to allow the user to abort these steps so that the playback won't
-      continue after seeking or buffering is finished.
+      for="MediaSessionAction">pause</a> action. See <a
+      href="#example-set-playbackState">Setting playbackState</a> for example.
     </p>
 
     <p>
@@ -691,11 +691,12 @@ interface MediaSession {
 <p>
   The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
   attribute represents the <dfn>declared playback state</dfn> of the <a>media
-  session</a>, by which the page declares it is playing media or not. The
-  initial value is <a enum-value for="MediaSessionPlaybackState">none</a>. On
-  setting, the user agent MUST set the IDL attribute to the new value if it is a
-  valid {{MediaSessionPlaybackState}} value. On getting, the user agent MUST
-  return the last valid value that was set. The {{MediaSession/playbackState}}
+  session</a>, by which the session declares its <a>browsing context</a> is
+  playing media or not. The initial value is <a enum-value
+  for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST set
+  the IDL attribute to the new value if it is a valid
+  {{MediaSessionPlaybackState}} value. On getting, the user agent MUST return
+  the last valid value that was set. The {{MediaSession/playbackState}}
   attribute is a hint for the user agent to determine whether the page is
   playing or paused.
 </p>
@@ -706,22 +707,24 @@ interface MediaSession {
 </p>
 
 <p>
-  The {{MediaSessionPlaybackState}} enum is used to indicate whether the page is
-  playing media or not, the values are described as follows:
+  The {{MediaSessionPlaybackState}} enum is used to indicate whether a
+  <a>browsing context</a> is playing media or not, the values are described as
+  follows:
 
   <ul>
     <li>
-      <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the page
+      <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the
+      <a>browsing context</a>
       does not specify whether it's playing or paused, it can only be used in
       the {{MediaSession/playbackState}} attribute.
     </li>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the
-      page is currently playing media and it can be paused.
+      <a>browsing context</a> is currently playing media and it can be paused.
     </li>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the
-      page has paused media and it can be resumed.
+      <a>browsing context</a> has paused media and it can be resumed.
     </li>
   </ul>
 </p>
@@ -1112,42 +1115,59 @@ agent to ignore images of media types it does not support.
 <div class="example" id="example-set-playbackState">
   Setting {{MediaSession/playbackState}}:
 
-  The user agent might consider the page not be playing when the media is
-  loading or seeking. During this time, the user agent might show only a play
-  button instead of pause button. Therefore the user will not be able to pause
-  the playback before the media has loaded or seeked. The page can override this
-  with {{MediaSession/playbackState}} to show the correct play/pause button.
-  This could also be useful when the user agent do not have the ability for
-  detecting the playback state, or when the page is expecting some preparation
-  work to be interrupted before media starts playing.
+  When a page pauses its media and plays a third-party ad in an iframe, the UA
+  might consider the session as "not playing", however the page wants to allow
+  the user to pause the ad playback and cancel the pending playback after the ad
+  finishes.
 
   <pre class="lang-javascript">
+    var adFrame;
     var audio = document.createElement("audio");
     audio.src = "foo.mp3";
 
-    navigator.mediaSession.setActionHandler('play', _ => {
-      // Mark the page as playing even if |audio| is still buffering.
-      navigator.mediaSession.playbackState = "playing";
-      audio.play().catch(_ => {
-        // play() promise rejected. Mark the page as paused
-        navigator.mediaSession.playbackState = "paused";
-      });
-    });
+    function resetActionHandlers() {
+      navigator.mediaSession.setActionHandler('play', audio.play());
+      navigator.mediaSession.setActionHandler('pause', audio.pause());
+    }
 
-    navigator.mediaSession.setActionHandler('pause', _ => {
-      navigator.mediaSession.playbackState = "paused";
+    resetActionHandlers();
+
+    // This method will be called when the page wants to play some ad.
+    function pauseAudioAndPlayAd() {
       audio.pause();
-    });
+      navigator.mediaSession.playbackState = playing;
+      setUpAdFrame();
+      adFrame.contentWindow.postMessage("play some ad");
+      navigator.mediaSession.setActionHandler('pause', pauseAd);
+    }
 
-    // Keep |playbackState| while seeking.
-    navigator.mediaSession.setActionHandler('seekforward', _ => {
-      audio.currentTime += 10;
-    });
+    function pauseAd() {
+      adFrame.contentWindow.postMessage("pause the ad");
+      navigator.mediaSession.setActionHandler('play', playAd);
+    }
 
-    // Keep |playbackState| while seeking.
-    navigator.mediaSession.setActionHandler('seekbackward', _ => {
-      audio.currentTime -= 10;
-    });
+    function resumeAd() {
+      adFrame.contentWindow.postMessage("resume the ad");
+      navigator.mediaSession.setActionHandler('pause', pauseAd);
+    }
+
+    window.onmessage = function(e) {
+      if (e.data === "ad finished") {
+        removeAdFrame();
+        resetActionHandlers();
+      }
+    }
+
+    function setUpAdFrame() {
+      adFrame = document.createElement('iframe');
+      adFrame.src = "https://example.com/ad-iframe.html";
+      document.body.appendChild(adFrame);
+    }
+
+    function removeAdFrame() {
+      document.body.removeChild(adFrame);
+      adFrame = null;
+    }
   </pre>
 </div>
 
