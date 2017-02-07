@@ -161,10 +161,10 @@ These are some usage examples of media session actions:
 Handle media session actions
 ```javascript
 // Suppose |audio| is an audio element.
-navigator.mediaSession.setActionHandler('play', _ => audio.play());
-navigator.mediaSession.setActionHandler('pause', _ => audio.pause());
-navigator.mediaSession.setActionHandler('previoustrack', _ => { audio.src = /* some URL */; });
-navigator.mediaSession.setActionHandler('nexttrack', _ => { audio.src = /* some URL */; });
+navigator.mediaSession.setActionHandler("play", _ => audio.play());
+navigator.mediaSession.setActionHandler("pause", _ => audio.pause());
+navigator.mediaSession.setActionHandler("previoustrack", _ => { audio.src = /* some URL */; });
+navigator.mediaSession.setActionHandler("nexttrack", _ => { audio.src = /* some URL */; });
 ```
 
 Use `playbackState` to override the playback state determined by the UA.
@@ -174,21 +174,21 @@ var adFrame;
 // Suppose |audio| is an audio element, and |adFrame| is an iframe for playing ads.
 function pauseAudioAndPlayAd() {
   audio.pause();
-  navigator.mediaSession.playbackState = playing;
+  navigator.mediaSession.playbackState = "playing";
 
   setUpAdFrame();
   adFrame.contentWindow.postMessage("play some ad");
-  navigator.mediaSession.setActionHandler('pause', pauseAd);
+  navigator.mediaSession.setActionHandler("pause", pauseAd);
 }
 
 function pauseAd() {
   adFrame.contentWindow.postMessage("pause the ad");
-  navigator.mediaSession.setActionHandler('play', playAd);
+  navigator.mediaSession.setActionHandler("play", resumeAd);
 }
 
 function resumeAd() {
   adFrame.contentWindow.postMessage("resume the ad");
-  navigator.mediaSession.setActionHandler('pause', pauseAd);
+  navigator.mediaSession.setActionHandler("pause", pauseAd);
 }
 
 window.onmessage = function(e) {
@@ -196,20 +196,19 @@ window.onmessage = function(e) {
     removeAdFrame();
 
     // Recover action handlers to control |audio|
-    navigator.mediaSession.setActionHandler('play', audio.play());
-    navigator.mediaSession.setActionHandler('pause', audio.pause());
+    navigator.mediaSession.setActionHandler("play", audio.play());
+    navigator.mediaSession.setActionHandler("pause", audio.pause());
   }
 }
 
 function setUpAdFrame() {
-  adFrame = document.createElement('iframe');
+  adFrame = document.createElement("iframe");
   adFrame.src = "https://example.com/ad-iframe.html";
   document.body.appendChild(adFrame);
 }
 
 function removeAdFrame() {
-  document.body.removeChild(adFrame);
-  adFrame = null;
+  adFrame.remove();
 }
 ```
 

@@ -58,8 +58,10 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
             text: MIME type
         urlPrefix: embedded-content.html
             text: media element
+            text: muted; url: #concept-media-muted
             text: pause event; url: #event-media-pause
             text: play event; url: #event-media-play
+            text: potentially playing
         urlPrefix: browsers.html
             text: browsing context
             text: top-level browsing context
@@ -75,8 +77,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
         urlPrefix: interaction.html
             text: triggered by user activation
     type: attribute
-        urlPrefix: embedded-content.html
-            text: muted; for: HTMLMediaElement; url: #attr-media-muted;
         urlPrefix: semantics.html
             text: sizes; for: HTMLLinkElement; url: #attr-link-sizes;
 urlPrefix: https://url.spec.whatwg.org/; spec: URL
@@ -245,21 +245,24 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       In order to make <a enum-value for="MediaSessionAction">play</a> and
       <a enum-value for="MediaSessionAction">pause</a> actions work properly,
-      the user agent SHOULD be able to determine the of a <a>browsing
-      context</a> of the <a>active media session</a>
-      is playing media or not, which is called the <dfn>guessed playback
-      state</dfn>. The RECOMMENDED way for determining the <a>guessed playback
-      state</a> is to monitor the <a>play event</a> and <a>pause event</a> of
-      media elements inside the <a>browsing context</a>
-      with <a attribute for="HTMLMediaElement">muted</a> attribute being false.
-      Other information SHOULD also be considered, such as WebAudio and plugins.
+      the user agent SHOULD be able to determine if a <a>browsing context</a> of
+      the <a>active media session</a> is playing media or not, which is called
+      the <dfn>guessed playback state</dfn>. The RECOMMENDED way for determining
+      the <a>guessed playback state</a> is to monitor the media elements whose
+      node document's browsing context is the <a>browsing context</a>. The
+      <a>browsing context</a>'s <a>guessed playback state</a> is <a enum-value
+      for="MediaSessionPlaybackState">playing</a> if any of them is
+      <a>potentially playing</a> and not <a>muted</a>, and is <a enum-value
+      for="MediaSessionPlaybackState">paused</a> otherwise. Other information
+      SHOULD also be considered, such as WebAudio and plugins.
     </p>
 
     <p>
       The <a attribute for="MediaSession">playbackState</a> attribute specifies
-      the <a>declared playback state</a> from the page. The state is combined
-      with the <a>guessed playback state</a> to compute the <dfn>actual playback
-      state</dfn>, which is a finalized state and will be used for
+      the <a>declared playback state</a> from the <a>browsing context</a>. The
+      state is combined with the <a>guessed playback state</a> to compute the
+      <dfn>actual playback state</dfn>, which is a finalized state and will be
+      used for
       <a enum-value for="MediaSessionAction">play</a> and
       <a enum-value for="MediaSessionAction">pause</a> actions.
     </p>
@@ -691,14 +694,14 @@ interface MediaSession {
 <p>
   The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
   attribute represents the <dfn>declared playback state</dfn> of the <a>media
-  session</a>, by which the session declares its <a>browsing context</a> is
-  playing media or not. The initial value is <a enum-value
+  session</a>, by which the session declares whether its <a>browsing context</a>
+  is playing media or not. The initial value is <a enum-value
   for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST set
   the IDL attribute to the new value if it is a valid
   {{MediaSessionPlaybackState}} value. On getting, the user agent MUST return
   the last valid value that was set. The {{MediaSession/playbackState}}
-  attribute is a hint for the user agent to determine whether the page is
-  playing or paused.
+  attribute is a hint for the user agent to determine whether the <a>browsing
+  context</a> is playing or paused.
 </p>
 
 <p class=note>
@@ -1126,8 +1129,8 @@ agent to ignore images of media types it does not support.
     audio.src = "foo.mp3";
 
     function resetActionHandlers() {
-      navigator.mediaSession.setActionHandler('play', audio.play());
-      navigator.mediaSession.setActionHandler('pause', audio.pause());
+      navigator.mediaSession.setActionHandler("play", _ => audio.play());
+      navigator.mediaSession.setActionHandler("pause", _ => audio.pause());
     }
 
     resetActionHandlers();
@@ -1135,20 +1138,20 @@ agent to ignore images of media types it does not support.
     // This method will be called when the page wants to play some ad.
     function pauseAudioAndPlayAd() {
       audio.pause();
-      navigator.mediaSession.playbackState = playing;
+      navigator.mediaSession.playbackState = "playing";
       setUpAdFrame();
       adFrame.contentWindow.postMessage("play some ad");
-      navigator.mediaSession.setActionHandler('pause', pauseAd);
+      navigator.mediaSession.setActionHandler("pause", pauseAd);
     }
 
     function pauseAd() {
       adFrame.contentWindow.postMessage("pause the ad");
-      navigator.mediaSession.setActionHandler('play', playAd);
+      navigator.mediaSession.setActionHandler("play", playAd);
     }
 
     function resumeAd() {
       adFrame.contentWindow.postMessage("resume the ad");
-      navigator.mediaSession.setActionHandler('pause', pauseAd);
+      navigator.mediaSession.setActionHandler("pause", pauseAd);
     }
 
     window.onmessage = function(e) {
@@ -1159,14 +1162,13 @@ agent to ignore images of media types it does not support.
     }
 
     function setUpAdFrame() {
-      adFrame = document.createElement('iframe');
+      adFrame = document.createElement("iframe");
       adFrame.src = "https://example.com/ad-iframe.html";
       document.body.appendChild(adFrame);
     }
 
     function removeAdFrame() {
-      document.body.removeChild(adFrame);
-      adFrame = null;
+      adFrame.remove();
     }
   </pre>
 </div>
