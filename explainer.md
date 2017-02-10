@@ -183,17 +183,20 @@ function pauseAudioAndPlayAd() {
 
 function pauseAd() {
   adFrame.contentWindow.postMessage("pause the ad");
+  navigator.mediaSession.playbackState = "paused";
   navigator.mediaSession.setActionHandler("play", resumeAd);
 }
 
 function resumeAd() {
   adFrame.contentWindow.postMessage("resume the ad");
+  navigator.mediaSession.playbackState = "playing";
   navigator.mediaSession.setActionHandler("pause", pauseAd);
 }
 
 window.onmessage = function(e) {
   if (e.data === "ad finished") {
     removeAdFrame();
+    navigator.mediaSession.playbackState = "none";
 
     // Recover action handlers to control |audio|
     navigator.mediaSession.setActionHandler("play", audio.play());
