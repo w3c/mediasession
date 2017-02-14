@@ -1047,7 +1047,7 @@ agent to ignore images of media types it does not support.
   <code>"podcast.jpg"</code> or <code>"podcast.png"</code> for a
   low-pixel-density screen, and <code>"podcast_hd.jpg"</code>
   or <code>"podcast_hd.png"</code> for a high-pixel-density screen. If the user
-  agent want to use an image for lockscreen background,
+  agent wants to use an image for lockscreen background,
   <code>"podcast_xhd.jpg"</code> will be preferred.
 
 </div>
@@ -1140,18 +1140,18 @@ agent to ignore images of media types it does not support.
       audio.pause();
       navigator.mediaSession.playbackState = "playing";
       setUpAdFrame();
-      adFrame.contentWindow.postMessage("play some ad");
+      adFrame.contentWindow.postMessage("play_ad");
       navigator.mediaSession.setActionHandler("pause", pauseAd);
     }
 
     function pauseAd() {
-      adFrame.contentWindow.postMessage("pause the ad");
+      adFrame.contentWindow.postMessage("pause_ad");
       navigator.mediaSession.playbackState = "paused";
       navigator.mediaSession.setActionHandler("play", playAd);
     }
 
     function resumeAd() {
-      adFrame.contentWindow.postMessage("resume the ad");
+      adFrame.contentWindow.postMessage("resume_ad");
       navigator.mediaSession.playbackState = "playing";
       navigator.mediaSession.setActionHandler("pause", pauseAd);
     }

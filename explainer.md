@@ -150,8 +150,8 @@ shown and `play` action handler should be called when the joint command is
 received. The UA must have the ability to determine whether the page is playing
 or not. Besides, the `playbackState` will be used as a hint which can override
 the playback state determined by the UA, which could be useful when the page
-want to do some preparation steps when the media is paused but it expects the
-preparation steps could be interrupted by `pause` action. For example, when the
+wants to do some preparation steps when the media is paused but it expects the
+preparation steps could be interrupted by a `pause` action. For example, when the
 page pauses its media and plays a third-party ad in an iframe, the UA might
 consider the session as "not playing", however the page wants to allow the user to
 pause the ad playback and cancel the pending playback after the ad finishes.
@@ -177,18 +177,18 @@ function pauseAudioAndPlayAd() {
   navigator.mediaSession.playbackState = "playing";
 
   setUpAdFrame();
-  adFrame.contentWindow.postMessage("play some ad");
+  adFrame.contentWindow.postMessage("play_ad");
   navigator.mediaSession.setActionHandler("pause", pauseAd);
 }
 
 function pauseAd() {
-  adFrame.contentWindow.postMessage("pause the ad");
+  adFrame.contentWindow.postMessage("pause_ad");
   navigator.mediaSession.playbackState = "paused";
   navigator.mediaSession.setActionHandler("play", resumeAd);
 }
 
 function resumeAd() {
-  adFrame.contentWindow.postMessage("resume the ad");
+  adFrame.contentWindow.postMessage("resume_ad");
   navigator.mediaSession.playbackState = "playing";
   navigator.mediaSession.setActionHandler("pause", pauseAd);
 }
