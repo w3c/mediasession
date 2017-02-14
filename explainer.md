@@ -98,8 +98,7 @@ and album art. To set the metadata for a `MediaSession`, the page should create
 a `MediaMetadata` object and assign it to a `MediaSession` object:
 
 ```javascript
-// Let |session| be a MediaSession object
-session.metadata = new MediaMetadata(/* MediaMetadata constructor */);
+navigator.mediaSession.metadata = new MediaMetadata(/* MediaMetadata constructor */);
 ```
 
 The `MediaMetadata` interface generally looks like (details are omitted):
@@ -138,16 +137,82 @@ It is up to the user agent to decide which actions to show for in the UI and
 register listeners to the platform. This may vary depending on UI concerns and
 platform capabilities.
 
-The user agent may have a default handler for `play` and `pause` actions but
-will not handled the other actions. The `playbackState` will be used as a hint
-in order to know which action should be sent to the page.
+The user agent may have default handlers for `play` and `pause` actions but not
+for the other actions.
 
-This is a usage example of media session actions:
+For `play` and `pause` actions, they are usually shown at the same place in the
+UI, and the platform sometimes send a joint command for those actions (such as a
+headset button click). Therefore, we need to figure out which button to show and
+which action handler to call. If the page is currently playing, the `pause`
+button should be shown and `pause` action handler should be called when the
+joint command is received. If the page is paused, the `play` button should be
+shown and `play` action handler should be called when the joint command is
+received. The UA must have the ability to determine whether the page is playing
+or not. Besides, the `playbackState` will be used as a hint which can override
+the playback state determined by the UA, which could be useful when the page
+wants to do some preparation steps when the media is paused but it expects the
+preparation steps could be interrupted by a `pause` action. For example, when the
+page pauses its media and plays a third-party ad in an iframe, the UA might
+consider the session as "not playing", however the page wants to allow the user to
+pause the ad playback and cancel the pending playback after the ad finishes.
 
+These are some usage examples of media session actions:
+
+Handle media session actions
+```javascript
+// Suppose |audio| is an audio element.
+navigator.mediaSession.setActionHandler("play", _ => audio.play());
+navigator.mediaSession.setActionHandler("pause", _ => audio.pause());
+navigator.mediaSession.setActionHandler("previoustrack", _ => { audio.src = /* some URL */; });
+navigator.mediaSession.setActionHandler("nexttrack", _ => { audio.src = /* some URL */; });
 ```
-// Suppose |audio| is an audio element and |session| is a MediaSession object.
-navigator.mediaSession.setActionHandler('play', _ => audio.play());
-navigator.mediaSession.setActionHandler('pause', _ => audio.pause());
+
+Use `playbackState` to override the playback state determined by the UA.
+```javascript
+var adFrame;
+
+// Suppose |audio| is an audio element, and |adFrame| is an iframe for playing ads.
+function pauseAudioAndPlayAd() {
+  audio.pause();
+  navigator.mediaSession.playbackState = "playing";
+
+  setUpAdFrame();
+  adFrame.contentWindow.postMessage("play_ad");
+  navigator.mediaSession.setActionHandler("pause", pauseAd);
+}
+
+function pauseAd() {
+  adFrame.contentWindow.postMessage("pause_ad");
+  navigator.mediaSession.playbackState = "paused";
+  navigator.mediaSession.setActionHandler("play", resumeAd);
+}
+
+function resumeAd() {
+  adFrame.contentWindow.postMessage("resume_ad");
+  navigator.mediaSession.playbackState = "playing";
+  navigator.mediaSession.setActionHandler("pause", pauseAd);
+}
+
+window.onmessage = function(e) {
+  if (e.data === "ad finished") {
+    removeAdFrame();
+    navigator.mediaSession.playbackState = "none";
+
+    // Recover action handlers to control |audio|
+    navigator.mediaSession.setActionHandler("play", audio.play());
+    navigator.mediaSession.setActionHandler("pause", audio.pause());
+  }
+}
+
+function setUpAdFrame() {
+  adFrame = document.createElement("iframe");
+  adFrame.src = "https://example.com/ad-iframe.html";
+  document.body.appendChild(adFrame);
+}
+
+function removeAdFrame() {
+  adFrame.remove();
+}
 ```
 
 ### `MediaSession` routing
