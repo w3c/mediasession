@@ -15,7 +15,9 @@ Abstract: metadata shown on platform UI, customize available platform media
 Abstract: controls, and access platform media keys such as hardware keys found
 Abstract: on keyboards, headsets, remote controls, and software keys found in
 Abstract: notification areas and on lock screens of mobile devices.
-!Participate: <a href="https://github.com/WICG/mediasession/issues/new">File an issue</a> (<a href="https://github.com/WICG/mediasession/issues?state=open">open issues</a>)
+!Participate: <a href="https://github.com/WICG/mediasession/">We are on GitHub</a>
+!Participate: <a href="https://github.com/WICG/mediasession/issues/new">File an issue</a>
+!Participate: <a href="https://github.com/WICG/mediasession/issues?state=open">Open issues</a>
 !Version History: <a href="https://github.com/WICG/mediasession/commits">https://github.com/WICG/mediasession/commits</a>
 Ignored Vars: context, media, session
 Boilerplate: omit conformance, omit feedback-header
