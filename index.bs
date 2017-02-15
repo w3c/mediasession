@@ -1149,7 +1149,7 @@ agent to ignore images of media types it does not support.
     function pauseAd() {
       adFrame.contentWindow.postMessage("pause_ad");
       navigator.mediaSession.playbackState = "paused";
-      navigator.mediaSession.setActionHandler("play", playAd);
+      navigator.mediaSession.setActionHandler("play", resumeAd);
     }
 
     function resumeAd() {
