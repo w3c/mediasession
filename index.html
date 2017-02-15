@@ -1176,7 +1176,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version d589f866ce24170b0e9661175eeecbffc94d0f9c" name="generator">
+  <meta content="Bikeshed version 108b329dea0b65829ab3050d2b667fd8aa4dc7c1" name="generator">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -1444,7 +1444,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-14">14 February 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-15">15 February 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2137,7 +2137,7 @@ resetActionHandlers<span class="p">(</span><span class="p">)</span><span class="
 <span class="kd">function</span> pauseAd<span class="p">(</span><span class="p">)</span> <span class="p">{</span>
   adFrame<span class="p">.</span>contentWindow<span class="p">.</span>postMessage<span class="p">(</span><span class="s2">"pause_ad"</span><span class="p">)</span><span class="p">;</span>
   navigator<span class="p">.</span>mediaSession<span class="p">.</span>playbackState <span class="o">=</span> <span class="s2">"paused"</span><span class="p">;</span>
-  navigator<span class="p">.</span>mediaSession<span class="p">.</span>setActionHandler<span class="p">(</span><span class="s2">"play"</span><span class="p">,</span> playAd<span class="p">)</span><span class="p">;</span>
+  navigator<span class="p">.</span>mediaSession<span class="p">.</span>setActionHandler<span class="p">(</span><span class="s2">"play"</span><span class="p">,</span> resumeAd<span class="p">)</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> resumeAd<span class="p">(</span><span class="p">)</span> <span class="p">{</span>
