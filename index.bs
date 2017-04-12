@@ -198,7 +198,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       If a user agent offers a mechanism to go back to a website from a UI
       element created based on the {{MediaMetadata}}, it is recommended that the
-      action should not be noticeable by the website, thus reducing the changes
+      action should not be noticeable by the website, thus reducing the chances
       of spoofing.
     </p>
 
