@@ -5,7 +5,7 @@ ED: https://wicg.github.io/mediasession
 Shortname: mediasession
 Level: 1
 Editor: Mounir Lamouri, Google Inc., mlamouri@google.com
-Editor: Zhiqiang Zhang, Google Inc., zqzhang@google.com
+Former Editor: Zhiqiang Zhang, Google Inc., zqzhang@google.com
 Former Editor: Rich Tibbett, Opera, richt@opera.com
 
 Group: wicg
