@@ -10,8 +10,8 @@ Former Editor: Rich Tibbett, Opera, richt@opera.com
 
 Group: wicg
 Logo: https://resources.whatwg.org/logo-mediasession.svg
-Abstract: This specification enables web developers to show customize media
-Abstract: metadata shown on platform UI, customize available platform media
+Abstract: This specification enables web developers to show customized media
+Abstract: metadata on platform UI, customize available platform media
 Abstract: controls, and access platform media keys such as hardware keys found
 Abstract: on keyboards, headsets, remote controls, and software keys found in
 Abstract: notification areas and on lock screens of mobile devices.
@@ -121,7 +121,7 @@ title, artist, album and album art on various UI elements such as notification,
 media control center, device lockscreen and wearable devices. This specification
 aims to enable web pages to specify the media metadata to be displayed in
 platform UI, and respond to media controls which may come from platform UI or
-media keys, therefore improves the user experience.
+media keys, thereby improving the user experience.
 
 <h2 id="conformance">Conformance</h2>
 
@@ -168,10 +168,10 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
   <em>This section is non-normative.</em>
 
   <p>
-    The API introduced in this specification have very low impact with regards
-    to security and privacy. Part of the API allows a website to expose metadata
-    that can be used by the user agent. The user agent obviously need to use
-    this data with care. Another part of the API allow a website to received
+    The API introduced in this specification has very low impact with regards to
+    security and privacy. Part of the API allows a website to expose metadata
+    that can be used by the user agent. The user agent obviously needs to use
+    this data with care. Another part of the API allows a website to receive
     commands from the user via buttons or other form of controls which might
     sometimes introduce a new input layer between the user and the website.
   </p>
@@ -191,8 +191,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       playback, making spoofing harder but because the {{MediaMetadata}} has
       text fields and image fields, a malicious website could try to spoof
       another website's identity. It is recommended that the user agent offers a
-      way to find the origin or clearly expose the origin of the website from
-      which the metadata are coming from.
+      way to find the origin or clearly expose the origin of the website which
+      the metadata are coming from.
     </p>
 
     <p>
@@ -227,13 +227,13 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <h3 id='media-session-actions-privacy'>Media Session Actions</h3>
 
     <p>
-      <a>Media session actions</a> are exposing a new input layer to the web
-      platform. User agents should make sure users are aware that there actions
-      might be routed to the website with the <a>active media session</a>.
-      Especially, when the actions are coming from remote devices such as
-      headset or other remote devices. It is recommended for the user agent to
-      follow the platform conventions when listening to these inputs in order to
-      facilitate the user understanding.
+      <a>Media session actions</a> expose a new input layer to the web platform.
+      User agents should make sure users are aware that their actions might be
+      routed to the website with the <a>active media session</a>. Especially,
+      when the actions are coming from remote devices such as a headset or other
+      remote device. It is recommended for the user agent to follow the platform
+      conventions when listening to these inputs in order to facilitate the user
+      understanding.
     </p>
   </section>
 </section>
@@ -308,7 +308,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     object.
 
     The user agent MUST select at most one of the {{MediaSession}} objects to
-    present it to the user, which is called the <dfn>active media session</dfn>.
+    present to the user, which is called the <dfn>active media session</dfn>.
     The <a>active media session</a> may be null. The selection is up to the user
     agent and SHOULD be based on preferred user experience. Note that the
     {{MediaSession/playbackState}} attribute MUST not affect media session
@@ -317,8 +317,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     It is RECOMMENDED that the user agent selects the <a>active media
     session</a> by managing <a>audio focus</a>. A tab or <a>browsing context</a>
     is said to have <dfn>audio focus</dfn> if it is currently playing audio or
-    the user expects to control the media in it. The AudioFocus API targets at
-    this area and could be used once it's finished.
+    the user expects to control the media in it. The AudioFocus API targets this
+    area and could be used once it's finished.
 
     Whenever the <a>active media session</a> is changed, the user agent MUST run
     the <a>media session actions update algorithm</a> and the <a>update metadata
@@ -351,7 +351,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         <a>active media session</a>.
       </li>
       <li>
-        If the user agent wants to display <a>artwork image</a>, it is
+        If the user agent wants to display an <a>artwork image</a>, it is
         RECOMMENDED to run the <a>fetch image algorithm</a>.
       </li>
     </ol>
@@ -361,8 +361,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <ol>
       <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
       <li>
-        If there are other <a>fetch image algorithm</a> running, cancel existing
-        algorithm execution instances.
+        If there are other <a>fetch image algorithms</a> running, cancel
+        existing algorithm execution instances.
       </li>
       <li>
         If <var>metadata</var>'s <a attribute
@@ -388,12 +388,12 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           <li>
             If the <a>response</a>'s <a>internal response</a>'s <a lt="response
             type">type</a> is <i>default</i>, attempt to decode the resource as
-            image.
+            an image.
           </li>
           <li>
             If the image format is supported, use the image as the artwork for
             display in platform UI. Otherwise the <a>fetch image algorithm</a>
-            fail and terminate.
+            fails and terminates.
           </li>
         </ol>
       </li>
@@ -416,7 +416,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       A <dfn title='media session action source'>media session action
       source</dfn> is a source that might produce a <a>media session action</a>.
-      Such source can be the platform or the UI surfaces created by the user
+      Such a source can be the platform or the UI surfaces created by the user
       agent.
     </p>
 
@@ -430,23 +430,23 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>pause</dfn>: the action intent
-          is to pause a currently active playback.
+          is to pause the currently active playback.
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>seekbackward</dfn>: the action
-          intent is to move the playback time backward by a short period (eg.
+          intent is to move the playback time backward by a short period (eg. a
           few seconds).
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>seekforward</dfn>: the action
-          intent is to move the playback time forward by a short period (eg. few
-          seconds).
+          intent is to move the playback time forward by a short period (eg. a
+          few seconds).
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>previoustrack</dfn>: the action
           intent is to either start the current playback from the beginning if
-          the playback has a notion of beginning or move to the previous item in
-          the playlist if the playback has a notion of playlist.
+          the playback has a notion of beginning, or move to the previous item
+          in the playlist if the playback has a notion of playlist.
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>nexttrack</dfn>: the action is
@@ -457,7 +457,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     </p>
 
     <p>
-      All {{MediaSession}} have a map of <dfn>supported media session
+      All {{MediaSession}}s have a map of <dfn>supported media session
       actions</dfn> with, as a key, a <a>media session action</a> and as a value
       a {{MediaSessionActionHandler}}.
     </p>
@@ -492,7 +492,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       that a
       <a>media session action</a> named <var>action</var> has been triggered,
       the user agent MUST run the <dfn>handle media session action</dfn> steps
-      as follow and consider it <a>triggered by user activation</a>:
+      as follows and consider it <a>triggered by user activation</a>:
       <ol>
         <li>
           If the <a>active media session</a> is <code>null</code>, abort these
@@ -555,7 +555,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p class=note>
       A page should only register a {{MediaSessionActionHandler}} for a <a>media
       session action</a> when it can handle the action given that the user agent
-      will list this as a <a>supported media session actions</a> and update the
+      will list this as a <a>supported media session action</a> and update the
       <a>media session action sources</a>.
     </p>
 
@@ -650,7 +650,7 @@ interface MediaSession {
 </pre>
 
 <p>
-  A {{MediaSession}} objects represents a media session for a given document and
+  A {{MediaSession}} object represents a media session for a given document and
   allows a document to communicate to the user agent some information about the
   playback and how to handle it.
 </p>
@@ -786,11 +786,11 @@ dictionary MediaMetadataInit {
   A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal
   to <code>null</code> or all the following conditions are true:
   <ul>
-    <li>It's <a for=MediaMetadata>title</a> is the empty string.</li>
-    <li>It's <a for=MediaMetadata>artist</a> is the empty string.</li>
-    <li>It's <a for=MediaMetadata>album</a> is the empty string.</li>
-    <li>It's <a for=MediaMetadata title='artwork image'>artwork images</a>
-    length is <code>0</code>.</li>
+    <li>Its <a for=MediaMetadata>title</a> is the empty string.</li>
+    <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
+    <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
+    <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
+    is <code>0</code>.</li>
   </ul>
 </p>
 
@@ -978,7 +978,7 @@ dictionary MediaImage {
 };
 </pre>
 
-The {{MediaImage}} dictionary members are inspired from the <a lt="image
+The {{MediaImage}} dictionary members are inspired by the <a lt="image
 object">image objects</a> in Web App Manifest.
 
 The <dfn dict-member for="MediaImage">src</dfn> <a>dictionary member</a> is used
@@ -988,7 +988,7 @@ a URL from which the user agent can fetch the image's data.
 The <dfn dict-member for="MediaImage">sizes</dfn> <a>dictionary member</a> is
 used to specify the {{MediaImage}} object's {{MediaImage/sizes}}. It follows the
 spec of <a attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in
-HTML
+the HTML
 <a for="HTMLLinkElement"><code>link</code></a> element, which is a string
 consisting of an <a>unordered set of unique space-separated tokens</a> which are
 <a>ASCII case-insensitive</a> that represents the dimensions of an image. Each
