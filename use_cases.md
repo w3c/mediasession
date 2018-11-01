@@ -20,7 +20,7 @@ The headphone button should mostly function like a keyboard's play/pause key. Ad
 
 ### Lock screen and notification area
 
-Phones and tablets may have media controls on the lock screen. ([iOS](http://appadvice.com/appnn/2013/06/the-appadvice-ios-7-quick-pick-controlling-music-while-on-the-lock-screen), [Android](http://stackoverflow.com/questions/12168046/remote-control-client-for-android)) Applications may also have media controls in the notification area, which are very similar to lock screen controls but can be dismissed. ([Android](http://stackoverflow.com/questions/14508369/how-to-create-a-notification-similar-to-play-music-app-from-google))
+PCs, phones and tablets may have media controls on the lock screen. ([Windows](https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/integrate-with-systemmediatransportcontrols), [iOS](http://appadvice.com/appnn/2013/06/the-appadvice-ios-7-quick-pick-controlling-music-while-on-the-lock-screen), [Android](http://stackoverflow.com/questions/12168046/remote-control-client-for-android)) Applications may also have media controls in the notification area, which are very similar to lock screen controls but can be dismissed. ([Android](http://stackoverflow.com/questions/14508369/how-to-create-a-notification-similar-to-play-music-app-from-google))
 
 The play/pause button should function like a keyboard's play/pause key. Where supported, the web application should be able to control:
 

@@ -25,6 +25,15 @@ take on Android and iOS:
 
 ![Screenshots](images/screenshots.png)
 
+Windows also provides a similar experience via its System Media Transport
+Controls. These controls appear on the lockscreen whenever media is playing:
+
+![SMTC on the Lockscreen](images/smtc-windows-lockscreen.png)
+
+They also appear on the desktop whenever a user interacts with hardware media keys:
+
+![SMTC on the Desktop](images/smtc-windows.png)
+
 ### Allowing pages to respond to media controls
 
 Many platforms provide interfaces for native app developers to respond to media
