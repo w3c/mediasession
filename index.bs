@@ -23,8 +23,6 @@ Ignored Vars: context, media, session
 Boilerplate: omit conformance, omit feedback-header
 </pre>
 
-<script src=https://resources.whatwg.org/file-issue.js async></script>
-
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
