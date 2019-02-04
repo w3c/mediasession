@@ -452,7 +452,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           playback has a notion of playlist.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>skip-ad</dfn>: the action
+          <dfn enum-value for=MediaSessionAction>skipad</dfn>: the action
           intent is to skip the advertisement that is currently playing.
         </li>
       </ul>
@@ -637,7 +637,7 @@ enum MediaSessionAction {
   "seekforward",
   "previoustrack",
   "nexttrack",
-  "skip-ad",
+  "skipad",
 };
 
 callback MediaSessionActionHandler = void();
