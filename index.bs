@@ -618,6 +618,83 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       </ol>
     </p>
   </section>
+
+  <section>
+    <h3 id='position-state'>Position State</h3>
+
+    <p>
+      A user agent MAY display the <a>current playback position</a> and <a>duration</a>
+      of a media session in the platform UI depending on platform conventions. The
+      <dfn>position state</dfn> is the combination of the following:
+      <ul>
+        <li>
+          The <dfn>duration</dfn> of the media in seconds.
+        </li>
+        <li>
+          The <dfn>playback rate</dfn> of the media. It is a coefficient.
+        </li>
+        <li>
+          The <dfn>last reported playback position</dfn> of the media. This is the
+          playback position of the media in seconds when the <a>position state</a>
+          was created.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      The <a>position state</a> is represented by a {{MediaPositionState}} which MUST
+      always be stored with the <dfn>last position updated time</dfn>. This is the
+      time the <a>position state</a> was last updated in seconds.
+    </p>
+
+    <p>
+      The RECOMMENDED way to determine the <a>position state</a> is to monitor the
+      media elements whose node document's browsing context is the
+      <a>browsing context</a>.
+    </p>
+
+    <p>
+      The <dfn>actual playback rate</dfn> is a coefficient computed in the following way:
+      <ul>
+        <li>
+          If the <a>actual playback state</a> is <a enum-value
+          for="MediaSessionPlaybackState">paused</a>, then return zero.
+        </li>
+        <li>
+          Return <a>playback rate</a>.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      The <dfn>current playback position</dfn> in seconds is computed in the following
+      way:
+      <ul>
+        <li>
+          Set <var>time elapsed</var> to the system time in seconds minus the
+          <a>last position updated time</a>.
+        </li>
+        <li>
+          Mutliply <var>time elapsed</var> with <a>actual playback rate</a>.
+        </li>
+        <li>
+          Set <var>position</var> to <var>time elapsed</var> added to
+          <a>last reported playback position</a>.
+        </li>
+        <li>
+          If <var>position</var> is less than zero, return zero.
+        </li>
+        <li>
+          If <var>position</var> is greater than <a>duration</a>, return <a>duration</a>.
+        </li>
+        <li>
+          Return <var>position</var>.
+        </li>
+      </ul>
+    </p>
+
+  </section>
+
 </section>
 
 <h2 id="the-mediasession-interface">The {{MediaSession}} interface</h2>
@@ -654,6 +731,8 @@ interface MediaSession {
   attribute MediaSessionPlaybackState playbackState;
 
   void setActionHandler(MediaSessionAction action, MediaSessionActionHandler? handler);
+
+  void setPositionState(MediaPositionState? state);
 };
 </pre>
 
@@ -746,6 +825,33 @@ interface MediaSession {
   The <dfn method for=MediaSession>setActionHandler()</dfn> method, when
   invoked, MUST run the <a>update action handler algorithm</a> with
   <var>action</var> and <var>handler</var> on the {{MediaSession}}.
+</p>
+
+<p>
+  The <dfn method for=MediaSession>setPositionState()</dfn> method, when
+  invoked MUST perform the following steps:
+
+  <ul>
+    <li>
+      If the <var>state</var> is null then clear the <a>position state</a>.
+    </li>
+    <li>
+      If the <a dict-member for="MediaPositionState">duration</a> is negative,
+      throw a <a exception>TypeError</a>.
+    </li>
+    <li>
+      If the <a dict-member for="MediaPositionState">position</a> is negative
+      or greater than <a dict-member for="MediaPositionState">duration</a>,
+      throw a <a exception>TypeError</a>.
+    </li>
+    <li>
+      If the <a dict-member for="MediaPositionState">playbackRate</a> is zero
+      throw a <a exception>TypeError</a>.
+    </li>
+    <li>
+      Update the <a>position state</a> and <a>last position updated time</a>.
+    </li>
+  </ul>
 </p>
 
 <h2 id="the-mediametadata-interface">The {{MediaMetadata}} interface</h2>
@@ -1016,6 +1122,34 @@ used to specify the {{MediaImage}} object's <a>MIME type</a>. It is a hint as to
 the media type of the image. The purpose of this attribute is to allow a user
 agent to ignore images of media types it does not support.
 
+<h2 id="the-mediapositionstate-dictionary">The {{MediaPositionState}} dictionary</h2>
+
+<pre class="idl">
+
+dictionary MediaPositionState {
+  required double duration;
+  double playbackRate = 1.0;
+  double position = 0.0;
+};
+</pre>
+
+The {{MediaPositionState}} dictionary is a representation of the current playback
+position associated with a {{MediaSession}} that can be used by user agents to
+provide a user interface that displays the current playback position and duration.
+
+The <dfn dict-member for="MediaPositionState">duration</dfn> <a>dictionary member</a>
+is used to specify the <a>duration</a> in seconds. It should always be positive
+and positive infinity can be used to indicate media without a defined end such as
+live playback.
+
+The <dfn dict-member for="MediaPositionState">playbackRate</dfn> <a>dictionary member</a>
+is used to specify the <a>playback rate</a>. It can be positive to represent forward
+playback or negative to represent backwards playback. It should not be zero.
+
+The <dfn dict-member for="MediaPositionState">position</dfn> <a>dictionary member</a>
+is used to specify the <a>last reported playback position</a> in seconds. It should
+always be positive.
+
 <h2 id="examples">Examples</h2>
 
 <em>This section is non-normative.</em>
@@ -1183,6 +1317,32 @@ agent to ignore images of media types it does not support.
     function removeAdFrame() {
       adFrame.remove();
     }
+  </pre>
+</div>
+
+<div class="example" id="example-media-position-state">
+  Setting <a>position state</a>:
+  <pre class="lang-javascript">
+    // Media is loaded, set the duration.
+    navigator.mediaSession.setPositionState({
+      duration: 60
+    });
+
+    // Media starts playing at the beginning.
+    navigator.mediaSession.playbackState = "playing";
+
+    // Media starts playing at 2x 10 seconds in.
+    navigator.mediaSession.setPositionState({
+      duration: 60,
+      playbackRate: 2,
+      position: 10
+    });
+
+    // Media is paused.
+    navigator.mediaSession.playbackState = "paused";
+
+    // Media is reset.
+    navigator.mediaSession.setPositionState(null);
   </pre>
 </div>
 
