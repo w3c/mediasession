@@ -174,6 +174,7 @@ navigator.mediaSession.setActionHandler("play", _ => audio.play());
 navigator.mediaSession.setActionHandler("pause", _ => audio.pause());
 navigator.mediaSession.setActionHandler("previoustrack", _ => { audio.src = /* some URL */; });
 navigator.mediaSession.setActionHandler("nexttrack", _ => { audio.src = /* some URL */; });
+navigator.mediaSession.setActionHandler("stop", _ => { audio.src = ''; });
 ```
 
 Use `playbackState` to override the playback state determined by the UA.
