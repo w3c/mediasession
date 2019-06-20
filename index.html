@@ -1482,7 +1482,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2019-06-11">11 June 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2019-06-20">20 June 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1554,7 +1554,8 @@ notification areas and on lock screens of mobile devices.</p>
     <li><a href="#the-mediametadata-interface"><span class="secno">7</span> <span class="content">The <code class="idl"><span>MediaMetadata</span></code> interface</span></a>
     <li><a href="#the-mediaimage-dictionary"><span class="secno">8</span> <span class="content">The <code class="idl"><span>MediaImage</span></code> dictionary</span></a>
     <li><a href="#the-mediapositionstate-dictionary"><span class="secno">9</span> <span class="content">The <code class="idl"><span>MediaPositionState</span></code> dictionary</span></a>
-    <li><a href="#examples"><span class="secno">10</span> <span class="content">Examples</span></a>
+    <li><a href="#the-mediasessionactiondetails-dictionary"><span class="secno">10</span> <span class="content">The <code class="idl"><span>MediaSessionActionDetails</span></code> dictionary</span></a>
+    <li><a href="#examples"><span class="secno">11</span> <span class="content">Examples</span></a>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1774,6 +1775,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
           is to skip the advertisement that is currently playing. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-stop"><code>stop</code></dfn>: the action intent
           is to stop the playback and clear the state if appropriate. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-seekto"><code>seekto</code></dfn>: the action intent
+          is to move the playback time to a specific time. 
      </ul>
      <p></p>
      <p> All <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession④">MediaSession</a></code>s have a map of <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="supported media session actions" data-noexport id="supported-media-session-actions">supported media session
@@ -1802,7 +1805,13 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
           abort these steps. 
       <li> Let <var>handler</var> be the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler①">MediaSessionActionHandler</a></code> associated
           with the key <var>action</var> in <var>actions</var>. 
-      <li> Run <var>handler</var>. 
+      <li>
+        Run <var>handler</var> with the <var>details</var> parameter set to: 
+       <ul>
+        <li> <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionseekactiondetails" id="ref-for-dictdef-mediasessionseekactiondetails">MediaSessionSeekActionDetails</a></code> if <var>action</var> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward">seekbackward</a> or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward">seekforward</a>. 
+        <li> <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionseektoactiondetails" id="ref-for-dictdef-mediasessionseektoactiondetails">MediaSessionSeekToActionDetails</a></code> if <var>action</var> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto">seekto</a>. 
+        <li> Otherwise, with <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails">MediaSessionActionDetails</a></code>. 
+       </ul>
      </ol>
      <p></p>
      <p> When the user agent receives a joint command for <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play②">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause③">pause</a>, such as a headset button click, it MUST
@@ -1905,15 +1914,16 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 <c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-mediasessionaction"><code><c- g>MediaSessionAction</c-></code></dfn> {
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play⑥"><c- s>"play"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause⑦"><c- s>"pause"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward"><c- s>"seekbackward"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward"><c- s>"seekforward"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①"><c- s>"seekbackward"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①"><c- s>"seekforward"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-previoustrack" id="ref-for-dom-mediasessionaction-previoustrack"><c- s>"previoustrack"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nexttrack" id="ref-for-dom-mediasessionaction-nexttrack"><c- s>"nexttrack"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-skipad" id="ref-for-dom-mediasessionaction-skipad"><c- s>"skipad"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-stop" id="ref-for-dom-mediasessionaction-stop"><c- s>"stop"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto①"><c- s>"seekto"</c-></a>
 };
 
-<c- b>callback</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export id="callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></dfn> = <c- b>void</c->();
+<c- b>callback</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export id="callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></dfn> = <c- b>void</c->(<a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails①"><c- n>MediaSessionActionDetails</c-></a> <dfn class="idl-code" data-dfn-for="MediaSessionActionHandler" data-dfn-type="argument" data-export id="dom-mediasessionactionhandler-details"><code><c- g>details</c-></code><a class="self-link" href="#dom-mediasessionactionhandler-details"></a></dfn>);
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="mediasession"><code><c- g>MediaSession</c-></code></dfn> {
@@ -2140,7 +2150,33 @@ zero.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaPositionState" data-dfn-type="dict-member" data-export id="dom-mediapositionstate-position"><code>position</code></dfn> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑤">dictionary
 member</a> is used to specify the <a data-link-type="dfn" href="#last-reported-playback-position" id="ref-for-last-reported-playback-position①">last reported playback position</a> in seconds. It
 should always be positive.</p>
-   <h2 class="heading settled" data-level="10" id="examples"><span class="secno">10. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
+   <h2 class="heading settled" data-level="10" id="the-mediasessionactiondetails-dictionary"><span class="secno">10. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails②">MediaSessionActionDetails</a></code> dictionary</span><a class="self-link" href="#the-mediasessionactiondetails-dictionary"></a></h2>
+<pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediasessionactiondetails"><code><c- g>MediaSessionActionDetails</c-></code></dfn> {
+  <c- b>required</c-> <a class="n" data-link-type="idl-name" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction②"><c- n>MediaSessionAction</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="MediaSessionAction " href="#dom-mediasessionactiondetails-action" id="ref-for-dom-mediasessionactiondetails-action"><c- g>action</c-></a>;
+};
+
+<c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediasessionseekactiondetails"><code><c- g>MediaSessionSeekActionDetails</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails③"><c- n>MediaSessionActionDetails</c-></a> {
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double③"><c- b>double</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="double? " href="#dom-mediasessionseekactiondetails-seekoffset" id="ref-for-dom-mediasessionseekactiondetails-seekoffset"><c- g>seekOffset</c-></a>;
+};
+
+<c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediasessionseektoactiondetails"><code><c- g>MediaSessionSeekToActionDetails</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails④"><c- n>MediaSessionActionDetails</c-></a> {
+  <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double④"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionseektoactiondetails-seektime" id="ref-for-dom-mediasessionseektoactiondetails-seektime"><c- g>seekTime</c-></a>;
+  <a class="n" data-link-type="idl-name"><c- n>bool</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="bool? " href="#dom-mediasessionseektoactiondetails-fastseek" id="ref-for-dom-mediasessionseektoactiondetails-fastseek"><c- g>fastSeek</c-></a>;
+};
+</pre>
+   <p>The <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler④">MediaSessionActionHandler</a></code> MUST be run with the <var>details</var> parameter which is represented by a dictionary inherited from <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails⑤">MediaSessionActionDetails</a></code>.</p>
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-action"><code>action</code></dfn> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑥">dictionary
+member</a> is used to specify the <a data-link-type="dfn">action</a> that the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler⑤">MediaSessionActionHandler</a></code> is
+associated with.</p>
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionSeekActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionseekactiondetails-seekoffset"><code>seekOffset</code></dfn> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑦">dictionary member</a> MAY be provided and is the time in seconds to move the
+playback time by. If it is not provided then the site should choose a sensible
+time (e.g. a few seconds).</p>
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionSeekToActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionseektoactiondetails-seektime"><code>seekTime</code></dfn> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑧">dictionary member</a> MUST be provided and is the time in seconds to move the
+playback time to.</p>
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionSeekToActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionseektoactiondetails-fastseek"><code>fastSeek</code></dfn> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑨">dictionary member</a> MAY be provided and will be true if the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto②">seekto</a> <a data-link-type="dfn">action</a> is being called
+multiple times as part of a sequence and this is not the last call in that
+sequence.</p>
+   <h2 class="heading settled" data-level="11" id="examples"><span class="secno">11. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <div class="example" id="example-setting-metadata">
     <a class="self-link" href="#example-setting-metadata"></a> Setting <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata⑤">metadata</a>: 
@@ -2224,6 +2260,10 @@ navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"
 navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"nexttrack"</c-><c- p>,</c-> <c- a>function</c-><c- p>()</c-> <c- p>{</c->
   trackId <c- o>=</c-> <c- p>(</c->trackId <c- o>+</c-> <c- mi>1</c-><c- p>)</c-> <c- o>%</c-> tracks<c- p>.</c->length<c- p>;</c->
   updatePlayingMedia<c- p>();</c->
+<c- p>});</c->
+
+navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"seekto"</c-><c- p>,</c-> <c- a>function</c-><c- p>(</c->details<c- p>)</c-> <c- p>{</c->
+  audio<c- p>.</c->currentTime <c- o>=</c-> details<c- p>.</c->seekTime<c- p>;</c->
 <c- p>});</c->
 </pre>
    </div>
@@ -2454,6 +2494,7 @@ support in making this specification happen.</p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
+   <li><a href="#dom-mediasessionactiondetails-action">action</a><span>, in §10</span>
    <li><a href="#active-media-session">active media session</a><span>, in §5.2</span>
    <li><a href="#actual-playback-rate">actual playback rate</a><span>, in §5.5</span>
    <li><a href="#actual-playback-state">actual playback state</a><span>, in §5.1</span>
@@ -2489,6 +2530,7 @@ support in making this specification happen.</p>
      <li><a href="#dom-mediapositionstate-duration">dict-member for MediaPositionState</a><span>, in §9</span>
     </ul>
    <li><a href="#empty-metadata">empty metadata</a><span>, in §7</span>
+   <li><a href="#dom-mediasessionseektoactiondetails-fastseek">fastSeek</a><span>, in §10</span>
    <li><a href="#fetch-image-algorithm">fetch image algorithm</a><span>, in §5.3</span>
    <li><a href="#guessed-playback-state">guessed playback state</a><span>, in §5.1</span>
    <li><a href="#handle-media-session-action">handle media session action</a><span>, in §5.4</span>
@@ -2504,10 +2546,13 @@ support in making this specification happen.</p>
    <li><a href="#dom-navigator-mediasession">mediaSession</a><span>, in §6</span>
    <li><a href="#media-session-action">media session action</a><span>, in §5.4</span>
    <li><a href="#enumdef-mediasessionaction">MediaSessionAction</a><span>, in §6</span>
+   <li><a href="#dictdef-mediasessionactiondetails">MediaSessionActionDetails</a><span>, in §10</span>
    <li><a href="#callbackdef-mediasessionactionhandler">MediaSessionActionHandler</a><span>, in §6</span>
    <li><a href="#media-session-action-source">media session action source</a><span>, in §5.4</span>
    <li><a href="#media-session-actions-update-algorithm">media session actions update algorithm</a><span>, in §5.4</span>
    <li><a href="#enumdef-mediasessionplaybackstate">MediaSessionPlaybackState</a><span>, in §6</span>
+   <li><a href="#dictdef-mediasessionseekactiondetails">MediaSessionSeekActionDetails</a><span>, in §10</span>
+   <li><a href="#dictdef-mediasessionseektoactiondetails">MediaSessionSeekToActionDetails</a><span>, in §10</span>
    <li>
     metadata
     <ul>
@@ -2529,6 +2574,9 @@ support in making this specification happen.</p>
    <li><a href="#dom-mediasessionaction-previoustrack">previoustrack</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionaction-seekbackward">seekbackward</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionaction-seekforward">seekforward</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionseekactiondetails-seekoffset">seekOffset</a><span>, in §10</span>
+   <li><a href="#dom-mediasessionseektoactiondetails-seektime">seekTime</a><span>, in §10</span>
+   <li><a href="#dom-mediasessionaction-seekto">seekto</a><span>, in §5.4</span>
    <li><a href="#dom-mediasession-setactionhandler①">setActionHandler()</a><span>, in §6</span>
    <li><a href="#dom-mediasession-setactionhandler">setActionHandler(action, handler)</a><span>, in §6</span>
    <li><a href="#dom-mediasession-setpositionstate①">setPositionState()</a><span>, in §6</span>
@@ -2630,7 +2678,7 @@ support in making this specification happen.</p>
   <aside class="dfn-panel" data-for="term-for-media-element">
    <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#media-element">https://html.spec.whatwg.org/multipage/embedded-content.html#media-element</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-media-element">10. Examples</a>
+    <li><a href="#ref-for-media-element">11. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-mime-type">
@@ -2732,6 +2780,8 @@ support in making this specification happen.</p>
     <li><a href="#ref-for-dfn-dictionary-member">8. The MediaImage dictionary</a> <a href="#ref-for-dfn-dictionary-member①">(2)</a> <a href="#ref-for-dfn-dictionary-member②">(3)</a>
     <li><a href="#ref-for-dfn-dictionary-member③">9. The MediaPositionState
 dictionary</a> <a href="#ref-for-dfn-dictionary-member④">(2)</a> <a href="#ref-for-dfn-dictionary-member⑤">(3)</a>
+    <li><a href="#ref-for-dfn-dictionary-member⑥">10. The
+MediaSessionActionDetails dictionary</a> <a href="#ref-for-dfn-dictionary-member⑦">(2)</a> <a href="#ref-for-dfn-dictionary-member⑧">(3)</a> <a href="#ref-for-dfn-dictionary-member⑨">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-double">
@@ -2739,6 +2789,8 @@ dictionary</a> <a href="#ref-for-dfn-dictionary-member④">(2)</a> <a href="#ref
    <ul>
     <li><a href="#ref-for-idl-double">9. The MediaPositionState
 dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-double②">(3)</a>
+    <li><a href="#ref-for-idl-double③">10. The
+MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2825,15 +2877,16 @@ dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-do
 <c- b>enum</c-> <a href="#enumdef-mediasessionaction"><code><c- g>MediaSessionAction</c-></code></a> {
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play⑥①"><c- s>"play"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause⑦①"><c- s>"pause"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①"><c- s>"seekbackward"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①"><c- s>"seekforward"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①①"><c- s>"seekbackward"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①①"><c- s>"seekforward"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-previoustrack" id="ref-for-dom-mediasessionaction-previoustrack①"><c- s>"previoustrack"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nexttrack" id="ref-for-dom-mediasessionaction-nexttrack①"><c- s>"nexttrack"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-skipad" id="ref-for-dom-mediasessionaction-skipad①"><c- s>"skipad"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-stop" id="ref-for-dom-mediasessionaction-stop①"><c- s>"stop"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto①①"><c- s>"seekto"</c-></a>
 };
 
-<c- b>callback</c-> <a href="#callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></a> = <c- b>void</c->();
+<c- b>callback</c-> <a href="#callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></a> = <c- b>void</c->(<a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails①①"><c- n>MediaSessionActionDetails</c-></a> <a href="#dom-mediasessionactionhandler-details"><code><c- g>details</c-></code></a>);
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <a href="#mediasession"><code><c- g>MediaSession</c-></code></a> {
@@ -2868,9 +2921,22 @@ dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-do
 };
 
 <c- b>dictionary</c-> <a href="#dictdef-mediapositionstate"><code><c- g>MediaPositionState</c-></code></a> {
-  <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double③"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediapositionstate-duration" id="ref-for-dom-mediapositionstate-duration②①"><c- g>duration</c-></a>;
+  <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double⑤"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediapositionstate-duration" id="ref-for-dom-mediapositionstate-duration②①"><c- g>duration</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double①①"><c- b>double</c-></a> <a class="idl-code" data-default="1.0" data-link-type="dict-member" data-type="double " href="#dom-mediapositionstate-playbackrate" id="ref-for-dom-mediapositionstate-playbackrate①①"><c- g>playbackRate</c-></a> = 1.0;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②①"><c- b>double</c-></a> <a class="idl-code" data-default="0.0" data-link-type="dict-member" data-type="double " href="#dom-mediapositionstate-position" id="ref-for-dom-mediapositionstate-position①①"><c- g>position</c-></a> = 0.0;
+};
+
+<c- b>dictionary</c-> <a href="#dictdef-mediasessionactiondetails"><code><c- g>MediaSessionActionDetails</c-></code></a> {
+  <c- b>required</c-> <a class="n" data-link-type="idl-name" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction②①"><c- n>MediaSessionAction</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="MediaSessionAction " href="#dom-mediasessionactiondetails-action" id="ref-for-dom-mediasessionactiondetails-action①"><c- g>action</c-></a>;
+};
+
+<c- b>dictionary</c-> <a href="#dictdef-mediasessionseekactiondetails"><code><c- g>MediaSessionSeekActionDetails</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails③①"><c- n>MediaSessionActionDetails</c-></a> {
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double③①"><c- b>double</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="double? " href="#dom-mediasessionseekactiondetails-seekoffset" id="ref-for-dom-mediasessionseekactiondetails-seekoffset①"><c- g>seekOffset</c-></a>;
+};
+
+<c- b>dictionary</c-> <a href="#dictdef-mediasessionseektoactiondetails"><code><c- g>MediaSessionSeekToActionDetails</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails④①"><c- n>MediaSessionActionDetails</c-></a> {
+  <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double④①"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionseektoactiondetails-seektime" id="ref-for-dom-mediasessionseektoactiondetails-seektime①"><c- g>seekTime</c-></a>;
+  <a class="n" data-link-type="idl-name"><c- n>bool</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="bool? " href="#dom-mediasessionseektoactiondetails-fastseek" id="ref-for-dom-mediasessionseektoactiondetails-fastseek①"><c- g>fastSeek</c-></a>;
 };
 
 </pre>
@@ -2930,7 +2996,7 @@ dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-do
    <ul>
     <li><a href="#ref-for-media-session-action">4.3. Media Session Actions</a>
     <li><a href="#ref-for-media-session-action①">5.4. Actions</a> <a href="#ref-for-media-session-action②">(2)</a> <a href="#ref-for-media-session-action③">(3)</a> <a href="#ref-for-media-session-action④">(4)</a> <a href="#ref-for-media-session-action⑤">(5)</a> <a href="#ref-for-media-session-action⑥">(6)</a> <a href="#ref-for-media-session-action⑦">(7)</a> <a href="#ref-for-media-session-action⑧">(8)</a>
-    <li><a href="#ref-for-media-session-action⑨">10. Examples</a>
+    <li><a href="#ref-for-media-session-action⑨">11. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="media-session-action-source">
@@ -2958,13 +3024,15 @@ dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-do
   <aside class="dfn-panel" data-for="dom-mediasessionaction-seekbackward">
    <b><a href="#dom-mediasessionaction-seekbackward">#dom-mediasessionaction-seekbackward</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-seekbackward">6. The MediaSession interface</a>
+    <li><a href="#ref-for-dom-mediasessionaction-seekbackward">5.4. Actions</a>
+    <li><a href="#ref-for-dom-mediasessionaction-seekbackward①">6. The MediaSession interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediasessionaction-seekforward">
    <b><a href="#dom-mediasessionaction-seekforward">#dom-mediasessionaction-seekforward</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-seekforward">6. The MediaSession interface</a>
+    <li><a href="#ref-for-dom-mediasessionaction-seekforward">5.4. Actions</a>
+    <li><a href="#ref-for-dom-mediasessionaction-seekforward①">6. The MediaSession interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediasessionaction-previoustrack">
@@ -2989,6 +3057,15 @@ dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-do
    <b><a href="#dom-mediasessionaction-stop">#dom-mediasessionaction-stop</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediasessionaction-stop">6. The MediaSession interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasessionaction-seekto">
+   <b><a href="#dom-mediasessionaction-seekto">#dom-mediasessionaction-seekto</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasessionaction-seekto">5.4. Actions</a>
+    <li><a href="#ref-for-dom-mediasessionaction-seekto①">6. The MediaSession interface</a>
+    <li><a href="#ref-for-dom-mediasessionaction-seekto②">10. The
+MediaSessionActionDetails dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="supported-media-session-actions">
@@ -3023,7 +3100,7 @@ dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-do
    <ul>
     <li><a href="#ref-for-position-state①">5.5. Position State</a> <a href="#ref-for-position-state①①">(2)</a> <a href="#ref-for-position-state①②">(3)</a> <a href="#ref-for-position-state①③">(4)</a>
     <li><a href="#ref-for-position-state①④">6. The MediaSession interface</a> <a href="#ref-for-position-state①⑤">(2)</a>
-    <li><a href="#ref-for-position-state①⑥">10. Examples</a>
+    <li><a href="#ref-for-position-state①⑥">11. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="duration">
@@ -3080,6 +3157,8 @@ dictionary</a>
    <ul>
     <li><a href="#ref-for-enumdef-mediasessionaction">5.4. Actions</a>
     <li><a href="#ref-for-enumdef-mediasessionaction①">6. The MediaSession interface</a>
+    <li><a href="#ref-for-enumdef-mediasessionaction②">10. The
+MediaSessionActionDetails dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-mediasessionactionhandler">
@@ -3087,6 +3166,8 @@ dictionary</a>
    <ul>
     <li><a href="#ref-for-callbackdef-mediasessionactionhandler">5.4. Actions</a> <a href="#ref-for-callbackdef-mediasessionactionhandler①">(2)</a> <a href="#ref-for-callbackdef-mediasessionactionhandler②">(3)</a>
     <li><a href="#ref-for-callbackdef-mediasessionactionhandler③">6. The MediaSession interface</a>
+    <li><a href="#ref-for-callbackdef-mediasessionactionhandler④">10. The
+MediaSessionActionDetails dictionary</a> <a href="#ref-for-callbackdef-mediasessionactionhandler⑤">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="mediasession">
@@ -3104,7 +3185,7 @@ dictionary</a>
    <b><a href="#mediasession-metadata">#mediasession-metadata</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-mediasession-metadata">6. The MediaSession interface</a> <a href="#ref-for-mediasession-metadata①">(2)</a> <a href="#ref-for-mediasession-metadata②">(3)</a> <a href="#ref-for-mediasession-metadata③">(4)</a> <a href="#ref-for-mediasession-metadata④">(5)</a>
-    <li><a href="#ref-for-mediasession-metadata⑤">10. Examples</a> <a href="#ref-for-mediasession-metadata⑥">(2)</a>
+    <li><a href="#ref-for-mediasession-metadata⑤">11. Examples</a> <a href="#ref-for-mediasession-metadata⑥">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-navigator-mediasession">
@@ -3126,7 +3207,7 @@ dictionary</a>
     <li><a href="#ref-for-dom-mediasession-playbackstate">5.1. Playback State</a> <a href="#ref-for-dom-mediasession-playbackstate①">(2)</a>
     <li><a href="#ref-for-dom-mediasession-playbackstate②">5.2. Routing</a>
     <li><a href="#ref-for-dom-mediasession-playbackstate③">6. The MediaSession interface</a> <a href="#ref-for-dom-mediasession-playbackstate④">(2)</a> <a href="#ref-for-dom-mediasession-playbackstate⑤">(3)</a> <a href="#ref-for-dom-mediasession-playbackstate⑥">(4)</a>
-    <li><a href="#ref-for-dom-mediasession-playbackstate⑦">10. Examples</a>
+    <li><a href="#ref-for-dom-mediasession-playbackstate⑦">11. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="declared-playback-state">
@@ -3201,7 +3282,7 @@ dictionary</a>
    <ul>
     <li><a href="#ref-for-mediametadata-media-session">6. The MediaSession interface</a> <a href="#ref-for-mediametadata-media-session①">(2)</a> <a href="#ref-for-mediametadata-media-session②">(3)</a>
     <li><a href="#ref-for-mediametadata-media-session③">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-media-session④">(2)</a>
-    <li><a href="#ref-for-mediametadata-media-session⑤">10. Examples</a>
+    <li><a href="#ref-for-mediametadata-media-session⑤">11. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="mediametadata-title">
@@ -3227,7 +3308,7 @@ dictionary</a>
    <ul>
     <li><a href="#ref-for-mediametadata-artwork-images">5.3. Metadata</a>
     <li><a href="#ref-for-mediametadata-artwork-images①">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-artwork-images②">(2)</a> <a href="#ref-for-mediametadata-artwork-images③">(3)</a> <a href="#ref-for-mediametadata-artwork-images④">(4)</a> <a href="#ref-for-mediametadata-artwork-images⑤">(5)</a> <a href="#ref-for-mediametadata-artwork-images⑥">(6)</a>
-    <li><a href="#ref-for-mediametadata-artwork-images⑦">10. Examples</a>
+    <li><a href="#ref-for-mediametadata-artwork-images⑦">11. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="empty-metadata">
@@ -3333,6 +3414,55 @@ dictionary</a>
     <li><a href="#ref-for-dom-mediapositionstate-position">6. The MediaSession interface</a>
     <li><a href="#ref-for-dom-mediapositionstate-position①">9. The MediaPositionState
 dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dictdef-mediasessionactiondetails">
+   <b><a href="#dictdef-mediasessionactiondetails">#dictdef-mediasessionactiondetails</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dictdef-mediasessionactiondetails">5.4. Actions</a>
+    <li><a href="#ref-for-dictdef-mediasessionactiondetails①">6. The MediaSession interface</a>
+    <li><a href="#ref-for-dictdef-mediasessionactiondetails②">10. The
+MediaSessionActionDetails dictionary</a> <a href="#ref-for-dictdef-mediasessionactiondetails③">(2)</a> <a href="#ref-for-dictdef-mediasessionactiondetails④">(3)</a> <a href="#ref-for-dictdef-mediasessionactiondetails⑤">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dictdef-mediasessionseekactiondetails">
+   <b><a href="#dictdef-mediasessionseekactiondetails">#dictdef-mediasessionseekactiondetails</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dictdef-mediasessionseekactiondetails">5.4. Actions</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dictdef-mediasessionseektoactiondetails">
+   <b><a href="#dictdef-mediasessionseektoactiondetails">#dictdef-mediasessionseektoactiondetails</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dictdef-mediasessionseektoactiondetails">5.4. Actions</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasessionactiondetails-action">
+   <b><a href="#dom-mediasessionactiondetails-action">#dom-mediasessionactiondetails-action</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasessionactiondetails-action">10. The
+MediaSessionActionDetails dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasessionseekactiondetails-seekoffset">
+   <b><a href="#dom-mediasessionseekactiondetails-seekoffset">#dom-mediasessionseekactiondetails-seekoffset</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasessionseekactiondetails-seekoffset">10. The
+MediaSessionActionDetails dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasessionseektoactiondetails-seektime">
+   <b><a href="#dom-mediasessionseektoactiondetails-seektime">#dom-mediasessionseektoactiondetails-seektime</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasessionseektoactiondetails-seektime">10. The
+MediaSessionActionDetails dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasessionseektoactiondetails-fastseek">
+   <b><a href="#dom-mediasessionseektoactiondetails-fastseek">#dom-mediasessionseektoactiondetails-fastseek</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasessionseektoactiondetails-fastseek">10. The
+MediaSessionActionDetails dictionary</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
