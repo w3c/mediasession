@@ -459,6 +459,10 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           <dfn enum-value for=MediaSessionAction>stop</dfn>: the action intent is
           to stop the playback and clear the state if appropriate.
         </li>
+	<li>
+          <dfn enum-value for=MediaSessionAction>seekto</dfn>: the action intent is
+          to move the playback time to a specific time.
+        </li>
       </ul>
     </p>
 
@@ -516,8 +520,22 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           Let <var>handler</var> be the {{MediaSessionActionHandler}} associated
           with the key <var>action</var> in <var>actions</var>.
         </li>
-        <li>
-          Run <var>handler</var>.
+	<li>
+	  Run <var>handler</var> with the <var>details</var> parameter set to:
+	  <ul>
+            <li>
+	      {{MediaSessionSeekActionDetails}} if <var>action</var> is
+	      <a enum-value for=MediaSessionAction>seekbackward</a> or
+              <a enum-value for=MediaSessionAction>seekforward</a>.
+	    </li>
+	    <li>
+	      {{MediaSessionSeekToActionDetails}} if <var>action</var> is
+	      <a enum-value for=MediaSessionAction>seekto</a>.
+	    </li>
+	    <li>
+              Otherwise, with {{MediaSessionActionDetails}}.
+            </li>
+	  </ul>
         </li>
       </ol>
     </p>
@@ -720,9 +738,10 @@ enum MediaSessionAction {
   "nexttrack",
   "skipad",
   "stop",
+  "seekto"
 };
 
-callback MediaSessionActionHandler = void();
+callback MediaSessionActionHandler = void(MediaSessionActionDetails details);
 
 [Exposed=Window]
 interface MediaSession {
@@ -1150,6 +1169,43 @@ The <dfn dict-member for="MediaPositionState">position</dfn> <a>dictionary membe
 is used to specify the <a>last reported playback position</a> in seconds. It should
 always be positive.
 
+<h2 id="the-mediasessionactiondetails-dictionary">The {{MediaSessionActionDetails}} dictionary</h2>
+
+<pre class="idl">
+
+dictionary MediaSessionActionDetails {
+  required MediaSessionAction action;
+};
+
+dictionary MediaSessionSeekActionDetails : MediaSessionActionDetails {
+  double? seekOffset;
+};
+
+dictionary MediaSessionSeekToActionDetails : MediaSessionActionDetails {
+  required double seekTime;
+  bool? fastSeek;
+};
+</pre>
+
+The {{MediaSessionActionHandler}} MUST be run with the <var>details</var> parameter
+which is represented by a dictionary inherited from {{MediaSessionActionDetails}}.
+
+The <dfn dict-member for="MediaSessionActionDetails">action</dfn> <a>dictionary member</a>
+is used to specify the <a>action</a> that the {{MediaSessionActionHandler}} is associated
+with.
+
+The <dfn dict-member for="MediaSessionSeekActionDetails">seekOffset</dfn> <a>dictionary
+member</a> MAY be provided and is the time in seconds to move the playback time by. If
+it is not provided then the site should choose a sensible time (e.g. a few seconds).
+
+The <dfn dict-member for="MediaSessionSeekToActionDetails">seekTime</dfn> <a>dictionary
+member</a> MUST be provided and is the time in seconds to move the playback time to.
+
+The <dfn dict-member for="MediaSessionSeekToActionDetails">fastSeek</dfn> <a>dictionary
+member</a> MAY be provided and will be true if the
+<a enum-value for=MediaSessionAction>seekto</a> <a>action</a> is being called multiple
+times as part of a sequence and this is not the last call in that sequence.
+
 <h2 id="examples">Examples</h2>
 
 <em>This section is non-normative.</em>
@@ -1255,6 +1311,10 @@ always be positive.
     navigator.mediaSession.setActionHandler("nexttrack", function() {
       trackId = (trackId + 1) % tracks.length;
       updatePlayingMedia();
+    });
+
+    navigator.mediaSession.setActionHandler("seekto", function(details) {
+      audio.currentTime = details.seekTime;
     });
   </pre>
 </div>
