@@ -87,7 +87,8 @@ enum MediaSessionAction {
   "seekforward",
   "previoustrack",
   "nexttrack",
-  "stop"
+  "stop",
+  "seekto"
 };
 
 callback MediaSessionActionHandler = void();
@@ -176,6 +177,7 @@ navigator.mediaSession.setActionHandler("pause", _ => audio.pause());
 navigator.mediaSession.setActionHandler("previoustrack", _ => { audio.src = /* some URL */; });
 navigator.mediaSession.setActionHandler("nexttrack", _ => { audio.src = /* some URL */; });
 navigator.mediaSession.setActionHandler("stop", _ => { audio.src = ''; });
+navigator.mediaSession.setActionHandler("seekto", (e) => { audio.currentTime = e.seekTime; });
 ```
 
 Use `playbackState` to override the playback state determined by the UA.
