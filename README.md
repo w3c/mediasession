@@ -1,6 +1,6 @@
 # Media Session Standard
 
-https://wicg.github.io/mediasession/
+https://w3c.github.io/mediasession/
 
 This standardization project aims to add support for media keys and audio focus to the Web. Media keys, like play, pause, fast forward and rewind, are found on keyboards, headsets, remote controls, and on lock screens of mobile devices.
 
@@ -26,7 +26,7 @@ Update `index.bs` and send a Pull Request with your changes. When your Pull Requ
 
 To run Bikeshed locally, [install Bikeshed](https://github.com/tabatkins/bikeshed/blob/prespec/docs/install.md) and then run `bikeshed spec` in the working directory.
 
-Everyone is welcome to contribute! However, you need [join WICG](https://www.w3.org/community/wicg/) first and sign the [W3C Community Contributor License Agreement](https://www.w3.org/community/about/agreements/cla/).
+Everyone is welcome to contribute! See the [CONTRIBUTING.md](CONTRIBUTING.md) file for practical licensing details for contributions.
 
 ## Code of conduct
 

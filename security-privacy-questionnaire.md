@@ -84,7 +84,7 @@ third-party contexts but allows the user agent to disable the feature for third-
 
 The specification does not normative requirements for incognito mode but offers
 recommendations with regards to user's privacy in the [Security and Privacy
-Considerations section](https://wicg.github.io/mediasession/index.html#security-privacy-considerations).
+Considerations section](https://w3c.github.io/mediasession/index.html#security-privacy-considerations).
 
 **Does this specification persist data to a user’s local device?**
 
