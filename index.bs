@@ -1331,7 +1331,7 @@ sequence.
     var audio = document.createElement("audio");
     audio.src = tracks[trackId];
 
-    void updatePlayingMedia() {
+    function updatePlayingMedia() {
       audio.src = tracks[trackId];
       // Update metadata (omitted)
     }
