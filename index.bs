@@ -757,7 +757,7 @@ interface MediaSession {
 
   void setActionHandler(MediaSessionAction action, MediaSessionActionHandler? handler);
 
-  void setPositionState(MediaPositionState? state);
+  void setPositionState(optional MediaPositionState? state);
 };
 </pre>
 
@@ -858,16 +858,29 @@ interface MediaSession {
 
   <ul>
     <li>
-      If the <var>state</var> is null then clear the <a>position state</a>.
+      If the <var>state</var> is a null or an empty dictionary then clear the
+      <a>position state</a>.
+    </li>
+    <li>
+      If the <a dict-member for="MediaPositionState">duration</a> is not present
+      or its value is null, throw a <a exception>TypeError</a>.
     </li>
     <li>
       If the <a dict-member for="MediaPositionState">duration</a> is negative,
       throw a <a exception>TypeError</a>.
     </li>
     <li>
+      If the <a dict-member for="MediaPositionState">position</a> is not present
+      or its value is null, set it to zero.
+    </li>
+    <li>
       If the <a dict-member for="MediaPositionState">position</a> is negative or
       greater than <a dict-member for="MediaPositionState">duration</a>, throw a
       <a exception>TypeError</a>.
+    </li>
+    <li>
+      If the <a dict-member for="MediaPositionState">playbackRate</a> is not
+      present or its value is null, set it to 1.0.
     </li>
     <li>
       If the <a dict-member for="MediaPositionState">playbackRate</a> is zero
@@ -1153,9 +1166,9 @@ dictionary</h2>
 <pre class="idl">
 
 dictionary MediaPositionState {
-  required double duration;
-  double playbackRate = 1.0;
-  double position = 0.0;
+  double duration;
+  double playbackRate;
+  double position;
 };
 </pre>
 
