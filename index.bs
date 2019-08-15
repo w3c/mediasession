@@ -5,7 +5,8 @@ Status: ED
 ED: https://w3c.github.io/mediasession
 Shortname: mediasession
 Level: 1
-Editor: Mounir Lamouri, Google Inc., mlamouri@google.com
+Editor: Mounir Lamouri, w3cid 45389, Google Inc., mlamouri@google.com
+Editor: Becca Hughes, w3cid 103353, Google Inc., beccahughes@google.com
 Former Editor: Zhiqiang Zhang, Google Inc., zqzhang@google.com
 Former Editor: Rich Tibbett, Opera, richt@opera.com
 
