@@ -134,13 +134,9 @@ dictionary MediaImage {
 
 ### The `MediaPositionState` dictionary
 
-The MediaPositionState dictionary can contain the current playback position and
-duration. To set the position for a `MediaSession`, the page should call
-`setPositionState` with a `MediaPositionState` dictionary.
-
-A `MediaPositionState` dictionary can contain position information such as the
-and album art. To set the metadata for a `MediaSession`, the page should create
-a `MediaMetadata` object and assign it to a `MediaSession` object:
+The `MediaPositionState` dictionary can contain the current playback position
+and duration. To set the position for a `MediaSession`, the page should call
+`setPositionState` with a `MediaPositionState` dictionary:
 
 ```javascript
 navigator.mediaSession.setPositionState({
