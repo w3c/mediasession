@@ -99,6 +99,8 @@ interface MediaSession : EventTarget {
     attribute MediaSessionPlaybackState playbackState;  // defaults to "none"
 
     void setActionHandler(MediaSessionAction action, MediaSessionActionHandler? handler);
+    
+    void setPositionState(optional MediaPositionState? state);
 };
 ```
 
@@ -127,6 +129,34 @@ dictionary MediaImage {
   required USVString src;
   DOMString sizes = "";
   DOMString type = "";
+};
+```
+
+### The `MediaPositionState` dictionary
+
+The MediaPositionState dictionary can contain the current playback position and
+duration. To set the position for a `MediaSession`, the page should call
+`setPositionState` with a `MediaPositionState` dictionary.
+
+A `MediaPositionState` dictionary can contain position information such as the
+and album art. To set the metadata for a `MediaSession`, the page should create
+a `MediaMetadata` object and assign it to a `MediaSession` object:
+
+```javascript
+navigator.mediaSession.setPositionState({
+  duration: 60,
+  playbackRate: 2,
+  position: 10
+});
+```
+
+The `MediaPositionState` interface generally looks like (details are omitted):
+
+```javascript
+dictionary MediaPositionState {
+  double duration;
+  double playbackRate;
+  double position;
 };
 ```
 
