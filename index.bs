@@ -899,7 +899,7 @@ interface MediaSession {
 
 [Exposed=Window]
 interface MediaMetadata {
-  constructor(optional MediaMetadataInit init);
+  constructor(optional MediaMetadataInit init = {});
   attribute DOMString title;
   attribute DOMString artist;
   attribute DOMString album;
