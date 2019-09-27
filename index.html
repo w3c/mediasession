@@ -1482,7 +1482,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-09-19">19 September 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-09-27">27 September 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2178,7 +2178,7 @@ should always be positive.</p>
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediasessionseektoactiondetails"><code><c- g>MediaSessionSeekToActionDetails</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails④"><c- n>MediaSessionActionDetails</c-></a> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double④"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionseektoactiondetails-seektime" id="ref-for-dom-mediasessionseektoactiondetails-seektime"><c- g>seekTime</c-></a>;
-  <a class="n" data-link-type="idl-name"><c- n>bool</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="bool? " href="#dom-mediasessionseektoactiondetails-fastseek" id="ref-for-dom-mediasessionseektoactiondetails-fastseek"><c- g>fastSeek</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean"><c- b>boolean</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="boolean? " href="#dom-mediasessionseektoactiondetails-fastseek" id="ref-for-dom-mediasessionseektoactiondetails-fastseek"><c- g>fastSeek</c-></a>;
 };
 </pre>
    <p>The <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler④">MediaSessionActionHandler</a></code> MUST be run with the <var>details</var> parameter which is represented by a dictionary inherited from <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails⑤">MediaSessionActionDetails</a></code>.</p>
@@ -2658,6 +2658,13 @@ support in making this specification happen.</p>
     <li><a href="#ref-for-idl-USVString">8. The MediaImage dictionary</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-boolean">
+   <a href="https://heycam.github.io/webidl/#idl-boolean">https://heycam.github.io/webidl/#idl-boolean</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-boolean">10. The
+MediaSessionActionDetails dictionary</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-dfn-create-frozen-array">
    <a href="https://heycam.github.io/webidl/#dfn-create-frozen-array">https://heycam.github.io/webidl/#dfn-create-frozen-array</a><b>Referenced in:</b>
    <ul>
@@ -2731,6 +2738,7 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
      <li><span class="dfn-paneled" id="term-for-Exposed" style="color:initial">Exposed</span>
      <li><span class="dfn-paneled" id="term-for-SameObject" style="color:initial">SameObject</span>
      <li><span class="dfn-paneled" id="term-for-idl-USVString" style="color:initial">USVString</span>
+     <li><span class="dfn-paneled" id="term-for-idl-boolean" style="color:initial">boolean</span>
      <li><span class="dfn-paneled" id="term-for-dfn-create-frozen-array" style="color:initial">create a frozen array</span>
      <li><span class="dfn-paneled" id="term-for-dfn-dictionary-member" style="color:initial">dictionary members</span>
      <li><span class="dfn-paneled" id="term-for-idl-double" style="color:initial">double</span>
@@ -2740,7 +2748,7 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-appmanifest">[APPMANIFEST]
-   <dd>Marcos Caceres; et al. <a href="https://www.w3.org/TR/appmanifest/">Web App Manifest</a>. 11 September 2019. WD. URL: <a href="https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>
+   <dd>Marcos Caceres; et al. <a href="https://www.w3.org/TR/appmanifest/">Web App Manifest</a>. 26 September 2019. WD. URL: <a href="https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
@@ -2827,7 +2835,7 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
 
 <c- b>dictionary</c-> <a href="#dictdef-mediasessionseektoactiondetails"><code><c- g>MediaSessionSeekToActionDetails</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails④①"><c- n>MediaSessionActionDetails</c-></a> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double④①"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionseektoactiondetails-seektime" id="ref-for-dom-mediasessionseektoactiondetails-seektime①"><c- g>seekTime</c-></a>;
-  <a class="n" data-link-type="idl-name"><c- n>bool</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="bool? " href="#dom-mediasessionseektoactiondetails-fastseek" id="ref-for-dom-mediasessionseektoactiondetails-fastseek①"><c- g>fastSeek</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean①"><c- b>boolean</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="boolean? " href="#dom-mediasessionseektoactiondetails-fastseek" id="ref-for-dom-mediasessionseektoactiondetails-fastseek①"><c- g>fastSeek</c-></a>;
 };
 
 </pre>
