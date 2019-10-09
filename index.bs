@@ -903,7 +903,7 @@ interface MediaMetadata {
   attribute DOMString title;
   attribute DOMString artist;
   attribute DOMString album;
-  attribute FrozenArray&lt;MediaImage> artwork;
+  attribute FrozenArray&lt;object> artwork;
 };
 
 dictionary MediaMetadataInit {
@@ -933,7 +933,8 @@ dictionary MediaMetadataInit {
 
 <p>
   A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">artwork
-  images</dfn>.
+  images</dfn> which is a list of type <a idl>object</a> on the interface
+  but a list of type {{MediaImage}} internally.
 </p>
 
 <p>
@@ -971,9 +972,10 @@ dictionary MediaMetadataInit {
     </li>
     <li>
       Run the <a>convert artwork algorithm</a> with <var>init</var>'s
-      {{MediaMetadataInit/artwork}} as <var>input</var> and set
-      <var>metadata</var>'s <a for="MediaMetadata">artwork images</a> as the
-      result if it succeeded.
+      {{MediaMetadataInit/artwork}} as <var>input</var>,
+      where the <var>input</var> is a list of type {{MediaImage}},
+      and set <var>metadata</var>'s <a for="MediaMetadata">artwork images</a>
+      as the result if it succeeded.
     </li>
     <li>
       Return <var>metadata</var>.
@@ -982,7 +984,8 @@ dictionary MediaMetadataInit {
 </p>
 
 When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
-invoked, the user agent MUST run the following steps:
+invoked, where the <var>input</var> is a list of type {{MediaImage}},
+the user agent MUST run the following steps:
 <ol>
   <li>
     Let <var>output</var> be an empty list of type {{MediaImage}}.
@@ -1050,7 +1053,7 @@ invoked, the user agent MUST run the following steps:
   images</a>. On getting, it MUST return the result of the following steps:
   <ol>
     <li>
-      Let <var>frozenArtwork</var> be an empty list of type {{MediaImage}}.
+      Let <var>frozenArtwork</var> be an empty list of type <a idl>object</a>.
     </li>
     <li>
       For each <var>entry</var> in the {{MediaMetadata}}'s <a
@@ -1071,17 +1074,21 @@ invoked, the user agent MUST run the following steps:
           Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
           {{MediaImage/type}}.
         </li>
+        <li>
+          Convert <var>image</var> into an <var>object</var>
+          whose type is <a idl>object</a>.
+        </li>
         <!-- XXX IDL dictionaries are usually returned by value, so don't need
         to be immutable. But FrozenArray reifies the dictionaries to mutable JS
         objects accessed by reference, so we explicitly freeze them. It would be
         better to do this with IDL primitives instead of JS - see
         https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
         <li>
-          Call <a lt="freeze">Object.freeze</a> on <var>image</var>, to prevent
-          accidental mutation by scripts.
+          Call <a lt="freeze">Object.freeze</a> on the <var>object</var>,
+          to prevent accidental mutation by scripts.
         </li>
         <li>
-          Append <var>image</var> to <var>frozenArtwork</var>.
+          Append the <var>object</var> to <var>frozenArtwork</var>.
         </li>
       </ol>
     </li>
@@ -1089,10 +1096,18 @@ invoked, the user agent MUST run the following steps:
       <a>Create a frozen array</a> from <var>frozenArtwork</var>.
     </li>
   </ol>
-  On setting, it MUST run the
-  <a>convert artwork algorithm</a> with the new value as <var>input</var>, and
-  set the {{MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as the
-  result if it succeeded.
+  On setting, it MUST run the following steps:
+  <ol>
+    <li>
+      Convert the <var>frozenArtwork</var> from a list of type <a idl>object</a>
+      into a list of type {{MediaImage}}.
+    </li>
+    <li>
+      Run <a>convert artwork algorithm</a> with the converted list as
+      <var>input</var>, and set the {{MediaMetadata}}'s
+      <a for="MediaMetadata">artwork images</a> as the result if it succeeded.
+    </li>
+  </ol>
 </p>
 
 <p>
