@@ -758,7 +758,7 @@ interface MediaSession {
 
   void setActionHandler(MediaSessionAction action, MediaSessionActionHandler? handler);
 
-  void setPositionState(optional MediaPositionState? state);
+  void setPositionState(optional MediaPositionState state = {});
 };
 </pre>
 
@@ -859,8 +859,8 @@ interface MediaSession {
 
   <ul>
     <li>
-      If the <var>state</var> is a null or an empty dictionary then clear the
-      <a>position state</a>.
+      If the <var>state</var> is an empty dictionary then clear the <a>position
+      state</a>.
     </li>
     <li>
       If the <a dict-member for="MediaPositionState">duration</a> is not present
