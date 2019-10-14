@@ -1213,7 +1213,7 @@ Possible extra rowspan handling
 	}
 </style>
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version e86d5b1b47a216fa66165c234892adc259212183" name="generator">
+  <meta content="Bikeshed version 86a39676f08870ba1210b97fe65ff62bd4e723c9" name="generator">
   <link href="https://w3c.github.io/mediasession" rel="canonical">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
@@ -1482,7 +1482,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-09-27">27 September 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-10-14">14 October 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1764,28 +1764,28 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
       agent. </p>
      <p> A <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action②">media session action</a> is represented by a <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction">MediaSessionAction</a></code> which can have one of the following value: </p>
      <ul>
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-play"><code>play</code></dfn>: the action intent
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;play&quot;|play" id="dom-mediasessionaction-play"><code>play</code></dfn>: the action intent
           is to resume the playback. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-pause"><code>pause</code></dfn>: the action intent
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;pause&quot;|pause" id="dom-mediasessionaction-pause"><code>pause</code></dfn>: the action intent
           is to pause the currently active playback. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-seekbackward"><code>seekbackward</code></dfn>: the action
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekbackward&quot;|seekbackward" id="dom-mediasessionaction-seekbackward"><code>seekbackward</code></dfn>: the action
           intent is to move the playback time backward by a short period (eg. a
           few seconds). 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-seekforward"><code>seekforward</code></dfn>: the action
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekforward&quot;|seekforward" id="dom-mediasessionaction-seekforward"><code>seekforward</code></dfn>: the action
           intent is to move the playback time forward by a short period (eg. a
           few seconds). 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-previoustrack"><code>previoustrack</code></dfn>: the action
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;previoustrack&quot;|previoustrack" id="dom-mediasessionaction-previoustrack"><code>previoustrack</code></dfn>: the action
           intent is to either start the current playback from the beginning if
           the playback has a notion of beginning, or move to the previous item
           in the playlist if the playback has a notion of playlist. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-nexttrack"><code>nexttrack</code></dfn>: the action is
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;nexttrack&quot;|nexttrack" id="dom-mediasessionaction-nexttrack"><code>nexttrack</code></dfn>: the action is
           to move to the playback to the next item in the playlist if the
           playback has a notion of playlist. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-skipad"><code>skipad</code></dfn>: the action intent
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;skipad&quot;|skipad" id="dom-mediasessionaction-skipad"><code>skipad</code></dfn>: the action intent
           is to skip the advertisement that is currently playing. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-stop"><code>stop</code></dfn>: the action intent
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;stop&quot;|stop" id="dom-mediasessionaction-stop"><code>stop</code></dfn>: the action intent
           is to stop the playback and clear the state if appropriate. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export id="dom-mediasessionaction-seekto"><code>seekto</code></dfn>: the action intent
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekto&quot;|seekto" id="dom-mediasessionaction-seekto"><code>seekto</code></dfn>: the action intent
           is to move the playback time to a specific time. 
      </ul>
      <p></p>
@@ -1943,7 +1943,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 
   <c- b>void</c-> <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export data-lt="setActionHandler(action, handler)" id="dom-mediasession-setactionhandler"><code><c- g>setActionHandler</c-></code><a class="self-link" href="#dom-mediasession-setactionhandler"></a></dfn>(<a class="n" data-link-type="idl-name" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction①"><c- n>MediaSessionAction</c-></a> <dfn class="idl-code" data-dfn-for="MediaSession/setActionHandler(action, handler)" data-dfn-type="argument" data-export id="dom-mediasession-setactionhandler-action-handler-action"><code><c- g>action</c-></code><a class="self-link" href="#dom-mediasession-setactionhandler-action-handler-action"></a></dfn>, <a class="n" data-link-type="idl-name" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler③"><c- n>MediaSessionActionHandler</c-></a>? <dfn class="idl-code" data-dfn-for="MediaSession/setActionHandler(action, handler)" data-dfn-type="argument" data-export id="dom-mediasession-setactionhandler-action-handler-handler"><code><c- g>handler</c-></code><a class="self-link" href="#dom-mediasession-setactionhandler-action-handler-handler"></a></dfn>);
 
-  <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setpositionstate" id="ref-for-dom-mediasession-setpositionstate"><c- g>setPositionState</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediapositionstate" id="ref-for-dictdef-mediapositionstate①"><c- n>MediaPositionState</c-></a>? <dfn class="idl-code" data-dfn-for="MediaSession/setPositionState(state), MediaSession/setPositionState()" data-dfn-type="argument" data-export id="dom-mediasession-setpositionstate-state-state"><code><c- g>state</c-></code><a class="self-link" href="#dom-mediasession-setpositionstate-state-state"></a></dfn>);
+  <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setpositionstate" id="ref-for-dom-mediasession-setpositionstate"><c- g>setPositionState</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediapositionstate" id="ref-for-dictdef-mediapositionstate①"><c- n>MediaPositionState</c-></a> <dfn class="idl-code" data-dfn-for="MediaSession/setPositionState(state), MediaSession/setPositionState()" data-dfn-type="argument" data-export id="dom-mediasession-setpositionstate-state-state"><code><c- g>state</c-></code><a class="self-link" href="#dom-mediasession-setpositionstate-state-state"></a></dfn> = {});
 };
 </pre>
    <p> A <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⓪">MediaSession</a></code> object represents a media session for a given document and
@@ -1975,10 +1975,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <p> The <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionplaybackstate" id="ref-for-enumdef-mediasessionplaybackstate②">MediaSessionPlaybackState</a></code> enum is used to indicate whether a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context⑨">browsing context</a> is playing media or not, the values are described as
   follows: </p>
    <ul>
-    <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export id="dom-mediasessionplaybackstate-none"><code>none</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①⓪">browsing context</a> does not specify whether it’s playing or paused, it can only be used in
+    <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export data-lt="&quot;none&quot;|none" id="dom-mediasessionplaybackstate-none"><code>none</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①⓪">browsing context</a> does not specify whether it’s playing or paused, it can only be used in
       the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate⑥">playbackState</a></code> attribute. 
-    <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export id="dom-mediasessionplaybackstate-playing"><code>playing</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①①">browsing context</a> is currently playing media and it can be paused. 
-    <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export id="dom-mediasessionplaybackstate-paused"><code>paused</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①②">browsing context</a> has paused media and it can be resumed. 
+    <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export data-lt="&quot;playing&quot;|playing" id="dom-mediasessionplaybackstate-playing"><code>playing</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①①">browsing context</a> is currently playing media and it can be paused. 
+    <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export data-lt="&quot;paused&quot;|paused" id="dom-mediasessionplaybackstate-paused"><code>paused</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①②">browsing context</a> has paused media and it can be resumed. 
    </ul>
    <p></p>
    <p> The <dfn class="idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setactionhandler①"><code>setActionHandler()</code><a class="self-link" href="#dom-mediasession-setactionhandler①"></a></dfn> method, when
@@ -1986,7 +1986,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export data-lt="setPositionState(state)|setPositionState()" id="dom-mediasession-setpositionstate"><code>setPositionState()</code></dfn> method, when invoked
   MUST perform the following steps: </p>
    <ul>
-    <li> If the <var>state</var> is a null or an empty dictionary then clear the <a data-link-type="dfn" href="#position-state①" id="ref-for-position-state①④">position state</a>. 
+    <li> If the <var>state</var> is an empty dictionary then clear the <a data-link-type="dfn" href="#position-state①" id="ref-for-position-state①④">position
+      state</a>. 
     <li> If the <a class="idl-code" data-link-type="dict-member" href="#dom-mediapositionstate-duration" id="ref-for-dom-mediapositionstate-duration">duration</a> is not present
       or its value is null, throw a <a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#typeerror" id="ref-for-typeerror">TypeError</a>. 
     <li> If the <a class="idl-code" data-link-type="dict-member" href="#dom-mediapositionstate-duration" id="ref-for-dom-mediapositionstate-duration①">duration</a> is negative,
@@ -2037,7 +2038,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     is <code>0</code>.
    </ul>
    <p></p>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="constructor" data-export id="dom-mediametadata-mediametadata"><code>MediaMetadata(<var>init</var>)</code></dfn> constructor, when invoked, MUST run the following steps: </p>
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="constructor" data-export data-lt="MediaMetadata(init)|constructor(init)|MediaMetadata()|constructor()" id="dom-mediametadata-mediametadata"><code>MediaMetadata(<var>init</var>)</code></dfn> constructor, when invoked, MUST run the following steps: </p>
    <ol>
     <li> Let <var>metadata</var> be a new <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①④">MediaMetadata</a></code> object. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-title" id="ref-for-dom-mediametadata-title①">title</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-title" id="ref-for-dom-mediametadatainit-title">title</a></code>. 
@@ -2410,6 +2411,8 @@ support in making this specification happen.</p>
     </ul>
    <li><a href="#mediametadata-artwork-images">artwork images</a><span>, in §7</span>
    <li><a href="#audio-focus">audio focus</a><span>, in §5.2</span>
+   <li><a href="#dom-mediametadata-mediametadata">constructor()</a><span>, in §7</span>
+   <li><a href="#dom-mediametadata-mediametadata">constructor(init)</a><span>, in §7</span>
    <li><a href="#convert-artwork-algorithm">convert artwork algorithm</a><span>, in §7</span>
    <li><a href="#current-playback-position">current playback position</a><span>, in §5.5</span>
    <li><a href="#declared-playback-state">declared playback state</a><span>, in §6</span>
@@ -2427,15 +2430,16 @@ support in making this specification happen.</p>
    <li><a href="#last-position-updated-time">last position updated time</a><span>, in §5.5</span>
    <li><a href="#last-reported-playback-position">last reported playback position</a><span>, in §5.5</span>
    <li><a href="#dictdef-mediaimage">MediaImage</a><span>, in §8</span>
+   <li><a href="#dom-mediametadata-mediametadata">MediaMetadata()</a><span>, in §7</span>
    <li><a href="#mediametadata">MediaMetadata</a><span>, in §7</span>
-   <li><a href="#dom-mediametadata-mediametadata">MediaMetadata(init)</a><span>, in §7</span>
    <li><a href="#dictdef-mediametadatainit">MediaMetadataInit</a><span>, in §7</span>
+   <li><a href="#dom-mediametadata-mediametadata">MediaMetadata(init)</a><span>, in §7</span>
    <li><a href="#dictdef-mediapositionstate">MediaPositionState</a><span>, in §9</span>
    <li><a href="#mediasession">MediaSession</a><span>, in §6</span>
    <li><a href="#mediametadata-media-session">media session</a><span>, in §7</span>
    <li><a href="#dom-navigator-mediasession">mediaSession</a><span>, in §6</span>
-   <li><a href="#media-session-action">media session action</a><span>, in §5.4</span>
    <li><a href="#enumdef-mediasessionaction">MediaSessionAction</a><span>, in §6</span>
+   <li><a href="#media-session-action">media session action</a><span>, in §5.4</span>
    <li><a href="#dictdef-mediasessionactiondetails">MediaSessionActionDetails</a><span>, in §10</span>
    <li><a href="#callbackdef-mediasessionactionhandler">MediaSessionActionHandler</a><span>, in §6</span>
    <li><a href="#media-session-action-source">media session action source</a><span>, in §5.4</span>
@@ -2450,32 +2454,44 @@ support in making this specification happen.</p>
      <li><a href="#mediasession-metadata">dfn for MediaSession</a><span>, in §6</span>
     </ul>
    <li><a href="#dom-mediasessionaction-nexttrack">nexttrack</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionaction-nexttrack">"nexttrack"</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionplaybackstate-none">"none"</a><span>, in §6</span>
    <li><a href="#dom-mediasessionplaybackstate-none">none</a><span>, in §6</span>
+   <li><a href="#dom-mediasessionaction-pause">"pause"</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionaction-pause">pause</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionplaybackstate-paused">paused</a><span>, in §6</span>
+   <li><a href="#dom-mediasessionplaybackstate-paused">"paused"</a><span>, in §6</span>
    <li><a href="#dom-mediasessionaction-play">play</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionaction-play">"play"</a><span>, in §5.4</span>
    <li><a href="#playback-rate">playback rate</a><span>, in §5.5</span>
    <li><a href="#dom-mediapositionstate-playbackrate">playbackRate</a><span>, in §9</span>
    <li><a href="#dom-mediasession-playbackstate">playbackState</a><span>, in §6</span>
    <li><a href="#dom-mediasessionplaybackstate-playing">playing</a><span>, in §6</span>
+   <li><a href="#dom-mediasessionplaybackstate-playing">"playing"</a><span>, in §6</span>
    <li><a href="#dom-mediapositionstate-position">position</a><span>, in §9</span>
    <li><a href="#position-state①">position state</a><span>, in §5.5</span>
    <li><a href="#preferred-artwork-image">preferred artwork image</a><span>, in §5.3</span>
    <li><a href="#dom-mediasessionaction-previoustrack">previoustrack</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionaction-previoustrack">"previoustrack"</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionaction-seekbackward">"seekbackward"</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionaction-seekbackward">seekbackward</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionaction-seekforward">"seekforward"</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionaction-seekforward">seekforward</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionseekactiondetails-seekoffset">seekOffset</a><span>, in §10</span>
    <li><a href="#dom-mediasessionseektoactiondetails-seektime">seekTime</a><span>, in §10</span>
+   <li><a href="#dom-mediasessionaction-seekto">"seekto"</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionaction-seekto">seekto</a><span>, in §5.4</span>
    <li><a href="#dom-mediasession-setactionhandler①">setActionHandler()</a><span>, in §6</span>
    <li><a href="#dom-mediasession-setactionhandler">setActionHandler(action, handler)</a><span>, in §6</span>
    <li><a href="#dom-mediasession-setpositionstate">setPositionState()</a><span>, in §6</span>
    <li><a href="#dom-mediasession-setpositionstate">setPositionState(state)</a><span>, in §6</span>
    <li><a href="#dom-mediaimage-sizes">sizes</a><span>, in §8</span>
+   <li><a href="#dom-mediasessionaction-skipad">"skipad"</a><span>, in §5.4</span>
    <li><a href="#dom-mediasessionaction-skipad">skipad</a><span>, in §5.4</span>
    <li><a href="#mediaimage-source">source</a><span>, in §8</span>
    <li><a href="#dom-mediaimage-src">src</a><span>, in §8</span>
    <li><a href="#dom-mediasessionaction-stop">stop</a><span>, in §5.4</span>
+   <li><a href="#dom-mediasessionaction-stop">"stop"</a><span>, in §5.4</span>
    <li><a href="#supported-media-session-actions">supported media session actions</a><span>, in §5.4</span>
    <li>
     title
@@ -2748,7 +2764,7 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-appmanifest">[APPMANIFEST]
-   <dd>Marcos Caceres; et al. <a href="https://www.w3.org/TR/appmanifest/">Web App Manifest</a>. 26 September 2019. WD. URL: <a href="https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>
+   <dd>Marcos Caceres; et al. <a href="https://www.w3.org/TR/appmanifest/">Web App Manifest</a>. 10 October 2019. WD. URL: <a href="https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
@@ -2794,7 +2810,7 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
 
   <c- b>void</c-> <a href="#dom-mediasession-setactionhandler"><code><c- g>setActionHandler</c-></code></a>(<a class="n" data-link-type="idl-name" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction①①"><c- n>MediaSessionAction</c-></a> <a href="#dom-mediasession-setactionhandler-action-handler-action"><code><c- g>action</c-></code></a>, <a class="n" data-link-type="idl-name" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler③①"><c- n>MediaSessionActionHandler</c-></a>? <a href="#dom-mediasession-setactionhandler-action-handler-handler"><code><c- g>handler</c-></code></a>);
 
-  <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setpositionstate" id="ref-for-dom-mediasession-setpositionstate①"><c- g>setPositionState</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediapositionstate" id="ref-for-dictdef-mediapositionstate①①"><c- n>MediaPositionState</c-></a>? <a href="#dom-mediasession-setpositionstate-state-state"><code><c- g>state</c-></code></a>);
+  <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setpositionstate" id="ref-for-dom-mediasession-setpositionstate①"><c- g>setPositionState</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediapositionstate" id="ref-for-dictdef-mediapositionstate①①"><c- n>MediaPositionState</c-></a> <a href="#dom-mediasession-setpositionstate-state-state"><code><c- g>state</c-></code></a> = {});
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
