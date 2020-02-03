@@ -4,7 +4,6 @@ Repository: w3c/mediasession
 Status: ED
 ED: https://w3c.github.io/mediasession/
 TR: https://www.w3.org/TR/mediasession/
-Previous Version: https://www.w3.org/TR/2020/WD-mediasession-20200130/
 Shortname: mediasession
 Level: 1
 Editor: Mounir Lamouri, w3cid 45389, Google Inc., mlamouri@google.com
