@@ -1222,7 +1222,7 @@ Possible extra rowspan handling
 	}
 </style>
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 8bc2fccb49a45a0af18c5e75ce18049d75f824b6" name="generator">
+  <meta content="Bikeshed version 70c86369151f7b7b97b78c0f664dba09a4024ca2" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
@@ -1491,7 +1491,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-02-03">3 February 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-06">6 March 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1776,29 +1776,30 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
       agent. </p>
      <p> A <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action②">media session action</a> is represented by a <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction">MediaSessionAction</a></code> which can have one of the following value: </p>
      <ul>
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;play&quot;|play" id="dom-mediasessionaction-play"><code>play</code></dfn>: the action intent
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;play&quot;|play" id="dom-mediasessionaction-play"><code>play</code></dfn>: the action’s intent
           is to resume the playback. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;pause&quot;|pause" id="dom-mediasessionaction-pause"><code>pause</code></dfn>: the action intent
-          is to pause the currently active playback. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekbackward&quot;|seekbackward" id="dom-mediasessionaction-seekbackward"><code>seekbackward</code></dfn>: the action
-          intent is to move the playback time backward by a short period (eg. a
-          few seconds). 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekforward&quot;|seekforward" id="dom-mediasessionaction-seekforward"><code>seekforward</code></dfn>: the action
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;pause&quot;|pause" id="dom-mediasessionaction-pause"><code>pause</code></dfn>: the action’s
+          intent is to pause the currently active playback. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekbackward&quot;|seekbackward" id="dom-mediasessionaction-seekbackward"><code>seekbackward</code></dfn>: the
+          action’s intent is to move the playback time backward by a short
+          period (eg. a few seconds). 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekforward&quot;|seekforward" id="dom-mediasessionaction-seekforward"><code>seekforward</code></dfn>: the action’s
           intent is to move the playback time forward by a short period (eg. a
           few seconds). 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;previoustrack&quot;|previoustrack" id="dom-mediasessionaction-previoustrack"><code>previoustrack</code></dfn>: the action
-          intent is to either start the current playback from the beginning if
-          the playback has a notion of beginning, or move to the previous item
-          in the playlist if the playback has a notion of playlist. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;nexttrack&quot;|nexttrack" id="dom-mediasessionaction-nexttrack"><code>nexttrack</code></dfn>: the action is
-          to move to the playback to the next item in the playlist if the
-          playback has a notion of playlist. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;skipad&quot;|skipad" id="dom-mediasessionaction-skipad"><code>skipad</code></dfn>: the action intent
-          is to skip the advertisement that is currently playing. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;stop&quot;|stop" id="dom-mediasessionaction-stop"><code>stop</code></dfn>: the action intent
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;previoustrack&quot;|previoustrack" id="dom-mediasessionaction-previoustrack"><code>previoustrack</code></dfn>: the
+          action’s intent is to either start the current playback from the
+          beginning if the playback has a notion of beginning, or move to the
+          previous item in the playlist if the playback has a notion of
+          playlist. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;nexttrack&quot;|nexttrack" id="dom-mediasessionaction-nexttrack"><code>nexttrack</code></dfn>: the action’s
+          intent is to move to the playback to the next item in the playlist if
+          the playback has a notion of playlist. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;skipad&quot;|skipad" id="dom-mediasessionaction-skipad"><code>skipad</code></dfn>: the action’s
+          intent is to skip the advertisement that is currently playing. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;stop&quot;|stop" id="dom-mediasessionaction-stop"><code>stop</code></dfn>: the action’s intent
           is to stop the playback and clear the state if appropriate. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekto&quot;|seekto" id="dom-mediasessionaction-seekto"><code>seekto</code></dfn>: the action intent
-          is to move the playback time to a specific time. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekto&quot;|seekto" id="dom-mediasessionaction-seekto"><code>seekto</code></dfn>: the action’s
+          intent is to move the playback time to a specific time. 
      </ul>
      <p></p>
      <p> All <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession④">MediaSession</a></code>s have a map of <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="supported media session actions" data-noexport id="supported-media-session-actions">supported media session
@@ -2018,7 +2019,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <h2 class="heading settled" data-level="7" id="the-mediametadata-interface"><span class="secno">7. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata⑧">MediaMetadata</a></code> interface</span><a class="self-link" href="#the-mediametadata-interface"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="mediametadata"><code><c- g>MediaMetadata</c-></code></dfn> {
-  <a class="idl-code" data-link-type="constructor" href="#dom-mediametadata-mediametadata" id="ref-for-dom-mediametadata-mediametadata"><c- g>constructor</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediametadatainit" id="ref-for-dictdef-mediametadatainit"><c- n>MediaMetadataInit</c-></a> <dfn class="idl-code" data-dfn-for="MediaMetadata/constructor(init), MediaMetadata/constructor()" data-dfn-type="argument" data-export id="dom-mediametadata-constructor-init-init"><code><c- g>init</c-></code><a class="self-link" href="#dom-mediametadata-constructor-init-init"></a></dfn> = {});
+  <a class="idl-code" data-link-type="constructor" href="#dom-mediametadata-mediametadata" id="ref-for-dom-mediametadata-mediametadata"><c- g>constructor</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediametadatainit" id="ref-for-dictdef-mediametadatainit"><c- n>MediaMetadataInit</c-></a> <dfn class="idl-code" data-dfn-for="MediaMetadata/MediaMetadata(init), MediaMetadata/constructor(init), MediaMetadata/MediaMetadata(), MediaMetadata/constructor()" data-dfn-type="argument" data-export id="dom-mediametadata-mediametadata-init-init"><code><c- g>init</c-></code><a class="self-link" href="#dom-mediametadata-mediametadata-init-init"></a></dfn> = {});
   <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-type="DOMString" href="#dom-mediametadata-title" id="ref-for-dom-mediametadata-title"><c- g>title</c-></a>;
   <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-type="DOMString" href="#dom-mediametadata-artist" id="ref-for-dom-mediametadata-artist"><c- g>artist</c-></a>;
   <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-type="DOMString" href="#dom-mediametadata-album" id="ref-for-dom-mediametadata-album"><c- g>album</c-></a>;
@@ -2855,7 +2856,7 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <a href="#mediametadata"><code><c- g>MediaMetadata</c-></code></a> {
-  <a class="idl-code" data-link-type="constructor" href="#dom-mediametadata-mediametadata" id="ref-for-dom-mediametadata-mediametadata①"><c- g>constructor</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediametadatainit" id="ref-for-dictdef-mediametadatainit①"><c- n>MediaMetadataInit</c-></a> <a href="#dom-mediametadata-constructor-init-init"><code><c- g>init</c-></code></a> = {});
+  <a class="idl-code" data-link-type="constructor" href="#dom-mediametadata-mediametadata" id="ref-for-dom-mediametadata-mediametadata①"><c- g>constructor</c-></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-mediametadatainit" id="ref-for-dictdef-mediametadatainit①"><c- n>MediaMetadataInit</c-></a> <a href="#dom-mediametadata-mediametadata-init-init"><code><c- g>init</c-></code></a> = {});
   <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑧"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-type="DOMString" href="#dom-mediametadata-title" id="ref-for-dom-mediametadata-title②"><c- g>title</c-></a>;
   <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-type="DOMString" href="#dom-mediametadata-artist" id="ref-for-dom-mediametadata-artist②"><c- g>artist</c-></a>;
   <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-type="DOMString" href="#dom-mediametadata-album" id="ref-for-dom-mediametadata-album②"><c- g>album</c-></a>;
