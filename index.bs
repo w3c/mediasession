@@ -1157,7 +1157,7 @@ zero.
 The <dfn dict-member for="MediaPositionState">position</dfn> <a>dictionary
 member</a>
 is used to specify the <a>last reported playback position</a> in seconds. It
-should always be positive.
+should always be positive or zero.
 
 <h2 id="the-mediasessionactiondetails-dictionary">The
 {{MediaSessionActionDetails}} dictionary</h2>
