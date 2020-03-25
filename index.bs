@@ -826,16 +826,16 @@ interface MediaSession {
       state</a>.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">duration</a> is not present
-      or its value is null, throw a <a exception>TypeError</a>.
-    </li>
-    <li>
-      If the <a dict-member for="MediaPositionState">duration</a> is negative,
+      If the <a dict-member for="MediaPositionState">duration</a> is not present,
       throw a <a exception>TypeError</a>.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">position</a> is not present
-      or its value is null, set it to zero.
+      If the <a dict-member for="MediaPositionState">duration</a> is not positive,
+      throw a <a exception>TypeError</a>.
+    </li>
+    <li>
+      If the <a dict-member for="MediaPositionState">position</a> is not present,
+      set it to zero.
     </li>
     <li>
       If the <a dict-member for="MediaPositionState">position</a> is negative or
@@ -844,7 +844,7 @@ interface MediaSession {
     </li>
     <li>
       If the <a dict-member for="MediaPositionState">playbackRate</a> is not
-      present or its value is null, set it to 1.0.
+      present, set it to 1.0.
     </li>
     <li>
       If the <a dict-member for="MediaPositionState">playbackRate</a> is zero
