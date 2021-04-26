@@ -446,7 +446,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's intent
-          is to end a video call.
+          is to end a call.
         </li>
       </ul>
     </p>
