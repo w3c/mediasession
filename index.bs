@@ -442,7 +442,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>togglecamera</dfn>: the action's intent
-          is to turn the user's camera on or off.
+          is to turn the user's active camera on or off.
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's intent
@@ -885,12 +885,12 @@ interface MediaSession {
 
 <p>
   The <dfn method for=MediaSession>setMicrophoneActive(active)</dfn> and
-  <dfn method for=MediaSession>setCameraActive(active)</dfn> methods will
-  indicate to the user agent whether the microphone and camera are currently
-  considered by the page to be active (e.g. if the microphone is considered
-  "muted" by the page since it is no longer sending audio through to a video
-  call, then the page can invoke <code>setMicrophoneActive(false);</code>).
-  The user agent MAY display UI which invoke the handlers for the <a enum-value
+  <dfn method for=MediaSession>setCameraActive(active)</dfn> methods indicate to
+  the user agent whether the microphone and camera are currently considered by
+  the page to be active (e.g. if the microphone is considered "muted" by the
+  page since it is no longer sending audio through to a call, then the page can
+  invoke <code>setMicrophoneActive(false)</code>). The user agent MAY display UI
+  which invoke the handlers for the <a enum-value
   for=MediaSessionAction>togglemicrophone</a> and <a enum-value
   for=MediaSessionAction>togglecamera</a> <a>media session actions</a>, and
   it is RECOMMENDED that the user agent respect the microphone and camera
@@ -1450,30 +1450,30 @@ When the <a>media session action</a> is
 <div class="example" id="example-microphone-camera-hangup">
   Using video conferencing actions:
   <pre class="lang-javascript">
-    var microphoneActive = false;
-    var cameraActive = false;
+    var isMicrophoneActive = false;
+    var isCameraActive = false;
 
-    navigator.mediaSession.setMicrophoneActive(microphoneActive);
-    navigator.mediaSession.setCameraActive(cameraActive);
+    navigator.mediaSession.setMicrophoneActive(isMicrophoneActive);
+    navigator.mediaSession.setCameraActive(isCameraActive);
 
     navigator.mediaSession.setActionHandler("togglemicrophone", function() {
-      if (microphoneActive) {
+      if (isMicrophoneActive) {
         // Mute the microphone. Implementation omitted.
       } else {
         // Unmute the microphone. Implementation omitted.
       }
-      microphoneActive = !microphoneActive;
-      navigator.mediaSession.setMicrophoneActive(microphoneActive);
+      isMicrophoneActive = !isMicrophoneActive;
+      navigator.mediaSession.setMicrophoneActive(isMicrophoneActive);
     });
 
     navigator.mediaSession.setActionHandler("togglecamera", function() {
-      if (cameraActive) {
+      if (isCameraActive) {
         // Disable the camera. Implementation omitted.
       } else {
         // Enable the camera. Implementation omitted.
       }
-      cameraActive = !cameraActive;
-      navigator.mediaSession.setCameraActive(cameraActive);
+      isCameraActive = !isCameraActive;
+      navigator.mediaSession.setCameraActive(isCameraActive);
     });
 
     navigator.mediaSession.setActionHandler("hangup", function() {
