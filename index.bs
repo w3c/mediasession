@@ -5,7 +5,7 @@ Status: ED
 ED: https://w3c.github.io/mediasession/
 TR: https://www.w3.org/TR/mediasession/
 Shortname: mediasession
-Level: 1
+Level: None
 Editor: Mounir Lamouri, w3cid 45389, Google Inc., mlamouri@google.com
 Editor: Becca Hughes, w3cid 103353, Google Inc., beccahughes@google.com
 Former Editor: Zhiqiang Zhang, Google Inc., zqzhang@google.com
@@ -18,12 +18,8 @@ Abstract: metadata on platform UI, customize available platform media
 Abstract: controls, and access platform media keys such as hardware keys found
 Abstract: on keyboards, headsets, remote controls, and software keys found in
 Abstract: notification areas and on lock screens of mobile devices.
-!Participate: <a href="https://github.com/w3c/mediasession/">We are on GitHub</a>
-!Participate: <a href="https://github.com/w3c/mediasession/issues/new">File an issue</a>
-!Participate: <a href="https://github.com/w3c/mediasession/issues?state=open">Open issues</a>
 !Version History: <a href="https://github.com/w3c/mediasession/commits">https://github.com/w3c/mediasession/commits</a>
 Ignored Vars: context, media, session
-Boilerplate: omit conformance, omit feedback-header
 </pre>
 
 <style>
