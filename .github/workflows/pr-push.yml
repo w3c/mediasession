@@ -23,15 +23,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # See doc at https://github.com/actions/setup-python/#setup-python-v2
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 2.7
-
-      - name: Tidy index.bs
-        run: python format.py index.bs
-
       # See doc at https://github.com/w3c/spec-prod/#spec-prod
       # The action only deploys the generated spec to the gh-pages branch when
       # the workflow was triggered by a push to the default branch.
