@@ -386,6 +386,15 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       Such a source can be the platform or the UI surfaces created by the user
       agent.
     </p>
+    <p>
+      A <a>media session action source</a> has an optional
+      <dfn for="media session action source">target</dfn> which should be the
+      recipient of any <a>media session action</a> created by the
+      <a>media session action source</a>. If a <a>media session action source</a>'s
+      <a for="media session action source">target</a> is <code>null</code>,
+      the <a>active media session</a> is the recipient of all
+      <a>media session action source</a>'s actions.
+    </p>
 
     <p>
       A <a>media session action</a> is represented by a {{MediaSessionAction}}
@@ -480,17 +489,24 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
     <p>
       When the user agent is notified by a <a>media session action source</a>
-      that a
+      named <var>source</var> that a
       <a>media session action</a> named <var>action</var> has been triggered,
       the user agent MUST run the <dfn>handle media session action</dfn> steps
       as follows:
       <ol>
         <li>
-          If the <a>active media session</a> is <code>null</code>, abort these
-          steps.
+          Let <var>session</var> be <var>source</var>'s <a for="media session
+          action source">target</a>.
         </li>
         <li>
-          Let <var>actions</var> be the <a>active media session</a>'s
+          If <var>session</var> is <code>null</code>, set <var>session</var> to
+          the <a>active media session</a>.
+        </li>
+        <li>
+          If <var>session</var> is <code>null</code>, abort these steps.
+        </li>
+        <li>
+          Let <var>actions</var> be <var>session</var>'s
           <a>supported media session actions</a>.
         </li>
         <li>
@@ -507,8 +523,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         </li>
         <li>
           Run the <a>activation notification</a> steps in the
-          <a>browsing context</a> associated with the
-          <a>active media session</a>.
+          <a>browsing context</a> associated with <var>session</var>.
         </li>
       </ol>
     </p>
