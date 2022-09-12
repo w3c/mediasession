@@ -6,8 +6,10 @@ ED: https://w3c.github.io/mediasession/
 TR: https://www.w3.org/TR/mediasession/
 Shortname: mediasession
 Level: None
-Editor: Mounir Lamouri, w3cid 45389, Google Inc., mlamouri@google.com
-Editor: Becca Hughes, w3cid 103353, Google Inc., beccahughes@google.com
+Editor: Tommy Steimel, w3cid 135774, Google Inc., steimel@google.com
+Editor: Youenn Fablet, w3cid 96458, Apple Inc., youenn@apple.com
+Former Editor: Mounir Lamouri, w3cid 45389, Google Inc., mlamouri@google.com
+Former Editor: Becca Hughes, w3cid 103353, Google Inc., beccahughes@google.com
 Former Editor: Zhiqiang Zhang, Google Inc., zqzhang@google.com
 Former Editor: Rich Tibbett, Opera, richt@opera.com
 
