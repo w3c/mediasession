@@ -446,6 +446,14 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's intent
           is to end a call.
         </li>
+        <li>
+          <dfn enum-value for=MediaSessionAction>previousslide</dfn>: the action's intent
+          is to go back to the previous slide when presenting slides.
+        </li>
+        <li>
+          <dfn enum-value for=MediaSessionAction>nextslide</dfn>: the action's intent
+          is to go to the next slide when presenting slides.
+        </li>
       </ul>
     </p>
 
@@ -729,7 +737,9 @@ enum MediaSessionAction {
   "seekto",
   "togglemicrophone",
   "togglecamera",
-  "hangup"
+  "hangup",
+  "previousslide",
+  "nextslide"
 };
 
 callback MediaSessionActionHandler = undefined(MediaSessionActionDetails details);
@@ -887,12 +897,14 @@ interface MediaSession {
   the user agent whether the microphone and camera are currently considered by
   the page to be active (e.g. if the microphone is considered "muted" by the
   page since it is no longer sending audio through to a call, then the page can
-  invoke <code>setMicrophoneActive(false)</code>). The user agent MAY display UI
-  which invoke the handlers for the <a enum-value
-  for=MediaSessionAction>togglemicrophone</a> and <a enum-value
-  for=MediaSessionAction>togglecamera</a> <a>media session actions</a>, and
-  it is RECOMMENDED that the user agent respect the microphone and camera
+  invoke <code>setMicrophoneActive(false)</code>).
+  It is RECOMMENDED that the user agent respect the microphone and camera
   states indicated by the page in this UI.
+</p>
+
+<p>
+  The user agent MAY display UI which invokes handlers for
+  <a>media session actions</a>.
 </p>
 
 <h2 id="the-mediametadata-interface">The {{MediaMetadata}} interface</h2>
@@ -1476,6 +1488,23 @@ When the <a>media session action</a> is
 
     navigator.mediaSession.setActionHandler("hangup", function() {
       // End the call. Implementation omitted.
+    });
+  </pre>
+</div>
+
+<div class="example" id="example-presenting-slide-actions">
+  Handling presenting slide actions:
+  <pre class="lang-javascript">
+    var currentSlideIndex = 0;
+
+    navigator.mediaSession.setActionHandler("previousslide", function() {
+      currentSlideIndex--;
+      // Set current slide. Implementation omitted.
+    });
+
+    navigator.mediaSession.setActionHandler("nextslide", function() {
+      currentSlideIndex++;
+      // Set current slide. Implementation omitted.
     });
   </pre>
 </div>
