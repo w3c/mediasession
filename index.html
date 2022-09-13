@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version 44af0bf3e, updated Fri Jul 29 17:05:16 2022 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="0b92828c115412b2afb51871ea450d6cb61ca9c7" name="document-revision">
+  <meta content="52b1a55d27ab4ecea99ac5a1f1c60077cb434923" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -914,6 +914,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
           is to turn the user’s active camera on or off. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;hangup&quot;|hangup" id="dom-mediasessionaction-hangup"><code>hangup</code></dfn>: the action’s intent
           is to end a call. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;previousslide&quot;|previousslide" id="dom-mediasessionaction-previousslide"><code>previousslide</code></dfn>: the action’s intent
+          is to go back to the previous slide when presenting slides. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;nextslide&quot;|nextslide" id="dom-mediasessionaction-nextslide"><code>nextslide</code></dfn>: the action’s intent
+          is to go to the next slide when presenting slides. 
      </ul>
      <p></p>
      <p> All <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession④">MediaSession</a></code>s have a map of <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="supported media session actions" data-noexport id="supported-media-session-actions">supported media session
@@ -1057,7 +1061,9 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto"><c- s>"seekto"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone①"><c- s>"togglemicrophone"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera①"><c- s>"togglecamera"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup" id="ref-for-dom-mediasessionaction-hangup①"><c- s>"hangup"</c-></a>
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup" id="ref-for-dom-mediasessionaction-hangup①"><c- s>"hangup"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-previousslide" id="ref-for-dom-mediasessionaction-previousslide"><c- s>"previousslide"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nextslide" id="ref-for-dom-mediasessionaction-nextslide"><c- s>"nextslide"</c-></a>
 };
 
 <c- b>callback</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export id="callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></dfn> = <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined"><c- b>undefined</c-></a>(<a data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails①"><c- n>MediaSessionActionDetails</c-></a> <dfn class="idl-code" data-dfn-for="MediaSessionActionHandler" data-dfn-type="argument" data-export id="dom-mediasessionactionhandler-details"><code><c- g>details</c-></code><a class="self-link" href="#dom-mediasessionactionhandler-details"></a></dfn>);
@@ -1138,10 +1144,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   the user agent whether the microphone and camera are currently considered by
   the page to be active (e.g. if the microphone is considered "muted" by the
   page since it is no longer sending audio through to a call, then the page can
-  invoke <code>setMicrophoneActive(false)</code>). The user agent MAY display UI
-  which invoke the handlers for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone②">togglemicrophone</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera②">togglecamera</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⓪">media session actions</a>, and
-  it is RECOMMENDED that the user agent respect the microphone and camera
+  invoke <code>setMicrophoneActive(false)</code>).
+  It is RECOMMENDED that the user agent respect the microphone and camera
   states indicated by the page in this UI. </p>
+   <p> The user agent MAY display UI which invokes handlers for <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⓪">media session actions</a>. </p>
    <h2 class="heading settled" data-level="7" id="the-mediametadata-interface"><span class="secno">7. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata⑧">MediaMetadata</a></code> interface</span><a class="self-link" href="#the-mediametadata-interface"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="mediametadata"><code><c- g>MediaMetadata</c-></code></dfn> {
@@ -1533,6 +1539,21 @@ navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"
 <c- p>});</c->
 </pre>
    </div>
+   <div class="example" id="example-presenting-slide-actions">
+    <a class="self-link" href="#example-presenting-slide-actions"></a> Handling presenting slide actions: 
+<pre class="lang-javascript highlight"><c- a>var</c-> currentSlideIndex <c- o>=</c-> <c- mf>0</c-><c- p>;</c->
+
+navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"previousslide"</c-><c- p>,</c-> <c- a>function</c-><c- p>()</c-> <c- p>{</c->
+  currentSlideIndex<c- o>--</c-><c- p>;</c->
+  <c- c1>// Set current slide. Implementation omitted.</c->
+<c- p>});</c->
+
+navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"nextslide"</c-><c- p>,</c-> <c- a>function</c-><c- p>()</c-> <c- p>{</c->
+  currentSlideIndex<c- o>++</c-><c- p>;</c->
+  <c- c1>// Set current slide. Implementation omitted.</c->
+<c- p>});</c->
+</pre>
+   </div>
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
    <p>The editors would like to thank Paul Adenot, Jake Archibald, Tab Atkins,
 Jonathan Bailey, François Beaufort, Marcos Caceres, Domenic Denicola, Ralph
@@ -1659,6 +1680,8 @@ support in making this specification happen.</p>
      <li><a href="#dom-mediasession-metadata">attribute for MediaSession</a><span>, in § 6</span>
      <li><a href="#mediasession-metadata">dfn for MediaSession</a><span>, in § 6</span>
     </ul>
+   <li><a href="#dom-mediasessionaction-nextslide">"nextslide"</a><span>, in § 5.4</span>
+   <li><a href="#dom-mediasessionaction-nextslide">nextslide</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionaction-nexttrack">"nexttrack"</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionaction-nexttrack">nexttrack</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionplaybackstate-none">"none"</a><span>, in § 6</span>
@@ -1677,6 +1700,8 @@ support in making this specification happen.</p>
    <li><a href="#dom-mediapositionstate-position">position</a><span>, in § 9</span>
    <li><a href="#position-state①">position state</a><span>, in § 5.5</span>
    <li><a href="#preferred-artwork-image">preferred artwork image</a><span>, in § 5.3</span>
+   <li><a href="#dom-mediasessionaction-previousslide">"previousslide"</a><span>, in § 5.4</span>
+   <li><a href="#dom-mediasessionaction-previousslide">previousslide</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionaction-previoustrack">"previoustrack"</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionaction-previoustrack">previoustrack</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionaction-seekbackward">"seekbackward"</a><span>, in § 5.4</span>
@@ -2057,7 +2082,9 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto"><c- s>"seekto"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglemicrophone"><c- s>"togglemicrophone"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera"><c- s>"togglecamera"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup"><c- s>"hangup"</c-></a>
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup"><c- s>"hangup"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-previousslide"><c- s>"previousslide"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nextslide"><c- s>"nextslide"</c-></a>
 };
 
 <c- b>callback</c-> <a href="#callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></a> = <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a>(<a data-link-type="idl-name" href="#dictdef-mediasessionactiondetails"><c- n>MediaSessionActionDetails</c-></a> <a href="#dom-mediasessionactionhandler-details"><code><c- g>details</c-></code></a>);
@@ -2249,14 +2276,14 @@ MediaSessionActionDetails dictionary</a>
    <b><a href="#dom-mediasessionaction-togglemicrophone">#dom-mediasessionaction-togglemicrophone</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediasessionaction-togglemicrophone">5.4. Actions</a>
-    <li><a href="#ref-for-dom-mediasessionaction-togglemicrophone①">6. The MediaSession interface</a> <a href="#ref-for-dom-mediasessionaction-togglemicrophone②">(2)</a>
+    <li><a href="#ref-for-dom-mediasessionaction-togglemicrophone①">6. The MediaSession interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediasessionaction-togglecamera">
    <b><a href="#dom-mediasessionaction-togglecamera">#dom-mediasessionaction-togglecamera</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediasessionaction-togglecamera">5.4. Actions</a>
-    <li><a href="#ref-for-dom-mediasessionaction-togglecamera①">6. The MediaSession interface</a> <a href="#ref-for-dom-mediasessionaction-togglecamera②">(2)</a>
+    <li><a href="#ref-for-dom-mediasessionaction-togglecamera①">6. The MediaSession interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediasessionaction-hangup">
@@ -2264,6 +2291,18 @@ MediaSessionActionDetails dictionary</a>
    <ul>
     <li><a href="#ref-for-dom-mediasessionaction-hangup">5.4. Actions</a>
     <li><a href="#ref-for-dom-mediasessionaction-hangup①">6. The MediaSession interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasessionaction-previousslide">
+   <b><a href="#dom-mediasessionaction-previousslide">#dom-mediasessionaction-previousslide</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasessionaction-previousslide">6. The MediaSession interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasessionaction-nextslide">
+   <b><a href="#dom-mediasessionaction-nextslide">#dom-mediasessionaction-nextslide</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasessionaction-nextslide">6. The MediaSession interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="supported-media-session-actions">
