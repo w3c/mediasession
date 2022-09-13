@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version 44af0bf3e, updated Fri Jul 29 17:05:16 2022 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="553bfabe18b489cfa158d55d0ebaa632d8c25d48" name="document-revision">
+  <meta content="0b92828c115412b2afb51871ea450d6cb61ca9c7" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -600,7 +600,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-09-12">12 September 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-09-13">13 September 2022</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1310,9 +1310,9 @@ should always be positive.</p>
    <h2 class="heading settled" data-level="10" id="the-mediasessionactiondetails-dictionary"><span class="secno">10. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails②">MediaSessionActionDetails</a></code> dictionary</span><a class="self-link" href="#the-mediasessionactiondetails-dictionary"></a></h2>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediasessionactiondetails"><code><c- g>MediaSessionActionDetails</c-></code></dfn> {
   <c- b>required</c-> <a data-link-type="idl-name" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction②"><c- n>MediaSessionAction</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="MediaSessionAction " href="#dom-mediasessionactiondetails-action" id="ref-for-dom-mediasessionactiondetails-action"><c- g>action</c-></a>;
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double③"><c- b>double</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="double? " href="#dom-mediasessionactiondetails-seekoffset" id="ref-for-dom-mediasessionactiondetails-seekoffset"><c- g>seekOffset</c-></a>;
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double④"><c- b>double</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="double? " href="#dom-mediasessionactiondetails-seektime" id="ref-for-dom-mediasessionactiondetails-seektime"><c- g>seekTime</c-></a>;
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean②"><c- b>boolean</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="boolean? " href="#dom-mediasessionactiondetails-fastseek" id="ref-for-dom-mediasessionactiondetails-fastseek"><c- g>fastSeek</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double③"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionactiondetails-seekoffset" id="ref-for-dom-mediasessionactiondetails-seekoffset"><c- g>seekOffset</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double④"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionactiondetails-seektime" id="ref-for-dom-mediasessionactiondetails-seektime"><c- g>seekTime</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean②"><c- b>boolean</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="boolean " href="#dom-mediasessionactiondetails-fastseek" id="ref-for-dom-mediasessionactiondetails-fastseek"><c- g>fastSeek</c-></a>;
 };
 </pre>
    <p>The <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler④">MediaSessionActionHandler</a></code> MUST be run with the <var>details</var> parameter which is represented by a dictionary inherited from <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails③">MediaSessionActionDetails</a></code>.</p>
@@ -2107,9 +2107,9 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
 
 <c- b>dictionary</c-> <a href="#dictdef-mediasessionactiondetails"><code><c- g>MediaSessionActionDetails</c-></code></a> {
   <c- b>required</c-> <a data-link-type="idl-name" href="#enumdef-mediasessionaction"><c- n>MediaSessionAction</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="MediaSessionAction " href="#dom-mediasessionactiondetails-action"><c- g>action</c-></a>;
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double"><c- b>double</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="double? " href="#dom-mediasessionactiondetails-seekoffset"><c- g>seekOffset</c-></a>;
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double"><c- b>double</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="double? " href="#dom-mediasessionactiondetails-seektime"><c- g>seekTime</c-></a>;
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a>? <a class="idl-code" data-link-type="dict-member" data-type="boolean? " href="#dom-mediasessionactiondetails-fastseek"><c- g>fastSeek</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionactiondetails-seekoffset"><c- g>seekOffset</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double"><c- b>double</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediasessionactiondetails-seektime"><c- g>seekTime</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="boolean " href="#dom-mediasessionactiondetails-fastseek"><c- g>fastSeek</c-></a>;
 };
 
 </pre>
