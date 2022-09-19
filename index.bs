@@ -72,9 +72,6 @@ urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
         text: response type
     type: dfn;
         text: force Origin header flag
-urlPrefix: https://www.w3.org/TR/appmanifest/#dom-; spec: appmanifest
-    type: dfn
-        text: ImageResource
 urlPrefix: https://tc39.es/ecma262/#sec-object.; spec: WEBIDL;
     type: dfn
         text: freeze
@@ -122,8 +119,7 @@ user agent must invoke its internal API for that attribute or method so that
 e.g. the author can't change the behavior by overriding attributes or methods
 with custom properties or functions in JavaScript.
 
-Unless otherwise stated, string comparisons are done in a <a>case-sensitive</a>
-manner.
+Unless otherwise stated, string comparisons use [=is|is identical to=].
 
 <h2 id="dependencies">Dependencies</h2>
 
@@ -1147,7 +1143,7 @@ dictionary MediaImage {
 </pre>
 
 <p class="informative">The {{MediaImage}} dictionary members are inspired by
-<a>ImageResource</a> in [[AppManifest]].</p>
+{{ImageResource}} in [[IMAGE-RESOURCE]].</p>
 
 The <dfn dict-member for="MediaImage">src</dfn> <a>dictionary member</a> is used
 to specify the {{MediaImage}} object's <dfn for="MediaImage">source</dfn>. It is
