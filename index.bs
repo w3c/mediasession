@@ -379,8 +379,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     </p>
 
     <p>
-      A <dfn title='media session action source'>media session action
-      source</dfn> is a source that might produce a <a>media session action</a>.
+      A <dfn>media session action source</dfn> is a source that might produce a <a>media session action</a>.
       Such a source can be the platform or the UI surfaces created by the user
       agent.
     </p>
