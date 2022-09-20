@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version 44af0bf3e, updated Fri Jul 29 17:05:16 2022 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="ba6e2228b9351402a0766af3a289783456324b96" name="document-revision">
+  <meta content="13d2621eeadfbc092747f88aee1657b61434260f" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -600,7 +600,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-09-19">19 September 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-09-20">20 September 2022</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -883,7 +883,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
       source</dfn> is a source that might produce a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①">media session action</a>.
       Such a source can be the platform or the UI surfaces created by the user
       agent. </p>
-     <p> A <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action②">media session action</a> is represented by a <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction">MediaSessionAction</a></code> which can have one of the following value: </p>
+     <p> A <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source">media session action source</a> has an optional <dfn class="dfn-paneled" data-dfn-for="media session action source" data-dfn-type="dfn" data-noexport id="media-session-action-source-target">target</dfn> which should be the
+      recipient of any <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action②">media session action</a> created by the <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source①">media session action source</a>. If a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source②">media session action source</a>’s <a data-link-type="dfn" href="#media-session-action-source-target" id="ref-for-media-session-action-source-target">target</a> is <code>null</code>,
+      the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑤">active media session</a> is the recipient of all <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source③">media session action source</a>’s actions. </p>
+     <p> A <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action③">media session action</a> is represented by a <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction">MediaSessionAction</a></code> which can have one of the following value: </p>
      <ul>
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;play&quot;|play" id="dom-mediasessionaction-play"><code>play</code></dfn>: the action’s intent
           is to resume the playback. 
@@ -921,7 +924,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      </ul>
      <p></p>
      <p> All <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession④">MediaSession</a></code>s have a map of <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="supported media session actions" data-noexport id="supported-media-session-actions">supported media session
-      actions</dfn> with, as a key, a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action③">media session action</a> and as a value
+      actions</dfn> with, as a key, a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action④">media session action</a> and as a value
       a <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler">MediaSessionActionHandler</a></code>. </p>
      <p> When the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="update-action-handler-algorithm">update action handler algorithm</dfn> on a given <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession⑤">MediaSession</a></code> with <var>action</var> and <var>handler</var> parameters
       is invoked, the user agent MUST run the following steps: </p>
@@ -935,57 +938,59 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
       user agent MAY <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task">queue a task</a> in order to run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm③">media session
       actions update algorithm</a> in order to avoid UI flickering when multiple
       actions are modified in the same event loop. </p>
-     <p> When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source">media session action source</a> that a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action④">media session action</a> named <var>action</var> has been triggered,
+     <p> When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source④">media session action source</a> named <var>source</var> that a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑤">media session action</a> named <var>action</var> has been triggered,
       the user agent MUST run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="handle-media-session-action">handle media session action</dfn> steps
       as follows: </p>
      <ol>
-      <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑤">active media session</a> is <code>null</code>, abort these
-          steps. 
-      <li> Let <var>actions</var> be the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑥">active media session</a>’s <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions③">supported media session actions</a>. 
+      <li> Let <var>session</var> be <var>source</var>’s <a data-link-type="dfn" href="#media-session-action-source-target" id="ref-for-media-session-action-source-target①">target</a>. 
+      <li> If <var>session</var> is <code>null</code>, set <var>session</var> to
+          the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑥">active media session</a>. 
+      <li> If <var>session</var> is <code>null</code>, abort these steps. 
+      <li> Let <var>actions</var> be <var>session</var>’s <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions③">supported media session actions</a>. 
       <li> If <var>actions</var> does not contain the key <var>action</var>,
           abort these steps. 
       <li> Let <var>handler</var> be the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler①">MediaSessionActionHandler</a></code> associated
           with the key <var>action</var> in <var>actions</var>. 
       <li> Run <var>handler</var> with the <var>details</var> parameter set to: <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails">MediaSessionActionDetails</a></code>. 
-      <li> Run the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#activation-notification" id="ref-for-activation-notification">activation notification</a> steps in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context⑥">browsing context</a> associated with the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑦">active media session</a>. 
+      <li> Run the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#activation-notification" id="ref-for-activation-notification">activation notification</a> steps in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context⑥">browsing context</a> associated with <var>session</var>. 
      </ol>
      <p></p>
      <p> When the user agent receives a joint command for <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play②">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause③">pause</a>, such as a headset button click, it MUST
       run the following steps: </p>
      <ol>
-      <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑧">active media session</a> is <code>null</code>, abort these
+      <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑦">active media session</a> is <code>null</code>, abort these
           steps. 
-      <li> Let <var>action</var> be a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑤">media session action</a>. 
-      <li> If the <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state②">actual playback state</a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑨">active media session</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing③">playing</a>, set <var>action</var> to <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause④">pause</a>. 
+      <li> Let <var>action</var> be a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑥">media session action</a>. 
+      <li> If the <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state②">actual playback state</a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑧">active media session</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing③">playing</a>, set <var>action</var> to <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause④">pause</a>. 
       <li> Otherwise, set <var>action</var> to <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play③">play</a>. 
       <li> Run the <a data-link-type="dfn" href="#handle-media-session-action" id="ref-for-handle-media-session-action">handle media session action</a> steps with <var>action</var>. 
      </ol>
      <p></p>
-     <p> It is RECOMMENDED for user agents to implement a default handler for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play④">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause⑤">pause</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑥">media session actions</a> if none was
+     <p> It is RECOMMENDED for user agents to implement a default handler for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play④">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause⑤">pause</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑦">media session actions</a> if none was
+      provided for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑨">active media session</a>. </p>
+     <p> A user agent MAY implement a default handler for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone">togglemicrophone</a>, <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera">togglecamera</a>, or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup" id="ref-for-dom-mediasessionaction-hangup">hangup</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑧">media session actions</a> if none was
       provided for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②⓪">active media session</a>. </p>
-     <p> A user agent MAY implement a default handler for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone">togglemicrophone</a>, <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera">togglecamera</a>, or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup" id="ref-for-dom-mediasessionaction-hangup">hangup</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑦">media session actions</a> if none was
-      provided for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②①">active media session</a>. </p>
-     <p class="note" role="note"> A page should only register a <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler②">MediaSessionActionHandler</a></code> for a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑧">media
+     <p class="note" role="note"> A page should only register a <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler②">MediaSessionActionHandler</a></code> for a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑨">media
       session action</a> when it can handle the action given that the user agent
-      will list this as a <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions④">supported media session action</a> and update the <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source①">media session action sources</a>. </p>
+      will list this as a <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions④">supported media session action</a> and update the <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source⑤">media session action sources</a>. </p>
      <p> When the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="media-session-actions-update-algorithm">media session actions update algorithm</dfn> is invoked, the
       user agent MUST run the following steps: </p>
      <ol>
-      <li> Let <var>available actions</var> be an array of <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑨">media session
+      <li> Let <var>available actions</var> be an array of <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⓪">media session
           actions</a>. 
-      <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②②">active media session</a> is null, set <var>available
+      <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②①">active media session</a> is null, set <var>available
           actions</var> to the empty array. 
       <li> Otherwise, set the <var>available actions</var> to the list of keys
-          available in the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②③">active media session</a>’s <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions⑤">supported media
+          available in the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②②">active media session</a>’s <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions⑤">supported media
           session actions</a>. 
       <li>
-        For each <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source②">media session action source</a> <var>source</var>, run the
+        For each <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source⑥">media session action source</a> <var>source</var>, run the
           following substeps: 
        <ol>
         <li>
-          Optionally, if the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②④">active media session</a> is not null: 
+          Optionally, if the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②③">active media session</a> is not null: 
          <ol>
-          <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②⑤">active media session</a>’s <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state③">actual playback
+          <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②④">active media session</a>’s <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state③">actual playback
                   state</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing④">playing</a>, remove <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play⑤">play</a> from <var>available
                   actions</var>. 
           <li> Otherwise, remove <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause⑥">pause</a> from <var>available
@@ -1147,7 +1152,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   invoke <code>setMicrophoneActive(false)</code>).
   It is RECOMMENDED that the user agent respect the microphone and camera
   states indicated by the page in this UI. </p>
-   <p> The user agent MAY display UI which invokes handlers for <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⓪">media session actions</a>. </p>
+   <p> The user agent MAY display UI which invokes handlers for <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①①">media session actions</a>. </p>
    <h2 class="heading settled" data-level="7" id="the-mediametadata-interface"><span class="secno">7. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata⑧">MediaMetadata</a></code> interface</span><a class="self-link" href="#the-mediametadata-interface"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="mediametadata"><code><c- g>MediaMetadata</c-></code></dfn> {
@@ -1323,15 +1328,15 @@ should always be positive.</p>
 </pre>
    <p>The <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler④">MediaSessionActionHandler</a></code> MUST be run with the <var>details</var> parameter which is represented by a dictionary inherited from <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails③">MediaSessionActionDetails</a></code>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-action"><code>action</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑥">dictionary
-member</a> is used to specify the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①①">media session action</a> that the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler⑤">MediaSessionActionHandler</a></code> is associated with.</p>
-   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-seekoffset"><code>seekOffset</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑦">dictionary member</a> MAY be provided when the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①②">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①">seekbackward</a> or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①">seekforward</a>. It is the time in seconds
+member</a> is used to specify the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①②">media session action</a> that the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler⑤">MediaSessionActionHandler</a></code> is associated with.</p>
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-seekoffset"><code>seekOffset</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑦">dictionary member</a> MAY be provided when the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①③">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①">seekbackward</a> or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①">seekforward</a>. It is the time in seconds
 to move the playback time by. If it is not provided then the site should choose
 a sensible time (e.g. a few seconds).</p>
-   <p>When the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①③">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto①">seekto</a>:</p>
+   <p>When the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①④">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto①">seekto</a>:</p>
    <ul>
     <li> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-seektime"><code>seekTime</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑧">dictionary member</a> MUST be provided and is the time in seconds to
     move the playback time to. 
-    <li> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-fastseek"><code>fastSeek</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑨">dictionary member</a> MAY be provided and will be true if the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①④">action</a> is being called multiple times
+    <li> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-fastseek"><code>fastSeek</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑨">dictionary member</a> MAY be provided and will be true if the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⑤">action</a> is being called multiple times
     as part of a sequence and this is not the last call in that sequence. 
    </ul>
    <h2 class="heading settled" data-level="11" id="examples"><span class="secno">11. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
@@ -1398,7 +1403,7 @@ audio2<c- p>.</c->addEventListener<c- p>(</c-><c- u>"play"</c-><c- p>,</c-> upda
 </pre>
    </div>
    <div class="example" id="example-media-session-actions">
-    <a class="self-link" href="#example-media-session-actions"></a> Handling <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⑤">media session actions</a>: 
+    <a class="self-link" href="#example-media-session-actions"></a> Handling <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⑥">media session actions</a>: 
 <pre class="lang-javascript highlight"><c- a>var</c-> tracks <c- o>=</c-> <c- p>[</c-><c- u>"chapter1.mp3"</c-><c- p>,</c-> <c- u>"chapter2.mp3"</c-><c- p>,</c-> <c- u>"chapter3.mp3"</c-><c- p>];</c->
 <c- a>var</c-> trackId <c- o>=</c-> <c- mf>0</c-><c- p>;</c->
 
@@ -1725,6 +1730,7 @@ support in making this specification happen.</p>
    <li><a href="#dom-mediasessionaction-stop">"stop"</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionaction-stop">stop</a><span>, in § 5.4</span>
    <li><a href="#supported-media-session-actions">supported media session actions</a><span>, in § 5.4</span>
+   <li><a href="#media-session-action-source-target">target</a><span>, in § 5.4</span>
    <li>
     title
     <ul>
@@ -2169,7 +2175,7 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
     <li><a href="#ref-for-active-media-session①">5.1. Playback State</a> <a href="#ref-for-active-media-session②">(2)</a>
     <li><a href="#ref-for-active-media-session③">5.2. Routing</a> <a href="#ref-for-active-media-session④">(2)</a> <a href="#ref-for-active-media-session⑤">(3)</a> <a href="#ref-for-active-media-session⑥">(4)</a>
     <li><a href="#ref-for-active-media-session⑦">5.3. Metadata</a> <a href="#ref-for-active-media-session⑧">(2)</a> <a href="#ref-for-active-media-session⑨">(3)</a> <a href="#ref-for-active-media-session①⓪">(4)</a> <a href="#ref-for-active-media-session①①">(5)</a> <a href="#ref-for-active-media-session①②">(6)</a> <a href="#ref-for-active-media-session①③">(7)</a> <a href="#ref-for-active-media-session①④">(8)</a>
-    <li><a href="#ref-for-active-media-session①⑤">5.4. Actions</a> <a href="#ref-for-active-media-session①⑥">(2)</a> <a href="#ref-for-active-media-session①⑦">(3)</a> <a href="#ref-for-active-media-session①⑧">(4)</a> <a href="#ref-for-active-media-session①⑨">(5)</a> <a href="#ref-for-active-media-session②⓪">(6)</a> <a href="#ref-for-active-media-session②①">(7)</a> <a href="#ref-for-active-media-session②②">(8)</a> <a href="#ref-for-active-media-session②③">(9)</a> <a href="#ref-for-active-media-session②④">(10)</a> <a href="#ref-for-active-media-session②⑤">(11)</a>
+    <li><a href="#ref-for-active-media-session①⑤">5.4. Actions</a> <a href="#ref-for-active-media-session①⑥">(2)</a> <a href="#ref-for-active-media-session①⑦">(3)</a> <a href="#ref-for-active-media-session①⑧">(4)</a> <a href="#ref-for-active-media-session①⑨">(5)</a> <a href="#ref-for-active-media-session②⓪">(6)</a> <a href="#ref-for-active-media-session②①">(7)</a> <a href="#ref-for-active-media-session②②">(8)</a> <a href="#ref-for-active-media-session②③">(9)</a> <a href="#ref-for-active-media-session②④">(10)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="audio-focus">
@@ -2202,17 +2208,23 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
    <b><a href="#media-session-action">#media-session-action</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-media-session-action">4.3. Media Session Actions</a>
-    <li><a href="#ref-for-media-session-action①">5.4. Actions</a> <a href="#ref-for-media-session-action②">(2)</a> <a href="#ref-for-media-session-action③">(3)</a> <a href="#ref-for-media-session-action④">(4)</a> <a href="#ref-for-media-session-action⑤">(5)</a> <a href="#ref-for-media-session-action⑥">(6)</a> <a href="#ref-for-media-session-action⑦">(7)</a> <a href="#ref-for-media-session-action⑧">(8)</a> <a href="#ref-for-media-session-action⑨">(9)</a>
-    <li><a href="#ref-for-media-session-action①⓪">6. The MediaSession interface</a>
-    <li><a href="#ref-for-media-session-action①①">10. The
-MediaSessionActionDetails dictionary</a> <a href="#ref-for-media-session-action①②">(2)</a> <a href="#ref-for-media-session-action①③">(3)</a> <a href="#ref-for-media-session-action①④">(4)</a>
-    <li><a href="#ref-for-media-session-action①⑤">11. Examples</a>
+    <li><a href="#ref-for-media-session-action①">5.4. Actions</a> <a href="#ref-for-media-session-action②">(2)</a> <a href="#ref-for-media-session-action③">(3)</a> <a href="#ref-for-media-session-action④">(4)</a> <a href="#ref-for-media-session-action⑤">(5)</a> <a href="#ref-for-media-session-action⑥">(6)</a> <a href="#ref-for-media-session-action⑦">(7)</a> <a href="#ref-for-media-session-action⑧">(8)</a> <a href="#ref-for-media-session-action⑨">(9)</a> <a href="#ref-for-media-session-action①⓪">(10)</a>
+    <li><a href="#ref-for-media-session-action①①">6. The MediaSession interface</a>
+    <li><a href="#ref-for-media-session-action①②">10. The
+MediaSessionActionDetails dictionary</a> <a href="#ref-for-media-session-action①③">(2)</a> <a href="#ref-for-media-session-action①④">(3)</a> <a href="#ref-for-media-session-action①⑤">(4)</a>
+    <li><a href="#ref-for-media-session-action①⑥">11. Examples</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="media-session-action-source">
    <b><a href="#media-session-action-source">#media-session-action-source</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-media-session-action-source">5.4. Actions</a> <a href="#ref-for-media-session-action-source①">(2)</a> <a href="#ref-for-media-session-action-source②">(3)</a>
+    <li><a href="#ref-for-media-session-action-source">5.4. Actions</a> <a href="#ref-for-media-session-action-source①">(2)</a> <a href="#ref-for-media-session-action-source②">(3)</a> <a href="#ref-for-media-session-action-source③">(4)</a> <a href="#ref-for-media-session-action-source④">(5)</a> <a href="#ref-for-media-session-action-source⑤">(6)</a> <a href="#ref-for-media-session-action-source⑥">(7)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="media-session-action-source-target">
+   <b><a href="#media-session-action-source-target">#media-session-action-source-target</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-media-session-action-source-target">5.4. Actions</a> <a href="#ref-for-media-session-action-source-target①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediasessionaction-play">
