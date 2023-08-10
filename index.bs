@@ -1,5 +1,5 @@
 <pre class="metadata">
-Title: Media Session Standard
+Title: Media Session
 Repository: w3c/mediasession
 Status: ED
 ED: https://w3c.github.io/mediasession/
