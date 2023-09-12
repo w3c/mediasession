@@ -2,13 +2,12 @@
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Media Session Standard</title>
+  <title>Media Session</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="Bikeshed version 44af0bf3e, updated Fri Jul 29 17:05:16 2022 -0700" name="generator">
+  <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="b2914fe05900d56441a3798e9f0adbcd6c90da10" name="document-revision">
+  <meta content="79be7cb38f1da66554986766e49511482d802599" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -30,8 +29,7 @@ table td, table th {
   padding: 3px;
 }
 </style>
-<style>/* style-autolinks */
-
+<style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
     font-size: inherit;
@@ -91,8 +89,17 @@ pre .property::before, pre .property::after {
 
 [data-link-type=biblio] {
     white-space: pre;
-}</style>
-<style>/* style-colors */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --selflink-text: black;
+        --selflink-bg: silver;
+        --selflink-hover-text: white;
+    }
+}
+</style>
+<style>/* Boilerplate: style-colors */
 
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
@@ -200,213 +207,7 @@ pre .property::before, pre .property::after {
     --outdated-shadow: red;
 
     --editedrec-bg: darkorange;
-}</style>
-<style>/* style-counters */
-
-body {
-    counter-reset: example figure issue;
 }
-.issue {
-    counter-increment: issue;
-}
-.issue:not(.no-marker)::before {
-    content: "Issue " counter(issue);
-}
-
-.example {
-    counter-increment: example;
-}
-.example:not(.no-marker)::before {
-    content: "Example " counter(example);
-}
-.invalid.example:not(.no-marker)::before,
-.illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
-}
-
-figcaption {
-    counter-increment: figure;
-}
-figcaption:not(.no-marker)::before {
-    content: "Figure " counter(figure) " ";
-}</style>
-<style>/* style-dfn-panel */
-
-:root {
-    --dfnpanel-bg: #ddd;
-    --dfnpanel-text: var(--text);
-}
-.dfn-panel {
-    position: absolute;
-    z-index: 35;
-    height: auto;
-    width: -webkit-fit-content;
-    width: fit-content;
-    max-width: 300px;
-    max-height: 500px;
-    overflow: auto;
-    padding: 0.5em 0.75em;
-    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: var(--dfnpanel-bg);
-    color: var(--dfnpanel-text);
-    border: outset 0.2em;
-}
-.dfn-panel:not(.on) { display: none; }
-.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-.dfn-panel > b { display: block; }
-.dfn-panel a { color: var(--dfnpanel-text); }
-.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-.dfn-panel > b + b { margin-top: 0.25em; }
-.dfn-panel ul { padding: 0; }
-.dfn-panel li { list-style: inside; }
-.dfn-panel.activated {
-    display: inline-block;
-    position: fixed;
-    left: .5em;
-    bottom: 2em;
-    margin: 0 auto;
-    max-width: calc(100vw - 1.5em - .4em - .5em);
-    max-height: 30vh;
-}
-
-.dfn-paneled { cursor: pointer; }
-</style>
-<style>/* style-issues */
-
-a[href].issue-return {
-    float: right;
-    float: inline-end;
-    color: var(--issueheading-text);
-    font-weight: bold;
-    text-decoration: none;
-}
-</style>
-<style>/* style-md-lists */
-
-/* This is a weird hack for me not yet following the commonmark spec
-   regarding paragraph and lists. */
-[data-md] > :first-child {
-    margin-top: 0;
-}
-[data-md] > :last-child {
-    margin-bottom: 0;
-}</style>
-<style>/* style-selflinks */
-
-:root {
-    --selflink-text: white;
-    --selflink-bg: gray;
-    --selflink-hover-text: black;
-}
-.heading, .issue, .note, .example, li, dt {
-    position: relative;
-}
-a.self-link {
-    position: absolute;
-    top: 0;
-    left: calc(-1 * (3.5rem - 26px));
-    width: calc(3.5rem - 26px);
-    height: 2em;
-    text-align: center;
-    border: none;
-    transition: opacity .2s;
-    opacity: .5;
-}
-a.self-link:hover {
-    opacity: 1;
-}
-.heading > a.self-link {
-    font-size: 83%;
-}
-li > a.self-link {
-    left: calc(-1 * (3.5rem - 26px) - 2em);
-}
-dfn > a.self-link {
-    top: auto;
-    left: auto;
-    opacity: 0;
-    width: 1.5em;
-    height: 1.5em;
-    background: var(--selflink-bg);
-    color: var(--selflink-text);
-    font-style: normal;
-    transition: opacity .2s, background-color .2s, color .2s;
-}
-dfn:hover > a.self-link {
-    opacity: 1;
-}
-dfn > a.self-link:hover {
-    color: var(--selflink-hover-text);
-}
-
-a.self-link::before            { content: "¶"; }
-.heading > a.self-link::before { content: "§"; }
-dfn > a.self-link::before      { content: "#"; }
-</style>
-<style>/* style-syntax-highlighting */
-
-            pre.idl.highlight {
-                background: var(--borderedblock-bg, var(--def-bg));
-            }
-            
-code.highlight { padding: .1em; border-radius: .3em; }
-pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
-
-.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
-c-[a] { color: #990055 } /* Keyword.Declaration */
-c-[b] { color: #990055 } /* Keyword.Type */
-c-[c] { color: #708090 } /* Comment */
-c-[d] { color: #708090 } /* Comment.Multiline */
-c-[e] { color: #0077aa } /* Name.Attribute */
-c-[f] { color: #669900 } /* Name.Tag */
-c-[g] { color: #222222 } /* Name.Variable */
-c-[k] { color: #990055 } /* Keyword */
-c-[l] { color: #000000 } /* Literal */
-c-[m] { color: #000000 } /* Literal.Number */
-c-[n] { color: #0077aa } /* Name */
-c-[o] { color: #999999 } /* Operator */
-c-[p] { color: #999999 } /* Punctuation */
-c-[s] { color: #a67f59 } /* Literal.String */
-c-[t] { color: #a67f59 } /* Literal.String.Single */
-c-[u] { color: #a67f59 } /* Literal.String.Double */
-c-[cp] { color: #708090 } /* Comment.Preproc */
-c-[c1] { color: #708090 } /* Comment.Single */
-c-[cs] { color: #708090 } /* Comment.Special */
-c-[kc] { color: #990055 } /* Keyword.Constant */
-c-[kn] { color: #990055 } /* Keyword.Namespace */
-c-[kp] { color: #990055 } /* Keyword.Pseudo */
-c-[kr] { color: #990055 } /* Keyword.Reserved */
-c-[ld] { color: #000000 } /* Literal.Date */
-c-[nc] { color: #0077aa } /* Name.Class */
-c-[no] { color: #0077aa } /* Name.Constant */
-c-[nd] { color: #0077aa } /* Name.Decorator */
-c-[ni] { color: #0077aa } /* Name.Entity */
-c-[ne] { color: #0077aa } /* Name.Exception */
-c-[nf] { color: #0077aa } /* Name.Function */
-c-[nl] { color: #0077aa } /* Name.Label */
-c-[nn] { color: #0077aa } /* Name.Namespace */
-c-[py] { color: #0077aa } /* Name.Property */
-c-[ow] { color: #999999 } /* Operator.Word */
-c-[mb] { color: #000000 } /* Literal.Number.Bin */
-c-[mf] { color: #000000 } /* Literal.Number.Float */
-c-[mh] { color: #000000 } /* Literal.Number.Hex */
-c-[mi] { color: #000000 } /* Literal.Number.Integer */
-c-[mo] { color: #000000 } /* Literal.Number.Oct */
-c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
-c-[sc] { color: #a67f59 } /* Literal.String.Char */
-c-[sd] { color: #a67f59 } /* Literal.String.Doc */
-c-[se] { color: #a67f59 } /* Literal.String.Escape */
-c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
-c-[si] { color: #a67f59 } /* Literal.String.Interpol */
-c-[sx] { color: #a67f59 } /* Literal.String.Other */
-c-[sr] { color: #a67f59 } /* Literal.String.Regex */
-c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
-c-[vc] { color: #0077aa } /* Name.Variable.Class */
-c-[vg] { color: #0077aa } /* Name.Variable.Global */
-c-[vi] { color: #0077aa } /* Name.Variable.Instance */
-c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
-</style>
-<style>/* style-darkmode */
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -519,20 +320,288 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
        which is quite common in practice... */
     img { background: white; }
 }
-@media (prefers-color-scheme: dark) {
-    :root {
-        --selflink-text: black;
-        --selflink-bg: silver;
-        --selflink-hover-text: white;
-    }
+</style>
+<style>/* Boilerplate: style-counters */
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
 }
 
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
+
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}
+</style>
+<style>/* Boilerplate: style-dfn-panel */
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
+}
 @media (prefers-color-scheme: dark) {
     :root {
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
     }
 }
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    width: 20em;
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: var(--dfnpanel-text); }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
+.dfn-panel li a {
+    white-space: pre;
+    display: inline-block;
+    max-width: calc(300px - 1.5em - 1em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
+
+.dfn-paneled[role="button"] { cursor: pointer; }
+</style>
+<style>/* Boilerplate: style-dfn-panel */
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dfnpanel-bg: #222;
+        --dfnpanel-text: var(--text);
+    }
+}
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    width: 20em;
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: var(--dfnpanel-text); }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
+.dfn-panel li a {
+    white-space: pre;
+    display: inline-block;
+    max-width: calc(300px - 1.5em - 1em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
+
+.dfn-paneled[role="button"] { cursor: pointer; }
+</style>
+<style>/* Boilerplate: style-issues */
+a[href].issue-return {
+    float: right;
+    float: inline-end;
+    color: var(--issueheading-text);
+    font-weight: bold;
+    text-decoration: none;
+}
+</style>
+<style>/* Boilerplate: style-md-lists */
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}
+</style>
+<style>/* Boilerplate: style-selflinks */
+
+:root {
+    --selflink-text: white;
+    --selflink-bg: gray;
+    --selflink-hover-text: black;
+}
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+.example > a.self-link,
+.note > a.self-link,
+.issue > a.self-link {
+    /* These blocks are overflow:auto, so positioning outside
+       doesn't work. */
+    left: auto;
+    right: 0;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: var(--selflink-bg);
+    color: var(--selflink-text);
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: var(--selflink-hover-text);
+}
+
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }
+</style>
+<style>/* Boilerplate: style-syntax-highlighting */
+
+            pre.idl.highlight {
+                background: var(--borderedblock-bg, var(--def-bg));
+            }
+            
+</style>
+<style>/* Boilerplate: style-syntax-highlighting */
+
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
+c-[a] { color: #990055 } /* Keyword.Declaration */
+c-[b] { color: #990055 } /* Keyword.Type */
+c-[c] { color: #708090 } /* Comment */
+c-[d] { color: #708090 } /* Comment.Multiline */
+c-[e] { color: #0077aa } /* Name.Attribute */
+c-[f] { color: #669900 } /* Name.Tag */
+c-[g] { color: #222222 } /* Name.Variable */
+c-[k] { color: #990055 } /* Keyword */
+c-[l] { color: #000000 } /* Literal */
+c-[m] { color: #000000 } /* Literal.Number */
+c-[n] { color: #0077aa } /* Name */
+c-[o] { color: #999999 } /* Operator */
+c-[p] { color: #999999 } /* Punctuation */
+c-[s] { color: #a67f59 } /* Literal.String */
+c-[t] { color: #a67f59 } /* Literal.String.Single */
+c-[u] { color: #a67f59 } /* Literal.String.Double */
+c-[cp] { color: #708090 } /* Comment.Preproc */
+c-[c1] { color: #708090 } /* Comment.Single */
+c-[cs] { color: #708090 } /* Comment.Special */
+c-[kc] { color: #990055 } /* Keyword.Constant */
+c-[kn] { color: #990055 } /* Keyword.Namespace */
+c-[kp] { color: #990055 } /* Keyword.Pseudo */
+c-[kr] { color: #990055 } /* Keyword.Reserved */
+c-[ld] { color: #000000 } /* Literal.Date */
+c-[nc] { color: #0077aa } /* Name.Class */
+c-[no] { color: #0077aa } /* Name.Constant */
+c-[nd] { color: #0077aa } /* Name.Decorator */
+c-[ni] { color: #0077aa } /* Name.Entity */
+c-[ne] { color: #0077aa } /* Name.Exception */
+c-[nf] { color: #0077aa } /* Name.Function */
+c-[nl] { color: #0077aa } /* Name.Label */
+c-[nn] { color: #0077aa } /* Name.Namespace */
+c-[py] { color: #0077aa } /* Name.Property */
+c-[ow] { color: #999999 } /* Operator.Word */
+c-[mb] { color: #000000 } /* Literal.Number.Bin */
+c-[mf] { color: #000000 } /* Literal.Number.Float */
+c-[mh] { color: #000000 } /* Literal.Number.Hex */
+c-[mi] { color: #000000 } /* Literal.Number.Integer */
+c-[mo] { color: #000000 } /* Literal.Number.Oct */
+c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
+c-[sc] { color: #a67f59 } /* Literal.String.Char */
+c-[sd] { color: #a67f59 } /* Literal.String.Doc */
+c-[se] { color: #a67f59 } /* Literal.String.Escape */
+c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
+c-[si] { color: #a67f59 } /* Literal.String.Interpol */
+c-[sx] { color: #a67f59 } /* Literal.String.Other */
+c-[sr] { color: #a67f59 } /* Literal.String.Regex */
+c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
+c-[vc] { color: #0077aa } /* Name.Variable.Class */
+c-[vg] { color: #0077aa } /* Name.Variable.Global */
+c-[vi] { color: #0077aa } /* Name.Variable.Instance */
+c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+
+
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
 
@@ -599,8 +668,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
-   <h1 class="p-name no-ref" id="title">Media Session Standard</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-09-20">20 September 2022</time></p>
+   <h1 class="p-name no-ref" id="title">Media Session</h1>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-09-12">12 September 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -625,7 +694,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2022 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>, <a href="https://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2023 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/copyright-software" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -647,7 +716,7 @@ notification areas and on lock screens of mobile devices.</p>
   This document is intended to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation. </p>
    <p> Publication as an Editor’s Draft does not imply endorsement by <abbr title="World Wide Web Consortium">W3C</abbr> and its Members. </p>
    <p> This document was produced by a group operating under the <a class="css" data-link-type="property" href="https://www.w3.org/Consortium/Patent-Policy/" id="sotd_patent">W3C Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/groups/wg/media/ipr" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2021/Process-20211102/" id="w3c_process_revision">2 November 2021 W3C Process Document</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2023/Process-20230612/" id="w3c_process_revision">12 June 2023 W3C Process Document</a>. </p>
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -719,7 +788,7 @@ specification is normative.</p>
    <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in RFC 2119. For readability, these
-words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a></p>
+words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a></p>
    <p>Requirements phrased in the imperative as part of algorithms (such as "strip any
 leading space characters" or "return false and terminate these steps") are to be
 interpreted with the meaning of the key word ("must", "should", "may", etc) used
@@ -738,7 +807,7 @@ with custom properties or functions in JavaScript.</p>
    <p>Unless otherwise stated, string comparisons use <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-is" id="ref-for-string-is">is identical to</a>.</p>
    <h2 class="heading settled" data-level="3" id="dependencies"><span class="secno">3. </span><span class="content">Dependencies</span><a class="self-link" href="#dependencies"></a></h2>
    <p>The IDL fragments in this specification must be interpreted as required for
-conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a></p>
+conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WEBIDL]</a></p>
    <section>
     <h2 class="heading settled" data-level="4" id="security-privacy-considerations"><span class="secno">4. </span><span class="content">Security and Privacy
   Considerations</span><a class="self-link" href="#security-privacy-considerations"></a></h2>
@@ -820,7 +889,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <section>
      <h3 class="heading settled" data-level="5.2" id="media-session-routing"><span class="secno">5.2. </span><span class="content">Routing</span><a class="self-link" href="#media-session-routing"></a></h3>
      <p>There could be multiple <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession">MediaSession</a></code> objects existing at the same time
-    since the user agent could have multiple tabs, each tab could contain a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context" id="ref-for-top-level-browsing-context">top-level browsing context</a> and multiple <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context" id="ref-for-nested-browsing-context">nested browsing
+    since the user agent could have multiple tabs, each tab could contain a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-browsing-context" id="ref-for-top-level-browsing-context">top-level browsing context</a> and multiple <a data-link-type="dfn">nested browsing
     contexts</a>, and each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context④">browsing context</a> could have a <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①">MediaSession</a></code> object.</p>
      <p>The user agent MUST select at most one of the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession②">MediaSession</a></code> objects to
     present to the user, which is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="active-media-session">active media session</dfn>.
@@ -1273,7 +1342,7 @@ invoked, the user agent MUST run the following steps:</p>
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑦"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dom-mediaimage-type" id="ref-for-dom-mediaimage-type④"><c- g>type</c-></a> = "";
 };
 </pre>
-   <p class="informative">The <code class="idl"><a data-link-type="idl" href="#dictdef-mediaimage" id="ref-for-dictdef-mediaimage⑦">MediaImage</a></code> dictionary members are inspired by <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/image-resource/#dom-imageresource" id="ref-for-dom-imageresource">ImageResource</a></code> in <a data-link-type="biblio" href="#biblio-image-resource">[IMAGE-RESOURCE]</a>.</p>
+   <p class="informative">The <code class="idl"><a data-link-type="idl" href="#dictdef-mediaimage" id="ref-for-dictdef-mediaimage⑦">MediaImage</a></code> dictionary members are inspired by <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/image-resource/#dom-imageresource" id="ref-for-dom-imageresource">ImageResource</a></code> in <a data-link-type="biblio" href="#biblio-image-resource" title="Image Resource">[IMAGE-RESOURCE]</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaImage" data-dfn-type="dict-member" data-export id="dom-mediaimage-src"><code>src</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member">dictionary member</a> is used
 to specify the <code class="idl"><a data-link-type="idl" href="#dictdef-mediaimage" id="ref-for-dictdef-mediaimage⑧">MediaImage</a></code> object’s <dfn data-dfn-for="MediaImage" data-dfn-type="dfn" data-noexport id="mediaimage-source">source<a class="self-link" href="#mediaimage-source"></a></dfn>. It is
 a URL from which the user agent can fetch the image’s data.</p>
@@ -1583,7 +1652,7 @@ support in making this specification happen.</p>
     However, for readability,
     these words do not appear in all uppercase letters in this specification. </p>
    <p>All of the text of this specification is normative
-    except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+    except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a> </p>
    <p>Examples in this specification are introduced with the words “for example”
     or are set apart from the normative text
     with <code>class="example"</code>,
@@ -1597,20 +1666,22 @@ support in making this specification happen.</p>
     with <code>class="note"</code>,
     like this: </p>
    <p class="note" role="note">Note, this is an informative note.</p>
-   <h3 class="no-ref no-num heading settled" id="w3c-conformant-algorithms"><span class="content">Conformant Algorithms</span><a class="self-link" href="#w3c-conformant-algorithms"></a></h3>
-   <p>Requirements phrased in the imperative as part of algorithms
+   <section>
+    <h3 class="no-ref no-num heading settled" id="w3c-conformant-algorithms"><span class="content">Conformant Algorithms</span><a class="self-link" href="#w3c-conformant-algorithms"></a></h3>
+    <p>Requirements phrased in the imperative as part of algorithms
     (such as "strip any leading space characters"
     or "return false and abort these steps")
     are to be interpreted with the meaning of the key word
     ("must", "should", "may", etc)
     used in introducing the algorithm. </p>
-   <p>Conformance requirements phrased as algorithms or specific steps
+    <p>Conformance requirements phrased as algorithms or specific steps
     can be implemented in any manner,
     so long as the end result is equivalent.
     In particular, the algorithms defined in this specification
     are intended to be easy to understand
     and are not intended to be performant.
     Implementers are encouraged to optimize. </p>
+   </section>
   </div>
 <script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
@@ -1745,306 +1816,70 @@ support in making this specification happen.</p>
    <li><a href="#update-action-handler-algorithm">update action handler algorithm</a><span>, in § 5.4</span>
    <li><a href="#update-metadata-algorithm">update metadata algorithm</a><span>, in § 5.3</span>
   </ul>
-  <aside class="dfn-panel" data-for="term-for-concept-fetch">
-   <a href="https://fetch.spec.whatwg.org/#concept-fetch">https://fetch.spec.whatwg.org/#concept-fetch</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-fetch">5.3. Metadata</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-internal-response">
-   <a href="https://fetch.spec.whatwg.org/#concept-internal-response">https://fetch.spec.whatwg.org/#concept-internal-response</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-internal-response">5.3. Metadata</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-response">
-   <a href="https://fetch.spec.whatwg.org/#concept-response">https://fetch.spec.whatwg.org/#concept-response</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-response">5.3. Metadata</a> <a href="#ref-for-concept-response①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-response-type">
-   <a href="https://fetch.spec.whatwg.org/#concept-response-type">https://fetch.spec.whatwg.org/#concept-response-type</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-response-type">5.3. Metadata</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-navigator">
-   <a href="https://html.spec.whatwg.org/multipage/system-state.html#navigator">https://html.spec.whatwg.org/multipage/system-state.html#navigator</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-navigator">6. The MediaSession interface</a> <a href="#ref-for-navigator①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activation-notification">
-   <a href="https://html.spec.whatwg.org/multipage/interaction.html#activation-notification">https://html.spec.whatwg.org/multipage/interaction.html#activation-notification</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activation-notification">5.4. Actions</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-browsing-context">
-   <a href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">https://html.spec.whatwg.org/multipage/browsers.html#browsing-context</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-browsing-context">5.1. Playback State</a> <a href="#ref-for-browsing-context①">(2)</a> <a href="#ref-for-browsing-context②">(3)</a> <a href="#ref-for-browsing-context③">(4)</a>
-    <li><a href="#ref-for-browsing-context④">5.2. Routing</a> <a href="#ref-for-browsing-context⑤">(2)</a>
-    <li><a href="#ref-for-browsing-context⑥">5.4. Actions</a>
-    <li><a href="#ref-for-browsing-context⑦">5.5. Position State</a>
-    <li><a href="#ref-for-browsing-context⑧">6. The MediaSession interface</a> <a href="#ref-for-browsing-context⑨">(2)</a> <a href="#ref-for-browsing-context①⓪">(3)</a> <a href="#ref-for-browsing-context①①">(4)</a> <a href="#ref-for-browsing-context①②">(5)</a> <a href="#ref-for-browsing-context①③">(6)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-entry-settings-object">
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entry-settings-object">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-in-parallel">
-   <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-in-parallel">5.3. Metadata</a>
-    <li><a href="#ref-for-in-parallel①">6. The MediaSession interface</a>
-    <li><a href="#ref-for-in-parallel②">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-the-link-element">
-   <a href="https://html.spec.whatwg.org/multipage/semantics.html#the-link-element">https://html.spec.whatwg.org/multipage/semantics.html#the-link-element</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-the-link-element">8. The MediaImage dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-media-element">
-   <a href="https://html.spec.whatwg.org/multipage/media.html#media-element">https://html.spec.whatwg.org/multipage/media.html#media-element</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-media-element">11. Examples</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-media-muted">
-   <a href="https://html.spec.whatwg.org/multipage/media.html#concept-media-muted">https://html.spec.whatwg.org/multipage/media.html#concept-media-muted</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-media-muted">5.1. Playback State</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-nested-browsing-context">
-   <a href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-nested-browsing-context">5.2. Routing</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-potentially-playing">
-   <a href="https://html.spec.whatwg.org/multipage/media.html#potentially-playing">https://html.spec.whatwg.org/multipage/media.html#potentially-playing</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-potentially-playing">5.1. Playback State</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-queue-a-task">
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-queue-a-task">5.4. Actions</a>
-    <li><a href="#ref-for-queue-a-task①">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-dom-link-sizes">
-   <a href="https://html.spec.whatwg.org/multipage/semantics.html#dom-link-sizes">https://html.spec.whatwg.org/multipage/semantics.html#dom-link-sizes</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-link-sizes">8. The MediaImage dictionary</a> <a href="#ref-for-dom-link-sizes①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-top-level-browsing-context">
-   <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-top-level-browsing-context">5.2. Routing</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-unordered-set-of-unique-space-separated-tokens">
-   <a href="https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-unordered-set-of-unique-space-separated-tokens">8. The MediaImage dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-dom-imageresource">
-   <a href="https://www.w3.org/TR/image-resource/#dom-imageresource">https://www.w3.org/TR/image-resource/#dom-imageresource</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-imageresource">8. The MediaImage dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-ascii-case-insensitive">
-   <a href="https://infra.spec.whatwg.org/#ascii-case-insensitive">https://infra.spec.whatwg.org/#ascii-case-insensitive</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-ascii-case-insensitive">8. The MediaImage dictionary</a> <a href="#ref-for-ascii-case-insensitive①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-string-is">
-   <a href="https://infra.spec.whatwg.org/#string-is">https://infra.spec.whatwg.org/#string-is</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-string-is">2. Conformance</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-mime-type">
-   <a href="https://mimesniff.spec.whatwg.org/#mime-type">https://mimesniff.spec.whatwg.org/#mime-type</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mime-type">8. The MediaImage dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-url-parser">
-   <a href="https://url.spec.whatwg.org/#concept-url-parser">https://url.spec.whatwg.org/#concept-url-parser</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-url-parser">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-idl-DOMString">
-   <a href="https://webidl.spec.whatwg.org/#idl-DOMString">https://webidl.spec.whatwg.org/#idl-DOMString</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-DOMString">7. The MediaMetadata interface</a> <a href="#ref-for-idl-DOMString①">(2)</a> <a href="#ref-for-idl-DOMString②">(3)</a> <a href="#ref-for-idl-DOMString③">(4)</a> <a href="#ref-for-idl-DOMString④">(5)</a> <a href="#ref-for-idl-DOMString⑤">(6)</a>
-    <li><a href="#ref-for-idl-DOMString⑥">8. The MediaImage dictionary</a> <a href="#ref-for-idl-DOMString⑦">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-Exposed">
-   <a href="https://webidl.spec.whatwg.org/#Exposed">https://webidl.spec.whatwg.org/#Exposed</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-Exposed">6. The MediaSession interface</a> <a href="#ref-for-Exposed①">(2)</a>
-    <li><a href="#ref-for-Exposed②">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-idl-frozen-array">
-   <a href="https://webidl.spec.whatwg.org/#idl-frozen-array">https://webidl.spec.whatwg.org/#idl-frozen-array</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-frozen-array">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-SameObject">
-   <a href="https://webidl.spec.whatwg.org/#SameObject">https://webidl.spec.whatwg.org/#SameObject</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-SameObject">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-exceptiondef-typeerror">
-   <a href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror">https://webidl.spec.whatwg.org/#exceptiondef-typeerror</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-exceptiondef-typeerror">6. The MediaSession interface</a> <a href="#ref-for-exceptiondef-typeerror①">(2)</a> <a href="#ref-for-exceptiondef-typeerror②">(3)</a> <a href="#ref-for-exceptiondef-typeerror③">(4)</a>
-    <li><a href="#ref-for-exceptiondef-typeerror④">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-idl-USVString">
-   <a href="https://webidl.spec.whatwg.org/#idl-USVString">https://webidl.spec.whatwg.org/#idl-USVString</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-USVString">8. The MediaImage dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-idl-boolean">
-   <a href="https://webidl.spec.whatwg.org/#idl-boolean">https://webidl.spec.whatwg.org/#idl-boolean</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-boolean">6. The MediaSession interface</a> <a href="#ref-for-idl-boolean①">(2)</a>
-    <li><a href="#ref-for-idl-boolean②">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-dfn-create-frozen-array">
-   <a href="https://webidl.spec.whatwg.org/#dfn-create-frozen-array">https://webidl.spec.whatwg.org/#dfn-create-frozen-array</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-create-frozen-array">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-dfn-dictionary-member">
-   <a href="https://webidl.spec.whatwg.org/#dfn-dictionary-member">https://webidl.spec.whatwg.org/#dfn-dictionary-member</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-dictionary-member">8. The MediaImage dictionary</a> <a href="#ref-for-dfn-dictionary-member①">(2)</a> <a href="#ref-for-dfn-dictionary-member②">(3)</a>
-    <li><a href="#ref-for-dfn-dictionary-member③">9. The MediaPositionState
-dictionary</a> <a href="#ref-for-dfn-dictionary-member④">(2)</a> <a href="#ref-for-dfn-dictionary-member⑤">(3)</a>
-    <li><a href="#ref-for-dfn-dictionary-member⑥">10. The
-MediaSessionActionDetails dictionary</a> <a href="#ref-for-dfn-dictionary-member⑦">(2)</a> <a href="#ref-for-dfn-dictionary-member⑧">(3)</a> <a href="#ref-for-dfn-dictionary-member⑨">(4)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-idl-double">
-   <a href="https://webidl.spec.whatwg.org/#idl-double">https://webidl.spec.whatwg.org/#idl-double</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-double">9. The MediaPositionState
-dictionary</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-double②">(3)</a>
-    <li><a href="#ref-for-idl-double③">10. The
-MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-sec-object.freeze">
-   <a href="https://tc39.es/ecma262/#sec-object.freeze">https://tc39.es/ecma262/#sec-object.freeze</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-sec-object.freeze">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-idl-sequence">
-   <a href="https://webidl.spec.whatwg.org/#idl-sequence">https://webidl.spec.whatwg.org/#idl-sequence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-sequence">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-idl-undefined">
-   <a href="https://webidl.spec.whatwg.org/#idl-undefined">https://webidl.spec.whatwg.org/#idl-undefined</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-undefined">6. The MediaSession interface</a> <a href="#ref-for-idl-undefined①">(2)</a> <a href="#ref-for-idl-undefined②">(3)</a> <a href="#ref-for-idl-undefined③">(4)</a> <a href="#ref-for-idl-undefined④">(5)</a>
-   </ul>
-  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[FETCH]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-concept-fetch">fetch</span>
-     <li><span class="dfn-paneled" id="term-for-concept-internal-response">internal response</span>
-     <li><span class="dfn-paneled" id="term-for-concept-response">response</span>
-     <li><span class="dfn-paneled" id="term-for-concept-response-type">response type</span>
+     <li><span class="dfn-paneled" id="a33db89a">fetch</span>
+     <li><span class="dfn-paneled" id="9a95489b">internal response</span>
+     <li><span class="dfn-paneled" id="ee7bba09">response</span>
+     <li><span class="dfn-paneled" id="41923559">response type</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-navigator">Navigator</span>
-     <li><span class="dfn-paneled" id="term-for-activation-notification">activation notification</span>
-     <li><span class="dfn-paneled" id="term-for-browsing-context">browsing context</span>
-     <li><span class="dfn-paneled" id="term-for-entry-settings-object">entry settings object</span>
-     <li><span class="dfn-paneled" id="term-for-in-parallel">in parallel</span>
-     <li><span class="dfn-paneled" id="term-for-the-link-element">link</span>
-     <li><span class="dfn-paneled" id="term-for-media-element">media element</span>
-     <li><span class="dfn-paneled" id="term-for-concept-media-muted">muted</span>
-     <li><span class="dfn-paneled" id="term-for-nested-browsing-context">nested browsing context</span>
-     <li><span class="dfn-paneled" id="term-for-potentially-playing">potentially playing</span>
-     <li><span class="dfn-paneled" id="term-for-queue-a-task">queue a task</span>
-     <li><span class="dfn-paneled" id="term-for-dom-link-sizes">sizes</span>
-     <li><span class="dfn-paneled" id="term-for-top-level-browsing-context">top-level browsing context</span>
-     <li><span class="dfn-paneled" id="term-for-unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</span>
+     <li><span class="dfn-paneled" id="be0c27b2">Navigator</span>
+     <li><span class="dfn-paneled" id="36d15a6d">activation notification</span>
+     <li><span class="dfn-paneled" id="faf954d6">browsing context</span>
+     <li><span class="dfn-paneled" id="d9aeb25e">entry settings object</span>
+     <li><span class="dfn-paneled" id="a72449dd">in parallel</span>
+     <li><span class="dfn-paneled" id="6cfa013d">link</span>
+     <li><span class="dfn-paneled" id="03499e48">media element</span>
+     <li><span class="dfn-paneled" id="655fdd86">muted</span>
+     <li><span class="dfn-paneled" id="049e907d">potentially playing</span>
+     <li><span class="dfn-paneled" id="9a517a7d">queue a task</span>
+     <li><span class="dfn-paneled" id="d75a73db">sizes</span>
+     <li><span class="dfn-paneled" id="ae2a6342">top-level browsing context</span>
+     <li><span class="dfn-paneled" id="16cfba2b">unordered set of unique space-separated tokens</span>
     </ul>
    <li>
     <a data-link-type="biblio">[IMAGE-RESOURCE]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-dom-imageresource">ImageResource</span>
+     <li><span class="dfn-paneled" id="ce860b8c">ImageResource</span>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-ascii-case-insensitive">ascii case-insensitive</span>
-     <li><span class="dfn-paneled" id="term-for-string-is">is</span>
+     <li><span class="dfn-paneled" id="7f9469b5">ascii case-insensitive</span>
+     <li><span class="dfn-paneled" id="7a87d819">is</span>
     </ul>
    <li>
     <a data-link-type="biblio">[MIMESNIFF]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-mime-type">mime type</span>
+     <li><span class="dfn-paneled" id="16785ec4">mime type</span>
     </ul>
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-concept-url-parser">url parser</span>
+     <li><span class="dfn-paneled" id="ca3ca4ae">url parser</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-idl-DOMString">DOMString</span>
-     <li><span class="dfn-paneled" id="term-for-Exposed">Exposed</span>
-     <li><span class="dfn-paneled" id="term-for-idl-frozen-array">FrozenArray</span>
-     <li><span class="dfn-paneled" id="term-for-SameObject">SameObject</span>
-     <li><span class="dfn-paneled" id="term-for-exceptiondef-typeerror">TypeError</span>
-     <li><span class="dfn-paneled" id="term-for-idl-USVString">USVString</span>
-     <li><span class="dfn-paneled" id="term-for-idl-boolean">boolean</span>
-     <li><span class="dfn-paneled" id="term-for-dfn-create-frozen-array">create a frozen array</span>
-     <li><span class="dfn-paneled" id="term-for-dfn-dictionary-member">dictionary members</span>
-     <li><span class="dfn-paneled" id="term-for-idl-double">double</span>
-     <li><span class="dfn-paneled" id="term-for-sec-object.freeze">freeze</span>
-     <li><span class="dfn-paneled" id="term-for-idl-sequence">sequence</span>
-     <li><span class="dfn-paneled" id="term-for-idl-undefined">undefined</span>
+     <li><span class="dfn-paneled" id="8855a9aa">DOMString</span>
+     <li><span class="dfn-paneled" id="889e932f">Exposed</span>
+     <li><span class="dfn-paneled" id="dcf5fafa">FrozenArray</span>
+     <li><span class="dfn-paneled" id="a5c91173">SameObject</span>
+     <li><span class="dfn-paneled" id="82ca3efc">TypeError</span>
+     <li><span class="dfn-paneled" id="b0d7f3c3">USVString</span>
+     <li><span class="dfn-paneled" id="5372cca8">boolean</span>
+     <li><span class="dfn-paneled" id="1641b9ef">create a frozen array</span>
+     <li><span class="dfn-paneled" id="6d8611a2">dictionary members</span>
+     <li><span class="dfn-paneled" id="8c800cdf">double</span>
+     <li><span class="dfn-paneled" id="5a2f390d">freeze</span>
+     <li><span class="dfn-paneled" id="9cce47fd">sequence</span>
+     <li><span class="dfn-paneled" id="5f90bbfb">undefined</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2152,639 +1987,625 @@ MediaSessionActionDetails dictionary</a> <a href="#ref-for-idl-double④">(2)</a
 };
 
 </pre>
-  <aside class="dfn-panel" data-for="guessed-playback-state">
-   <b><a href="#guessed-playback-state">#guessed-playback-state</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-guessed-playback-state">5.1. Playback State</a> <a href="#ref-for-guessed-playback-state①">(2)</a> <a href="#ref-for-guessed-playback-state②">(3)</a> <a href="#ref-for-guessed-playback-state③">(4)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="actual-playback-state">
-   <b><a href="#actual-playback-state">#actual-playback-state</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-actual-playback-state">5.1. Playback State</a> <a href="#ref-for-actual-playback-state①">(2)</a>
-    <li><a href="#ref-for-actual-playback-state②">5.4. Actions</a> <a href="#ref-for-actual-playback-state③">(2)</a>
-    <li><a href="#ref-for-actual-playback-state④">5.5. Position State</a>
-    <li><a href="#ref-for-actual-playback-state⑤">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="active-media-session">
-   <b><a href="#active-media-session">#active-media-session</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-active-media-session">4.3. Media Session Actions</a>
-    <li><a href="#ref-for-active-media-session①">5.1. Playback State</a> <a href="#ref-for-active-media-session②">(2)</a>
-    <li><a href="#ref-for-active-media-session③">5.2. Routing</a> <a href="#ref-for-active-media-session④">(2)</a> <a href="#ref-for-active-media-session⑤">(3)</a> <a href="#ref-for-active-media-session⑥">(4)</a>
-    <li><a href="#ref-for-active-media-session⑦">5.3. Metadata</a> <a href="#ref-for-active-media-session⑧">(2)</a> <a href="#ref-for-active-media-session⑨">(3)</a> <a href="#ref-for-active-media-session①⓪">(4)</a> <a href="#ref-for-active-media-session①①">(5)</a> <a href="#ref-for-active-media-session①②">(6)</a> <a href="#ref-for-active-media-session①③">(7)</a> <a href="#ref-for-active-media-session①④">(8)</a>
-    <li><a href="#ref-for-active-media-session①⑤">5.4. Actions</a> <a href="#ref-for-active-media-session①⑥">(2)</a> <a href="#ref-for-active-media-session①⑦">(3)</a> <a href="#ref-for-active-media-session①⑧">(4)</a> <a href="#ref-for-active-media-session①⑨">(5)</a> <a href="#ref-for-active-media-session②⓪">(6)</a> <a href="#ref-for-active-media-session②①">(7)</a> <a href="#ref-for-active-media-session②②">(8)</a> <a href="#ref-for-active-media-session②③">(9)</a> <a href="#ref-for-active-media-session②④">(10)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="audio-focus">
-   <b><a href="#audio-focus">#audio-focus</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-audio-focus">5.2. Routing</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="update-metadata-algorithm">
-   <b><a href="#update-metadata-algorithm">#update-metadata-algorithm</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-update-metadata-algorithm">5.2. Routing</a>
-    <li><a href="#ref-for-update-metadata-algorithm①">6. The MediaSession interface</a>
-    <li><a href="#ref-for-update-metadata-algorithm②">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="fetch-image-algorithm">
-   <b><a href="#fetch-image-algorithm">#fetch-image-algorithm</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-fetch-image-algorithm">5.3. Metadata</a> <a href="#ref-for-fetch-image-algorithm①">(2)</a> <a href="#ref-for-fetch-image-algorithm②">(3)</a> <a href="#ref-for-fetch-image-algorithm③">(4)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="preferred-artwork-image">
-   <b><a href="#preferred-artwork-image">#preferred-artwork-image</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-preferred-artwork-image">5.3. Metadata</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="media-session-action">
-   <b><a href="#media-session-action">#media-session-action</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-media-session-action">4.3. Media Session Actions</a>
-    <li><a href="#ref-for-media-session-action①">5.4. Actions</a> <a href="#ref-for-media-session-action②">(2)</a> <a href="#ref-for-media-session-action③">(3)</a> <a href="#ref-for-media-session-action④">(4)</a> <a href="#ref-for-media-session-action⑤">(5)</a> <a href="#ref-for-media-session-action⑥">(6)</a> <a href="#ref-for-media-session-action⑦">(7)</a> <a href="#ref-for-media-session-action⑧">(8)</a> <a href="#ref-for-media-session-action⑨">(9)</a> <a href="#ref-for-media-session-action①⓪">(10)</a>
-    <li><a href="#ref-for-media-session-action①①">6. The MediaSession interface</a>
-    <li><a href="#ref-for-media-session-action①②">10. The
-MediaSessionActionDetails dictionary</a> <a href="#ref-for-media-session-action①③">(2)</a> <a href="#ref-for-media-session-action①④">(3)</a> <a href="#ref-for-media-session-action①⑤">(4)</a>
-    <li><a href="#ref-for-media-session-action①⑥">11. Examples</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="media-session-action-source">
-   <b><a href="#media-session-action-source">#media-session-action-source</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-media-session-action-source">5.4. Actions</a> <a href="#ref-for-media-session-action-source①">(2)</a> <a href="#ref-for-media-session-action-source②">(3)</a> <a href="#ref-for-media-session-action-source③">(4)</a> <a href="#ref-for-media-session-action-source④">(5)</a> <a href="#ref-for-media-session-action-source⑤">(6)</a> <a href="#ref-for-media-session-action-source⑥">(7)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="media-session-action-source-target">
-   <b><a href="#media-session-action-source-target">#media-session-action-source-target</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-media-session-action-source-target">5.4. Actions</a> <a href="#ref-for-media-session-action-source-target①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-play">
-   <b><a href="#dom-mediasessionaction-play">#dom-mediasessionaction-play</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-play">5.1. Playback State</a> <a href="#ref-for-dom-mediasessionaction-play①">(2)</a>
-    <li><a href="#ref-for-dom-mediasessionaction-play②">5.4. Actions</a> <a href="#ref-for-dom-mediasessionaction-play③">(2)</a> <a href="#ref-for-dom-mediasessionaction-play④">(3)</a> <a href="#ref-for-dom-mediasessionaction-play⑤">(4)</a>
-    <li><a href="#ref-for-dom-mediasessionaction-play⑥">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-pause">
-   <b><a href="#dom-mediasessionaction-pause">#dom-mediasessionaction-pause</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-pause">5.1. Playback State</a> <a href="#ref-for-dom-mediasessionaction-pause①">(2)</a> <a href="#ref-for-dom-mediasessionaction-pause②">(3)</a>
-    <li><a href="#ref-for-dom-mediasessionaction-pause③">5.4. Actions</a> <a href="#ref-for-dom-mediasessionaction-pause④">(2)</a> <a href="#ref-for-dom-mediasessionaction-pause⑤">(3)</a> <a href="#ref-for-dom-mediasessionaction-pause⑥">(4)</a>
-    <li><a href="#ref-for-dom-mediasessionaction-pause⑦">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-seekbackward">
-   <b><a href="#dom-mediasessionaction-seekbackward">#dom-mediasessionaction-seekbackward</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-seekbackward">6. The MediaSession interface</a>
-    <li><a href="#ref-for-dom-mediasessionaction-seekbackward①">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-seekforward">
-   <b><a href="#dom-mediasessionaction-seekforward">#dom-mediasessionaction-seekforward</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-seekforward">6. The MediaSession interface</a>
-    <li><a href="#ref-for-dom-mediasessionaction-seekforward①">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-previoustrack">
-   <b><a href="#dom-mediasessionaction-previoustrack">#dom-mediasessionaction-previoustrack</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-previoustrack">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-nexttrack">
-   <b><a href="#dom-mediasessionaction-nexttrack">#dom-mediasessionaction-nexttrack</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-nexttrack">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-skipad">
-   <b><a href="#dom-mediasessionaction-skipad">#dom-mediasessionaction-skipad</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-skipad">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-stop">
-   <b><a href="#dom-mediasessionaction-stop">#dom-mediasessionaction-stop</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-stop">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-seekto">
-   <b><a href="#dom-mediasessionaction-seekto">#dom-mediasessionaction-seekto</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-seekto">6. The MediaSession interface</a>
-    <li><a href="#ref-for-dom-mediasessionaction-seekto①">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-togglemicrophone">
-   <b><a href="#dom-mediasessionaction-togglemicrophone">#dom-mediasessionaction-togglemicrophone</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-togglemicrophone">5.4. Actions</a>
-    <li><a href="#ref-for-dom-mediasessionaction-togglemicrophone①">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-togglecamera">
-   <b><a href="#dom-mediasessionaction-togglecamera">#dom-mediasessionaction-togglecamera</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-togglecamera">5.4. Actions</a>
-    <li><a href="#ref-for-dom-mediasessionaction-togglecamera①">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-hangup">
-   <b><a href="#dom-mediasessionaction-hangup">#dom-mediasessionaction-hangup</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-hangup">5.4. Actions</a>
-    <li><a href="#ref-for-dom-mediasessionaction-hangup①">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-previousslide">
-   <b><a href="#dom-mediasessionaction-previousslide">#dom-mediasessionaction-previousslide</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-previousslide">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionaction-nextslide">
-   <b><a href="#dom-mediasessionaction-nextslide">#dom-mediasessionaction-nextslide</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionaction-nextslide">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="supported-media-session-actions">
-   <b><a href="#supported-media-session-actions">#supported-media-session-actions</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-supported-media-session-actions">5.4. Actions</a> <a href="#ref-for-supported-media-session-actions①">(2)</a> <a href="#ref-for-supported-media-session-actions②">(3)</a> <a href="#ref-for-supported-media-session-actions③">(4)</a> <a href="#ref-for-supported-media-session-actions④">(5)</a> <a href="#ref-for-supported-media-session-actions⑤">(6)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="update-action-handler-algorithm">
-   <b><a href="#update-action-handler-algorithm">#update-action-handler-algorithm</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-update-action-handler-algorithm">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="handle-media-session-action">
-   <b><a href="#handle-media-session-action">#handle-media-session-action</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-handle-media-session-action">5.4. Actions</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="media-session-actions-update-algorithm">
-   <b><a href="#media-session-actions-update-algorithm">#media-session-actions-update-algorithm</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-media-session-actions-update-algorithm">5.1. Playback State</a>
-    <li><a href="#ref-for-media-session-actions-update-algorithm①">5.2. Routing</a>
-    <li><a href="#ref-for-media-session-actions-update-algorithm②">5.4. Actions</a> <a href="#ref-for-media-session-actions-update-algorithm③">(2)</a>
-    <li><a href="#ref-for-media-session-actions-update-algorithm④">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="position-state①">
-   <b><a href="#position-state①">#position-state①</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-position-state①">5.5. Position State</a> <a href="#ref-for-position-state①①">(2)</a> <a href="#ref-for-position-state①②">(3)</a> <a href="#ref-for-position-state①③">(4)</a>
-    <li><a href="#ref-for-position-state①④">6. The MediaSession interface</a> <a href="#ref-for-position-state①⑤">(2)</a>
-    <li><a href="#ref-for-position-state①⑥">11. Examples</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="duration">
-   <b><a href="#duration">#duration</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-duration">5.5. Position State</a> <a href="#ref-for-duration①">(2)</a> <a href="#ref-for-duration②">(3)</a>
-    <li><a href="#ref-for-duration③">9. The MediaPositionState
-dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="playback-rate">
-   <b><a href="#playback-rate">#playback-rate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-playback-rate">5.5. Position State</a>
-    <li><a href="#ref-for-playback-rate①">9. The MediaPositionState
-dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="last-reported-playback-position">
-   <b><a href="#last-reported-playback-position">#last-reported-playback-position</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-last-reported-playback-position">5.5. Position State</a>
-    <li><a href="#ref-for-last-reported-playback-position①">9. The MediaPositionState
-dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="last-position-updated-time">
-   <b><a href="#last-position-updated-time">#last-position-updated-time</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-last-position-updated-time">5.5. Position State</a>
-    <li><a href="#ref-for-last-position-updated-time①">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="actual-playback-rate">
-   <b><a href="#actual-playback-rate">#actual-playback-rate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-actual-playback-rate">5.5. Position State</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="current-playback-position">
-   <b><a href="#current-playback-position">#current-playback-position</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-current-playback-position">5.5. Position State</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="enumdef-mediasessionplaybackstate">
-   <b><a href="#enumdef-mediasessionplaybackstate">#enumdef-mediasessionplaybackstate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-enumdef-mediasessionplaybackstate">6. The MediaSession interface</a> <a href="#ref-for-enumdef-mediasessionplaybackstate①">(2)</a> <a href="#ref-for-enumdef-mediasessionplaybackstate②">(3)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="enumdef-mediasessionaction">
-   <b><a href="#enumdef-mediasessionaction">#enumdef-mediasessionaction</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-enumdef-mediasessionaction">5.4. Actions</a>
-    <li><a href="#ref-for-enumdef-mediasessionaction①">6. The MediaSession interface</a>
-    <li><a href="#ref-for-enumdef-mediasessionaction②">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="callbackdef-mediasessionactionhandler">
-   <b><a href="#callbackdef-mediasessionactionhandler">#callbackdef-mediasessionactionhandler</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-callbackdef-mediasessionactionhandler">5.4. Actions</a> <a href="#ref-for-callbackdef-mediasessionactionhandler①">(2)</a> <a href="#ref-for-callbackdef-mediasessionactionhandler②">(3)</a>
-    <li><a href="#ref-for-callbackdef-mediasessionactionhandler③">6. The MediaSession interface</a>
-    <li><a href="#ref-for-callbackdef-mediasessionactionhandler④">10. The
-MediaSessionActionDetails dictionary</a> <a href="#ref-for-callbackdef-mediasessionactionhandler⑤">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediasession">
-   <b><a href="#mediasession">#mediasession</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediasession">5.2. Routing</a> <a href="#ref-for-mediasession①">(2)</a> <a href="#ref-for-mediasession②">(3)</a>
-    <li><a href="#ref-for-mediasession③">5.4. Actions</a> <a href="#ref-for-mediasession④">(2)</a> <a href="#ref-for-mediasession⑤">(3)</a> <a href="#ref-for-mediasession⑥">(4)</a> <a href="#ref-for-mediasession⑦">(5)</a>
-    <li><a href="#ref-for-mediasession⑧">6. The MediaSession interface</a> <a href="#ref-for-mediasession⑨">(2)</a> <a href="#ref-for-mediasession①⓪">(3)</a> <a href="#ref-for-mediasession①①">(4)</a> <a href="#ref-for-mediasession①②">(5)</a> <a href="#ref-for-mediasession①③">(6)</a> <a href="#ref-for-mediasession①④">(7)</a> <a href="#ref-for-mediasession①⑤">(8)</a> <a href="#ref-for-mediasession①⑥">(9)</a> <a href="#ref-for-mediasession①⑦">(10)</a> <a href="#ref-for-mediasession①⑧">(11)</a> <a href="#ref-for-mediasession①⑨">(12)</a>
-    <li><a href="#ref-for-mediasession②⓪">7. The MediaMetadata interface</a>
-    <li><a href="#ref-for-mediasession②①">9. The MediaPositionState
-dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediasession-metadata">
-   <b><a href="#mediasession-metadata">#mediasession-metadata</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediasession-metadata">6. The MediaSession interface</a> <a href="#ref-for-mediasession-metadata①">(2)</a> <a href="#ref-for-mediasession-metadata②">(3)</a> <a href="#ref-for-mediasession-metadata③">(4)</a> <a href="#ref-for-mediasession-metadata④">(5)</a>
-    <li><a href="#ref-for-mediasession-metadata⑤">11. Examples</a> <a href="#ref-for-mediasession-metadata⑥">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-navigator-mediasession">
-   <b><a href="#dom-navigator-mediasession">#dom-navigator-mediasession</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-navigator-mediasession">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasession-metadata">
-   <b><a href="#dom-mediasession-metadata">#dom-mediasession-metadata</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasession-metadata">5.3. Metadata</a> <a href="#ref-for-dom-mediasession-metadata①">(2)</a> <a href="#ref-for-dom-mediasession-metadata②">(3)</a>
-    <li><a href="#ref-for-dom-mediasession-metadata③">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasession-playbackstate">
-   <b><a href="#dom-mediasession-playbackstate">#dom-mediasession-playbackstate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasession-playbackstate">5.1. Playback State</a> <a href="#ref-for-dom-mediasession-playbackstate①">(2)</a>
-    <li><a href="#ref-for-dom-mediasession-playbackstate②">5.2. Routing</a>
-    <li><a href="#ref-for-dom-mediasession-playbackstate③">6. The MediaSession interface</a> <a href="#ref-for-dom-mediasession-playbackstate④">(2)</a> <a href="#ref-for-dom-mediasession-playbackstate⑤">(3)</a> <a href="#ref-for-dom-mediasession-playbackstate⑥">(4)</a>
-    <li><a href="#ref-for-dom-mediasession-playbackstate⑦">11. Examples</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="declared-playback-state">
-   <b><a href="#declared-playback-state">#declared-playback-state</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-declared-playback-state">5.1. Playback State</a> <a href="#ref-for-declared-playback-state①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionplaybackstate-none">
-   <b><a href="#dom-mediasessionplaybackstate-none">#dom-mediasessionplaybackstate-none</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionplaybackstate-none">6. The MediaSession interface</a> <a href="#ref-for-dom-mediasessionplaybackstate-none①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionplaybackstate-playing">
-   <b><a href="#dom-mediasessionplaybackstate-playing">#dom-mediasessionplaybackstate-playing</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionplaybackstate-playing">5.1. Playback State</a> <a href="#ref-for-dom-mediasessionplaybackstate-playing①">(2)</a> <a href="#ref-for-dom-mediasessionplaybackstate-playing②">(3)</a>
-    <li><a href="#ref-for-dom-mediasessionplaybackstate-playing③">5.4. Actions</a> <a href="#ref-for-dom-mediasessionplaybackstate-playing④">(2)</a>
-    <li><a href="#ref-for-dom-mediasessionplaybackstate-playing⑤">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionplaybackstate-paused">
-   <b><a href="#dom-mediasessionplaybackstate-paused">#dom-mediasessionplaybackstate-paused</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionplaybackstate-paused">5.1. Playback State</a>
-    <li><a href="#ref-for-dom-mediasessionplaybackstate-paused①">5.5. Position State</a>
-    <li><a href="#ref-for-dom-mediasessionplaybackstate-paused②">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasession-setactionhandler">
-   <b><a href="#dom-mediasession-setactionhandler">#dom-mediasession-setactionhandler</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasession-setactionhandler">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasession-setpositionstate">
-   <b><a href="#dom-mediasession-setpositionstate">#dom-mediasession-setpositionstate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasession-setpositionstate">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasession-setmicrophoneactive">
-   <b><a href="#dom-mediasession-setmicrophoneactive">#dom-mediasession-setmicrophoneactive</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasession-setmicrophoneactive">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasession-setcameraactive">
-   <b><a href="#dom-mediasession-setcameraactive">#dom-mediasession-setcameraactive</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasession-setcameraactive">6. The MediaSession interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediametadata">
-   <b><a href="#mediametadata">#mediametadata</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediametadata">4.1. User interface guidelines</a> <a href="#ref-for-mediametadata①">(2)</a> <a href="#ref-for-mediametadata②">(3)</a> <a href="#ref-for-mediametadata③">(4)</a> <a href="#ref-for-mediametadata④">(5)</a>
-    <li><a href="#ref-for-mediametadata⑤">4.2. Incognito mode</a>
-    <li><a href="#ref-for-mediametadata⑥">6. The MediaSession interface</a> <a href="#ref-for-mediametadata⑦">(2)</a>
-    <li><a href="#ref-for-mediametadata⑧">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata⑨">(2)</a> <a href="#ref-for-mediametadata①⓪">(3)</a> <a href="#ref-for-mediametadata①①">(4)</a> <a href="#ref-for-mediametadata①②">(5)</a> <a href="#ref-for-mediametadata①③">(6)</a> <a href="#ref-for-mediametadata①④">(7)</a> <a href="#ref-for-mediametadata①⑤">(8)</a> <a href="#ref-for-mediametadata①⑥">(9)</a> <a href="#ref-for-mediametadata①⑦">(10)</a> <a href="#ref-for-mediametadata①⑧">(11)</a> <a href="#ref-for-mediametadata①⑨">(12)</a> <a href="#ref-for-mediametadata②⓪">(13)</a> <a href="#ref-for-mediametadata②①">(14)</a> <a href="#ref-for-mediametadata②②">(15)</a> <a href="#ref-for-mediametadata②③">(16)</a> <a href="#ref-for-mediametadata②④">(17)</a> <a href="#ref-for-mediametadata②⑤">(18)</a> <a href="#ref-for-mediametadata②⑥">(19)</a> <a href="#ref-for-mediametadata②⑦">(20)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dictdef-mediametadatainit">
-   <b><a href="#dictdef-mediametadatainit">#dictdef-mediametadatainit</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-mediametadatainit">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadatainit-title">
-   <b><a href="#dom-mediametadatainit-title">#dom-mediametadatainit-title</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadatainit-title">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadatainit-artist">
-   <b><a href="#dom-mediametadatainit-artist">#dom-mediametadatainit-artist</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadatainit-artist">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadatainit-album">
-   <b><a href="#dom-mediametadatainit-album">#dom-mediametadatainit-album</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadatainit-album">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadatainit-artwork">
-   <b><a href="#dom-mediametadatainit-artwork">#dom-mediametadatainit-artwork</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadatainit-artwork">7. The MediaMetadata interface</a> <a href="#ref-for-dom-mediametadatainit-artwork①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediametadata-media-session">
-   <b><a href="#mediametadata-media-session">#mediametadata-media-session</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediametadata-media-session">6. The MediaSession interface</a> <a href="#ref-for-mediametadata-media-session①">(2)</a> <a href="#ref-for-mediametadata-media-session②">(3)</a>
-    <li><a href="#ref-for-mediametadata-media-session③">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-media-session④">(2)</a>
-    <li><a href="#ref-for-mediametadata-media-session⑤">11. Examples</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediametadata-title">
-   <b><a href="#mediametadata-title">#mediametadata-title</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediametadata-title">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-title①">(2)</a> <a href="#ref-for-mediametadata-title②">(3)</a> <a href="#ref-for-mediametadata-title③">(4)</a> <a href="#ref-for-mediametadata-title④">(5)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediametadata-artist">
-   <b><a href="#mediametadata-artist">#mediametadata-artist</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediametadata-artist">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-artist①">(2)</a> <a href="#ref-for-mediametadata-artist②">(3)</a> <a href="#ref-for-mediametadata-artist③">(4)</a> <a href="#ref-for-mediametadata-artist④">(5)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediametadata-album">
-   <b><a href="#mediametadata-album">#mediametadata-album</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediametadata-album">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-album①">(2)</a> <a href="#ref-for-mediametadata-album②">(3)</a> <a href="#ref-for-mediametadata-album③">(4)</a> <a href="#ref-for-mediametadata-album④">(5)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mediametadata-artwork-images">
-   <b><a href="#mediametadata-artwork-images">#mediametadata-artwork-images</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediametadata-artwork-images">5.3. Metadata</a>
-    <li><a href="#ref-for-mediametadata-artwork-images①">7. The MediaMetadata interface</a> <a href="#ref-for-mediametadata-artwork-images②">(2)</a> <a href="#ref-for-mediametadata-artwork-images③">(3)</a> <a href="#ref-for-mediametadata-artwork-images④">(4)</a> <a href="#ref-for-mediametadata-artwork-images⑤">(5)</a> <a href="#ref-for-mediametadata-artwork-images⑥">(6)</a>
-    <li><a href="#ref-for-mediametadata-artwork-images⑦">11. Examples</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="empty-metadata">
-   <b><a href="#empty-metadata">#empty-metadata</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-empty-metadata">5.3. Metadata</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadata-mediametadata">
-   <b><a href="#dom-mediametadata-mediametadata">#dom-mediametadata-mediametadata</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadata-mediametadata">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="convert-artwork-algorithm">
-   <b><a href="#convert-artwork-algorithm">#convert-artwork-algorithm</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-convert-artwork-algorithm">7. The MediaMetadata interface</a> <a href="#ref-for-convert-artwork-algorithm①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadata-title">
-   <b><a href="#dom-mediametadata-title">#dom-mediametadata-title</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadata-title">7. The MediaMetadata interface</a> <a href="#ref-for-dom-mediametadata-title①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadata-artist">
-   <b><a href="#dom-mediametadata-artist">#dom-mediametadata-artist</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadata-artist">7. The MediaMetadata interface</a> <a href="#ref-for-dom-mediametadata-artist①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadata-album">
-   <b><a href="#dom-mediametadata-album">#dom-mediametadata-album</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadata-album">7. The MediaMetadata interface</a> <a href="#ref-for-dom-mediametadata-album①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediametadata-artwork">
-   <b><a href="#dom-mediametadata-artwork">#dom-mediametadata-artwork</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediametadata-artwork">5.3. Metadata</a> <a href="#ref-for-dom-mediametadata-artwork①">(2)</a>
-    <li><a href="#ref-for-dom-mediametadata-artwork②">7. The MediaMetadata interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dictdef-mediaimage">
-   <b><a href="#dictdef-mediaimage">#dictdef-mediaimage</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-mediaimage">7. The MediaMetadata interface</a> <a href="#ref-for-dictdef-mediaimage①">(2)</a> <a href="#ref-for-dictdef-mediaimage②">(3)</a> <a href="#ref-for-dictdef-mediaimage③">(4)</a> <a href="#ref-for-dictdef-mediaimage④">(5)</a> <a href="#ref-for-dictdef-mediaimage⑤">(6)</a>
-    <li><a href="#ref-for-dictdef-mediaimage⑥">8. The MediaImage dictionary</a> <a href="#ref-for-dictdef-mediaimage⑦">(2)</a> <a href="#ref-for-dictdef-mediaimage⑧">(3)</a> <a href="#ref-for-dictdef-mediaimage⑨">(4)</a> <a href="#ref-for-dictdef-mediaimage①⓪">(5)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediaimage-src">
-   <b><a href="#dom-mediaimage-src">#dom-mediaimage-src</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediaimage-src">5.3. Metadata</a>
-    <li><a href="#ref-for-dom-mediaimage-src①">7. The MediaMetadata interface</a> <a href="#ref-for-dom-mediaimage-src②">(2)</a> <a href="#ref-for-dom-mediaimage-src③">(3)</a> <a href="#ref-for-dom-mediaimage-src④">(4)</a>
-    <li><a href="#ref-for-dom-mediaimage-src⑤">8. The MediaImage dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediaimage-sizes">
-   <b><a href="#dom-mediaimage-sizes">#dom-mediaimage-sizes</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediaimage-sizes">7. The MediaMetadata interface</a> <a href="#ref-for-dom-mediaimage-sizes①">(2)</a> <a href="#ref-for-dom-mediaimage-sizes②">(3)</a> <a href="#ref-for-dom-mediaimage-sizes③">(4)</a>
-    <li><a href="#ref-for-dom-mediaimage-sizes④">8. The MediaImage dictionary</a> <a href="#ref-for-dom-mediaimage-sizes⑤">(2)</a> <a href="#ref-for-dom-mediaimage-sizes⑥">(3)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediaimage-type">
-   <b><a href="#dom-mediaimage-type">#dom-mediaimage-type</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediaimage-type">7. The MediaMetadata interface</a> <a href="#ref-for-dom-mediaimage-type①">(2)</a> <a href="#ref-for-dom-mediaimage-type②">(3)</a> <a href="#ref-for-dom-mediaimage-type③">(4)</a>
-    <li><a href="#ref-for-dom-mediaimage-type④">8. The MediaImage dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dictdef-mediapositionstate">
-   <b><a href="#dictdef-mediapositionstate">#dictdef-mediapositionstate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-mediapositionstate">5.5. Position State</a>
-    <li><a href="#ref-for-dictdef-mediapositionstate①">6. The MediaSession interface</a>
-    <li><a href="#ref-for-dictdef-mediapositionstate②">9. The MediaPositionState
-dictionary</a> <a href="#ref-for-dictdef-mediapositionstate③">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediapositionstate-duration">
-   <b><a href="#dom-mediapositionstate-duration">#dom-mediapositionstate-duration</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediapositionstate-duration">6. The MediaSession interface</a> <a href="#ref-for-dom-mediapositionstate-duration①">(2)</a> <a href="#ref-for-dom-mediapositionstate-duration②">(3)</a>
-    <li><a href="#ref-for-dom-mediapositionstate-duration③">9. The MediaPositionState
-dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediapositionstate-playbackrate">
-   <b><a href="#dom-mediapositionstate-playbackrate">#dom-mediapositionstate-playbackrate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediapositionstate-playbackrate">6. The MediaSession interface</a> <a href="#ref-for-dom-mediapositionstate-playbackrate①">(2)</a>
-    <li><a href="#ref-for-dom-mediapositionstate-playbackrate②">9. The MediaPositionState
-dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediapositionstate-position">
-   <b><a href="#dom-mediapositionstate-position">#dom-mediapositionstate-position</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediapositionstate-position">6. The MediaSession interface</a> <a href="#ref-for-dom-mediapositionstate-position①">(2)</a>
-    <li><a href="#ref-for-dom-mediapositionstate-position②">9. The MediaPositionState
-dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dictdef-mediasessionactiondetails">
-   <b><a href="#dictdef-mediasessionactiondetails">#dictdef-mediasessionactiondetails</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-mediasessionactiondetails">5.4. Actions</a>
-    <li><a href="#ref-for-dictdef-mediasessionactiondetails①">6. The MediaSession interface</a>
-    <li><a href="#ref-for-dictdef-mediasessionactiondetails②">10. The
-MediaSessionActionDetails dictionary</a> <a href="#ref-for-dictdef-mediasessionactiondetails③">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionactiondetails-action">
-   <b><a href="#dom-mediasessionactiondetails-action">#dom-mediasessionactiondetails-action</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionactiondetails-action">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionactiondetails-seekoffset">
-   <b><a href="#dom-mediasessionactiondetails-seekoffset">#dom-mediasessionactiondetails-seekoffset</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionactiondetails-seekoffset">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionactiondetails-seektime">
-   <b><a href="#dom-mediasessionactiondetails-seektime">#dom-mediasessionactiondetails-seektime</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionactiondetails-seektime">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-mediasessionactiondetails-fastseek">
-   <b><a href="#dom-mediasessionactiondetails-fastseek">#dom-mediasessionactiondetails-fastseek</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediasessionactiondetails-fastseek">10. The
-MediaSessionActionDetails dictionary</a>
-   </ul>
-  </aside>
-<script>/* script-dfn-panel */
+<script>/* Boilerplate: script-dfn-panel */
+"use strict";
+{
+    const dfnsJson = window.dfnsJson || {};
 
-document.body.addEventListener("click", function(e) {
-    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
-    // Find the dfn element or panel, if any, that was clicked on.
-    var el = e.target;
-    var target;
-    var hitALink = false;
-    while(el.parentElement) {
-        if(el.tagName == "A") {
-            // Clicking on a link in a <dfn> shouldn't summon the panel
-            hitALink = true;
-        }
-        if(el.classList.contains("dfn-paneled")) {
-            target = "dfn";
-            break;
-        }
-        if(el.classList.contains("dfn-panel")) {
-            target = "dfn-panel";
-            break;
-        }
-        el = el.parentElement;
+    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
+        return mk.aside({
+            class: "dfn-panel",
+            id: `infopanel-for-${dfnID}`,
+            "data-for": dfnID,
+            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+            },
+            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+                `Info about the '${dfnText}' ${external?"external":""} reference.`),
+            mk.a({href:url}, url),
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({
+                                    href: `#${ref.id}`
+                                    },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        );
     }
-    if(target != "dfn-panel") {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
-            el.classList.remove("on");
-            el.classList.remove("activated");
-        });
-    }
-    if(target == "dfn" && !hitALink) {
-        // open the panel
-        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
-        if(dfnPanel) {
-            dfnPanel.classList.add("on");
-            var rect = el.getBoundingClientRect();
-            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
-            dfnPanel.style.top = window.scrollY + rect.top + "px";
-            var panelRect = dfnPanel.getBoundingClientRect();
-            var panelWidth = panelRect.right - panelRect.left;
-            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
-                // Reposition, because the panel is overflowing
-                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+
+    function genAllDfnPanels() {
+        for(const panelData of Object.values(window.dfnpanelData)) {
+            const dfnID = panelData.dfnID;
+            const dfn = document.getElementById(dfnID);
+            if(!dfn) {
+                console.log(`Can't find dfn#${dfnID}.`, panelData);
+            } else {
+                const panel = genDfnPanel(panelData);
+                append(document.body, panel);
+                insertDfnPopupAction(dfn, panel)
             }
-        } else {
-            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
         }
-    } else if(target == "dfn-panel") {
-        // Switch it to "activated" state, which pins it.
-        el.classList.add("activated");
-        el.style.left = null;
-        el.style.top = null;
     }
 
+    document.addEventListener("DOMContentLoaded", ()=>{
+        genAllDfnPanels();
+
+        // Add popup behavior to all dfns to show the corresponding dfn-panel.
+        var dfns = queryAll('.dfn-paneled');
+        for(let dfn of dfns) { ; }
+
+        document.body.addEventListener("click", (e) => {
+            // If not handled already, just hide all dfn panels.
+            hideAllDfnPanels();
+        });
+    })
+
+
+    function hideAllDfnPanels() {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
+    }
+
+    function showDfnPanel(dfnPanel, dfn) {
+        hideAllDfnPanels(); // Only display one at this time.
+        dfn.setAttribute("aria-expanded", "true");
+        dfnPanel.classList.add("on");
+        dfnPanel.style.left = "5px";
+        dfnPanel.style.top = "0px";
+        const panelRect = dfnPanel.getBoundingClientRect();
+        const panelWidth = panelRect.right - panelRect.left;
+        if (panelRect.right > document.body.scrollWidth) {
+            // Panel's overflowing the screen.
+            // Just drop it below the dfn and flip it rightward instead.
+            // This still wont' fix things if the screen is *really* wide,
+            // but fixing that's a lot harder without 'anchor()'.
+            dfnPanel.style.top = "1.5em";
+            dfnPanel.style.left = "auto";
+            dfnPanel.style.right = "0px";
+        }
+    }
+
+    function pinDfnPanel(dfnPanel) {
+        // Switch it to "activated" state, which pins it.
+        dfnPanel.classList.add("activated");
+        dfnPanel.style.left = null;
+        dfnPanel.style.top = null;
+    }
+
+    function hideDfnPanel(dfnPanel, dfn) {
+        if(!dfn) {
+            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
+        }
+        dfn.setAttribute("aria-expanded", "false")
+        dfnPanel.classList.remove("on");
+        dfnPanel.classList.remove("activated");
+    }
+
+    function toggleDfnPanel(dfnPanel, dfn) {
+        if(dfnPanel.classList.contains("on")) {
+            hideDfnPanel(dfnPanel, dfn);
+        } else {
+            showDfnPanel(dfnPanel, dfn);
+        }
+    }
+
+    function insertDfnPopupAction(dfn, dfnPanel) {
+        // Find dfn panel
+        const panelWrapper = document.createElement('span');
+        panelWrapper.appendChild(dfnPanel);
+        panelWrapper.style.position = "relative";
+        panelWrapper.style.height = "0px";
+        dfn.insertAdjacentElement("afterend", panelWrapper);
+        dfn.setAttribute('role', 'button');
+        dfn.setAttribute('aria-expanded', 'false')
+        dfn.tabIndex = 0;
+        dfn.classList.add('has-dfn-panel');
+        dfn.addEventListener('click', (event) => {
+            showDfnPanel(dfnPanel, dfn);
+            event.stopPropagation();
+        });
+        dfn.addEventListener('keypress', (event) => {
+            const kc = event.keyCode;
+            // 32->Space, 13->Enter
+            if(kc == 32 || kc == 13) {
+                toggleDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        });
+
+        dfnPanel.addEventListener('click', (event) => {
+            if (event.target.nodeName == 'A') {
+                pinDfnPanel(dfnPanel);
+            }
+            event.stopPropagation();
+        });
+
+        dfnPanel.addEventListener('keydown', (event) => {
+            if(event.keyCode == 27) { // Escape key
+                hideDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        })
+    }
+}
+</script>
+<script>/* Boilerplate: script-dfn-panel */
+"use strict";
+{
+    const dfnsJson = window.dfnsJson || {};
+
+    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
+        return mk.aside({
+            class: "dfn-panel",
+            id: `infopanel-for-${dfnID}`,
+            "data-for": dfnID,
+            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+            },
+            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+                `Info about the '${dfnText}' ${external?"external":""} reference.`),
+            mk.a({href:url}, url),
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({
+                                    href: `#${ref.id}`
+                                    },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        );
+    }
+
+    function genAllDfnPanels() {
+        for(const panelData of Object.values(window.dfnpanelData)) {
+            const dfnID = panelData.dfnID;
+            const dfn = document.getElementById(dfnID);
+            if(!dfn) {
+                console.log(`Can't find dfn#${dfnID}.`, panelData);
+            } else {
+                const panel = genDfnPanel(panelData);
+                append(document.body, panel);
+                insertDfnPopupAction(dfn, panel)
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+        genAllDfnPanels();
+
+        // Add popup behavior to all dfns to show the corresponding dfn-panel.
+        var dfns = queryAll('.dfn-paneled');
+        for(let dfn of dfns) { ; }
+
+        document.body.addEventListener("click", (e) => {
+            // If not handled already, just hide all dfn panels.
+            hideAllDfnPanels();
+        });
+    })
+
+
+    function hideAllDfnPanels() {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
+    }
+
+    function showDfnPanel(dfnPanel, dfn) {
+        hideAllDfnPanels(); // Only display one at this time.
+        dfn.setAttribute("aria-expanded", "true");
+        dfnPanel.classList.add("on");
+        dfnPanel.style.left = "5px";
+        dfnPanel.style.top = "0px";
+        const panelRect = dfnPanel.getBoundingClientRect();
+        const panelWidth = panelRect.right - panelRect.left;
+        if (panelRect.right > document.body.scrollWidth) {
+            // Panel's overflowing the screen.
+            // Just drop it below the dfn and flip it rightward instead.
+            // This still wont' fix things if the screen is *really* wide,
+            // but fixing that's a lot harder without 'anchor()'.
+            dfnPanel.style.top = "1.5em";
+            dfnPanel.style.left = "auto";
+            dfnPanel.style.right = "0px";
+        }
+    }
+
+    function pinDfnPanel(dfnPanel) {
+        // Switch it to "activated" state, which pins it.
+        dfnPanel.classList.add("activated");
+        dfnPanel.style.left = null;
+        dfnPanel.style.top = null;
+    }
+
+    function hideDfnPanel(dfnPanel, dfn) {
+        if(!dfn) {
+            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
+        }
+        dfn.setAttribute("aria-expanded", "false")
+        dfnPanel.classList.remove("on");
+        dfnPanel.classList.remove("activated");
+    }
+
+    function toggleDfnPanel(dfnPanel, dfn) {
+        if(dfnPanel.classList.contains("on")) {
+            hideDfnPanel(dfnPanel, dfn);
+        } else {
+            showDfnPanel(dfnPanel, dfn);
+        }
+    }
+
+    function insertDfnPopupAction(dfn, dfnPanel) {
+        // Find dfn panel
+        const panelWrapper = document.createElement('span');
+        panelWrapper.appendChild(dfnPanel);
+        panelWrapper.style.position = "relative";
+        panelWrapper.style.height = "0px";
+        dfn.insertAdjacentElement("afterend", panelWrapper);
+        dfn.setAttribute('role', 'button');
+        dfn.setAttribute('aria-expanded', 'false')
+        dfn.tabIndex = 0;
+        dfn.classList.add('has-dfn-panel');
+        dfn.addEventListener('click', (event) => {
+            showDfnPanel(dfnPanel, dfn);
+            event.stopPropagation();
+        });
+        dfn.addEventListener('keypress', (event) => {
+            const kc = event.keyCode;
+            // 32->Space, 13->Enter
+            if(kc == 32 || kc == 13) {
+                toggleDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        });
+
+        dfnPanel.addEventListener('click', (event) => {
+            if (event.target.nodeName == 'A') {
+                pinDfnPanel(dfnPanel);
+            }
+            event.stopPropagation();
+        });
+
+        dfnPanel.addEventListener('keydown', (event) => {
+            if(event.keyCode == 27) { // Escape key
+                hideDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        })
+    }
+}
+</script>
+<script>/* Boilerplate: script-dfn-panel-json */
+window.dfnpanelData = {};
+window.dfnpanelData['a33db89a'] = {"dfnID": "a33db89a", "url": "https://fetch.spec.whatwg.org/#concept-fetch", "dfnText": "fetch", "refSections": [{"refs": [{"id": "ref-for-concept-fetch"}], "title": "5.3. Metadata"}], "external": true};
+window.dfnpanelData['9a95489b'] = {"dfnID": "9a95489b", "url": "https://fetch.spec.whatwg.org/#concept-internal-response", "dfnText": "internal response", "refSections": [{"refs": [{"id": "ref-for-concept-internal-response"}], "title": "5.3. Metadata"}], "external": true};
+window.dfnpanelData['ee7bba09'] = {"dfnID": "ee7bba09", "url": "https://fetch.spec.whatwg.org/#concept-response", "dfnText": "response", "refSections": [{"refs": [{"id": "ref-for-concept-response"}, {"id": "ref-for-concept-response\u2460"}], "title": "5.3. Metadata"}], "external": true};
+window.dfnpanelData['41923559'] = {"dfnID": "41923559", "url": "https://fetch.spec.whatwg.org/#concept-response-type", "dfnText": "response type", "refSections": [{"refs": [{"id": "ref-for-concept-response-type"}], "title": "5.3. Metadata"}], "external": true};
+window.dfnpanelData['be0c27b2'] = {"dfnID": "be0c27b2", "url": "https://html.spec.whatwg.org/multipage/system-state.html#navigator", "dfnText": "Navigator", "refSections": [{"refs": [{"id": "ref-for-navigator"}, {"id": "ref-for-navigator\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
+window.dfnpanelData['36d15a6d'] = {"dfnID": "36d15a6d", "url": "https://html.spec.whatwg.org/multipage/interaction.html#activation-notification", "dfnText": "activation notification", "refSections": [{"refs": [{"id": "ref-for-activation-notification"}], "title": "5.4. Actions"}], "external": true};
+window.dfnpanelData['faf954d6'] = {"dfnID": "faf954d6", "url": "https://html.spec.whatwg.org/multipage/browsers.html#browsing-context", "dfnText": "browsing context", "refSections": [{"refs": [{"id": "ref-for-browsing-context"}, {"id": "ref-for-browsing-context\u2460"}, {"id": "ref-for-browsing-context\u2461"}, {"id": "ref-for-browsing-context\u2462"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-browsing-context\u2463"}, {"id": "ref-for-browsing-context\u2464"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-browsing-context\u2465"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-browsing-context\u2466"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-browsing-context\u2467"}, {"id": "ref-for-browsing-context\u2468"}, {"id": "ref-for-browsing-context\u2460\u24ea"}, {"id": "ref-for-browsing-context\u2460\u2460"}, {"id": "ref-for-browsing-context\u2460\u2461"}, {"id": "ref-for-browsing-context\u2460\u2462"}], "title": "6. The MediaSession interface"}], "external": true};
+window.dfnpanelData['d9aeb25e'] = {"dfnID": "d9aeb25e", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object", "dfnText": "entry settings object", "refSections": [{"refs": [{"id": "ref-for-entry-settings-object"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['a72449dd'] = {"dfnID": "a72449dd", "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel", "dfnText": "in parallel", "refSections": [{"refs": [{"id": "ref-for-in-parallel"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-in-parallel\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-in-parallel\u2461"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['6cfa013d'] = {"dfnID": "6cfa013d", "url": "https://html.spec.whatwg.org/multipage/semantics.html#the-link-element", "dfnText": "link", "refSections": [{"refs": [{"id": "ref-for-the-link-element"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['03499e48'] = {"dfnID": "03499e48", "url": "https://html.spec.whatwg.org/multipage/media.html#media-element", "dfnText": "media element", "refSections": [{"refs": [{"id": "ref-for-media-element"}], "title": "11. Examples"}], "external": true};
+window.dfnpanelData['655fdd86'] = {"dfnID": "655fdd86", "url": "https://html.spec.whatwg.org/multipage/media.html#concept-media-muted", "dfnText": "muted", "refSections": [{"refs": [{"id": "ref-for-concept-media-muted"}], "title": "5.1. Playback State"}], "external": true};
+window.dfnpanelData['049e907d'] = {"dfnID": "049e907d", "url": "https://html.spec.whatwg.org/multipage/media.html#potentially-playing", "dfnText": "potentially playing", "refSections": [{"refs": [{"id": "ref-for-potentially-playing"}], "title": "5.1. Playback State"}], "external": true};
+window.dfnpanelData['9a517a7d'] = {"dfnID": "9a517a7d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task", "dfnText": "queue a task", "refSections": [{"refs": [{"id": "ref-for-queue-a-task"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-queue-a-task\u2460"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['d75a73db'] = {"dfnID": "d75a73db", "url": "https://html.spec.whatwg.org/multipage/semantics.html#dom-link-sizes", "dfnText": "sizes", "refSections": [{"refs": [{"id": "ref-for-dom-link-sizes"}, {"id": "ref-for-dom-link-sizes\u2460"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['ae2a6342'] = {"dfnID": "ae2a6342", "url": "https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-browsing-context", "dfnText": "top-level browsing context", "refSections": [{"refs": [{"id": "ref-for-top-level-browsing-context"}], "title": "5.2. Routing"}], "external": true};
+window.dfnpanelData['16cfba2b'] = {"dfnID": "16cfba2b", "url": "https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens", "dfnText": "unordered set of unique space-separated tokens", "refSections": [{"refs": [{"id": "ref-for-unordered-set-of-unique-space-separated-tokens"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['ce860b8c'] = {"dfnID": "ce860b8c", "url": "https://w3c.github.io/image-resource/#dom-imageresource", "dfnText": "ImageResource", "refSections": [{"refs": [{"id": "ref-for-dom-imageresource"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['7f9469b5'] = {"dfnID": "7f9469b5", "url": "https://infra.spec.whatwg.org/#ascii-case-insensitive", "dfnText": "ascii case-insensitive", "refSections": [{"refs": [{"id": "ref-for-ascii-case-insensitive"}, {"id": "ref-for-ascii-case-insensitive\u2460"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['7a87d819'] = {"dfnID": "7a87d819", "url": "https://infra.spec.whatwg.org/#string-is", "dfnText": "is", "refSections": [{"refs": [{"id": "ref-for-string-is"}], "title": "2. Conformance"}], "external": true};
+window.dfnpanelData['16785ec4'] = {"dfnID": "16785ec4", "url": "https://mimesniff.spec.whatwg.org/#mime-type", "dfnText": "mime type", "refSections": [{"refs": [{"id": "ref-for-mime-type"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['ca3ca4ae'] = {"dfnID": "ca3ca4ae", "url": "https://url.spec.whatwg.org/#concept-url-parser", "dfnText": "url parser", "refSections": [{"refs": [{"id": "ref-for-concept-url-parser"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['8855a9aa'] = {"dfnID": "8855a9aa", "url": "https://webidl.spec.whatwg.org/#idl-DOMString", "dfnText": "DOMString", "refSections": [{"refs": [{"id": "ref-for-idl-DOMString"}, {"id": "ref-for-idl-DOMString\u2460"}, {"id": "ref-for-idl-DOMString\u2461"}, {"id": "ref-for-idl-DOMString\u2462"}, {"id": "ref-for-idl-DOMString\u2463"}, {"id": "ref-for-idl-DOMString\u2464"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-idl-DOMString\u2465"}, {"id": "ref-for-idl-DOMString\u2466"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['889e932f'] = {"dfnID": "889e932f", "url": "https://webidl.spec.whatwg.org/#Exposed", "dfnText": "Exposed", "refSections": [{"refs": [{"id": "ref-for-Exposed"}, {"id": "ref-for-Exposed\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-Exposed\u2461"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['dcf5fafa'] = {"dfnID": "dcf5fafa", "url": "https://webidl.spec.whatwg.org/#idl-frozen-array", "dfnText": "FrozenArray", "refSections": [{"refs": [{"id": "ref-for-idl-frozen-array"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['a5c91173'] = {"dfnID": "a5c91173", "url": "https://webidl.spec.whatwg.org/#SameObject", "dfnText": "SameObject", "refSections": [{"refs": [{"id": "ref-for-SameObject"}], "title": "6. The MediaSession interface"}], "external": true};
+window.dfnpanelData['82ca3efc'] = {"dfnID": "82ca3efc", "url": "https://webidl.spec.whatwg.org/#exceptiondef-typeerror", "dfnText": "TypeError", "refSections": [{"refs": [{"id": "ref-for-exceptiondef-typeerror"}, {"id": "ref-for-exceptiondef-typeerror\u2460"}, {"id": "ref-for-exceptiondef-typeerror\u2461"}, {"id": "ref-for-exceptiondef-typeerror\u2462"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-exceptiondef-typeerror\u2463"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['b0d7f3c3'] = {"dfnID": "b0d7f3c3", "url": "https://webidl.spec.whatwg.org/#idl-USVString", "dfnText": "USVString", "refSections": [{"refs": [{"id": "ref-for-idl-USVString"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['5372cca8'] = {"dfnID": "5372cca8", "url": "https://webidl.spec.whatwg.org/#idl-boolean", "dfnText": "boolean", "refSections": [{"refs": [{"id": "ref-for-idl-boolean"}, {"id": "ref-for-idl-boolean\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-idl-boolean\u2461"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": true};
+window.dfnpanelData['1641b9ef'] = {"dfnID": "1641b9ef", "url": "https://webidl.spec.whatwg.org/#dfn-create-frozen-array", "dfnText": "create a frozen array", "refSections": [{"refs": [{"id": "ref-for-dfn-create-frozen-array"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['6d8611a2'] = {"dfnID": "6d8611a2", "url": "https://webidl.spec.whatwg.org/#dfn-dictionary-member", "dfnText": "dictionary members", "refSections": [{"refs": [{"id": "ref-for-dfn-dictionary-member"}, {"id": "ref-for-dfn-dictionary-member\u2460"}, {"id": "ref-for-dfn-dictionary-member\u2461"}], "title": "8. The MediaImage dictionary"}, {"refs": [{"id": "ref-for-dfn-dictionary-member\u2462"}, {"id": "ref-for-dfn-dictionary-member\u2463"}, {"id": "ref-for-dfn-dictionary-member\u2464"}], "title": "9. The MediaPositionState\ndictionary"}, {"refs": [{"id": "ref-for-dfn-dictionary-member\u2465"}, {"id": "ref-for-dfn-dictionary-member\u2466"}, {"id": "ref-for-dfn-dictionary-member\u2467"}, {"id": "ref-for-dfn-dictionary-member\u2468"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": true};
+window.dfnpanelData['8c800cdf'] = {"dfnID": "8c800cdf", "url": "https://webidl.spec.whatwg.org/#idl-double", "dfnText": "double", "refSections": [{"refs": [{"id": "ref-for-idl-double"}, {"id": "ref-for-idl-double\u2460"}, {"id": "ref-for-idl-double\u2461"}], "title": "9. The MediaPositionState\ndictionary"}, {"refs": [{"id": "ref-for-idl-double\u2462"}, {"id": "ref-for-idl-double\u2463"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": true};
+window.dfnpanelData['5a2f390d'] = {"dfnID": "5a2f390d", "url": "https://tc39.es/ecma262/#sec-object.freeze", "dfnText": "freeze", "refSections": [{"refs": [{"id": "ref-for-sec-object.freeze"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['9cce47fd'] = {"dfnID": "9cce47fd", "url": "https://webidl.spec.whatwg.org/#idl-sequence", "dfnText": "sequence", "refSections": [{"refs": [{"id": "ref-for-idl-sequence"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['5f90bbfb'] = {"dfnID": "5f90bbfb", "url": "https://webidl.spec.whatwg.org/#idl-undefined", "dfnText": "undefined", "refSections": [{"refs": [{"id": "ref-for-idl-undefined"}, {"id": "ref-for-idl-undefined\u2460"}, {"id": "ref-for-idl-undefined\u2461"}, {"id": "ref-for-idl-undefined\u2462"}, {"id": "ref-for-idl-undefined\u2463"}], "title": "6. The MediaSession interface"}], "external": true};
+window.dfnpanelData['guessed-playback-state'] = {"dfnID": "guessed-playback-state", "url": "#guessed-playback-state", "dfnText": "guessed playback state", "refSections": [{"refs": [{"id": "ref-for-guessed-playback-state"}, {"id": "ref-for-guessed-playback-state\u2460"}, {"id": "ref-for-guessed-playback-state\u2461"}, {"id": "ref-for-guessed-playback-state\u2462"}], "title": "5.1. Playback State"}], "external": false};
+window.dfnpanelData['actual-playback-state'] = {"dfnID": "actual-playback-state", "url": "#actual-playback-state", "dfnText": "actual playback state", "refSections": [{"refs": [{"id": "ref-for-actual-playback-state"}, {"id": "ref-for-actual-playback-state\u2460"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-actual-playback-state\u2461"}, {"id": "ref-for-actual-playback-state\u2462"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-actual-playback-state\u2463"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-actual-playback-state\u2464"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['active-media-session'] = {"dfnID": "active-media-session", "url": "#active-media-session", "dfnText": "active media session", "refSections": [{"refs": [{"id": "ref-for-active-media-session"}], "title": "4.3. Media Session Actions"}, {"refs": [{"id": "ref-for-active-media-session\u2460"}, {"id": "ref-for-active-media-session\u2461"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-active-media-session\u2462"}, {"id": "ref-for-active-media-session\u2463"}, {"id": "ref-for-active-media-session\u2464"}, {"id": "ref-for-active-media-session\u2465"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-active-media-session\u2466"}, {"id": "ref-for-active-media-session\u2467"}, {"id": "ref-for-active-media-session\u2468"}, {"id": "ref-for-active-media-session\u2460\u24ea"}, {"id": "ref-for-active-media-session\u2460\u2460"}, {"id": "ref-for-active-media-session\u2460\u2461"}, {"id": "ref-for-active-media-session\u2460\u2462"}, {"id": "ref-for-active-media-session\u2460\u2463"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-active-media-session\u2460\u2464"}, {"id": "ref-for-active-media-session\u2460\u2465"}, {"id": "ref-for-active-media-session\u2460\u2466"}, {"id": "ref-for-active-media-session\u2460\u2467"}, {"id": "ref-for-active-media-session\u2460\u2468"}, {"id": "ref-for-active-media-session\u2461\u24ea"}, {"id": "ref-for-active-media-session\u2461\u2460"}, {"id": "ref-for-active-media-session\u2461\u2461"}, {"id": "ref-for-active-media-session\u2461\u2462"}, {"id": "ref-for-active-media-session\u2461\u2463"}], "title": "5.4. Actions"}], "external": false};
+window.dfnpanelData['audio-focus'] = {"dfnID": "audio-focus", "url": "#audio-focus", "dfnText": "audio focus", "refSections": [{"refs": [{"id": "ref-for-audio-focus"}], "title": "5.2. Routing"}], "external": false};
+window.dfnpanelData['update-metadata-algorithm'] = {"dfnID": "update-metadata-algorithm", "url": "#update-metadata-algorithm", "dfnText": "update metadata\n    algorithm", "refSections": [{"refs": [{"id": "ref-for-update-metadata-algorithm"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-update-metadata-algorithm\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-update-metadata-algorithm\u2461"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['fetch-image-algorithm'] = {"dfnID": "fetch-image-algorithm", "url": "#fetch-image-algorithm", "dfnText": "fetch image algorithm", "refSections": [{"refs": [{"id": "ref-for-fetch-image-algorithm"}, {"id": "ref-for-fetch-image-algorithm\u2460"}, {"id": "ref-for-fetch-image-algorithm\u2461"}, {"id": "ref-for-fetch-image-algorithm\u2462"}], "title": "5.3. Metadata"}], "external": false};
+window.dfnpanelData['preferred-artwork-image'] = {"dfnID": "preferred-artwork-image", "url": "#preferred-artwork-image", "dfnText": "preferred artwork image", "refSections": [{"refs": [{"id": "ref-for-preferred-artwork-image"}], "title": "5.3. Metadata"}], "external": false};
+window.dfnpanelData['media-session-action'] = {"dfnID": "media-session-action", "url": "#media-session-action", "dfnText": "media session action", "refSections": [{"refs": [{"id": "ref-for-media-session-action"}], "title": "4.3. Media Session Actions"}, {"refs": [{"id": "ref-for-media-session-action\u2460"}, {"id": "ref-for-media-session-action\u2461"}, {"id": "ref-for-media-session-action\u2462"}, {"id": "ref-for-media-session-action\u2463"}, {"id": "ref-for-media-session-action\u2464"}, {"id": "ref-for-media-session-action\u2465"}, {"id": "ref-for-media-session-action\u2466"}, {"id": "ref-for-media-session-action\u2467"}, {"id": "ref-for-media-session-action\u2468"}, {"id": "ref-for-media-session-action\u2460\u24ea"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-media-session-action\u2460\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-media-session-action\u2460\u2461"}, {"id": "ref-for-media-session-action\u2460\u2462"}, {"id": "ref-for-media-session-action\u2460\u2463"}, {"id": "ref-for-media-session-action\u2460\u2464"}], "title": "10. The\nMediaSessionActionDetails dictionary"}, {"refs": [{"id": "ref-for-media-session-action\u2460\u2465"}], "title": "11. Examples"}], "external": false};
+window.dfnpanelData['media-session-action-source'] = {"dfnID": "media-session-action-source", "url": "#media-session-action-source", "dfnText": "media session action source", "refSections": [{"refs": [{"id": "ref-for-media-session-action-source"}, {"id": "ref-for-media-session-action-source\u2460"}, {"id": "ref-for-media-session-action-source\u2461"}, {"id": "ref-for-media-session-action-source\u2462"}, {"id": "ref-for-media-session-action-source\u2463"}, {"id": "ref-for-media-session-action-source\u2464"}, {"id": "ref-for-media-session-action-source\u2465"}], "title": "5.4. Actions"}], "external": false};
+window.dfnpanelData['media-session-action-source-target'] = {"dfnID": "media-session-action-source-target", "url": "#media-session-action-source-target", "dfnText": "target", "refSections": [{"refs": [{"id": "ref-for-media-session-action-source-target"}, {"id": "ref-for-media-session-action-source-target\u2460"}], "title": "5.4. Actions"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-play'] = {"dfnID": "dom-mediasessionaction-play", "url": "#dom-mediasessionaction-play", "dfnText": "play", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-play"}, {"id": "ref-for-dom-mediasessionaction-play\u2460"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-play\u2461"}, {"id": "ref-for-dom-mediasessionaction-play\u2462"}, {"id": "ref-for-dom-mediasessionaction-play\u2463"}, {"id": "ref-for-dom-mediasessionaction-play\u2464"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-play\u2465"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-pause'] = {"dfnID": "dom-mediasessionaction-pause", "url": "#dom-mediasessionaction-pause", "dfnText": "pause", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-pause"}, {"id": "ref-for-dom-mediasessionaction-pause\u2460"}, {"id": "ref-for-dom-mediasessionaction-pause\u2461"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-pause\u2462"}, {"id": "ref-for-dom-mediasessionaction-pause\u2463"}, {"id": "ref-for-dom-mediasessionaction-pause\u2464"}, {"id": "ref-for-dom-mediasessionaction-pause\u2465"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-pause\u2466"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-seekbackward'] = {"dfnID": "dom-mediasessionaction-seekbackward", "url": "#dom-mediasessionaction-seekbackward", "dfnText": "seekbackward", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-seekbackward"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-seekbackward\u2460"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-seekforward'] = {"dfnID": "dom-mediasessionaction-seekforward", "url": "#dom-mediasessionaction-seekforward", "dfnText": "seekforward", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-seekforward"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-seekforward\u2460"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-previoustrack'] = {"dfnID": "dom-mediasessionaction-previoustrack", "url": "#dom-mediasessionaction-previoustrack", "dfnText": "previoustrack", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-previoustrack"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-nexttrack'] = {"dfnID": "dom-mediasessionaction-nexttrack", "url": "#dom-mediasessionaction-nexttrack", "dfnText": "nexttrack", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-nexttrack"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-skipad'] = {"dfnID": "dom-mediasessionaction-skipad", "url": "#dom-mediasessionaction-skipad", "dfnText": "skipad", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-skipad"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-stop'] = {"dfnID": "dom-mediasessionaction-stop", "url": "#dom-mediasessionaction-stop", "dfnText": "stop", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-stop"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-seekto'] = {"dfnID": "dom-mediasessionaction-seekto", "url": "#dom-mediasessionaction-seekto", "dfnText": "seekto", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-seekto"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-seekto\u2460"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-togglemicrophone'] = {"dfnID": "dom-mediasessionaction-togglemicrophone", "url": "#dom-mediasessionaction-togglemicrophone", "dfnText": "togglemicrophone", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-togglemicrophone"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-togglemicrophone\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-togglecamera'] = {"dfnID": "dom-mediasessionaction-togglecamera", "url": "#dom-mediasessionaction-togglecamera", "dfnText": "togglecamera", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-togglecamera"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-togglecamera\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-hangup'] = {"dfnID": "dom-mediasessionaction-hangup", "url": "#dom-mediasessionaction-hangup", "dfnText": "hangup", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-hangup"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-hangup\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-previousslide'] = {"dfnID": "dom-mediasessionaction-previousslide", "url": "#dom-mediasessionaction-previousslide", "dfnText": "previousslide", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-previousslide"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-nextslide'] = {"dfnID": "dom-mediasessionaction-nextslide", "url": "#dom-mediasessionaction-nextslide", "dfnText": "nextslide", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-nextslide"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['supported-media-session-actions'] = {"dfnID": "supported-media-session-actions", "url": "#supported-media-session-actions", "dfnText": "supported media session\n      actions", "refSections": [{"refs": [{"id": "ref-for-supported-media-session-actions"}, {"id": "ref-for-supported-media-session-actions\u2460"}, {"id": "ref-for-supported-media-session-actions\u2461"}, {"id": "ref-for-supported-media-session-actions\u2462"}, {"id": "ref-for-supported-media-session-actions\u2463"}, {"id": "ref-for-supported-media-session-actions\u2464"}], "title": "5.4. Actions"}], "external": false};
+window.dfnpanelData['update-action-handler-algorithm'] = {"dfnID": "update-action-handler-algorithm", "url": "#update-action-handler-algorithm", "dfnText": "update action handler algorithm", "refSections": [{"refs": [{"id": "ref-for-update-action-handler-algorithm"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['handle-media-session-action'] = {"dfnID": "handle-media-session-action", "url": "#handle-media-session-action", "dfnText": "handle media session action", "refSections": [{"refs": [{"id": "ref-for-handle-media-session-action"}], "title": "5.4. Actions"}], "external": false};
+window.dfnpanelData['media-session-actions-update-algorithm'] = {"dfnID": "media-session-actions-update-algorithm", "url": "#media-session-actions-update-algorithm", "dfnText": "media session actions update algorithm", "refSections": [{"refs": [{"id": "ref-for-media-session-actions-update-algorithm"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-media-session-actions-update-algorithm\u2460"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-media-session-actions-update-algorithm\u2461"}, {"id": "ref-for-media-session-actions-update-algorithm\u2462"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-media-session-actions-update-algorithm\u2463"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['position-state①'] = {"dfnID": "position-state\u2460", "url": "#position-state\u2460", "dfnText": "position state", "refSections": [{"refs": [{"id": "ref-for-position-state\u2460"}, {"id": "ref-for-position-state\u2460\u2460"}, {"id": "ref-for-position-state\u2460\u2461"}, {"id": "ref-for-position-state\u2460\u2462"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-position-state\u2460\u2463"}, {"id": "ref-for-position-state\u2460\u2464"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-position-state\u2460\u2465"}], "title": "11. Examples"}], "external": false};
+window.dfnpanelData['duration'] = {"dfnID": "duration", "url": "#duration", "dfnText": "duration", "refSections": [{"refs": [{"id": "ref-for-duration"}, {"id": "ref-for-duration\u2460"}, {"id": "ref-for-duration\u2461"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-duration\u2462"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['playback-rate'] = {"dfnID": "playback-rate", "url": "#playback-rate", "dfnText": "playback rate", "refSections": [{"refs": [{"id": "ref-for-playback-rate"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-playback-rate\u2460"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['last-reported-playback-position'] = {"dfnID": "last-reported-playback-position", "url": "#last-reported-playback-position", "dfnText": "last reported playback position", "refSections": [{"refs": [{"id": "ref-for-last-reported-playback-position"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-last-reported-playback-position\u2460"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['last-position-updated-time'] = {"dfnID": "last-position-updated-time", "url": "#last-position-updated-time", "dfnText": "last position updated time", "refSections": [{"refs": [{"id": "ref-for-last-position-updated-time"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-last-position-updated-time\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['actual-playback-rate'] = {"dfnID": "actual-playback-rate", "url": "#actual-playback-rate", "dfnText": "actual playback rate", "refSections": [{"refs": [{"id": "ref-for-actual-playback-rate"}], "title": "5.5. Position State"}], "external": false};
+window.dfnpanelData['current-playback-position'] = {"dfnID": "current-playback-position", "url": "#current-playback-position", "dfnText": "current playback position", "refSections": [{"refs": [{"id": "ref-for-current-playback-position"}], "title": "5.5. Position State"}], "external": false};
+window.dfnpanelData['enumdef-mediasessionplaybackstate'] = {"dfnID": "enumdef-mediasessionplaybackstate", "url": "#enumdef-mediasessionplaybackstate", "dfnText": "MediaSessionPlaybackState", "refSections": [{"refs": [{"id": "ref-for-enumdef-mediasessionplaybackstate"}, {"id": "ref-for-enumdef-mediasessionplaybackstate\u2460"}, {"id": "ref-for-enumdef-mediasessionplaybackstate\u2461"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['enumdef-mediasessionaction'] = {"dfnID": "enumdef-mediasessionaction", "url": "#enumdef-mediasessionaction", "dfnText": "MediaSessionAction", "refSections": [{"refs": [{"id": "ref-for-enumdef-mediasessionaction"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-enumdef-mediasessionaction\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-enumdef-mediasessionaction\u2461"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['callbackdef-mediasessionactionhandler'] = {"dfnID": "callbackdef-mediasessionactionhandler", "url": "#callbackdef-mediasessionactionhandler", "dfnText": "MediaSessionActionHandler", "refSections": [{"refs": [{"id": "ref-for-callbackdef-mediasessionactionhandler"}, {"id": "ref-for-callbackdef-mediasessionactionhandler\u2460"}, {"id": "ref-for-callbackdef-mediasessionactionhandler\u2461"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-callbackdef-mediasessionactionhandler\u2462"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-callbackdef-mediasessionactionhandler\u2463"}, {"id": "ref-for-callbackdef-mediasessionactionhandler\u2464"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['mediasession'] = {"dfnID": "mediasession", "url": "#mediasession", "dfnText": "MediaSession", "refSections": [{"refs": [{"id": "ref-for-mediasession"}, {"id": "ref-for-mediasession\u2460"}, {"id": "ref-for-mediasession\u2461"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-mediasession\u2462"}, {"id": "ref-for-mediasession\u2463"}, {"id": "ref-for-mediasession\u2464"}, {"id": "ref-for-mediasession\u2465"}, {"id": "ref-for-mediasession\u2466"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-mediasession\u2467"}, {"id": "ref-for-mediasession\u2468"}, {"id": "ref-for-mediasession\u2460\u24ea"}, {"id": "ref-for-mediasession\u2460\u2460"}, {"id": "ref-for-mediasession\u2460\u2461"}, {"id": "ref-for-mediasession\u2460\u2462"}, {"id": "ref-for-mediasession\u2460\u2463"}, {"id": "ref-for-mediasession\u2460\u2464"}, {"id": "ref-for-mediasession\u2460\u2465"}, {"id": "ref-for-mediasession\u2460\u2466"}, {"id": "ref-for-mediasession\u2460\u2467"}, {"id": "ref-for-mediasession\u2460\u2468"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-mediasession\u2461\u24ea"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-mediasession\u2461\u2460"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['mediasession-metadata'] = {"dfnID": "mediasession-metadata", "url": "#mediasession-metadata", "dfnText": "metadata", "refSections": [{"refs": [{"id": "ref-for-mediasession-metadata"}, {"id": "ref-for-mediasession-metadata\u2460"}, {"id": "ref-for-mediasession-metadata\u2461"}, {"id": "ref-for-mediasession-metadata\u2462"}, {"id": "ref-for-mediasession-metadata\u2463"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-mediasession-metadata\u2464"}, {"id": "ref-for-mediasession-metadata\u2465"}], "title": "11. Examples"}], "external": false};
+window.dfnpanelData['dom-navigator-mediasession'] = {"dfnID": "dom-navigator-mediasession", "url": "#dom-navigator-mediasession", "dfnText": "mediaSession", "refSections": [{"refs": [{"id": "ref-for-dom-navigator-mediasession"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-metadata'] = {"dfnID": "dom-mediasession-metadata", "url": "#dom-mediasession-metadata", "dfnText": "metadata", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-metadata"}, {"id": "ref-for-dom-mediasession-metadata\u2460"}, {"id": "ref-for-dom-mediasession-metadata\u2461"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-dom-mediasession-metadata\u2462"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-playbackstate'] = {"dfnID": "dom-mediasession-playbackstate", "url": "#dom-mediasession-playbackstate", "dfnText": "playbackState", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-playbackstate"}, {"id": "ref-for-dom-mediasession-playbackstate\u2460"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-dom-mediasession-playbackstate\u2461"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-dom-mediasession-playbackstate\u2462"}, {"id": "ref-for-dom-mediasession-playbackstate\u2463"}, {"id": "ref-for-dom-mediasession-playbackstate\u2464"}, {"id": "ref-for-dom-mediasession-playbackstate\u2465"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediasession-playbackstate\u2466"}], "title": "11. Examples"}], "external": false};
+window.dfnpanelData['declared-playback-state'] = {"dfnID": "declared-playback-state", "url": "#declared-playback-state", "dfnText": "declared playback state", "refSections": [{"refs": [{"id": "ref-for-declared-playback-state"}, {"id": "ref-for-declared-playback-state\u2460"}], "title": "5.1. Playback State"}], "external": false};
+window.dfnpanelData['dom-mediasessionplaybackstate-none'] = {"dfnID": "dom-mediasessionplaybackstate-none", "url": "#dom-mediasessionplaybackstate-none", "dfnText": "none", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-none"}, {"id": "ref-for-dom-mediasessionplaybackstate-none\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionplaybackstate-playing'] = {"dfnID": "dom-mediasessionplaybackstate-playing", "url": "#dom-mediasessionplaybackstate-playing", "dfnText": "playing", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-playing"}, {"id": "ref-for-dom-mediasessionplaybackstate-playing\u2460"}, {"id": "ref-for-dom-mediasessionplaybackstate-playing\u2461"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-playing\u2462"}, {"id": "ref-for-dom-mediasessionplaybackstate-playing\u2463"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-playing\u2464"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionplaybackstate-paused'] = {"dfnID": "dom-mediasessionplaybackstate-paused", "url": "#dom-mediasessionplaybackstate-paused", "dfnText": "paused", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-paused"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-paused\u2460"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-paused\u2461"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-setactionhandler'] = {"dfnID": "dom-mediasession-setactionhandler", "url": "#dom-mediasession-setactionhandler", "dfnText": "setActionHandler(action, handler)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setactionhandler"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-setpositionstate'] = {"dfnID": "dom-mediasession-setpositionstate", "url": "#dom-mediasession-setpositionstate", "dfnText": "setPositionState(state)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setpositionstate"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-setmicrophoneactive'] = {"dfnID": "dom-mediasession-setmicrophoneactive", "url": "#dom-mediasession-setmicrophoneactive", "dfnText": "setMicrophoneActive(active)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setmicrophoneactive"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-setcameraactive'] = {"dfnID": "dom-mediasession-setcameraactive", "url": "#dom-mediasession-setcameraactive", "dfnText": "setCameraActive(active)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setcameraactive"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['mediametadata'] = {"dfnID": "mediametadata", "url": "#mediametadata", "dfnText": "MediaMetadata", "refSections": [{"refs": [{"id": "ref-for-mediametadata"}, {"id": "ref-for-mediametadata\u2460"}, {"id": "ref-for-mediametadata\u2461"}, {"id": "ref-for-mediametadata\u2462"}, {"id": "ref-for-mediametadata\u2463"}], "title": "4.1. User interface guidelines"}, {"refs": [{"id": "ref-for-mediametadata\u2464"}], "title": "4.2. Incognito mode"}, {"refs": [{"id": "ref-for-mediametadata\u2465"}, {"id": "ref-for-mediametadata\u2466"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-mediametadata\u2467"}, {"id": "ref-for-mediametadata\u2468"}, {"id": "ref-for-mediametadata\u2460\u24ea"}, {"id": "ref-for-mediametadata\u2460\u2460"}, {"id": "ref-for-mediametadata\u2460\u2461"}, {"id": "ref-for-mediametadata\u2460\u2462"}, {"id": "ref-for-mediametadata\u2460\u2463"}, {"id": "ref-for-mediametadata\u2460\u2464"}, {"id": "ref-for-mediametadata\u2460\u2465"}, {"id": "ref-for-mediametadata\u2460\u2466"}, {"id": "ref-for-mediametadata\u2460\u2467"}, {"id": "ref-for-mediametadata\u2460\u2468"}, {"id": "ref-for-mediametadata\u2461\u24ea"}, {"id": "ref-for-mediametadata\u2461\u2460"}, {"id": "ref-for-mediametadata\u2461\u2461"}, {"id": "ref-for-mediametadata\u2461\u2462"}, {"id": "ref-for-mediametadata\u2461\u2463"}, {"id": "ref-for-mediametadata\u2461\u2464"}, {"id": "ref-for-mediametadata\u2461\u2465"}, {"id": "ref-for-mediametadata\u2461\u2466"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dictdef-mediametadatainit'] = {"dfnID": "dictdef-mediametadatainit", "url": "#dictdef-mediametadatainit", "dfnText": "MediaMetadataInit", "refSections": [{"refs": [{"id": "ref-for-dictdef-mediametadatainit"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadatainit-title'] = {"dfnID": "dom-mediametadatainit-title", "url": "#dom-mediametadatainit-title", "dfnText": "title", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadatainit-title"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadatainit-artist'] = {"dfnID": "dom-mediametadatainit-artist", "url": "#dom-mediametadatainit-artist", "dfnText": "artist", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadatainit-artist"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadatainit-album'] = {"dfnID": "dom-mediametadatainit-album", "url": "#dom-mediametadatainit-album", "dfnText": "album", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadatainit-album"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadatainit-artwork'] = {"dfnID": "dom-mediametadatainit-artwork", "url": "#dom-mediametadatainit-artwork", "dfnText": "artwork", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadatainit-artwork"}, {"id": "ref-for-dom-mediametadatainit-artwork\u2460"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['mediametadata-media-session'] = {"dfnID": "mediametadata-media-session", "url": "#mediametadata-media-session", "dfnText": "media\n  session", "refSections": [{"refs": [{"id": "ref-for-mediametadata-media-session"}, {"id": "ref-for-mediametadata-media-session\u2460"}, {"id": "ref-for-mediametadata-media-session\u2461"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-mediametadata-media-session\u2462"}, {"id": "ref-for-mediametadata-media-session\u2463"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-mediametadata-media-session\u2464"}], "title": "11. Examples"}], "external": false};
+window.dfnpanelData['mediametadata-title'] = {"dfnID": "mediametadata-title", "url": "#mediametadata-title", "dfnText": "title", "refSections": [{"refs": [{"id": "ref-for-mediametadata-title"}, {"id": "ref-for-mediametadata-title\u2460"}, {"id": "ref-for-mediametadata-title\u2461"}, {"id": "ref-for-mediametadata-title\u2462"}, {"id": "ref-for-mediametadata-title\u2463"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['mediametadata-artist'] = {"dfnID": "mediametadata-artist", "url": "#mediametadata-artist", "dfnText": "artist", "refSections": [{"refs": [{"id": "ref-for-mediametadata-artist"}, {"id": "ref-for-mediametadata-artist\u2460"}, {"id": "ref-for-mediametadata-artist\u2461"}, {"id": "ref-for-mediametadata-artist\u2462"}, {"id": "ref-for-mediametadata-artist\u2463"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['mediametadata-album'] = {"dfnID": "mediametadata-album", "url": "#mediametadata-album", "dfnText": "album", "refSections": [{"refs": [{"id": "ref-for-mediametadata-album"}, {"id": "ref-for-mediametadata-album\u2460"}, {"id": "ref-for-mediametadata-album\u2461"}, {"id": "ref-for-mediametadata-album\u2462"}, {"id": "ref-for-mediametadata-album\u2463"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['mediametadata-artwork-images'] = {"dfnID": "mediametadata-artwork-images", "url": "#mediametadata-artwork-images", "dfnText": "artwork\n  images", "refSections": [{"refs": [{"id": "ref-for-mediametadata-artwork-images"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-mediametadata-artwork-images\u2460"}, {"id": "ref-for-mediametadata-artwork-images\u2461"}, {"id": "ref-for-mediametadata-artwork-images\u2462"}, {"id": "ref-for-mediametadata-artwork-images\u2463"}, {"id": "ref-for-mediametadata-artwork-images\u2464"}, {"id": "ref-for-mediametadata-artwork-images\u2465"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-mediametadata-artwork-images\u2466"}], "title": "11. Examples"}], "external": false};
+window.dfnpanelData['empty-metadata'] = {"dfnID": "empty-metadata", "url": "#empty-metadata", "dfnText": "empty metadata", "refSections": [{"refs": [{"id": "ref-for-empty-metadata"}], "title": "5.3. Metadata"}], "external": false};
+window.dfnpanelData['dom-mediametadata-mediametadata'] = {"dfnID": "dom-mediametadata-mediametadata", "url": "#dom-mediametadata-mediametadata", "dfnText": "MediaMetadata(init)", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadata-mediametadata"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['convert-artwork-algorithm'] = {"dfnID": "convert-artwork-algorithm", "url": "#convert-artwork-algorithm", "dfnText": "convert artwork algorithm", "refSections": [{"refs": [{"id": "ref-for-convert-artwork-algorithm"}, {"id": "ref-for-convert-artwork-algorithm\u2460"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadata-title'] = {"dfnID": "dom-mediametadata-title", "url": "#dom-mediametadata-title", "dfnText": "title", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadata-title"}, {"id": "ref-for-dom-mediametadata-title\u2460"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadata-artist'] = {"dfnID": "dom-mediametadata-artist", "url": "#dom-mediametadata-artist", "dfnText": "artist", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadata-artist"}, {"id": "ref-for-dom-mediametadata-artist\u2460"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadata-album'] = {"dfnID": "dom-mediametadata-album", "url": "#dom-mediametadata-album", "dfnText": "album", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadata-album"}, {"id": "ref-for-dom-mediametadata-album\u2460"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dom-mediametadata-artwork'] = {"dfnID": "dom-mediametadata-artwork", "url": "#dom-mediametadata-artwork", "dfnText": "artwork", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadata-artwork"}, {"id": "ref-for-dom-mediametadata-artwork\u2460"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-dom-mediametadata-artwork\u2461"}], "title": "7. The MediaMetadata interface"}], "external": false};
+window.dfnpanelData['dictdef-mediaimage'] = {"dfnID": "dictdef-mediaimage", "url": "#dictdef-mediaimage", "dfnText": "MediaImage", "refSections": [{"refs": [{"id": "ref-for-dictdef-mediaimage"}, {"id": "ref-for-dictdef-mediaimage\u2460"}, {"id": "ref-for-dictdef-mediaimage\u2461"}, {"id": "ref-for-dictdef-mediaimage\u2462"}, {"id": "ref-for-dictdef-mediaimage\u2463"}, {"id": "ref-for-dictdef-mediaimage\u2464"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-dictdef-mediaimage\u2465"}, {"id": "ref-for-dictdef-mediaimage\u2466"}, {"id": "ref-for-dictdef-mediaimage\u2467"}, {"id": "ref-for-dictdef-mediaimage\u2468"}, {"id": "ref-for-dictdef-mediaimage\u2460\u24ea"}], "title": "8. The MediaImage dictionary"}], "external": false};
+window.dfnpanelData['dom-mediaimage-src'] = {"dfnID": "dom-mediaimage-src", "url": "#dom-mediaimage-src", "dfnText": "src", "refSections": [{"refs": [{"id": "ref-for-dom-mediaimage-src"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-dom-mediaimage-src\u2460"}, {"id": "ref-for-dom-mediaimage-src\u2461"}, {"id": "ref-for-dom-mediaimage-src\u2462"}, {"id": "ref-for-dom-mediaimage-src\u2463"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-dom-mediaimage-src\u2464"}], "title": "8. The MediaImage dictionary"}], "external": false};
+window.dfnpanelData['dom-mediaimage-sizes'] = {"dfnID": "dom-mediaimage-sizes", "url": "#dom-mediaimage-sizes", "dfnText": "sizes", "refSections": [{"refs": [{"id": "ref-for-dom-mediaimage-sizes"}, {"id": "ref-for-dom-mediaimage-sizes\u2460"}, {"id": "ref-for-dom-mediaimage-sizes\u2461"}, {"id": "ref-for-dom-mediaimage-sizes\u2462"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-dom-mediaimage-sizes\u2463"}, {"id": "ref-for-dom-mediaimage-sizes\u2464"}, {"id": "ref-for-dom-mediaimage-sizes\u2465"}], "title": "8. The MediaImage dictionary"}], "external": false};
+window.dfnpanelData['dom-mediaimage-type'] = {"dfnID": "dom-mediaimage-type", "url": "#dom-mediaimage-type", "dfnText": "type", "refSections": [{"refs": [{"id": "ref-for-dom-mediaimage-type"}, {"id": "ref-for-dom-mediaimage-type\u2460"}, {"id": "ref-for-dom-mediaimage-type\u2461"}, {"id": "ref-for-dom-mediaimage-type\u2462"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-dom-mediaimage-type\u2463"}], "title": "8. The MediaImage dictionary"}], "external": false};
+window.dfnpanelData['dictdef-mediapositionstate'] = {"dfnID": "dictdef-mediapositionstate", "url": "#dictdef-mediapositionstate", "dfnText": "MediaPositionState", "refSections": [{"refs": [{"id": "ref-for-dictdef-mediapositionstate"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-dictdef-mediapositionstate\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dictdef-mediapositionstate\u2461"}, {"id": "ref-for-dictdef-mediapositionstate\u2462"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['dom-mediapositionstate-duration'] = {"dfnID": "dom-mediapositionstate-duration", "url": "#dom-mediapositionstate-duration", "dfnText": "duration", "refSections": [{"refs": [{"id": "ref-for-dom-mediapositionstate-duration"}, {"id": "ref-for-dom-mediapositionstate-duration\u2460"}, {"id": "ref-for-dom-mediapositionstate-duration\u2461"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediapositionstate-duration\u2462"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['dom-mediapositionstate-playbackrate'] = {"dfnID": "dom-mediapositionstate-playbackrate", "url": "#dom-mediapositionstate-playbackrate", "dfnText": "playbackRate", "refSections": [{"refs": [{"id": "ref-for-dom-mediapositionstate-playbackrate"}, {"id": "ref-for-dom-mediapositionstate-playbackrate\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediapositionstate-playbackrate\u2461"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['dom-mediapositionstate-position'] = {"dfnID": "dom-mediapositionstate-position", "url": "#dom-mediapositionstate-position", "dfnText": "position", "refSections": [{"refs": [{"id": "ref-for-dom-mediapositionstate-position"}, {"id": "ref-for-dom-mediapositionstate-position\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediapositionstate-position\u2461"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
+window.dfnpanelData['dictdef-mediasessionactiondetails'] = {"dfnID": "dictdef-mediasessionactiondetails", "url": "#dictdef-mediasessionactiondetails", "dfnText": "MediaSessionActionDetails", "refSections": [{"refs": [{"id": "ref-for-dictdef-mediasessionactiondetails"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dictdef-mediasessionactiondetails\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dictdef-mediasessionactiondetails\u2461"}, {"id": "ref-for-dictdef-mediasessionactiondetails\u2462"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['dom-mediasessionactiondetails-action'] = {"dfnID": "dom-mediasessionactiondetails-action", "url": "#dom-mediasessionactiondetails-action", "dfnText": "action", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionactiondetails-action"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['dom-mediasessionactiondetails-seekoffset'] = {"dfnID": "dom-mediasessionactiondetails-seekoffset", "url": "#dom-mediasessionactiondetails-seekoffset", "dfnText": "seekOffset", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionactiondetails-seekoffset"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['dom-mediasessionactiondetails-seektime'] = {"dfnID": "dom-mediasessionactiondetails-seektime", "url": "#dom-mediasessionactiondetails-seektime", "dfnText": "seekTime", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionactiondetails-seektime"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+window.dfnpanelData['dom-mediasessionactiondetails-fastseek'] = {"dfnID": "dom-mediasessionactiondetails-fastseek", "url": "#dom-mediasessionactiondetails-fastseek", "dfnText": "fastSeek", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionactiondetails-fastseek"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
+</script>
+<script>/* Boilerplate: script-dom-helper */
+function query(sel) { return document.querySelector(sel); }
+
+function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
+
+function iter(obj) {
+	if(!obj) return [];
+	var it = obj[Symbol.iterator];
+	if(it) return it;
+	return Object.entries(obj);
+}
+
+function mk(tagname, attrs, ...children) {
+	const el = document.createElement(tagname);
+	for(const [k,v] of iter(attrs)) {
+		if(k.slice(0,3) == "_on") {
+			const eventName = k.slice(3);
+			el.addEventListener(eventName, v);
+		} else if(k[0] == "_") {
+			// property, not attribute
+			el[k.slice(1)] = v;
+		} else {
+			if(v === false || v == null) {
+        continue;
+      } else if(v === true) {
+        el.setAttribute(k, "");
+        continue;
+      } else {
+  			el.setAttribute(k, v);
+      }
+		}
+	}
+	append(el, children);
+	return el;
+}
+
+/* Create shortcuts for every known HTML element */
+[
+  "a",
+  "abbr",
+  "acronym",
+  "address",
+  "applet",
+  "area",
+  "article",
+  "aside",
+  "audio",
+  "b",
+  "base",
+  "basefont",
+  "bdo",
+  "big",
+  "blockquote",
+  "body",
+  "br",
+  "button",
+  "canvas",
+  "caption",
+  "center",
+  "cite",
+  "code",
+  "col",
+  "colgroup",
+  "datalist",
+  "dd",
+  "del",
+  "details",
+  "dfn",
+  "dialog",
+  "div",
+  "dl",
+  "dt",
+  "em",
+  "embed",
+  "fieldset",
+  "figcaption",
+  "figure",
+  "font",
+  "footer",
+  "form",
+  "frame",
+  "frameset",
+  "head",
+  "header",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "hr",
+  "html",
+  "i",
+  "iframe",
+  "img",
+  "input",
+  "ins",
+  "kbd",
+  "label",
+  "legend",
+  "li",
+  "link",
+  "main",
+  "map",
+  "mark",
+  "meta",
+  "meter",
+  "nav",
+  "nobr",
+  "noscript",
+  "object",
+  "ol",
+  "optgroup",
+  "option",
+  "output",
+  "p",
+  "param",
+  "pre",
+  "progress",
+  "q",
+  "s",
+  "samp",
+  "script",
+  "section",
+  "select",
+  "small",
+  "source",
+  "span",
+  "strike",
+  "strong",
+  "style",
+  "sub",
+  "summary",
+  "sup",
+  "table",
+  "tbody",
+  "td",
+  "template",
+  "textarea",
+  "tfoot",
+  "th",
+  "thead",
+  "time",
+  "title",
+  "tr",
+  "u",
+  "ul",
+  "var",
+  "video",
+  "wbr",
+  "xmp",
+].forEach(tagname=>{
+	mk[tagname] = (...args) => mk(tagname, ...args);
 });
+
+function* nodesFromChildList(children) {
+	for(const child of children.flat(Infinity)) {
+		if(child instanceof Node) {
+			yield child;
+		} else {
+			yield new Text(child);
+		}
+	}
+}
+function append(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		if(el instanceof Node) el.appendChild(child);
+		else el.push(child);
+	}
+	return el;
+}
+
+function insertAfter(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		el.parentNode.insertBefore(child, el.nextSibling);
+	}
+	return el;
+}
+
+function clearContents(el) {
+	el.innerHTML = "";
+	return el;
+}
+
+function parseHTML(markup) {
+	if(markup.toLowerCase().trim().indexOf('<!doctype') === 0) {
+		const doc = document.implementation.createHTMLDocument("");
+		doc.documentElement.innerHTML = markup;
+		return doc;
+	} else {
+		const el = mk.template({});
+		el.innerHTML = markup;
+		return el.content;
+	}
+}
 </script>
