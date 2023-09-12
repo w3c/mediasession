@@ -75,6 +75,13 @@ urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
 urlPrefix: https://tc39.es/ecma262/#sec-object.; spec: WEBIDL;
     type: dfn
         text: freeze
+urlPrefix: https://www.w3.org/TR/permissions-policy-1/; spec: PermissionsPolicy
+    type: dfn;
+        text: policy-controlled feature; url:#policy-controlled-feature
+        text: default allowlist; url:#policy-controlled-feature-default-allowlist
+urlPrefix: https://html.spec.whatwg.org/multipage/dom.html; spec: dom
+    type: dfn
+        text: permissions policy; url:#concept-document-permissions-policy
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -1266,6 +1273,14 @@ When the <a>media session action</a> is
     as part of a sequence and this is not the last call in that sequence.
   </li>
 </ul>
+
+<h2 id="permissions-policy">Permissions Policy Integration</h2>
+
+This specification defines a <a>policy-controlled feature</a> identified by the
+string "mediasession". Its <a>default allowlist</a> is *.
+
+A document's <a>permissions policy</a> determines whether any content in that document is allowed to use the MediaSession API.
+If disabled in the document, the User Agent MUST NOT select the document's media session as the <a>active media session</a>.
 
 <h2 id="examples">Examples</h2>
 
