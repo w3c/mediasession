@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="2b9aa44eaa01c71f4086abc842c122d68a662a19" name="document-revision">
+  <meta content="ffe21685590c986f61de39629a29b1455185d4cb" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -669,7 +669,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-09-15">15 September 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-09-18">18 September 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1399,7 +1399,8 @@ should always be positive.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-action"><code>action</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑥">dictionary
 member</a> is used to specify the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①②">media session action</a> that the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler⑤">MediaSessionActionHandler</a></code> is associated with.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-seekoffset"><code>seekOffset</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑦">dictionary member</a> MAY be provided when the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①③">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①">seekbackward</a> or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①">seekforward</a>. It is the time in seconds
-to move the playback time by. If it is not provided then the site should choose
+to move the playback time by. If present, it should always be positive.
+If it is not provided then the site should choose
 a sensible time (e.g. a few seconds).</p>
    <p>When the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①④">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto①">seekto</a>:</p>
    <ul>
