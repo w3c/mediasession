@@ -1253,7 +1253,8 @@ The <dfn dict-member for="MediaSessionActionDetails">seekOffset</dfn>
 <a>dictionary member</a> MAY be provided when the <a>media session action</a>
 is <a enum-value for=MediaSessionAction>seekbackward</a> or
 <a enum-value for=MediaSessionAction>seekforward</a>. It is the time in seconds
-to move the playback time by. If it is not provided then the site should choose
+to move the playback time by. If present, it should always be positive.
+If it is not provided then the site should choose
 a sensible time (e.g. a few seconds).
 
 When the <a>media session action</a> is
