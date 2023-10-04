@@ -1232,19 +1232,9 @@ should always be positive.
 
 dictionary MediaSessionActionDetails {
   required MediaSessionAction action;
-};
-
-dictionary MediaSessionSeekActionDetails : MediaSessionActionDetails {
   double seekOffset;
-};
-
-dictionary MediaSessionSeekToActionDetails : MediaSessionActionDetails {
   double seekTime;
   boolean fastSeek;
-};
-
-dictionary MediaSessionPictureInPictureActionDetails : MediaSessionActionDetails {
-  boolean automatic;
 };
 </pre>
 
@@ -1257,7 +1247,7 @@ member</a>
 is used to specify the <a>media session action</a> that the
 {{MediaSessionActionHandler}} is associated with.
 
-The <dfn dict-member for="MediaSessionSeekActionDetails">seekOffset</dfn>
+The <dfn dict-member for="MediaSessionActionDetails">seekOffset</dfn>
 <a>dictionary member</a> MAY be provided when the <a>media session action</a>
 is <a enum-value for=MediaSessionAction>seekbackward</a> or
 <a enum-value for=MediaSessionAction>seekforward</a>. It is the time in seconds
@@ -1269,25 +1259,18 @@ When the <a>media session action</a> is
 
 <ul>
   <li>
-    The <dfn dict-member for="MediaSessionSeekToActionDetails">seekTime</dfn>
+    The <dfn dict-member for="MediaSessionActionDetails">seekTime</dfn>
     <a>dictionary member</a> MUST be provided and is the time in seconds to
     move the playback time to.
   </li>
 
   <li>
-    The <dfn dict-member for="MediaSessionSeekToActionDetails">fastSeek</dfn>
+    The <dfn dict-member for="MediaSessionActionDetails">fastSeek</dfn>
     <a>dictionary member</a> MAY be provided and will be true if the
     <a lt="media session action">action</a> is being called multiple times
     as part of a sequence and this is not the last call in that sequence.
   </li>
 </ul>
-
-The <dfn dict-member for="MediaSessionPictureInPictureActionDetails">automatic</dfn>
-<a>dictionary member</a> MUST be provided when the <a>media session action</a>
-is <a enum-value for=MediaSessionAction>enterpictureinpicture</a>. This boolean
-distinguishes an explicit user action to enter picture-in-picture (e.g. a
-picture-in-picture button on the user agent) and an automatic picture-in-picture
-action from the user agent when the content is hidden.
 
 <h2 id="examples">Examples</h2>
 
@@ -1544,10 +1527,7 @@ action from the user agent when the content is hidden.
 <div class="example" id="example-enterpictureinpicture">
   Handling picture-in-picture:
   <pre class="lang-javascript">
-    navigator.mediaSession.setActionHandler("enterpictureinpicture", function(details) {
-      if (details.automatic && !mywebsite.userSettings.allowAutomaticPictureInPicture) {
-        return;
-      }
+    navigator.mediaSession.setActionHandler("enterpictureinpicture", function() {
       video.requestPictureInPicture();
     });
   </pre>
