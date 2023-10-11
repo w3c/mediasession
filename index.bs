@@ -465,6 +465,10 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           <dfn enum-value for=MediaSessionAction>nextslide</dfn>: the action's intent
           is to go to the next slide when presenting slides.
         </li>
+        <li>
+          <dfn enum-value for=MediaSessionAction>enterpictureinpicture</dfn>: the action's intent
+          is to open the media session in a picture-in-picture window.
+        </li>
       </ul>
     </p>
 
@@ -756,7 +760,8 @@ enum MediaSessionAction {
   "togglecamera",
   "hangup",
   "previousslide",
-  "nextslide"
+  "nextslide",
+  "enterpictureinpicture"
 };
 
 callback MediaSessionActionHandler = undefined(MediaSessionActionDetails details);
@@ -1531,6 +1536,15 @@ If disabled in the document, the User Agent MUST NOT select the document's media
     navigator.mediaSession.setActionHandler("nextslide", function() {
       currentSlideIndex++;
       // Set current slide. Implementation omitted.
+    });
+  </pre>
+</div>
+
+<div class="example" id="example-enterpictureinpicture">
+  Handling picture-in-picture:
+  <pre class="lang-javascript">
+    navigator.mediaSession.setActionHandler("enterpictureinpicture", function() {
+      remoteVideo.requestPictureInPicture();
     });
   </pre>
 </div>
