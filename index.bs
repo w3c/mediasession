@@ -24,7 +24,7 @@ Abstract: notification areas and on lock screens of mobile devices.
 Ignored Vars: context, media, session
 </pre>
 
-<style>
+<style> 
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
 </style>
