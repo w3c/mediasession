@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="ffe21685590c986f61de39629a29b1455185d4cb" name="document-revision">
+  <meta content="5d4054a52170fe87192e6d251e6cc37f40e41888" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -669,7 +669,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-09-18">18 September 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-10-11">11 October 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -990,6 +990,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
           is to go back to the previous slide when presenting slides. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;nextslide&quot;|nextslide" id="dom-mediasessionaction-nextslide"><code>nextslide</code></dfn>: the action’s intent
           is to go to the next slide when presenting slides. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;enterpictureinpicture&quot;|enterpictureinpicture" id="dom-mediasessionaction-enterpictureinpicture"><code>enterpictureinpicture</code></dfn>: the action’s intent
+          is to open the media session in a picture-in-picture window. 
      </ul>
      <p></p>
      <p> All <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession④">MediaSession</a></code>s have a map of <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="supported media session actions" data-noexport id="supported-media-session-actions">supported media session
@@ -1137,7 +1139,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera①"><c- s>"togglecamera"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup" id="ref-for-dom-mediasessionaction-hangup①"><c- s>"hangup"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-previousslide" id="ref-for-dom-mediasessionaction-previousslide"><c- s>"previousslide"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nextslide" id="ref-for-dom-mediasessionaction-nextslide"><c- s>"nextslide"</c-></a>
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nextslide" id="ref-for-dom-mediasessionaction-nextslide"><c- s>"nextslide"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-enterpictureinpicture" id="ref-for-dom-mediasessionaction-enterpictureinpicture"><c- s>"enterpictureinpicture"</c-></a>
 };
 
 <c- b>callback</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export id="callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></dfn> = <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined"><c- b>undefined</c-></a>(<a data-link-type="idl-name" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails①"><c- n>MediaSessionActionDetails</c-></a> <dfn class="idl-code" data-dfn-for="MediaSessionActionHandler" data-dfn-type="argument" data-export id="dom-mediasessionactionhandler-details"><code><c- g>details</c-></code><a class="self-link" href="#dom-mediasessionactionhandler-details"></a></dfn>);
@@ -1634,6 +1637,13 @@ navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"
 <c- p>});</c->
 </pre>
    </div>
+   <div class="example" id="example-enterpictureinpicture">
+    <a class="self-link" href="#example-enterpictureinpicture"></a> Handling picture-in-picture: 
+<pre class="lang-javascript highlight">navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"enterpictureinpicture"</c-><c- p>,</c-> <c- a>function</c-><c- p>()</c-> <c- p>{</c->
+  remoteVideo<c- p>.</c->requestPictureInPicture<c- p>();</c->
+<c- p>});</c->
+</pre>
+   </div>
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
    <p>The editors would like to thank Paul Adenot, Jake Archibald, Tab Atkins,
 Jonathan Bailey, François Beaufort, Marcos Caceres, Domenic Denicola, Ralph
@@ -1732,6 +1742,8 @@ support in making this specification happen.</p>
      <li><a href="#dom-mediapositionstate-duration">dict-member for MediaPositionState</a><span>, in § 9</span>
     </ul>
    <li><a href="#empty-metadata">empty metadata</a><span>, in § 7</span>
+   <li><a href="#dom-mediasessionaction-enterpictureinpicture">"enterpictureinpicture"</a><span>, in § 5.4</span>
+   <li><a href="#dom-mediasessionaction-enterpictureinpicture">enterpictureinpicture</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionactiondetails-fastseek">fastSeek</a><span>, in § 10</span>
    <li><a href="#fetch-image-algorithm">fetch image algorithm</a><span>, in § 5.3</span>
    <li><a href="#guessed-playback-state">guessed playback state</a><span>, in § 5.1</span>
@@ -1951,7 +1963,8 @@ support in making this specification happen.</p>
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera"><c- s>"togglecamera"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup"><c- s>"hangup"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-previousslide"><c- s>"previousslide"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nextslide"><c- s>"nextslide"</c-></a>
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-nextslide"><c- s>"nextslide"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-enterpictureinpicture"><c- s>"enterpictureinpicture"</c-></a>
 };
 
 <c- b>callback</c-> <a href="#callbackdef-mediasessionactionhandler"><code><c- g>MediaSessionActionHandler</c-></code></a> = <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a>(<a data-link-type="idl-name" href="#dictdef-mediasessionactiondetails"><c- n>MediaSessionActionDetails</c-></a> <a href="#dom-mediasessionactionhandler-details"><code><c- g>details</c-></code></a>);
@@ -2377,6 +2390,7 @@ window.dfnpanelData['dom-mediasessionaction-togglecamera'] = {"dfnID": "dom-medi
 window.dfnpanelData['dom-mediasessionaction-hangup'] = {"dfnID": "dom-mediasessionaction-hangup", "url": "#dom-mediasessionaction-hangup", "dfnText": "hangup", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-hangup"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-dom-mediasessionaction-hangup\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['dom-mediasessionaction-previousslide'] = {"dfnID": "dom-mediasessionaction-previousslide", "url": "#dom-mediasessionaction-previousslide", "dfnText": "previousslide", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-previousslide"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['dom-mediasessionaction-nextslide'] = {"dfnID": "dom-mediasessionaction-nextslide", "url": "#dom-mediasessionaction-nextslide", "dfnText": "nextslide", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-nextslide"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasessionaction-enterpictureinpicture'] = {"dfnID": "dom-mediasessionaction-enterpictureinpicture", "url": "#dom-mediasessionaction-enterpictureinpicture", "dfnText": "enterpictureinpicture", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionaction-enterpictureinpicture"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['supported-media-session-actions'] = {"dfnID": "supported-media-session-actions", "url": "#supported-media-session-actions", "dfnText": "supported media session\n      actions", "refSections": [{"refs": [{"id": "ref-for-supported-media-session-actions"}, {"id": "ref-for-supported-media-session-actions\u2460"}, {"id": "ref-for-supported-media-session-actions\u2461"}, {"id": "ref-for-supported-media-session-actions\u2462"}, {"id": "ref-for-supported-media-session-actions\u2463"}, {"id": "ref-for-supported-media-session-actions\u2464"}], "title": "5.4. Actions"}], "external": false};
 window.dfnpanelData['update-action-handler-algorithm'] = {"dfnID": "update-action-handler-algorithm", "url": "#update-action-handler-algorithm", "dfnText": "update action handler algorithm", "refSections": [{"refs": [{"id": "ref-for-update-action-handler-algorithm"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['handle-media-session-action'] = {"dfnID": "handle-media-session-action", "url": "#handle-media-session-action", "dfnText": "handle media session action", "refSections": [{"refs": [{"id": "ref-for-handle-media-session-action"}], "title": "5.4. Actions"}], "external": false};
