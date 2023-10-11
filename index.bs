@@ -460,7 +460,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>enterpictureinpicture</dfn>: the action's intent
-          is to open the playback in a picture-in-picture window.
+          is to open the media session in a picture-in-picture window.
         </li>
       </ul>
     </p>
