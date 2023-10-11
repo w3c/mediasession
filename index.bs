@@ -1528,7 +1528,7 @@ When the <a>media session action</a> is
   Handling picture-in-picture:
   <pre class="lang-javascript">
     navigator.mediaSession.setActionHandler("enterpictureinpicture", function() {
-      video.requestPictureInPicture();
+      remoteVideo.requestPictureInPicture();
     });
   </pre>
 </div>
