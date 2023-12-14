@@ -950,12 +950,6 @@ dictionary MediaMetadataInit {
   sequence&lt;MediaImage> artwork = [];
   sequence<ChapterInformation> chapterInfo = [];
 };
-
-dictionary ChapterInformation {
-  DOMString title = "";
-  double startTime = "";
-  attribute FrozenArray<MediaImage> artwork;
-};
 </pre>
 
 <p>
@@ -981,6 +975,11 @@ dictionary ChapterInformation {
 </p>
 
 <p>
+  A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">
+  chapter information</dfn>.
+</p>
+
+<p>
   A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal
   to <code>null</code> or all the following conditions are true:
   <ul>
@@ -988,6 +987,8 @@ dictionary ChapterInformation {
     <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
     <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
     <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
+    is <code>0</code>.</li>
+    <li>Its <a for=MediaMetadata>chapter information</a> length
     is <code>0</code>.</li>
   </ul>
 </p>
@@ -1018,6 +1019,10 @@ dictionary ChapterInformation {
       {{MediaMetadataInit/artwork}} as <var>input</var> and set
       <var>metadata</var>'s <a for="MediaMetadata">artwork images</a> as the
       result if it succeeded.
+    </li>
+    <li>
+      Set <var>metadata</var>'s {{MediaMetadata/chapterInfo}} to
+      <var>init</var>'s {{MediaMetadataInit/chapterInfo}}.
     </li>
     <li>
       Return <var>metadata</var>.
@@ -1164,6 +1169,28 @@ invoked, the user agent MUST run the following steps:
     </li>
   </ol>
 </p>
+
+<h2 id="the-chapterinformation-dictionary">The {{ChapterInformation}} dictionary</h2>
+
+<pre class="idl">
+
+dictionary ChapterInformation {
+  DOMString title = "";
+  double startTime = "";
+  attribute FrozenArray<MediaImage> artwork;
+};
+</pre>
+
+The <dfn dict-member for="ChapterInformation">title</dfn> <a>dictionary member</a> is
+used to specify the {{ChapterInformation}} object's {{MediaImage/title}}. 
+
+The <dfn dict-member for="ChapterInformation">startTime</dfn> <a>dictionary member</a>
+is used to specify the {{ChapterInformation}} object's {{MediaImage/startTime}} in
+seconds. It should always be positive.
+
+The <dfn dict-member for="ChapterInformation">artwork</dfn> <a>dictionary member</a>
+is used to specify the {{ChapterInformation}} object's {{MediaImage/artwork}}.
+
 
 <h2 id="the-mediaimage-dictionary">The {{MediaImage}} dictionary</h2>
 
