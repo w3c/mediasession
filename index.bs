@@ -1197,7 +1197,7 @@ getting, it MUST return the result of the following steps:
     </li>
     <li>
       For each <var>entry</var> in the {{ChapterInformation}}'s <a
-      for="MediaMetadata">artwork images</a>, perform the following steps:
+      for="ChapterInformation">artwork images</a>, perform the following steps:
       <ol>
         <li>
           Let <var>image</var> be a new {{MediaImage}}.
@@ -1234,7 +1234,7 @@ getting, it MUST return the result of the following steps:
   </ol>
 
 On setting, it MUST run the <a>convert artwork algorithm</a> with the new value as
-<var>input</var>, and set the {{MediaMetadata}}'s <a for="ChapterInformation">artwork 
+<var>input</var>, and set the {{ChapterInformation}}'s <a for="ChapterInformation">artwork 
 images</a> as the result if it succeeded.
 
 
