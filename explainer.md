@@ -134,7 +134,7 @@ dictionary MediaImage {
 
 dictionary ChapterInformation {
   DOMString title = "";
-  double startTime = "";
+  double startTime = 0;
   attribute FrozenArray<MediaImage> artwork;
 };
 ```
