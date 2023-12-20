@@ -1406,7 +1406,7 @@ If disabled in the document, the User Agent MUST NOT select the document's media
         {src: "podcast.png", sizes: "128x128", type: "image/png"},
         {src: "podcast_hd.png", sizes: "256x256", type: "image/png"},
         {src: "podcast.ico", sizes: "128x128 256x256", type: "image/x-icon"}
-      ]
+      ],
       chapterInfo: [
         {title: "Chapter 1", startTime: 0, artwork: [
            {src: "chapter1_a.jpg", sizes: "128x128", type: "image/jpeg"},
