@@ -1381,14 +1381,18 @@ If disabled in the document, the User Agent MUST NOT select the document's media
       title: "Episode Title",
       artist: "Podcast Host",
       album: "Podcast Title",
-      artwork: [{src: "podcast.jpg"}]
+      artwork: [{src: "podcast.jpg"}],
+      chapterInfo: [
+        {title: "Chapter 1", startTime: 0, artwork: [{src: "chapter1.jpg"}]},
+        {title: "Chapter 2", startTime: 120, artwork: [{src: "chapter2.jpg"}]}
+      ]
     });
   </pre>
 
   Alternatively, providing multiple <a for="MediaMetadata" title="artwork
   image">artwork images</a> in the metadata can let the user agent be able to
   select different artwork images for different display purposes and better fit
-  for different screens:
+  for different screens (the same for the artwork in {{MediaMetadata/chapterInfo}}):
 
   <pre class="lang-javascript">
     navigator.mediaSession.metadata = new MediaMetadata({
@@ -1402,6 +1406,16 @@ If disabled in the document, the User Agent MUST NOT select the document's media
         {src: "podcast.png", sizes: "128x128", type: "image/png"},
         {src: "podcast_hd.png", sizes: "256x256", type: "image/png"},
         {src: "podcast.ico", sizes: "128x128 256x256", type: "image/x-icon"}
+      ]
+      chapterInfo: [
+        {title: "Chapter 1", startTime: 0, artwork: [
+           {src: "chapter1_a.jpg", sizes: "128x128", type: "image/jpeg"},
+           {src: "chapter1_b.png", sizes: "256x256", type: "image/png"}
+         ]},
+        {title: "Chapter 2", startTime: 120, artwork: [
+           {src: "chapter2_a.jpg", sizes: "128x128", type: "image/jpeg"},
+           {src: "chapter2_b.png", sizes: "256x256", type: "image/png"}
+         ]}
       ]
     });
   </pre>
