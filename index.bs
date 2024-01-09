@@ -50,44 +50,17 @@ table td, table th {
 
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
+    type:element; text:link
     type: dfn
-        urlPrefix: common-microsyntaxes.html
-            text: unordered set of unique space-separated tokens; url: #unordered-set-of-unique-space-separated-tokens
         urlPrefix: media.html
-            text: media element
             text: muted; url: #concept-media-muted
             text: potentially playing
-        urlPrefix: browsers.html
-            text: browsing context
         urlPrefix: webappapis.html
             text: entry settings object
-        urlPrefix: semantics.html
-            text: link; for: HTMLLinkElement; url:#the-link-element
         urlPrefix: interaction.html
             text: activation notification
-urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
-    type: dfn; urlPrefix: #concept-
-        text: fetch
-        text: internal response
-        text: response
-        text: response type
     type: dfn;
         text: force Origin header flag
-urlPrefix: https://tc39.es/ecma262/#sec-object.; spec: WEBIDL;
-    type: dfn
-        text: freeze
-urlPrefix: https://www.w3.org/TR/permissions-policy-1/; spec: PermissionsPolicy
-    type: dfn;
-        text: policy-controlled feature; url:#policy-controlled-feature
-        text: default allowlist; url:#policy-controlled-feature-default-allowlist
-urlPrefix: https://html.spec.whatwg.org/multipage/dom.html; spec: dom
-    type: dfn
-        text: permissions policy; url:#concept-document-permissions-policy
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/; spec: mediacapture-main
-    type: dfn
-        text: MediaStreamTrack; url:#mediastreamtrack
-        text: MediaStreamTrack muted state; url:#track-muted
-        text: set MediaStreamTrack muted state; url:#set-track-muted
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -101,43 +74,6 @@ media control center, device lockscreen, and wearable devices. This specificatio
 aims to enable web pages to specify the media metadata to be displayed in
 platform UI, and respond to media controls that may come from platform UI or
 media keys, thereby improving the user experience.
-
-<h2 id="conformance">Conformance</h2>
-
-All diagrams, examples, and notes in this specification are non-normative, as
-are all sections explicitly marked non-normative. Everything else in this
-specification is normative.
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in RFC 2119. For readability, these
-words do not appear in all uppercase letters in this specification. [[!RFC2119]]
-
-Requirements phrased in the imperative as part of algorithms (such as "strip any
-leading space characters" or "return false and terminate these steps") are to be
-interpreted with the meaning of the key word ("must", "should", "may", etc) used
-in introducing the algorithm.
-
-Conformance requirements phrased as algorithms or specific steps may be
-implemented in any manner, so long as the end result is equivalent. (In
-particular, the algorithms defined in this specification are intended to be easy
-to follow, and not intended to be performant.)
-
-User agents may impose implementation-specific limits on otherwise unconstrained
-inputs, e.g. to prevent denial of service attacks, to guard against running out
-of memory, or to work around platform-specific limitations.
-
-When a method or an attribute is said to call another method or attribute, the
-user agent must invoke its internal API for that attribute or method so that
-e.g. the author can't change the behavior by overriding attributes or methods
-with custom properties or functions in JavaScript.
-
-Unless otherwise stated, string comparisons use [=is|is identical to=].
-
-<h2 id="dependencies">Dependencies</h2>
-
-The IDL fragments in this specification must be interpreted as required for
-conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
 <section>
   <h2 id='security-privacy-considerations'>Security and Privacy
@@ -225,21 +161,20 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       In order to make {{MediaSessionAction/play}} and
       {{MediaSessionAction/pause}} actions work properly,
-      the user agent SHOULD be able to determine if a <a>browsing context</a> of
+      the user agent SHOULD be able to determine if a [=/browsing context=] of
       the <a>active media session</a> is playing media or not, which is called
       the <dfn>guessed playback state</dfn>. The RECOMMENDED way for determining
       the <a>guessed playback state</a> is to monitor the media elements whose
-      node document's browsing context is the <a>browsing context</a>. The
-      <a>browsing context</a>'s <a>guessed playback state</a> is <a enum-value
-      for="MediaSessionPlaybackState">playing</a> if any of them is
-      <a>potentially playing</a> and not <a>muted</a>, and is <a enum-value
+      node document's [=Document/browsing context=] is the [=/browsing context=]. The
+      [=/browsing context=]'s <a>guessed playback state</a> is {{MediaSessionPlaybackState/"playing"}}
+      if any of them is <a>potentially playing</a> and not <a>muted</a>, and is <a enum-value
       for="MediaSessionPlaybackState">paused</a> otherwise. Other information
       SHOULD also be considered, such as WebAudio and plugins.
     </p>
 
     <p>
-      The <a attribute for="MediaSession">playbackState</a> attribute specifies
-      the <a>declared playback state</a> from the <a>browsing context</a>. The
+      The {{MediaSession/playbackState}} attribute specifies
+      the <a>declared playback state</a> from the [=/browsing context=]. The
       state is combined with the <a>guessed playback state</a> to compute the
       <dfn>actual playback state</dfn>, which is a finalized state and will be
       used for
@@ -280,7 +215,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     There could be multiple {{MediaSession}} objects existing at the same time
     since the user agent could have multiple tabs, each tab could contain a
     <a>top-level browsing context</a> and multiple <a>nested browsing
-    contexts</a>, and each <a>browsing context</a> could have a {{MediaSession}}
+    contexts</a>, and each [=/browsing context=] could have a {{MediaSession}}
     object.
 
     The user agent MUST select at most one of the {{MediaSession}} objects to
@@ -291,7 +226,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     routing. It only takes effect for the <a>active media session</a>.
 
     It is RECOMMENDED that the user agent selects the <a>active media
-    session</a> by managing <a>audio focus</a>. A tab or <a>browsing context</a>
+    session</a> by managing <a>audio focus</a>. A tab or [=Window/browsing context=]
     is said to have <dfn>audio focus</dfn> if it is currently playing audio or
     the user expects to control the media in it. The AudioFocus API targets this
     area and could be used once it's finished.
@@ -357,11 +292,11 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
         <ol>
           <li>
-            Wait for the <a>response</a>.
+            Wait for the [=/response=].
           </li>
           <li>
-            If the <a>response</a>'s <a>internal response</a>'s <a lt="response
-            type">type</a> is <i>default</i>, attempt to decode the resource as
+            If the [=/response=]'s [=response/type=]
+            is {{ResponseType/"default"}}, attempt to decode the resource as
             an image.
           </li>
           <li>
@@ -542,7 +477,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         </li>
         <li>
           Run the <a>activation notification</a> steps in the
-          <a>browsing context</a> associated with <var>session</var>.
+          [=/browsing context=] associated with <var>session</var>.
         </li>
       </ol>
     </p>
@@ -663,7 +598,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
   </section>
 
   <section>
-    <h3 id='position-state'>Position State</h3>
+    <h3 id='position-state-sec'>Position State</h3>
 
     <p>
       A user agent MAY display the <a>current playback position</a> and
@@ -696,7 +631,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       The RECOMMENDED way to determine the <a>position state</a> is to monitor
       the media elements whose node document's browsing context is the
-      <a>browsing context</a>.
+      [=/browsing context=].
     </p>
 
     <p>
@@ -842,14 +777,14 @@ interface MediaSession {
 <p>
   The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
   attribute represents the <dfn>declared playback state</dfn> of the <a>media
-  session</a>, by which the session declares whether its <a>browsing context</a>
+  session</a>, by which the session declares whether its [=/browsing context=]
   is playing media or not. The initial value is <a enum-value
   for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST set
   the IDL attribute to the new value if it is a valid
   {{MediaSessionPlaybackState}} value. On getting, the user agent MUST return
   the last valid value that was set. The {{MediaSession/playbackState}}
-  attribute is a hint for the user agent to determine whether the <a>browsing
-  context</a> is playing or paused.
+  attribute is a hint for the user agent to determine whether the [=/browsing
+  context=] is playing or paused.
 </p>
 
 <p class=note>
@@ -859,23 +794,23 @@ interface MediaSession {
 
 <p>
   The {{MediaSessionPlaybackState}} enum is used to indicate whether a
-  <a>browsing context</a> is playing media or not, the values are described as
+  [=/browsing context=] is playing media or not, the values are described as
   follows:
 
   <ul>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the
-      <a>browsing context</a>
+      [=/browsing context=]
       does not specify whether it's playing or paused, it can only be used in
       the {{MediaSession/playbackState}} attribute.
     </li>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the
-      <a>browsing context</a> is currently playing media and it can be paused.
+      [=/browsing context=] is currently playing media and it can be paused.
     </li>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the
-      <a>browsing context</a> has paused media and it can be resumed.
+      [=/browsing context=] has paused media and it can be resumed.
     </li>
   </ul>
 </p>
@@ -887,7 +822,7 @@ interface MediaSession {
 </p>
 
 <p>
-  The <dfn method for=MediaSession>setPositionState(state)</dfn> method, when invoked
+  The <dfn method for=MediaSession>setPositionState(|state|)</dfn> method, when invoked
   MUST perform the following steps:
 
   <ul>
@@ -1257,7 +1192,7 @@ perform the following steps:
         better to do this with IDL primitives instead of JS - see
         https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
         <li>
-          Call <a lt="freeze">Object.freeze</a> on <var>image</var>, to prevent
+          Call {{Object/freeze(O)}} on <var>image</var>, to prevent
           accidental mutation by scripts.
         </li>
         <li>
@@ -1410,17 +1345,16 @@ dictionary MediaImage {
 {{ImageResource}} in [[IMAGE-RESOURCE]].</p>
 
 The <dfn dict-member for="MediaImage">src</dfn> <a>dictionary member</a> is used
-to specify the {{MediaImage}} object's <dfn for="MediaImage">source</dfn>. It is
+to specify the {{MediaImage}} object's <dfn attribute for="MediaImage">source</dfn>. It is
 a URL from which the user agent can fetch the image's data.
 
 The <dfn dict-member for="MediaImage">sizes</dfn> <a>dictionary member</a> is
 used to specify the {{MediaImage}} object's {{MediaImage/sizes}}. It follows the
-spec of <a attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in
-the HTML
-<a for="HTMLLinkElement"><code>link</code></a> element, which is a string
-consisting of an <a>unordered set of unique space-separated tokens</a> which are
-<a>ASCII case-insensitive</a> that represents the dimensions of an image. Each
-keyword is either an <a>ASCII case-insensitive</a> match for the string "any",
+spec of <{link/sizes}> attribute in
+the HTML <{link}> element, which is a string
+consisting of an [=unordered set of unique space-separated tokens=] which are
+[=ASCII case-insensitive=] that represents the dimensions of an image. Each
+keyword is either an [=ASCII case-insensitive=] match for the string "any",
 or a value that consists of two valid non-negative integers that do not have a
 leading U+0030 DIGIT ZERO (0) character and that are separated by a single
 U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The
@@ -1540,8 +1474,8 @@ policy of [=pausing all input sources=].
 
 <h2 id="permissions-policy">Permissions Policy Integration</h2>
 
-This specification defines a <a>policy-controlled feature</a> identified by the
-string "mediasession". Its <a>default allowlist</a> is *.
+This specification defines a [=policy-controlled feature=] identified by the
+string "mediasession". Its [=default allowlist=] is [=default allowlist/*=].
 
 A document's <a>permissions policy</a> determines whether any content in that document is allowed to use the MediaSession API.
 If disabled in the document, the User Agent MUST NOT select the document's media session as the <a>active media session</a>.
@@ -1609,7 +1543,7 @@ If disabled in the document, the User Agent MUST NOT select the document's media
 <div class="example" id="example-changing-metadata">
   Changing [=MediaSession/metadata=]:
 
-  For playlists or chapters of an audio book, multiple <a>media elements</a> can
+  For playlists or chapters of an audio book, multiple [=media elements=] can
   share a single <a>media session</a>.
 
   <pre class="lang-javascript">
