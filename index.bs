@@ -891,9 +891,15 @@ interface MediaSession {
       <code>NaN</code>, throw a <a exception>TypeError</a>.
     </li>
     <li>
+      If <var>state</var>'s <a dict-member for="MediaPositionState">position</a> is not present, set it to zero.
+    </li>
+    <li>
       If <var>state</var>'s <a dict-member for="MediaPositionState">position</a> is negative or
       greater than <a dict-member for="MediaPositionState">duration</a>, throw a
       <a exception>TypeError</a>.
+    </li>
+    <li>
+      If <var>state</var>'s <a dict-member for="MediaPositionState">playbackRate</a> is not present, set it to 1.0.
     </li>
     <li>
       If <var>state</var>'s <a dict-member for="MediaPositionState">playbackRate</a> is zero,
@@ -1197,8 +1203,8 @@ dictionary</h2>
 
 dictionary MediaPositionState {
   unrestricted double duration;
-  double playbackRate = 1.0;
-  double position = 0.0;
+  double playbackRate;
+  double position;
 };
 </pre>
 
