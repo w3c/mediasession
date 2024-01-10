@@ -85,6 +85,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/dom.html; spec: dom
         text: permissions policy; url:#concept-document-permissions-policy
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/; spec: mediacapture-main
     type: dfn
+        text: MediaStreamTrack; url:#mediastreamtrack
         text: MediaStreamTrack muted state; url:#track-muted
         text: set MediaStreamTrack muted state; url:#set-track-muted
 </pre>
@@ -786,9 +787,9 @@ interface MediaSession {
 
   undefined setPositionState(optional MediaPositionState state = {});
 
-  undefined setMicrophoneActive(boolean active);
+  Promise&lt;undefined&gt; setMicrophoneActive(boolean active);
 
-  undefined setCameraActive(boolean active);
+  Promise&lt;undefined&gt; setCameraActive(boolean active);
 };
 </pre>
 
@@ -922,14 +923,98 @@ interface MediaSession {
 </p>
 
 <p>
-  The <dfn method for=MediaSession>setMicrophoneActive(active)</dfn> and
-  <dfn method for=MediaSession>setCameraActive(active)</dfn> methods indicate to
-  the user agent whether the microphone and camera are currently considered by
-  the page to be active (e.g. if the microphone is considered "muted" by the
-  page since it is no longer sending audio through to a call, then the page can
-  invoke <code>setMicrophoneActive(false)</code>).
-  It is RECOMMENDED that the user agent respect the microphone and camera
-  states indicated by the page in this UI.
+  The <dfn method for=MediaSession>setMicrophoneActive(active)</dfn> method
+  indicates to the user agent the microphone state desired by the page (e.g. if
+  the microphone is considered "muted" by the page since it is no longer sending
+  audio through a call, the page can invoke
+  <code>setMicrophoneActive(false)</code>). When invoked, it MUST perform the
+  following steps:
+  <ul>
+    <li>
+      Let <var>document</var> be [=this=]'s [=relevant global object=]'s
+      [=associated Document=].
+    </li>
+    <li>
+      Let <var>captureKind</var> be "microphone".
+    </li>
+    <li>
+      Return the result of running the [=update capture state algorithm=] with
+      <var>document</var>, <var>active</var> and <var>captureKind</var>.
+    </li>
+  </ul>
+</p>
+<p>
+  Similarly, the <dfn method for=MediaSession>setCameraActive(active)</dfn>
+  method indicates to the user agent the camera state desired by the page. When
+  invoked, it MUST perform the following steps:
+  <ul>
+    <li>
+      Let <var>document</var> be [=this=]'s [=relevant global object=]'s
+      [=associated Document=].
+    </li>
+    <li>
+      Let <var>captureKind</var> be "camera".
+    </li>
+    <li>
+      Return the result of running the [=update capture state algorithm=] with
+      <var>document</var>, <var>active</var> and <var>captureKind</var>.
+    </li>
+  </ul>
+</p>
+<p>
+  When the <dfn>update capture state algorithm</dfn> is invoked with
+  <var>document</var>, <var>active</var> and <var>captureKind</var>, the user
+  agent MUST perform the following steps:
+  <ul>
+    <li>
+      If <var>document</var> is not [=fully active=], return [=a promise
+      rejected with=] <a exception>InvalidStateError</a>.
+    </li>
+    <li>
+      If <var>active</var> is <code>true</code> and <var>document</var>'s
+      [=Document/visibility state=] is not "visible", the user agent MAY return
+      [=a promise rejected with=] <a exception>InvalidStateError</a>.
+    </li>
+    <li>
+      Let <var>p</var> be a new promise.
+    </li>
+    <li>
+      <a>In parallel</a>, run the following substeps::
+      <ul>
+        <li>The user agent MAY wait to proceed, for instance if
+        <var>active</var> is <code>true</code> and <var>document</var>'s
+        [=Document/visibility state=] is not "visible".</li>
+        <li>If <var>active</var> corresponds to <var>captureKind</var>'s state,
+        resolve <var>p</var> with <code>undefined</code> and abort these
+        steps.</li>
+        <li>If the user agent denies the request to change
+        <var>captureKind</var>'s state to <var>active</var>, reject <var>p</var>
+        with a <a exception>NotAllowedError</a> and abort these steps.</li>
+        <li>Let <var>newMutedState</var> be <code>true</code> if
+        <var>active</var> is <code> false</code> and <code>false</code>
+        otherwise.</li>
+        <li>It is recommended that the user agent initiates a change to
+        <var>captureKind</var>'s [=MediaStreamTrack muted state|muted state=]
+        according <var>active</var>. When doing so, the user agent MUST <a>queue
+        a task</a> for any affected [=MediaStreamTrack=] to [=set
+        MediaStreamTrack muted state=] to <var>newMutedState</var>.</li>
+        <li>Update the user agent <var>captureKind</var>'s state UI according
+        <var>active</var>.</li>
+        <li>Resolve <var>p</var> with <code>undefined</code>.</li>
+      </ul>
+    </li>
+    <li>
+      Return <var>p</var>.
+    </li>
+  </ul>
+</p>
+<p class=note>
+  Both the <a>setMicrophoneActive(active)</a> and <a>setCameraActive(active)</a>
+  methods can reject based on user agent specific heuristics. This might in
+  particular happen when the web page asks to activate (aka unmute) microphone
+  or camera. The user agent could decide to require [=transient activation=] in
+  that case. It might also require user input through a prompt to make the
+  actual decision.
 </p>
 
 <p>
