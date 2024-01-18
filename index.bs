@@ -891,7 +891,7 @@ interface MediaSession {
       <code>NaN</code>, throw a <a exception>TypeError</a>.
     </li>
     <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">position</a> is not present, set it to zero.
+      If <var>state</var>'s {{MediaPositionState/position}} is not present, set it to zero.
     </li>
     <li>
       If <var>state</var>'s <a dict-member for="MediaPositionState">position</a> is negative or
