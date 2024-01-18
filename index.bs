@@ -887,7 +887,7 @@ interface MediaSession {
       present, throw a <a exception>TypeError</a>.
     </li>
     <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">duration</a> is negative or
+      If <var>state</var>'s {{MediaPositionState/duration}} is negative or
       <code>NaN</code>, throw a <a exception>TypeError</a>.
     </li>
     <li>
