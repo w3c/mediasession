@@ -902,7 +902,7 @@ interface MediaSession {
       If <var>state</var>'s <a dict-member for="MediaPositionState">playbackRate</a> is not present, set it to 1.0.
     </li>
     <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">playbackRate</a> is zero,
+      If <var>state</var>'s {{MediaPositionState/playbackRate}} is zero,
       throw a <a exception>TypeError</a>.
     </li>
     <li>
