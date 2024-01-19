@@ -13,6 +13,7 @@ Former Editor: Becca Hughes, w3cid 103353, Google Inc., beccahughes@google.com
 Former Editor: Zhiqiang Zhang, Google Inc., zqzhang@google.com
 Former Editor: Rich Tibbett, Opera, richt@opera.com
 
+Markup Shorthands: markdown yes
 Group: mediawg
 Logo: https://resources.whatwg.org/logo-mediasession.svg
 Abstract: This specification enables web developers to show customized media
@@ -90,10 +91,10 @@ urlPrefix: https://html.spec.whatwg.org/multipage/dom.html; spec: dom
 
 Media is used extensively today, and the Web is one of the primary means of
 consuming media content. Many platforms can display media metadata, such as
-title, artist, album and album art on various UI elements such as notification,
-media control center, device lockscreen and wearable devices. This specification
+title, artist, album and album art on various UI elements such as notifications,
+media control center, device lockscreen, and wearable devices. This specification
 aims to enable web pages to specify the media metadata to be displayed in
-platform UI, and respond to media controls which may come from platform UI or
+platform UI, and respond to media controls that may come from platform UI or
 media keys, thereby improving the user experience.
 
 <h2 id="conformance">Conformance</h2>
@@ -217,8 +218,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <h3 id='playback-state-model'>Playback State</h3>
 
     <p>
-      In order to make <a enum-value for="MediaSessionAction">play</a> and
-      <a enum-value for="MediaSessionAction">pause</a> actions work properly,
+      In order to make {{MediaSessionAction/play}} and
+      {{MediaSessionAction/pause}} actions work properly,
       the user agent SHOULD be able to determine if a <a>browsing context</a> of
       the <a>active media session</a> is playing media or not, which is called
       the <dfn>guessed playback state</dfn>. The RECOMMENDED way for determining
@@ -237,17 +238,16 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       state is combined with the <a>guessed playback state</a> to compute the
       <dfn>actual playback state</dfn>, which is a finalized state and will be
       used for
-      <a enum-value for="MediaSessionAction">play</a> and
-      <a enum-value for="MediaSessionAction">pause</a> actions.
+      {{MediaSessionAction/play}} and
+      {{MediaSessionAction/pause}} actions.
     </p>
 
     <p>
       The <a>actual playback state</a> is computed in the following way:
       <ul>
         <li>
-          If the <a>declared playback state</a> is <a enum-value
-          for="MediaSessionPlaybackState">playing</a>, return <a enum-value
-          for="MediaSessionPlaybackState">playing</a>.
+          If the <a>declared playback state</a> is {{MediaSessionPlaybackState/playing}},
+          return {{MediaSessionPlaybackState/playing}}.
         </li>
         <li>
           Otherwise, return the <a>guessed playback state</a>.
@@ -258,8 +258,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p class=note>
       The {{MediaSession/playbackState}} attribute could be useful when the page
       wants to do some preparation steps when the media is paused but it allows
-      the preparation steps to be interrupted by <a enum-value
-      for="MediaSessionAction">pause</a> action. See <a
+      the preparation steps to be interrupted by {{MediaSessionAction/pause}} action. See <a
       href="#example-set-playbackState">Setting playbackState</a> for example.
     </p>
 
@@ -302,8 +301,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
     The media metadata for the <a>active media session</a> MAY be displayed in
     the platform UI depending on platform conventions. Whenever the <a>active
-    media session</a> changes or setting <a attribute
-    for="MediaSession"><code>metadata</code></a> of the <a>active media
+    media session</a> changes or setting {{MediaSession/metadata}} of the <a>active media
     session</a>, the user agent MUST run the <dfn>update metadata
     algorithm</dfn>. The steps are as follows:
 
@@ -313,13 +311,13 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         presented to the platform, and terminate these steps.
       </li>
       <li>
-        If the <a attribute for="MediaSession"><code>metadata</code></a> of the
+        If the {{MediaSession/metadata}} of the
         <a>active media session</a> is an <a>empty metadata</a>, unset the media
         metadata presented to the platform, and terminate these steps.
       </li>
       <li>
-        Update the media metadata presented to the platform to match the <a
-        attribute for="MediaSession"><code>metadata</code></a> for the
+        Update the media metadata presented to the platform to match the
+        {{MediaSession/metadata}} for the
         <a>active media session</a>.
       </li>
       <li>
@@ -337,18 +335,17 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         existing algorithm execution instances.
       </li>
       <li>
-        If <var>metadata</var>'s <a attribute
-        for="MediaMetadata"><code>artwork</code></a> of the <a>active media
+        If <var>metadata</var>'s {{MediaMetadata/artwork}} of the <a>active media
         session</a> is empty, then terminate these steps.
       </li>
       <li>
         If the platform supports displaying media artwork, select a
-        <dfn>preferred artwork image</dfn> from <var>metadata</var>'s <a
-        attribute for="MediaMetadata"><code>artwork</code></a> of the <a>active
+        <dfn>preferred artwork image</dfn> from <var>metadata</var>'s
+        {{MediaMetadata/artwork}} of the <a>active
         media session</a>.
       </li>
       <li>
-        <a title="fetch">Fetch</a> the <a>preferred artwork image</a>'s
+        [=Fetch=] the <a>preferred artwork image</a>'s
         {{MediaImage/src}}.
 
         Then, <a>in parallel</a>:
@@ -395,7 +392,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       <dfn for="media session action source">target</dfn> which should be the
       recipient of any <a>media session action</a> created by the
       <a>media session action source</a>. If a <a>media session action source</a>'s
-      <a for="media session action source">target</a> is <code>null</code>,
+      <a for="media session action source">target</a> is `null`,
       the <a>active media session</a> is the recipient of all
       <a>media session action source</a>'s actions.
     </p>
@@ -484,7 +481,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       is invoked, the user agent MUST run the following steps:
       <ol>
         <li>
-          If <var>handler</var> is <code>null</code>, remove <var>action</var>
+          If <var>handler</var> is `null`, remove <var>action</var>
           from the <a>supported media session actions</a> for {{MediaSession}}
           and abort these steps.
         </li>
@@ -515,11 +512,11 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           action source">target</a>.
         </li>
         <li>
-          If <var>session</var> is <code>null</code>, set <var>session</var> to
+          If <var>session</var> is `null`, set <var>session</var> to
           the <a>active media session</a>.
         </li>
         <li>
-          If <var>session</var> is <code>null</code>, abort these steps.
+          If <var>session</var> is `null`, abort these steps.
         </li>
         <li>
           Let <var>actions</var> be <var>session</var>'s
@@ -551,7 +548,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       run the following steps:
       <ol>
         <li>
-          If the <a>active media session</a> is <code>null</code>, abort these
+          If the <a>active media session</a> is `null`, abort these
           steps.
         </li>
         <li>
@@ -790,7 +787,7 @@ interface MediaSession {
 
 <p>
   A {{MediaSession}} has an associated <dfn for="MediaSession">metadata</dfn>
-  object represented by a {{MediaMetadata}}. It is initially <code>null</code>.
+  object represented by a {{MediaMetadata}}. It is initially `null`.
 </p>
 
 <p>
@@ -801,23 +798,23 @@ interface MediaSession {
 
 <p>
   The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute
-  reflects the {{MediaSession}}'s <a for=MediaSession>metadata</a>. On getting,
-  it MUST return the {{MediaSession}}'s <a for=MediaSession>metadata</a>. On
+  reflects the {{MediaSession}}'s {{MediaSession/metadata}}. On getting,
+  it MUST return the {{MediaSession}}'s {{MediaSession/metadata}}. On
   setting, it MUST run the following steps with <var>value</var> being the new
   value being set:
   <ol>
     <li>
-      If the {{MediaSession}}'s <a for=MediaSession>metadata</a> is not
-      <code>null</code>, set its <a for=MediaMetadata>media session</a> to
-      <code>null</code>.
+      If the {{MediaSession}}'s {{MediaSession/metadata}} is not
+      `null`, set its [=MediaMetadata/media session=] to
+      `null`.
     </li>
     <li>
-      Set the {{MediaSession}}'s <a for=MediaSession>metadata</a> to
+      Set the {{MediaSession}}'s {{MediaSession/metadata}} to
       <var>value</var>.
     </li>
     <li>
-      If the {{MediaSession}}'s <a for=MediaSession>metadata</a> is not
-      <code>null</code>, set its <a for=MediaMetadata>media session</a> to the
+      If the {{MediaSession}}'s {{MediaSession/metadata}} is not
+      `null`, set its [=MediaMetadata/media session=] to the
       current {{MediaSession}}.
     </li>
     <li>
@@ -974,7 +971,7 @@ dictionary MediaMetadataInit {
 
 <p>
   A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal
-  to <code>null</code> or all the following conditions are true:
+  to `null` or all the following conditions are true:
   <ul>
     <li>Its <a for=MediaMetadata>title</a> is the empty string.</li>
     <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
@@ -986,7 +983,7 @@ dictionary MediaMetadataInit {
 
 <p>
   The <dfn constructor
-  for="MediaMetadata"><code>MediaMetadata(<var>init</var>)</code></dfn>
+  for="MediaMetadata">MediaMetadata(<var>init</var>)</dfn>
   constructor, when invoked, MUST run the following steps:
 
   <ol>
@@ -1057,7 +1054,7 @@ invoked, the user agent MUST run the following steps:
 </ol>
 
 <p>
-  The <dfn attribute for="MediaMetadata"><code>title</code></dfn> attribute
+  The <dfn attribute for="MediaMetadata">title</dfn> attribute
   reflects the {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On getting,
   it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On
   setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>title</a> to
@@ -1065,7 +1062,7 @@ invoked, the user agent MUST run the following steps:
 </p>
 
 <p>
-  The <dfn attribute for="MediaMetadata"><code>artist</code></dfn> attribute
+  The <dfn attribute for="MediaMetadata">artist</dfn> attribute
   reflects the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On getting,
   it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On
   setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>
@@ -1073,7 +1070,7 @@ invoked, the user agent MUST run the following steps:
 </p>
 
 <p>
-  The <dfn attribute for="MediaMetadata"><code>album</code></dfn> attribute
+  The <dfn attribute for="MediaMetadata">album</dfn> attribute
   reflects the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On getting,
   it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On
   setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>album</a> to
@@ -1081,7 +1078,7 @@ invoked, the user agent MUST run the following steps:
 </p>
 
 <p>
-  The <dfn attribute for="MediaMetadata"><code>artwork</code></dfn>
+  The <dfn attribute for="MediaMetadata">artwork</dfn>
   attribute reflects the {{MediaMetadata}}'s <a for="MediaMetadata">artwork
   images</a>. On getting, it MUST return the result of the following steps:
   <ol>
@@ -1138,7 +1135,7 @@ invoked, the user agent MUST run the following steps:
   following steps:
   <ol>
     <li>
-      If the instance has no associated <a for=MediaMetadata>media session</a>,
+      If the instance has no associated [=MediaMetadata/media session=],
       abort these steps.
     </li>
     <li>
@@ -1256,14 +1253,13 @@ is used to specify the <a>media session action</a> that the
 
 The <dfn dict-member for="MediaSessionActionDetails">seekOffset</dfn>
 <a>dictionary member</a> MAY be provided when the <a>media session action</a>
-is <a enum-value for=MediaSessionAction>seekbackward</a> or
-<a enum-value for=MediaSessionAction>seekforward</a>. It is the time in seconds
+is {{MediaSessionAction/seekbackward}} or
+{{MediaSessionAction/seekforward}}. It is the time in seconds
 to move the playback time by. If present, it should always be positive.
 If it is not provided then the site should choose
 a sensible time (e.g. a few seconds).
 
-When the <a>media session action</a> is
-<a enum-value for=MediaSessionAction>seekto</a>:
+When the <a>media session action</a> is {{MediaSessionAction/seekto}}:
 
 <ul>
   <li>
@@ -1275,7 +1271,7 @@ When the <a>media session action</a> is
   <li>
     The <dfn dict-member for="MediaSessionActionDetails">fastSeek</dfn>
     <a>dictionary member</a> MAY be provided and will be true if the
-    <a lt="media session action">action</a> is being called multiple times
+    [=media session action|action=] is being called multiple times
     as part of a sequence and this is not the last call in that sequence.
   </li>
 </ul>
@@ -1326,16 +1322,16 @@ If disabled in the document, the User Agent MUST NOT select the document's media
   </pre>
 
   For example, if the user agent wants to use an image as icon, it may choose
-  <code>"podcast.jpg"</code> or <code>"podcast.png"</code> for a
-  low-pixel-density screen, and <code>"podcast_hd.jpg"</code>
-  or <code>"podcast_hd.png"</code> for a high-pixel-density screen. If the user
+  `"podcast.jpg"` or `"podcast.png"` for a
+  low-pixel-density screen, and `"podcast_hd.jpg"`
+  or `"podcast_hd.png"` for a high-pixel-density screen. If the user
   agent wants to use an image for lockscreen background,
-  <code>"podcast_xhd.jpg"</code> will be preferred.
+  `"podcast_xhd.jpg"` will be preferred.
 
 </div>
 
 <div class="example" id="example-changing-metadata">
-  Changing <a for=MediaSession>metadata</a>:
+  Changing [=MediaSession/metadata=]:
 
   For playlists or chapters of an audio book, multiple <a>media elements</a> can
   share a single <a>media session</a>.
