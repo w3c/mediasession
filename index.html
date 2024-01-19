@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="5d4054a52170fe87192e6d251e6cc37f40e41888" name="document-revision">
+  <meta content="d07ef1892bbc009c0fcaaf773024e7a0477683f1" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -669,7 +669,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-10-11">11 October 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-01-19">19 January 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -694,7 +694,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2023 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/copyright-software" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2024 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -716,7 +716,7 @@ notification areas and on lock screens of mobile devices.</p>
   This document is intended to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation. </p>
    <p> Publication as an Editor’s Draft does not imply endorsement by <abbr title="World Wide Web Consortium">W3C</abbr> and its Members. </p>
    <p> This document was produced by a group operating under the <a class="css" data-link-type="property" href="https://www.w3.org/Consortium/Patent-Policy/" id="sotd_patent">W3C Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/groups/wg/media/ipr" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2023/Process-20230612/" id="w3c_process_revision">12 June 2023 W3C Process Document</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2023/Process-20231103/" id="w3c_process_revision">03 November 2023 W3C Process Document</a>. </p>
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -777,10 +777,10 @@ notification areas and on lock screens of mobile devices.</p>
    <p><em>This section is non-normative.</em></p>
    <p>Media is used extensively today, and the Web is one of the primary means of
 consuming media content. Many platforms can display media metadata, such as
-title, artist, album and album art on various UI elements such as notification,
-media control center, device lockscreen and wearable devices. This specification
+title, artist, album and album art on various UI elements such as notifications,
+media control center, device lockscreen, and wearable devices. This specification
 aims to enable web pages to specify the media metadata to be displayed in
-platform UI, and respond to media controls which may come from platform UI or
+platform UI, and respond to media controls that may come from platform UI or
 media keys, thereby improving the user experience.</p>
    <h2 class="heading settled" data-level="2" id="conformance"><span class="secno">2. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
    <p>All diagrams, examples, and notes in this specification are non-normative, as
@@ -864,7 +864,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <h2 class="heading settled" data-level="5" id="model"><span class="secno">5. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
     <section>
      <h3 class="heading settled" data-level="5.1" id="playback-state-model"><span class="secno">5.1. </span><span class="content">Playback State</span><a class="self-link" href="#playback-state-model"></a></h3>
-     <p> In order to make <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause">pause</a> actions work properly,
+     <p> In order to make <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play">play</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause">pause</a></code> actions work properly,
       the user agent SHOULD be able to determine if a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context">browsing context</a> of
       the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①">active media session</a> is playing media or not, which is called
       the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="guessed-playback-state">guessed playback state</dfn>. The RECOMMENDED way for determining
@@ -874,16 +874,17 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <p> The <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate">playbackState</a> attribute specifies
       the <a data-link-type="dfn" href="#declared-playback-state" id="ref-for-declared-playback-state">declared playback state</a> from the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context③">browsing context</a>. The
       state is combined with the <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state②">guessed playback state</a> to compute the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="actual-playback-state">actual playback state</dfn>, which is a finalized state and will be
-      used for <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play①">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause①">pause</a> actions. </p>
+      used for <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play①">play</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause①">pause</a></code> actions. </p>
      <p> The <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state">actual playback state</a> is computed in the following way: </p>
      <ul>
-      <li> If the <a data-link-type="dfn" href="#declared-playback-state" id="ref-for-declared-playback-state①">declared playback state</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing①">playing</a>, return <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing②">playing</a>. 
+      <li> If the <a data-link-type="dfn" href="#declared-playback-state" id="ref-for-declared-playback-state①">declared playback state</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing①">playing</a></code>,
+          return <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing②">playing</a></code>. 
       <li> Otherwise, return the <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state③">guessed playback state</a>. 
      </ul>
      <p></p>
      <p class="note" role="note"> The <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate①">playbackState</a></code> attribute could be useful when the page
       wants to do some preparation steps when the media is paused but it allows
-      the preparation steps to be interrupted by <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause②">pause</a> action. See <a href="#example-set-playbackState">Setting playbackState</a> for example. </p>
+      the preparation steps to be interrupted by <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause②">pause</a></code> action. See <a href="#example-set-playbackState">Setting playbackState</a> for example. </p>
      <p> When the <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state①">actual playback state</a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②">active media session</a> changes, the user agent MUST run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm">media session actions update
       algorithm</a>. </p>
     </section>
@@ -909,15 +910,15 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <h3 class="heading settled" data-level="5.3" id="metadata"><span class="secno">5.3. </span><span class="content">Metadata</span><a class="self-link" href="#metadata"></a></h3>
      <p>The media metadata for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session⑦">active media session</a> MAY be displayed in
     the platform UI depending on platform conventions. Whenever the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session⑧">active
-    media session</a> changes or setting <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata"><code>metadata</code></a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session⑨">active media
+    media session</a> changes or setting <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata">metadata</a></code> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session⑨">active media
     session</a>, the user agent MUST run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="update metadata algorithm" data-noexport id="update-metadata-algorithm">update metadata
     algorithm</dfn>. The steps are as follows:</p>
      <ol>
       <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⓪">active media session</a> is null, unset the media metadata
         presented to the platform, and terminate these steps. 
-      <li> If the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata①"><code>metadata</code></a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①①">active media session</a> is an <a data-link-type="dfn" href="#empty-metadata" id="ref-for-empty-metadata">empty metadata</a>, unset the media
+      <li> If the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata①">metadata</a></code> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①①">active media session</a> is an <a data-link-type="dfn" href="#empty-metadata" id="ref-for-empty-metadata">empty metadata</a>, unset the media
         metadata presented to the platform, and terminate these steps. 
-      <li> Update the media metadata presented to the platform to match the <a class="idl-code" data-link-type="attribute" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata②"><code>metadata</code></a> for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①②">active media session</a>. 
+      <li> Update the media metadata presented to the platform to match the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata②">metadata</a></code> for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①②">active media session</a>. 
       <li> If the user agent wants to display an <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images">artwork image</a>, it is
         RECOMMENDED to run the <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm">fetch image algorithm</a>. 
      </ol>
@@ -925,12 +926,12 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <ol>
       <li> If there are other <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm①">fetch image algorithms</a> running, cancel
         existing algorithm execution instances. 
-      <li> If <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork"><code>artwork</code></a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①③">active media
+      <li> If <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork">artwork</a></code> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①③">active media
         session</a> is empty, then terminate these steps. 
-      <li> If the platform supports displaying media artwork, select a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="preferred-artwork-image">preferred artwork image</dfn> from <var>metadata</var>’s <a class="idl-code" data-link-type="attribute" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork①"><code>artwork</code></a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①④">active
+      <li> If the platform supports displaying media artwork, select a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="preferred-artwork-image">preferred artwork image</dfn> from <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artwork" id="ref-for-dom-mediametadata-artwork①">artwork</a></code> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①④">active
         media session</a>. 
       <li>
-        <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch" title="fetch">Fetch</a> the <a data-link-type="dfn" href="#preferred-artwork-image" id="ref-for-preferred-artwork-image">preferred artwork image</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaimage-src" id="ref-for-dom-mediaimage-src">src</a></code>. 
+        <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch">Fetch</a> the <a data-link-type="dfn" href="#preferred-artwork-image" id="ref-for-preferred-artwork-image">preferred artwork image</a>’s <code class="idl"><a data-link-type="idl" href="#dom-mediaimage-src" id="ref-for-dom-mediaimage-src">src</a></code>. 
        <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>:</p>
        <ol>
         <li> Wait for the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response" id="ref-for-concept-response">response</a>. 
@@ -1167,14 +1168,14 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="Navigator" data-dfn-type="attribute" data-export id="dom-navigator-mediasession"><code>mediaSession</code></dfn> attribute
   MUST return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①②">MediaSession</a></code> instance associated with the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="ref-for-navigator①">Navigator</a></code> object. </p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export id="dom-mediasession-metadata"><code>metadata</code></dfn> attribute
-  reflects the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①③">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata">metadata</a>. On getting,
-  it MUST return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①④">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata①">metadata</a>. On
+  reflects the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①③">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata④">metadata</a></code>. On getting,
+  it MUST return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①④">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑤">metadata</a></code>. On
   setting, it MUST run the following steps with <var>value</var> being the new
   value being set: </p>
    <ol>
-    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑤">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata②">metadata</a> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session">media session</a> to <code>null</code>. 
-    <li> Set the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑥">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata③">metadata</a> to <var>value</var>. 
-    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑦">MediaSession</a></code>'s <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata④">metadata</a> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session①">media session</a> to the
+    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑤">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑥">metadata</a></code> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session">media session</a> to <code>null</code>. 
+    <li> Set the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑥">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑦">metadata</a></code> to <var>value</var>. 
+    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑦">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑧">metadata</a></code> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session①">media session</a> to the
       current <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑧">MediaSession</a></code>. 
     <li> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel①">In parallel</a>, run the <a data-link-type="dfn" href="#update-metadata-algorithm" id="ref-for-update-metadata-algorithm①">update metadata algorithm</a>. 
    </ol>
@@ -1401,11 +1402,11 @@ should always be positive.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler④">MediaSessionActionHandler</a></code> MUST be run with the <var>details</var> parameter which is represented by a dictionary inherited from <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails③">MediaSessionActionDetails</a></code>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-action"><code>action</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑥">dictionary
 member</a> is used to specify the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①②">media session action</a> that the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler⑤">MediaSessionActionHandler</a></code> is associated with.</p>
-   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-seekoffset"><code>seekOffset</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑦">dictionary member</a> MAY be provided when the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①③">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①">seekbackward</a> or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①">seekforward</a>. It is the time in seconds
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-seekoffset"><code>seekOffset</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑦">dictionary member</a> MAY be provided when the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①③">media session action</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-seekbackward" id="ref-for-dom-mediasessionaction-seekbackward①">seekbackward</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-seekforward" id="ref-for-dom-mediasessionaction-seekforward①">seekforward</a></code>. It is the time in seconds
 to move the playback time by. If present, it should always be positive.
 If it is not provided then the site should choose
 a sensible time (e.g. a few seconds).</p>
-   <p>When the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①④">media session action</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto①">seekto</a>:</p>
+   <p>When the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①④">media session action</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-seekto" id="ref-for-dom-mediasessionaction-seekto①">seekto</a></code>:</p>
    <ul>
     <li> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactiondetails-seektime"><code>seekTime</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member⑧">dictionary member</a> MUST be provided and is the time in seconds to
     move the playback time to. 
@@ -1420,7 +1421,7 @@ If disabled in the document, the User Agent MUST NOT select the document’s med
    <h2 class="heading settled" data-level="12" id="examples"><span class="secno">12. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <div class="example" id="example-setting-metadata">
-    <a class="self-link" href="#example-setting-metadata"></a> Setting <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata⑤">metadata</a>: 
+    <a class="self-link" href="#example-setting-metadata"></a> Setting <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata">metadata</a>: 
 <pre class="lang-javascript highlight">navigator<c- p>.</c->mediaSession<c- p>.</c->metadata <c- o>=</c-> <c- ow>new</c-> MediaMetadata<c- p>({</c->
   title<c- o>:</c-> <c- u>"Episode Title"</c-><c- p>,</c->
   artist<c- o>:</c-> <c- u>"Podcast Host"</c-><c- p>,</c->
@@ -1451,7 +1452,7 @@ If disabled in the document, the User Agent MUST NOT select the document’s med
   agent wants to use an image for lockscreen background, <code>"podcast_xhd.jpg"</code> will be preferred.</p>
    </div>
    <div class="example" id="example-changing-metadata">
-    <a class="self-link" href="#example-changing-metadata"></a> Changing <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata⑥">metadata</a>: 
+    <a class="self-link" href="#example-changing-metadata"></a> Changing <a data-link-type="dfn" href="#mediasession-metadata" id="ref-for-mediasession-metadata①">metadata</a>: 
     <p>For playlists or chapters of an audio book, multiple <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#media-element" id="ref-for-media-element">media elements</a> can
   share a single <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session⑤">media session</a>.</p>
 <pre class="lang-javascript highlight"><c- a>var</c-> audio1 <c- o>=</c-> document<c- p>.</c->createElement<c- p>(</c-><c- u>"audio"</c-><c- p>);</c->
@@ -2406,9 +2407,9 @@ window.dfnpanelData['enumdef-mediasessionplaybackstate'] = {"dfnID": "enumdef-me
 window.dfnpanelData['enumdef-mediasessionaction'] = {"dfnID": "enumdef-mediasessionaction", "url": "#enumdef-mediasessionaction", "dfnText": "MediaSessionAction", "refSections": [{"refs": [{"id": "ref-for-enumdef-mediasessionaction"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-enumdef-mediasessionaction\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-enumdef-mediasessionaction\u2461"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
 window.dfnpanelData['callbackdef-mediasessionactionhandler'] = {"dfnID": "callbackdef-mediasessionactionhandler", "url": "#callbackdef-mediasessionactionhandler", "dfnText": "MediaSessionActionHandler", "refSections": [{"refs": [{"id": "ref-for-callbackdef-mediasessionactionhandler"}, {"id": "ref-for-callbackdef-mediasessionactionhandler\u2460"}, {"id": "ref-for-callbackdef-mediasessionactionhandler\u2461"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-callbackdef-mediasessionactionhandler\u2462"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-callbackdef-mediasessionactionhandler\u2463"}, {"id": "ref-for-callbackdef-mediasessionactionhandler\u2464"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": false};
 window.dfnpanelData['mediasession'] = {"dfnID": "mediasession", "url": "#mediasession", "dfnText": "MediaSession", "refSections": [{"refs": [{"id": "ref-for-mediasession"}, {"id": "ref-for-mediasession\u2460"}, {"id": "ref-for-mediasession\u2461"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-mediasession\u2462"}, {"id": "ref-for-mediasession\u2463"}, {"id": "ref-for-mediasession\u2464"}, {"id": "ref-for-mediasession\u2465"}, {"id": "ref-for-mediasession\u2466"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-mediasession\u2467"}, {"id": "ref-for-mediasession\u2468"}, {"id": "ref-for-mediasession\u2460\u24ea"}, {"id": "ref-for-mediasession\u2460\u2460"}, {"id": "ref-for-mediasession\u2460\u2461"}, {"id": "ref-for-mediasession\u2460\u2462"}, {"id": "ref-for-mediasession\u2460\u2463"}, {"id": "ref-for-mediasession\u2460\u2464"}, {"id": "ref-for-mediasession\u2460\u2465"}, {"id": "ref-for-mediasession\u2460\u2466"}, {"id": "ref-for-mediasession\u2460\u2467"}, {"id": "ref-for-mediasession\u2460\u2468"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-mediasession\u2461\u24ea"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-mediasession\u2461\u2460"}], "title": "9. The MediaPositionState\ndictionary"}], "external": false};
-window.dfnpanelData['mediasession-metadata'] = {"dfnID": "mediasession-metadata", "url": "#mediasession-metadata", "dfnText": "metadata", "refSections": [{"refs": [{"id": "ref-for-mediasession-metadata"}, {"id": "ref-for-mediasession-metadata\u2460"}, {"id": "ref-for-mediasession-metadata\u2461"}, {"id": "ref-for-mediasession-metadata\u2462"}, {"id": "ref-for-mediasession-metadata\u2463"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-mediasession-metadata\u2464"}, {"id": "ref-for-mediasession-metadata\u2465"}], "title": "12. Examples"}], "external": false};
+window.dfnpanelData['mediasession-metadata'] = {"dfnID": "mediasession-metadata", "url": "#mediasession-metadata", "dfnText": "metadata", "refSections": [{"refs": [{"id": "ref-for-mediasession-metadata"}, {"id": "ref-for-mediasession-metadata\u2460"}], "title": "12. Examples"}], "external": false};
 window.dfnpanelData['dom-navigator-mediasession'] = {"dfnID": "dom-navigator-mediasession", "url": "#dom-navigator-mediasession", "dfnText": "mediaSession", "refSections": [{"refs": [{"id": "ref-for-dom-navigator-mediasession"}], "title": "6. The MediaSession interface"}], "external": false};
-window.dfnpanelData['dom-mediasession-metadata'] = {"dfnID": "dom-mediasession-metadata", "url": "#dom-mediasession-metadata", "dfnText": "metadata", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-metadata"}, {"id": "ref-for-dom-mediasession-metadata\u2460"}, {"id": "ref-for-dom-mediasession-metadata\u2461"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-dom-mediasession-metadata\u2462"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-metadata'] = {"dfnID": "dom-mediasession-metadata", "url": "#dom-mediasession-metadata", "dfnText": "metadata", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-metadata"}, {"id": "ref-for-dom-mediasession-metadata\u2460"}, {"id": "ref-for-dom-mediasession-metadata\u2461"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-dom-mediasession-metadata\u2462"}, {"id": "ref-for-dom-mediasession-metadata\u2463"}, {"id": "ref-for-dom-mediasession-metadata\u2464"}, {"id": "ref-for-dom-mediasession-metadata\u2465"}, {"id": "ref-for-dom-mediasession-metadata\u2466"}, {"id": "ref-for-dom-mediasession-metadata\u2467"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['dom-mediasession-playbackstate'] = {"dfnID": "dom-mediasession-playbackstate", "url": "#dom-mediasession-playbackstate", "dfnText": "playbackState", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-playbackstate"}, {"id": "ref-for-dom-mediasession-playbackstate\u2460"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-dom-mediasession-playbackstate\u2461"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-dom-mediasession-playbackstate\u2462"}, {"id": "ref-for-dom-mediasession-playbackstate\u2463"}, {"id": "ref-for-dom-mediasession-playbackstate\u2464"}, {"id": "ref-for-dom-mediasession-playbackstate\u2465"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-dom-mediasession-playbackstate\u2466"}], "title": "12. Examples"}], "external": false};
 window.dfnpanelData['declared-playback-state'] = {"dfnID": "declared-playback-state", "url": "#declared-playback-state", "dfnText": "declared playback state", "refSections": [{"refs": [{"id": "ref-for-declared-playback-state"}, {"id": "ref-for-declared-playback-state\u2460"}], "title": "5.1. Playback State"}], "external": false};
 window.dfnpanelData['dom-mediasessionplaybackstate-none'] = {"dfnID": "dom-mediasessionplaybackstate-none", "url": "#dom-mediasessionplaybackstate-none", "dfnText": "none", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-none"}, {"id": "ref-for-dom-mediasessionplaybackstate-none\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
