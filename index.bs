@@ -876,32 +876,30 @@ interface MediaSession {
 
   <ul>
     <li>
-      If the <var>state</var> is an empty dictionary then clear the <a>position
-      state</a>.
+      If <var>state</var> is an empty dictionary, clear the <a>position state</a>
+      and abort these steps.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">duration</a> is not present
-      or its value is null, throw a <a exception>TypeError</a>.
+      If <var>state</var>'s <a dict-member for="MediaPositionState">duration</a> is not
+      present, throw a <a exception>TypeError</a>.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">duration</a> is negative,
-      throw a <a exception>TypeError</a>.
+      If <var>state</var>'s {{MediaPositionState/duration}} is negative or
+      <code>NaN</code>, throw a <a exception>TypeError</a>.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">position</a> is not present
-      or its value is null, set it to zero.
+      If <var>state</var>'s {{MediaPositionState/position}} is not present, set it to zero.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">position</a> is negative or
+      If <var>state</var>'s <a dict-member for="MediaPositionState">position</a> is negative or
       greater than <a dict-member for="MediaPositionState">duration</a>, throw a
       <a exception>TypeError</a>.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">playbackRate</a> is not
-      present or its value is null, set it to 1.0.
+      If <var>state</var>'s <a dict-member for="MediaPositionState">playbackRate</a> is not present, set it to 1.0.
     </li>
     <li>
-      If the <a dict-member for="MediaPositionState">playbackRate</a> is zero
+      If <var>state</var>'s {{MediaPositionState/playbackRate}} is zero,
       throw a <a exception>TypeError</a>.
     </li>
     <li>
@@ -1201,7 +1199,7 @@ dictionary</h2>
 <pre class="idl">
 
 dictionary MediaPositionState {
-  double duration;
+  unrestricted double duration;
   double playbackRate;
   double position;
 };
