@@ -83,6 +83,10 @@ urlPrefix: https://www.w3.org/TR/permissions-policy-1/; spec: PermissionsPolicy
 urlPrefix: https://html.spec.whatwg.org/multipage/dom.html; spec: dom
     type: dfn
         text: permissions policy; url:#concept-document-permissions-policy
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/; spec: mediacapture-main
+    type: dfn
+        text: MediaStreamTrack muted state; url:#track-muted
+        text: set MediaStreamTrack muted state; url:#set-track-muted
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -583,6 +587,15 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       for=MediaSessionAction>togglecamera</a>, or <a enum-value
       for=MediaSessionAction>hangup</a> <a>media session actions</a> if none was
       provided for the <a>active media session</a>.
+    </p>
+    <p>
+      A user agent MAY expose microphone and camera state to web pages via <a>
+      MediaStreamTrack muted state</a> in addition to
+      {{MediaSessionAction/togglemicrophone}} or
+      {{MediaSessionAction/togglecamera}} [=media session action=]. In that
+      case, the user agent MUST execute the corresponding
+      {{MediaSessionActionHandler}} before running, as different tasks, the
+      steps defined to [=set MediaStreamTrack muted state=].
     </p>
 
     <p class=note>
