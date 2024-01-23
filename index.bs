@@ -940,7 +940,7 @@ interface MediaMetadata {
   attribute DOMString artist;
   attribute DOMString album;
   attribute FrozenArray&lt;MediaImage> artwork;
-  readonly attribute FrozenArray&lt;ChapterInformation> chapterInfo;
+  attribute sequence&lt;ChapterInformation> chapterInfo;
 };
 
 dictionary MediaMetadataInit {
@@ -948,7 +948,7 @@ dictionary MediaMetadataInit {
   DOMString artist = "";
   DOMString album = "";
   sequence&lt;MediaImage> artwork = [];
-  sequence&lt;ChapterInformation> chapterInfo = [];
+  sequence&lt;ChapterInformationInit> chapterInfo = [];
 };
 </pre>
 
@@ -1170,15 +1170,23 @@ invoked, the user agent MUST run the following steps:
   </ol>
 </p>
 
-<h2 id="the-chapterinformation-dictionary">The {{ChapterInformation}} dictionary</h2>
+<h2 id="the-chapterinformation-interface">The {{ChapterInformation}} interface</h2>
 
 <pre class="idl">
 
-dictionary ChapterInformation {
-  DOMString title = "";
-  double startTime = 0;
+interface ChapterInformation {
+  constructor(optional ChapterInformationInit init = {});
+  DOMString title;
+  double startTime;
   attribute FrozenArray&lt;MediaImage> artwork;
 };
+
+interface ChapterInformationInit {
+  DOMString title = "";
+  double startTime = 0;
+  attribute FrozenArray&lt;MediaImage> artwork = [];
+};
+
 </pre>
 
 The <dfn dict-member for="ChapterInformation">title</dfn> <a>dictionary member</a> is
