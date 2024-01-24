@@ -1176,12 +1176,12 @@ invoked, the user agent MUST run the following steps:
 
 interface ChapterInformation {
   constructor(optional ChapterInformationInit init = {});
-  DOMString title;
-  double startTime;
+  attribute DOMString title;
+  attribute double startTime;
   attribute FrozenArray&lt;MediaImage> artwork;
 };
 
-interface ChapterInformationInit {
+dictionary ChapterInformationInit {
   DOMString title = "";
   double startTime = 0;
   attribute FrozenArray&lt;MediaImage> artwork = [];
