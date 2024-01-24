@@ -134,8 +134,8 @@ dictionary MediaImage {
 };
 
 interface ChapterInformation {
-  DOMString title;
-  double startTime;
+  attribute DOMString title;
+  attribute double startTime;
   attribute FrozenArray<MediaImage> artwork;
 };
 ```
