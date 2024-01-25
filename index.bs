@@ -940,7 +940,7 @@ interface MediaMetadata {
   attribute DOMString artist;
   attribute DOMString album;
   attribute FrozenArray&lt;MediaImage> artwork;
-  attribute sequence&lt;ChapterInformation> chapterInfo;
+  readonly attribute FrozenArray&lt;ChapterInformation> chapterInfo;
 };
 
 dictionary MediaMetadataInit {
@@ -1178,13 +1178,13 @@ interface ChapterInformation {
   constructor(optional ChapterInformationInit init = {});
   attribute DOMString title;
   attribute double startTime;
-  attribute FrozenArray&lt;MediaImage> artwork;
+  readonly attribute FrozenArray&lt;MediaImage> artwork;
 };
 
 dictionary ChapterInformationInit {
   DOMString title = "";
   double startTime = 0;
-  attribute FrozenArray&lt;MediaImage> artwork = [];
+  sequence&lt;MediaImage> artwork = [];
 };
 
 </pre>
