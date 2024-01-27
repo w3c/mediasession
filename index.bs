@@ -1215,7 +1215,7 @@ artwork images</dfn>.
 </p>
 
 <p>
-  A {{ChapterInformation}} is said to be an <dfn>empty metadata</dfn> if it is equal
+  A {{ChapterInformation}} is said to be an <dfn>empty chapterInfo</dfn> if it is equal
   to `null` or all the following conditions are true:
   <ul>
     <li>Its <a for=ChapterInformation>title</a> is the empty string.</li>
