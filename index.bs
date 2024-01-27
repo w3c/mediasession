@@ -1173,7 +1173,6 @@ invoked, the user agent MUST run the following steps:
 <h2 id="the-chapterinformation-interface">The {{ChapterInformation}} interface</h2>
 
 <pre class="idl">
-A {{ChapterInformation}} object is a representation of metadata for an individual chapter, such as the title of the section, its timestamp, and screenshot image data of this section, that can be used by user agents to provide a customized user interface. 
 interface ChapterInformation {
   constructor(optional ChapterInformationInit init = {});
   readonly attribute DOMString title;
@@ -1189,16 +1188,132 @@ dictionary ChapterInformationInit {
 
 </pre>
 
-The <dfn dict-member for="ChapterInformation">title</dfn> <a>dictionary member</a> is
-used to specify the {{ChapterInformation}} object's {{MediaImage/title}}. 
+<p>
+  A {{ChapterInformation}} object is a representation of metadata for an individual
+  chapter, such as the title of the section, its timestamp, and screenshot image data
+  of this section, that can be used by user agents to provide a customized user interface. 
+</p>
 
-The <dfn dict-member for="ChapterInformation">startTime</dfn> <a>dictionary member</a>
-is used to specify the {{ChapterInformation}} object's {{MediaImage/startTime}} in
-seconds. It should not be negative.
+<p>
+  A {{ChapterInformation}} can have an associated <dfn for="ChapterInformation">
+  MediaMetadata</dfn>.
+</p>
 
-The <dfn dict-member for="ChapterInformation">artwork</dfn> <a>dictionary member</a>
-is used to specify the {{ChapterInformation}} object's {{MediaImage/artwork}}. On 
-getting, it MUST return the result of the following steps:
+<p>
+  A {{ChapterInformation}} has an associated <dfn for="ChapterInformation">title</dfn>
+  which is DOMString.
+</p>
+
+<p>
+  A {{ChapterInformation}} has an associated <dfn for="ChapterInformation">
+  startTime</dfn> which is double.
+</p>
+
+<p>
+  A {{ChapterInformation}} has an associated list of <dfn for="ChapterInformation">
+artwork images</dfn>.
+</p>
+
+<p>
+  A {{ChapterInformation}} is said to be an <dfn>empty metadata</dfn> if it is equal
+  to `null` or all the following conditions are true:
+  <ul>
+    <li>Its <a for=ChapterInformation>title</a> is the empty string.</li>
+    <li>Its <a for=ChapterInformation>startTime</a> is <code>0</code>.</li>
+    <li>Its <a for=ChapterInformation title='artwork image'>artwork images</a> length
+    is <code>0</code>.</li>
+  </ul>
+</p>
+
+<p>
+  The <dfn constructor
+  for="ChapterInformation">ChapterInformation(<var>init</var>)</dfn>
+  constructor, when invoked, MUST run the following steps:
+
+  <ol>
+    <li>
+      Let <var>chapterInfo</var> be a new {{ChapterInformation}} object.
+    </li>
+    <li>
+      Set <var>chapterInfo</var>'s {{ChapterInformation/title}} to <var>init</var>'s
+      {{ChapterInformationInit/title}}.
+    </li>
+    <li>
+      Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to <var>init</var>'s
+      {{ChapterInformationInit/startTime}}.
+    </li>
+    <li>
+      Run the <a>convert artwork algorithm</a> with <var>init</var>'s
+      {{ChapterInformationInit/artwork}} as <var>input</var> and set
+      <var>chapterInfo</var>'s <a for="ChapterInformation">artwork images</a> as the
+      result if it succeeded.
+    </li>
+    <li>
+      Return <var>chapterInfo</var>.
+    </li>
+  </ol>
+</p>
+
+When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
+invoked, the user agent MUST run the following steps:
+<ol>
+  <li>
+    Let <var>output</var> be an empty list of type {{MediaImage}}.
+  </li>
+  <li>
+    For each <var>entry</var> in <var>input</var>'s
+    {{ChapterInformationInit/artwork}}, perform the following steps:
+    <ol>
+      <li>
+        Let <var>image</var> be a new {{MediaImage}}.
+      </li>
+      <li>Let <var>baseURL</var> be the API base URL specified by the <a>entry
+      settings object</a>. </li>
+      <li>
+        <a lt="url parser">Parse</a> <var>entry</var>'s {{MediaImage/src}} using
+        <var>baseURL</var>. If it does not return failure, set
+        <var>image</var>'s {{MediaImage/src}} to the return value. Otherwise,
+        throw a <a exception>TypeError</a> and abort these steps.
+      </li>
+      <li>
+        Set <var>image</var>'s {{MediaImage/sizes}} to <var>entry</var>'s
+        {{MediaImage/sizes}}.
+      </li>
+      <li>
+        Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
+        {{MediaImage/type}}.
+      </li>
+      <li>
+        Append <var>image</var> to the <var>output</var>.
+      </li>
+    </ol>
+  </li>
+  <li>
+    Return <var>output</var> as result.
+  </li>
+</ol>
+
+<p>
+  The <dfn attribute for="ChapterInformation">title</dfn> attribute
+  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>. On getting,
+  it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>. On
+  setting, it MUST set the {{ChapterInformation}}'s <a for=ChapterInformation>title</a> to
+  the given value.
+</p>
+
+<p>
+  The <dfn attribute for="ChapterInformation">startTime</dfn> attribute
+  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>. On getting,
+  it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>. On
+  setting, it MUST set the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>
+  to the given value. If the <a for=ChapterInformation>startTime</a> is negative or greater than
+  <a dict-member for="MediaPositionState">duration</a>, throw a <a exception>TypeError</a>
+</p>
+
+<p>
+  The <dfn attribute for="ChapterInformation">artwork</dfn>
+  attribute reflects the {{ChapterInformation}}'s <a for="ChapterInformation">artwork
+  images</a>. On getting, it MUST return the result of the following steps:
   <ol>
     <li>
       Let <var>frozenArtwork</var> be an empty list of type {{MediaImage}}.
@@ -1240,11 +1355,36 @@ getting, it MUST return the result of the following steps:
       <a>Create a frozen array</a> from <var>frozenArtwork</var>.
     </li>
   </ol>
+  On setting, it MUST run the
+  <a>convert artwork algorithm</a> with the new value as <var>input</var>, and
+  set the {{ChapterInformation}}'s <a for="ChapterInformation">artwork images</a> as the
+  result if it succeeded.
+</p>
 
-On setting, it MUST run the <a>convert artwork algorithm</a> with the new value as
-<var>input</var>, and set the {{ChapterInformation}}'s <a for="ChapterInformation">artwork 
-images</a> as the result if it succeeded.
-
+<p>
+  When {{ChapterInformation}}'s <a for=ChapterInformation>title</a>, <a
+  for=ChapterInformation>startTime</a> or <a for=ChapterInformation>artwork images</a>
+  are modified, the user agent MUST run the following steps:
+  <ol>
+    <li>
+      If the instance has no associated [=ChapterInformation/media metadata=],
+      abort these steps.
+    </li>
+    <li>
+      Otherwise, <a>queue a task</a> to run the following substeps:
+      <ol>
+        <li>
+          If the instance no longer has an associated <a for=ChapterInformation>media
+          metadata</a>, abort these steps.
+        </li>
+        <li>
+          Otherwise, <a>in parallel</a>, run the <a>update metadata
+          algorithm</a>.
+        </li>
+      </ol>
+    </li>
+  </ol>
+</p>
 
 <h2 id="the-mediaimage-dictionary">The {{MediaImage}} dictionary</h2>
 
