@@ -1313,52 +1313,10 @@ invoked, the user agent MUST run the following steps:
 <p>
   The <dfn attribute for="ChapterInformation">artwork</dfn>
   attribute reflects the {{ChapterInformation}}'s <a for="ChapterInformation">artwork
-  images</a>. On getting, it MUST return the result of the following steps:
-  <ol>
-    <li>
-      Let <var>frozenArtwork</var> be an empty list of type {{MediaImage}}.
-    </li>
-    <li>
-      For each <var>entry</var> in the {{ChapterInformation}}'s <a
-      for="ChapterInformation">artwork images</a>, perform the following steps:
-      <ol>
-        <li>
-          Let <var>image</var> be a new {{MediaImage}}.
-        </li>
-        <li>
-          Set <var>image</var>'s {{MediaImage/src}} to <var>entry</var>'s
-          {{MediaImage/src}}.
-        </li>
-        <li>
-          Set <var>image</var>'s {{MediaImage/sizes}} to <var>entry</var>'s
-          {{MediaImage/sizes}}.
-        </li>
-        <li>
-          Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
-          {{MediaImage/type}}.
-        </li>
-        <!-- XXX IDL dictionaries are usually returned by value, so don't need
-        to be immutable. But FrozenArray reifies the dictionaries to mutable JS
-        objects accessed by reference, so we explicitly freeze them. It would be
-        better to do this with IDL primitives instead of JS - see
-        https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
-        <li>
-          Call <a lt="freeze">Object.freeze</a> on <var>image</var>, to prevent
-          accidental mutation by scripts.
-        </li>
-        <li>
-          Append <var>image</var> to <var>frozenArtwork</var>.
-        </li>
-      </ol>
-    </li>
-    <li>
-      <a>Create a frozen array</a> from <var>frozenArtwork</var>.
-    </li>
-  </ol>
-  On setting, it MUST run the
-  <a>convert artwork algorithm</a> with the new value as <var>input</var>, and
-  set the {{ChapterInformation}}'s <a for="ChapterInformation">artwork images</a> as the
-  result if it succeeded.
+  images</a>. On getting, it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>
+  artwork</a>. On setting, it MUST run the <a>convert artwork algorithm</a> with the new value as
+  <var>input</var>, and set the {{ChapterInformation}}'s <a for="ChapterInformation">artwork
+  images</a> as the result if it succeeded.
 </p>
 
 <p>
