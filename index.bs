@@ -1178,7 +1178,7 @@ interface ChapterInformation {
   constructor(optional ChapterInformationInit init = {});
   readonly attribute DOMString title;
   readonly attribute double startTime;
-  readonly attribute FrozenArray&lt;MediaImage> artwork;
+  [SameObject] readonly attribute FrozenArray&lt;MediaImage> artwork;
 };
 
 dictionary ChapterInformationInit {
