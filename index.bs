@@ -1173,7 +1173,7 @@ invoked, the user agent MUST run the following steps:
 <h2 id="the-chapterinformation-interface">The {{ChapterInformation}} interface</h2>
 
 <pre class="idl">
-
+A {{ChapterInformation}} object is a representation of metadata for an individual chapter, such as the title of the section, its timestamp, and screenshot image data of this section, that can be used by user agents to provide a customized user interface. 
 interface ChapterInformation {
   constructor(optional ChapterInformationInit init = {});
   readonly attribute DOMString title;
