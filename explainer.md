@@ -136,7 +136,7 @@ dictionary MediaImage {
 interface ChapterInformation {
   attribute DOMString title;
   attribute double startTime;
-  readonly attribute FrozenArray<MediaImage> artwork;
+  [SameObject] readonly attribute FrozenArray<MediaImage> artwork;
 };
 ```
 
