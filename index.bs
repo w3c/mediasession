@@ -1301,7 +1301,7 @@ invoked, the user agent MUST run the following steps:
 
 <p>
   The <dfn attribute for="ChapterInformation">startTime</dfn> attribute
-  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>. On getting,
+  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a> in seconds. On getting,
   it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>. On
   setting, it MUST set the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>
   to the given value. If the <a for=ChapterInformation>startTime</a> is negative or greater than
