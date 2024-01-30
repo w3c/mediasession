@@ -1174,7 +1174,6 @@ invoked, the user agent MUST run the following steps:
 
 <pre class="idl">
 interface ChapterInformation {
-  constructor(optional ChapterInformationInit init = {});
   readonly attribute DOMString title;
   readonly attribute double startTime;
   [SameObject] readonly attribute FrozenArray&lt;MediaImage> artwork;
