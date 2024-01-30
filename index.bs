@@ -1312,9 +1312,7 @@ invoked, the user agent MUST run the following steps:
   The <dfn attribute for="ChapterInformation">artwork</dfn>
   attribute reflects the {{ChapterInformation}}'s <a for="ChapterInformation">artwork
   images</a>. On getting, it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>
-  artwork</a>. On setting, it MUST run the <a>convert artwork algorithm</a> with the new value as
-  <var>input</var>, and set the {{ChapterInformation}}'s <a for="ChapterInformation">artwork
-  images</a> as the result if it succeeded.
+  artwork images</a>.
 </p>
 
 <p>
