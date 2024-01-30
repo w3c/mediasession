@@ -1225,9 +1225,8 @@ artwork images</dfn>.
 </p>
 
 <p>
-  The <dfn constructor
-  for="ChapterInformation">ChapterInformation(<var>init</var>)</dfn>
-  constructor, when invoked, MUST run the following steps:
+  To <dfn>create a {{ChapterInformation}}</dfn> with <var>init</var>,
+  run the following steps:
 
   <ol>
     <li>
