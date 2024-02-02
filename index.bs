@@ -927,7 +927,7 @@ interface MediaSession {
   indicates to the user agent the microphone state desired by the page (e.g. if
   the microphone is considered "muted" by the page since it is no longer sending
   audio through a call, the page can invoke
-  <code>setMicrophoneActive(false)</code>). When invoked, it MUST perform the
+  <code>setMicrophoneActive(false)</code>). When invoked, the method MUST perform the
   following steps:
   <ul>
     <li>
