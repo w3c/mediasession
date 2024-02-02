@@ -979,7 +979,7 @@ interface MediaSession {
       Let <var>p</var> be a new promise.
     </li>
     <li>
-      <a>In parallel</a>, run the following substeps::
+      <a>In parallel</a>, run the following substeps:
       <ul>
         <li>The user agent MAY wait to proceed, for instance if
         <var>active</var> is <code>true</code> and <var>document</var>'s
