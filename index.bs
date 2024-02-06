@@ -1182,6 +1182,7 @@ invoked, the user agent MUST run the following steps:
 <h2 id="the-chapterinformation-interface">The {{ChapterInformation}} interface</h2>
 
 <pre class="idl">
+[Exposed=Window]
 interface ChapterInformation {
   readonly attribute DOMString title;
   readonly attribute double startTime;
