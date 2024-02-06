@@ -1252,46 +1252,6 @@ artwork images</dfn>.
   </ol>
 </p>
 
-When the <a>convert artwork algorithm</a> with <var>input</var> parameter is
-invoked, the user agent MUST run the following steps:
-<ol>
-  <li>
-    Let <var>output</var> be an empty list of type {{MediaImage}}.
-  </li>
-  <li>
-    For each <var>entry</var> in <var>input</var>'s
-    {{ChapterInformationInit/artwork}}, perform the following steps:
-    <ol>
-      <li>
-        <!-- TODO: https://github.com/w3c/mediasession/issues/237 -->
-        Let <var>image</var> be a new {{MediaImage}}.
-      </li>
-      <li>Let <var>baseURL</var> be the API base URL specified by the <a>entry
-      settings object</a>. </li>
-      <li>
-        <a lt="url parser">Parse</a> <var>entry</var>'s {{MediaImage/src}} using
-        <var>baseURL</var>. If it does not return failure, set
-        <var>image</var>'s {{MediaImage/src}} to the return value. Otherwise,
-        throw a <a exception>TypeError</a> and abort these steps.
-      </li>
-      <li>
-        Set <var>image</var>'s {{MediaImage/sizes}} to <var>entry</var>'s
-        {{MediaImage/sizes}}.
-      </li>
-      <li>
-        Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
-        {{MediaImage/type}}.
-      </li>
-      <li>
-        Append <var>image</var> to the <var>output</var>.
-      </li>
-    </ol>
-  </li>
-  <li>
-    Return <var>output</var> as result.
-  </li>
-</ol>
-
 <p>
   The <dfn attribute for="ChapterInformation">title</dfn> attribute
   reflects the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>. On getting,
