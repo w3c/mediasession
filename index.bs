@@ -1021,9 +1021,17 @@ dictionary MediaMetadataInit {
       result if it succeeded.
     </li>
     <li>
-      Create a list of {{ChapterInformation}} from the sequence of chapters. Then
-      freeze this list and set it to <var>metadata</var>'s {{MediaMetadata/chapterInfo}} to
-      <var>init</var>'s {{MediaMetadataInit/chapterInfo}}.
+      Let <var>chapters</var> be an empty list of type {{ChapterInformation}}.
+    </li>
+    <li>
+      For each <var>entry</var> in <var>init</var>'s {{MediaMetadataInit/chapterInfo}},
+      [=create a {{ChapterInformation}}=] from <var>entry</var> and append it to
+      <var>chapters</var>.
+    </li>
+    <li>
+      Set <var>metadata</var>'s <a for="MediaMetadata">chapter information</a> to the
+      result of [=Create a frozen array|creating a frozen array=] from
+      <var>chapters</var>.
     </li>
     <li>
       Return <var>metadata</var>.
