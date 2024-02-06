@@ -1252,7 +1252,7 @@ artwork images</dfn>.
   </ol>
 </p>
 
-When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
+When the <a>convert artwork algorithm</a> with <var>input</var> parameter is
 invoked, the user agent MUST run the following steps:
 <ol>
   <li>
