@@ -1229,7 +1229,7 @@ artwork images</dfn>.
     <li>
       Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to <var>init</var>'s
       {{ChapterInformationInit/startTime}}. If the <a for=ChapterInformation>startTime</a> is
-      negative or greater than <a dict-member for="MediaPositionState">duration</a>, throw
+      negative or greater than [=duration=], throw
       a <a exception>TypeError</a>.
     </li>
     <li>
