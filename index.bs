@@ -1236,8 +1236,7 @@ artwork images</dfn>.
       Run the <a>convert artwork algorithm</a> with <var>init</var>'s
       {{ChapterInformationInit/artwork}} as <var>input</var> and set
       <var>chapterInfo</var>'s <a for="ChapterInformation">artwork images</a> to the
-      result of <a for="create a frozen array">creating a frozen array</a> from the result
-      of the <a>convert artwork algorithm</a>.
+      result of [=Create a frozen array|creating a frozen array=] from the result.
     </li>
     <li>
       Return <var>chapterInfo</var>.
