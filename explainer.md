@@ -124,7 +124,7 @@ interface MediaMetadata {
     attribute DOMString artist;
     attribute DOMString album;
     attribute FrozenArray<MediaImage> artwork;
-[SameObject] readonly attribute FrozenArray<ChapterInformation> chapterInfo;
+    [SameObject] readonly attribute FrozenArray<ChapterInformation> chapterInfo;
 };
 
 dictionary MediaImage {
