@@ -133,6 +133,7 @@ dictionary MediaImage {
   DOMString type = "";
 };
 
+[Exposed=Window]
 interface ChapterInformation {
   attribute DOMString title;
   attribute double startTime;
