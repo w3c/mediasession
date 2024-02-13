@@ -1238,7 +1238,7 @@ artwork images</dfn>.
     <li>
       Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to <var>init</var>'s
       {{ChapterInformationInit/startTime}}. If the <a for=ChapterInformation>startTime</a> is
-      negative or greater than [=duration=], throw
+      negative, greater than [=duration=], or <code>NaN</code>, throw
       a <a exception>TypeError</a>.
     </li>
     <li>
