@@ -982,9 +982,13 @@ interface MediaSession {
       <a>In parallel</a>, run the following steps:
       <ol>
         <li>
-          If the user agent implements a policy of <dfn>pausing all
-          input sources</dfn> of type <var>captureKind</var> in response to
-          UI, the user agent SHOULD run the following substeps:
+          Let <var>applyPausePolicy</var> be <code>true</code> if the user agent
+          implements a policy of <dfn>pausing all input sources</dfn> of type
+          <var>captureKind</var> in response to UI and <code>false</code>
+          otherwise.
+        </li>
+        <li>
+          If <var>applyPausePolicy</var> is <code>true</code>, run the following substeps:
           <ol>
             <li>
               Let <var>currentlyActive</var> be <code>false</code> if the user
@@ -1004,6 +1008,16 @@ interface MediaSession {
               reject <var>p</var> with a <a exception>NotAllowedError</a> and
               abort these steps.
             </li>
+          </ol>
+        </li>
+        <li>
+          Update the user agent capture state UI according to <var>captureKind</var>
+          and <var>active</var>.
+        </li>
+        <li>Resolve <var>p</var> with <code>undefined</code>.</li>
+        <li>
+          If <var>applyPausePolicy</var> is <code>true</code>, run the following substeps:
+          <ol>
             <li>
               Let <var>newMutedState</var> be <code>true</code> if <var>active</var> is
               <code>false</code> and <code>false</code> otherwise.</li>
@@ -1014,11 +1028,6 @@ interface MediaSession {
             </li>
           </ol>
         </li>
-        <li>
-          Update the user agent capture state UI according to <var>captureKind</var>
-          and <var>active</var>.
-        </li>
-        <li>Resolve <var>p</var> with <code>undefined</code>.</li>
       </ol>
     </li>
     <li>
