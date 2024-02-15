@@ -391,6 +391,10 @@ platform UI or media keys, thereby improving the user experience.
           action's intent is to turn the user's active camera on or off.
         </li>
         <li>
+          <dfn enum-value for=MediaSessionAction>togglescreenshare</dfn>: the action's intent
+          is to turn the user's active screenshare on or off.
+        </li>
+        <li>
           <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's
           intent is to end a call.
         </li>
@@ -524,14 +528,15 @@ platform UI or media keys, thereby improving the user experience.
       A user agent MAY implement a default handler for the <a enum-value
       for=MediaSessionAction>togglemicrophone</a>, <a enum-value
       for=MediaSessionAction>togglecamera</a>, or <a enum-value
+      for=MediaSessionAction>togglescreenshare</a>, or <a enum-value
       for=MediaSessionAction>hangup</a> <a>media session actions</a> if none was
       provided for the <a>active media session</a>.
     </p>
     <p>
-      A user agent MAY expose microphone and camera state to web pages via
-      {{MediaStreamTrack}}'s {{MediaStreamTrack/muted}} attribute in addition
-      to {{MediaSessionAction/togglemicrophone}} or
-      {{MediaSessionAction/togglecamera}} [=media session action=]. In that
+      A user agent MAY expose microphone, camera and screenshare state to web pages
+      via {{MediaStreamTrack}}'s {{MediaStreamTrack/muted}} attribute in addition
+      to {{MediaSessionAction/togglemicrophone}}, {{MediaSessionAction/togglecamera}}
+      or {{MediaSessionAction/togglescreenshare}} [=media session action=]. In that
       case, the user agent MUST execute the corresponding
       {{MediaSessionActionHandler}} before running, as different tasks, the
       steps defined to [$set a track's muted state$].
@@ -707,6 +712,7 @@ enum MediaSessionAction {
   "seekto",
   "togglemicrophone",
   "togglecamera",
+  "togglescreenshare",
   "hangup",
   "previousslide",
   "nextslide",
@@ -728,6 +734,8 @@ interface MediaSession {
   Promise&lt;undefined&gt; setMicrophoneActive(boolean active);
 
   Promise&lt;undefined&gt; setCameraActive(boolean active);
+
+  Promise&lt;undefined&gt; setScreenshareActive(boolean active);
 };
 </pre>
 
@@ -900,6 +908,24 @@ interface MediaSession {
   </ol>
 </p>
 <p>
+  Similarly, the <dfn method for=MediaSession>setScreenshareActive(active)</dfn>
+  method indicates to the user agent the screenshare capture state desired by the page.
+  When invoked, it MUST perform the following steps:
+  <ol>
+    <li>
+      Let <var>document</var> be [=this=]'s [=relevant global object=]'s
+      [=associated Document=].
+    </li>
+    <li>
+      Let <var>captureKind</var> be "screenshare".
+    </li>
+    <li>
+      Return the result of running the [=update capture state algorithm=] with
+      <var>document</var>, <var>active</var> and <var>captureKind</var>.
+    </li>
+  </ol>
+</p>
+<p>
   The <dfn>update capture state algorithm</dfn>, when invoked with
   <var>document</var>, <var>active</var> and <var>captureKind</var>, MUST
   perform the following steps:
@@ -980,10 +1006,11 @@ interface MediaSession {
   </ol>
 </p>
 <p class=note>
-  Both the <a>setMicrophoneActive(active)</a> and <a>setCameraActive(active)</a>
-  methods can reject based on user agent specific heuristics. This might in
-  particular happen when the web page asks to activate (aka unmute) microphone
-  or camera. The user agent could decide to require [=transient activation=] in
+  The <a>setMicrophoneActive(active)</a>, <a>setCameraActive(active)</a>
+  and <a>setScreenshareActive(active)</a> methods
+  can reject based on user agent specific heuristics. This might in
+  particular happen when the web page asks to activate (aka unmute) microphone,
+  camera or screenshare. The user agent could decide to require [=transient activation=] in
   that case. It might also require user input through a prompt to make the
   actual decision.
 </p>
