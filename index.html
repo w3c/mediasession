@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="061778a21933fbc568de096c5e165d8e836b248a" name="document-revision">
+  <meta content="fac2b9a5684d568fc1d0059fb4d81a05ec8d6315" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -669,7 +669,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-01-22">22 January 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-02-15">15 February 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1159,9 +1159,9 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined②"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setpositionstate" id="ref-for-dom-mediasession-setpositionstate"><c- g>setPositionState</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-mediapositionstate" id="ref-for-dictdef-mediapositionstate①"><c- n>MediaPositionState</c-></a> <dfn class="idl-code" data-dfn-for="MediaSession/setPositionState(state), MediaSession/setPositionState()" data-dfn-type="argument" data-export id="dom-mediasession-setpositionstate-state-state"><code><c- g>state</c-></code><a class="self-link" href="#dom-mediasession-setpositionstate-state-state"></a></dfn> = {});
 
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined③"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmicrophoneactive" id="ref-for-dom-mediasession-setmicrophoneactive"><c- g>setMicrophoneActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean"><c- b>boolean</c-></a> <dfn class="idl-code" data-dfn-for="MediaSession/setMicrophoneActive(active)" data-dfn-type="argument" data-export id="dom-mediasession-setmicrophoneactive-active-active"><code><c- g>active</c-></code><a class="self-link" href="#dom-mediasession-setmicrophoneactive-active-active"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise" id="ref-for-idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined③"><c- b>undefined</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmicrophoneactive" id="ref-for-dom-mediasession-setmicrophoneactive"><c- g>setMicrophoneActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean"><c- b>boolean</c-></a> <dfn class="idl-code" data-dfn-for="MediaSession/setMicrophoneActive(active)" data-dfn-type="argument" data-export id="dom-mediasession-setmicrophoneactive-active-active"><code><c- g>active</c-></code><a class="self-link" href="#dom-mediasession-setmicrophoneactive-active-active"></a></dfn>);
 
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined④"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setcameraactive" id="ref-for-dom-mediasession-setcameraactive"><c- g>setCameraActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean①"><c- b>boolean</c-></a> <dfn class="idl-code" data-dfn-for="MediaSession/setCameraActive(active)" data-dfn-type="argument" data-export id="dom-mediasession-setcameraactive-active-active"><code><c- g>active</c-></code><a class="self-link" href="#dom-mediasession-setcameraactive-active-active"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise" id="ref-for-idl-promise①"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined④"><c- b>undefined</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setcameraactive" id="ref-for-dom-mediasession-setcameraactive"><c- g>setCameraActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean①"><c- b>boolean</c-></a> <dfn class="idl-code" data-dfn-for="MediaSession/setCameraActive(active)" data-dfn-type="argument" data-export id="dom-mediasession-setcameraactive-active-active"><code><c- g>active</c-></code><a class="self-link" href="#dom-mediasession-setcameraactive-active-active"></a></dfn>);
 };
 </pre>
    <p> A <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⓪">MediaSession</a></code> object represents a media session for a given document and
@@ -1217,13 +1217,66 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li> Update the <a data-link-type="dfn" href="#position-state①" id="ref-for-position-state①⑤">position state</a> and <a data-link-type="dfn" href="#last-position-updated-time" id="ref-for-last-position-updated-time①">last position updated time</a>. 
    </ul>
    <p></p>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setmicrophoneactive"><code>setMicrophoneActive(active)</code></dfn> and <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setcameraactive"><code>setCameraActive(active)</code></dfn> methods indicate to
-  the user agent whether the microphone and camera are currently considered by
-  the page to be active (e.g. if the microphone is considered "muted" by the
-  page since it is no longer sending audio through to a call, then the page can
-  invoke <code>setMicrophoneActive(false)</code>).
-  It is RECOMMENDED that the user agent respect the microphone and camera
-  states indicated by the page in this UI. </p>
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setmicrophoneactive"><code>setMicrophoneActive(active)</code></dfn> method
+  indicates to the user agent the microphone capture state desired by the page
+  (e.g. if the microphone is considered "inactive" by the page since it is no
+  longer sending audio through a call, the page can invoke <code>setMicrophoneActive(false)</code>). When invoked, it MUST perform
+  the following steps: </p>
+   <ol>
+    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global">relevant global object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window">associated Document</a>. 
+    <li> Let <var>captureKind</var> be "microphone". 
+    <li> Return the result of running the <a data-link-type="dfn" href="#update-capture-state-algorithm" id="ref-for-update-capture-state-algorithm">update capture state algorithm</a> with <var>document</var>, <var>active</var> and <var>captureKind</var>. 
+   </ol>
+   <p></p>
+   <p> Similarly, the <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setcameraactive"><code>setCameraActive(active)</code></dfn> method indicates to the user agent the camera capture state desired by the page.
+  When invoked, it MUST perform the following steps: </p>
+   <ol>
+    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global①">relevant global object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window①">associated Document</a>. 
+    <li> Let <var>captureKind</var> be "camera". 
+    <li> Return the result of running the <a data-link-type="dfn" href="#update-capture-state-algorithm" id="ref-for-update-capture-state-algorithm①">update capture state algorithm</a> with <var>document</var>, <var>active</var> and <var>captureKind</var>. 
+   </ol>
+   <p></p>
+   <p> The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="update-capture-state-algorithm">update capture state algorithm</dfn>, when invoked with <var>document</var>, <var>active</var> and <var>captureKind</var>,
+  MUST perform the following steps: </p>
+   <ol>
+    <li> If <var>document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-fully-active">fully active</a>, return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#a-promise-rejected-with" id="ref-for-a-promise-rejected-with">a promise
+      rejected with</a> <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a>. 
+    <li> If <var>active</var> is <code>true</code> and <var>document</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-visibility-state">visibility state</a> is not "visible", the user agent MAY return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#a-promise-rejected-with" id="ref-for-a-promise-rejected-with①">a promise rejected with</a> <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a>. 
+    <li> Let <var>p</var> be a new promise. 
+    <li>
+      <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel②">In parallel</a>, run the following steps: 
+     <ol>
+      <li> Let <var>applyPausePolicy</var> be <code>true</code> if the user agent
+          implements a policy of <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pausing-all-input-sources">pausing all input sources</dfn> of type <var>captureKind</var> in response to UI and <code>false</code> otherwise. 
+      <li>
+        If <var>applyPausePolicy</var> is <code>true</code>, run the following substeps: 
+       <ol>
+        <li> Let <var>currentlyActive</var> be <code>false</code> if the user
+              agent is currently <a data-link-type="dfn" href="#pausing-all-input-sources" id="ref-for-pausing-all-input-sources">pausing all input sources</a> of type <var>captureKind</var> and <code>true</code> otherwise. 
+        <li> If <var>active</var> is <var>currentlyActive</var>, resolve <var>p</var> with <code>undefined</code> and abort these steps. 
+        <li> If <var>active</var> is <code>true</code>, the user agent MAY wait to
+              proceed, for instance to prompt the user. 
+        <li> If the user agent denies the request to update the capture state,
+              reject <var>p</var> with a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notallowederror" id="ref-for-notallowederror">NotAllowedError</a> and
+              abort these steps. 
+       </ol>
+      <li> Update the user agent capture state UI according to <var>captureKind</var> and <var>active</var>. 
+      <li>Resolve <var>p</var> with <code>undefined</code>.
+      <li>
+        If <var>applyPausePolicy</var> is <code>true</code>, run the following substeps: 
+       <ol>
+        <li> Let <var>newMutedState</var> be <code>true</code> if <var>active</var> is <code>false</code> and <code>false</code> otherwise.
+        <li> For each <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack" id="ref-for-mediastreamtrack">MediaStreamTrack</a> whose source is of type <var>captureKind</var>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queue a task</a> to <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#set-track-muted" id="ref-for-set-track-muted①">set MediaStreamTrack muted state</a> to <var>newMutedState</var>. 
+       </ol>
+     </ol>
+    <li> Return <var>p</var>. 
+   </ol>
+   <p></p>
+   <p class="note" role="note"> Both the <a data-link-type="functionish" href="#dom-mediasession-setmicrophoneactive" id="ref-for-dom-mediasession-setmicrophoneactive①">setMicrophoneActive(active)</a> and <a data-link-type="functionish" href="#dom-mediasession-setcameraactive" id="ref-for-dom-mediasession-setcameraactive①">setCameraActive(active)</a> methods can reject based on user agent specific heuristics. This might in
+  particular happen when the web page asks to activate (aka unmute) microphone
+  or camera. The user agent could decide to require <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation" id="ref-for-transient-activation">transient activation</a> in
+  that case. It might also require user input through a prompt to make the
+  actual decision. </p>
    <p> The user agent MAY display UI which invokes handlers for <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①②">media session actions</a>. </p>
    <h2 class="heading settled" data-level="7" id="the-mediametadata-interface"><span class="secno">7. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata⑧">MediaMetadata</a></code> interface</span><a class="self-link" href="#the-mediametadata-interface"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -1330,11 +1383,11 @@ invoked, the user agent MUST run the following steps:</p>
     <li> If the instance has no associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session③">media session</a>,
       abort these steps. 
     <li>
-      Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queue a task</a> to run the following substeps: 
+      Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task②">queue a task</a> to run the following substeps: 
      <ol>
       <li> If the instance no longer has an associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session④">media
           session</a>, abort these steps. 
-      <li> Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel②">in parallel</a>, run the <a data-link-type="dfn" href="#update-metadata-algorithm" id="ref-for-update-metadata-algorithm②">update metadata
+      <li> Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel③">in parallel</a>, run the <a data-link-type="dfn" href="#update-metadata-algorithm" id="ref-for-update-metadata-algorithm②">update metadata
           algorithm</a>. 
      </ol>
    </ol>
@@ -1784,6 +1837,7 @@ support in making this specification happen.</p>
    <li><a href="#dom-mediasessionaction-pause">pause</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionplaybackstate-paused">"paused"</a><span>, in § 6</span>
    <li><a href="#dom-mediasessionplaybackstate-paused">paused</a><span>, in § 6</span>
+   <li><a href="#pausing-all-input-sources">pausing all input sources</a><span>, in § 6</span>
    <li><a href="#dom-mediasessionaction-play">"play"</a><span>, in § 5.4</span>
    <li><a href="#dom-mediasessionaction-play">play</a><span>, in § 5.4</span>
    <li><a href="#playback-rate">playback rate</a><span>, in § 5.5</span>
@@ -1833,6 +1887,7 @@ support in making this specification happen.</p>
    <li><a href="#dom-mediasessionaction-togglemicrophone">togglemicrophone</a><span>, in § 5.4</span>
    <li><a href="#dom-mediaimage-type">type</a><span>, in § 8</span>
    <li><a href="#update-action-handler-algorithm">update action handler algorithm</a><span>, in § 5.4</span>
+   <li><a href="#update-capture-state-algorithm">update capture state algorithm</a><span>, in § 6</span>
    <li><a href="#update-metadata-algorithm">update metadata algorithm</a><span>, in § 5.3</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -1855,17 +1910,22 @@ support in making this specification happen.</p>
     <ul>
      <li><span class="dfn-paneled" id="be0c27b2">Navigator</span>
      <li><span class="dfn-paneled" id="36d15a6d">activation notification</span>
+     <li><span class="dfn-paneled" id="3349d69f">associated document</span>
      <li><span class="dfn-paneled" id="faf954d6">browsing context</span>
      <li><span class="dfn-paneled" id="d9aeb25e">entry settings object</span>
+     <li><span class="dfn-paneled" id="0e3ba9f8">fully active</span>
      <li><span class="dfn-paneled" id="a72449dd">in parallel</span>
      <li><span class="dfn-paneled" id="6cfa013d">link</span>
      <li><span class="dfn-paneled" id="03499e48">media element</span>
      <li><span class="dfn-paneled" id="655fdd86">muted</span>
      <li><span class="dfn-paneled" id="049e907d">potentially playing</span>
      <li><span class="dfn-paneled" id="9a517a7d">queue a task</span>
+     <li><span class="dfn-paneled" id="e99bd18e">relevant global object</span>
      <li><span class="dfn-paneled" id="d75a73db">sizes</span>
      <li><span class="dfn-paneled" id="ae2a6342">top-level browsing context</span>
+     <li><span class="dfn-paneled" id="47fe679e">transient activation</span>
      <li><span class="dfn-paneled" id="16cfba2b">unordered set of unique space-separated tokens</span>
+     <li><span class="dfn-paneled" id="b4c365f8">visibility state</span>
     </ul>
    <li>
     <a data-link-type="biblio">[IMAGE-RESOURCE]</a> defines the following terms:
@@ -1881,6 +1941,7 @@ support in making this specification happen.</p>
    <li>
     <a data-link-type="biblio">[MEDIACAPTURE-MAIN]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="873e24a3">mediastreamtrack</span>
      <li><span class="dfn-paneled" id="5f9c63fd">mediastreamtrack muted state</span>
      <li><span class="dfn-paneled" id="3bace697">set mediastreamtrack muted state</span>
     </ul>
@@ -1906,15 +1967,20 @@ support in making this specification happen.</p>
      <li><span class="dfn-paneled" id="8855a9aa">DOMString</span>
      <li><span class="dfn-paneled" id="889e932f">Exposed</span>
      <li><span class="dfn-paneled" id="dcf5fafa">FrozenArray</span>
+     <li><span class="dfn-paneled" id="797018a7">InvalidStateError</span>
+     <li><span class="dfn-paneled" id="ba556545">NotAllowedError</span>
+     <li><span class="dfn-paneled" id="bdbd19d1">Promise</span>
      <li><span class="dfn-paneled" id="a5c91173">SameObject</span>
      <li><span class="dfn-paneled" id="82ca3efc">TypeError</span>
      <li><span class="dfn-paneled" id="b0d7f3c3">USVString</span>
+     <li><span class="dfn-paneled" id="d0b4a948">a promise rejected with</span>
      <li><span class="dfn-paneled" id="5372cca8">boolean</span>
      <li><span class="dfn-paneled" id="1641b9ef">create a frozen array</span>
      <li><span class="dfn-paneled" id="6d8611a2">dictionary members</span>
      <li><span class="dfn-paneled" id="8c800cdf">double</span>
      <li><span class="dfn-paneled" id="5a2f390d">freeze</span>
      <li><span class="dfn-paneled" id="9cce47fd">sequence</span>
+     <li><span class="dfn-paneled" id="4013a022">this</span>
      <li><span class="dfn-paneled" id="5f90bbfb">undefined</span>
      <li><span class="dfn-paneled" id="11e0b87f">unrestricted double</span>
     </ul>
@@ -1986,9 +2052,9 @@ support in making this specification happen.</p>
 
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setpositionstate"><c- g>setPositionState</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-mediapositionstate"><c- n>MediaPositionState</c-></a> <a href="#dom-mediasession-setpositionstate-state-state"><code><c- g>state</c-></code></a> = {});
 
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmicrophoneactive"><c- g>setMicrophoneActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a> <a href="#dom-mediasession-setmicrophoneactive-active-active"><code><c- g>active</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setmicrophoneactive"><c- g>setMicrophoneActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a> <a href="#dom-mediasession-setmicrophoneactive-active-active"><code><c- g>active</c-></code></a>);
 
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setcameraactive"><c- g>setCameraActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a> <a href="#dom-mediasession-setcameraactive-active-active"><code><c- g>active</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-mediasession-setcameraactive"><c- g>setCameraActive</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a> <a href="#dom-mediasession-setcameraactive-active-active"><code><c- g>active</c-></code></a>);
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -2342,22 +2408,28 @@ window.dfnpanelData['ee7bba09'] = {"dfnID": "ee7bba09", "url": "https://fetch.sp
 window.dfnpanelData['41923559'] = {"dfnID": "41923559", "url": "https://fetch.spec.whatwg.org/#concept-response-type", "dfnText": "response type", "refSections": [{"refs": [{"id": "ref-for-concept-response-type"}], "title": "5.3. Metadata"}], "external": true};
 window.dfnpanelData['be0c27b2'] = {"dfnID": "be0c27b2", "url": "https://html.spec.whatwg.org/multipage/system-state.html#navigator", "dfnText": "Navigator", "refSections": [{"refs": [{"id": "ref-for-navigator"}, {"id": "ref-for-navigator\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['36d15a6d'] = {"dfnID": "36d15a6d", "url": "https://html.spec.whatwg.org/multipage/interaction.html#activation-notification", "dfnText": "activation notification", "refSections": [{"refs": [{"id": "ref-for-activation-notification"}], "title": "5.4. Actions"}], "external": true};
+window.dfnpanelData['3349d69f'] = {"dfnID": "3349d69f", "url": "https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window", "dfnText": "associated document", "refSections": [{"refs": [{"id": "ref-for-concept-document-window"}, {"id": "ref-for-concept-document-window\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['faf954d6'] = {"dfnID": "faf954d6", "url": "https://html.spec.whatwg.org/multipage/browsers.html#browsing-context", "dfnText": "browsing context", "refSections": [{"refs": [{"id": "ref-for-browsing-context"}, {"id": "ref-for-browsing-context\u2460"}, {"id": "ref-for-browsing-context\u2461"}, {"id": "ref-for-browsing-context\u2462"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-browsing-context\u2463"}, {"id": "ref-for-browsing-context\u2464"}], "title": "5.2. Routing"}, {"refs": [{"id": "ref-for-browsing-context\u2465"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-browsing-context\u2466"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-browsing-context\u2467"}, {"id": "ref-for-browsing-context\u2468"}, {"id": "ref-for-browsing-context\u2460\u24ea"}, {"id": "ref-for-browsing-context\u2460\u2460"}, {"id": "ref-for-browsing-context\u2460\u2461"}, {"id": "ref-for-browsing-context\u2460\u2462"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['d9aeb25e'] = {"dfnID": "d9aeb25e", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object", "dfnText": "entry settings object", "refSections": [{"refs": [{"id": "ref-for-entry-settings-object"}], "title": "7. The MediaMetadata interface"}], "external": true};
-window.dfnpanelData['a72449dd'] = {"dfnID": "a72449dd", "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel", "dfnText": "in parallel", "refSections": [{"refs": [{"id": "ref-for-in-parallel"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-in-parallel\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-in-parallel\u2461"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['0e3ba9f8'] = {"dfnID": "0e3ba9f8", "url": "https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active", "dfnText": "fully active", "refSections": [{"refs": [{"id": "ref-for-fully-active"}], "title": "6. The MediaSession interface"}], "external": true};
+window.dfnpanelData['a72449dd'] = {"dfnID": "a72449dd", "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel", "dfnText": "in parallel", "refSections": [{"refs": [{"id": "ref-for-in-parallel"}], "title": "5.3. Metadata"}, {"refs": [{"id": "ref-for-in-parallel\u2460"}, {"id": "ref-for-in-parallel\u2461"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-in-parallel\u2462"}], "title": "7. The MediaMetadata interface"}], "external": true};
 window.dfnpanelData['6cfa013d'] = {"dfnID": "6cfa013d", "url": "https://html.spec.whatwg.org/multipage/semantics.html#the-link-element", "dfnText": "link", "refSections": [{"refs": [{"id": "ref-for-the-link-element"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['03499e48'] = {"dfnID": "03499e48", "url": "https://html.spec.whatwg.org/multipage/media.html#media-element", "dfnText": "media element", "refSections": [{"refs": [{"id": "ref-for-media-element"}], "title": "12. Examples"}], "external": true};
 window.dfnpanelData['655fdd86'] = {"dfnID": "655fdd86", "url": "https://html.spec.whatwg.org/multipage/media.html#concept-media-muted", "dfnText": "muted", "refSections": [{"refs": [{"id": "ref-for-concept-media-muted"}], "title": "5.1. Playback State"}], "external": true};
 window.dfnpanelData['049e907d'] = {"dfnID": "049e907d", "url": "https://html.spec.whatwg.org/multipage/media.html#potentially-playing", "dfnText": "potentially playing", "refSections": [{"refs": [{"id": "ref-for-potentially-playing"}], "title": "5.1. Playback State"}], "external": true};
-window.dfnpanelData['9a517a7d'] = {"dfnID": "9a517a7d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task", "dfnText": "queue a task", "refSections": [{"refs": [{"id": "ref-for-queue-a-task"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-queue-a-task\u2460"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['9a517a7d'] = {"dfnID": "9a517a7d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task", "dfnText": "queue a task", "refSections": [{"refs": [{"id": "ref-for-queue-a-task"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-queue-a-task\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-queue-a-task\u2461"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['e99bd18e'] = {"dfnID": "e99bd18e", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global", "dfnText": "relevant global object", "refSections": [{"refs": [{"id": "ref-for-concept-relevant-global"}, {"id": "ref-for-concept-relevant-global\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['d75a73db'] = {"dfnID": "d75a73db", "url": "https://html.spec.whatwg.org/multipage/semantics.html#dom-link-sizes", "dfnText": "sizes", "refSections": [{"refs": [{"id": "ref-for-dom-link-sizes"}, {"id": "ref-for-dom-link-sizes\u2460"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['ae2a6342'] = {"dfnID": "ae2a6342", "url": "https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-browsing-context", "dfnText": "top-level browsing context", "refSections": [{"refs": [{"id": "ref-for-top-level-browsing-context"}], "title": "5.2. Routing"}], "external": true};
+window.dfnpanelData['47fe679e'] = {"dfnID": "47fe679e", "url": "https://html.spec.whatwg.org/multipage/interaction.html#transient-activation", "dfnText": "transient activation", "refSections": [{"refs": [{"id": "ref-for-transient-activation"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['16cfba2b'] = {"dfnID": "16cfba2b", "url": "https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens", "dfnText": "unordered set of unique space-separated tokens", "refSections": [{"refs": [{"id": "ref-for-unordered-set-of-unique-space-separated-tokens"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['b4c365f8'] = {"dfnID": "b4c365f8", "url": "https://html.spec.whatwg.org/multipage/interaction.html#visibility-state", "dfnText": "visibility state", "refSections": [{"refs": [{"id": "ref-for-visibility-state"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['ce860b8c'] = {"dfnID": "ce860b8c", "url": "https://w3c.github.io/image-resource/#dom-imageresource", "dfnText": "ImageResource", "refSections": [{"refs": [{"id": "ref-for-dom-imageresource"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['7f9469b5'] = {"dfnID": "7f9469b5", "url": "https://infra.spec.whatwg.org/#ascii-case-insensitive", "dfnText": "ascii case-insensitive", "refSections": [{"refs": [{"id": "ref-for-ascii-case-insensitive"}, {"id": "ref-for-ascii-case-insensitive\u2460"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['7a87d819'] = {"dfnID": "7a87d819", "url": "https://infra.spec.whatwg.org/#string-is", "dfnText": "is", "refSections": [{"refs": [{"id": "ref-for-string-is"}], "title": "2. Conformance"}], "external": true};
+window.dfnpanelData['873e24a3'] = {"dfnID": "873e24a3", "url": "https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack", "dfnText": "mediastreamtrack", "refSections": [{"refs": [{"id": "ref-for-mediastreamtrack"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['5f9c63fd'] = {"dfnID": "5f9c63fd", "url": "https://www.w3.org/TR/mediacapture-streams/#track-muted", "dfnText": "mediastreamtrack muted state", "refSections": [{"refs": [{"id": "ref-for-track-muted"}], "title": "5.4. Actions"}], "external": true};
-window.dfnpanelData['3bace697'] = {"dfnID": "3bace697", "url": "https://www.w3.org/TR/mediacapture-streams/#set-track-muted", "dfnText": "set mediastreamtrack muted state", "refSections": [{"refs": [{"id": "ref-for-set-track-muted"}], "title": "5.4. Actions"}], "external": true};
+window.dfnpanelData['3bace697'] = {"dfnID": "3bace697", "url": "https://www.w3.org/TR/mediacapture-streams/#set-track-muted", "dfnText": "set mediastreamtrack muted state", "refSections": [{"refs": [{"id": "ref-for-set-track-muted"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-set-track-muted\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['16785ec4'] = {"dfnID": "16785ec4", "url": "https://mimesniff.spec.whatwg.org/#mime-type", "dfnText": "mime type", "refSections": [{"refs": [{"id": "ref-for-mime-type"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['c88e6590'] = {"dfnID": "c88e6590", "url": "https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist", "dfnText": "default allowlist", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature-default-allowlist"}], "title": "11. Permissions Policy Integration"}], "external": true};
 window.dfnpanelData['4ed2f1ff'] = {"dfnID": "4ed2f1ff", "url": "https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature", "dfnText": "policy-controlled feature", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature"}], "title": "11. Permissions Policy Integration"}], "external": true};
@@ -2365,15 +2437,20 @@ window.dfnpanelData['ca3ca4ae'] = {"dfnID": "ca3ca4ae", "url": "https://url.spec
 window.dfnpanelData['8855a9aa'] = {"dfnID": "8855a9aa", "url": "https://webidl.spec.whatwg.org/#idl-DOMString", "dfnText": "DOMString", "refSections": [{"refs": [{"id": "ref-for-idl-DOMString"}, {"id": "ref-for-idl-DOMString\u2460"}, {"id": "ref-for-idl-DOMString\u2461"}, {"id": "ref-for-idl-DOMString\u2462"}, {"id": "ref-for-idl-DOMString\u2463"}, {"id": "ref-for-idl-DOMString\u2464"}], "title": "7. The MediaMetadata interface"}, {"refs": [{"id": "ref-for-idl-DOMString\u2465"}, {"id": "ref-for-idl-DOMString\u2466"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['889e932f'] = {"dfnID": "889e932f", "url": "https://webidl.spec.whatwg.org/#Exposed", "dfnText": "Exposed", "refSections": [{"refs": [{"id": "ref-for-Exposed"}, {"id": "ref-for-Exposed\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-Exposed\u2461"}], "title": "7. The MediaMetadata interface"}], "external": true};
 window.dfnpanelData['dcf5fafa'] = {"dfnID": "dcf5fafa", "url": "https://webidl.spec.whatwg.org/#idl-frozen-array", "dfnText": "FrozenArray", "refSections": [{"refs": [{"id": "ref-for-idl-frozen-array"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['797018a7'] = {"dfnID": "797018a7", "url": "https://webidl.spec.whatwg.org/#invalidstateerror", "dfnText": "InvalidStateError", "refSections": [{"refs": [{"id": "ref-for-invalidstateerror"}, {"id": "ref-for-invalidstateerror\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
+window.dfnpanelData['ba556545'] = {"dfnID": "ba556545", "url": "https://webidl.spec.whatwg.org/#notallowederror", "dfnText": "NotAllowedError", "refSections": [{"refs": [{"id": "ref-for-notallowederror"}], "title": "6. The MediaSession interface"}], "external": true};
+window.dfnpanelData['bdbd19d1'] = {"dfnID": "bdbd19d1", "url": "https://webidl.spec.whatwg.org/#idl-promise", "dfnText": "Promise", "refSections": [{"refs": [{"id": "ref-for-idl-promise"}, {"id": "ref-for-idl-promise\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['a5c91173'] = {"dfnID": "a5c91173", "url": "https://webidl.spec.whatwg.org/#SameObject", "dfnText": "SameObject", "refSections": [{"refs": [{"id": "ref-for-SameObject"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['82ca3efc'] = {"dfnID": "82ca3efc", "url": "https://webidl.spec.whatwg.org/#exceptiondef-typeerror", "dfnText": "TypeError", "refSections": [{"refs": [{"id": "ref-for-exceptiondef-typeerror"}, {"id": "ref-for-exceptiondef-typeerror\u2460"}, {"id": "ref-for-exceptiondef-typeerror\u2461"}, {"id": "ref-for-exceptiondef-typeerror\u2462"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-exceptiondef-typeerror\u2463"}], "title": "7. The MediaMetadata interface"}], "external": true};
 window.dfnpanelData['b0d7f3c3'] = {"dfnID": "b0d7f3c3", "url": "https://webidl.spec.whatwg.org/#idl-USVString", "dfnText": "USVString", "refSections": [{"refs": [{"id": "ref-for-idl-USVString"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['d0b4a948'] = {"dfnID": "d0b4a948", "url": "https://webidl.spec.whatwg.org/#a-promise-rejected-with", "dfnText": "a promise rejected with", "refSections": [{"refs": [{"id": "ref-for-a-promise-rejected-with"}, {"id": "ref-for-a-promise-rejected-with\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['5372cca8'] = {"dfnID": "5372cca8", "url": "https://webidl.spec.whatwg.org/#idl-boolean", "dfnText": "boolean", "refSections": [{"refs": [{"id": "ref-for-idl-boolean"}, {"id": "ref-for-idl-boolean\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-idl-boolean\u2461"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": true};
 window.dfnpanelData['1641b9ef'] = {"dfnID": "1641b9ef", "url": "https://webidl.spec.whatwg.org/#dfn-create-frozen-array", "dfnText": "create a frozen array", "refSections": [{"refs": [{"id": "ref-for-dfn-create-frozen-array"}], "title": "7. The MediaMetadata interface"}], "external": true};
 window.dfnpanelData['6d8611a2'] = {"dfnID": "6d8611a2", "url": "https://webidl.spec.whatwg.org/#dfn-dictionary-member", "dfnText": "dictionary members", "refSections": [{"refs": [{"id": "ref-for-dfn-dictionary-member"}, {"id": "ref-for-dfn-dictionary-member\u2460"}, {"id": "ref-for-dfn-dictionary-member\u2461"}], "title": "8. The MediaImage dictionary"}, {"refs": [{"id": "ref-for-dfn-dictionary-member\u2462"}, {"id": "ref-for-dfn-dictionary-member\u2463"}, {"id": "ref-for-dfn-dictionary-member\u2464"}], "title": "9. The MediaPositionState\ndictionary"}, {"refs": [{"id": "ref-for-dfn-dictionary-member\u2465"}, {"id": "ref-for-dfn-dictionary-member\u2466"}, {"id": "ref-for-dfn-dictionary-member\u2467"}, {"id": "ref-for-dfn-dictionary-member\u2468"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": true};
 window.dfnpanelData['8c800cdf'] = {"dfnID": "8c800cdf", "url": "https://webidl.spec.whatwg.org/#idl-double", "dfnText": "double", "refSections": [{"refs": [{"id": "ref-for-idl-double"}, {"id": "ref-for-idl-double\u2460"}], "title": "9. The MediaPositionState\ndictionary"}, {"refs": [{"id": "ref-for-idl-double\u2461"}, {"id": "ref-for-idl-double\u2462"}], "title": "10. The\nMediaSessionActionDetails dictionary"}], "external": true};
 window.dfnpanelData['5a2f390d'] = {"dfnID": "5a2f390d", "url": "https://tc39.es/ecma262/#sec-object.freeze", "dfnText": "freeze", "refSections": [{"refs": [{"id": "ref-for-sec-object.freeze"}], "title": "7. The MediaMetadata interface"}], "external": true};
 window.dfnpanelData['9cce47fd'] = {"dfnID": "9cce47fd", "url": "https://webidl.spec.whatwg.org/#idl-sequence", "dfnText": "sequence", "refSections": [{"refs": [{"id": "ref-for-idl-sequence"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['4013a022'] = {"dfnID": "4013a022", "url": "https://webidl.spec.whatwg.org/#this", "dfnText": "this", "refSections": [{"refs": [{"id": "ref-for-this"}, {"id": "ref-for-this\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['5f90bbfb'] = {"dfnID": "5f90bbfb", "url": "https://webidl.spec.whatwg.org/#idl-undefined", "dfnText": "undefined", "refSections": [{"refs": [{"id": "ref-for-idl-undefined"}, {"id": "ref-for-idl-undefined\u2460"}, {"id": "ref-for-idl-undefined\u2461"}, {"id": "ref-for-idl-undefined\u2462"}, {"id": "ref-for-idl-undefined\u2463"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['11e0b87f'] = {"dfnID": "11e0b87f", "url": "https://webidl.spec.whatwg.org/#idl-unrestricted-double", "dfnText": "unrestricted double", "refSections": [{"refs": [{"id": "ref-for-idl-unrestricted-double"}], "title": "9. The MediaPositionState\ndictionary"}], "external": true};
 window.dfnpanelData['guessed-playback-state'] = {"dfnID": "guessed-playback-state", "url": "#guessed-playback-state", "dfnText": "guessed playback state", "refSections": [{"refs": [{"id": "ref-for-guessed-playback-state"}, {"id": "ref-for-guessed-playback-state\u2460"}, {"id": "ref-for-guessed-playback-state\u2461"}, {"id": "ref-for-guessed-playback-state\u2462"}], "title": "5.1. Playback State"}], "external": false};
@@ -2426,8 +2503,10 @@ window.dfnpanelData['dom-mediasessionplaybackstate-playing'] = {"dfnID": "dom-me
 window.dfnpanelData['dom-mediasessionplaybackstate-paused'] = {"dfnID": "dom-mediasessionplaybackstate-paused", "url": "#dom-mediasessionplaybackstate-paused", "dfnText": "paused", "refSections": [{"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-paused"}], "title": "5.1. Playback State"}, {"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-paused\u2460"}], "title": "5.5. Position State"}, {"refs": [{"id": "ref-for-dom-mediasessionplaybackstate-paused\u2461"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['dom-mediasession-setactionhandler'] = {"dfnID": "dom-mediasession-setactionhandler", "url": "#dom-mediasession-setactionhandler", "dfnText": "setActionHandler(action, handler)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setactionhandler"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['dom-mediasession-setpositionstate'] = {"dfnID": "dom-mediasession-setpositionstate", "url": "#dom-mediasession-setpositionstate", "dfnText": "setPositionState(state)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setpositionstate"}], "title": "6. The MediaSession interface"}], "external": false};
-window.dfnpanelData['dom-mediasession-setmicrophoneactive'] = {"dfnID": "dom-mediasession-setmicrophoneactive", "url": "#dom-mediasession-setmicrophoneactive", "dfnText": "setMicrophoneActive(active)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setmicrophoneactive"}], "title": "6. The MediaSession interface"}], "external": false};
-window.dfnpanelData['dom-mediasession-setcameraactive'] = {"dfnID": "dom-mediasession-setcameraactive", "url": "#dom-mediasession-setcameraactive", "dfnText": "setCameraActive(active)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setcameraactive"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-setmicrophoneactive'] = {"dfnID": "dom-mediasession-setmicrophoneactive", "url": "#dom-mediasession-setmicrophoneactive", "dfnText": "setMicrophoneActive(active)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setmicrophoneactive"}, {"id": "ref-for-dom-mediasession-setmicrophoneactive\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['dom-mediasession-setcameraactive'] = {"dfnID": "dom-mediasession-setcameraactive", "url": "#dom-mediasession-setcameraactive", "dfnText": "setCameraActive(active)", "refSections": [{"refs": [{"id": "ref-for-dom-mediasession-setcameraactive"}, {"id": "ref-for-dom-mediasession-setcameraactive\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['update-capture-state-algorithm'] = {"dfnID": "update-capture-state-algorithm", "url": "#update-capture-state-algorithm", "dfnText": "update capture state algorithm", "refSections": [{"refs": [{"id": "ref-for-update-capture-state-algorithm"}, {"id": "ref-for-update-capture-state-algorithm\u2460"}], "title": "6. The MediaSession interface"}], "external": false};
+window.dfnpanelData['pausing-all-input-sources'] = {"dfnID": "pausing-all-input-sources", "url": "#pausing-all-input-sources", "dfnText": "pausing all input sources", "refSections": [{"refs": [{"id": "ref-for-pausing-all-input-sources"}], "title": "6. The MediaSession interface"}], "external": false};
 window.dfnpanelData['mediametadata'] = {"dfnID": "mediametadata", "url": "#mediametadata", "dfnText": "MediaMetadata", "refSections": [{"refs": [{"id": "ref-for-mediametadata"}, {"id": "ref-for-mediametadata\u2460"}, {"id": "ref-for-mediametadata\u2461"}, {"id": "ref-for-mediametadata\u2462"}, {"id": "ref-for-mediametadata\u2463"}], "title": "4.1. User interface guidelines"}, {"refs": [{"id": "ref-for-mediametadata\u2464"}], "title": "4.2. Incognito mode"}, {"refs": [{"id": "ref-for-mediametadata\u2465"}, {"id": "ref-for-mediametadata\u2466"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-mediametadata\u2467"}, {"id": "ref-for-mediametadata\u2468"}, {"id": "ref-for-mediametadata\u2460\u24ea"}, {"id": "ref-for-mediametadata\u2460\u2460"}, {"id": "ref-for-mediametadata\u2460\u2461"}, {"id": "ref-for-mediametadata\u2460\u2462"}, {"id": "ref-for-mediametadata\u2460\u2463"}, {"id": "ref-for-mediametadata\u2460\u2464"}, {"id": "ref-for-mediametadata\u2460\u2465"}, {"id": "ref-for-mediametadata\u2460\u2466"}, {"id": "ref-for-mediametadata\u2460\u2467"}, {"id": "ref-for-mediametadata\u2460\u2468"}, {"id": "ref-for-mediametadata\u2461\u24ea"}, {"id": "ref-for-mediametadata\u2461\u2460"}, {"id": "ref-for-mediametadata\u2461\u2461"}, {"id": "ref-for-mediametadata\u2461\u2462"}, {"id": "ref-for-mediametadata\u2461\u2463"}, {"id": "ref-for-mediametadata\u2461\u2464"}, {"id": "ref-for-mediametadata\u2461\u2465"}, {"id": "ref-for-mediametadata\u2461\u2466"}], "title": "7. The MediaMetadata interface"}], "external": false};
 window.dfnpanelData['dictdef-mediametadatainit'] = {"dfnID": "dictdef-mediametadatainit", "url": "#dictdef-mediametadatainit", "dfnText": "MediaMetadataInit", "refSections": [{"refs": [{"id": "ref-for-dictdef-mediametadatainit"}], "title": "7. The MediaMetadata interface"}], "external": false};
 window.dfnpanelData['dom-mediametadatainit-title'] = {"dfnID": "dom-mediametadatainit-title", "url": "#dom-mediametadatainit-title", "dfnText": "title", "refSections": [{"refs": [{"id": "ref-for-dom-mediametadatainit-title"}], "title": "7. The MediaMetadata interface"}], "external": false};
