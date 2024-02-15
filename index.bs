@@ -1364,6 +1364,7 @@ dictionary MediaSessionActionDetails {
   double seekOffset;
   double seekTime;
   boolean fastSeek;
+  boolean isActivating;
 };
 </pre>
 
@@ -1398,6 +1399,18 @@ When the <a>media session action</a> is {{MediaSessionAction/seekto}}:
     <a>dictionary member</a> MAY be provided and will be true if the
     [=media session action|action=] is being called multiple times
     as part of a sequence and this is not the last call in that sequence.
+  </li>
+</ul>
+
+When the <a>media session action</a> is {{MediaSessionAction/togglemicrophone}}
+or {{MediaSessionAction/togglecamera}}:
+
+<ul>
+  <li>
+    The <dfn dict-member for="MediaSessionActionDetails">isActivating</dfn>
+    <a>dictionary member</a> SHOULD be provided and will be <code>false</code>
+    if the user agent is about to [=pausing all input sources|pause all input sources=]
+    related to the [=media session action|action=] and <code>true</code> otherwise.
   </li>
 </ul>
 
