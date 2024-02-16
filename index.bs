@@ -509,8 +509,9 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       When the user agent is notified by a <a>media session action source</a>
       named <var>source</var> that a
       <a>media session action</a> named <var>action</var> has been triggered,
-      the user agent MUST run the <dfn>handle media session action</dfn> steps
-      as follows:
+      the user agent MUST <a>queue a task</a>, using the
+      [=user interaction task source=], to run the following
+      <dfn>handle media session action</dfn> steps:
       <ol>
         <li>
           Let <var>session</var> be <var>source</var>'s <a for="media session
@@ -550,7 +551,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       When the user agent receives a joint command for <a enum-value
       for=MediaSessionAction>play</a> and <a enum-value
       for=MediaSessionAction>pause</a>, such as a headset button click, it MUST
-      run the following steps:
+      <a>queue a task</a>, using the
+      [=user interaction task source=], to run the following steps:
       <ol>
         <li>
           If the <a>active media session</a> is `null`, abort these
