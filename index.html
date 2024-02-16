@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="fac2b9a5684d568fc1d0059fb4d81a05ec8d6315" name="document-revision">
+  <meta content="99e66fcf2a6f7c55d9c294713296efe0dbfc0810" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -669,7 +669,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-02-15">15 February 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-02-16">16 February 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1011,8 +1011,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
       actions update algorithm</a> in order to avoid UI flickering when multiple
       actions are modified in the same event loop. </p>
      <p> When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source④">media session action source</a> named <var>source</var> that a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑤">media session action</a> named <var>action</var> has been triggered,
-      the user agent MUST run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="handle-media-session-action">handle media session action</dfn> steps
-      as follows: </p>
+      the user agent MUST <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queue a task</a>, using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source">user interaction task source</a>, to run the following <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="handle-media-session-action">handle media session action</dfn> steps: </p>
      <ol>
       <li> Let <var>session</var> be <var>source</var>’s <a data-link-type="dfn" href="#media-session-action-source-target" id="ref-for-media-session-action-source-target①">target</a>. 
       <li> If <var>session</var> is <code>null</code>, set <var>session</var> to
@@ -1027,8 +1026,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
       <li> Run the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#activation-notification" id="ref-for-activation-notification">activation notification</a> steps in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context⑥">browsing context</a> associated with <var>session</var>. 
      </ol>
      <p></p>
-     <p> When the user agent receives a joint command for <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play②">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause③">pause</a>, such as a headset button click, it MUST
-      run the following steps: </p>
+     <p> When the user agent receives a joint command for <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play②">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause③">pause</a>, such as a headset button click, it MUST <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task②">queue a task</a>, using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source①">user interaction task source</a>, to run the following steps: </p>
      <ol>
       <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑦">active media session</a> is <code>null</code>, abort these
           steps. 
@@ -1266,7 +1264,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
         If <var>applyPausePolicy</var> is <code>true</code>, run the following substeps: 
        <ol>
         <li> Let <var>newMutedState</var> be <code>true</code> if <var>active</var> is <code>false</code> and <code>false</code> otherwise.
-        <li> For each <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack" id="ref-for-mediastreamtrack">MediaStreamTrack</a> whose source is of type <var>captureKind</var>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queue a task</a> to <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#set-track-muted" id="ref-for-set-track-muted①">set MediaStreamTrack muted state</a> to <var>newMutedState</var>. 
+        <li> For each <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack" id="ref-for-mediastreamtrack">MediaStreamTrack</a> whose source is of type <var>captureKind</var>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task③">queue a task</a> to <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#set-track-muted" id="ref-for-set-track-muted①">set MediaStreamTrack muted state</a> to <var>newMutedState</var>. 
        </ol>
      </ol>
     <li> Return <var>p</var>. 
@@ -1383,7 +1381,7 @@ invoked, the user agent MUST run the following steps:</p>
     <li> If the instance has no associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session③">media session</a>,
       abort these steps. 
     <li>
-      Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task②">queue a task</a> to run the following substeps: 
+      Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task④">queue a task</a> to run the following substeps: 
      <ol>
       <li> If the instance no longer has an associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session④">media
           session</a>, abort these steps. 
@@ -1925,6 +1923,7 @@ support in making this specification happen.</p>
      <li><span class="dfn-paneled" id="ae2a6342">top-level browsing context</span>
      <li><span class="dfn-paneled" id="47fe679e">transient activation</span>
      <li><span class="dfn-paneled" id="16cfba2b">unordered set of unique space-separated tokens</span>
+     <li><span class="dfn-paneled" id="825cbc48">user interaction task source</span>
      <li><span class="dfn-paneled" id="b4c365f8">visibility state</span>
     </ul>
    <li>
@@ -2417,12 +2416,13 @@ window.dfnpanelData['6cfa013d'] = {"dfnID": "6cfa013d", "url": "https://html.spe
 window.dfnpanelData['03499e48'] = {"dfnID": "03499e48", "url": "https://html.spec.whatwg.org/multipage/media.html#media-element", "dfnText": "media element", "refSections": [{"refs": [{"id": "ref-for-media-element"}], "title": "12. Examples"}], "external": true};
 window.dfnpanelData['655fdd86'] = {"dfnID": "655fdd86", "url": "https://html.spec.whatwg.org/multipage/media.html#concept-media-muted", "dfnText": "muted", "refSections": [{"refs": [{"id": "ref-for-concept-media-muted"}], "title": "5.1. Playback State"}], "external": true};
 window.dfnpanelData['049e907d'] = {"dfnID": "049e907d", "url": "https://html.spec.whatwg.org/multipage/media.html#potentially-playing", "dfnText": "potentially playing", "refSections": [{"refs": [{"id": "ref-for-potentially-playing"}], "title": "5.1. Playback State"}], "external": true};
-window.dfnpanelData['9a517a7d'] = {"dfnID": "9a517a7d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task", "dfnText": "queue a task", "refSections": [{"refs": [{"id": "ref-for-queue-a-task"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-queue-a-task\u2460"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-queue-a-task\u2461"}], "title": "7. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['9a517a7d'] = {"dfnID": "9a517a7d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task", "dfnText": "queue a task", "refSections": [{"refs": [{"id": "ref-for-queue-a-task"}, {"id": "ref-for-queue-a-task\u2460"}, {"id": "ref-for-queue-a-task\u2461"}], "title": "5.4. Actions"}, {"refs": [{"id": "ref-for-queue-a-task\u2462"}], "title": "6. The MediaSession interface"}, {"refs": [{"id": "ref-for-queue-a-task\u2463"}], "title": "7. The MediaMetadata interface"}], "external": true};
 window.dfnpanelData['e99bd18e'] = {"dfnID": "e99bd18e", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global", "dfnText": "relevant global object", "refSections": [{"refs": [{"id": "ref-for-concept-relevant-global"}, {"id": "ref-for-concept-relevant-global\u2460"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['d75a73db'] = {"dfnID": "d75a73db", "url": "https://html.spec.whatwg.org/multipage/semantics.html#dom-link-sizes", "dfnText": "sizes", "refSections": [{"refs": [{"id": "ref-for-dom-link-sizes"}, {"id": "ref-for-dom-link-sizes\u2460"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['ae2a6342'] = {"dfnID": "ae2a6342", "url": "https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-browsing-context", "dfnText": "top-level browsing context", "refSections": [{"refs": [{"id": "ref-for-top-level-browsing-context"}], "title": "5.2. Routing"}], "external": true};
 window.dfnpanelData['47fe679e'] = {"dfnID": "47fe679e", "url": "https://html.spec.whatwg.org/multipage/interaction.html#transient-activation", "dfnText": "transient activation", "refSections": [{"refs": [{"id": "ref-for-transient-activation"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['16cfba2b'] = {"dfnID": "16cfba2b", "url": "https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens", "dfnText": "unordered set of unique space-separated tokens", "refSections": [{"refs": [{"id": "ref-for-unordered-set-of-unique-space-separated-tokens"}], "title": "8. The MediaImage dictionary"}], "external": true};
+window.dfnpanelData['825cbc48'] = {"dfnID": "825cbc48", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source", "dfnText": "user interaction task source", "refSections": [{"refs": [{"id": "ref-for-user-interaction-task-source"}, {"id": "ref-for-user-interaction-task-source\u2460"}], "title": "5.4. Actions"}], "external": true};
 window.dfnpanelData['b4c365f8'] = {"dfnID": "b4c365f8", "url": "https://html.spec.whatwg.org/multipage/interaction.html#visibility-state", "dfnText": "visibility state", "refSections": [{"refs": [{"id": "ref-for-visibility-state"}], "title": "6. The MediaSession interface"}], "external": true};
 window.dfnpanelData['ce860b8c'] = {"dfnID": "ce860b8c", "url": "https://w3c.github.io/image-resource/#dom-imageresource", "dfnText": "ImageResource", "refSections": [{"refs": [{"id": "ref-for-dom-imageresource"}], "title": "8. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['7f9469b5'] = {"dfnID": "7f9469b5", "url": "https://infra.spec.whatwg.org/#ascii-case-insensitive", "dfnText": "ascii case-insensitive", "refSections": [{"refs": [{"id": "ref-for-ascii-case-insensitive"}, {"id": "ref-for-ascii-case-insensitive\u2460"}], "title": "8. The MediaImage dictionary"}], "external": true};
