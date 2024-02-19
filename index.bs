@@ -533,9 +533,9 @@ platform UI or media keys, thereby improving the user experience.
       provided for the <a>active media session</a>.
     </p>
     <p>
-      A user agent MAY expose microphone, camera and screenshare state to web pages
-      via {{MediaStreamTrack}}'s {{MediaStreamTrack/muted}} attribute in addition
-      to {{MediaSessionAction/togglemicrophone}}, {{MediaSessionAction/togglecamera}}
+      A user agent MAY expose microphone, camera, and screenshare state to web pages
+      via {{MediaStreamTrack}}'s {{MediaStreamTrack/muted}} attribute in addition to
+      {{MediaSessionAction/togglemicrophone}}, {{MediaSessionAction/togglecamera}}
       or {{MediaSessionAction/togglescreenshare}} [=media session action=]. In that
       case, the user agent MUST execute the corresponding
       {{MediaSessionActionHandler}} before running, as different tasks, the
@@ -1488,6 +1488,8 @@ parameter whose dictionary type is:
   {{MediaSessionAction/togglemicrophone}}.</li>
   <li>{{MediaSessionCaptureActionDetails}} for
   {{MediaSessionAction/togglecamera}}.</li>
+  <li>{{MediaSessionCaptureActionDetails}} for
+  {{MediaSessionAction/togglescreenshare}}.</li>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/hangup}}.</li>
   <li>{{MediaSessionActionDetails}} for
   {{MediaSessionAction/previousslide}}.</li>
