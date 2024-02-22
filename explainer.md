@@ -106,7 +106,7 @@ interface MediaSession : EventTarget {
 
 ### The `MediaMetadata` interface
 
-A `MediaMetadata` object can contain media metadata likelike title, artist, album,
+A `MediaMetadata` object can contain media metadata like title, artist, album,
 artwork, and video chapter information. To set the metadata for a `MediaSession`,
 the page should create a `MediaMetadata` object and assign it to a `MediaSession`
 object:
