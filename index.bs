@@ -1025,7 +1025,7 @@ dictionary MediaMetadataInit {
     </li>
     <li>
       For each <var>entry</var> in <var>init</var>'s {{MediaMetadataInit/chapterInfo}},
-      [=create a {{ChapterInformation}}=] from <var>entry</var> and append it to
+      [=create a ChapterInformation=] from <var>entry</var> and append it to
       <var>chapters</var>.
     </li>
     <li>
