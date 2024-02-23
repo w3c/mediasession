@@ -1046,8 +1046,8 @@ invoked, the user agent MUST run the following steps:
     Let <var>output</var> be an empty list of type {{MediaImage}}.
   </li>
   <li>
-    For each <var>entry</var> (which is a {{MediaImage}}) in <var>input</var> 
-(which is a {{MediaImage}} list), perform the following steps:
+    For each <var>entry</var> in <var>input</var> (which is a {{MediaImage}} list), 
+perform the following steps:
     <ol>
       <li>
         Let <var>image</var> be a new {{MediaImage}}.
