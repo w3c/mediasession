@@ -1242,10 +1242,11 @@ artwork images</dfn>.
       a <a exception>TypeError</a>.
     </li>
     <li>
-      Run the <a>convert artwork algorithm</a> with <var>init</var>'s
-      {{ChapterInformationInit/artwork}} as <var>input</var> and set
-      <var>chapterInfo</var>'s <a for="ChapterInformation">artwork images</a> to the
-      result of [=Create a frozen array|creating a frozen array=] from the result.
+      Let {{ChapterInformationInit/artwork}} be the result of running the <a>convert artwork algorithm</a>.
+    </li>
+    <li>
+      Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork images</a> to the
+      result of [=Create a frozen array|creating a frozen array=] from {{ChapterInformationInit/artwork}}.
     </li>
     <li>
       Return <var>chapterInfo</var>.
