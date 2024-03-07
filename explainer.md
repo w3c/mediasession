@@ -135,8 +135,8 @@ dictionary MediaImage {
 
 [Exposed=Window]
 interface ChapterInformation {
-  attribute DOMString title;
-  attribute double startTime;
+  readonly attribute DOMString title;
+  readonly attribute double startTime;
   [SameObject] readonly attribute FrozenArray<MediaImage> artwork;
 };
 ```
