@@ -1062,6 +1062,7 @@ interface MediaMetadata {
   attribute DOMString artist;
   attribute DOMString album;
   attribute FrozenArray&lt;MediaImage> artwork;
+  [SameObject] readonly attribute FrozenArray&lt;ChapterInformation> chapterInfo;
 };
 
 dictionary MediaMetadataInit {
@@ -1069,6 +1070,7 @@ dictionary MediaMetadataInit {
   DOMString artist = "";
   DOMString album = "";
   sequence&lt;MediaImage> artwork = [];
+  sequence&lt;ChapterInformationInit> chapterInfo = [];
 };
 </pre>
 
@@ -1095,6 +1097,11 @@ dictionary MediaMetadataInit {
 </p>
 
 <p>
+  A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">
+  chapter information</dfn>.
+</p>
+
+<p>
   A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal
   to `null` or all the following conditions are true:
   <ul>
@@ -1102,6 +1109,8 @@ dictionary MediaMetadataInit {
     <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
     <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
     <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
+    is <code>0</code>.</li>
+    <li>Its <a for=MediaMetadata>chapter information</a> length
     is <code>0</code>.</li>
   </ul>
 </p>
@@ -1134,6 +1143,19 @@ dictionary MediaMetadataInit {
       result if it succeeded.
     </li>
     <li>
+      Let <var>chapters</var> be an empty list of type {{ChapterInformation}}.
+    </li>
+    <li>
+      For each <var>entry</var> in <var>init</var>'s {{MediaMetadataInit/chapterInfo}},
+      [=create a ChapterInformation=] from <var>entry</var> and append it to
+      <var>chapters</var>.
+    </li>
+    <li>
+      Set <var>metadata</var>'s <a for="MediaMetadata">chapter information</a> to the
+      result of [=Create a frozen array|creating a frozen array=] from
+      <var>chapters</var>.
+    </li>
+    <li>
       Return <var>metadata</var>.
     </li>
   </ol>
@@ -1146,8 +1168,8 @@ invoked, the user agent MUST run the following steps:
     Let <var>output</var> be an empty list of type {{MediaImage}}.
   </li>
   <li>
-    For each <var>entry</var> in <var>input</var>'s
-    {{MediaMetadataInit/artwork}}, perform the following steps:
+    For each <var>entry</var> in <var>input</var> (which is a {{MediaImage}} list), 
+perform the following steps:
     <ol>
       <li>
         Let <var>image</var> be a new {{MediaImage}}.
@@ -1277,6 +1299,100 @@ invoked, the user agent MUST run the following steps:
       </ol>
     </li>
   </ol>
+</p>
+
+<h2 id="the-chapterinformation-interface">The {{ChapterInformation}} interface</h2>
+
+<pre class="idl">
+[Exposed=Window]
+interface ChapterInformation {
+  readonly attribute DOMString title;
+  readonly attribute double startTime;
+  [SameObject] readonly attribute FrozenArray&lt;MediaImage> artwork;
+};
+
+dictionary ChapterInformationInit {
+  DOMString title = "";
+  double startTime = 0;
+  sequence&lt;MediaImage> artwork = [];
+};
+
+</pre>
+
+<p>
+  A {{ChapterInformation}} object is a representation of metadata for an individual
+  chapter, such as the title of the section, its timestamp, and screenshot image data
+  of this section, that can be used by user agents to provide a customized user interface. 
+</p>
+
+<p>
+  A {{ChapterInformation}} can have an associated <dfn for="ChapterInformation">
+  media metadata</dfn>.
+</p>
+
+<p>
+  A {{ChapterInformation}} has an associated <dfn for="ChapterInformation">title</dfn>
+  which is DOMString.
+</p>
+
+<p>
+  A {{ChapterInformation}} has an associated <dfn for="ChapterInformation">
+  startTime</dfn> which is double.
+</p>
+
+<p>
+  A {{ChapterInformation}} has an associated list of <dfn for="ChapterInformation">
+artwork images</dfn>.
+</p>
+
+<p>
+  To <dfn>create a {{ChapterInformation}}</dfn> with <var>init</var>,
+  run the following steps:
+
+  <ol>
+    <li>
+      Let <var>chapterInfo</var> be a new {{ChapterInformation}} object.
+    </li>
+    <li>
+      Set <var>chapterInfo</var>'s {{ChapterInformation/title}} to <var>init</var>'s
+      {{ChapterInformationInit/title}}.
+    </li>
+    <li>
+      Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to <var>init</var>'s
+      {{ChapterInformationInit/startTime}}. If the <a for=ChapterInformation>startTime</a> is
+      negative or greater than [=duration=], throw
+      a <a exception>TypeError</a>.
+    </li>
+    <li>
+      Let {{ChapterInformationInit/artwork}} be the result of running the <a>convert artwork algorithm</a>.
+    </li>
+    <li>
+      Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork images</a> to the
+      result of [=Create a frozen array|creating a frozen array=] from {{ChapterInformationInit/artwork}}.
+    </li>
+    <li>
+      Return <var>chapterInfo</var>.
+    </li>
+  </ol>
+</p>
+
+<p>
+  The <dfn attribute for="ChapterInformation">title</dfn> attribute
+  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>. On getting,
+  it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>.
+</p>
+
+<p>
+  The <dfn attribute for="ChapterInformation">startTime</dfn> attribute
+  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a> in seconds. On getting,
+  it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>.
+</p>
+
+<p>
+  The <dfn attribute for="ChapterInformation">artwork</dfn>
+  attribute reflects the {{ChapterInformation}}'s <a for="ChapterInformation">artwork
+  images</a>. On getting, it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>
+  artwork images</a>.
 </p>
 
 <h2 id="the-mediaimage-dictionary">The {{MediaImage}} dictionary</h2>
@@ -1442,14 +1558,18 @@ If disabled in the document, the User Agent MUST NOT select the document's media
       title: "Episode Title",
       artist: "Podcast Host",
       album: "Podcast Title",
-      artwork: [{src: "podcast.jpg"}]
+      artwork: [{src: "podcast.jpg"}],
+      chapterInfo: [
+        {title: "Chapter 1", startTime: 0, artwork: [{src: "chapter1.jpg"}]},
+        {title: "Chapter 2", startTime: 120, artwork: [{src: "chapter2.jpg"}]}
+      ]
     });
   </pre>
 
   Alternatively, providing multiple <a for="MediaMetadata" title="artwork
   image">artwork images</a> in the metadata can let the user agent be able to
   select different artwork images for different display purposes and better fit
-  for different screens:
+  for different screens (the same for the artwork in {{MediaMetadata/chapterInfo}}):
 
   <pre class="lang-javascript">
     navigator.mediaSession.metadata = new MediaMetadata({
@@ -1463,6 +1583,16 @@ If disabled in the document, the User Agent MUST NOT select the document's media
         {src: "podcast.png", sizes: "128x128", type: "image/png"},
         {src: "podcast_hd.png", sizes: "256x256", type: "image/png"},
         {src: "podcast.ico", sizes: "128x128 256x256", type: "image/x-icon"}
+      ],
+      chapterInfo: [
+        {title: "Chapter 1", startTime: 0, artwork: [
+           {src: "chapter1_a.jpg", sizes: "128x128", type: "image/jpeg"},
+           {src: "chapter1_b.png", sizes: "256x256", type: "image/png"}
+         ]},
+        {title: "Chapter 2", startTime: 120, artwork: [
+           {src: "chapter2_a.jpg", sizes: "128x128", type: "image/jpeg"},
+           {src: "chapter2_b.png", sizes: "256x256", type: "image/png"}
+         ]}
       ]
     });
   </pre>
