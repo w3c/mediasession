@@ -50,44 +50,17 @@ table td, table th {
 
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
+    type:element; text:link
     type: dfn
-        urlPrefix: common-microsyntaxes.html
-            text: unordered set of unique space-separated tokens; url: #unordered-set-of-unique-space-separated-tokens
         urlPrefix: media.html
-            text: media element
             text: muted; url: #concept-media-muted
             text: potentially playing
-        urlPrefix: browsers.html
-            text: browsing context
         urlPrefix: webappapis.html
             text: entry settings object
-        urlPrefix: semantics.html
-            text: link; for: HTMLLinkElement; url:#the-link-element
         urlPrefix: interaction.html
             text: activation notification
-urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH
-    type: dfn; urlPrefix: #concept-
-        text: fetch
-        text: internal response
-        text: response
-        text: response type
     type: dfn;
         text: force Origin header flag
-urlPrefix: https://tc39.es/ecma262/#sec-object.; spec: WEBIDL;
-    type: dfn
-        text: freeze
-urlPrefix: https://www.w3.org/TR/permissions-policy-1/; spec: PermissionsPolicy
-    type: dfn;
-        text: policy-controlled feature; url:#policy-controlled-feature
-        text: default allowlist; url:#policy-controlled-feature-default-allowlist
-urlPrefix: https://html.spec.whatwg.org/multipage/dom.html; spec: dom
-    type: dfn
-        text: permissions policy; url:#concept-document-permissions-policy
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/; spec: mediacapture-main
-    type: dfn
-        text: MediaStreamTrack; url:#mediastreamtrack
-        text: MediaStreamTrack muted state; url:#track-muted
-        text: set MediaStreamTrack muted state; url:#set-track-muted
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -97,47 +70,10 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/; spec: mediacapture-main
 Media is used extensively today, and the Web is one of the primary means of
 consuming media content. Many platforms can display media metadata, such as
 title, artist, album and album art on various UI elements such as notifications,
-media control center, device lockscreen, and wearable devices. This specification
-aims to enable web pages to specify the media metadata to be displayed in
-platform UI, and respond to media controls that may come from platform UI or
-media keys, thereby improving the user experience.
-
-<h2 id="conformance">Conformance</h2>
-
-All diagrams, examples, and notes in this specification are non-normative, as
-are all sections explicitly marked non-normative. Everything else in this
-specification is normative.
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in RFC 2119. For readability, these
-words do not appear in all uppercase letters in this specification. [[!RFC2119]]
-
-Requirements phrased in the imperative as part of algorithms (such as "strip any
-leading space characters" or "return false and terminate these steps") are to be
-interpreted with the meaning of the key word ("must", "should", "may", etc) used
-in introducing the algorithm.
-
-Conformance requirements phrased as algorithms or specific steps may be
-implemented in any manner, so long as the end result is equivalent. (In
-particular, the algorithms defined in this specification are intended to be easy
-to follow, and not intended to be performant.)
-
-User agents may impose implementation-specific limits on otherwise unconstrained
-inputs, e.g. to prevent denial of service attacks, to guard against running out
-of memory, or to work around platform-specific limitations.
-
-When a method or an attribute is said to call another method or attribute, the
-user agent must invoke its internal API for that attribute or method so that
-e.g. the author can't change the behavior by overriding attributes or methods
-with custom properties or functions in JavaScript.
-
-Unless otherwise stated, string comparisons use [=is|is identical to=].
-
-<h2 id="dependencies">Dependencies</h2>
-
-The IDL fragments in this specification must be interpreted as required for
-conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
+media control center, device lockscreen, and wearable devices. This
+specification aims to enable web pages to specify the media metadata to be
+displayed in platform UI, and respond to media controls that may come from
+platform UI or media keys, thereby improving the user experience.
 
 <section>
   <h2 id='security-privacy-considerations'>Security and Privacy
@@ -224,35 +160,35 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
     <p>
       In order to make {{MediaSessionAction/play}} and
-      {{MediaSessionAction/pause}} actions work properly,
-      the user agent SHOULD be able to determine if a <a>browsing context</a> of
-      the <a>active media session</a> is playing media or not, which is called
-      the <dfn>guessed playback state</dfn>. The RECOMMENDED way for determining
-      the <a>guessed playback state</a> is to monitor the media elements whose
-      node document's browsing context is the <a>browsing context</a>. The
-      <a>browsing context</a>'s <a>guessed playback state</a> is <a enum-value
-      for="MediaSessionPlaybackState">playing</a> if any of them is
-      <a>potentially playing</a> and not <a>muted</a>, and is <a enum-value
+      {{MediaSessionAction/pause}} actions work properly, the user agent SHOULD
+      be able to determine if a [=/browsing context=] of the <a>active media
+      session</a> is playing media or not, which is called the <dfn>guessed
+      playback state</dfn>. The RECOMMENDED way for determining the <a>guessed
+      playback state</a> is to monitor the media elements whose node document's
+      [=Document/browsing context=] is the [=/browsing context=]. The
+      [=/browsing context=]'s <a>guessed playback state</a> is
+      {{MediaSessionPlaybackState/"playing"}} if any of them is <a>potentially
+      playing</a> and not <a>muted</a>, and is <a enum-value
       for="MediaSessionPlaybackState">paused</a> otherwise. Other information
       SHOULD also be considered, such as WebAudio and plugins.
     </p>
 
     <p>
-      The <a attribute for="MediaSession">playbackState</a> attribute specifies
-      the <a>declared playback state</a> from the <a>browsing context</a>. The
-      state is combined with the <a>guessed playback state</a> to compute the
+      The {{MediaSession/playbackState}} attribute specifies the <a>declared
+      playback state</a> from the [=/browsing context=]. The state is combined
+      with the <a>guessed playback state</a> to compute the
       <dfn>actual playback state</dfn>, which is a finalized state and will be
-      used for
-      {{MediaSessionAction/play}} and
-      {{MediaSessionAction/pause}} actions.
+      used for {{MediaSessionAction/play}} and {{MediaSessionAction/pause}}
+      actions.
     </p>
 
     <p>
       The <a>actual playback state</a> is computed in the following way:
       <ul>
         <li>
-          If the <a>declared playback state</a> is {{MediaSessionPlaybackState/playing}},
-          return {{MediaSessionPlaybackState/playing}}.
+          If the <a>declared playback state</a> is
+          {{MediaSessionPlaybackState/playing}}, return
+          {{MediaSessionPlaybackState/playing}}.
         </li>
         <li>
           Otherwise, return the <a>guessed playback state</a>.
@@ -263,8 +199,9 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p class=note>
       The {{MediaSession/playbackState}} attribute could be useful when the page
       wants to do some preparation steps when the media is paused but it allows
-      the preparation steps to be interrupted by {{MediaSessionAction/pause}} action. See <a
-      href="#example-set-playbackState">Setting playbackState</a> for example.
+      the preparation steps to be interrupted by {{MediaSessionAction/pause}}
+      action. See <a href="#example-set-playbackState">Setting playbackState</a>
+      for example.
     </p>
 
     <p>
@@ -280,7 +217,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     There could be multiple {{MediaSession}} objects existing at the same time
     since the user agent could have multiple tabs, each tab could contain a
     <a>top-level browsing context</a> and multiple <a>nested browsing
-    contexts</a>, and each <a>browsing context</a> could have a {{MediaSession}}
+    contexts</a>, and each [=/browsing context=] could have a {{MediaSession}}
     object.
 
     The user agent MUST select at most one of the {{MediaSession}} objects to
@@ -291,10 +228,10 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     routing. It only takes effect for the <a>active media session</a>.
 
     It is RECOMMENDED that the user agent selects the <a>active media
-    session</a> by managing <a>audio focus</a>. A tab or <a>browsing context</a>
-    is said to have <dfn>audio focus</dfn> if it is currently playing audio or
-    the user expects to control the media in it. The AudioFocus API targets this
-    area and could be used once it's finished.
+    session</a> by managing <a>audio focus</a>. A tab or [=Window/browsing
+    context=] is said to have <dfn>audio focus</dfn> if it is currently playing
+    audio or the user expects to control the media in it. The AudioFocus API
+    targets this area and could be used once it's finished.
 
     Whenever the <a>active media session</a> is changed, the user agent MUST run
     the <a>media session actions update algorithm</a> and the <a>update metadata
@@ -306,9 +243,9 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
 
     The media metadata for the <a>active media session</a> MAY be displayed in
     the platform UI depending on platform conventions. Whenever the <a>active
-    media session</a> changes or setting {{MediaSession/metadata}} of the <a>active media
-    session</a>, the user agent MUST run the <dfn>update metadata
-    algorithm</dfn>. The steps are as follows:
+    media session</a> changes or setting {{MediaSession/metadata}} of the
+    <a>active media session</a>, the user agent MUST run the <dfn>update
+    metadata algorithm</dfn>. The steps are as follows:
 
     <ol>
       <li>
@@ -340,29 +277,27 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
         existing algorithm execution instances.
       </li>
       <li>
-        If <var>metadata</var>'s {{MediaMetadata/artwork}} of the <a>active media
-        session</a> is empty, then terminate these steps.
+        If <var>metadata</var>'s {{MediaMetadata/artwork}} of the <a>active
+        media session</a> is empty, then terminate these steps.
       </li>
       <li>
         If the platform supports displaying media artwork, select a
         <dfn>preferred artwork image</dfn> from <var>metadata</var>'s
-        {{MediaMetadata/artwork}} of the <a>active
-        media session</a>.
+        {{MediaMetadata/artwork}} of the <a>active media session</a>.
       </li>
       <li>
-        [=Fetch=] the <a>preferred artwork image</a>'s
-        {{MediaImage/src}}.
+        [=Fetch=] the <a>preferred artwork image</a>'s {{MediaImage/src}}.
 
         Then, <a>in parallel</a>:
 
         <ol>
           <li>
-            Wait for the <a>response</a>.
+            Wait for the [=/response=].
           </li>
           <li>
-            If the <a>response</a>'s <a>internal response</a>'s <a lt="response
-            type">type</a> is <i>default</i>, attempt to decode the resource as
-            an image.
+            If the [=/response=]'s [=response/type=] is
+            {{ResponseType/"default"}}, attempt to decode the resource as an
+            image.
           </li>
           <li>
             If the image format is supported, use the image as the artwork for
@@ -388,17 +323,18 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     </p>
 
     <p>
-      A <dfn>media session action source</dfn> is a source that might produce a <a>media session action</a>.
-      Such a source can be the platform or the UI surfaces created by the user
-      agent.
+      A <dfn>media session action source</dfn> is a source that might produce a
+      <a>media session action</a>. Such a source can be the platform or the UI
+      surfaces created by the user agent.
     </p>
     <p>
       A <a>media session action source</a> has an optional
       <dfn for="media session action source">target</dfn> which should be the
       recipient of any <a>media session action</a> created by the
-      <a>media session action source</a>. If a <a>media session action source</a>'s
-      <a for="media session action source">target</a> is `null`,
-      the <a>active media session</a> is the recipient of all
+      <a>media session action source</a>. If a <a>media session action
+      source</a>'s
+      <a for="media session action source">target</a> is `null`, the <a>active
+      media session</a> is the recipient of all
       <a>media session action source</a>'s actions.
     </p>
 
@@ -411,13 +347,13 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           is to resume the playback.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>pause</dfn>: the action's intent
-          is to pause the currently active playback.
+          <dfn enum-value for=MediaSessionAction>pause</dfn>: the action's
+          intent is to pause the currently active playback.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>seekbackward</dfn>: the action's
-          intent is to move the playback time backward by a short period (eg. a
-          few seconds).
+          <dfn enum-value for=MediaSessionAction>seekbackward</dfn>: the
+          action's intent is to move the playback time backward by a short
+          period (eg. a few seconds).
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>seekforward</dfn>: the action's
@@ -425,51 +361,54 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           few seconds).
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>previoustrack</dfn>: the action's
-          intent is to either start the current playback from the beginning if
-          the playback has a notion of beginning, or move to the previous item
-          in the playlist if the playback has a notion of playlist.
+          <dfn enum-value for=MediaSessionAction>previoustrack</dfn>: the
+          action's intent is to either start the current playback from the
+          beginning if the playback has a notion of beginning, or move to the
+          previous item in the playlist if the playback has a notion of
+          playlist.
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>nexttrack</dfn>: the action's
-          intent is to move to the playback to the next item in the playlist if the
-          playback has a notion of playlist.
+          intent is to move to the playback to the next item in the playlist if
+          the playback has a notion of playlist.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>skipad</dfn>: the action's intent
-          is to skip the advertisement that is currently playing.
+          <dfn enum-value for=MediaSessionAction>skipad</dfn>: the action's
+          intent is to skip the advertisement that is currently playing.
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>stop</dfn>: the action's intent
           is to stop the playback and clear the state if appropriate.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>seekto</dfn>: the action's intent
-          is to move the playback time to a specific time.
+          <dfn enum-value for=MediaSessionAction>seekto</dfn>: the action's
+          intent is to move the playback time to a specific time.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>togglemicrophone</dfn>: the action's intent
-          is to mute or unmute the user's microphone.
+          <dfn enum-value for=MediaSessionAction>togglemicrophone</dfn>: the
+          action's intent is to mute or unmute the user's microphone.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>togglecamera</dfn>: the action's intent
-          is to turn the user's active camera on or off.
+          <dfn enum-value for=MediaSessionAction>togglecamera</dfn>: the
+          action's intent is to turn the user's active camera on or off.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's intent
-          is to end a call.
+          <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's
+          intent is to end a call.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>previousslide</dfn>: the action's intent
-          is to go back to the previous slide when presenting slides.
+          <dfn enum-value for=MediaSessionAction>previousslide</dfn>: the
+          action's intent is to go back to the previous slide when presenting
+          slides.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>nextslide</dfn>: the action's intent
-          is to go to the next slide when presenting slides.
+          <dfn enum-value for=MediaSessionAction>nextslide</dfn>: the action's
+          intent is to go to the next slide when presenting slides.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>enterpictureinpicture</dfn>: the action's intent
-          is to open the media session in a picture-in-picture window.
+          <dfn enum-value for=MediaSessionAction>enterpictureinpicture</dfn>:
+          the action's intent is to open the media session in a
+          picture-in-picture window.
         </li>
       </ul>
     </p>
@@ -509,8 +448,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       When the user agent is notified by a <a>media session action source</a>
       named <var>source</var> that a
       <a>media session action</a> named <var>action</var> has been triggered,
-      the user agent MUST <a>queue a task</a>, using the
-      [=user interaction task source=], to run the following
+      the user agent MUST <a>queue a task</a>, using the [=user interaction task
+      source=], to run the following
       <dfn>handle media session action</dfn> steps:
       <ol>
         <li>
@@ -518,8 +457,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           action source">target</a>.
         </li>
         <li>
-          If <var>session</var> is `null`, set <var>session</var> to
-          the <a>active media session</a>.
+          If <var>session</var> is `null`, set <var>session</var> to the
+          <a>active media session</a>.
         </li>
         <li>
           If <var>session</var> is `null`, abort these steps.
@@ -541,8 +480,8 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
           {{MediaSessionActionDetails}}.
         </li>
         <li>
-          Run the <a>activation notification</a> steps in the
-          <a>browsing context</a> associated with <var>session</var>.
+          Run the <a>activation notification</a> steps in the [=/browsing
+          context=] associated with <var>session</var>.
         </li>
       </ol>
     </p>
@@ -551,12 +490,11 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
       When the user agent receives a joint command for <a enum-value
       for=MediaSessionAction>play</a> and <a enum-value
       for=MediaSessionAction>pause</a>, such as a headset button click, it MUST
-      <a>queue a task</a>, using the
-      [=user interaction task source=], to run the following steps:
+      <a>queue a task</a>, using the [=user interaction task source=], to run
+      the following steps:
       <ol>
         <li>
-          If the <a>active media session</a> is `null`, abort these
-          steps.
+          If the <a>active media session</a> is `null`, abort these steps.
         </li>
         <li>
           Let <var>action</var> be a <a>media session action</a>.
@@ -663,7 +601,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
   </section>
 
   <section>
-    <h3 id='position-state'>Position State</h3>
+    <h3 id='position-state-sec'>Position State</h3>
 
     <p>
       A user agent MAY display the <a>current playback position</a> and
@@ -696,7 +634,7 @@ conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
     <p>
       The RECOMMENDED way to determine the <a>position state</a> is to monitor
       the media elements whose node document's browsing context is the
-      <a>browsing context</a>.
+      [=/browsing context=].
     </p>
 
     <p>
@@ -814,24 +752,21 @@ interface MediaSession {
 
 <p>
   The <dfn attribute for="MediaSession"><code>metadata</code></dfn> attribute
-  reflects the {{MediaSession}}'s {{MediaSession/metadata}}. On getting,
-  it MUST return the {{MediaSession}}'s {{MediaSession/metadata}}. On
-  setting, it MUST run the following steps with <var>value</var> being the new
-  value being set:
+  reflects the {{MediaSession}}'s {{MediaSession/metadata}}. On getting, it MUST
+  return the {{MediaSession}}'s {{MediaSession/metadata}}. On setting, it MUST
+  run the following steps with <var>value</var> being the new value being set:
   <ol>
     <li>
-      If the {{MediaSession}}'s {{MediaSession/metadata}} is not
-      `null`, set its [=MediaMetadata/media session=] to
-      `null`.
+      If the {{MediaSession}}'s {{MediaSession/metadata}} is not `null`, set its
+      [=MediaMetadata/media session=] to `null`.
     </li>
     <li>
       Set the {{MediaSession}}'s {{MediaSession/metadata}} to
       <var>value</var>.
     </li>
     <li>
-      If the {{MediaSession}}'s {{MediaSession/metadata}} is not
-      `null`, set its [=MediaMetadata/media session=] to the
-      current {{MediaSession}}.
+      If the {{MediaSession}}'s {{MediaSession/metadata}} is not `null`, set its
+      [=MediaMetadata/media session=] to the current {{MediaSession}}.
     </li>
     <li>
       <a>In parallel</a>, run the <a>update metadata algorithm</a>.
@@ -842,14 +777,14 @@ interface MediaSession {
 <p>
   The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
   attribute represents the <dfn>declared playback state</dfn> of the <a>media
-  session</a>, by which the session declares whether its <a>browsing context</a>
+  session</a>, by which the session declares whether its [=/browsing context=]
   is playing media or not. The initial value is <a enum-value
   for="MediaSessionPlaybackState">none</a>. On setting, the user agent MUST set
   the IDL attribute to the new value if it is a valid
   {{MediaSessionPlaybackState}} value. On getting, the user agent MUST return
   the last valid value that was set. The {{MediaSession/playbackState}}
-  attribute is a hint for the user agent to determine whether the <a>browsing
-  context</a> is playing or paused.
+  attribute is a hint for the user agent to determine whether the [=/browsing
+  context=] is playing or paused.
 </p>
 
 <p class=note>
@@ -859,64 +794,67 @@ interface MediaSession {
 
 <p>
   The {{MediaSessionPlaybackState}} enum is used to indicate whether a
-  <a>browsing context</a> is playing media or not, the values are described as
+  [=/browsing context=] is playing media or not, the values are described as
   follows:
 
   <ul>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the
-      <a>browsing context</a>
-      does not specify whether it's playing or paused, it can only be used in
-      the {{MediaSession/playbackState}} attribute.
+      [=/browsing context=] does not specify whether it's playing or paused, it
+      can only be used in the {{MediaSession/playbackState}} attribute.
     </li>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the
-      <a>browsing context</a> is currently playing media and it can be paused.
+      [=/browsing context=] is currently playing media and it can be paused.
     </li>
     <li>
       <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the
-      <a>browsing context</a> has paused media and it can be resumed.
+      [=/browsing context=] has paused media and it can be resumed.
     </li>
   </ul>
 </p>
 
 <p>
-  The <dfn method for=MediaSession>setActionHandler(action, handler)</dfn> method, when
-  invoked, MUST run the <a>update action handler algorithm</a> with
+  The <dfn method for=MediaSession>setActionHandler(action, handler)</dfn>
+  method, when invoked, MUST run the <a>update action handler algorithm</a> with
   <var>action</var> and <var>handler</var> on the {{MediaSession}}.
 </p>
 
 <p>
-  The <dfn method for=MediaSession>setPositionState(state)</dfn> method, when invoked
-  MUST perform the following steps:
+  The <dfn method for=MediaSession>setPositionState(|state|)</dfn> method, when
+  invoked MUST perform the following steps:
 
   <ul>
     <li>
-      If <var>state</var> is an empty dictionary, clear the <a>position state</a>
+      If <var>state</var> is an empty dictionary, clear the <a>position
+      state</a>
       and abort these steps.
     </li>
     <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">duration</a> is not
-      present, throw a <a exception>TypeError</a>.
+      If <var>state</var>'s <a dict-member for="MediaPositionState">duration</a>
+      is not present, throw a <a exception>TypeError</a>.
     </li>
     <li>
       If <var>state</var>'s {{MediaPositionState/duration}} is negative or
       <code>NaN</code>, throw a <a exception>TypeError</a>.
     </li>
     <li>
-      If <var>state</var>'s {{MediaPositionState/position}} is not present, set it to zero.
+      If <var>state</var>'s {{MediaPositionState/position}} is not present, set
+      it to zero.
     </li>
     <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">position</a> is negative or
-      greater than <a dict-member for="MediaPositionState">duration</a>, throw a
+      If <var>state</var>'s <a dict-member for="MediaPositionState">position</a>
+      is negative or greater than <a dict-member
+      for="MediaPositionState">duration</a>, throw a
       <a exception>TypeError</a>.
     </li>
     <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">playbackRate</a> is not present, set it to 1.0.
+      If <var>state</var>'s <a dict-member
+      for="MediaPositionState">playbackRate</a> is not present, set it to 1.0.
     </li>
     <li>
-      If <var>state</var>'s {{MediaPositionState/playbackRate}} is zero,
-      throw a <a exception>TypeError</a>.
+      If <var>state</var>'s {{MediaPositionState/playbackRate}} is zero, throw a
+      <a exception>TypeError</a>.
     </li>
     <li>
       Update the <a>position state</a> and <a>last position updated time</a>.
@@ -929,8 +867,8 @@ interface MediaSession {
   indicates to the user agent the microphone capture state desired by the page
   (e.g. if the microphone is considered "inactive" by the page since it is no
   longer sending audio through a call, the page can invoke
-  <code>setMicrophoneActive(false)</code>). When invoked, it MUST perform
-  the following steps:
+  <code>setMicrophoneActive(false)</code>). When invoked, it MUST perform the
+  following steps:
   <ol>
     <li>
       Let <var>document</var> be [=this=]'s [=relevant global object=]'s
@@ -947,8 +885,8 @@ interface MediaSession {
 </p>
 <p>
   Similarly, the <dfn method for=MediaSession>setCameraActive(active)</dfn>
-  method indicates to the user agent the camera capture state desired by the page.
-  When invoked, it MUST perform the following steps:
+  method indicates to the user agent the camera capture state desired by the
+  page. When invoked, it MUST perform the following steps:
   <ol>
     <li>
       Let <var>document</var> be [=this=]'s [=relevant global object=]'s
@@ -965,8 +903,8 @@ interface MediaSession {
 </p>
 <p>
   The <dfn>update capture state algorithm</dfn>, when invoked with
-  <var>document</var>, <var>active</var> and <var>captureKind</var>,
-  MUST perform the following steps:
+  <var>document</var>, <var>active</var> and <var>captureKind</var>, MUST
+  perform the following steps:
   <ol>
     <li>
       If <var>document</var> is not [=fully active=], return [=a promise
@@ -990,11 +928,13 @@ interface MediaSession {
           otherwise.
         </li>
         <li>
-          If <var>applyPausePolicy</var> is <code>true</code>, run the following substeps:
+          If <var>applyPausePolicy</var> is <code>true</code>, run the following
+          substeps:
           <ol>
             <li>
               Let <var>currentlyActive</var> be <code>false</code> if the user
-              agent is currently [=pausing all input sources=] of type <var>captureKind</var>
+              agent is currently [=pausing all input sources=] of type
+              <var>captureKind</var>
               and <code>true</code> otherwise.
             </li>
             <li>
@@ -1002,8 +942,8 @@ interface MediaSession {
               <var>p</var> with <code>undefined</code> and abort these steps.
             </li>
             <li>
-              If <var>active</var> is <code>true</code>, the user agent MAY wait to
-              proceed, for instance to prompt the user.
+              If <var>active</var> is <code>true</code>, the user agent MAY wait
+              to proceed, for instance to prompt the user.
             </li>
             <li>
               If the user agent denies the request to update the capture state,
@@ -1013,18 +953,22 @@ interface MediaSession {
           </ol>
         </li>
         <li>
-          Update the user agent capture state UI according to <var>captureKind</var>
+          Update the user agent capture state UI according to
+          <var>captureKind</var>
           and <var>active</var>.
         </li>
         <li>Resolve <var>p</var> with <code>undefined</code>.</li>
         <li>
-          If <var>applyPausePolicy</var> is <code>true</code>, run the following substeps:
+          If <var>applyPausePolicy</var> is <code>true</code>, run the following
+          substeps:
           <ol>
             <li>
-              Let <var>newMutedState</var> be <code>true</code> if <var>active</var> is
-              <code>false</code> and <code>false</code> otherwise.</li>
+              Let <var>newMutedState</var> be <code>true</code> if
+              <var>active</var> is
+            <code>false</code> and <code>false</code> otherwise.</li>
             <li>
-              For each [=MediaStreamTrack=] whose source is of type <var>captureKind</var>,
+              For each [=MediaStreamTrack=] whose source is of type
+              <var>captureKind</var>,
               <a>queue a task</a> to [=set MediaStreamTrack muted state=] to
               <var>newMutedState</var>.
             </li>
@@ -1110,14 +1054,13 @@ dictionary MediaMetadataInit {
     <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
     <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
     is <code>0</code>.</li>
-    <li>Its <a for=MediaMetadata>chapter information</a> length
-    is <code>0</code>.</li>
+    <li>Its <a for=MediaMetadata>chapter information</a> length is
+    <code>0</code>.</li>
   </ul>
 </p>
 
 <p>
-  The <dfn constructor
-  for="MediaMetadata">MediaMetadata(<var>init</var>)</dfn>
+  The <dfn constructor for="MediaMetadata">MediaMetadata(<var>init</var>)</dfn>
   constructor, when invoked, MUST run the following steps:
 
   <ol>
@@ -1146,13 +1089,14 @@ dictionary MediaMetadataInit {
       Let <var>chapters</var> be an empty list of type {{ChapterInformation}}.
     </li>
     <li>
-      For each <var>entry</var> in <var>init</var>'s {{MediaMetadataInit/chapterInfo}},
-      [=create a ChapterInformation=] from <var>entry</var> and append it to
+      For each <var>entry</var> in <var>init</var>'s
+      {{MediaMetadataInit/chapterInfo}}, [=create a ChapterInformation=] from
+      <var>entry</var> and append it to
       <var>chapters</var>.
     </li>
     <li>
-      Set <var>metadata</var>'s <a for="MediaMetadata">chapter information</a> to the
-      result of [=Create a frozen array|creating a frozen array=] from
+      Set <var>metadata</var>'s <a for="MediaMetadata">chapter information</a>
+      to the result of [=Create a frozen array|creating a frozen array=] from
       <var>chapters</var>.
     </li>
     <li>
@@ -1168,8 +1112,8 @@ invoked, the user agent MUST run the following steps:
     Let <var>output</var> be an empty list of type {{MediaImage}}.
   </li>
   <li>
-    For each <var>entry</var> in <var>input</var> (which is a {{MediaImage}} list), 
-perform the following steps:
+    For each <var>entry</var> in <var>input</var> (which is a {{MediaImage}}
+    list), perform the following steps:
     <ol>
       <li>
         Let <var>image</var> be a new {{MediaImage}}.
@@ -1201,27 +1145,25 @@ perform the following steps:
 </ol>
 
 <p>
-  The <dfn attribute for="MediaMetadata">title</dfn> attribute
-  reflects the {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On getting,
-  it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On
-  setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>title</a> to
-  the given value.
+  The <dfn attribute for="MediaMetadata">title</dfn> attribute reflects the
+  {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On getting, it MUST return
+  the {{MediaMetadata}}'s <a for=MediaMetadata>title</a>. On setting, it MUST
+  set the {{MediaMetadata}}'s <a for=MediaMetadata>title</a> to the given value.
 </p>
 
 <p>
-  The <dfn attribute for="MediaMetadata">artist</dfn> attribute
-  reflects the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On getting,
-  it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On
-  setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>
+  The <dfn attribute for="MediaMetadata">artist</dfn> attribute reflects the
+  {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On getting, it MUST
+  return the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>. On setting, it
+  MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>artist</a>
   to the given value.
 </p>
 
 <p>
-  The <dfn attribute for="MediaMetadata">album</dfn> attribute
-  reflects the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On getting,
-  it MUST return the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On
-  setting, it MUST set the {{MediaMetadata}}'s <a for=MediaMetadata>album</a> to
-  the given value.
+  The <dfn attribute for="MediaMetadata">album</dfn> attribute reflects the
+  {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On getting, it MUST return
+  the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On setting, it MUST
+  set the {{MediaMetadata}}'s <a for=MediaMetadata>album</a> to the given value.
 </p>
 
 <p>
@@ -1257,8 +1199,8 @@ perform the following steps:
         better to do this with IDL primitives instead of JS - see
         https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
         <li>
-          Call <a lt="freeze">Object.freeze</a> on <var>image</var>, to prevent
-          accidental mutation by scripts.
+          Call {{Object/freeze(O)}} on <var>image</var>, to prevent accidental
+          mutation by scripts.
         </li>
         <li>
           Append <var>image</var> to <var>frozenArtwork</var>.
@@ -1282,8 +1224,8 @@ perform the following steps:
   following steps:
   <ol>
     <li>
-      If the instance has no associated [=MediaMetadata/media session=],
-      abort these steps.
+      If the instance has no associated [=MediaMetadata/media session=], abort
+      these steps.
     </li>
     <li>
       Otherwise, <a>queue a task</a> to run the following substeps:
@@ -1301,7 +1243,8 @@ perform the following steps:
   </ol>
 </p>
 
-<h2 id="the-chapterinformation-interface">The {{ChapterInformation}} interface</h2>
+<h2 id="the-chapterinformation-interface">The {{ChapterInformation}}
+interface</h2>
 
 <pre class="idl">
 [Exposed=Window]
@@ -1320,9 +1263,10 @@ dictionary ChapterInformationInit {
 </pre>
 
 <p>
-  A {{ChapterInformation}} object is a representation of metadata for an individual
-  chapter, such as the title of the section, its timestamp, and screenshot image data
-  of this section, that can be used by user agents to provide a customized user interface. 
+  A {{ChapterInformation}} object is a representation of metadata for an
+  individual chapter, such as the title of the section, its timestamp, and
+  screenshot image data of this section, that can be used by user agents to
+  provide a customized user interface.
 </p>
 
 <p>
@@ -1331,7 +1275,8 @@ dictionary ChapterInformationInit {
 </p>
 
 <p>
-  A {{ChapterInformation}} has an associated <dfn for="ChapterInformation">title</dfn>
+  A {{ChapterInformation}} has an associated <dfn
+  for="ChapterInformation">title</dfn>
   which is DOMString.
 </p>
 
@@ -1341,34 +1286,37 @@ dictionary ChapterInformationInit {
 </p>
 
 <p>
-  A {{ChapterInformation}} has an associated list of <dfn for="ChapterInformation">
-artwork images</dfn>.
+  A {{ChapterInformation}} has an associated list of <dfn
+  for="ChapterInformation">
+  artwork images</dfn>.
 </p>
 
 <p>
-  To <dfn>create a {{ChapterInformation}}</dfn> with <var>init</var>,
-  run the following steps:
+  To <dfn>create a {{ChapterInformation}}</dfn> with <var>init</var>, run the
+  following steps:
 
   <ol>
     <li>
       Let <var>chapterInfo</var> be a new {{ChapterInformation}} object.
     </li>
     <li>
-      Set <var>chapterInfo</var>'s {{ChapterInformation/title}} to <var>init</var>'s
-      {{ChapterInformationInit/title}}.
+      Set <var>chapterInfo</var>'s {{ChapterInformation/title}} to
+      <var>init</var>'s {{ChapterInformationInit/title}}.
     </li>
     <li>
-      Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to <var>init</var>'s
-      {{ChapterInformationInit/startTime}}. If the <a for=ChapterInformation>startTime</a> is
-      negative or greater than [=duration=], throw
-      a <a exception>TypeError</a>.
+      Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to
+      <var>init</var>'s {{ChapterInformationInit/startTime}}. If the <a
+      for=ChapterInformation>startTime</a> is negative or greater than
+      [=duration=], throw a <a exception>TypeError</a>.
     </li>
     <li>
-      Let {{ChapterInformationInit/artwork}} be the result of running the <a>convert artwork algorithm</a>.
+      Let {{ChapterInformationInit/artwork}} be the result of running the
+      <a>convert artwork algorithm</a>.
     </li>
     <li>
-      Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork images</a> to the
-      result of [=Create a frozen array|creating a frozen array=] from {{ChapterInformationInit/artwork}}.
+      Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork
+      images</a> to the result of [=Create a frozen array|creating a frozen
+      array=] from {{ChapterInformationInit/artwork}}.
     </li>
     <li>
       Return <var>chapterInfo</var>.
@@ -1377,21 +1325,23 @@ artwork images</dfn>.
 </p>
 
 <p>
-  The <dfn attribute for="ChapterInformation">title</dfn> attribute
-  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>. On getting,
-  it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>.
+  The <dfn attribute for="ChapterInformation">title</dfn> attribute reflects the
+  {{ChapterInformation}}'s <a for=ChapterInformation>title</a>. On getting, it
+  MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>title</a>.
 </p>
 
 <p>
-  The <dfn attribute for="ChapterInformation">startTime</dfn> attribute
-  reflects the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a> in seconds. On getting,
-  it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a>.
+  The <dfn attribute for="ChapterInformation">startTime</dfn> attribute reflects
+  the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a> in
+  seconds. On getting, it MUST return the {{ChapterInformation}}'s <a
+  for=ChapterInformation>startTime</a>.
 </p>
 
 <p>
   The <dfn attribute for="ChapterInformation">artwork</dfn>
-  attribute reflects the {{ChapterInformation}}'s <a for="ChapterInformation">artwork
-  images</a>. On getting, it MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>
+  attribute reflects the {{ChapterInformation}}'s <a
+  for="ChapterInformation">artwork images</a>. On getting, it MUST return the
+  {{ChapterInformation}}'s <a for=ChapterInformation>
   artwork images</a>.
 </p>
 
@@ -1410,18 +1360,17 @@ dictionary MediaImage {
 {{ImageResource}} in [[IMAGE-RESOURCE]].</p>
 
 The <dfn dict-member for="MediaImage">src</dfn> <a>dictionary member</a> is used
-to specify the {{MediaImage}} object's <dfn for="MediaImage">source</dfn>. It is
-a URL from which the user agent can fetch the image's data.
+to specify the {{MediaImage}} object's <dfn attribute
+for="MediaImage">source</dfn>. It is a URL from which the user agent can fetch
+the image's data.
 
 The <dfn dict-member for="MediaImage">sizes</dfn> <a>dictionary member</a> is
 used to specify the {{MediaImage}} object's {{MediaImage/sizes}}. It follows the
-spec of <a attribute for="HTMLLinkElement"><code>sizes</code></a> attribute in
-the HTML
-<a for="HTMLLinkElement"><code>link</code></a> element, which is a string
-consisting of an <a>unordered set of unique space-separated tokens</a> which are
-<a>ASCII case-insensitive</a> that represents the dimensions of an image. Each
-keyword is either an <a>ASCII case-insensitive</a> match for the string "any",
-or a value that consists of two valid non-negative integers that do not have a
+spec of <{link/sizes}> attribute in the HTML <{link}> element, which is a string
+consisting of an [=unordered set of unique space-separated tokens=] which are
+[=ASCII case-insensitive=] that represents the dimensions of an image. Each
+keyword is either an [=ASCII case-insensitive=] match for the string "any", or a
+value that consists of two valid non-negative integers that do not have a
 leading U+0030 DIGIT ZERO (0) character and that are separated by a single
 U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The
 keywords represent icon sizes in raw pixels (as opposed to CSS pixels). When
@@ -1499,19 +1448,27 @@ parameter whose dictionary type is:
 <ul>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/play}}.</li>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/pause}}.</li>
-  <li>{{MediaSessionSeekActionDetails}} for {{MediaSessionAction/seekbackward}}.</li>
-  <li>{{MediaSessionSeekActionDetails}} for {{MediaSessionAction/seekforward}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/previoustrack}}.</li>
+  <li>{{MediaSessionSeekActionDetails}} for
+  {{MediaSessionAction/seekbackward}}.</li>
+  <li>{{MediaSessionSeekActionDetails}} for
+  {{MediaSessionAction/seekforward}}.</li>
+  <li>{{MediaSessionActionDetails}} for
+  {{MediaSessionAction/previoustrack}}.</li>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/nexttrack}}.</li>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/skipad}}.</li>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/stop}}.</li>
-  <li>{{MediaSessionSeekToActionDetails}} for {{MediaSessionAction/seekto}}.</li>
-  <li>{{MediaSessionCaptureActionDetails}} for {{MediaSessionAction/togglemicrophone}}.</li>
-  <li>{{MediaSessionCaptureActionDetails}} for {{MediaSessionAction/togglecamera}}.</li>
+  <li>{{MediaSessionSeekToActionDetails}} for
+  {{MediaSessionAction/seekto}}.</li>
+  <li>{{MediaSessionCaptureActionDetails}} for
+  {{MediaSessionAction/togglemicrophone}}.</li>
+  <li>{{MediaSessionCaptureActionDetails}} for
+  {{MediaSessionAction/togglecamera}}.</li>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/hangup}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/previousslide}}.</li>
+  <li>{{MediaSessionActionDetails}} for
+  {{MediaSessionAction/previousslide}}.</li>
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/nextslide}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/enterpictureinpicture}}.</li>
+  <li>{{MediaSessionActionDetails}} for
+  {{MediaSessionAction/enterpictureinpicture}}.</li>
 </ul>
 
 The <dfn dict-member for="MediaSessionActionDetails">action</dfn>
@@ -1519,32 +1476,34 @@ The <dfn dict-member for="MediaSessionActionDetails">action</dfn>
 that the {{MediaSessionActionHandler}} is associated with.
 
 The <dfn dict-member for="MediaSessionSeekActionDetails">seekOffset</dfn>
-<a>dictionary member</a> is the time in seconds to move the playback time by.
-If present, it should always be positive. If it is not provided then the site
+<a>dictionary member</a> is the time in seconds to move the playback time by. If
+present, it should always be positive. If it is not provided then the site
 should choose a sensible time (e.g. a few seconds).
 
 The <dfn dict-member for="MediaSessionSeekToActionDetails">seekTime</dfn>
 <a>dictionary member</a> is the time in seconds to move the playback time to.
 
 The <dfn dict-member for="MediaSessionActionSeekToDetails">fastSeek</dfn>
-<a>dictionary member</a> will be true if the seek [=media session action|action=]
-is being called multiple times as part of a sequence and this is not the last
-call in that sequence.
+<a>dictionary member</a> will be true if the seek [=media session
+action|action=] is being called multiple times as part of a sequence and this is
+not the last call in that sequence.
 
 The <dfn dict-member for="MediaSessionActionCaptureDetails">isActivating</dfn>
 <a>dictionary member</a> will be <code>false</code> if the user agent is about
 to [=pausing all input sources|pause all input sources=] related to the capture
-[=media session action|action=] and <code>true</code> otherwise.
-This <a>dictionary member</a> MUST be present if the user agent implements a
-policy of [=pausing all input sources=].
+[=media session action|action=] and <code>true</code> otherwise. This
+<a>dictionary member</a> MUST be present if the user agent implements a policy
+of [=pausing all input sources=].
 
 <h2 id="permissions-policy">Permissions Policy Integration</h2>
 
-This specification defines a <a>policy-controlled feature</a> identified by the
-string "mediasession". Its <a>default allowlist</a> is *.
+This specification defines a [=policy-controlled feature=] identified by the
+string "mediasession". Its [=default allowlist=] is [=default allowlist/*=].
 
-A document's <a>permissions policy</a> determines whether any content in that document is allowed to use the MediaSession API.
-If disabled in the document, the User Agent MUST NOT select the document's media session as the <a>active media session</a>.
+A document's <a>permissions policy</a> determines whether any content in that
+document is allowed to use the MediaSession API. If disabled in the document,
+the User Agent MUST NOT select the document's media session as the <a>active
+media session</a>.
 
 <h2 id="examples">Examples</h2>
 
@@ -1569,7 +1528,8 @@ If disabled in the document, the User Agent MUST NOT select the document's media
   Alternatively, providing multiple <a for="MediaMetadata" title="artwork
   image">artwork images</a> in the metadata can let the user agent be able to
   select different artwork images for different display purposes and better fit
-  for different screens (the same for the artwork in {{MediaMetadata/chapterInfo}}):
+  for different screens (the same for the artwork in
+  {{MediaMetadata/chapterInfo}}):
 
   <pre class="lang-javascript">
     navigator.mediaSession.metadata = new MediaMetadata({
@@ -1598,10 +1558,9 @@ If disabled in the document, the User Agent MUST NOT select the document's media
   </pre>
 
   For example, if the user agent wants to use an image as icon, it may choose
-  `"podcast.jpg"` or `"podcast.png"` for a
-  low-pixel-density screen, and `"podcast_hd.jpg"`
-  or `"podcast_hd.png"` for a high-pixel-density screen. If the user
-  agent wants to use an image for lockscreen background,
+  `"podcast.jpg"` or `"podcast.png"` for a low-pixel-density screen, and
+  `"podcast_hd.jpg"` or `"podcast_hd.png"` for a high-pixel-density screen. If
+  the user agent wants to use an image for lockscreen background,
   `"podcast_xhd.jpg"` will be preferred.
 
 </div>
@@ -1609,7 +1568,7 @@ If disabled in the document, the User Agent MUST NOT select the document's media
 <div class="example" id="example-changing-metadata">
   Changing [=MediaSession/metadata=]:
 
-  For playlists or chapters of an audio book, multiple <a>media elements</a> can
+  For playlists or chapters of an audio book, multiple [=media elements=] can
   share a single <a>media session</a>.
 
   <pre class="lang-javascript">

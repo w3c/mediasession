@@ -36,10 +36,10 @@ def tokenize(source):
 def validate(path, source, tokens):
     stack = []
 
-    def fail(reason, offset):
+    def fail(reason, offset, source, path):
         lineno = source.count('\n', 0, offset) + 1
-        print '%s:%s: error: %s' % (path, lineno, reason)
-        print source.splitlines()[lineno - 1]
+        print(f'{path}:{lineno}: error: {reason}')
+        print(source.splitlines()[lineno - 1])
         sys.exit(1)
 
     for token, start, end, name in tokens:
