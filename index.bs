@@ -715,7 +715,9 @@ enum MediaSessionAction {
   "enterpictureinpicture"
 };
 
-callback MediaSessionActionHandler = undefined(MediaSessionActionDetails details);
+callback MediaSessionActionHandler = undefined(
+  (MediaSessionActionDetails or MediaSessionSeekActionDetails or MediaSessionSeekToActionDetails or MediaSessionCaptureActionDetails) details
+);
 
 [Exposed=Window]
 interface MediaSession {
