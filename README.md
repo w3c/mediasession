@@ -1,4 +1,4 @@
-# Media Session Standard
+# Media Session API
 
 https://w3c.github.io/mediasession/
 

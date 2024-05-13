@@ -106,9 +106,10 @@ interface MediaSession : EventTarget {
 
 ### The `MediaMetadata` interface
 
-A `MediaMetadata` object can contain media metadata like title, artist, album
-and album art. To set the metadata for a `MediaSession`, the page should create
-a `MediaMetadata` object and assign it to a `MediaSession` object:
+A `MediaMetadata` object can contain media metadata like title, artist, album,
+artwork, and video chapter information. To set the metadata for a `MediaSession`,
+the page should create a `MediaMetadata` object and assign it to a `MediaSession`
+object:
 
 ```javascript
 navigator.mediaSession.metadata = new MediaMetadata(/* MediaMetadata constructor */);
@@ -123,12 +124,20 @@ interface MediaMetadata {
     attribute DOMString artist;
     attribute DOMString album;
     attribute FrozenArray<MediaImage> artwork;
+    [SameObject] readonly attribute FrozenArray<ChapterInformation> chapterInfo;
 };
 
 dictionary MediaImage {
   required USVString src;
   DOMString sizes = "";
   DOMString type = "";
+};
+
+[Exposed=Window]
+interface ChapterInformation {
+  readonly attribute DOMString title;
+  readonly attribute double startTime;
+  [SameObject] readonly attribute FrozenArray<MediaImage> artwork;
 };
 ```
 

@@ -1,0 +1,21 @@
+name: Tidy document
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - gh-pages
+    paths:
+      - index.html
+
+jobs:
+  tidy:
+    name: Tidy up
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          title: "Tidied up source"
+          commit-message: "chore(index.bs): tidy up"
+          branch: tidy
