@@ -48,19 +48,17 @@ table td, table th {
 }
 </style>
 
+<pre class="link-defaults">
+spec:html; type:element; text:link
+</pre>
+
 <pre class="anchors">
 urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
-    type:element; text:link
     type: dfn
-        urlPrefix: media.html
-            text: muted; url: #concept-media-muted
-            text: potentially playing
         urlPrefix: webappapis.html
             text: entry settings object
         urlPrefix: interaction.html
             text: activation notification
-    type: dfn;
-        text: force Origin header flag
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -167,10 +165,10 @@ platform UI or media keys, thereby improving the user experience.
       playback state</a> is to monitor the media elements whose node document's
       [=Document/browsing context=] is the [=/browsing context=]. The
       [=/browsing context=]'s <a>guessed playback state</a> is
-      {{MediaSessionPlaybackState/"playing"}} if any of them is <a>potentially
-      playing</a> and not <a>muted</a>, and is <a enum-value
-      for="MediaSessionPlaybackState">paused</a> otherwise. Other information
-      SHOULD also be considered, such as WebAudio and plugins.
+      {{MediaSessionPlaybackState/"playing"}} if any of them is
+      [=media element/potentially playing=] and not [=media element/muted=],
+      and is {{MediaSessionPlaybackState/"paused"}} otherwise. Other
+      information SHOULD also be considered, such as WebAudio and plugins.
     </p>
 
     <p>
@@ -263,7 +261,7 @@ platform UI or media keys, thereby improving the user experience.
         <a>active media session</a>.
       </li>
       <li>
-        If the user agent wants to display an <a>artwork image</a>, it is
+        If the user agent wants to display an [=MediaMetadata/artwork image=], it is
         RECOMMENDED to run the <a>fetch image algorithm</a>.
       </li>
     </ol>
@@ -530,13 +528,13 @@ platform UI or media keys, thereby improving the user experience.
       provided for the <a>active media session</a>.
     </p>
     <p>
-      A user agent MAY expose microphone and camera state to web pages via <a>
-      MediaStreamTrack muted state</a> in addition to
-      {{MediaSessionAction/togglemicrophone}} or
+      A user agent MAY expose microphone and camera state to web pages via
+      {{MediaStreamTrack}}'s {{MediaStreamTrack/muted}} attribute in addition
+      to {{MediaSessionAction/togglemicrophone}} or
       {{MediaSessionAction/togglecamera}} [=media session action=]. In that
       case, the user agent MUST execute the corresponding
       {{MediaSessionActionHandler}} before running, as different tasks, the
-      steps defined to [=set MediaStreamTrack muted state=].
+      steps defined to [$set a track's muted state$].
     </p>
 
     <p class=note>
@@ -967,9 +965,9 @@ interface MediaSession {
               <var>active</var> is
             <code>false</code> and <code>false</code> otherwise.</li>
             <li>
-              For each [=MediaStreamTrack=] whose source is of type
+              For each {{MediaStreamTrack}} whose source is of type
               <var>captureKind</var>,
-              <a>queue a task</a> to [=set MediaStreamTrack muted state=] to
+              <a>queue a task</a> to [$set a track's muted state$] to
               <var>newMutedState</var>.
             </li>
           </ol>
