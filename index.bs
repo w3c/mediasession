@@ -1009,7 +1009,7 @@ interface MediaSession {
   The <a>setMicrophoneActive(active)</a>, <a>setCameraActive(active)</a>
   and <a>setScreenshareActive(active)</a> methods
   can reject based on user agent specific heuristics. This might in
-  particular happen when the web page asks to activate (aka unmute) microphone,
+  particular happen when the web page asks to activate (unmute) the microphone,
   camera or screenshare. The user agent could decide to require [=transient activation=] in
   that case. It might also require user input through a prompt to make the
   actual decision.
