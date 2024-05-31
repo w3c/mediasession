@@ -214,8 +214,8 @@ platform UI or media keys, thereby improving the user experience.
 
     There could be multiple {{MediaSession}} objects existing at the same time
     since the user agent could have multiple tabs, each tab could contain a
-    <a>top-level browsing context</a> and multiple <a>nested browsing
-    contexts</a>, and each [=/browsing context=] could have a {{MediaSession}}
+    [=browsing context/top-level traversable=] and decendent [=/navigables=], 
+    and each [=/navigable=] could have a {{MediaSession}}
     object.
 
     The user agent MUST select at most one of the {{MediaSession}} objects to
