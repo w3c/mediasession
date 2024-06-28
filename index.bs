@@ -1833,7 +1833,8 @@ media session</a>.
     const track = stream.getAudioTracks()[0];
     navigator.mediaSession.setActionHandler("voiceactivity", function() {
       if (track.muted) {
-        // Show unmute notification.
+        // Show unmute notification. If user allows to unmute, call
+        // setMicrophoneActive(true) to unmute.
       }
     });
   </pre>
