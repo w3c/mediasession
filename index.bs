@@ -549,8 +549,8 @@ platform UI or media keys, thereby improving the user experience.
     <p>
       A user agent MUST invoke {{MediaSessionActionHandler}} for
       {{MediaSessionAction/voiceactivity}} only when the voice activity is
-      detected from a source with one or more live {{MediaStreamTrack}}s. A user
-      agent MAY ignore a {{MediaSessionAction/voiceactivity}} action if all
+      detected from a microphone with one or more live {{MediaStreamTrack}}s. A
+      user agent MAY ignore a {{MediaSessionAction/voiceactivity}} action if all
       {{MediaStreamTrack}}s associated with the source are not
       {{MediaStreamTrack/muted}}. It is RECOMMENDED for user agents to set a
       minimal interval for invoking {{MediaSessionActionHandler}} for
@@ -1821,6 +1821,20 @@ media session</a>.
   <pre class="lang-javascript">
     navigator.mediaSession.setActionHandler("enterpictureinpicture", function() {
       remoteVideo.requestPictureInPicture();
+    });
+  </pre>
+</div>
+
+<div class="example" id="example-enterpictureinpicture">
+  Handling voice activity:
+  <pre class="lang-javascript">
+    // Create a MediaStream with audio enabled.
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    const track = stream.getAudioTracks()[0];
+    navigator.mediaSession.setActionHandler("voiceactivity", function() {
+      if (track.muted) {
+        // Show unmute notification.
+      }
     });
   </pre>
 </div>
