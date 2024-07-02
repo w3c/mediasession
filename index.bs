@@ -414,8 +414,8 @@ platform UI or media keys, thereby improving the user experience.
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>voiceactivity</dfn>:
-          the action's intent is to notify the action handler that a voice
-          activity is started.
+          the action's intent is to notify the web page that a voice activity
+          has been detected by the microphone.
         </li>
       </ul>
     </p>
@@ -547,15 +547,28 @@ platform UI or media keys, thereby improving the user experience.
       steps defined to [$set a track's muted state$].
     </p>
     <p>
-      A user agent MUST invoke {{MediaSessionActionHandler}} for
-      {{MediaSessionAction/voiceactivity}} only when the voice activity is
-      detected from a microphone with one or more live {{MediaStreamTrack}}s. A
-      user agent MAY ignore a {{MediaSessionAction/voiceactivity}} action if all
+      A user agent MUST invoke the {{MediaSessionActionHandler}} for
+      {{MediaSessionAction/voiceactivity}} only when voice activity is detected
+      from a microphone with one or more live {{MediaStreamTrack}}s. A user
+      agent MAY ignore a {{MediaSessionAction/voiceactivity}} action if all
       {{MediaStreamTrack}}s associated with the source are not
       {{MediaStreamTrack/muted}}. It is RECOMMENDED for user agents to set a
       minimal interval for invoking {{MediaSessionActionHandler}} for
       {{MediaSessionAction/voiceactivity}} based on privacy and power efficiency
       policies.
+    </p>
+
+    <p class=note>
+      {{MediaSessionAction/voiceactivity}} only indicates the start of a voice
+      activity. Application may display a notification if the user is speaking
+      while the {{MediaStreamTrack}} is muted, or start an {{AudioWorklet}} for
+      audio processing. No action is defined for the end of a voice activity.
+      Unlike other actions which are explicitely triggered by the user,
+      {{MediaSessionAction/voiceactivity}} also depends on the voice activity
+      detection algorithm of the user agent or the system. For privacy and power
+      efficiency concern, web page may not be notified if the second voice
+      activity started soon after last {{MediaSessionAction/voiceactivity}}
+      action.
     </p>
 
     <p class=note>
