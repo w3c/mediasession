@@ -946,13 +946,13 @@ interface MediaSession {
       <a>In parallel</a>, run the following steps:
       <ol>
         <li>
-          Let <var>applyPausePolicy</var> be <code>true</code> if the user agent
+          Let <var>implementPausePolicy</var> be <code>true</code> if the user agent
           implements a policy of <dfn>pausing all input sources</dfn> of type
           <var>captureKind</var> in response to UI and <code>false</code>
           otherwise.
         </li>
         <li>
-          If <var>applyPausePolicy</var> is <code>true</code>, run the following
+          If <var>implementPausePolicy</var> is <code>true</code>, run the following
           substeps:
           <ol>
             <li>
@@ -983,7 +983,7 @@ interface MediaSession {
         </li>
         <li>Resolve <var>p</var> with <code>undefined</code>.</li>
         <li>
-          If <var>applyPausePolicy</var> is <code>true</code>, run the following
+          If <var>implementPausePolicy</var> is <code>true</code>, run the following
           substeps:
           <ol>
             <li>
@@ -991,10 +991,22 @@ interface MediaSession {
               <var>active</var> is
             <code>false</code> and <code>false</code> otherwise.</li>
             <li>
-              For each {{MediaStreamTrack}} whose source is of type
-              <var>captureKind</var>,
-              <a>queue a task</a> to [$set a track's muted state$] to
-              <var>newMutedState</var>.
+              For each {{MediaStreamTrack}} <var>track</var> whose source
+              is of type <var>captureKind</var>, <a>queue a task</a> to run
+              the following substep:
+              <ol>
+                <li>
+                  Provided <var>track</var> is not [=MediaStreamTrack/muted=]
+                  by the user agent for reasons that override its [=pausing all
+                  input sources | pausing policy=],
+                  [$set a track's muted state | set the muted state$] of
+                  <var>track</var> to <var>newMutedState</var>.
+                </li>
+                <p class=note>
+                  Overriding reasons might include a physical mute button on
+                  the device.
+                </p>
+              </ol>
             </li>
           </ol>
         </li>
