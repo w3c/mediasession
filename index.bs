@@ -547,15 +547,18 @@ platform UI or media keys, thereby improving the user experience.
       steps defined to [$set a track's muted state$].
     </p>
     <p>
-      A user agent MUST invoke the {{MediaSessionActionHandler}} for
-      {{MediaSessionAction/voiceactivity}} only when voice activity is detected
-      from a microphone with one or more live {{MediaStreamTrack}}s. A user
-      agent MAY ignore a {{MediaSessionAction/voiceactivity}} action if
-      microphone is not muted and all {{MediaStreamTrack}}s associated with the
-      source are {{MediaStreamTrack/enabled}}. It is RECOMMENDED for user agents
-      to set a minimal interval between invocations of the
+      The {{MediaSessionAction/voiceactivity}} action source MUST always have a
+      target whose document MUST always have {{MediaStreamTrackState/live}}
+      microphone {{MediaStreamTrack}}s. A user agent MUST invoke the
       {{MediaSessionActionHandler}} for {{MediaSessionAction/voiceactivity}}
-      based on privacy and power efficiency policies.
+      only when voice activity is detected from a microphone with one or more
+      {{MediaStreamTrackState/live}} {{MediaStreamTrack}}s. A user agent MAY
+      ignore voice activity if the microphone is not muted and all
+      {{MediaStreamTrack}}s associated with the microphone are
+      {{MediaStreamTrack/enabled}}. It is RECOMMENDED for user agents to set a
+      minimal interval between invocations of the {{MediaSessionActionHandler}}
+      for {{MediaSessionAction/voiceactivity}} based on privacy and power
+      efficiency policies.
     </p>
 
     <p class=note>
