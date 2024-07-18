@@ -412,6 +412,11 @@ platform UI or media keys, thereby improving the user experience.
           the action's intent is to open the media session in a
           picture-in-picture window.
         </li>
+        <li>
+          <dfn enum-value for=MediaSessionAction>voiceactivity</dfn>:
+          the action's intent is to notify the web page that voice activity has
+          been detected by the microphone.
+        </li>
       </ul>
     </p>
 
@@ -540,6 +545,33 @@ platform UI or media keys, thereby improving the user experience.
       case, the user agent MUST execute the corresponding
       {{MediaSessionActionHandler}} before running, as different tasks, the
       steps defined to [$set a track's muted state$].
+    </p>
+    <p>
+      The {{MediaSessionAction/voiceactivity}} action source MUST always have a
+      target whose document MUST always have {{MediaStreamTrackState/live}}
+      microphone {{MediaStreamTrack}}s. A user agent MUST invoke the
+      {{MediaSessionActionHandler}} for {{MediaSessionAction/voiceactivity}}
+      only when voice activity is detected from a microphone with one or more
+      {{MediaStreamTrackState/live}} {{MediaStreamTrack}}s. A user agent MAY
+      ignore voice activity if the microphone is not muted and all
+      {{MediaStreamTrack}}s associated with the microphone are
+      {{MediaStreamTrack/enabled}}. It is RECOMMENDED for user agents to set a
+      minimal interval between invocations of the {{MediaSessionActionHandler}}
+      for {{MediaSessionAction/voiceactivity}} based on privacy and power
+      efficiency policies.
+    </p>
+
+    <p class=note>
+      {{MediaSessionAction/voiceactivity}} only indicates the start of voice
+      activity. Applications may display a notification if the user is speaking
+      while the {{MediaStreamTrack}} is muted, or start an {{AudioWorklet}} for
+      audio processing. No action is defined for the end of voice activity.
+      Unlike other actions which are explicitly triggered by the user,
+      {{MediaSessionAction/voiceactivity}} also depends on the voice activity
+      detection algorithm of the user agent or the system. For privacy and power
+      efficiency concerns, the web page may not be notified if voice activity
+      ends and restarts soon after the last {{MediaSessionAction/voiceactivity}}
+      action.
     </p>
 
     <p class=note>
@@ -716,7 +748,8 @@ enum MediaSessionAction {
   "hangup",
   "previousslide",
   "nextslide",
-  "enterpictureinpicture"
+  "enterpictureinpicture",
+  "voiceactivity"
 };
 
 callback MediaSessionActionHandler = undefined(MediaSessionActionDetails details);
@@ -1496,6 +1529,7 @@ parameter whose dictionary type is:
   <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/nextslide}}.</li>
   <li>{{MediaSessionActionDetails}} for
   {{MediaSessionAction/enterpictureinpicture}}.</li>
+  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/voiceactivity}}.</li>
 </ul>
 
 The <dfn dict-member for="MediaSessionActionDetails">action</dfn>
@@ -1803,6 +1837,21 @@ media session</a>.
   <pre class="lang-javascript">
     navigator.mediaSession.setActionHandler("enterpictureinpicture", function() {
       remoteVideo.requestPictureInPicture();
+    });
+  </pre>
+</div>
+
+<div class="example" id="example-enterpictureinpicture">
+  Handling voice activity:
+  <pre class="lang-javascript">
+    // Create a MediaStream with audio enabled.
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    const track = stream.getAudioTracks()[0];
+    navigator.mediaSession.setActionHandler("voiceactivity", function() {
+      if (track.muted) {
+        // Show unmute notification. If user allows to unmute, call
+        // setMicrophoneActive(true) to unmute.
+      }
     });
   </pre>
 </div>
