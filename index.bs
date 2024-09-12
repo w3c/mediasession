@@ -1095,7 +1095,7 @@ dictionary MediaMetadataInit {
 
 <p>
   A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">artwork
-  images</dfn> which is a list of type <a idl>object</a> on the interface
+  images</dfn>, which is a list of type <a idl>object</a> on the interface
   but a list of type {{MediaImage}} internally.
 </p>
 
