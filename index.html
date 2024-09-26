@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="0f6e6934179f0d5b3aedad2ecac590a2ea2158ef" name="document-revision">
+  <meta content="ab499c5086e1e906514d06875d0b5a3deddf704a" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -669,7 +669,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-07-18">18 July 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-09-26">26 September 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1261,13 +1261,13 @@ platform UI or media keys, thereby improving the user experience.</p>
               abort these steps. 
        </ol>
       <li> Update the user agent capture state UI according to <var>captureKind</var> and <var>active</var>. 
-      <li>Resolve <var>p</var> with <code>undefined</code>.
+      <li> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task③">Queue a task</a> using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source②">user interaction task source</a> to resolve <var>p</var> with <code>undefined</code>. 
       <li>
         If <var>applyPausePolicy</var> is <code>true</code>, run the following
           substeps: 
        <ol>
         <li> Let <var>newMutedState</var> be <code>true</code> if <var>active</var> is <code>false</code> and <code>false</code> otherwise.
-        <li> For each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack" id="ref-for-dom-mediastreamtrack⑤">MediaStreamTrack</a></code> whose source is of type <var>captureKind</var>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task③">queue a task</a> to <a data-link-type="abstract-op" href="https://w3c.github.io/mediacapture-main/#set-track-muted" id="ref-for-set-track-muted①">set a track’s muted state</a> to <var>newMutedState</var>. 
+        <li> For each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack" id="ref-for-dom-mediastreamtrack⑤">MediaStreamTrack</a></code> whose source is of type <var>captureKind</var>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task④">queue a task</a>using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source③">user interaction task source</a> to <a data-link-type="abstract-op" href="https://w3c.github.io/mediacapture-main/#set-track-muted" id="ref-for-set-track-muted①">set a track’s muted state</a> to <var>newMutedState</var>. 
        </ol>
      </ol>
     <li> Return <var>p</var>. 
@@ -1387,7 +1387,7 @@ invoked, the user agent MUST run the following steps:</p>
     <li> If the instance has no associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session③">media session</a>, abort
       these steps. 
     <li>
-      Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task④">queue a task</a> to run the following substeps: 
+      Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task⑤">queue a task</a> to run the following substeps: 
      <ol>
       <li> If the instance no longer has an associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session④">media
           session</a>, abort these steps. 
@@ -2617,14 +2617,14 @@ window.dfnpanelData['655fdd86'] = {"dfnID": "655fdd86", "url": "https://html.spe
 window.dfnpanelData['9c19b7fc'] = {"dfnID": "9c19b7fc", "url": "https://html.spec.whatwg.org/multipage/document-sequences.html#navigable", "dfnText": "navigable", "refSections": [{"refs": [{"id": "ref-for-navigable"}, {"id": "ref-for-navigable\u2460"}], "title": "3.2. Routing"}], "external": true};
 window.dfnpanelData['a41102eb'] = {"dfnID": "a41102eb", "url": "https://html.spec.whatwg.org/multipage/dom.html#concept-document-permissions-policy", "dfnText": "permissions policy", "refSections": [{"refs": [{"id": "ref-for-concept-document-permissions-policy"}], "title": "10. Permissions Policy Integration"}], "external": true};
 window.dfnpanelData['049e907d'] = {"dfnID": "049e907d", "url": "https://html.spec.whatwg.org/multipage/media.html#potentially-playing", "dfnText": "potentially playing", "refSections": [{"refs": [{"id": "ref-for-potentially-playing"}], "title": "3.1. Playback State"}], "external": true};
-window.dfnpanelData['9a517a7d'] = {"dfnID": "9a517a7d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task", "dfnText": "queue a task", "refSections": [{"refs": [{"id": "ref-for-queue-a-task"}, {"id": "ref-for-queue-a-task\u2460"}, {"id": "ref-for-queue-a-task\u2461"}], "title": "3.4. Actions"}, {"refs": [{"id": "ref-for-queue-a-task\u2462"}], "title": "4. The MediaSession interface"}, {"refs": [{"id": "ref-for-queue-a-task\u2463"}], "title": "5. The MediaMetadata interface"}], "external": true};
+window.dfnpanelData['9a517a7d'] = {"dfnID": "9a517a7d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task", "dfnText": "queue a task", "refSections": [{"refs": [{"id": "ref-for-queue-a-task"}, {"id": "ref-for-queue-a-task\u2460"}, {"id": "ref-for-queue-a-task\u2461"}], "title": "3.4. Actions"}, {"refs": [{"id": "ref-for-queue-a-task\u2462"}, {"id": "ref-for-queue-a-task\u2463"}], "title": "4. The MediaSession interface"}, {"refs": [{"id": "ref-for-queue-a-task\u2464"}], "title": "5. The MediaMetadata interface"}], "external": true};
 window.dfnpanelData['e99bd18e'] = {"dfnID": "e99bd18e", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global", "dfnText": "relevant global object", "refSections": [{"refs": [{"id": "ref-for-concept-relevant-global"}, {"id": "ref-for-concept-relevant-global\u2460"}, {"id": "ref-for-concept-relevant-global\u2461"}], "title": "4. The MediaSession interface"}], "external": true};
 window.dfnpanelData['d75a73db'] = {"dfnID": "d75a73db", "url": "https://html.spec.whatwg.org/multipage/semantics.html#dom-link-sizes", "dfnText": "sizes (for HTMLLinkElement)", "refSections": [{"refs": [{"id": "ref-for-dom-link-sizes"}], "title": "7. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['aed5b083'] = {"dfnID": "aed5b083", "url": "https://html.spec.whatwg.org/multipage/semantics.html#attr-link-sizes", "dfnText": "sizes (for link)", "refSections": [{"refs": [{"id": "ref-for-attr-link-sizes"}], "title": "7. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['0ff9b6b9'] = {"dfnID": "0ff9b6b9", "url": "https://html.spec.whatwg.org/multipage/document-sequences.html#bc-traversable", "dfnText": "top-level traversable", "refSections": [{"refs": [{"id": "ref-for-bc-traversable"}], "title": "3.2. Routing"}], "external": true};
 window.dfnpanelData['47fe679e'] = {"dfnID": "47fe679e", "url": "https://html.spec.whatwg.org/multipage/interaction.html#transient-activation", "dfnText": "transient activation", "refSections": [{"refs": [{"id": "ref-for-transient-activation"}], "title": "4. The MediaSession interface"}], "external": true};
 window.dfnpanelData['16cfba2b'] = {"dfnID": "16cfba2b", "url": "https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens", "dfnText": "unordered set of unique space-separated tokens", "refSections": [{"refs": [{"id": "ref-for-unordered-set-of-unique-space-separated-tokens"}], "title": "7. The MediaImage dictionary"}], "external": true};
-window.dfnpanelData['825cbc48'] = {"dfnID": "825cbc48", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source", "dfnText": "user interaction task source", "refSections": [{"refs": [{"id": "ref-for-user-interaction-task-source"}, {"id": "ref-for-user-interaction-task-source\u2460"}], "title": "3.4. Actions"}], "external": true};
+window.dfnpanelData['825cbc48'] = {"dfnID": "825cbc48", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source", "dfnText": "user interaction task source", "refSections": [{"refs": [{"id": "ref-for-user-interaction-task-source"}, {"id": "ref-for-user-interaction-task-source\u2460"}], "title": "3.4. Actions"}, {"refs": [{"id": "ref-for-user-interaction-task-source\u2461"}, {"id": "ref-for-user-interaction-task-source\u2462"}], "title": "4. The MediaSession interface"}], "external": true};
 window.dfnpanelData['b4c365f8'] = {"dfnID": "b4c365f8", "url": "https://html.spec.whatwg.org/multipage/interaction.html#visibility-state", "dfnText": "visibility state", "refSections": [{"refs": [{"id": "ref-for-visibility-state"}], "title": "4. The MediaSession interface"}], "external": true};
 window.dfnpanelData['ce860b8c'] = {"dfnID": "ce860b8c", "url": "https://w3c.github.io/image-resource/#dom-imageresource", "dfnText": "ImageResource", "refSections": [{"refs": [{"id": "ref-for-dom-imageresource"}], "title": "7. The MediaImage dictionary"}], "external": true};
 window.dfnpanelData['7f9469b5'] = {"dfnID": "7f9469b5", "url": "https://infra.spec.whatwg.org/#ascii-case-insensitive", "dfnText": "ascii case-insensitive", "refSections": [{"refs": [{"id": "ref-for-ascii-case-insensitive"}, {"id": "ref-for-ascii-case-insensitive\u2460"}], "title": "7. The MediaImage dictionary"}], "external": true};
