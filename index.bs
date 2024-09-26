@@ -1484,77 +1484,53 @@ should always be positive.
 
 dictionary MediaSessionActionDetails {
   required MediaSessionAction action;
-};
-
-dictionary MediaSessionSeekActionDetails : MediaSessionActionDetails {
   double seekOffset;
-};
-
-dictionary MediaSessionSeekToActionDetails : MediaSessionActionDetails {
-  required double seekTime;
+  double seekTime;
   boolean fastSeek;
-};
-
-dictionary MediaSessionCaptureActionDetails : MediaSessionActionDetails {
   boolean isActivating;
 };
 
 </pre>
 
 The {{MediaSessionActionHandler}} MUST be run with the <var>details</var>
-parameter whose dictionary type is:
+parameter whose dictionary type is {{MediaSessionActionDetails}}.
+
+The <dfn dict-member for="MediaSessionActionDetails">action</dfn> <a>dictionary
+member</a>
+is used to specify the <a>media session action</a> that the
+{{MediaSessionActionHandler}} is associated with.
+
+The <dfn dict-member for="MediaSessionActionDetails">seekOffset</dfn>
+<a>dictionary member</a> MAY be provided when the <a>media session action</a>
+is {{MediaSessionAction/seekbackward}} or {{MediaSessionAction/seekforward}}. It
+is the time in seconds to move the playback time by. If present, it should
+always be positive. If it is not provided then the site should choose a sensible
+time (e.g. a few seconds).
+
+When the <a>media session action</a> is {{MediaSessionAction/seekto}}:
 <ul>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/play}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/pause}}.</li>
-  <li>{{MediaSessionSeekActionDetails}} for
-  {{MediaSessionAction/seekbackward}}.</li>
-  <li>{{MediaSessionSeekActionDetails}} for
-  {{MediaSessionAction/seekforward}}.</li>
-  <li>{{MediaSessionActionDetails}} for
-  {{MediaSessionAction/previoustrack}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/nexttrack}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/skipad}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/stop}}.</li>
-  <li>{{MediaSessionSeekToActionDetails}} for
-  {{MediaSessionAction/seekto}}.</li>
-  <li>{{MediaSessionCaptureActionDetails}} for
-  {{MediaSessionAction/togglemicrophone}}.</li>
-  <li>{{MediaSessionCaptureActionDetails}} for
-  {{MediaSessionAction/togglecamera}}.</li>
-  <li>{{MediaSessionCaptureActionDetails}} for
-  {{MediaSessionAction/togglescreenshare}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/hangup}}.</li>
-  <li>{{MediaSessionActionDetails}} for
-  {{MediaSessionAction/previousslide}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/nextslide}}.</li>
-  <li>{{MediaSessionActionDetails}} for
-  {{MediaSessionAction/enterpictureinpicture}}.</li>
-  <li>{{MediaSessionActionDetails}} for {{MediaSessionAction/voiceactivity}}.</li>
+  <li>
+    The <dfn dict-member for="MediaSessionActionDetails">seekTime</dfn>
+    <a>dictionary member</a> MUST be provided and is the time in seconds to move
+    the playback time to.
+  </li>
+
+  <li>
+    The <dfn dict-member for="MediaSessionActionDetails">fastSeek</dfn>
+    <a>dictionary member</a> MAY be provided and will be true if the [=media
+    session action|action=] is being called multiple times as part of a sequence
+    and this is not the last call in that sequence.
+  </li>
 </ul>
-
-The <dfn dict-member for="MediaSessionActionDetails">action</dfn>
-<a>dictionary member</a> is used to specify the <a>media session action</a>
-that the {{MediaSessionActionHandler}} is associated with.
-
-The <dfn dict-member for="MediaSessionSeekActionDetails">seekOffset</dfn>
-<a>dictionary member</a> is the time in seconds to move the playback time by. If
-present, it should always be positive. If it is not provided then the site
-should choose a sensible time (e.g. a few seconds).
-
-The <dfn dict-member for="MediaSessionSeekToActionDetails">seekTime</dfn>
-<a>dictionary member</a> is the time in seconds to move the playback time to.
-
-The <dfn dict-member for="MediaSessionActionSeekToDetails">fastSeek</dfn>
-<a>dictionary member</a> will be true if the seek [=media session
-action|action=] is being called multiple times as part of a sequence and this is
-not the last call in that sequence.
 
 The <dfn dict-member for="MediaSessionActionCaptureDetails">isActivating</dfn>
 <a>dictionary member</a> will be <code>false</code> if the user agent is about
 to [=pausing all input sources|pause all input sources=] related to the capture
 [=media session action|action=] and <code>true</code> otherwise. This
 <a>dictionary member</a> MUST be present if the user agent implements a policy
-of [=pausing all input sources=].
+of [=pausing all input sources=] and the <a>media session action</a>
+is {{MediaSessionAction/togglecamera}}, {{MediaSessionAction/togglemicrophone}}
+or {{MediaSessionAction/screenshare}}.
 
 <h2 id="permissions-policy">Permissions Policy Integration</h2>
 
