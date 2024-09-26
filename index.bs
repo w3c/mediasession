@@ -1014,7 +1014,10 @@ interface MediaSession {
           <var>captureKind</var>
           and <var>active</var>.
         </li>
-        <li>Resolve <var>p</var> with <code>undefined</code>.</li>
+        <li>
+           <a>Queue a task</a> using the [=user interaction task source=]
+           to resolve <var>p</var> with <code>undefined</code>.
+        </li>
         <li>
           If <var>applyPausePolicy</var> is <code>true</code>, run the following
           substeps:
@@ -1026,8 +1029,8 @@ interface MediaSession {
             <li>
               For each {{MediaStreamTrack}} whose source is of type
               <var>captureKind</var>,
-              <a>queue a task</a> to [$set a track's muted state$] to
-              <var>newMutedState</var>.
+              <a>queue a task</a>using the [=user interaction task source=]
+              to [$set a track's muted state$] to <var>newMutedState</var>.
             </li>
           </ol>
         </li>
