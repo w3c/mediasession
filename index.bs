@@ -1235,19 +1235,19 @@ user agent MUST run the following steps:
   images</a>. On getting, it MUST run the following steps:
   <ol>
     <li>
-      If the {{MediaMetadata}}'s <dfn>converted artwork images</dfn> is
+      If the {{MediaMetadata}}'s <a>converted artwork images</a> is
       <code>undefined</code>, run the following steps:
       <ol>
         <li>
-          Let <var>frozenArtwork</var> be a Javascript Array value.
+          Let <var>frozenArtwork</var> be a JavaScript Array value.
         </li>
         <li>
           For each <var>entry</var> in the {{MediaMetadata}}'s <a
           for="MediaMetadata">artwork images</a>, perform the following steps:
           <ol>
             <li>
-              Convert <var>entry</var> into a Javascript object named
-              <var>image</var>.
+              Let <var>image</var> be the result of [=converted to a JavaScript
+              value|converting to a JavaScript object=] <var>entry</var>.
             </li>
             <li>
               Perform [=!=] <a
@@ -1274,16 +1274,17 @@ user agent MUST run the following steps:
       Return the {{MediaMetadata}}'s <a>converted artwork images</a>.
     </li>
   </ol>
-  On setting, it MUST run the following steps:
+  On setting, it MUST run the following steps with <var>value</var> being the
+  new value being set:
   <ol>
     <li>
-      Let <var>convertedArtwork</var> be the result of converting the new value
-      <var>input</var> into a sequence of type {{MediaImage}}.
+      Let <var>convertedArtwork</var> be the result of [=converted to an IDL
+      value|converting=] <var>value</var> to a sequence of type {{MediaImage}}.
     </li>
     <li>
-      Run <a>convert artwork algorithm</a> with the converted sequence as
-      <var>input</var>, and set the {{MediaMetadata}}'s
-      <a for="MediaMetadata">artwork images</a> as the result if it succeeds.
+      Run <a>convert artwork algorithm</a> with <var>convertedArtwork</var>, and
+      set the {{MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as
+      the result if it succeeds.
     </li>
     <li>
       Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
