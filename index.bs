@@ -1095,9 +1095,10 @@ dictionary MediaMetadataInit {
 </p>
 
 <p>
-  A {{MediaMetadata}} has an associated sequence of <dfn for="MediaMetadata">artwork
-  images</dfn>, which is a sequence of type {{MediaImage}}.
-  A {{MediaMetadata}} also has has an associated <dfn for="MediaMetadata">
+  A {{MediaMetadata}} has an associated sequence of <dfn
+  for="MediaMetadata">artwork images</dfn>, which is a sequence of type
+  {{MediaImage}}. A {{MediaMetadata}} also has has an associated <dfn
+  for="MediaMetadata">
   converted artwork images</dfn> which is initially <code>undefined</code>.
 </p>
 
@@ -1167,8 +1168,8 @@ dictionary MediaMetadataInit {
 </p>
 
 When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
-invoked, where the <var>input</var> is a sequence of type {{MediaImage}},
-the user agent MUST run the following steps:
+invoked, where the <var>input</var> is a sequence of type {{MediaImage}}, the
+user agent MUST run the following steps:
 <ol>
   <li>
     Let <var>output</var> be an empty list of type {{MediaImage}}.
@@ -1234,8 +1235,8 @@ the user agent MUST run the following steps:
   images</a>. On getting, it MUST run the following steps:
   <ol>
     <li>
-      If the {{MediaMetadata}}'s <dfn>converted artwork images</dfn> is <code>undefined</code>,
-      run the following steps:
+      If the {{MediaMetadata}}'s <dfn>converted artwork images</dfn> is
+      <code>undefined</code>, run the following steps:
       <ol>
         <li>
           Let <var>frozenArtwork</var> be a Javascript Array value.
@@ -1245,10 +1246,12 @@ the user agent MUST run the following steps:
           for="MediaMetadata">artwork images</a>, perform the following steps:
           <ol>
             <li>
-              Convert <var>entry</var> into a Javascript object named <var>image</var>.
+              Convert <var>entry</var> into a Javascript object named
+              <var>image</var>.
             </li>
             <li>
-              Perform [=!=] <a abstract-op>SetIntegrityLevel</a>(<var>image</var>,
+              Perform [=!=] <a
+              abstract-op>SetIntegrityLevel</a>(<var>image</var>,
               "<code>frozen</code>"), to prevent accidental mutation by scripts.
             </li>
             <li>
@@ -1257,10 +1260,13 @@ the user agent MUST run the following steps:
           </ol>
         </li>
         <li>
-          Perform [=!=] <a abstract-op>SetIntegrityLevel</a>(<var>frozenArtwork</var>, "<code>frozen</code>").
+          Perform [=!=] <a
+          abstract-op>SetIntegrityLevel</a>(<var>frozenArtwork</var>,
+          "<code>frozen</code>").
         </li>
         <li>
-          Set the {{MediaMetadata}}'s <a>converted artwork images</a> to <var>frozenArtwork</var>.
+          Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
+          <var>frozenArtwork</var>.
         </li>
       </ol>
     </li>
@@ -1271,8 +1277,8 @@ the user agent MUST run the following steps:
   On setting, it MUST run the following steps:
   <ol>
     <li>
-      Let <var>convertedArtwork</var> be the result of converting
-      the new value <var>input</var> into a sequence of type {{MediaImage}}.
+      Let <var>convertedArtwork</var> be the result of converting the new value
+      <var>input</var> into a sequence of type {{MediaImage}}.
     </li>
     <li>
       Run <a>convert artwork algorithm</a> with the converted sequence as
@@ -1280,7 +1286,8 @@ the user agent MUST run the following steps:
       <a for="MediaMetadata">artwork images</a> as the result if it succeeds.
     </li>
     <li>
-      Set the {{MediaMetadata}}'s <a>converted artwork images</a> to <code>undefined</code>.
+      Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
+      <code>undefined</code>.
     </li>
   </ol>
 </p>
@@ -1384,7 +1391,7 @@ dictionary ChapterInformationInit {
     </li>
     <li>
       Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork
-      images</a> be the result of [=Create a frozen array|creating a frozen
+      images</a> to the result of [=Create a frozen array|creating a frozen
       array=] from {{ChapterInformationInit/artwork}}.
     </li>
     <li>
