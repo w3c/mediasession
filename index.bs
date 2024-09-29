@@ -165,10 +165,10 @@ platform UI or media keys, thereby improving the user experience.
       playback state</a> is to monitor the media elements whose node document's
       [=Document/browsing context=] is the [=/browsing context=]. The
       [=/browsing context=]'s <a>guessed playback state</a> is
-      {{MediaSessionPlaybackState/"playing"}} if any of them is
-      [=media element/potentially playing=] and not [=media element/muted=],
-      and is {{MediaSessionPlaybackState/"paused"}} otherwise. Other
-      information SHOULD also be considered, such as WebAudio and plugins.
+      {{MediaSessionPlaybackState/"playing"}} if any of them is [=media
+      element/potentially playing=] and not [=media element/muted=], and is
+      {{MediaSessionPlaybackState/"paused"}} otherwise. Other information SHOULD
+      also be considered, such as WebAudio and plugins.
     </p>
 
     <p>
@@ -214,9 +214,8 @@ platform UI or media keys, thereby improving the user experience.
 
     There could be multiple {{MediaSession}} objects existing at the same time
     since the user agent could have multiple tabs, each tab could contain a
-    [=browsing context/top-level traversable=] and decendent [=/navigables=], 
-    and each [=/navigable=] could have a {{MediaSession}}
-    object.
+    [=browsing context/top-level traversable=] and decendent [=/navigables=],
+    and each [=/navigable=] could have a {{MediaSession}} object.
 
     The user agent MUST select at most one of the {{MediaSession}} objects to
     present to the user, which is called the <dfn>active media session</dfn>.
@@ -261,8 +260,8 @@ platform UI or media keys, thereby improving the user experience.
         <a>active media session</a>.
       </li>
       <li>
-        If the user agent wants to display an [=MediaMetadata/artwork image=], it is
-        RECOMMENDED to run the <a>fetch image algorithm</a>.
+        If the user agent wants to display an [=MediaMetadata/artwork image=],
+        it is RECOMMENDED to run the <a>fetch image algorithm</a>.
       </li>
     </ol>
 
@@ -391,8 +390,8 @@ platform UI or media keys, thereby improving the user experience.
           action's intent is to turn the user's active camera on or off.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>togglescreenshare</dfn>: the action's intent
-          is to turn the user's active screenshare on or off.
+          <dfn enum-value for=MediaSessionAction>togglescreenshare</dfn>: the
+          action's intent is to turn the user's active screenshare on or off.
         </li>
         <li>
           <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's
@@ -413,9 +412,9 @@ platform UI or media keys, thereby improving the user experience.
           picture-in-picture window.
         </li>
         <li>
-          <dfn enum-value for=MediaSessionAction>voiceactivity</dfn>:
-          the action's intent is to notify the web page that voice activity has
-          been detected by the microphone.
+          <dfn enum-value for=MediaSessionAction>voiceactivity</dfn>: the
+          action's intent is to notify the web page that voice activity has been
+          detected by the microphone.
         </li>
       </ul>
     </p>
@@ -538,10 +537,11 @@ platform UI or media keys, thereby improving the user experience.
       provided for the <a>active media session</a>.
     </p>
     <p>
-      A user agent MAY expose microphone, camera, and screenshare state to web pages
-      via {{MediaStreamTrack}}'s {{MediaStreamTrack/muted}} attribute in addition to
-      {{MediaSessionAction/togglemicrophone}}, {{MediaSessionAction/togglecamera}}
-      or {{MediaSessionAction/togglescreenshare}} [=media session action=]. In that
+      A user agent MAY expose microphone, camera, and screenshare state to web
+      pages via {{MediaStreamTrack}}'s {{MediaStreamTrack/muted}} attribute in
+      addition to {{MediaSessionAction/togglemicrophone}},
+      {{MediaSessionAction/togglecamera}} or
+      {{MediaSessionAction/togglescreenshare}} [=media session action=]. In that
       case, the user agent MUST execute the corresponding
       {{MediaSessionActionHandler}} before running, as different tasks, the
       steps defined to [$set a track's muted state$].
@@ -942,8 +942,8 @@ interface MediaSession {
 </p>
 <p>
   Similarly, the <dfn method for=MediaSession>setScreenshareActive(active)</dfn>
-  method indicates to the user agent the screenshare capture state desired by the page.
-  When invoked, it MUST perform the following steps:
+  method indicates to the user agent the screenshare capture state desired by
+  the page. When invoked, it MUST perform the following steps:
   <ol>
     <li>
       Let <var>document</var> be [=this=]'s [=relevant global object=]'s
@@ -1043,12 +1043,11 @@ interface MediaSession {
 </p>
 <p class=note>
   The <a>setMicrophoneActive(active)</a>, <a>setCameraActive(active)</a>
-  and <a>setScreenshareActive(active)</a> methods
-  can reject based on user agent specific heuristics. This might in
-  particular happen when the web page asks to activate (unmute) the microphone,
-  camera or screenshare. The user agent could decide to require [=transient activation=] in
-  that case. It might also require user input through a prompt to make the
-  actual decision.
+  and <a>setScreenshareActive(active)</a> methods can reject based on user agent
+  specific heuristics. This might in particular happen when the web page asks to
+  activate (unmute) the microphone, camera or screenshare. The user agent could
+  decide to require [=transient activation=] in that case. It might also require
+  user input through a prompt to make the actual decision.
 </p>
 
 <p>
