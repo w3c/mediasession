@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="51e3cd5edaadd45b2c6828b484077581997f74ab" name="document-revision">
+  <meta content="1ef0e12a8d33095bb2409d3d35c80b9b7aef3338" name="document-revision">
 <style>
   /* https://github.com/tabatkins/bikeshed/issues/485 */
   .example .self-link { display: none; }
@@ -840,9 +840,8 @@ platform UI or media keys, thereby improving the user experience.</p>
       be able to determine if a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context">browsing context</a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①">active media
       session</a> is playing media or not, which is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="guessed playback state" data-noexport id="guessed-playback-state">guessed
       playback state</dfn>. The RECOMMENDED way for determining the <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state">guessed
-      playback state</a> is to monitor the media elements whose node document’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc" id="ref-for-concept-document-bc">browsing context</a> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context①">browsing context</a>. The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context②">browsing context</a>'s <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state①">guessed playback state</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing">"playing"</a></code> if any of them is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#potentially-playing" id="ref-for-potentially-playing">potentially playing</a> and not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#concept-media-muted" id="ref-for-concept-media-muted">muted</a>,
-      and is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-paused" id="ref-for-dom-mediasessionplaybackstate-paused">"paused"</a></code> otherwise. Other
-      information SHOULD also be considered, such as WebAudio and plugins. </p>
+      playback state</a> is to monitor the media elements whose node document’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc" id="ref-for-concept-document-bc">browsing context</a> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context①">browsing context</a>. The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context②">browsing context</a>'s <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state①">guessed playback state</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing">"playing"</a></code> if any of them is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#potentially-playing" id="ref-for-potentially-playing">potentially playing</a> and not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#concept-media-muted" id="ref-for-concept-media-muted">muted</a>, and is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-paused" id="ref-for-dom-mediasessionplaybackstate-paused">"paused"</a></code> otherwise. Other information SHOULD
+      also be considered, such as WebAudio and plugins. </p>
      <p> The <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate">playbackState</a></code> attribute specifies the <a data-link-type="dfn" href="#declared-playback-state" id="ref-for-declared-playback-state">declared
       playback state</a> from the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context③">browsing context</a>. The state is combined
       with the <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state②">guessed playback state</a> to compute the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="actual-playback-state">actual playback state</dfn>, which is a finalized state and will be
@@ -862,7 +861,7 @@ platform UI or media keys, thereby improving the user experience.</p>
     <section>
      <h3 class="heading settled" data-level="3.2" id="media-session-routing"><span class="secno">3.2. </span><span class="content">Routing</span><a class="self-link" href="#media-session-routing"></a></h3>
      <p>There could be multiple <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession">MediaSession</a></code> objects existing at the same time
-    since the user agent could have multiple tabs, each tab could contain a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#bc-traversable" id="ref-for-bc-traversable">top-level traversable</a> and decendent <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable" id="ref-for-navigable">navigables</a>, 
+    since the user agent could have multiple tabs, each tab could contain a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#bc-traversable" id="ref-for-bc-traversable">top-level traversable</a> and descendant <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable" id="ref-for-navigable">navigables</a>,
     and each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable" id="ref-for-navigable①">navigable</a> could have a <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①">MediaSession</a></code> object.</p>
      <p>The user agent MUST select at most one of the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession②">MediaSession</a></code> objects to
     present to the user, which is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="active-media-session">active media session</dfn>.
@@ -890,8 +889,8 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> If the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata①">metadata</a></code> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①①">active media session</a> is an <a data-link-type="dfn" href="#empty-metadata" id="ref-for-empty-metadata">empty metadata</a>, unset the media
         metadata presented to the platform, and terminate these steps. 
       <li> Update the media metadata presented to the platform to match the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata②">metadata</a></code> for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①②">active media session</a>. 
-      <li> If the user agent wants to display an <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images">artwork image</a>, it is
-        RECOMMENDED to run the <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm">fetch image algorithm</a>. 
+      <li> If the user agent wants to display an <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images">artwork image</a>,
+        it is RECOMMENDED to run the <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm">fetch image algorithm</a>. 
      </ol>
      <p>The RECOMMENDED <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-image-algorithm">fetch image algorithm</dfn> is as follows:</p>
      <ol>
@@ -956,8 +955,8 @@ platform UI or media keys, thereby improving the user experience.</p>
           action’s intent is to mute or unmute the user’s microphone. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;togglecamera&quot;|togglecamera" id="dom-mediasessionaction-togglecamera"><code>togglecamera</code></dfn>: the
           action’s intent is to turn the user’s active camera on or off. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;togglescreenshare&quot;|togglescreenshare" id="dom-mediasessionaction-togglescreenshare"><code>togglescreenshare</code></dfn>: the action’s intent
-          is to turn the user’s active screenshare on or off. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;togglescreenshare&quot;|togglescreenshare" id="dom-mediasessionaction-togglescreenshare"><code>togglescreenshare</code></dfn>: the
+          action’s intent is to turn the user’s active screenshare on or off. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;hangup&quot;|hangup" id="dom-mediasessionaction-hangup"><code>hangup</code></dfn>: the action’s
           intent is to end a call. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;previousslide&quot;|previousslide" id="dom-mediasessionaction-previousslide"><code>previousslide</code></dfn>: the
@@ -968,9 +967,9 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;enterpictureinpicture&quot;|enterpictureinpicture" id="dom-mediasessionaction-enterpictureinpicture"><code>enterpictureinpicture</code></dfn>:
           the action’s intent is to open the media session in a
           picture-in-picture window. 
-      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;voiceactivity&quot;|voiceactivity" id="dom-mediasessionaction-voiceactivity"><code>voiceactivity</code></dfn>:
-          the action’s intent is to notify the web page that voice activity has
-          been detected by the microphone. 
+      <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;voiceactivity&quot;|voiceactivity" id="dom-mediasessionaction-voiceactivity"><code>voiceactivity</code></dfn>: the
+          action’s intent is to notify the web page that voice activity has been
+          detected by the microphone. 
      </ul>
      <p></p>
      <p> All <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession④">MediaSession</a></code>s have a map of <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="supported media session actions" data-noexport id="supported-media-session-actions">supported media session
@@ -1019,8 +1018,9 @@ platform UI or media keys, thereby improving the user experience.</p>
       provided for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑨">active media session</a>. </p>
      <p> A user agent MAY implement a default handler for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone">togglemicrophone</a>, <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera">togglecamera</a>, or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglescreenshare" id="ref-for-dom-mediasessionaction-togglescreenshare">togglescreenshare</a>, or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup" id="ref-for-dom-mediasessionaction-hangup">hangup</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑧">media session actions</a> if none was
       provided for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②⓪">active media session</a>. </p>
-     <p> A user agent MAY expose microphone, camera, and screenshare state to web pages
-      via <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack" id="ref-for-dom-mediastreamtrack">MediaStreamTrack</a></code>'s <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted" id="ref-for-dom-mediastreamtrack-muted">muted</a></code> attribute in addition to <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone①">togglemicrophone</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera①">togglecamera</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglescreenshare" id="ref-for-dom-mediasessionaction-togglescreenshare①">togglescreenshare</a></code> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑨">media session action</a>. In that
+     <p> A user agent MAY expose microphone, camera, and screenshare state to web
+      pages via <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack" id="ref-for-dom-mediastreamtrack">MediaStreamTrack</a></code>'s <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted" id="ref-for-dom-mediastreamtrack-muted">muted</a></code> attribute in
+      addition to <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone①">togglemicrophone</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera①">togglecamera</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglescreenshare" id="ref-for-dom-mediasessionaction-togglescreenshare①">togglescreenshare</a></code> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑨">media session action</a>. In that
       case, the user agent MUST execute the corresponding <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler②">MediaSessionActionHandler</a></code> before running, as different tasks, the
       steps defined to <a data-link-type="abstract-op" href="https://w3c.github.io/mediacapture-main/#set-track-muted" id="ref-for-set-track-muted">set a track’s muted state</a>. </p>
      <p> The <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-voiceactivity" id="ref-for-dom-mediasessionaction-voiceactivity">voiceactivity</a></code> action source MUST always have a
@@ -1227,8 +1227,8 @@ platform UI or media keys, thereby improving the user experience.</p>
     <li> Return the result of running the <a data-link-type="dfn" href="#update-capture-state-algorithm" id="ref-for-update-capture-state-algorithm①">update capture state algorithm</a> with <var>document</var>, <var>active</var> and <var>captureKind</var>. 
    </ol>
    <p></p>
-   <p> Similarly, the <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setscreenshareactive"><code>setScreenshareActive(active)</code></dfn> method indicates to the user agent the screenshare capture state desired by the page.
-  When invoked, it MUST perform the following steps: </p>
+   <p> Similarly, the <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setscreenshareactive"><code>setScreenshareActive(active)</code></dfn> method indicates to the user agent the screenshare capture state desired by
+  the page. When invoked, it MUST perform the following steps: </p>
    <ol>
     <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this②">this</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global②">relevant global object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window②">associated Document</a>. 
     <li> Let <var>captureKind</var> be "screenshare". 
@@ -1273,12 +1273,11 @@ platform UI or media keys, thereby improving the user experience.</p>
     <li> Return <var>p</var>. 
    </ol>
    <p></p>
-   <p class="note" role="note"> The <a data-link-type="functionish" href="#dom-mediasession-setmicrophoneactive" id="ref-for-dom-mediasession-setmicrophoneactive①">setMicrophoneActive(active)</a>, <a data-link-type="functionish" href="#dom-mediasession-setcameraactive" id="ref-for-dom-mediasession-setcameraactive①">setCameraActive(active)</a> and <a data-link-type="functionish" href="#dom-mediasession-setscreenshareactive" id="ref-for-dom-mediasession-setscreenshareactive①">setScreenshareActive(active)</a> methods
-  can reject based on user agent specific heuristics. This might in
-  particular happen when the web page asks to activate (unmute) the microphone,
-  camera or screenshare. The user agent could decide to require <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation" id="ref-for-transient-activation">transient activation</a> in
-  that case. It might also require user input through a prompt to make the
-  actual decision. </p>
+   <p class="note" role="note"> The <a data-link-type="functionish" href="#dom-mediasession-setmicrophoneactive" id="ref-for-dom-mediasession-setmicrophoneactive①">setMicrophoneActive(active)</a>, <a data-link-type="functionish" href="#dom-mediasession-setcameraactive" id="ref-for-dom-mediasession-setcameraactive①">setCameraActive(active)</a> and <a data-link-type="functionish" href="#dom-mediasession-setscreenshareactive" id="ref-for-dom-mediasession-setscreenshareactive①">setScreenshareActive(active)</a> methods can reject based on user agent
+  specific heuristics. This might in particular happen when the web page asks to
+  activate (unmute) the microphone, camera or screenshare. The user agent could
+  decide to require <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation" id="ref-for-transient-activation">transient activation</a> in that case. It might also require
+  user input through a prompt to make the actual decision. </p>
    <p> The user agent MAY display UI which invokes handlers for <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①②">media session actions</a>. </p>
    <h2 class="heading settled" data-level="5" id="the-mediametadata-interface"><span class="secno">5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata⑧">MediaMetadata</a></code> interface</span><a class="self-link" href="#the-mediametadata-interface"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
