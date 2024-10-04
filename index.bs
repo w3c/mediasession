@@ -50,6 +50,7 @@ table td, table th {
 
 <pre class="link-defaults">
 spec:html; type:element; text:link
+spec:webidl; type:interface; text:object
 </pre>
 
 <pre class="anchors">
@@ -1065,7 +1066,7 @@ interface MediaMetadata {
   attribute DOMString title;
   attribute DOMString artist;
   attribute DOMString album;
-  attribute FrozenArray&lt;MediaImage> artwork;
+  attribute FrozenArray&lt;object> artwork;
   [SameObject] readonly attribute FrozenArray&lt;ChapterInformation> chapterInfo;
 };
 
@@ -1096,8 +1097,11 @@ dictionary MediaMetadataInit {
 </p>
 
 <p>
-  A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">artwork
-  images</dfn>.
+  A {{MediaMetadata}} has an associated sequence of <dfn
+  for="MediaMetadata">artwork images</dfn>, which is a sequence of type
+  {{MediaImage}}. A {{MediaMetadata}} also has has an associated <dfn
+  for="MediaMetadata">
+  converted artwork images</dfn> which is initially <code>undefined</code>.
 </p>
 
 <p>
@@ -1166,7 +1170,8 @@ dictionary MediaMetadataInit {
 </p>
 
 When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
-invoked, the user agent MUST run the following steps:
+invoked, where the <var>input</var> is a sequence of type {{MediaImage}}, the
+user agent MUST run the following steps:
 <ol>
   <li>
     Let <var>output</var> be an empty list of type {{MediaImage}}.
@@ -1229,52 +1234,65 @@ invoked, the user agent MUST run the following steps:
 <p>
   The <dfn attribute for="MediaMetadata">artwork</dfn>
   attribute reflects the {{MediaMetadata}}'s <a for="MediaMetadata">artwork
-  images</a>. On getting, it MUST return the result of the following steps:
+  images</a>. On getting, it MUST run the following steps:
   <ol>
     <li>
-      Let <var>frozenArtwork</var> be an empty list of type {{MediaImage}}.
-    </li>
-    <li>
-      For each <var>entry</var> in the {{MediaMetadata}}'s <a
-      for="MediaMetadata">artwork images</a>, perform the following steps:
+      If the {{MediaMetadata}}'s <a>converted artwork images</a> is
+      <code>undefined</code>, run the following steps:
       <ol>
         <li>
-          Let <var>image</var> be a new {{MediaImage}}.
+          Let <var>frozenArtwork</var> be a JavaScript Array value.
         </li>
         <li>
-          Set <var>image</var>'s {{MediaImage/src}} to <var>entry</var>'s
-          {{MediaImage/src}}.
+          For each <var>entry</var> in the {{MediaMetadata}}'s <a
+          for="MediaMetadata">artwork images</a>, perform the following steps:
+          <ol>
+            <li>
+              Let <var>image</var> be the result of [=converted to a JavaScript
+              value|converting to a JavaScript object=] <var>entry</var>.
+            </li>
+            <li>
+              Perform [=!=] <a
+              abstract-op>SetIntegrityLevel</a>(<var>image</var>,
+              "<code>frozen</code>"), to prevent accidental mutation by scripts.
+            </li>
+            <li>
+              Push <var>image</var> to <var>frozenArtwork</var>.
+            </li>
+          </ol>
         </li>
         <li>
-          Set <var>image</var>'s {{MediaImage/sizes}} to <var>entry</var>'s
-          {{MediaImage/sizes}}.
+          Perform [=!=] <a
+          abstract-op>SetIntegrityLevel</a>(<var>frozenArtwork</var>,
+          "<code>frozen</code>").
         </li>
         <li>
-          Set <var>image</var>'s {{MediaImage/type}} to <var>entry</var>'s
-          {{MediaImage/type}}.
-        </li>
-        <!-- XXX IDL dictionaries are usually returned by value, so don't need
-        to be immutable. But FrozenArray reifies the dictionaries to mutable JS
-        objects accessed by reference, so we explicitly freeze them. It would be
-        better to do this with IDL primitives instead of JS - see
-        https://www.w3.org/Bugs/Public/show_bug.cgi?id=29004 -->
-        <li>
-          Call {{Object/freeze(O)}} on <var>image</var>, to prevent accidental
-          mutation by scripts.
-        </li>
-        <li>
-          Append <var>image</var> to <var>frozenArtwork</var>.
+          Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
+          <var>frozenArtwork</var>.
         </li>
       </ol>
     </li>
     <li>
-      <a>Create a frozen array</a> from <var>frozenArtwork</var>.
+      Return the {{MediaMetadata}}'s <a>converted artwork images</a>.
     </li>
   </ol>
-  On setting, it MUST run the
-  <a>convert artwork algorithm</a> with the new value as <var>input</var>, and
-  set the {{MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as the
-  result if it succeeded.
+  On setting, it MUST run the following steps with <var>value</var> being the
+  new value being set:
+  <ol>
+    <li>
+      Let <var>convertedArtwork</var> be the result of [=converted to an IDL
+      value|converting=] <var>value</var> to a sequence of type {{MediaImage}}.
+    </li>
+    <li>
+      Run <a>convert artwork algorithm</a> with <var>convertedArtwork</var>, and
+      set the {{MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as
+      the result if it succeeds.
+    </li>
+    <li>
+      Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
+      <code>undefined</code>.
+    </li>
+  </ol>
 </p>
 
 <p>
@@ -1371,7 +1389,8 @@ dictionary ChapterInformationInit {
     </li>
     <li>
       Let {{ChapterInformationInit/artwork}} be the result of running the
-      <a>convert artwork algorithm</a>.
+      <a>convert artwork algorithm</a> with <var>init</var>'s
+      {{ChapterInformation/artwork}} as <var>input</var>.
     </li>
     <li>
       Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork
