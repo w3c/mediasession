@@ -383,8 +383,8 @@ platform UI or media keys, thereby improving the user experience.
         the playback has a notion of playlist.
       </li>
       <li>
-        <dfn enum-value for=MediaSessionAction>skipad</dfn>: the action's
-        intent is to skip the advertisement that is currently playing.
+        <dfn enum-value for=MediaSessionAction>skip</dfn>: the action's
+        intent is to skip the media item that is currently playing.
       </li>
       <li>
         <dfn enum-value for=MediaSessionAction>stop</dfn>: the action's intent
@@ -751,7 +751,7 @@ enum MediaSessionAction {
   "seekforward",
   "previoustrack",
   "nexttrack",
-  "skipad",
+  "skip",
   "stop",
   "seekto",
   "togglemicrophone",
@@ -1079,6 +1079,7 @@ interface MediaMetadata {
   attribute DOMString title;
   attribute DOMString artist;
   attribute DOMString album;
+  readonly attribute MediaKind kind;
   attribute FrozenArray&lt;object> artwork;
   [SameObject] readonly attribute FrozenArray&lt;ChapterInformation> chapterInfo;
 };
@@ -1087,8 +1088,17 @@ dictionary MediaMetadataInit {
   DOMString title = "";
   DOMString artist = "";
   DOMString album = "";
+  MediaKind kind = "";
   sequence&lt;MediaImage> artwork = [];
   sequence&lt;ChapterInformationInit> chapterInfo = [];
+};
+
+enum MediaKind {
+  "advertisement",
+  "generic",
+  "pregeneric",
+  "summary",
+  ""
 };
 </pre>
 
@@ -1107,6 +1117,11 @@ dictionary MediaMetadataInit {
   A {{MediaMetadata}} has an associated <dfn for="MediaMetadata">title</dfn>,
   <dfn for="MediaMetadata">artist</dfn> and <dfn for="MediaMetadata">album</dfn>
   which are DOMString.
+</p>
+
+<p>
+  A {{MediaMetadata}} has an associated <dfn for="MediaMetadata">kind</dfn>,
+  which is a {{MediaKind}}.
 </p>
 
 <p>
@@ -1130,6 +1145,7 @@ dictionary MediaMetadataInit {
   <li>Its <a for=MediaMetadata>title</a> is the empty string.</li>
   <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
   <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
+  <li>Its <a for=MediaMetadata>kind</a> is the empty string.</li>
   <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
   is <code>0</code>.</li>
   <li>Its <a for=MediaMetadata>chapter information</a> length is
@@ -1155,6 +1171,10 @@ dictionary MediaMetadataInit {
   <li>
     Set <var>metadata</var>'s {{MediaMetadata/album}} to
     <var>init</var>'s {{MediaMetadataInit/album}}.
+  </li>
+  <li>
+    Set <var>metadata</var>'s {{MediaMetadata/kind}} to
+    <var>init</var>'s {{MediaMetadataInit/kind}}.
   </li>
   <li>
     Run the <a>convert artwork algorithm</a> with <var>init</var>'s
@@ -1244,6 +1264,11 @@ user agent MUST run the following steps:
   the {{MediaMetadata}}'s <a for=MediaMetadata>album</a>. On setting, it MUST
   set the {{MediaMetadata}}'s <a for=MediaMetadata>album</a> to the given value.
 </p>
+
+<p>
+  The <dfn attribute for="MediaMetadata">kind</dfn> attribute reflects the
+  {{MediaMetadata}}'s <a for=MediaMetadata>kind</a>. On getting, it MUST return
+  the {{MediaMetadata}}'s <a for=MediaMetadata>kind</a>.</p>
 
 <p>
   The <dfn attribute for="MediaMetadata">artwork</dfn>
@@ -1344,12 +1369,14 @@ interface</h2>
 interface ChapterInformation {
   readonly attribute DOMString title;
   readonly attribute double startTime;
+  readonly attribute MediaKind kind;
   [SameObject] readonly attribute FrozenArray&lt;MediaImage> artwork;
 };
 
 dictionary ChapterInformationInit {
   DOMString title = "";
   double startTime = 0;
+  MediaKind kind = "";
   sequence&lt;MediaImage> artwork = [];
 };
 
@@ -1371,6 +1398,12 @@ dictionary ChapterInformationInit {
 <p>
   A {{ChapterInformation}} has an associated <dfn for="ChapterInformation">
   startTime</dfn> which is double.
+</p>
+
+<p>
+  A {{ChapterInformation}} has an associated <dfn
+  for="ChapterInformation">kind</dfn>
+  which is a {{MediaKind}}.
 </p>
 
 <p>
@@ -1398,6 +1431,10 @@ dictionary ChapterInformationInit {
     [=duration=], throw a <a exception>TypeError</a>.
   </li>
   <li>
+    Set <var>chapterInfo</var>'s {{ChapterInformation/kind}} to
+    <var>init</var>'s {{ChapterInformationInit/kind}}.
+  </li>
+  <li>
     Let {{ChapterInformationInit/artwork}} be the result of running the
     <a>convert artwork algorithm</a> with <var>init</var>'s
     {{ChapterInformation/artwork}} as <var>input</var>.
@@ -1423,6 +1460,12 @@ dictionary ChapterInformationInit {
   the {{ChapterInformation}}'s <a for=ChapterInformation>startTime</a> in
   seconds. On getting, it MUST return the {{ChapterInformation}}'s <a
   for=ChapterInformation>startTime</a>.
+</p>
+
+<p>
+  The <dfn attribute for="ChapterInformation">kind</dfn> attribute reflects the
+  {{ChapterInformation}}'s <a for=ChapterInformation>kind</a>. On getting, it
+  MUST return the {{ChapterInformation}}'s <a for=ChapterInformation>kind</a>.
 </p>
 
 <p>
