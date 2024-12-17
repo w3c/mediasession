@@ -1095,8 +1095,10 @@ dictionary MediaMetadataInit {
 
 enum MediaKind {
   "advertisement",
-  "generic",
-  "pregeneric",
+  "closing-credits",
+  "cold-open-scene",
+  "opening-credits",
+  "post-credits-scene",
   "summary",
   ""
 };
@@ -1121,7 +1123,35 @@ enum MediaKind {
 
 <p>
   A {{MediaMetadata}} has an associated <dfn for="MediaMetadata">kind</dfn>,
-  which is a {{MediaKind}}.
+  which is a {{MediaKind}}, which can have one of the following value:
+  <ul>
+    <li>
+      <dfn enum-value for=MediaKind>advertisement</dfn>: the media content represents advertisments.
+    </li>
+    <li>
+      <dfn enum-value for=MediaKind>closing-credits</dfn>: the media content represents closing credits,
+      typically happening at the end of a video.
+    </li>
+    <li>
+      <dfn enum-value for=MediaKind>cold-open-scene</dfn>: the media content represents a cold open scene,
+      typically happening at the very beginning of a video, before opening credits.
+    </li>
+    <li>
+      <dfn enum-value for=MediaKind>opening-credits</dfn>: the media content represents opening credits
+      typically happening at the beginning of a video.
+    </li>
+    <li>
+      <dfn enum-value for=MediaKind>post-credits-scene</dfn>: the media content represents a post credits scene,
+      typically happening after the closing credits.
+    </li>
+    <li>
+      <dfn enum-value for=MediaKind>summary</dfn>: the media content represents a summary,
+      typically happening at the beginning of a TV serie episiode and summarizing past episodes.
+    </li>
+    <li>
+      the empty string: the default value of media content, it represents any other value of a part of media content.
+    </li>
+  </ul>
 </p>
 
 <p>
