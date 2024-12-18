@@ -1137,7 +1137,7 @@ enum MediaKind {
       typically happening at the very beginning of a video, before opening credits.
     </li>
     <li>
-      <dfn enum-value for=MediaKind>opening-credits</dfn>: the media content represents opening credits
+      <dfn enum-value for=MediaKind>opening-credits</dfn>: the media content represents opening credits,
       typically happening at the beginning of a video.
     </li>
     <li>
