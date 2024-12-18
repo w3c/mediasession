@@ -1146,7 +1146,7 @@ enum MediaKind {
     </li>
     <li>
       <dfn enum-value for=MediaKind>summary</dfn>: the media content represents a summary,
-      typically happening at the beginning of a TV serie episiode and summarizing past episodes.
+      typically happening at the beginning of a TV series episode and summarizing past episodes.
     </li>
     <li>
       the empty string: the default value of media content, it represents any other value of a part of media content.
