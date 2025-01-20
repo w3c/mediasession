@@ -1088,7 +1088,7 @@ dictionary MediaMetadataInit {
   DOMString title = "";
   DOMString artist = "";
   DOMString album = "";
-  MediaKind kind = "";
+  MediaKind kind = "other";
   sequence&lt;MediaImage> artwork = [];
   sequence&lt;ChapterInformationInit> chapterInfo = [];
 };
@@ -1100,7 +1100,7 @@ enum MediaKind {
   "opening-credits",
   "post-credits-scene",
   "summary",
-  ""
+  "other"
 };
 </pre>
 
@@ -1125,34 +1125,38 @@ enum MediaKind {
   A {{MediaMetadata}} has an associated <dfn for="MediaMetadata">kind</dfn>,
   which is a {{MediaKind}}, which can have one of the following value:
 </p>
-  <ul>
-    <li>
-      <dfn enum-value for=MediaKind>advertisement</dfn>: the media content represents advertisments.
-    </li>
-    <li>
-      <dfn enum-value for=MediaKind>closing-credits</dfn>: the media content represents closing credits,
-      typically happening at the end of a video.
-    </li>
-    <li>
-      <dfn enum-value for=MediaKind>cold-open-scene</dfn>: the media content represents a cold open scene,
-      typically happening at the very beginning of a video, before opening credits.
-    </li>
-    <li>
-      <dfn enum-value for=MediaKind>opening-credits</dfn>: the media content represents opening credits,
-      typically happening at the beginning of a video.
-    </li>
-    <li>
-      <dfn enum-value for=MediaKind>post-credits-scene</dfn>: the media content represents a post credits scene,
-      typically happening after the closing credits.
-    </li>
-    <li>
-      <dfn enum-value for=MediaKind>summary</dfn>: the media content represents a summary,
-      typically happening at the beginning of a TV series episode and summarizing past episodes.
-    </li>
-    <li>
-      the empty string: the default value of media content, it represents any other value of a part of media content.
-    </li>
-  </ul>
+<ul>
+  <li>
+    <dfn enum-value for=MediaKind>advertisement</dfn>: the media content represents advertisments.
+  </li>
+  <li>
+    <dfn enum-value for=MediaKind>closing-credits</dfn>: the media content represents closing credits,
+    typically happening at the end of a video.
+  </li>
+  <li>
+    <dfn enum-value for=MediaKind>cold-open-scene</dfn>: the media content represents a cold open scene,
+    typically happening at the very beginning of a video, before opening credits.
+  </li>
+  <li>
+    <dfn enum-value for=MediaKind>opening-credits</dfn>: the media content represents opening credits,
+    typically happening at the beginning of a video.
+  </li>
+  <li>
+    <dfn enum-value for=MediaKind>post-credits-scene</dfn>: the media content represents a post credits scene,
+    typically happening after the closing credits.
+  </li>
+  <li>
+    <dfn enum-value for=MediaKind>summary</dfn>: the media content represents a summary,
+    typically happening at the beginning of a TV series episode and summarizing past episodes.
+  </li>
+  <li>
+    <dfn enum-value for=MediaKind>other</dfn>: the default value of media content,
+    it represents any other value of a part of media content.
+  </li>
+</ul>
+<p class=note>
+  This enumeration is experimental and is subject to changes.
+</p>
 
 <p>
   A {{MediaMetadata}} has an associated sequence of <dfn
