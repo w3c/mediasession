@@ -1124,6 +1124,7 @@ enum MediaKind {
 <p>
   A {{MediaMetadata}} has an associated <dfn for="MediaMetadata">kind</dfn>,
   which is a {{MediaKind}}, which can have one of the following value:
+</p>
   <ul>
     <li>
       <dfn enum-value for=MediaKind>advertisement</dfn>: the media content represents advertisments.
