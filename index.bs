@@ -1153,7 +1153,6 @@ enum MediaKind {
       the empty string: the default value of media content, it represents any other value of a part of media content.
     </li>
   </ul>
-</p>
 
 <p>
   A {{MediaMetadata}} has an associated sequence of <dfn
