@@ -75,18 +75,55 @@ displayed in platform UI, and respond to media controls that may come from
 platform UI or media keys, thereby improving the user experience.
 
 <section>
-  <h2 id='security-privacy-considerations'>Security and Privacy
-  Considerations</h2>
+  <h2 id='privacy-considerations'>Privacy Considerations</h2>
 
   <em>This section is non-normative.</em>
 
   <p>
     The API introduced in this specification has very low impact with regards to
-    security and privacy. Part of the API allows a website to expose metadata
-    that can be used by the user agent. The user agent obviously needs to use
-    this data with care. Another part of the API allows a website to receive
+    privacy. Part of the API allows a website to receive
     commands from the user via buttons or other form of controls which might
     sometimes introduce a new input layer between the user and the website.
+  </p>
+
+  <section>
+    <h3 id='incognito-mode-privacy'>Incognito mode</h3>
+
+    <p>
+      For privacy purposes, when in incognito mode, the user agent should be
+      careful when sharing the information from {{MediaMetadata}} with the
+      system and make sure they will not be used in a way that would harm the
+      user. Displaying this information in a way that is very visible would be
+      against the user's intent of browsing in incognito mode. When available,
+      the UI elements should be advertized as private to the platform.
+    </p>
+  </section>
+
+  <section>
+    <h3 id='media-session-actions-privacy'>Media Session Actions</h3>
+
+    <p>
+      <a>Media session actions</a> expose a new input layer to the web platform.
+      User agents should make sure users are aware that their actions might be
+      routed to the website with the <a>active media session</a>. Especially,
+      when the actions are coming from remote devices such as a headset or other
+      remote device. It is recommended for the user agent to follow the platform
+      conventions when listening to these inputs in order to facilitate the user
+      understanding.
+    </p>
+  </section>
+</section>
+
+<section>
+  <h2 id='security-considerations'>Security Considerations</h2>
+
+  <em>This section is non-normative.</em>
+
+  <p>
+    The API introduced in this specification has very low impact with regards to
+    security. Part of the API allows a website to expose metadata
+    that can be used by the user agent. The user agent obviously needs to use
+    this data with care.
   </p>
 
   <section>
@@ -116,37 +153,10 @@ platform UI or media keys, thereby improving the user experience.
     </p>
 
     <p>
-      In general, all security and privacy considerations related to the display
+      In general, all security considerations related to the display
       of notifications from a website should apply here. It is worth noting that
       the {{MediaMetadata}} offer less customization than regular web
       notifications, thus would be harder to spoof.
-    </p>
-  </section>
-
-  <section>
-    <h3 id='incognito-mode-privacy'>Incognito mode</h3>
-
-    <p>
-      For privacy purposes, when in incognito mode, the user agent should be
-      careful when sharing the information from {{MediaMetadata}} with the
-      system and make sure they will not be used in a way that would harm the
-      user. Displaying this information in a way that is very visible would be
-      against the user's intent of browsing in incognito mode. When available,
-      the UI elements should be advertized as private to the platform.
-    </p>
-  </section>
-
-  <section>
-    <h3 id='media-session-actions-privacy'>Media Session Actions</h3>
-
-    <p>
-      <a>Media session actions</a> expose a new input layer to the web platform.
-      User agents should make sure users are aware that their actions might be
-      routed to the website with the <a>active media session</a>. Especially,
-      when the actions are coming from remote devices such as a headset or other
-      remote device. It is recommended for the user agent to follow the platform
-      conventions when listening to these inputs in order to facilitate the user
-      understanding.
     </p>
   </section>
 </section>
