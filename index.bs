@@ -1254,9 +1254,9 @@ user agent MUST run the following steps:
             value|converting to a JavaScript object=] <var>entry</var>.
           </li>
           <li>
-            Perform [=!=] <a
-            abstract-op>SetIntegrityLevel</a>(<var>image</var>,
-            "<code>frozen</code>"), to prevent accidental mutation by scripts.
+            Perform <a href="https://tc39.es/ecma262/#sec-setintegritylevel">
+            SetIntegrityLevel</a>(<var>image</var>, "<code>frozen</code>"),
+            to prevent accidental mutation by scripts.
           </li>
           <li>
             Push <var>image</var> to <var>frozenArtwork</var>.
@@ -1264,9 +1264,8 @@ user agent MUST run the following steps:
         </ol>
       </li>
       <li>
-        Perform [=!=] <a
-        abstract-op>SetIntegrityLevel</a>(<var>frozenArtwork</var>,
-        "<code>frozen</code>").
+        Perform <a href="https://tc39.es/ecma262/#sec-setintegritylevel">
+        SetIntegrityLevel</a>(<var>frozenArtwork</var>, "<code>frozen</code>").
       </li>
       <li>
         Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
