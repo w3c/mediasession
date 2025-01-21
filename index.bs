@@ -51,6 +51,7 @@ table td, table th {
 <pre class="link-defaults">
 spec:html; type:element; text:link
 spec:webidl; type:interface; text:object
+spec:webaudio-1.1; type:interface; text:AudioWorklet
 </pre>
 
 <pre class="anchors">
