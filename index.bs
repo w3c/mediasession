@@ -1112,16 +1112,16 @@ dictionary MediaMetadataInit {
 <p>
   A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal
   to `null` or all the following conditions are true:
-  <ul>
-    <li>Its <a for=MediaMetadata>title</a> is the empty string.</li>
-    <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
-    <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
-    <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
-    is <code>0</code>.</li>
-    <li>Its <a for=MediaMetadata>chapter information</a> length is
-    <code>0</code>.</li>
-  </ul>
 </p>
+<ul>
+  <li>Its <a for=MediaMetadata>title</a> is the empty string.</li>
+  <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
+  <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
+  <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
+  is <code>0</code>.</li>
+  <li>Its <a for=MediaMetadata>chapter information</a> length is
+  <code>0</code>.</li>
+</ul>
 
 <p>
   The <dfn constructor for="MediaMetadata">MediaMetadata(<var>init</var>)</dfn>
