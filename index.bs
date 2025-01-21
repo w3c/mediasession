@@ -1378,7 +1378,7 @@ dictionary ChapterInformationInit {
 </p>
 <ol>
   <li>
-      Let <var>chapterInfo</var> be a new {{ChapterInformation}} object.
+    Let <var>chapterInfo</var> be a new {{ChapterInformation}} object.
   </li>
   <li>
     Set <var>chapterInfo</var>'s {{ChapterInformation/title}} to
