@@ -1351,11 +1351,6 @@ dictionary ChapterInformationInit {
 </p>
 
 <p>
-  A {{ChapterInformation}} can have an associated <dfn for="ChapterInformation">
-  media metadata</dfn>.
-</p>
-
-<p>
   A {{ChapterInformation}} has an associated <dfn
   for="ChapterInformation">title</dfn>
   which is DOMString.
