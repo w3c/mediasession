@@ -1088,7 +1088,7 @@ dictionary MediaMetadataInit {
   DOMString title = "";
   DOMString artist = "";
   DOMString album = "";
-  MediaKind kind = "other";
+  MediaKind kind = "";
   sequence&lt;MediaImage> artwork = [];
   sequence&lt;ChapterInformationInit> chapterInfo = [];
 };
@@ -1100,7 +1100,8 @@ enum MediaKind {
   "opening-credits",
   "post-credits-scene",
   "summary",
-  "other"
+  "content",
+  ""
 };
 </pre>
 
@@ -1150,8 +1151,11 @@ enum MediaKind {
     typically happening at the beginning of a TV series episode and summarizing past episodes.
   </li>
   <li>
-    <dfn enum-value for=MediaKind>other</dfn>: the default value of media content,
-    it represents any other value of a part of media content.
+    <dfn enum-value for=MediaKind>content</dfn>: the media content represents the main media content,
+    like a song or a TV series episode..
+  </li>
+  <li>
+    the empty string: the default value of media content, it represents any other value of a part of media content.
   </li>
 </ul>
 <p class=note>
