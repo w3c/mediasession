@@ -51,6 +51,7 @@ table td, table th {
 <pre class="link-defaults">
 spec:html; type:element; text:link
 spec:webidl; type:interface; text:object
+spec:webaudio-1.1; type:interface; text:AudioWorklet
 </pre>
 
 <pre class="anchors">
@@ -183,17 +184,17 @@ platform UI or media keys, thereby improving the user experience.
 
     <p>
       The <a>actual playback state</a> is computed in the following way:
-      <ul>
-        <li>
-          If the <a>declared playback state</a> is
-          {{MediaSessionPlaybackState/playing}}, return
-          {{MediaSessionPlaybackState/playing}}.
-        </li>
-        <li>
-          Otherwise, return the <a>guessed playback state</a>.
-        </li>
-      </ul>
     </p>
+    <ul>
+      <li>
+        If the <a>declared playback state</a> is
+        {{MediaSessionPlaybackState/playing}}, return
+        {{MediaSessionPlaybackState/playing}}.
+      </li>
+      <li>
+        Otherwise, return the <a>guessed playback state</a>.
+      </li>
+    </ul>
 
     <p class=note>
       The {{MediaSession/playbackState}} attribute could be useful when the page
@@ -339,86 +340,86 @@ platform UI or media keys, thereby improving the user experience.
     <p>
       A <a>media session action</a> is represented by a {{MediaSessionAction}}
       which can have one of the following value:
-      <ul>
-        <li>
-          <dfn enum-value for=MediaSessionAction>play</dfn>: the action's intent
-          is to resume the playback.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>pause</dfn>: the action's
-          intent is to pause the currently active playback.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>seekbackward</dfn>: the
-          action's intent is to move the playback time backward by a short
-          period (eg. a few seconds).
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>seekforward</dfn>: the action's
-          intent is to move the playback time forward by a short period (eg. a
-          few seconds).
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>previoustrack</dfn>: the
-          action's intent is to either start the current playback from the
-          beginning if the playback has a notion of beginning, or move to the
-          previous item in the playlist if the playback has a notion of
-          playlist.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>nexttrack</dfn>: the action's
-          intent is to move to the playback to the next item in the playlist if
-          the playback has a notion of playlist.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>skipad</dfn>: the action's
-          intent is to skip the advertisement that is currently playing.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>stop</dfn>: the action's intent
-          is to stop the playback and clear the state if appropriate.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>seekto</dfn>: the action's
-          intent is to move the playback time to a specific time.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>togglemicrophone</dfn>: the
-          action's intent is to mute or unmute the user's microphone.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>togglecamera</dfn>: the
-          action's intent is to turn the user's active camera on or off.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>togglescreenshare</dfn>: the
-          action's intent is to turn the user's active screenshare on or off.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's
-          intent is to end a call.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>previousslide</dfn>: the
-          action's intent is to go back to the previous slide when presenting
-          slides.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>nextslide</dfn>: the action's
-          intent is to go to the next slide when presenting slides.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>enterpictureinpicture</dfn>:
-          the action's intent is to open the media session in a
-          picture-in-picture window.
-        </li>
-        <li>
-          <dfn enum-value for=MediaSessionAction>voiceactivity</dfn>: the
-          action's intent is to notify the web page that voice activity has been
-          detected by the microphone.
-        </li>
-      </ul>
     </p>
+    <ul>
+      <li>
+        <dfn enum-value for=MediaSessionAction>play</dfn>: the action's intent
+        is to resume the playback.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>pause</dfn>: the action's
+        intent is to pause the currently active playback.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>seekbackward</dfn>: the
+        action's intent is to move the playback time backward by a short
+        period (eg. a few seconds).
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>seekforward</dfn>: the action's
+        intent is to move the playback time forward by a short period (eg. a
+        few seconds).
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>previoustrack</dfn>: the
+        action's intent is to either start the current playback from the
+        beginning if the playback has a notion of beginning, or move to the
+        previous item in the playlist if the playback has a notion of
+        playlist.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>nexttrack</dfn>: the action's
+        intent is to move to the playback to the next item in the playlist if
+        the playback has a notion of playlist.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>skipad</dfn>: the action's
+        intent is to skip the advertisement that is currently playing.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>stop</dfn>: the action's intent
+        is to stop the playback and clear the state if appropriate.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>seekto</dfn>: the action's
+        intent is to move the playback time to a specific time.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>togglemicrophone</dfn>: the
+        action's intent is to mute or unmute the user's microphone.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>togglecamera</dfn>: the
+        action's intent is to turn the user's active camera on or off.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>togglescreenshare</dfn>: the
+        action's intent is to turn the user's active screenshare on or off.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>hangup</dfn>: the action's
+        intent is to end a call.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>previousslide</dfn>: the
+        action's intent is to go back to the previous slide when presenting
+        slides.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>nextslide</dfn>: the action's
+        intent is to go to the next slide when presenting slides.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>enterpictureinpicture</dfn>:
+        the action's intent is to open the media session in a
+        picture-in-picture window.
+      </li>
+      <li>
+        <dfn enum-value for=MediaSessionAction>voiceactivity</dfn>: the
+        action's intent is to notify the web page that voice activity has been
+        detected by the microphone.
+      </li>
+    </ul>
 
     <p>
       All {{MediaSession}}s have a map of <dfn>supported media session
@@ -430,18 +431,18 @@ platform UI or media keys, thereby improving the user experience.
       When the <dfn>update action handler algorithm</dfn> on a given
       {{MediaSession}} with <var>action</var> and <var>handler</var> parameters
       is invoked, the user agent MUST run the following steps:
-      <ol>
-        <li>
-          If <var>handler</var> is `null`, remove <var>action</var>
-          from the <a>supported media session actions</a> for {{MediaSession}}
-          and abort these steps.
-        </li>
-        <li>
-          Add <var>action</var> to the <a>supported media session actions</a>
-          for {{MediaSession}} and associate to it the <var>handler</var>.
-        </li>
-      </ol>
     </p>
+    <ol>
+      <li>
+        If <var>handler</var> is `null`, remove <var>action</var>
+        from the <a>supported media session actions</a> for {{MediaSession}}
+        and abort these steps.
+      </li>
+      <li>
+        Add <var>action</var> to the <a>supported media session actions</a>
+        for {{MediaSession}} and associate to it the <var>handler</var>.
+      </li>
+    </ol>
 
     <p>
       When the <a>supported media session actions</a> are changed, the user
@@ -458,40 +459,40 @@ platform UI or media keys, thereby improving the user experience.
       the user agent MUST <a>queue a task</a>, using the [=user interaction task
       source=], to run the following
       <dfn>handle media session action</dfn> steps:
-      <ol>
-        <li>
-          Let <var>session</var> be <var>source</var>'s <a for="media session
-          action source">target</a>.
-        </li>
-        <li>
-          If <var>session</var> is `null`, set <var>session</var> to the
-          <a>active media session</a>.
-        </li>
-        <li>
-          If <var>session</var> is `null`, abort these steps.
-        </li>
-        <li>
-          Let <var>actions</var> be <var>session</var>'s
-          <a>supported media session actions</a>.
-        </li>
-        <li>
-          If <var>actions</var> does not contain the key <var>action</var>,
-          abort these steps.
-        </li>
-        <li>
-          Let <var>handler</var> be the {{MediaSessionActionHandler}} associated
-          with the key <var>action</var> in <var>actions</var>.
-        </li>
-        <li>
-          Run <var>handler</var> with the <var>details</var> parameter set to:
-          {{MediaSessionActionDetails}}.
-        </li>
-        <li>
-          Run the <a>activation notification</a> steps in the [=/browsing
-          context=] associated with <var>session</var>.
-        </li>
-      </ol>
     </p>
+    <ol>
+      <li>
+        Let <var>session</var> be <var>source</var>'s <a for="media session
+        action source">target</a>.
+      </li>
+      <li>
+        If <var>session</var> is `null`, set <var>session</var> to the
+        <a>active media session</a>.
+      </li>
+      <li>
+        If <var>session</var> is `null`, abort these steps.
+      </li>
+      <li>
+        Let <var>actions</var> be <var>session</var>'s
+        <a>supported media session actions</a>.
+      </li>
+      <li>
+        If <var>actions</var> does not contain the key <var>action</var>,
+        abort these steps.
+      </li>
+      <li>
+        Let <var>handler</var> be the {{MediaSessionActionHandler}} associated
+        with the key <var>action</var> in <var>actions</var>.
+      </li>
+      <li>
+        Run <var>handler</var> with the <var>details</var> parameter set to:
+        {{MediaSessionActionDetails}}.
+      </li>
+      <li>
+        Run the <a>activation notification</a> steps in the [=/browsing
+        context=] associated with <var>session</var>.
+      </li>
+    </ol>
 
     <p>
       When the user agent receives a joint command for <a enum-value
@@ -499,28 +500,28 @@ platform UI or media keys, thereby improving the user experience.
       for=MediaSessionAction>pause</a>, such as a headset button click, it MUST
       <a>queue a task</a>, using the [=user interaction task source=], to run
       the following steps:
-      <ol>
-        <li>
-          If the <a>active media session</a> is `null`, abort these steps.
-        </li>
-        <li>
-          Let <var>action</var> be a <a>media session action</a>.
-        </li>
-        <li>
-          If the <a>actual playback state</a> of the <a>active media session</a>
-          is <a enum-value for="MediaSessionPlaybackState">playing</a>, set
-          <var>action</var> to <a enum-value for=MediaSessionAction>pause</a>.
-        </li>
-        <li>
-          Otherwise, set <var>action</var> to <a enum-value
-          for=MediaSessionAction>play</a>.
-        </li>
-        <li>
-          Run the <a>handle media session action</a> steps with
-          <var>action</var>.
-        </li>
-      </ol>
     </p>
+    <ol>
+      <li>
+        If the <a>active media session</a> is `null`, abort these steps.
+      </li>
+      <li>
+        Let <var>action</var> be a <a>media session action</a>.
+      </li>
+      <li>
+        If the <a>actual playback state</a> of the <a>active media session</a>
+        is <a enum-value for="MediaSessionPlaybackState">playing</a>, set
+        <var>action</var> to <a enum-value for=MediaSessionAction>pause</a>.
+      </li>
+      <li>
+        Otherwise, set <var>action</var> to <a enum-value
+        for=MediaSessionAction>play</a>.
+      </li>
+      <li>
+        Run the <a>handle media session action</a> steps with
+        <var>action</var>.
+      </li>
+    </ol>
 
     <p>
       It is RECOMMENDED for user agents to implement a default handler for the
@@ -585,55 +586,55 @@ platform UI or media keys, thereby improving the user experience.
     <p>
       When the <dfn>media session actions update algorithm</dfn> is invoked, the
       user agent MUST run the following steps:
-      <ol>
-        <li>
-          Let <var>available actions</var> be an array of <a>media session
-          actions</a>.
-        </li>
-        <li>
-          If the <a>active media session</a> is null, set <var>available
-          actions</var> to the empty array.
-        </li>
-        <li>
-          Otherwise, set the <var>available actions</var> to the list of keys
-          available in the <a>active media session</a>'s <a>supported media
-          session actions</a>.
-        </li>
-        <li>
-          For each <a>media session action source</a> <var>source</var>, run the
-          following substeps:
-          <ol>
-            <li>
-              Optionally, if the <a>active media session</a> is not null:
-              <ol>
-                <li>
-                  If the <a>active media session</a>'s <a>actual playback
-                  state</a> is <a enum-value
-                  for="MediaSessionPlaybackState">playing</a>, remove <a
-                  enum-value for=MediaSessionAction>play</a> from <var>available
-                  actions</var>.
-                </li>
-                <li>
-                  Otherwise, remove <a enum-value
-                  for=MediaSessionAction>pause</a> from <var>available
-                  actions</var>.
-                </li>
-              </ol>
-            </li>
-            <li>
-              If the <var>source</var> is a UI element created by the user
-              agent, it MAY remove some elements from <var>available
-              actions</var> if there are too many of them compared to the
-              available space.
-            </li>
-            <li>
-              Notify the <var>source</var> with the updated list of
-              <var>available actions</var>.
-            </li>
-          </ol>
-        </li>
-      </ol>
     </p>
+    <ol>
+      <li>
+        Let <var>available actions</var> be an array of <a>media session
+        actions</a>.
+      </li>
+      <li>
+        If the <a>active media session</a> is null, set <var>available
+        actions</var> to the empty array.
+      </li>
+      <li>
+        Otherwise, set the <var>available actions</var> to the list of keys
+        available in the <a>active media session</a>'s <a>supported media
+        session actions</a>.
+      </li>
+      <li>
+        For each <a>media session action source</a> <var>source</var>, run the
+        following substeps:
+        <ol>
+          <li>
+            Optionally, if the <a>active media session</a> is not null:
+            <ol>
+              <li>
+                If the <a>active media session</a>'s <a>actual playback
+                state</a> is <a enum-value
+                for="MediaSessionPlaybackState">playing</a>, remove <a
+                enum-value for=MediaSessionAction>play</a> from <var>available
+                actions</var>.
+              </li>
+              <li>
+                Otherwise, remove <a enum-value
+                for=MediaSessionAction>pause</a> from <var>available
+                actions</var>.
+              </li>
+            </ol>
+          </li>
+          <li>
+            If the <var>source</var> is a UI element created by the user
+            agent, it MAY remove some elements from <var>available
+            actions</var> if there are too many of them compared to the
+            available space.
+          </li>
+          <li>
+            Notify the <var>source</var> with the updated list of
+            <var>available actions</var>.
+          </li>
+        </ol>
+      </li>
+    </ol>
   </section>
 
   <section>
@@ -645,21 +646,21 @@ platform UI or media keys, thereby improving the user experience.
       of a media session in the platform UI depending on platform conventions.
       The
       <dfn>position state</dfn> is the combination of the following:
-      <ul>
-        <li>
-          The <dfn>duration</dfn> of the media in seconds.
-        </li>
-        <li>
-          The <dfn>playback rate</dfn> of the media. It is a coefficient.
-        </li>
-        <li>
-          The <dfn>last reported playback position</dfn> of the media. This is
-          the playback position of the media in seconds when the <a>position
-          state</a>
-          was created.
-        </li>
-      </ul>
     </p>
+    <ul>
+      <li>
+        The <dfn>duration</dfn> of the media in seconds.
+      </li>
+      <li>
+        The <dfn>playback rate</dfn> of the media. It is a coefficient.
+      </li>
+      <li>
+        The <dfn>last reported playback position</dfn> of the media. This is
+        the playback position of the media in seconds when the <a>position
+        state</a>
+        was created.
+      </li>
+    </ul>
 
     <p>
       The <a>position state</a> is represented by a {{MediaPositionState}} which
@@ -676,44 +677,44 @@ platform UI or media keys, thereby improving the user experience.
     <p>
       The <dfn>actual playback rate</dfn> is a coefficient computed in the
       following way:
-      <ul>
-        <li>
-          If the <a>actual playback state</a> is <a enum-value
-          for="MediaSessionPlaybackState">paused</a>, then return zero.
-        </li>
-        <li>
-          Return <a>playback rate</a>.
-        </li>
-      </ul>
     </p>
+    <ul>
+      <li>
+        If the <a>actual playback state</a> is <a enum-value
+        for="MediaSessionPlaybackState">paused</a>, then return zero.
+      </li>
+      <li>
+        Return <a>playback rate</a>.
+      </li>
+    </ul>
 
     <p>
       The <dfn>current playback position</dfn> in seconds is computed in the
       following way:
-      <ul>
-        <li>
-          Set <var>time elapsed</var> to the system time in seconds minus the
-          <a>last position updated time</a>.
-        </li>
-        <li>
-          Mutliply <var>time elapsed</var> with <a>actual playback rate</a>.
-        </li>
-        <li>
-          Set <var>position</var> to <var>time elapsed</var> added to
-          <a>last reported playback position</a>.
-        </li>
-        <li>
-          If <var>position</var> is less than zero, return zero.
-        </li>
-        <li>
-          If <var>position</var> is greater than <a>duration</a>, return
-          <a>duration</a>.
-        </li>
-        <li>
-          Return <var>position</var>.
-        </li>
-      </ul>
     </p>
+    <ul>
+      <li>
+        Set <var>time elapsed</var> to the system time in seconds minus the
+        <a>last position updated time</a>.
+      </li>
+      <li>
+        Mutliply <var>time elapsed</var> with <a>actual playback rate</a>.
+      </li>
+      <li>
+        Set <var>position</var> to <var>time elapsed</var> added to
+        <a>last reported playback position</a>.
+      </li>
+      <li>
+        If <var>position</var> is less than zero, return zero.
+      </li>
+      <li>
+        If <var>position</var> is greater than <a>duration</a>, return
+        <a>duration</a>.
+      </li>
+      <li>
+        Return <var>position</var>.
+      </li>
+    </ul>
 
   </section>
 
@@ -795,24 +796,24 @@ interface MediaSession {
   reflects the {{MediaSession}}'s {{MediaSession/metadata}}. On getting, it MUST
   return the {{MediaSession}}'s {{MediaSession/metadata}}. On setting, it MUST
   run the following steps with <var>value</var> being the new value being set:
-  <ol>
-    <li>
-      If the {{MediaSession}}'s {{MediaSession/metadata}} is not `null`, set its
-      [=MediaMetadata/media session=] to `null`.
-    </li>
-    <li>
-      Set the {{MediaSession}}'s {{MediaSession/metadata}} to
-      <var>value</var>.
-    </li>
-    <li>
-      If the {{MediaSession}}'s {{MediaSession/metadata}} is not `null`, set its
-      [=MediaMetadata/media session=] to the current {{MediaSession}}.
-    </li>
-    <li>
-      <a>In parallel</a>, run the <a>update metadata algorithm</a>.
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    If the {{MediaSession}}'s {{MediaSession/metadata}} is not `null`, set its
+    [=MediaMetadata/media session=] to `null`.
+  </li>
+  <li>
+    Set the {{MediaSession}}'s {{MediaSession/metadata}} to
+    <var>value</var>.
+  </li>
+  <li>
+    If the {{MediaSession}}'s {{MediaSession/metadata}} is not `null`, set its
+    [=MediaMetadata/media session=] to the current {{MediaSession}}.
+  </li>
+  <li>
+    <a>In parallel</a>, run the <a>update metadata algorithm</a>.
+  </li>
+</ol>
 
 <p>
   The <dfn attribute for="MediaSession"><code>playbackState</code></dfn>
@@ -836,23 +837,23 @@ interface MediaSession {
   The {{MediaSessionPlaybackState}} enum is used to indicate whether a
   [=/browsing context=] is playing media or not, the values are described as
   follows:
-
-  <ul>
-    <li>
-      <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the
-      [=/browsing context=] does not specify whether it's playing or paused, it
-      can only be used in the {{MediaSession/playbackState}} attribute.
-    </li>
-    <li>
-      <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the
-      [=/browsing context=] is currently playing media and it can be paused.
-    </li>
-    <li>
-      <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the
-      [=/browsing context=] has paused media and it can be resumed.
-    </li>
-  </ul>
 </p>
+
+<ul>
+  <li>
+    <dfn enum-value for="MediaSessionPlaybackState">none</dfn> means the
+    [=/browsing context=] does not specify whether it's playing or paused, it
+    can only be used in the {{MediaSession/playbackState}} attribute.
+  </li>
+  <li>
+    <dfn enum-value for="MediaSessionPlaybackState">playing</dfn> means the
+    [=/browsing context=] is currently playing media and it can be paused.
+  </li>
+  <li>
+    <dfn enum-value for="MediaSessionPlaybackState">paused</dfn> means the
+    [=/browsing context=] has paused media and it can be resumed.
+  </li>
+</ul>
 
 <p>
   The <dfn method for=MediaSession>setActionHandler(action, handler)</dfn>
@@ -863,44 +864,44 @@ interface MediaSession {
 <p>
   The <dfn method for=MediaSession>setPositionState(|state|)</dfn> method, when
   invoked MUST perform the following steps:
-
-  <ul>
-    <li>
-      If <var>state</var> is an empty dictionary, clear the <a>position
-      state</a>
-      and abort these steps.
-    </li>
-    <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">duration</a>
-      is not present, throw a <a exception>TypeError</a>.
-    </li>
-    <li>
-      If <var>state</var>'s {{MediaPositionState/duration}} is negative or
-      <code>NaN</code>, throw a <a exception>TypeError</a>.
-    </li>
-    <li>
-      If <var>state</var>'s {{MediaPositionState/position}} is not present, set
-      it to zero.
-    </li>
-    <li>
-      If <var>state</var>'s <a dict-member for="MediaPositionState">position</a>
-      is negative or greater than <a dict-member
-      for="MediaPositionState">duration</a>, throw a
-      <a exception>TypeError</a>.
-    </li>
-    <li>
-      If <var>state</var>'s <a dict-member
-      for="MediaPositionState">playbackRate</a> is not present, set it to 1.0.
-    </li>
-    <li>
-      If <var>state</var>'s {{MediaPositionState/playbackRate}} is zero, throw a
-      <a exception>TypeError</a>.
-    </li>
-    <li>
-      Update the <a>position state</a> and <a>last position updated time</a>.
-    </li>
-  </ul>
 </p>
+
+<ul>
+  <li>
+    If <var>state</var> is an empty dictionary, clear the <a>position
+    state</a>
+    and abort these steps.
+  </li>
+  <li>
+    If <var>state</var>'s <a dict-member for="MediaPositionState">duration</a>
+    is not present, throw a <a exception>TypeError</a>.
+  </li>
+  <li>
+    If <var>state</var>'s {{MediaPositionState/duration}} is negative or
+    <code>NaN</code>, throw a <a exception>TypeError</a>.
+  </li>
+  <li>
+    If <var>state</var>'s {{MediaPositionState/position}} is not present, set
+    it to zero.
+  </li>
+  <li>
+    If <var>state</var>'s <a dict-member for="MediaPositionState">position</a>
+    is negative or greater than <a dict-member
+    for="MediaPositionState">duration</a>, throw a
+    <a exception>TypeError</a>.
+  </li>
+  <li>
+    If <var>state</var>'s <a dict-member
+    for="MediaPositionState">playbackRate</a> is not present, set it to 1.0.
+  </li>
+  <li>
+    If <var>state</var>'s {{MediaPositionState/playbackRate}} is zero, throw a
+    <a exception>TypeError</a>.
+  </li>
+  <li>
+    Update the <a>position state</a> and <a>last position updated time</a>.
+  </li>
+</ul>
 
 <p>
   The <dfn method for=MediaSession>setMicrophoneActive(active)</dfn> method
@@ -909,139 +910,139 @@ interface MediaSession {
   longer sending audio through a call, the page can invoke
   <code>setMicrophoneActive(false)</code>). When invoked, it MUST perform the
   following steps:
-  <ol>
-    <li>
-      Let <var>document</var> be [=this=]'s [=relevant global object=]'s
-      [=associated Document=].
-    </li>
-    <li>
-      Let <var>captureKind</var> be "microphone".
-    </li>
-    <li>
-      Return the result of running the [=update capture state algorithm=] with
-      <var>document</var>, <var>active</var> and <var>captureKind</var>.
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    Let <var>document</var> be [=this=]'s [=relevant global object=]'s
+    [=associated Document=].
+  </li>
+  <li>
+    Let <var>captureKind</var> be "microphone".
+  </li>
+  <li>
+    Return the result of running the [=update capture state algorithm=] with
+    <var>document</var>, <var>active</var> and <var>captureKind</var>.
+  </li>
+</ol>
 <p>
   Similarly, the <dfn method for=MediaSession>setCameraActive(active)</dfn>
   method indicates to the user agent the camera capture state desired by the
   page. When invoked, it MUST perform the following steps:
-  <ol>
-    <li>
-      Let <var>document</var> be [=this=]'s [=relevant global object=]'s
-      [=associated Document=].
-    </li>
-    <li>
-      Let <var>captureKind</var> be "camera".
-    </li>
-    <li>
-      Return the result of running the [=update capture state algorithm=] with
-      <var>document</var>, <var>active</var> and <var>captureKind</var>.
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    Let <var>document</var> be [=this=]'s [=relevant global object=]'s
+    [=associated Document=].
+  </li>
+  <li>
+    Let <var>captureKind</var> be "camera".
+  </li>
+  <li>
+    Return the result of running the [=update capture state algorithm=] with
+    <var>document</var>, <var>active</var> and <var>captureKind</var>.
+  </li>
+</ol>
 <p>
   Similarly, the <dfn method for=MediaSession>setScreenshareActive(active)</dfn>
   method indicates to the user agent the screenshare capture state desired by
   the page. When invoked, it MUST perform the following steps:
-  <ol>
-    <li>
-      Let <var>document</var> be [=this=]'s [=relevant global object=]'s
-      [=associated Document=].
-    </li>
-    <li>
-      Let <var>captureKind</var> be "screenshare".
-    </li>
-    <li>
-      Return the result of running the [=update capture state algorithm=] with
-      <var>document</var>, <var>active</var> and <var>captureKind</var>.
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    Let <var>document</var> be [=this=]'s [=relevant global object=]'s
+    [=associated Document=].
+  </li>
+  <li>
+    Let <var>captureKind</var> be "screenshare".
+  </li>
+  <li>
+    Return the result of running the [=update capture state algorithm=] with
+    <var>document</var>, <var>active</var> and <var>captureKind</var>.
+  </li>
+</ol>
 <p>
   The <dfn>update capture state algorithm</dfn>, when invoked with
   <var>document</var>, <var>active</var> and <var>captureKind</var>, MUST
   perform the following steps:
-  <ol>
-    <li>
-      If <var>document</var> is not [=fully active=], return [=a promise
-      rejected with=] <a exception>InvalidStateError</a>.
-    </li>
-    <li>
-      If <var>active</var> is <code>true</code> and <var>document</var>'s
-      [=Document/visibility state=] is not "visible", the user agent MAY return
-      [=a promise rejected with=] <a exception>InvalidStateError</a>.
-    </li>
-    <li>
-      Let <var>p</var> be a new promise.
-    </li>
-    <li>
-      <a>In parallel</a>, run the following steps:
-      <ol>
-        <li>
-          Let <var>applyPausePolicy</var> be <code>true</code> if the user agent
-          implements a policy of <dfn>pausing all input sources</dfn> of type
-          <var>captureKind</var> in response to UI and <code>false</code>
-          otherwise.
-        </li>
-        <li>
-          If <var>applyPausePolicy</var> is <code>true</code>, run the following
-          substeps:
-          <ol>
-            <li>
-              Let <var>currentlyActive</var> be <code>false</code> if the user
-              agent is currently [=pausing all input sources=] of type
-              <var>captureKind</var>
-              and <code>true</code> otherwise.
-            </li>
-            <li>
-              If <var>active</var> is <var>currentlyActive</var>, resolve
-              <var>p</var> with <code>undefined</code> and abort these steps.
-            </li>
-            <li>
-              If <var>active</var> is <code>true</code>, the user agent MAY wait
-              to proceed, for instance to prompt the user.
-            </li>
-            <li>
-              If the user agent denies the request to update the capture state,
-              reject <var>p</var> with a <a exception>NotAllowedError</a> and
-              abort these steps.
-            </li>
-          </ol>
-        </li>
-        <li>
-          Update the user agent capture state UI according to
-          <var>captureKind</var>
-          and <var>active</var>.
-        </li>
-        <li>
-           <a>Queue a task</a> using the [=user interaction task source=]
-           to resolve <var>p</var> with <code>undefined</code>.
-        </li>
-        <li>
-          If <var>applyPausePolicy</var> is <code>true</code>, run the following
-          substeps:
-          <ol>
-            <li>
-              Let <var>newMutedState</var> be <code>true</code> if
-              <var>active</var> is
-            <code>false</code> and <code>false</code> otherwise.</li>
-            <li>
-              For each {{MediaStreamTrack}} whose source is of type
-              <var>captureKind</var>,
-              <a>queue a task</a>using the [=user interaction task source=]
-              to [$set a track's muted state$] to <var>newMutedState</var>.
-            </li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li>
-      Return <var>p</var>.
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    If <var>document</var> is not [=fully active=], return [=a promise
+    rejected with=] <a exception>InvalidStateError</a>.
+  </li>
+  <li>
+    If <var>active</var> is <code>true</code> and <var>document</var>'s
+    [=Document/visibility state=] is not "visible", the user agent MAY return
+    [=a promise rejected with=] <a exception>InvalidStateError</a>.
+  </li>
+  <li>
+    Let <var>p</var> be a new promise.
+  </li>
+  <li>
+    <a>In parallel</a>, run the following steps:
+    <ol>
+      <li>
+        Let <var>applyPausePolicy</var> be <code>true</code> if the user agent
+        implements a policy of <dfn>pausing all input sources</dfn> of type
+        <var>captureKind</var> in response to UI and <code>false</code>
+        otherwise.
+      </li>
+      <li>
+        If <var>applyPausePolicy</var> is <code>true</code>, run the following
+        substeps:
+        <ol>
+          <li>
+            Let <var>currentlyActive</var> be <code>false</code> if the user
+            agent is currently [=pausing all input sources=] of type
+            <var>captureKind</var>
+            and <code>true</code> otherwise.
+          </li>
+          <li>
+            If <var>active</var> is <var>currentlyActive</var>, resolve
+            <var>p</var> with <code>undefined</code> and abort these steps.
+          </li>
+          <li>
+            If <var>active</var> is <code>true</code>, the user agent MAY wait
+            to proceed, for instance to prompt the user.
+          </li>
+          <li>
+            If the user agent denies the request to update the capture state,
+            reject <var>p</var> with a <a exception>NotAllowedError</a> and
+            abort these steps.
+          </li>
+        </ol>
+      </li>
+      <li>
+        Update the user agent capture state UI according to
+        <var>captureKind</var>
+        and <var>active</var>.
+      </li>
+      <li>
+         <a>Queue a task</a> using the [=user interaction task source=]
+         to resolve <var>p</var> with <code>undefined</code>.
+      </li>
+      <li>
+        If <var>applyPausePolicy</var> is <code>true</code>, run the following
+        substeps:
+        <ol>
+          <li>
+            Let <var>newMutedState</var> be <code>true</code> if
+            <var>active</var> is
+          <code>false</code> and <code>false</code> otherwise.</li>
+          <li>
+            For each {{MediaStreamTrack}} whose source is of type
+            <var>captureKind</var>,
+            <a>queue a task</a>using the [=user interaction task source=]
+            to [$set a track's muted state$] to <var>newMutedState</var>.
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>
+    Return <var>p</var>.
+  </li>
+</ol>
 <p class=note>
   The <a>setMicrophoneActive(active)</a>, <a>setCameraActive(active)</a>
   and <a>setScreenshareActive(active)</a> methods can reject based on user agent
@@ -1112,66 +1113,67 @@ dictionary MediaMetadataInit {
 <p>
   A {{MediaMetadata}} is said to be an <dfn>empty metadata</dfn> if it is equal
   to `null` or all the following conditions are true:
-  <ul>
-    <li>Its <a for=MediaMetadata>title</a> is the empty string.</li>
-    <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
-    <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
-    <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
-    is <code>0</code>.</li>
-    <li>Its <a for=MediaMetadata>chapter information</a> length is
-    <code>0</code>.</li>
-  </ul>
 </p>
+<ul>
+  <li>Its <a for=MediaMetadata>title</a> is the empty string.</li>
+  <li>Its <a for=MediaMetadata>artist</a> is the empty string.</li>
+  <li>Its <a for=MediaMetadata>album</a> is the empty string.</li>
+  <li>Its <a for=MediaMetadata title='artwork image'>artwork images</a> length
+  is <code>0</code>.</li>
+  <li>Its <a for=MediaMetadata>chapter information</a> length is
+  <code>0</code>.</li>
+</ul>
 
 <p>
   The <dfn constructor for="MediaMetadata">MediaMetadata(<var>init</var>)</dfn>
   constructor, when invoked, MUST run the following steps:
-
-  <ol>
-    <li>
-      Let <var>metadata</var> be a new {{MediaMetadata}} object.
-    </li>
-    <li>
-      Set <var>metadata</var>'s {{MediaMetadata/title}} to <var>init</var>'s
-      {{MediaMetadataInit/title}}.
-    </li>
-    <li>
-      Set <var>metadata</var>'s {{MediaMetadata/artist}} to <var>init</var>'s
-      {{MediaMetadataInit/artist}}.
-    </li>
-    <li>
-      Set <var>metadata</var>'s {{MediaMetadata/album}} to
-      <var>init</var>'s {{MediaMetadataInit/album}}.
-    </li>
-    <li>
-      Run the <a>convert artwork algorithm</a> with <var>init</var>'s
-      {{MediaMetadataInit/artwork}} as <var>input</var> and set
-      <var>metadata</var>'s <a for="MediaMetadata">artwork images</a> as the
-      result if it succeeded.
-    </li>
-    <li>
-      Let <var>chapters</var> be an empty list of type {{ChapterInformation}}.
-    </li>
-    <li>
-      For each <var>entry</var> in <var>init</var>'s
-      {{MediaMetadataInit/chapterInfo}}, [=create a ChapterInformation=] from
-      <var>entry</var> and append it to
-      <var>chapters</var>.
-    </li>
-    <li>
-      Set <var>metadata</var>'s <a for="MediaMetadata">chapter information</a>
-      to the result of [=Create a frozen array|creating a frozen array=] from
-      <var>chapters</var>.
-    </li>
-    <li>
-      Return <var>metadata</var>.
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    Let <var>metadata</var> be a new {{MediaMetadata}} object.
+  </li>
+  <li>
+    Set <var>metadata</var>'s {{MediaMetadata/title}} to <var>init</var>'s
+    {{MediaMetadataInit/title}}.
+  </li>
+  <li>
+    Set <var>metadata</var>'s {{MediaMetadata/artist}} to <var>init</var>'s
+    {{MediaMetadataInit/artist}}.
+  </li>
+  <li>
+    Set <var>metadata</var>'s {{MediaMetadata/album}} to
+    <var>init</var>'s {{MediaMetadataInit/album}}.
+  </li>
+  <li>
+    Run the <a>convert artwork algorithm</a> with <var>init</var>'s
+    {{MediaMetadataInit/artwork}} as <var>input</var> and set
+    <var>metadata</var>'s <a for="MediaMetadata">artwork images</a> as the
+    result if it succeeded.
+  </li>
+  <li>
+    Let <var>chapters</var> be an empty list of type {{ChapterInformation}}.
+  </li>
+  <li>
+    For each <var>entry</var> in <var>init</var>'s
+    {{MediaMetadataInit/chapterInfo}}, [=create a ChapterInformation=] from
+    <var>entry</var> and append it to
+    <var>chapters</var>.
+  </li>
+  <li>
+    Set <var>metadata</var>'s <a for="MediaMetadata">chapter information</a>
+    to the result of [=Create a frozen array|creating a frozen array=] from
+    <var>chapters</var>.
+  </li>
+  <li>
+    Return <var>metadata</var>.
+  </li>
+</ol>
 
+<p>
 When the <dfn>convert artwork algorithm</dfn> with <var>input</var> parameter is
 invoked, where the <var>input</var> is a sequence of type {{MediaImage}}, the
 user agent MUST run the following steps:
+</p>
 <ol>
   <li>
     Let <var>output</var> be an empty list of type {{MediaImage}}.
@@ -1235,91 +1237,92 @@ user agent MUST run the following steps:
   The <dfn attribute for="MediaMetadata">artwork</dfn>
   attribute reflects the {{MediaMetadata}}'s <a for="MediaMetadata">artwork
   images</a>. On getting, it MUST run the following steps:
-  <ol>
-    <li>
-      If the {{MediaMetadata}}'s <a>converted artwork images</a> is
-      <code>undefined</code>, run the following steps:
-      <ol>
-        <li>
-          Let <var>frozenArtwork</var> be a JavaScript Array value.
-        </li>
-        <li>
-          For each <var>entry</var> in the {{MediaMetadata}}'s <a
-          for="MediaMetadata">artwork images</a>, perform the following steps:
-          <ol>
-            <li>
-              Let <var>image</var> be the result of [=converted to a JavaScript
-              value|converting to a JavaScript object=] <var>entry</var>.
-            </li>
-            <li>
-              Perform [=!=] <a
-              abstract-op>SetIntegrityLevel</a>(<var>image</var>,
-              "<code>frozen</code>"), to prevent accidental mutation by scripts.
-            </li>
-            <li>
-              Push <var>image</var> to <var>frozenArtwork</var>.
-            </li>
-          </ol>
-        </li>
-        <li>
-          Perform [=!=] <a
-          abstract-op>SetIntegrityLevel</a>(<var>frozenArtwork</var>,
-          "<code>frozen</code>").
-        </li>
-        <li>
-          Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
-          <var>frozenArtwork</var>.
-        </li>
-      </ol>
-    </li>
-    <li>
-      Return the {{MediaMetadata}}'s <a>converted artwork images</a>.
-    </li>
-  </ol>
+</p>
+<ol>
+  <li>
+    If the {{MediaMetadata}}'s <a>converted artwork images</a> is
+    <code>undefined</code>, run the following steps:
+    <ol>
+      <li>
+        Let <var>frozenArtwork</var> be a JavaScript Array value.
+      </li>
+      <li>
+        For each <var>entry</var> in the {{MediaMetadata}}'s <a
+        for="MediaMetadata">artwork images</a>, perform the following steps:
+        <ol>
+          <li>
+            Let <var>image</var> be the result of [=converted to a JavaScript
+            value|converting to a JavaScript object=] <var>entry</var>.
+          </li>
+          <li>
+            Perform <a href="https://tc39.es/ecma262/#sec-setintegritylevel">
+            SetIntegrityLevel</a>(<var>image</var>, "<code>frozen</code>"),
+            to prevent accidental mutation by scripts.
+          </li>
+          <li>
+            Push <var>image</var> to <var>frozenArtwork</var>.
+          </li>
+        </ol>
+      </li>
+      <li>
+        Perform <a href="https://tc39.es/ecma262/#sec-setintegritylevel">
+        SetIntegrityLevel</a>(<var>frozenArtwork</var>, "<code>frozen</code>").
+      </li>
+      <li>
+        Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
+        <var>frozenArtwork</var>.
+      </li>
+    </ol>
+  </li>
+  <li>
+    Return the {{MediaMetadata}}'s <a>converted artwork images</a>.
+  </li>
+</ol>
+<p>
   On setting, it MUST run the following steps with <var>value</var> being the
   new value being set:
-  <ol>
-    <li>
-      Let <var>convertedArtwork</var> be the result of [=converted to an IDL
-      value|converting=] <var>value</var> to a sequence of type {{MediaImage}}.
-    </li>
-    <li>
-      Run <a>convert artwork algorithm</a> with <var>convertedArtwork</var>, and
-      set the {{MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as
-      the result if it succeeds.
-    </li>
-    <li>
-      Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
-      <code>undefined</code>.
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    Let <var>convertedArtwork</var> be the result of [=converted to an IDL
+    value|converting=] <var>value</var> to a sequence of type {{MediaImage}}.
+  </li>
+  <li>
+    Run <a>convert artwork algorithm</a> with <var>convertedArtwork</var>, and
+    set the {{MediaMetadata}}'s <a for="MediaMetadata">artwork images</a> as
+    the result if it succeeds.
+  </li>
+  <li>
+    Set the {{MediaMetadata}}'s <a>converted artwork images</a> to
+    <code>undefined</code>.
+  </li>
+</ol>
 
 <p>
   When {{MediaMetadata}}'s <a for=MediaMetadata>title</a>, <a
   for=MediaMetadata>artist</a>, <a for=MediaMetadata>album</a> or <a
   for=MediaMetadata>artwork images</a> are modified, the user agent MUST run the
   following steps:
-  <ol>
-    <li>
-      If the instance has no associated [=MediaMetadata/media session=], abort
-      these steps.
-    </li>
-    <li>
-      Otherwise, <a>queue a task</a> to run the following substeps:
-      <ol>
-        <li>
-          If the instance no longer has an associated <a for=MediaMetadata>media
-          session</a>, abort these steps.
-        </li>
-        <li>
-          Otherwise, <a>in parallel</a>, run the <a>update metadata
-          algorithm</a>.
-        </li>
-      </ol>
-    </li>
-  </ol>
 </p>
+<ol>
+  <li>
+    If the instance has no associated [=MediaMetadata/media session=], abort
+    these steps.
+  </li>
+  <li>
+    Otherwise, <a>queue a task</a> to run the following substeps:
+    <ol>
+      <li>
+        If the instance no longer has an associated <a for=MediaMetadata>media
+        session</a>, abort these steps.
+      </li>
+      <li>
+        Otherwise, <a>in parallel</a>, run the <a>update metadata
+        algorithm</a>.
+      </li>
+    </ol>
+  </li>
+</ol>
 
 <h2 id="the-chapterinformation-interface">The {{ChapterInformation}}
 interface</h2>
@@ -1348,11 +1351,6 @@ dictionary ChapterInformationInit {
 </p>
 
 <p>
-  A {{ChapterInformation}} can have an associated <dfn for="ChapterInformation">
-  media metadata</dfn>.
-</p>
-
-<p>
   A {{ChapterInformation}} has an associated <dfn
   for="ChapterInformation">title</dfn>
   which is DOMString.
@@ -1372,37 +1370,36 @@ dictionary ChapterInformationInit {
 <p>
   To <dfn>create a {{ChapterInformation}}</dfn> with <var>init</var>, run the
   following steps:
-
-  <ol>
-    <li>
-      Let <var>chapterInfo</var> be a new {{ChapterInformation}} object.
-    </li>
-    <li>
-      Set <var>chapterInfo</var>'s {{ChapterInformation/title}} to
-      <var>init</var>'s {{ChapterInformationInit/title}}.
-    </li>
-    <li>
-      Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to
-      <var>init</var>'s {{ChapterInformationInit/startTime}}. If the <a
-      for=ChapterInformation>startTime</a> is negative or greater than
-      [=duration=], throw a <a exception>TypeError</a>.
-    </li>
-    <li>
-      Let {{ChapterInformationInit/artwork}} be the result of running the
-      <a>convert artwork algorithm</a> with <var>init</var>'s
-      {{ChapterInformation/artwork}} as <var>input</var>.
-    </li>
-    <li>
-      Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork
-      images</a> to the result of [=Create a frozen array|creating a frozen
-      array=] from {{ChapterInformationInit/artwork}}.
-    </li>
-    <li>
-      Return <var>chapterInfo</var>.
-    </li>
-  </ol>
 </p>
-
+<ol>
+  <li>
+    Let <var>chapterInfo</var> be a new {{ChapterInformation}} object.
+  </li>
+  <li>
+    Set <var>chapterInfo</var>'s {{ChapterInformation/title}} to
+    <var>init</var>'s {{ChapterInformationInit/title}}.
+  </li>
+  <li>
+    Set <var>chapterInfo</var>'s {{ChapterInformation/startTime}} to
+    <var>init</var>'s {{ChapterInformationInit/startTime}}. If the <a
+    for=ChapterInformation>startTime</a> is negative or greater than
+    [=duration=], throw a <a exception>TypeError</a>.
+  </li>
+  <li>
+    Let {{ChapterInformationInit/artwork}} be the result of running the
+    <a>convert artwork algorithm</a> with <var>init</var>'s
+    {{ChapterInformation/artwork}} as <var>input</var>.
+  </li>
+  <li>
+    Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork
+    images</a> to the result of [=Create a frozen array|creating a frozen
+    array=] from {{ChapterInformationInit/artwork}}.
+  </li>
+  <li>
+    Return <var>chapterInfo</var>.
+  </li>
+</ol>
+  
 <p>
   The <dfn attribute for="ChapterInformation">title</dfn> attribute reflects the
   {{ChapterInformation}}'s <a for=ChapterInformation>title</a>. On getting, it
@@ -1551,7 +1548,7 @@ to [=pausing all input sources|pause all input sources=] related to the capture
 <a>dictionary member</a> MUST be present if the user agent implements a policy
 of [=pausing all input sources=] and the <a>media session action</a>
 is {{MediaSessionAction/togglecamera}}, {{MediaSessionAction/togglemicrophone}}
-or {{MediaSessionAction/screenshare}}.
+or {{MediaSessionAction/togglescreenshare}}.
 
 <h2 id="permissions-policy">Permissions Policy Integration</h2>
 
@@ -1838,7 +1835,7 @@ media session</a>.
   </pre>
 </div>
 
-<div class="example" id="example-enterpictureinpicture">
+<div class="example" id="example-voiceactivity">
   Handling voice activity:
   <pre class="lang-javascript">
     // Create a MediaStream with audio enabled.
