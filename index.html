@@ -5,9 +5,9 @@
   <title>Media Session</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version ac5ea272d, updated Fri Dec 6 15:45:15 2024 -0800" name="generator">
+  <meta content="Bikeshed version c67c745b1, updated Fri Jan 17 14:27:28 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="115bf9ebaa7b4c4e76ffc13c7ce6480fa9d89d85" name="revision">
+  <meta content="9e9736385ca23ca183c533b35bc62d331e56851d" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -716,7 +716,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Media Session</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-12-16">16 December 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2025-01-23">23 January 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -741,7 +741,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2024 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2025 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -886,7 +886,7 @@ platform UI or media keys, thereby improving the user experience.</p>
       be able to determine if a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context">browsing context</a> of the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①">active media
       session</a> is playing media or not, which is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="guessed playback state" data-noexport id="guessed-playback-state">guessed
       playback state</dfn>. The RECOMMENDED way for determining the <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state">guessed
-      playback state</a> is to monitor the media elements whose node document’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc" id="ref-for-concept-document-bc">browsing context</a> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context①">browsing context</a>. The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context②">browsing context</a>'s <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state①">guessed playback state</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing">"playing"</a></code> if any of them is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#potentially-playing" id="ref-for-potentially-playing">potentially playing</a> and not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#concept-media-muted" id="ref-for-concept-media-muted">muted</a>, and is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-paused" id="ref-for-dom-mediasessionplaybackstate-paused">"paused"</a></code> otherwise. Other information SHOULD
+      playback state</a> is to monitor the media elements whose node document’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc" id="ref-for-concept-document-bc">browsing context</a> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context①">browsing context</a>. The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context②">browsing context</a>’s <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state①">guessed playback state</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing">"playing"</a></code> if any of them is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#potentially-playing" id="ref-for-potentially-playing">potentially playing</a> and not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#concept-media-muted" id="ref-for-concept-media-muted">muted</a>, and is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-paused" id="ref-for-dom-mediasessionplaybackstate-paused">"paused"</a></code> otherwise. Other information SHOULD
       also be considered, such as WebAudio and plugins. </p>
      <p> The <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate">playbackState</a></code> attribute specifies the <a data-link-type="dfn" href="#declared-playback-state" id="ref-for-declared-playback-state">declared
       playback state</a> from the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context③">browsing context</a>. The state is combined
@@ -897,7 +897,6 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> If the <a data-link-type="dfn" href="#declared-playback-state" id="ref-for-declared-playback-state①">declared playback state</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing①">playing</a></code>, return <code class="idl"><a data-link-type="idl" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing②">playing</a></code>. 
       <li> Otherwise, return the <a data-link-type="dfn" href="#guessed-playback-state" id="ref-for-guessed-playback-state③">guessed playback state</a>. 
      </ul>
-     <p></p>
      <p class="note" role="note"> The <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate①">playbackState</a></code> attribute could be useful when the page
       wants to do some preparation steps when the media is paused but it allows
       the preparation steps to be interrupted by <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause②">pause</a></code> action. See <a href="#example-set-playbackState">Setting playbackState</a> for example. </p>
@@ -915,8 +914,7 @@ platform UI or media keys, thereby improving the user experience.</p>
     agent and SHOULD be based on preferred user experience. Note that the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate②">playbackState</a></code> attribute MUST not affect media session
     routing. It only takes effect for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session④">active media session</a>.</p>
      <p>It is RECOMMENDED that the user agent selects the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session⑤">active media
-    session</a> by managing <a data-link-type="dfn" href="#audio-focus" id="ref-for-audio-focus">audio focus</a>. A tab or <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#window-bc" id="ref-for-window-bc">browsing
-    context</a> is said to have <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="audio-focus">audio focus</dfn> if it is currently playing
+    session</a> by managing <a data-link-type="dfn" href="#audio-focus" id="ref-for-audio-focus">audio focus</a>. A tab or <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#window-bc" id="ref-for-window-bc">browsing context</a> is said to have <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="audio-focus">audio focus</dfn> if it is currently playing
     audio or the user expects to control the media in it. The AudioFocus API
     targets this area and could be used once it’s finished.</p>
      <p>Whenever the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session⑥">active media session</a> is changed, the user agent MUST run
@@ -950,7 +948,7 @@ platform UI or media keys, thereby improving the user experience.</p>
        <p>Then, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>:</p>
        <ol>
         <li> Wait for the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response" id="ref-for-concept-response">response</a>. 
-        <li> If the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response" id="ref-for-concept-response①">response</a>'s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-type" id="ref-for-concept-response-type">type</a> is <code class="idl"><a data-link-type="idl" href="https://fetch.spec.whatwg.org/#dom-responsetype-default" id="ref-for-dom-responsetype-default">"default"</a></code>, attempt to decode the resource as an
+        <li> If the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response" id="ref-for-concept-response①">response</a>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-type" id="ref-for-concept-response-type">type</a> is <code class="idl"><a data-link-type="idl" href="https://fetch.spec.whatwg.org/#dom-responsetype-default" id="ref-for-dom-responsetype-default">"default"</a></code>, attempt to decode the resource as an
             image. 
         <li> If the image format is supported, use the image as the artwork for
             display in platform UI. Otherwise the <a data-link-type="dfn" href="#fetch-image-algorithm" id="ref-for-fetch-image-algorithm②">fetch image algorithm</a> fails and terminates. 
@@ -974,50 +972,49 @@ platform UI or media keys, thereby improving the user experience.</p>
      <p> A <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action③">media session action</a> is represented by a <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionaction" id="ref-for-enumdef-mediasessionaction">MediaSessionAction</a></code> which can have one of the following value: </p>
      <ul>
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;play&quot;|play" id="dom-mediasessionaction-play"><code>play</code></dfn>: the action’s intent
-          is to resume the playback. 
+        is to resume the playback. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;pause&quot;|pause" id="dom-mediasessionaction-pause"><code>pause</code></dfn>: the action’s
-          intent is to pause the currently active playback. 
+        intent is to pause the currently active playback. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekbackward&quot;|seekbackward" id="dom-mediasessionaction-seekbackward"><code>seekbackward</code></dfn>: the
-          action’s intent is to move the playback time backward by a short
-          period (eg. a few seconds). 
+        action’s intent is to move the playback time backward by a short
+        period (eg. a few seconds). 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekforward&quot;|seekforward" id="dom-mediasessionaction-seekforward"><code>seekforward</code></dfn>: the action’s
-          intent is to move the playback time forward by a short period (eg. a
-          few seconds). 
+        intent is to move the playback time forward by a short period (eg. a
+        few seconds). 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;previoustrack&quot;|previoustrack" id="dom-mediasessionaction-previoustrack"><code>previoustrack</code></dfn>: the
-          action’s intent is to either start the current playback from the
-          beginning if the playback has a notion of beginning, or move to the
-          previous item in the playlist if the playback has a notion of
-          playlist. 
+        action’s intent is to either start the current playback from the
+        beginning if the playback has a notion of beginning, or move to the
+        previous item in the playlist if the playback has a notion of
+        playlist. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;nexttrack&quot;|nexttrack" id="dom-mediasessionaction-nexttrack"><code>nexttrack</code></dfn>: the action’s
-          intent is to move to the playback to the next item in the playlist if
-          the playback has a notion of playlist. 
+        intent is to move to the playback to the next item in the playlist if
+        the playback has a notion of playlist. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;skipad&quot;|skipad" id="dom-mediasessionaction-skipad"><code>skipad</code></dfn>: the action’s
-          intent is to skip the advertisement that is currently playing. 
+        intent is to skip the advertisement that is currently playing. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;stop&quot;|stop" id="dom-mediasessionaction-stop"><code>stop</code></dfn>: the action’s intent
-          is to stop the playback and clear the state if appropriate. 
+        is to stop the playback and clear the state if appropriate. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;seekto&quot;|seekto" id="dom-mediasessionaction-seekto"><code>seekto</code></dfn>: the action’s
-          intent is to move the playback time to a specific time. 
+        intent is to move the playback time to a specific time. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;togglemicrophone&quot;|togglemicrophone" id="dom-mediasessionaction-togglemicrophone"><code>togglemicrophone</code></dfn>: the
-          action’s intent is to mute or unmute the user’s microphone. 
+        action’s intent is to mute or unmute the user’s microphone. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;togglecamera&quot;|togglecamera" id="dom-mediasessionaction-togglecamera"><code>togglecamera</code></dfn>: the
-          action’s intent is to turn the user’s active camera on or off. 
+        action’s intent is to turn the user’s active camera on or off. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;togglescreenshare&quot;|togglescreenshare" id="dom-mediasessionaction-togglescreenshare"><code>togglescreenshare</code></dfn>: the
-          action’s intent is to turn the user’s active screenshare on or off. 
+        action’s intent is to turn the user’s active screenshare on or off. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;hangup&quot;|hangup" id="dom-mediasessionaction-hangup"><code>hangup</code></dfn>: the action’s
-          intent is to end a call. 
+        intent is to end a call. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;previousslide&quot;|previousslide" id="dom-mediasessionaction-previousslide"><code>previousslide</code></dfn>: the
-          action’s intent is to go back to the previous slide when presenting
-          slides. 
+        action’s intent is to go back to the previous slide when presenting
+        slides. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;nextslide&quot;|nextslide" id="dom-mediasessionaction-nextslide"><code>nextslide</code></dfn>: the action’s
-          intent is to go to the next slide when presenting slides. 
+        intent is to go to the next slide when presenting slides. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;enterpictureinpicture&quot;|enterpictureinpicture" id="dom-mediasessionaction-enterpictureinpicture"><code>enterpictureinpicture</code></dfn>:
-          the action’s intent is to open the media session in a
-          picture-in-picture window. 
+        the action’s intent is to open the media session in a
+        picture-in-picture window. 
       <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionAction" data-dfn-type="enum-value" data-export data-lt="&quot;voiceactivity&quot;|voiceactivity" id="dom-mediasessionaction-voiceactivity"><code>voiceactivity</code></dfn>: the
-          action’s intent is to notify the web page that voice activity has been
-          detected by the microphone. 
+        action’s intent is to notify the web page that voice activity has been
+        detected by the microphone. 
      </ul>
-     <p></p>
      <p> All <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession④">MediaSession</a></code>s have a map of <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="supported media session actions" data-noexport id="supported-media-session-actions">supported media session
       actions</dfn> with, as a key, a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action④">media session action</a> and as a value
       a <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler">MediaSessionActionHandler</a></code>. </p>
@@ -1027,29 +1024,25 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> If <var>handler</var> is <code>null</code>, remove <var>action</var> from the <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions">supported media session actions</a> for <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession⑥">MediaSession</a></code> and abort these steps. 
       <li> Add <var>action</var> to the <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions①">supported media session actions</a> for <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession⑦">MediaSession</a></code> and associate to it the <var>handler</var>. 
      </ol>
-     <p></p>
      <p> When the <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions②">supported media session actions</a> are changed, the user
       agent SHOULD run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm②">media session actions update algorithm</a>. The
       user agent MAY <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task">queue a task</a> in order to run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm③">media session
       actions update algorithm</a> in order to avoid UI flickering when multiple
       actions are modified in the same event loop. </p>
      <p> When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source④">media session action source</a> named <var>source</var> that a <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑤">media session action</a> named <var>action</var> has been triggered,
-      the user agent MUST <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queue a task</a>, using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source">user interaction task
-      source</a>, to run the following <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="handle-media-session-action">handle media session action</dfn> steps: </p>
+      the user agent MUST <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queue a task</a>, using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source">user interaction task source</a>, to run the following <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="handle-media-session-action">handle media session action</dfn> steps: </p>
      <ol>
       <li> Let <var>session</var> be <var>source</var>’s <a data-link-type="dfn" href="#media-session-action-source-target" id="ref-for-media-session-action-source-target①">target</a>. 
       <li> If <var>session</var> is <code>null</code>, set <var>session</var> to the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑥">active media session</a>. 
       <li> If <var>session</var> is <code>null</code>, abort these steps. 
       <li> Let <var>actions</var> be <var>session</var>’s <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions③">supported media session actions</a>. 
       <li> If <var>actions</var> does not contain the key <var>action</var>,
-          abort these steps. 
+        abort these steps. 
       <li> Let <var>handler</var> be the <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler①">MediaSessionActionHandler</a></code> associated
-          with the key <var>action</var> in <var>actions</var>. 
+        with the key <var>action</var> in <var>actions</var>. 
       <li> Run <var>handler</var> with the <var>details</var> parameter set to: <code class="idl"><a data-link-type="idl" href="#dictdef-mediasessionactiondetails" id="ref-for-dictdef-mediasessionactiondetails">MediaSessionActionDetails</a></code>. 
-      <li> Run the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#activation-notification" id="ref-for-activation-notification">activation notification</a> steps in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context④">browsing
-          context</a> associated with <var>session</var>. 
+      <li> Run the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#activation-notification" id="ref-for-activation-notification">activation notification</a> steps in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context④">browsing context</a> associated with <var>session</var>. 
      </ol>
-     <p></p>
      <p> When the user agent receives a joint command for <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play②">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause③">pause</a>, such as a headset button click, it MUST <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task②">queue a task</a>, using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source①">user interaction task source</a>, to run
       the following steps: </p>
      <ol>
@@ -1059,13 +1052,12 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> Otherwise, set <var>action</var> to <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play③">play</a>. 
       <li> Run the <a data-link-type="dfn" href="#handle-media-session-action" id="ref-for-handle-media-session-action">handle media session action</a> steps with <var>action</var>. 
      </ol>
-     <p></p>
      <p> It is RECOMMENDED for user agents to implement a default handler for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play④">play</a> and <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause⑤">pause</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑦">media session actions</a> if none was
       provided for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session①⑨">active media session</a>. </p>
      <p> A user agent MAY implement a default handler for the <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone">togglemicrophone</a>, <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera">togglecamera</a>, or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-togglescreenshare" id="ref-for-dom-mediasessionaction-togglescreenshare">togglescreenshare</a>, or <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-hangup" id="ref-for-dom-mediasessionaction-hangup">hangup</a> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑧">media session actions</a> if none was
       provided for the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②⓪">active media session</a>. </p>
      <p> A user agent MAY expose microphone, camera, and screenshare state to web
-      pages via <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack" id="ref-for-dom-mediastreamtrack">MediaStreamTrack</a></code>'s <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted" id="ref-for-dom-mediastreamtrack-muted">muted</a></code> attribute in
+      pages via <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack" id="ref-for-dom-mediastreamtrack">MediaStreamTrack</a></code>’s <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted" id="ref-for-dom-mediastreamtrack-muted">muted</a></code> attribute in
       addition to <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone①">togglemicrophone</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera①">togglecamera</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglescreenshare" id="ref-for-dom-mediasessionaction-togglescreenshare①">togglescreenshare</a></code> <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action⑨">media session action</a>. In that
       case, the user agent MUST execute the corresponding <code class="idl"><a data-link-type="idl" href="#callbackdef-mediasessionactionhandler" id="ref-for-callbackdef-mediasessionactionhandler②">MediaSessionActionHandler</a></code> before running, as different tasks, the
       steps defined to <a data-link-type="abstract-op" href="https://w3c.github.io/mediacapture-main/#set-track-muted" id="ref-for-set-track-muted">set a track’s muted state</a>. </p>
@@ -1089,33 +1081,32 @@ platform UI or media keys, thereby improving the user experience.</p>
       user agent MUST run the following steps: </p>
      <ol>
       <li> Let <var>available actions</var> be an array of <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①①">media session
-          actions</a>. 
+        actions</a>. 
       <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②①">active media session</a> is null, set <var>available
-          actions</var> to the empty array. 
+        actions</var> to the empty array. 
       <li> Otherwise, set the <var>available actions</var> to the list of keys
-          available in the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②②">active media session</a>’s <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions⑤">supported media
-          session actions</a>. 
+        available in the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②②">active media session</a>’s <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions⑤">supported media
+        session actions</a>. 
       <li>
         For each <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source⑥">media session action source</a> <var>source</var>, run the
-          following substeps: 
+        following substeps: 
        <ol>
         <li>
           Optionally, if the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②③">active media session</a> is not null: 
          <ol>
           <li> If the <a data-link-type="dfn" href="#active-media-session" id="ref-for-active-media-session②④">active media session</a>’s <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state③">actual playback
-                  state</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing④">playing</a>, remove <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play⑤">play</a> from <var>available
-                  actions</var>. 
+                state</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-playing" id="ref-for-dom-mediasessionplaybackstate-playing④">playing</a>, remove <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-play" id="ref-for-dom-mediasessionaction-play⑤">play</a> from <var>available
+                actions</var>. 
           <li> Otherwise, remove <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionaction-pause" id="ref-for-dom-mediasessionaction-pause⑥">pause</a> from <var>available
-                  actions</var>. 
+                actions</var>. 
          </ol>
         <li> If the <var>source</var> is a UI element created by the user
-              agent, it MAY remove some elements from <var>available
-              actions</var> if there are too many of them compared to the
-              available space. 
+            agent, it MAY remove some elements from <var>available
+            actions</var> if there are too many of them compared to the
+            available space. 
         <li> Notify the <var>source</var> with the updated list of <var>available actions</var>. 
        </ol>
      </ol>
-     <p></p>
     </section>
     <section>
      <h3 class="heading settled" data-level="3.5" id="position-state-sec"><span class="secno">3.5. </span><span class="content">Position State</span><a class="self-link" href="#position-state-sec"></a></h3>
@@ -1125,10 +1116,9 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="duration">duration</dfn> of the media in seconds. 
       <li> The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="playback-rate">playback rate</dfn> of the media. It is a coefficient. 
       <li> The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="last-reported-playback-position">last reported playback position</dfn> of the media. This is
-          the playback position of the media in seconds when the <a data-link-type="dfn" href="#position-state" id="ref-for-position-state">position
-          state</a> was created. 
+        the playback position of the media in seconds when the <a data-link-type="dfn" href="#position-state" id="ref-for-position-state">position
+        state</a> was created. 
      </ul>
-     <p></p>
      <p> The <a data-link-type="dfn" href="#position-state" id="ref-for-position-state①">position state</a> is represented by a <code class="idl"><a data-link-type="idl" href="#dictdef-mediapositionstate" id="ref-for-dictdef-mediapositionstate">MediaPositionState</a></code> which
       MUST always be stored with the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="last-position-updated-time">last position updated time</dfn>. This
       is the time the <a data-link-type="dfn" href="#position-state" id="ref-for-position-state②">position state</a> was last updated in seconds. </p>
@@ -1140,7 +1130,6 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> If the <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state④">actual playback state</a> is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-paused" id="ref-for-dom-mediasessionplaybackstate-paused①">paused</a>, then return zero. 
       <li> Return <a data-link-type="dfn" href="#playback-rate" id="ref-for-playback-rate">playback rate</a>. 
      </ul>
-     <p></p>
      <p> The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="current-playback-position">current playback position</dfn> in seconds is computed in the
       following way: </p>
      <ul>
@@ -1151,7 +1140,6 @@ platform UI or media keys, thereby improving the user experience.</p>
       <li> If <var>position</var> is greater than <a data-link-type="dfn" href="#duration" id="ref-for-duration①">duration</a>, return <a data-link-type="dfn" href="#duration" id="ref-for-duration②">duration</a>. 
       <li> Return <var>position</var>. 
      </ul>
-     <p></p>
     </section>
    </section>
    <h2 class="heading settled" data-level="4" id="the-mediasession-interface"><span class="secno">4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession⑧">MediaSession</a></code> interface</span><a class="self-link" href="#the-mediasession-interface"></a></h2>
@@ -1212,105 +1200,97 @@ platform UI or media keys, thereby improving the user experience.</p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="Navigator" data-dfn-type="attribute" data-export id="dom-navigator-mediasession"><code>mediaSession</code></dfn> attribute
   MUST return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①②">MediaSession</a></code> instance associated with the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="ref-for-navigator①">Navigator</a></code> object. </p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export id="dom-mediasession-metadata"><code>metadata</code></dfn> attribute
-  reflects the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①③">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata④">metadata</a></code>. On getting, it MUST
-  return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①④">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑤">metadata</a></code>. On setting, it MUST
+  reflects the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①③">MediaSession</a></code>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata④">metadata</a></code>. On getting, it MUST
+  return the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①④">MediaSession</a></code>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑤">metadata</a></code>. On setting, it MUST
   run the following steps with <var>value</var> being the new value being set: </p>
    <ol>
-    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑤">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑥">metadata</a></code> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session">media session</a> to <code>null</code>. 
-    <li> Set the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑥">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑦">metadata</a></code> to <var>value</var>. 
-    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑦">MediaSession</a></code>'s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑧">metadata</a></code> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session①">media session</a> to the current <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑧">MediaSession</a></code>. 
+    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑤">MediaSession</a></code>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑥">metadata</a></code> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session">media session</a> to <code>null</code>. 
+    <li> Set the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑥">MediaSession</a></code>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑦">metadata</a></code> to <var>value</var>. 
+    <li> If the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑦">MediaSession</a></code>’s <code class="idl"><a data-link-type="idl" href="#dom-mediasession-metadata" id="ref-for-dom-mediasession-metadata⑧">metadata</a></code> is not <code>null</code>, set its <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session①">media session</a> to the current <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑧">MediaSession</a></code>. 
     <li> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel①">In parallel</a>, run the <a data-link-type="dfn" href="#update-metadata-algorithm" id="ref-for-update-metadata-algorithm①">update metadata algorithm</a>. 
    </ol>
-   <p></p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="attribute" data-export id="dom-mediasession-playbackstate"><code>playbackState</code></dfn> attribute represents the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="declared-playback-state">declared playback state</dfn> of the <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session②">media
   session</a>, by which the session declares whether its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context⑥">browsing context</a> is playing media or not. The initial value is <a class="idl-code" data-link-type="enum-value" href="#dom-mediasessionplaybackstate-none" id="ref-for-dom-mediasessionplaybackstate-none①">none</a>. On setting, the user agent MUST set
   the IDL attribute to the new value if it is a valid <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionplaybackstate" id="ref-for-enumdef-mediasessionplaybackstate①">MediaSessionPlaybackState</a></code> value. On getting, the user agent MUST return
-  the last valid value that was set. The <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate④">playbackState</a></code> attribute is a hint for the user agent to determine whether the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context⑦">browsing
-  context</a> is playing or paused. </p>
+  the last valid value that was set. The <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate④">playbackState</a></code> attribute is a hint for the user agent to determine whether the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context⑦">browsing context</a> is playing or paused. </p>
    <p class="note" role="note"> Setting <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate⑤">playbackState</a></code> may cause the <a data-link-type="dfn" href="#actual-playback-state" id="ref-for-actual-playback-state⑤">actual playback
   state</a> to change and run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm④">media session actions update algorithm</a>. </p>
    <p> The <code class="idl"><a data-link-type="idl" href="#enumdef-mediasessionplaybackstate" id="ref-for-enumdef-mediasessionplaybackstate②">MediaSessionPlaybackState</a></code> enum is used to indicate whether a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context⑧">browsing context</a> is playing media or not, the values are described as
   follows: </p>
    <ul>
     <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export data-lt="&quot;none&quot;|none" id="dom-mediasessionplaybackstate-none"><code>none</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context⑨">browsing context</a> does not specify whether it’s playing or paused, it
-      can only be used in the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate⑥">playbackState</a></code> attribute. 
+    can only be used in the <code class="idl"><a data-link-type="idl" href="#dom-mediasession-playbackstate" id="ref-for-dom-mediasession-playbackstate⑥">playbackState</a></code> attribute. 
     <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export data-lt="&quot;playing&quot;|playing" id="dom-mediasessionplaybackstate-playing"><code>playing</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context①⓪">browsing context</a> is currently playing media and it can be paused. 
     <li> <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionPlaybackState" data-dfn-type="enum-value" data-export data-lt="&quot;paused&quot;|paused" id="dom-mediasessionplaybackstate-paused"><code>paused</code></dfn> means the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#browsing-context" id="ref-for-browsing-context①①">browsing context</a> has paused media and it can be resumed. 
    </ul>
-   <p></p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setactionhandler"><code>setActionHandler(action, handler)</code></dfn> method, when invoked, MUST run the <a data-link-type="dfn" href="#update-action-handler-algorithm" id="ref-for-update-action-handler-algorithm">update action handler algorithm</a> with <var>action</var> and <var>handler</var> on the <code class="idl"><a data-link-type="idl" href="#mediasession" id="ref-for-mediasession①⑨">MediaSession</a></code>. </p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export data-lt="setPositionState(state)|setPositionState()" id="dom-mediasession-setpositionstate"><code>setPositionState(<var>state</var>)</code></dfn> method, when
   invoked MUST perform the following steps: </p>
    <ul>
     <li> If <var>state</var> is an empty dictionary, clear the <a data-link-type="dfn" href="#position-state" id="ref-for-position-state④">position
-      state</a> and abort these steps. 
+    state</a> and abort these steps. 
     <li> If <var>state</var>’s <a class="idl-code" data-link-type="dict-member" href="#dom-mediapositionstate-duration" id="ref-for-dom-mediapositionstate-duration">duration</a> is not present, throw a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror">TypeError</a>. 
     <li> If <var>state</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediapositionstate-duration" id="ref-for-dom-mediapositionstate-duration①">duration</a></code> is negative or <code>NaN</code>, throw a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①">TypeError</a>. 
     <li> If <var>state</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediapositionstate-position" id="ref-for-dom-mediapositionstate-position">position</a></code> is not present, set
-      it to zero. 
+    it to zero. 
     <li> If <var>state</var>’s <a class="idl-code" data-link-type="dict-member" href="#dom-mediapositionstate-position" id="ref-for-dom-mediapositionstate-position①">position</a> is negative or greater than <a class="idl-code" data-link-type="dict-member" href="#dom-mediapositionstate-duration" id="ref-for-dom-mediapositionstate-duration②">duration</a>, throw a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a>. 
     <li> If <var>state</var>’s <a class="idl-code" data-link-type="dict-member" href="#dom-mediapositionstate-playbackrate" id="ref-for-dom-mediapositionstate-playbackrate">playbackRate</a> is not present, set it to 1.0. 
     <li> If <var>state</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediapositionstate-playbackrate" id="ref-for-dom-mediapositionstate-playbackrate①">playbackRate</a></code> is zero, throw a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror③">TypeError</a>. 
     <li> Update the <a data-link-type="dfn" href="#position-state" id="ref-for-position-state⑤">position state</a> and <a data-link-type="dfn" href="#last-position-updated-time" id="ref-for-last-position-updated-time①">last position updated time</a>. 
    </ul>
-   <p></p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setmicrophoneactive"><code>setMicrophoneActive(active)</code></dfn> method
   indicates to the user agent the microphone capture state desired by the page
   (e.g. if the microphone is considered "inactive" by the page since it is no
   longer sending audio through a call, the page can invoke <code>setMicrophoneActive(false)</code>). When invoked, it MUST perform the
   following steps: </p>
    <ol>
-    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global">relevant global object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window">associated Document</a>. 
+    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global">relevant global object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window">associated Document</a>. 
     <li> Let <var>captureKind</var> be "microphone". 
     <li> Return the result of running the <a data-link-type="dfn" href="#update-capture-state-algorithm" id="ref-for-update-capture-state-algorithm">update capture state algorithm</a> with <var>document</var>, <var>active</var> and <var>captureKind</var>. 
    </ol>
-   <p></p>
    <p> Similarly, the <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setcameraactive"><code>setCameraActive(active)</code></dfn> method indicates to the user agent the camera capture state desired by the
   page. When invoked, it MUST perform the following steps: </p>
    <ol>
-    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global①">relevant global object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window①">associated Document</a>. 
+    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global①">relevant global object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window①">associated Document</a>. 
     <li> Let <var>captureKind</var> be "camera". 
     <li> Return the result of running the <a data-link-type="dfn" href="#update-capture-state-algorithm" id="ref-for-update-capture-state-algorithm①">update capture state algorithm</a> with <var>document</var>, <var>active</var> and <var>captureKind</var>. 
    </ol>
-   <p></p>
    <p> Similarly, the <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSession" data-dfn-type="method" data-export id="dom-mediasession-setscreenshareactive"><code>setScreenshareActive(active)</code></dfn> method indicates to the user agent the screenshare capture state desired by
   the page. When invoked, it MUST perform the following steps: </p>
    <ol>
-    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this②">this</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global②">relevant global object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window②">associated Document</a>. 
+    <li> Let <var>document</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this②">this</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global②">relevant global object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window②">associated Document</a>. 
     <li> Let <var>captureKind</var> be "screenshare". 
     <li> Return the result of running the <a data-link-type="dfn" href="#update-capture-state-algorithm" id="ref-for-update-capture-state-algorithm②">update capture state algorithm</a> with <var>document</var>, <var>active</var> and <var>captureKind</var>. 
    </ol>
-   <p></p>
    <p> The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="update-capture-state-algorithm">update capture state algorithm</dfn>, when invoked with <var>document</var>, <var>active</var> and <var>captureKind</var>, MUST
   perform the following steps: </p>
    <ol>
-    <li> If <var>document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-fully-active">fully active</a>, return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#a-promise-rejected-with" id="ref-for-a-promise-rejected-with">a promise
-      rejected with</a> <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a>. 
+    <li> If <var>document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-fully-active">fully active</a>, return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#a-promise-rejected-with" id="ref-for-a-promise-rejected-with">a promise rejected with</a> <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a>. 
     <li> If <var>active</var> is <code>true</code> and <var>document</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-visibility-state">visibility state</a> is not "visible", the user agent MAY return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#a-promise-rejected-with" id="ref-for-a-promise-rejected-with①">a promise rejected with</a> <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a>. 
     <li> Let <var>p</var> be a new promise. 
     <li>
       <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel②">In parallel</a>, run the following steps: 
      <ol>
       <li> Let <var>applyPausePolicy</var> be <code>true</code> if the user agent
-          implements a policy of <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pausing-all-input-sources">pausing all input sources</dfn> of type <var>captureKind</var> in response to UI and <code>false</code> otherwise. 
+        implements a policy of <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pausing-all-input-sources">pausing all input sources</dfn> of type <var>captureKind</var> in response to UI and <code>false</code> otherwise. 
       <li>
         If <var>applyPausePolicy</var> is <code>true</code>, run the following
-          substeps: 
+        substeps: 
        <ol>
         <li> Let <var>currentlyActive</var> be <code>false</code> if the user
-              agent is currently <a data-link-type="dfn" href="#pausing-all-input-sources" id="ref-for-pausing-all-input-sources">pausing all input sources</a> of type <var>captureKind</var> and <code>true</code> otherwise. 
+            agent is currently <a data-link-type="dfn" href="#pausing-all-input-sources" id="ref-for-pausing-all-input-sources">pausing all input sources</a> of type <var>captureKind</var> and <code>true</code> otherwise. 
         <li> If <var>active</var> is <var>currentlyActive</var>, resolve <var>p</var> with <code>undefined</code> and abort these steps. 
         <li> If <var>active</var> is <code>true</code>, the user agent MAY wait
-              to proceed, for instance to prompt the user. 
+            to proceed, for instance to prompt the user. 
         <li> If the user agent denies the request to update the capture state,
-              reject <var>p</var> with a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notallowederror" id="ref-for-notallowederror">NotAllowedError</a> and
-              abort these steps. 
+            reject <var>p</var> with a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notallowederror" id="ref-for-notallowederror">NotAllowedError</a> and
+            abort these steps. 
        </ol>
       <li> Update the user agent capture state UI according to <var>captureKind</var> and <var>active</var>. 
       <li> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task③">Queue a task</a> using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source②">user interaction task source</a> to resolve <var>p</var> with <code>undefined</code>. 
       <li>
         If <var>applyPausePolicy</var> is <code>true</code>, run the following
-          substeps: 
+        substeps: 
        <ol>
         <li> Let <var>newMutedState</var> be <code>true</code> if <var>active</var> is <code>false</code> and <code>false</code> otherwise.
         <li> For each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack" id="ref-for-dom-mediastreamtrack⑤">MediaStreamTrack</a></code> whose source is of type <var>captureKind</var>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task④">queue a task</a>using the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source" id="ref-for-user-interaction-task-source③">user interaction task source</a> to <a data-link-type="abstract-op" href="https://w3c.github.io/mediacapture-main/#set-track-muted" id="ref-for-set-track-muted①">set a track’s muted state</a> to <var>newMutedState</var>. 
@@ -1318,7 +1298,6 @@ platform UI or media keys, thereby improving the user experience.</p>
      </ol>
     <li> Return <var>p</var>. 
    </ol>
-   <p></p>
    <p class="note" role="note"> The <a data-link-type="functionish" href="#dom-mediasession-setmicrophoneactive" id="ref-for-dom-mediasession-setmicrophoneactive①">setMicrophoneActive(active)</a>, <a data-link-type="functionish" href="#dom-mediasession-setcameraactive" id="ref-for-dom-mediasession-setcameraactive①">setCameraActive(active)</a> and <a data-link-type="functionish" href="#dom-mediasession-setscreenshareactive" id="ref-for-dom-mediasession-setscreenshareactive①">setScreenshareActive(active)</a> methods can reject based on user agent
   specific heuristics. This might in particular happen when the web page asks to
   activate (unmute) the microphone, camera or screenshare. The user agent could
@@ -1359,10 +1338,9 @@ platform UI or media keys, thereby improving the user experience.</p>
     <li>Its <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist">artist</a> is the empty string.
     <li>Its <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album">album</a> is the empty string.
     <li>Its <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images①" title="artwork image">artwork images</a> length
-    is <code>0</code>.
+  is <code>0</code>.
     <li>Its <a data-link-type="dfn" href="#mediametadata-chapter-information" id="ref-for-mediametadata-chapter-information">chapter information</a> length is <code>0</code>.
    </ul>
-   <p></p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="constructor" data-export data-lt="MediaMetadata(init)|constructor(init)|MediaMetadata()|constructor()" id="dom-mediametadata-mediametadata"><code>MediaMetadata(<var>init</var>)</code></dfn> constructor, when invoked, MUST run the following steps: </p>
    <ol>
     <li> Let <var>metadata</var> be a new <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①⑥">MediaMetadata</a></code> object. 
@@ -1370,16 +1348,15 @@ platform UI or media keys, thereby improving the user experience.</p>
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-artist" id="ref-for-dom-mediametadata-artist①">artist</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-artist" id="ref-for-dom-mediametadatainit-artist">artist</a></code>. 
     <li> Set <var>metadata</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadata-album" id="ref-for-dom-mediametadata-album①">album</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-album" id="ref-for-dom-mediametadatainit-album">album</a></code>. 
     <li> Run the <a data-link-type="dfn" href="#convert-artwork-algorithm" id="ref-for-convert-artwork-algorithm">convert artwork algorithm</a> with <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-artwork" id="ref-for-dom-mediametadatainit-artwork">artwork</a></code> as <var>input</var> and set <var>metadata</var>’s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images②">artwork images</a> as the
-      result if it succeeded. 
+    result if it succeeded. 
     <li> Let <var>chapters</var> be an empty list of type <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①">ChapterInformation</a></code>. 
     <li> For each <var>entry</var> in <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediametadatainit-chapterinfo" id="ref-for-dom-mediametadatainit-chapterinfo">chapterInfo</a></code>, <a data-link-type="dfn" href="#create-a-chapterinformation" id="ref-for-create-a-chapterinformation">create a ChapterInformation</a> from <var>entry</var> and append it to <var>chapters</var>. 
     <li> Set <var>metadata</var>’s <a data-link-type="dfn" href="#mediametadata-chapter-information" id="ref-for-mediametadata-chapter-information①">chapter information</a> to the result of <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-create-frozen-array" id="ref-for-dfn-create-frozen-array">creating a frozen array</a> from <var>chapters</var>. 
     <li> Return <var>metadata</var>. 
    </ol>
-   <p></p>
-   <p>When the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="convert-artwork-algorithm">convert artwork algorithm</dfn> with <var>input</var> parameter is
+   <p> When the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="convert-artwork-algorithm">convert artwork algorithm</dfn> with <var>input</var> parameter is
 invoked, where the <var>input</var> is a sequence of type <code class="idl"><a data-link-type="idl" href="#dictdef-mediaimage" id="ref-for-dictdef-mediaimage②">MediaImage</a></code>, the
-user agent MUST run the following steps:</p>
+user agent MUST run the following steps: </p>
    <ol>
     <li> Let <var>output</var> be an empty list of type <code class="idl"><a data-link-type="idl" href="#dictdef-mediaimage" id="ref-for-dictdef-mediaimage③">MediaImage</a></code>. 
     <li>
@@ -1396,61 +1373,58 @@ user agent MUST run the following steps:</p>
      </ol>
     <li> Return <var>output</var> as result. 
    </ol>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-title"><code>title</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①⑦">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title①">title</a>. On getting, it MUST return
-  the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①⑧">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title②">title</a>. On setting, it MUST
-  set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①⑨">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title③">title</a> to the given value. </p>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-artist"><code>artist</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⓪">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist①">artist</a>. On getting, it MUST
-  return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②①">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist②">artist</a>. On setting, it
-  MUST set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②②">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist③">artist</a> to the given value. </p>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-album"><code>album</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②③">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album①">album</a>. On getting, it MUST return
-  the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②④">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album②">album</a>. On setting, it MUST
-  set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑤">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album③">album</a> to the given value. </p>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-artwork"><code>artwork</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑥">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images③">artwork
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-title"><code>title</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①⑦">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title①">title</a>. On getting, it MUST return
+  the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①⑧">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title②">title</a>. On setting, it MUST
+  set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata①⑨">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title③">title</a> to the given value. </p>
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-artist"><code>artist</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⓪">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist①">artist</a>. On getting, it MUST
+  return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②①">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist②">artist</a>. On setting, it
+  MUST set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②②">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist③">artist</a> to the given value. </p>
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-album"><code>album</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②③">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album①">album</a>. On getting, it MUST return
+  the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②④">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album②">album</a>. On setting, it MUST
+  set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑤">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album③">album</a> to the given value. </p>
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaMetadata" data-dfn-type="attribute" data-export id="dom-mediametadata-artwork"><code>artwork</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑥">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images③">artwork
   images</a>. On getting, it MUST run the following steps: </p>
    <ol>
     <li>
-      If the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑦">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images">converted artwork images</a> is <code>undefined</code>, run the following steps: 
+      If the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑦">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images">converted artwork images</a> is <code>undefined</code>, run the following steps: 
      <ol>
       <li> Let <var>frozenArtwork</var> be a JavaScript Array value. 
       <li>
-        For each <var>entry</var> in the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑧">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images④">artwork images</a>, perform the following steps: 
+        For each <var>entry</var> in the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑧">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images④">artwork images</a>, perform the following steps: 
        <ol>
         <li> Let <var>image</var> be the result of <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-idl-to-javascript-value" id="ref-for-dfn-convert-idl-to-javascript-value">converting to a JavaScript object</a> <var>entry</var>. 
-        <li> Perform <a data-link-type="dfn">!</a> <a data-link-type="abstract-op" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-setintegritylevel" id="ref-for-sec-setintegritylevel">SetIntegrityLevel</a>(<var>image</var>,
-              "<code>frozen</code>"), to prevent accidental mutation by scripts. 
+        <li> Perform <a href="https://tc39.es/ecma262/#sec-setintegritylevel"> SetIntegrityLevel</a>(<var>image</var>, "<code>frozen</code>"),
+            to prevent accidental mutation by scripts. 
         <li> Push <var>image</var> to <var>frozenArtwork</var>. 
        </ol>
-      <li> Perform <a data-link-type="dfn">!</a> <a data-link-type="abstract-op" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-setintegritylevel" id="ref-for-sec-setintegritylevel①">SetIntegrityLevel</a>(<var>frozenArtwork</var>,
-          "<code>frozen</code>"). 
-      <li> Set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑨">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images①">converted artwork images</a> to <var>frozenArtwork</var>. 
+      <li> Perform <a href="https://tc39.es/ecma262/#sec-setintegritylevel"> SetIntegrityLevel</a>(<var>frozenArtwork</var>, "<code>frozen</code>"). 
+      <li> Set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata②⑨">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images①">converted artwork images</a> to <var>frozenArtwork</var>. 
      </ol>
-    <li> Return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③⓪">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images②">converted artwork images</a>. 
+    <li> Return the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③⓪">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images②">converted artwork images</a>. 
    </ol>
-    On setting, it MUST run the following steps with <var>value</var> being the
-  new value being set: 
+   <p> On setting, it MUST run the following steps with <var>value</var> being the
+  new value being set: </p>
    <ol>
     <li> Let <var>convertedArtwork</var> be the result of <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value">converting</a> <var>value</var> to a sequence of type <code class="idl"><a data-link-type="idl" href="#dictdef-mediaimage" id="ref-for-dictdef-mediaimage⑥">MediaImage</a></code>. 
     <li> Run <a data-link-type="dfn" href="#convert-artwork-algorithm" id="ref-for-convert-artwork-algorithm①">convert artwork algorithm</a> with <var>convertedArtwork</var>, and
-      set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③①">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images⑤">artwork images</a> as
-      the result if it succeeds. 
-    <li> Set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③②">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images③">converted artwork images</a> to <code>undefined</code>. 
+    set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③①">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images⑤">artwork images</a> as
+    the result if it succeeds. 
+    <li> Set the <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③②">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-converted-artwork-images" id="ref-for-mediametadata-converted-artwork-images③">converted artwork images</a> to <code>undefined</code>. 
    </ol>
-   <p></p>
-   <p> When <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③③">MediaMetadata</a></code>'s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title④">title</a>, <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist④">artist</a>, <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album④">album</a> or <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images⑥">artwork images</a> are modified, the user agent MUST run the
+   <p> When <code class="idl"><a data-link-type="idl" href="#mediametadata" id="ref-for-mediametadata③③">MediaMetadata</a></code>’s <a data-link-type="dfn" href="#mediametadata-title" id="ref-for-mediametadata-title④">title</a>, <a data-link-type="dfn" href="#mediametadata-artist" id="ref-for-mediametadata-artist④">artist</a>, <a data-link-type="dfn" href="#mediametadata-album" id="ref-for-mediametadata-album④">album</a> or <a data-link-type="dfn" href="#mediametadata-artwork-images" id="ref-for-mediametadata-artwork-images⑥">artwork images</a> are modified, the user agent MUST run the
   following steps: </p>
    <ol>
     <li> If the instance has no associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session③">media session</a>, abort
-      these steps. 
+    these steps. 
     <li>
       Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task⑤">queue a task</a> to run the following substeps: 
      <ol>
       <li> If the instance no longer has an associated <a data-link-type="dfn" href="#mediametadata-media-session" id="ref-for-mediametadata-media-session④">media
-          session</a>, abort these steps. 
+        session</a>, abort these steps. 
       <li> Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel③">in parallel</a>, run the <a data-link-type="dfn" href="#update-metadata-algorithm" id="ref-for-update-metadata-algorithm②">update metadata
-          algorithm</a>. 
+        algorithm</a>. 
      </ol>
    </ol>
-   <p></p>
    <h2 class="heading settled" data-level="6" id="the-chapterinformation-interface"><span class="secno">6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation②">ChapterInformation</a></code> interface</span><a class="self-link" href="#the-chapterinformation-interface"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="chapterinformation"><code><c- g>ChapterInformation</c-></code></dfn> {
@@ -1470,29 +1444,27 @@ user agent MUST run the following steps:</p>
   individual chapter, such as the title of the section, its timestamp, and
   screenshot image data of this section, that can be used by user agents to
   provide a customized user interface. </p>
-   <p> A <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation④">ChapterInformation</a></code> can have an associated <dfn class="dfn-paneled" data-dfn-for="ChapterInformation" data-dfn-type="dfn" data-lt="media metadata" data-noexport id="chapterinformation-media-metadata"> media metadata</dfn>. </p>
-   <p> A <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑤">ChapterInformation</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="ChapterInformation" data-dfn-type="dfn" data-noexport id="chapterinformation-title">title</dfn> which is DOMString. </p>
-   <p> A <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑥">ChapterInformation</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="ChapterInformation" data-dfn-type="dfn" data-lt="startTime" data-noexport id="chapterinformation-starttime"> startTime</dfn> which is double. </p>
-   <p> A <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑦">ChapterInformation</a></code> has an associated list of <dfn class="dfn-paneled" data-dfn-for="ChapterInformation" data-dfn-type="dfn" data-lt="artwork images" data-noexport id="chapterinformation-artwork-images"> artwork images</dfn>. </p>
-   <p> To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="create-a-chapterinformation">create a <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑧">ChapterInformation</a></code></dfn> with <var>init</var>, run the
+   <p> A <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation④">ChapterInformation</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="ChapterInformation" data-dfn-type="dfn" data-noexport id="chapterinformation-title">title</dfn> which is DOMString. </p>
+   <p> A <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑤">ChapterInformation</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="ChapterInformation" data-dfn-type="dfn" data-lt="startTime" data-noexport id="chapterinformation-starttime"> startTime</dfn> which is double. </p>
+   <p> A <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑥">ChapterInformation</a></code> has an associated list of <dfn class="dfn-paneled" data-dfn-for="ChapterInformation" data-dfn-type="dfn" data-lt="artwork images" data-noexport id="chapterinformation-artwork-images"> artwork images</dfn>. </p>
+   <p> To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="create-a-chapterinformation">create a <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑦">ChapterInformation</a></code></dfn> with <var>init</var>, run the
   following steps: </p>
    <ol>
-    <li> Let <var>chapterInfo</var> be a new <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑨">ChapterInformation</a></code> object. 
+    <li> Let <var>chapterInfo</var> be a new <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑧">ChapterInformation</a></code> object. 
     <li> Set <var>chapterInfo</var>’s <code class="idl"><a data-link-type="idl" href="#dom-chapterinformation-title" id="ref-for-dom-chapterinformation-title①">title</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-chapterinformationinit-title" id="ref-for-dom-chapterinformationinit-title">title</a></code>. 
     <li> Set <var>chapterInfo</var>’s <code class="idl"><a data-link-type="idl" href="#dom-chapterinformation-starttime" id="ref-for-dom-chapterinformation-starttime①">startTime</a></code> to <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-chapterinformationinit-starttime" id="ref-for-dom-chapterinformationinit-starttime">startTime</a></code>. If the <a data-link-type="dfn" href="#chapterinformation-starttime" id="ref-for-chapterinformation-starttime">startTime</a> is negative or greater than <a data-link-type="dfn" href="#duration" id="ref-for-duration③">duration</a>, throw a <a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑤">TypeError</a>. 
     <li> Let <code class="idl"><a data-link-type="idl" href="#dom-chapterinformationinit-artwork" id="ref-for-dom-chapterinformationinit-artwork">artwork</a></code> be the result of running the <a data-link-type="dfn" href="#convert-artwork-algorithm" id="ref-for-convert-artwork-algorithm②">convert artwork algorithm</a> with <var>init</var>’s <code class="idl"><a data-link-type="idl" href="#dom-chapterinformation-artwork" id="ref-for-dom-chapterinformation-artwork①">artwork</a></code> as <var>input</var>. 
     <li> Set <var>chapterInfo</var>’s <a data-link-type="dfn" href="#chapterinformation-artwork-images" id="ref-for-chapterinformation-artwork-images">artwork
-      images</a> to the result of <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-create-frozen-array" id="ref-for-dfn-create-frozen-array①">creating a frozen
-      array</a> from <code class="idl"><a data-link-type="idl" href="#dom-chapterinformationinit-artwork" id="ref-for-dom-chapterinformationinit-artwork①">artwork</a></code>. 
+    images</a> to the result of <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-create-frozen-array" id="ref-for-dfn-create-frozen-array①">creating a frozen
+    array</a> from <code class="idl"><a data-link-type="idl" href="#dom-chapterinformationinit-artwork" id="ref-for-dom-chapterinformationinit-artwork①">artwork</a></code>. 
     <li> Return <var>chapterInfo</var>. 
    </ol>
-   <p></p>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="ChapterInformation" data-dfn-type="attribute" data-export id="dom-chapterinformation-title"><code>title</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①⓪">ChapterInformation</a></code>'s <a data-link-type="dfn" href="#chapterinformation-title" id="ref-for-chapterinformation-title">title</a>. On getting, it
-  MUST return the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①①">ChapterInformation</a></code>'s <a data-link-type="dfn" href="#chapterinformation-title" id="ref-for-chapterinformation-title①">title</a>. </p>
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="ChapterInformation" data-dfn-type="attribute" data-export id="dom-chapterinformation-title"><code>title</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation⑨">ChapterInformation</a></code>’s <a data-link-type="dfn" href="#chapterinformation-title" id="ref-for-chapterinformation-title">title</a>. On getting, it
+  MUST return the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①⓪">ChapterInformation</a></code>’s <a data-link-type="dfn" href="#chapterinformation-title" id="ref-for-chapterinformation-title①">title</a>. </p>
    <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="ChapterInformation" data-dfn-type="attribute" data-export id="dom-chapterinformation-starttime"><code>startTime</code></dfn> attribute reflects
-  the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①②">ChapterInformation</a></code>'s <a data-link-type="dfn" href="#chapterinformation-starttime" id="ref-for-chapterinformation-starttime①">startTime</a> in
-  seconds. On getting, it MUST return the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①③">ChapterInformation</a></code>'s <a data-link-type="dfn" href="#chapterinformation-starttime" id="ref-for-chapterinformation-starttime②">startTime</a>. </p>
-   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="ChapterInformation" data-dfn-type="attribute" data-export id="dom-chapterinformation-artwork"><code>artwork</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①④">ChapterInformation</a></code>'s <a data-link-type="dfn" href="#chapterinformation-artwork-images" id="ref-for-chapterinformation-artwork-images①">artwork images</a>. On getting, it MUST return the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①⑤">ChapterInformation</a></code>'s <a data-link-type="dfn" href="#chapterinformation-artwork-images" id="ref-for-chapterinformation-artwork-images②"> artwork images</a>. </p>
+  the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①①">ChapterInformation</a></code>’s <a data-link-type="dfn" href="#chapterinformation-starttime" id="ref-for-chapterinformation-starttime①">startTime</a> in
+  seconds. On getting, it MUST return the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①②">ChapterInformation</a></code>’s <a data-link-type="dfn" href="#chapterinformation-starttime" id="ref-for-chapterinformation-starttime②">startTime</a>. </p>
+   <p> The <dfn class="dfn-paneled idl-code" data-dfn-for="ChapterInformation" data-dfn-type="attribute" data-export id="dom-chapterinformation-artwork"><code>artwork</code></dfn> attribute reflects the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①③">ChapterInformation</a></code>’s <a data-link-type="dfn" href="#chapterinformation-artwork-images" id="ref-for-chapterinformation-artwork-images①">artwork images</a>. On getting, it MUST return the <code class="idl"><a data-link-type="idl" href="#chapterinformation" id="ref-for-chapterinformation①④">ChapterInformation</a></code>’s <a data-link-type="dfn" href="#chapterinformation-artwork-images" id="ref-for-chapterinformation-artwork-images②"> artwork images</a>. </p>
    <h2 class="heading settled" data-level="7" id="the-mediaimage-dictionary"><span class="secno">7. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dictdef-mediaimage" id="ref-for-dictdef-mediaimage⑨">MediaImage</a></code> dictionary</span><a class="self-link" href="#the-mediaimage-dictionary"></a></h2>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediaimage"><code><c- g>MediaImage</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString" href="#dom-mediaimage-src" id="ref-for-dom-mediaimage-src③"><c- g>src</c-></a>;
@@ -1569,7 +1541,7 @@ time (e.g. a few seconds).</p>
    </ul>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="MediaSessionActionCaptureDetails" data-dfn-type="dict-member" data-export id="dom-mediasessionactioncapturedetails-isactivating"><code>isActivating</code></dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member①⓪">dictionary member</a> will be <code>false</code> if the user agent is about
 to <a data-link-type="dfn" href="#pausing-all-input-sources" id="ref-for-pausing-all-input-sources①">pause all input sources</a> related to the capture <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⑦">action</a> and <code>true</code> otherwise. This <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member" id="ref-for-dfn-dictionary-member①①">dictionary member</a> MUST be present if the user agent implements a policy
-of <a data-link-type="dfn" href="#pausing-all-input-sources" id="ref-for-pausing-all-input-sources②">pausing all input sources</a> and the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⑧">media session action</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera③">togglecamera</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone③">togglemicrophone</a></code> or <code class="idl"><a data-link-type="idl">screenshare</a></code>.</p>
+of <a data-link-type="dfn" href="#pausing-all-input-sources" id="ref-for-pausing-all-input-sources②">pausing all input sources</a> and the <a data-link-type="dfn" href="#media-session-action" id="ref-for-media-session-action①⑧">media session action</a> is <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglecamera" id="ref-for-dom-mediasessionaction-togglecamera③">togglecamera</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglemicrophone" id="ref-for-dom-mediasessionaction-togglemicrophone③">togglemicrophone</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediasessionaction-togglescreenshare" id="ref-for-dom-mediasessionaction-togglescreenshare③">togglescreenshare</a></code>.</p>
    <h2 class="heading settled" data-level="10" id="permissions-policy"><span class="secno">10. </span><span class="content">Permissions Policy Integration</span><a class="self-link" href="#permissions-policy"></a></h2>
    <p>This specification defines a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature" id="ref-for-policy-controlled-feature">policy-controlled feature</a> identified by the
 string "mediasession". Its <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist" id="ref-for-policy-controlled-feature-default-allowlist">default allowlist</a> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#default-allowlist" id="ref-for-default-allowlist">*</a>.</p>
@@ -1817,8 +1789,8 @@ navigator<c- p>.</c->mediaSession<c- p>.</c->setActionHandler<c- p>(</c-><c- u>"
 <c- p>});</c->
 </pre>
    </div>
-   <div class="example" id="example-enterpictureinpicture①">
-    <a class="self-link" href="#example-enterpictureinpicture①"></a> Handling voice activity: 
+   <div class="example" id="example-voiceactivity">
+    <a class="self-link" href="#example-voiceactivity"></a> Handling voice activity: 
 <pre class="lang-javascript highlight"><c- c1>// Create a MediaStream with audio enabled.</c->
 <c- a>const</c-> stream <c- o>=</c-> <c- k>await</c-> navigator<c- p>.</c->mediaDevices<c- p>.</c->getUserMedia<c- p>({</c->audio<c- o>:</c-><c- kc>true</c-><c- p>});</c->
 <c- a>const</c-> track <c- o>=</c-> stream<c- p>.</c->getAudioTracks<c- p>()[</c-><c- mf>0</c-><c- p>];</c->
@@ -1963,7 +1935,6 @@ support in making this specification happen.</p>
    <li><a href="#last-position-updated-time">last position updated time</a><span>, in § 3.5</span>
    <li><a href="#last-reported-playback-position">last reported playback position</a><span>, in § 3.5</span>
    <li><a href="#dictdef-mediaimage">MediaImage</a><span>, in § 7</span>
-   <li><a href="#chapterinformation-media-metadata">media metadata</a><span>, in § 6</span>
    <li><a href="#mediametadata">MediaMetadata</a><span>, in § 5</span>
    <li><a href="#dom-mediametadata-mediametadata">MediaMetadata()</a><span>, in § 5</span>
    <li><a href="#dom-mediametadata-mediametadata">MediaMetadata(init)</a><span>, in § 5</span>
@@ -2066,11 +2037,6 @@ support in making this specification happen.</p>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio">[ECMASCRIPT]</a> defines the following terms:
-    <ul>
-     <li><span class="dfn-paneled" id="369594bc">SetIntegrityLevel</span>
-    </ul>
-   <li>
     <a data-link-type="biblio">[FETCH]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="4465c0ef">"default"</span>
@@ -2143,7 +2109,7 @@ support in making this specification happen.</p>
      <li><span class="dfn-paneled" id="ca3ca4ae">URL parser</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[WEBAUDIO-1.0]</a> defines the following terms:
+    <a data-link-type="biblio">[WEBAUDIO-1.1]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="1bb59bab">AudioWorklet</span>
     </ul>
@@ -2176,8 +2142,6 @@ support in making this specification happen.</p>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
-   <dt id="biblio-ecmascript">[ECMASCRIPT]
-   <dd><a href="https://tc39.es/ecma262/multipage/"><cite>ECMAScript Language Specification</cite></a>. URL: <a href="https://tc39.es/ecma262/multipage/">https://tc39.es/ecma262/multipage/</a>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
@@ -2201,8 +2165,8 @@ support in making this specification happen.</p>
   <dl>
    <dt id="biblio-image-resource">[IMAGE-RESOURCE]
    <dd>Aaron Gustafson; Rayan Kanso; Marcos Caceres. <a href="https://w3c.github.io/image-resource/"><cite>Image Resource</cite></a>. URL: <a href="https://w3c.github.io/image-resource/">https://w3c.github.io/image-resource/</a>
-   <dt id="biblio-webaudio-10">[WEBAUDIO-1.0]
-   <dd>Paul Adenot; Hongchan Choi. <a href="https://webaudio.github.io/web-audio-api/"><cite>Web Audio API</cite></a>. URL: <a href="https://webaudio.github.io/web-audio-api/">https://webaudio.github.io/web-audio-api/</a>
+   <dt id="biblio-webaudio-11">[WEBAUDIO-1.1]
+   <dd>Paul Adenot; Hongchan Choi. <a href="https://webaudio.github.io/web-audio-api/"><cite>Web Audio API 1.1</cite></a>. URL: <a href="https://webaudio.github.io/web-audio-api/">https://webaudio.github.io/web-audio-api/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -2524,7 +2488,6 @@ let dfnPanelData = {
 "1bb59bab": {"dfnID":"1bb59bab","dfnText":"AudioWorklet","external":true,"refSections":[{"refs":[{"id":"ref-for-AudioWorklet"}],"title":"3.4. Actions"}],"url":"https://webaudio.github.io/web-audio-api/#AudioWorklet"},
 "2cf6d842": {"dfnID":"2cf6d842","dfnText":"muted","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-mediastreamtrack-muted"}],"title":"3.4. Actions"}],"url":"https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted"},
 "3349d69f": {"dfnID":"3349d69f","dfnText":"associated Document","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document-window"},{"id":"ref-for-concept-document-window\u2460"},{"id":"ref-for-concept-document-window\u2461"}],"title":"4. The MediaSession interface"}],"url":"https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window"},
-"369594bc": {"dfnID":"369594bc","dfnText":"SetIntegrityLevel","external":true,"refSections":[{"refs":[{"id":"ref-for-sec-setintegritylevel"},{"id":"ref-for-sec-setintegritylevel\u2460"}],"title":"5. The MediaMetadata interface"}],"url":"https://tc39.es/ecma262/multipage/abstract-operations.html#sec-setintegritylevel"},
 "36d15a6d": {"dfnID":"36d15a6d","dfnText":"activation notification","external":true,"refSections":[{"refs":[{"id":"ref-for-activation-notification"}],"title":"3.4. Actions"}],"url":"https://html.spec.whatwg.org/multipage/interaction.html#activation-notification"},
 "3b2ff63e": {"dfnID":"3b2ff63e","dfnText":"browsing context (for Document)","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document-bc"}],"title":"3.1. Playback State"}],"url":"https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc"},
 "4013a022": {"dfnID":"4013a022","dfnText":"this","external":true,"refSections":[{"refs":[{"id":"ref-for-this"},{"id":"ref-for-this\u2460"},{"id":"ref-for-this\u2461"}],"title":"4. The MediaSession interface"}],"url":"https://webidl.spec.whatwg.org/#this"},
@@ -2570,9 +2533,8 @@ let dfnPanelData = {
 "cc890cc1": {"dfnID":"cc890cc1","dfnText":"policy-controlled feature","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-controlled-feature"}],"title":"10. Permissions Policy Integration"}],"url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
 "cdea6030": {"dfnID":"cdea6030","dfnText":"type","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-response-type"}],"title":"3.3. Metadata"}],"url":"https://fetch.spec.whatwg.org/#concept-response-type"},
 "ce860b8c": {"dfnID":"ce860b8c","dfnText":"ImageResource","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-imageresource"}],"title":"7. The MediaImage dictionary"}],"url":"https://w3c.github.io/image-resource/#dom-imageresource"},
-"chapterinformation": {"dfnID":"chapterinformation","dfnText":"ChapterInformation","external":false,"refSections":[{"refs":[{"id":"ref-for-chapterinformation"},{"id":"ref-for-chapterinformation\u2460"}],"title":"5. The MediaMetadata interface"},{"refs":[{"id":"ref-for-chapterinformation\u2461"},{"id":"ref-for-chapterinformation\u2462"},{"id":"ref-for-chapterinformation\u2463"},{"id":"ref-for-chapterinformation\u2464"},{"id":"ref-for-chapterinformation\u2465"},{"id":"ref-for-chapterinformation\u2466"},{"id":"ref-for-chapterinformation\u2467"},{"id":"ref-for-chapterinformation\u2468"},{"id":"ref-for-chapterinformation\u2460\u24ea"},{"id":"ref-for-chapterinformation\u2460\u2460"},{"id":"ref-for-chapterinformation\u2460\u2461"},{"id":"ref-for-chapterinformation\u2460\u2462"},{"id":"ref-for-chapterinformation\u2460\u2463"},{"id":"ref-for-chapterinformation\u2460\u2464"}],"title":"6. The ChapterInformation\ninterface"}],"url":"#chapterinformation"},
+"chapterinformation": {"dfnID":"chapterinformation","dfnText":"ChapterInformation","external":false,"refSections":[{"refs":[{"id":"ref-for-chapterinformation"},{"id":"ref-for-chapterinformation\u2460"}],"title":"5. The MediaMetadata interface"},{"refs":[{"id":"ref-for-chapterinformation\u2461"},{"id":"ref-for-chapterinformation\u2462"},{"id":"ref-for-chapterinformation\u2463"},{"id":"ref-for-chapterinformation\u2464"},{"id":"ref-for-chapterinformation\u2465"},{"id":"ref-for-chapterinformation\u2466"},{"id":"ref-for-chapterinformation\u2467"},{"id":"ref-for-chapterinformation\u2468"},{"id":"ref-for-chapterinformation\u2460\u24ea"},{"id":"ref-for-chapterinformation\u2460\u2460"},{"id":"ref-for-chapterinformation\u2460\u2461"},{"id":"ref-for-chapterinformation\u2460\u2462"},{"id":"ref-for-chapterinformation\u2460\u2463"}],"title":"6. The ChapterInformation\ninterface"}],"url":"#chapterinformation"},
 "chapterinformation-artwork-images": {"dfnID":"chapterinformation-artwork-images","dfnText":"\n  artwork images","external":false,"refSections":[{"refs":[{"id":"ref-for-chapterinformation-artwork-images"},{"id":"ref-for-chapterinformation-artwork-images\u2460"},{"id":"ref-for-chapterinformation-artwork-images\u2461"}],"title":"6. The ChapterInformation\ninterface"}],"url":"#chapterinformation-artwork-images"},
-"chapterinformation-media-metadata": {"dfnID":"chapterinformation-media-metadata","dfnText":"\n  media metadata","external":false,"refSections":[],"url":"#chapterinformation-media-metadata"},
 "chapterinformation-starttime": {"dfnID":"chapterinformation-starttime","dfnText":"\n  startTime","external":false,"refSections":[{"refs":[{"id":"ref-for-chapterinformation-starttime"},{"id":"ref-for-chapterinformation-starttime\u2460"},{"id":"ref-for-chapterinformation-starttime\u2461"}],"title":"6. The ChapterInformation\ninterface"}],"url":"#chapterinformation-starttime"},
 "chapterinformation-title": {"dfnID":"chapterinformation-title","dfnText":"title","external":false,"refSections":[{"refs":[{"id":"ref-for-chapterinformation-title"},{"id":"ref-for-chapterinformation-title\u2460"}],"title":"6. The ChapterInformation\ninterface"}],"url":"#chapterinformation-title"},
 "convert-artwork-algorithm": {"dfnID":"convert-artwork-algorithm","dfnText":"convert artwork algorithm","external":false,"refSections":[{"refs":[{"id":"ref-for-convert-artwork-algorithm"},{"id":"ref-for-convert-artwork-algorithm\u2460"}],"title":"5. The MediaMetadata interface"},{"refs":[{"id":"ref-for-convert-artwork-algorithm\u2461"}],"title":"6. The ChapterInformation\ninterface"}],"url":"#convert-artwork-algorithm"},
@@ -2641,7 +2603,7 @@ let dfnPanelData = {
 "dom-mediasessionaction-stop": {"dfnID":"dom-mediasessionaction-stop","dfnText":"stop","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-mediasessionaction-stop"}],"title":"4. The MediaSession interface"}],"url":"#dom-mediasessionaction-stop"},
 "dom-mediasessionaction-togglecamera": {"dfnID":"dom-mediasessionaction-togglecamera","dfnText":"togglecamera","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-mediasessionaction-togglecamera"},{"id":"ref-for-dom-mediasessionaction-togglecamera\u2460"}],"title":"3.4. Actions"},{"refs":[{"id":"ref-for-dom-mediasessionaction-togglecamera\u2461"}],"title":"4. The MediaSession interface"},{"refs":[{"id":"ref-for-dom-mediasessionaction-togglecamera\u2462"}],"title":"9. The\nMediaSessionActionDetails dictionary"}],"url":"#dom-mediasessionaction-togglecamera"},
 "dom-mediasessionaction-togglemicrophone": {"dfnID":"dom-mediasessionaction-togglemicrophone","dfnText":"togglemicrophone","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-mediasessionaction-togglemicrophone"},{"id":"ref-for-dom-mediasessionaction-togglemicrophone\u2460"}],"title":"3.4. Actions"},{"refs":[{"id":"ref-for-dom-mediasessionaction-togglemicrophone\u2461"}],"title":"4. The MediaSession interface"},{"refs":[{"id":"ref-for-dom-mediasessionaction-togglemicrophone\u2462"}],"title":"9. The\nMediaSessionActionDetails dictionary"}],"url":"#dom-mediasessionaction-togglemicrophone"},
-"dom-mediasessionaction-togglescreenshare": {"dfnID":"dom-mediasessionaction-togglescreenshare","dfnText":"togglescreenshare","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-mediasessionaction-togglescreenshare"},{"id":"ref-for-dom-mediasessionaction-togglescreenshare\u2460"}],"title":"3.4. Actions"},{"refs":[{"id":"ref-for-dom-mediasessionaction-togglescreenshare\u2461"}],"title":"4. The MediaSession interface"}],"url":"#dom-mediasessionaction-togglescreenshare"},
+"dom-mediasessionaction-togglescreenshare": {"dfnID":"dom-mediasessionaction-togglescreenshare","dfnText":"togglescreenshare","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-mediasessionaction-togglescreenshare"},{"id":"ref-for-dom-mediasessionaction-togglescreenshare\u2460"}],"title":"3.4. Actions"},{"refs":[{"id":"ref-for-dom-mediasessionaction-togglescreenshare\u2461"}],"title":"4. The MediaSession interface"},{"refs":[{"id":"ref-for-dom-mediasessionaction-togglescreenshare\u2462"}],"title":"9. The\nMediaSessionActionDetails dictionary"}],"url":"#dom-mediasessionaction-togglescreenshare"},
 "dom-mediasessionaction-voiceactivity": {"dfnID":"dom-mediasessionaction-voiceactivity","dfnText":"voiceactivity","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-mediasessionaction-voiceactivity"},{"id":"ref-for-dom-mediasessionaction-voiceactivity\u2460"},{"id":"ref-for-dom-mediasessionaction-voiceactivity\u2461"},{"id":"ref-for-dom-mediasessionaction-voiceactivity\u2462"},{"id":"ref-for-dom-mediasessionaction-voiceactivity\u2463"},{"id":"ref-for-dom-mediasessionaction-voiceactivity\u2464"}],"title":"3.4. Actions"},{"refs":[{"id":"ref-for-dom-mediasessionaction-voiceactivity\u2465"}],"title":"4. The MediaSession interface"}],"url":"#dom-mediasessionaction-voiceactivity"},
 "dom-mediasessionactioncapturedetails-isactivating": {"dfnID":"dom-mediasessionactioncapturedetails-isactivating","dfnText":"isActivating","external":false,"refSections":[],"url":"#dom-mediasessionactioncapturedetails-isactivating"},
 "dom-mediasessionactiondetails-action": {"dfnID":"dom-mediasessionactiondetails-action","dfnText":"action","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-mediasessionactiondetails-action"}],"title":"9. The\nMediaSessionActionDetails dictionary"}],"url":"#dom-mediasessionactiondetails-action"},
@@ -3210,7 +3172,6 @@ let refsData = {
 "https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source": {"displayText":"user interaction task source","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"user interaction task source","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source"},
 "https://infra.spec.whatwg.org/#ascii-case-insensitive": {"displayText":"ASCII case-insensitive","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"ascii case-insensitive","type":"dfn","url":"https://infra.spec.whatwg.org/#ascii-case-insensitive"},
 "https://mimesniff.spec.whatwg.org/#mime-type": {"displayText":"MIME type","export":true,"for_":[],"level":"1","normative":true,"shortname":"mimesniff","spec":"mimesniff","status":"current","text":"mime type","type":"dfn","url":"https://mimesniff.spec.whatwg.org/#mime-type"},
-"https://tc39.es/ecma262/multipage/abstract-operations.html#sec-setintegritylevel": {"displayText":"SetIntegrityLevel","export":true,"for_":[],"level":"1","normative":true,"shortname":"ecmascript","spec":"ecmascript","status":"current","text":"SetIntegrityLevel","type":"abstract-op","url":"https://tc39.es/ecma262/multipage/abstract-operations.html#sec-setintegritylevel"},
 "https://url.spec.whatwg.org/#concept-url-parser": {"displayText":"URL parser","export":true,"for_":[],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"url parser","type":"dfn","url":"https://url.spec.whatwg.org/#concept-url-parser"},
 "https://w3c.github.io/image-resource/#dom-imageresource": {"displayText":"ImageResource","export":true,"for_":[],"level":"1","normative":true,"shortname":"image-resource","spec":"image-resource","status":"current","text":"ImageResource","type":"dictionary","url":"https://w3c.github.io/image-resource/#dom-imageresource"},
 "https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack": {"displayText":"MediaStreamTrack","export":true,"for_":[],"level":"1","normative":true,"shortname":"mediacapture-streams","spec":"mediacapture-streams","status":"current","text":"MediaStreamTrack","type":"interface","url":"https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack"},
@@ -3221,7 +3182,7 @@ let refsData = {
 "https://w3c.github.io/webappsec-permissions-policy/#default-allowlist": {"displayText":"*","export":true,"for_":["default allowlist"],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"*","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#default-allowlist"},
 "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature": {"displayText":"policy-controlled feature","export":true,"for_":[],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"policy-controlled feature","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
 "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist": {"displayText":"default allowlist","export":true,"for_":["policy-controlled feature"],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"default allowlist","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist"},
-"https://webaudio.github.io/web-audio-api/#AudioWorklet": {"displayText":"AudioWorklet","export":true,"for_":[],"level":"1","normative":true,"shortname":"webaudio","spec":"webaudio-1.0","status":"current","text":"AudioWorklet","type":"interface","url":"https://webaudio.github.io/web-audio-api/#AudioWorklet"},
+"https://webaudio.github.io/web-audio-api/#AudioWorklet": {"displayText":"AudioWorklet","export":true,"for_":[],"level":"1","normative":true,"shortname":"webaudio","spec":"webaudio-1.1","status":"current","text":"AudioWorklet","type":"interface","url":"https://webaudio.github.io/web-audio-api/#AudioWorklet"},
 "https://webidl.spec.whatwg.org/#Exposed": {"displayText":"Exposed","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"Exposed","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#Exposed"},
 "https://webidl.spec.whatwg.org/#SameObject": {"displayText":"SameObject","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"SameObject","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#SameObject"},
 "https://webidl.spec.whatwg.org/#a-promise-rejected-with": {"displayText":"a promise rejected with","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"a promise rejected with","type":"dfn","url":"https://webidl.spec.whatwg.org/#a-promise-rejected-with"},
