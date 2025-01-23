@@ -1008,7 +1008,8 @@ interface MediaSession {
             and <code>true</code> otherwise.
           </li>
           <li>
-            If <var>active</var> is <var>currentlyActive</var>, resolve
+            If <var>active</var> is <var>currentlyActive</var>, <a>queue a task</a>
+            using the [=user interaction task source=] to resolve
             <var>p</var> with <code>undefined</code> and abort these steps.
           </li>
           <li>
@@ -1017,6 +1018,7 @@ interface MediaSession {
           </li>
           <li>
             If the user agent denies the request to update the capture state,
+            <a>queue a task</a> using the [=user interaction task source=] to
             reject <var>p</var> with a <a exception>NotAllowedError</a> and
             abort these steps.
           </li>
@@ -1042,7 +1044,7 @@ interface MediaSession {
           <li>
             For each {{MediaStreamTrack}} whose source is of type
             <var>captureKind</var>,
-            <a>queue a task</a>using the [=user interaction task source=]
+            <a>queue a task</a> using the [=user interaction task source=]
             to [$set a track's muted state$] to <var>newMutedState</var>.
           </li>
         </ol>
