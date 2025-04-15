@@ -273,14 +273,13 @@ platform UI or media keys, thereby improving the user experience.
       </li>
       <li>
         If the user agent wants to display an [=MediaMetadata/artwork image=],
-        it is RECOMMENDED to run the <a>fetch image algorithm</a>.
+        the user agent MUST run the <a>fetch image algorithm</a>.
       </li>
     </ol>
 
-    The RECOMMENDED <dfn>fetch image algorithm</dfn> is as follows:
+    The <dfn>fetch image algorithm</dfn> is as follows:
 
     <ol>
-      <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=24055 -->
       <li>
         If there are other <a>fetch image algorithms</a> running, cancel
         existing algorithm execution instances.
@@ -294,18 +293,22 @@ platform UI or media keys, thereby improving the user experience.
         <dfn>preferred artwork image</dfn> from <var>metadata</var>'s
         {{MediaMetadata/artwork}} of the <a>active media session</a>.
       </li>
+      <li>Let <var>request</var> be a new [=request=] whose [=request/URL=] is the
+        <a>preferred artwork image</a>'s {{MediaImage/src}}, [=request/destination=]
+        is "image", [=request/mode=] is "no-cors", [=request/credentials mode=] is "include",
+        and whose [=request/use-URL-credentials flag=] is set.
+      </li>
       <li>
-        [=Fetch=] the <a>preferred artwork image</a>'s {{MediaImage/src}}.
-
-        Then, <a>in parallel</a>:
-
+        [=Fetch=] <var>request</var> with  the following steps executed
+        as the fetch's [=processResponse=] algorithm.
         <ol>
-          <li>
-            Wait for the [=/response=].
+	  <li>
+            Let <var>response</var> be the [=response=] given to the fetch's
+            [=processResponse=] algorithm.
           </li>
           <li>
-            If the [=/response=]'s [=response/type=] is
-            {{ResponseType/"default"}}, attempt to decode the resource as an
+            If <var>response</var>'s [=response/type=] is not
+            {{ResponseType/"error"}}, attempt to decode <var>response</var>'s [=body=] as an
             image.
           </li>
           <li>
