@@ -767,6 +767,12 @@ enum MediaSessionAction {
   "voiceactivity"
 };
 
+enum EnterPictureInPictureReason {
+  "unspecified",
+  "useraction",
+  "contentoccluded"
+};
+
 callback MediaSessionActionHandler = undefined(MediaSessionActionDetails details);
 
 [Exposed=Window]
@@ -1521,6 +1527,7 @@ dictionary MediaSessionActionDetails {
   double seekTime;
   boolean fastSeek;
   boolean isActivating;
+  EnterPictureInPictureReason? enterPictureInPictureReason;
 };
 
 </pre>
@@ -1564,6 +1571,24 @@ to [=pausing all input sources|pause all input sources=] related to the capture
 of [=pausing all input sources=] and the <a>media session action</a>
 is {{MediaSessionAction/togglecamera}}, {{MediaSessionAction/togglemicrophone}}
 or {{MediaSessionAction/togglescreenshare}}.
+
+When the <a>media session action</a> is {{MediaSessionAction/enterpictureinpicture}},
+the <dfn dict-member for="MediaSessionActionDetails">enterPictureInPictureReason</dfn>
+<a>dictionary member</a> MUST be provided and is the reason the UA has triggered this
+action.
+
+{{enterPictureInPictureReason}} can have one of the following values:
+<ul>
+  <li>
+    <dfn enum-value for="EnterPictureInPictureReason">unspecified</dfn>: the reason for entering picture-in-picture is unspecified
+  </li>
+  <li>
+    <dfn enum-value for="EnterPictureInPictureReason">useraction</dfn>: the user has taken an explicit action to enter picture-in-picture (e.g. clicking a picture-in-picture button in the user agent UI)
+  </li>
+  <li>
+    <dfn enum-value for="EnterPictureInPictureReason">contentoccluded</dfn>: the user agent is requesting picture-in-picture because the content has become occluded
+  </li>
+</ul>
 
 <h2 id="permissions-policy">Permissions Policy Integration</h2>
 
