@@ -767,7 +767,7 @@ enum MediaSessionAction {
   "voiceactivity"
 };
 
-enum EnterPictureInPictureReason {
+enum MediaSessionEnterPictureInPictureReason {
   "unspecified",
   "useraction",
   "contentoccluded"
@@ -1527,7 +1527,7 @@ dictionary MediaSessionActionDetails {
   double seekTime;
   boolean fastSeek;
   boolean isActivating;
-  EnterPictureInPictureReason? enterPictureInPictureReason;
+  MediaSessionEnterPictureInPictureReason enterPictureInPictureReason;
 };
 
 </pre>
@@ -1580,13 +1580,13 @@ action.
 {{enterPictureInPictureReason}} can have one of the following values:
 <ul>
   <li>
-    <dfn enum-value for="EnterPictureInPictureReason">unspecified</dfn>: the reason for entering picture-in-picture is unspecified
+    <dfn enum-value for="MediaSessionEnterPictureInPictureReason">unspecified</dfn>: the reason for entering picture-in-picture is unspecified
   </li>
   <li>
-    <dfn enum-value for="EnterPictureInPictureReason">useraction</dfn>: the user has taken an explicit action to enter picture-in-picture (e.g. clicking a picture-in-picture button in the user agent UI)
+    <dfn enum-value for="MediaSessionEnterPictureInPictureReason">useraction</dfn>: the user has taken an explicit action to enter picture-in-picture (e.g. clicking a picture-in-picture button in the user agent UI)
   </li>
   <li>
-    <dfn enum-value for="EnterPictureInPictureReason">contentoccluded</dfn>: the user agent is requesting picture-in-picture because the content has become occluded
+    <dfn enum-value for="MediaSessionEnterPictureInPictureReason">contentoccluded</dfn>: the user agent is requesting picture-in-picture because the content has become occluded
   </li>
 </ul>
 
