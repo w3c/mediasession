@@ -1128,7 +1128,7 @@ enum MediaKind {
 </p>
 <ul>
   <li>
-    <dfn enum-value for=MediaKind>advertisement</dfn>: the media content represents advertisments.
+    <dfn enum-value for=MediaKind>advertisement</dfn>: the media content represents advertisements.
   </li>
   <li>
     <dfn enum-value for=MediaKind>closing-credits</dfn>: the media content represents closing credits,
@@ -1152,7 +1152,7 @@ enum MediaKind {
   </li>
   <li>
     <dfn enum-value for=MediaKind>content</dfn>: the media content represents the main media content,
-    like a song or a TV series episode..
+    like a song or a TV series episode.
   </li>
   <li>
     the empty string: the default value of media content, it represents any other value of a part of media content.
