@@ -768,7 +768,7 @@ enum MediaSessionAction {
 };
 
 enum MediaSessionEnterPictureInPictureReason {
-  "unspecified",
+  "other",
   "useraction",
   "contentoccluded"
 };
@@ -1580,7 +1580,7 @@ action.
 {{enterPictureInPictureReason}} can have one of the following values:
 <ul>
   <li>
-    <dfn enum-value for="MediaSessionEnterPictureInPictureReason">unspecified</dfn>: the reason for entering picture-in-picture is unspecified
+    <dfn enum-value for="MediaSessionEnterPictureInPictureReason">other</dfn>: the reason for entering picture-in-picture is not one of the existing enum values
   </li>
   <li>
     <dfn enum-value for="MediaSessionEnterPictureInPictureReason">useraction</dfn>: the user has taken an explicit action to enter picture-in-picture (e.g. clicking a picture-in-picture button in the user agent UI)
