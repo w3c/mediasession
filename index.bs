@@ -1586,7 +1586,8 @@ action.
     <dfn enum-value for="MediaSessionEnterPictureInPictureReason">useraction</dfn>: the user has taken an explicit action to enter picture-in-picture (e.g. clicking a picture-in-picture button in the user agent UI)
   </li>
   <li>
-    <dfn enum-value for="MediaSessionEnterPictureInPictureReason">contentoccluded</dfn>: the user agent is requesting picture-in-picture because the content has become occluded
+    <dfn enum-value for="MediaSessionEnterPictureInPictureReason">contentoccluded</dfn>: the user agent is requesting picture-in-picture because the page has become occluded.
+    This can happen in various cases like tab switching or tab minimization.
   </li>
 </ul>
 
