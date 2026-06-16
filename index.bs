@@ -1090,6 +1090,7 @@ interface MediaMetadata {
   attribute DOMString album;
   attribute FrozenArray&lt;object> artwork;
   [SameObject] readonly attribute FrozenArray&lt;ChapterInformation> chapterInfo;
+  [SameObject] readonly attribute FrozenArray&lt;MediaTranscripts> transcripts;
 };
 
 dictionary MediaMetadataInit {
@@ -1098,6 +1099,7 @@ dictionary MediaMetadataInit {
   DOMString album = "";
   sequence&lt;MediaImage> artwork = [];
   sequence&lt;ChapterInformationInit> chapterInfo = [];
+  sequence&lt;MediaTranscriptsInit> transcripts = [];
 };
 </pre>
 
@@ -1128,7 +1130,12 @@ dictionary MediaMetadataInit {
 
 <p>
   A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">
-  chapter information</dfn>.
+  chapter information</dfn>, which is a sequence of type {{ChapterInformation}}.
+</p>
+
+<p>
+  A {{MediaMetadata}} has an associated list of <dfn for="MediaMetadata">
+  transcripts</dfn>, which is a sequence of type {{MediaTranscripts}}.
 </p>
 
 <p>
@@ -1143,6 +1150,7 @@ dictionary MediaMetadataInit {
   is <code>0</code>.</li>
   <li>Its <a for=MediaMetadata>chapter information</a> length is
   <code>0</code>.</li>
+  <li>Its <a for=MediaMetadata>transcripts</a> length is <code>0</code>.</li>
 </ul>
 
 <p>
@@ -1177,13 +1185,23 @@ dictionary MediaMetadataInit {
   <li>
     For each <var>entry</var> in <var>init</var>'s
     {{MediaMetadataInit/chapterInfo}}, [=create a ChapterInformation=] from
-    <var>entry</var> and append it to
-    <var>chapters</var>.
+    <var>entry</var> and append it to <var>chapters</var>.
   </li>
   <li>
     Set <var>metadata</var>'s <a for="MediaMetadata">chapter information</a>
-    to the result of [=Create a frozen array|creating a frozen array=] from
-    <var>chapters</var>.
+    to the result of [=creating a frozen array=] from <var>chapters</var>.
+  </li>
+  <li>
+    Let <var>transcripts</var> be an empty list of type {{MediaTranscripts}}.
+  </li>
+  <li>
+    For each <var>entry</var> in <var>init</var>'s
+    {{MediaMetadataInit/transcripts}}, [=create a MediaTranscripts=] from
+    <var>entry</var> and append it to <var>transcripts</var>.
+  </li>
+  <li>
+    Set <var>metadata</var>'s <a for="MediaMetadata">transcripts</a>
+    to the result of [=creating a frozen array=] from <var>transcripts</var>.
   </li>
   <li>
     Return <var>metadata</var>.
@@ -1320,9 +1338,28 @@ user agent MUST run the following steps:
 </ol>
 
 <p>
+  The <dfn attribute for="MediaMetadata">chapterInfo</dfn> attribute reflects
+  the {{MediaMetadata}}'s <a for=MediaMetadata>chapter information</a>.
+  On getting, it must return the {{MediaMetadata}}'s
+  <a for=MediaMetadata>chapter information</a>. On setting, it must set the
+  {{MediaMetadata}}'s <a for=MediaMetadata>chapter information</a> to the given
+  value.
+</p>
+
+<p>
+  The <dfn attribute for="MediaMetadata">transcripts</dfn> attribute reflects
+  the {{MediaMetadata}}'s <a for=MediaMetadata>transcripts</a>. On getting,
+  it must return the {{MediaMetadata}}'s <a for=MediaMetadata>transcripts</a>.
+  On setting, it must set the {{MediaMetadata}}'s
+  <a for=MediaMetadata>transcripts</a> to the given value.
+</p>
+
+<p>
   When {{MediaMetadata}}'s <a for=MediaMetadata>title</a>, <a
-  for=MediaMetadata>artist</a>, <a for=MediaMetadata>album</a> or <a
-  for=MediaMetadata>artwork images</a> are modified, the user agent MUST run the
+  for=MediaMetadata>artist</a>, <a for=MediaMetadata>album</a>,
+  <a for=MediaMetadata>artwork images</a>,
+  <a for=MediaMetadata>chapter information</a> or
+  <a for=MediaMetadata>transcripts</a> are modified, the user agent must run the
   following steps:
 </p>
 <ol>
@@ -1482,6 +1519,153 @@ used to specify the {{MediaImage}} object's <a>MIME type</a>. It is a hint as to
 the media type of the image. The purpose of this attribute is to allow a user
 agent to ignore images of media types it does not support.
 
+<h2 id="the-media-transcripts-interface">The {{MediaTranscripts}} interface</h2>
+
+<pre class="idl">
+[Exposed=Window]
+interface MediaTranscripts {
+  readonly attribute DOMString language;
+  [SameObject] readonly attribute FrozenArray&lt;MediaTranscript> transcripts;
+};
+
+dictionary MediaTranscriptsInit {
+  DOMString language = "en-US";
+  sequence&lt;MediaTranscript> transcripts = [];
+};
+</pre>
+
+<p>
+  A {{MediaTranscripts}} object is a representation of transcripts for a
+  language, which are used by user agents to provide transcription for the
+  media content.
+</p>
+
+<p>
+  A {{MediaTranscripts}} has an associated
+  <dfn for="MediaTranscripts">language</dfn> which is {{DOMString}} of a
+  [[BCP47]] language tag.
+</p>
+
+<p>
+  A {{MediaTranscripts}} has an associated list of
+  <dfn for="MediaTranscripts">transcripts</dfn> for the language.
+</p>
+
+<p>
+  To <dfn>create a {{MediaTranscripts}}</dfn> given a {{MediaTranscriptsInit}}
+  <var>init</var>, run the following steps:
+</p>
+<ol>
+  <li>
+    Let <var>transcripts</var> be a [=new=] {{MediaTranscripts}} object.
+  </li>
+  <li>
+    If <var>init</var>'s {{MediaTranscriptsInit/language}} is not a valid
+    [[BCP47]] language tag defined in [[LANG-SUBTAG-REGISTRY]], throw a
+    <a exception>TypeError</a> and abort these steps.
+  </li>
+  <li>
+    Set <var>transcripts</var>'s {{MediaTranscripts/language}} to
+    <var>init</var>'s {{MediaTranscriptsInit/language}}.
+  </li>
+  <li>
+    Set <var>transcripts</var>'s {{MediaTranscripts/transcripts}} to
+    the result of [=creating a frozen array=] from <var>init</var>'s
+    {{MediaTranscriptsInit/transcripts}}.
+  </li>
+  <li>
+    Return <var>transcripts</var>.
+  </li>
+</ol>
+
+<p>
+  The <dfn attribute for="MediaTranscripts">language</dfn> attribute reflects
+  the {{MediaTranscripts}}'s <a for=MediaTranscripts>language</a>. On getting,
+  it must return the {{MediaTranscripts}}'s
+  <a for=MediaTranscripts>language</a>.
+</p>
+
+<p>
+  The <dfn attribute for="MediaTranscripts">transcripts</dfn> attribute
+  reflects the {{MediaTranscripts}}'s <a for="MediaTranscripts">transcripts</a>.
+  On getting, it must return the {{MediaTranscripts}}'s
+  <a for=MediaTranscripts>transcripts</a>.
+</p>
+
+<h2 id="the-media-transcript-dictionary">The {{MediaTranscript}} dictionary</h2>
+
+<pre class="idl">
+enum MediaTranscriptType {
+  "subtitles",
+  "captions",
+  "descriptions",
+  "metadata",
+};
+
+dictionary MediaTranscript {
+  MediaTranscriptType type = "subtitles";
+  DOMString speaker = "";
+  double startTime = 0;
+  double endTime = 0;
+  DOMString text = "";
+};
+</pre>
+
+<p>
+  The {{MediaTranscript}} dictionary is a representation of a single piece of
+  transcript information.
+</p>
+
+<p>
+The <dfn dict-member for="MediaTranscript">type</dfn> <a>dictionary member</a>
+is used to specify the purpose of the transcript. It is an enum of
+{{MediaTranscriptType}} which has one of the following values:
+</p>
+<ul>
+  <li>
+    <dfn enum-value for=MediaTranscriptType>subtitles</dfn>: transcription or
+    translation of the dialogue, suitable for when the sound is available but
+    not understood by the users.
+  </li>
+  <li>
+    <dfn enum-value for=MediaTranscriptType>captions</dfn>: transcription or
+    translation of the dialogue, sound effects, musical cues, and other
+    relevant audio information, suitable for when the soundtrack is unavailable.
+  </li>
+  <li>
+    <dfn enum-value for=MediaTranscriptType>descriptions</dfn>: textual
+    descriptions of the video component of the media, intended for audio
+    synthesis when the visual component is unavailable.
+  </li>
+  <li>
+    <dfn enum-value for=MediaTranscriptType>metadata</dfn>: information intended
+    for use from scripts and usually not visible to the users.
+  </li>
+</ul>
+
+<p>
+  The <dfn dict-member for="MediaTranscript">speaker</dfn>
+  <a>dictionary member</a> is used to specify the speaker of the transcript.
+  It is a {{DOMString}} of the name or character identifier of the speaker.
+</p>
+
+<p>
+  The <dfn dict-member for="MediaTranscript">startTime</dfn>
+  <a>dictionary member</a> is used to specify the start time of the transcript
+  in seconds. It should be zero or positive.
+</p>
+
+<p>
+  The <dfn dict-member for="MediaTranscript">endTime</dfn>
+  <a>dictionary member</a> is used to specify the end time of the transcript in
+  seconds. It should be larger than {{MediaTranscript/startTime}}.
+</p>
+
+<p>
+  The <dfn dict-member for="MediaTranscript">text</dfn> <a>dictionary member</a>
+  is used to specify the content of the transcript. It is a {{DOMString}}.
+</p>
+
 <h2 id="the-mediapositionstate-dictionary">The {{MediaPositionState}}
 dictionary</h2>
 
@@ -1617,6 +1801,17 @@ media session</a>.
       chapterInfo: [
         {title: "Chapter 1", startTime: 0, artwork: [{src: "chapter1.jpg"}]},
         {title: "Chapter 2", startTime: 120, artwork: [{src: "chapter2.jpg"}]}
+      ],
+      transcripts: [
+        {language: "en-US", transcripts: [
+          {type: "subtitles", speaker: "Podcast Host", startTime: 0,
+           endTime: 1, text: "Subtitles 1"},
+          {type: "subtitles", speaker: "Podcast Guest", startTime: 1,
+           endTime: 2, text: "Subtitles 2"}
+         ]},
+        {language: "en-GB", transcripts: [
+          {type: "captions", startTime: 0, text: "Captions 1"}
+         ]}
       ]
     });
   </pre>
