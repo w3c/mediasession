@@ -428,6 +428,10 @@ platform UI or media keys, thereby improving the user experience.
         picture-in-picture window.
       </li>
       <li>
+        <dfn enum-value for=MediaSessionAction>enterfullscreen</dfn>:
+        the action's intent is to open the media session in fullscreen.
+      </li>
+      <li>
         <dfn enum-value for=MediaSessionAction>voiceactivity</dfn>: the
         action's intent is to notify the web page that voice activity has been
         detected by the microphone.
@@ -764,6 +768,7 @@ enum MediaSessionAction {
   "previousslide",
   "nextslide",
   "enterpictureinpicture",
+  "enterfullscreen",
   "voiceactivity"
 };
 
@@ -1871,7 +1876,16 @@ media session</a>.
   Handling picture-in-picture:
   <pre class="lang-javascript">
     navigator.mediaSession.setActionHandler("enterpictureinpicture", function() {
-      remoteVideo.requestPictureInPicture();
+      video.requestPictureInPicture();
+    });
+  </pre>
+</div>
+
+<div class="example" id="example-enterfullscreen">
+  Handling enter fullscreen:
+  <pre class="lang-javascript">
+    navigator.mediaSession.setActionHandler("enterfullscreen", function() {
+      video.requestFullscreen();
     });
   </pre>
 </div>
