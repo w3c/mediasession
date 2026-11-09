@@ -972,7 +972,7 @@ interface MediaSession {
     [=associated Document=].
   </li>
   <li>
-    Let <var>captureKind</var> be "screenshare".
+    Let <var>captureKind</var> be "display".
   </li>
   <li>
     Return the result of running the [=update capture state algorithm=] with
@@ -988,6 +988,14 @@ interface MediaSession {
   <li>
     If <var>document</var> is not [=fully active=], return [=a promise
     rejected with=] <a exception>InvalidStateError</a>.
+  </li>
+  <li>
+    If <var>document</var> is not [=allowed to use=] the feature identified by
+    the "microphone" permission name if <var>captureKind</var> is "microphone",
+    by the "camera" permission name if <var>captureKind</var> is "camera", or
+    by the "display-capture" permission name if <var>captureKind</var> is
+    "display", return [=a promise rejected with=]
+    <a exception>NotAllowedError</a>.
   </li>
   <li>
     If <var>active</var> is <code>true</code> and <var>document</var>'s
@@ -1051,10 +1059,9 @@ interface MediaSession {
             <var>active</var> is
           <code>false</code> and <code>false</code> otherwise.</li>
           <li>
-            For each {{MediaStreamTrack}} whose source is of type
-            <var>captureKind</var>,
-            <a>queue a task</a> using the [=user interaction task source=]
-            to [$set a track's muted state$] to <var>newMutedState</var>.
+            Run [$set the capture state of a context$] with
+            <var>document</var>, <var>captureKind</var> and
+            <var>newMutedState</var>.
           </li>
         </ol>
       </li>
