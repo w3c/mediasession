@@ -52,6 +52,17 @@ table td, table th {
 spec:html; type:element; text:link
 spec:webidl; type:interface; text:object
 spec:webaudio-1.1; type:interface; text:AudioWorklet
+spec:webaudio-1.1; type:interface; text:AudioContext
+</pre>
+
+<pre class="anchors">
+urlPrefix: https://w3c.github.io/audio-session/; spec: AUDIO-SESSION
+    type: dfn
+        text: audible element; url: #audible-element
+        text: associated AudioSession; url: #associated-audiosession
+        for: top-level browsing context; text: audio focus; url: #top-level-browsing-context-audio-focus
+        for: AudioSession; text: [[type]]; url: #audiosession-type
+        for: AudioSession; text: [[state]]; url: #audiosession-state
 </pre>
 
 <pre class="anchors">
@@ -232,15 +243,52 @@ platform UI or media keys, thereby improving the user experience.
     The user agent MUST select at most one of the {{MediaSession}} objects to
     present to the user, which is called the <dfn>active media session</dfn>.
     The <a>active media session</a> may be null. The selection is up to the user
-    agent and SHOULD be based on preferred user experience. Note that the
-    {{MediaSession/playbackState}} attribute MUST not affect media session
-    routing. It only takes effect for the <a>active media session</a>.
+    agent and SHOULD be based on preferred user experience. The
+    {{MediaSession/playbackState}} attribute MUST NOT affect media session
+    routing, except in the <a>AudioContext activation conditions</a>.
+    Outside these conditions, it only takes effect for the <a>active media
+    session</a>.
 
     It is RECOMMENDED that the user agent selects the <a>active media
-    session</a> by managing <a>audio focus</a>. A tab or [=Window/browsing
-    context=] is said to have <dfn>audio focus</dfn> if it is currently playing
-    audio or the user expects to control the media in it. The AudioFocus API
-    targets this area and could be used once it's finished.
+    session</a> by managing [=top-level browsing context/audio focus=] as
+    defined in [[!AUDIO-SESSION]].
+
+    <p class=note>
+      The user agent can keep a {{MediaSession}} object as the <a>active media
+      session</a> after its [=top-level browsing context=] loses
+      [=top-level browsing context/audio focus=]. For example, the user can
+      pause the media. Then the user can send a {{MediaSessionAction/play}}
+      action, and the page can resume the media in its action handler.
+    </p>
+
+    The user agent SHOULD let a {{MediaSession}} object become the <a>active
+    media session</a> if the <dfn>AudioContext activation conditions</dfn> are
+    true for it, even if no media element plays audio.
+    These conditions are true if all of the following are true, where |window|
+    is the {{MediaSession}} object's [=relevant global object=]:
+
+    1. An {{AudioContext}} whose [=relevant global object=] is |window| is an
+        [=audible element=].
+    1. |window| has [=Window/media playback intent=].
+
+    A {{Window}} |window| has <dfn for=Window>media playback intent</dfn> if at
+    least one of the following is true, where |mediaSession| is the
+    {{MediaSession}} object whose [=relevant global object=] is |window|, and
+    |audioSession| is |window|'s [=associated AudioSession=]:
+
+    * |mediaSession|'s {{MediaSession/playbackState}} is not
+        {{MediaSessionPlaybackState/"none"}}.
+    * |audioSession|'s [=AudioSession/[[type]]=] is
+        {{AudioSessionType/"playback"}} or
+        {{AudioSessionType/"play-and-record"}}, and |audioSession|'s
+        [=AudioSession/[[state]]=] is {{AudioSessionState/"active"}}.
+
+    <p class=note>
+      An audible {{AudioContext}} alone does not show that a page plays media.
+      For example, a game can play sound effects. The audio session type is a
+      second way to show [=Window/media playback intent=], because a platform
+      can restrict media commands to some types of audio session.
+    </p>
 
     Whenever the <a>active media session</a> is changed, the user agent MUST run
     the <a>media session actions update algorithm</a> and the <a>update metadata
