@@ -498,8 +498,57 @@ platform UI or media keys, thereby improving the user experience.
         with the key <var>action</var> in <var>actions</var>.
       </li>
       <li>
-        Run <var>handler</var> with the <var>details</var> parameter set to:
-        {{MediaSessionActionDetails}}.
+        Let <var>details</var> be a new {{MediaSessionActionDetails}}
+        dictionary whose {{MediaSessionActionDetails/action}} member is
+        <var>action</var>.
+      </li>
+      <li>
+        Set the other members of <var>details</var> for <var>action</var>:
+        <ol>
+          <li>
+            If <var>action</var> is {{MediaSessionAction/seekbackward}} or
+            {{MediaSessionAction/seekforward}}, and <var>source</var> gives a
+            seek offset, set
+            <var>details</var>["{{MediaSessionActionDetails/seekOffset}}"] to
+            that offset in seconds.
+          </li>
+          <li>
+            If <var>action</var> is {{MediaSessionAction/seekto}}:
+            <ol>
+              <li>
+                Set
+                <var>details</var>["{{MediaSessionActionDetails/seekTime}}"] to
+                the seek time that <var>source</var> gives, in seconds.
+              </li>
+              <li>
+                If <var>source</var> tells that this call is part of a
+                sequence of calls and is not the last call, set
+                <var>details</var>["{{MediaSessionActionDetails/fastSeek}}"] to
+                true.
+              </li>
+            </ol>
+          </li>
+          <li>
+            If <var>action</var> is {{MediaSessionAction/togglecamera}},
+            {{MediaSessionAction/togglemicrophone}} or
+            {{MediaSessionAction/togglescreenshare}}, and the user agent
+            implements a policy of [=pausing all input sources=], set
+            <var>details</var>["{{MediaSessionActionDetails/isActivating}}"] to
+            false if the user agent is about to [=pausing all input
+            sources|pause all input sources=] related to <var>action</var>, and
+            to true otherwise.
+          </li>
+          <li>
+            If <var>action</var> is
+            {{MediaSessionAction/enterpictureinpicture}}, set
+            <var>details</var>["{{MediaSessionActionDetails/enterPictureInPictureReason}}"]
+            to the reason that the user agent triggered <var>action</var>.
+          </li>
+        </ol>
+      </li>
+      <li>
+        Run <var>handler</var> with the <var>details</var> parameter set to
+        <var>details</var>.
       </li>
       <li>
         Run the <a>activation notification</a> steps in the [=/browsing
@@ -1532,18 +1581,19 @@ dictionary MediaSessionActionDetails {
 
 </pre>
 
-The {{MediaSessionActionHandler}} MUST be run with the <var>details</var>
-parameter whose dictionary type is {{MediaSessionActionDetails}}.
+The <a>handle media session action</a> steps create the
+{{MediaSessionActionDetails}} dictionary that is passed to the
+{{MediaSessionActionHandler}}.
 
 The <dfn dict-member for="MediaSessionActionDetails">action</dfn> <a>dictionary
 member</a>
 is used to specify the <a>media session action</a> that the
 {{MediaSessionActionHandler}} is associated with.
 
-The <dfn dict-member for="MediaSessionActionDetails">seekOffset</dfn>
-<a>dictionary member</a> MAY be provided when the <a>media session action</a>
-is {{MediaSessionAction/seekbackward}} or {{MediaSessionAction/seekforward}}. It
-is the time in seconds to move the playback time by. If present, it should
+When the <a>media session action</a> is {{MediaSessionAction/seekbackward}} or
+{{MediaSessionAction/seekforward}}, the
+<dfn dict-member for="MediaSessionActionDetails">seekOffset</dfn>
+<a>dictionary member</a> is the time in seconds to move the playback time by. If present, it should
 always be positive. If it is not provided then the site should choose a sensible
 time (e.g. a few seconds).
 
@@ -1551,31 +1601,29 @@ When the <a>media session action</a> is {{MediaSessionAction/seekto}}:
 <ul>
   <li>
     The <dfn dict-member for="MediaSessionActionDetails">seekTime</dfn>
-    <a>dictionary member</a> MUST be provided and is the time in seconds to move
-    the playback time to.
+    <a>dictionary member</a> is the time in seconds to move the playback time
+    to.
   </li>
 
   <li>
     The <dfn dict-member for="MediaSessionActionDetails">fastSeek</dfn>
-    <a>dictionary member</a> MAY be provided and will be true if the [=media
-    session action|action=] is being called multiple times as part of a sequence
-    and this is not the last call in that sequence.
+    <a>dictionary member</a> is true if the [=media session action|action=] is
+    being called multiple times as part of a sequence and this is not the last
+    call in that sequence.
   </li>
 </ul>
 
-The <dfn dict-member for="MediaSessionActionCaptureDetails">isActivating</dfn>
-<a>dictionary member</a> will be <code>false</code> if the user agent is about
-to [=pausing all input sources|pause all input sources=] related to the capture
-[=media session action|action=] and <code>true</code> otherwise. This
-<a>dictionary member</a> MUST be present if the user agent implements a policy
-of [=pausing all input sources=] and the <a>media session action</a>
-is {{MediaSessionAction/togglecamera}}, {{MediaSessionAction/togglemicrophone}}
-or {{MediaSessionAction/togglescreenshare}}.
+When the <a>media session action</a> is {{MediaSessionAction/togglecamera}},
+{{MediaSessionAction/togglemicrophone}} or
+{{MediaSessionAction/togglescreenshare}}, the
+<dfn dict-member for="MediaSessionActionDetails" oldids="dom-mediasessionactioncapturedetails-isactivating">isActivating</dfn>
+<a>dictionary member</a> is <code>false</code> if the user agent is about to
+[=pausing all input sources|pause all input sources=] related to the capture
+[=media session action|action=] and <code>true</code> otherwise.
 
 When the <a>media session action</a> is {{MediaSessionAction/enterpictureinpicture}},
 the <dfn dict-member for="MediaSessionActionDetails">enterPictureInPictureReason</dfn>
-<a>dictionary member</a> MUST be provided and is the reason the UA has triggered this
-action.
+<a>dictionary member</a> is the reason the UA has triggered this action.
 
 {{enterPictureInPictureReason}} can have one of the following values:
 <ul>
