@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version e0b165ae4, updated Mon Nov 2 15:16:49 2026 -0800" name="generator">
   <link href="https://www.w3.org/TR/mediasession/" rel="canonical">
-  <meta content="2e9305a240ce13e572fae33e7c118760477013c1" name="revision">
+  <meta content="420075a901a42f3f3c45231e429c8ac2543aa13f" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -758,7 +758,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </p>
    <h1 class="no-ref p-name" id="title">Media Session</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-11-09">9 November 2026</time></p>
+    <time class="dt-updated" datetime="2026-11-14">14 November 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -965,6 +965,10 @@ platform UI or media keys, thereby improving the user experience.</p>
    </section>
    <section>
     <h2 class="heading settled" data-level="4" id="model"><span class="secno">4. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
+    <p>
+    This specification defines a new <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source" id="ref-for-task-source">task source</a>, the
+    <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="media-session-task-source">media session task source</dfn>.
+  </p>
     <section>
      <h3 class="heading settled" data-level="4.1" id="playback-state-model"><span class="secno">4.1. </span><span class="content">Playback State</span><a class="self-link" href="#playback-state-model"></a></h3>
      <p>
@@ -1236,9 +1240,10 @@ platform UI or media keys, thereby improving the user experience.</p>
      <p>
       When the <a data-link-type="dfn" href="#supported-media-session-actions" id="ref-for-supported-media-session-actions②">supported media session actions</a> are changed, the user
       agent SHOULD run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm②">media session actions update algorithm</a>. The
-      user agent MAY <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task">queue a task</a> in order to run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm③">media session
-      actions update algorithm</a> in order to avoid UI flickering when multiple
-      actions are modified in the same event loop.
+      user agent MAY <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task">queue a task</a>, using the <a data-link-type="dfn" href="#media-session-task-source" id="ref-for-media-session-task-source">media session task
+      source</a>, to run the <a data-link-type="dfn" href="#media-session-actions-update-algorithm" id="ref-for-media-session-actions-update-algorithm③">media session actions update algorithm</a>.
+      This avoids UI flickering when a page modifies multiple actions in the
+      same event loop.
     </p>
      <p>
       When the user agent is notified by a <a data-link-type="dfn" href="#media-session-action-source" id="ref-for-media-session-action-source④">media session action source</a>
@@ -2041,7 +2046,8 @@ user agent MUST run the following steps:
   
     <li>
      
-    Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task⑦">queue a task</a> to run the following substeps:
+    Otherwise, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task⑦">queue a task</a>, using the <a data-link-type="dfn" href="#media-session-task-source" id="ref-for-media-session-task-source①">media session task
+    source</a>, to run the following substeps:
     
      <ol>
       <li>
@@ -2704,6 +2710,7 @@ support in making this specification happen.</p>
    <li><a href="#media-session-actions-update-algorithm">media session actions update algorithm</a><span>, in § 4.4</span>
    <li><a href="#enumdef-mediasessionenterpictureinpicturereason">MediaSessionEnterPictureInPictureReason</a><span>, in § 5</span>
    <li><a href="#enumdef-mediasessionplaybackstate">MediaSessionPlaybackState</a><span>, in § 5</span>
+   <li><a href="#media-session-task-source">media session task source</a><span>, in § 4</span>
    <li>
     metadata
     <ul>
@@ -2832,6 +2839,7 @@ support in making this specification happen.</p>
      <li><span class="dfn-paneled" id="e99bd18e">relevant global object</span>
      <li><span class="dfn-paneled" id="d75a73db">sizes <small>(for HTMLLinkElement)</small></span>
      <li><span class="dfn-paneled" id="aed5b083">sizes <small>(for link)</small></span>
+     <li><span class="dfn-paneled" id="c3b2d08c">task source</span>
      <li><span class="dfn-paneled" id="0ff9b6b9">top-level traversable</span>
      <li><span class="dfn-paneled" id="47fe679e">transient activation</span>
      <li><span class="dfn-paneled" id="16cfba2b">unordered set of unique space-separated tokens</span>
@@ -3306,6 +3314,7 @@ let dfnPanelData = {
 "bdbd19d1": {"dfnID":"bdbd19d1","dfnText":"Promise","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-promise"},{"id":"ref-for-idl-promise\u2460"},{"id":"ref-for-idl-promise\u2461"}],"title":"5. The MediaSession interface"}],"url":"https://webidl.spec.whatwg.org/#idl-promise"},
 "be0c27b2": {"dfnID":"be0c27b2","dfnText":"Navigator","external":true,"refSections":[{"refs":[{"id":"ref-for-navigator"},{"id":"ref-for-navigator\u2460"}],"title":"5. The MediaSession interface"}],"url":"https://html.spec.whatwg.org/multipage/system-state.html#navigator"},
 "c26e55a2": {"dfnID":"c26e55a2","dfnText":"set a track's muted state","external":true,"refSections":[{"refs":[{"id":"ref-for-set-track-muted"}],"title":"4.4. Actions"},{"refs":[{"id":"ref-for-set-track-muted\u2460"}],"title":"5. The MediaSession interface"}],"url":"https://w3c.github.io/mediacapture-main/#set-track-muted"},
+"c3b2d08c": {"dfnID":"c3b2d08c","dfnText":"task source","external":true,"refSections":[{"refs":[{"id":"ref-for-task-source"}],"title":"4. Model"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#task-source"},
 "ca3ca4ae": {"dfnID":"ca3ca4ae","dfnText":"URL parser","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-url-parser"}],"title":"6. The MediaMetadata interface"}],"url":"https://url.spec.whatwg.org/#concept-url-parser"},
 "cadf5fe9": {"dfnID":"cadf5fe9","dfnText":"converted to an IDL value","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-convert-ecmascript-to-idl-value"}],"title":"6. The MediaMetadata interface"}],"url":"https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value"},
 "callbackdef-mediasessionactionhandler": {"dfnID":"callbackdef-mediasessionactionhandler","dfnText":"MediaSessionActionHandler","external":false,"refSections":[{"refs":[{"id":"ref-for-callbackdef-mediasessionactionhandler"},{"id":"ref-for-callbackdef-mediasessionactionhandler\u2460"},{"id":"ref-for-callbackdef-mediasessionactionhandler\u2461"},{"id":"ref-for-callbackdef-mediasessionactionhandler\u2462"},{"id":"ref-for-callbackdef-mediasessionactionhandler\u2463"},{"id":"ref-for-callbackdef-mediasessionactionhandler\u2464"}],"title":"4.4. Actions"},{"refs":[{"id":"ref-for-callbackdef-mediasessionactionhandler\u2465"}],"title":"5. The MediaSession interface"},{"refs":[{"id":"ref-for-callbackdef-mediasessionactionhandler\u2466"},{"id":"ref-for-callbackdef-mediasessionactionhandler\u2467"}],"title":"10. The MediaSessionActionDetails dictionary"}],"url":"#callbackdef-mediasessionactionhandler"},
@@ -3418,6 +3427,7 @@ let dfnPanelData = {
 "media-session-action-source": {"dfnID":"media-session-action-source","dfnText":"media session action source","external":false,"refSections":[{"refs":[{"id":"ref-for-media-session-action-source"},{"id":"ref-for-media-session-action-source\u2460"},{"id":"ref-for-media-session-action-source\u2461"},{"id":"ref-for-media-session-action-source\u2462"},{"id":"ref-for-media-session-action-source\u2463"},{"id":"ref-for-media-session-action-source\u2464"},{"id":"ref-for-media-session-action-source\u2465"}],"title":"4.4. Actions"}],"url":"#media-session-action-source"},
 "media-session-action-source-target": {"dfnID":"media-session-action-source-target","dfnText":"target","external":false,"refSections":[{"refs":[{"id":"ref-for-media-session-action-source-target"},{"id":"ref-for-media-session-action-source-target\u2460"}],"title":"4.4. Actions"}],"url":"#media-session-action-source-target"},
 "media-session-actions-update-algorithm": {"dfnID":"media-session-actions-update-algorithm","dfnText":"media session actions update algorithm","external":false,"refSections":[{"refs":[{"id":"ref-for-media-session-actions-update-algorithm"}],"title":"4.1. Playback State"},{"refs":[{"id":"ref-for-media-session-actions-update-algorithm\u2460"}],"title":"4.2. Routing"},{"refs":[{"id":"ref-for-media-session-actions-update-algorithm\u2461"},{"id":"ref-for-media-session-actions-update-algorithm\u2462"}],"title":"4.4. Actions"},{"refs":[{"id":"ref-for-media-session-actions-update-algorithm\u2463"}],"title":"5. The MediaSession interface"}],"url":"#media-session-actions-update-algorithm"},
+"media-session-task-source": {"dfnID":"media-session-task-source","dfnText":"media session task source","external":false,"refSections":[{"refs":[{"id":"ref-for-media-session-task-source"}],"title":"4.4. Actions"},{"refs":[{"id":"ref-for-media-session-task-source\u2460"}],"title":"6. The MediaMetadata interface"}],"url":"#media-session-task-source"},
 "mediametadata": {"dfnID":"mediametadata","dfnText":"MediaMetadata","external":false,"refSections":[{"refs":[{"id":"ref-for-mediametadata"}],"title":"2.1. Incognito mode"},{"refs":[{"id":"ref-for-mediametadata\u2460"},{"id":"ref-for-mediametadata\u2461"},{"id":"ref-for-mediametadata\u2462"},{"id":"ref-for-mediametadata\u2463"},{"id":"ref-for-mediametadata\u2464"}],"title":"3.1. User interface guidelines"},{"refs":[{"id":"ref-for-mediametadata\u2465"},{"id":"ref-for-mediametadata\u2466"}],"title":"5. The MediaSession interface"},{"refs":[{"id":"ref-for-mediametadata\u2467"},{"id":"ref-for-mediametadata\u2468"},{"id":"ref-for-mediametadata\u2460\u24ea"},{"id":"ref-for-mediametadata\u2460\u2460"},{"id":"ref-for-mediametadata\u2460\u2461"},{"id":"ref-for-mediametadata\u2460\u2462"},{"id":"ref-for-mediametadata\u2460\u2463"},{"id":"ref-for-mediametadata\u2460\u2464"},{"id":"ref-for-mediametadata\u2460\u2465"},{"id":"ref-for-mediametadata\u2460\u2466"},{"id":"ref-for-mediametadata\u2460\u2467"},{"id":"ref-for-mediametadata\u2460\u2468"},{"id":"ref-for-mediametadata\u2461\u24ea"},{"id":"ref-for-mediametadata\u2461\u2460"},{"id":"ref-for-mediametadata\u2461\u2461"},{"id":"ref-for-mediametadata\u2461\u2462"},{"id":"ref-for-mediametadata\u2461\u2463"},{"id":"ref-for-mediametadata\u2461\u2464"},{"id":"ref-for-mediametadata\u2461\u2465"},{"id":"ref-for-mediametadata\u2461\u2466"},{"id":"ref-for-mediametadata\u2461\u2467"},{"id":"ref-for-mediametadata\u2461\u2468"},{"id":"ref-for-mediametadata\u2462\u24ea"},{"id":"ref-for-mediametadata\u2462\u2460"},{"id":"ref-for-mediametadata\u2462\u2461"},{"id":"ref-for-mediametadata\u2462\u2462"}],"title":"6. The MediaMetadata interface"}],"url":"#mediametadata"},
 "mediametadata-album": {"dfnID":"mediametadata-album","dfnText":"album","external":false,"refSections":[{"refs":[{"id":"ref-for-mediametadata-album"},{"id":"ref-for-mediametadata-album\u2460"},{"id":"ref-for-mediametadata-album\u2461"},{"id":"ref-for-mediametadata-album\u2462"},{"id":"ref-for-mediametadata-album\u2463"}],"title":"6. The MediaMetadata interface"}],"url":"#mediametadata-album"},
 "mediametadata-artist": {"dfnID":"mediametadata-artist","dfnText":"artist","external":false,"refSections":[{"refs":[{"id":"ref-for-mediametadata-artist"},{"id":"ref-for-mediametadata-artist\u2460"},{"id":"ref-for-mediametadata-artist\u2461"},{"id":"ref-for-mediametadata-artist\u2462"},{"id":"ref-for-mediametadata-artist\u2463"}],"title":"6. The MediaMetadata interface"}],"url":"#mediametadata-artist"},
@@ -3819,6 +3829,7 @@ let refsData = {
 "#media-session-action-source": {"displayText":"media session action source","export":true,"for_":[],"level":"","normative":true,"shortname":"mediasession","spec":"mediasession","status":"local","text":"media session action source","type":"dfn","url":"#media-session-action-source"},
 "#media-session-action-source-target": {"displayText":"target","export":true,"for_":["media session action source"],"level":"","normative":true,"shortname":"mediasession","spec":"mediasession","status":"local","text":"target","type":"dfn","url":"#media-session-action-source-target"},
 "#media-session-actions-update-algorithm": {"displayText":"media session actions update algorithm","export":true,"for_":[],"level":"","normative":true,"shortname":"mediasession","spec":"mediasession","status":"local","text":"media session actions update algorithm","type":"dfn","url":"#media-session-actions-update-algorithm"},
+"#media-session-task-source": {"displayText":"media session task source","export":true,"for_":[],"level":"","normative":true,"shortname":"mediasession","spec":"mediasession","status":"local","text":"media session task source","type":"dfn","url":"#media-session-task-source"},
 "#mediametadata": {"displayText":"MediaMetadata","export":true,"for_":[],"level":"","normative":true,"shortname":"mediasession","spec":"mediasession","status":"local","text":"MediaMetadata","type":"interface","url":"#mediametadata"},
 "#mediametadata-album": {"displayText":"album","export":true,"for_":["MediaMetadata"],"level":"","normative":true,"shortname":"mediasession","spec":"mediasession","status":"local","text":"album","type":"dfn","url":"#mediametadata-album"},
 "#mediametadata-artist": {"displayText":"artist","export":true,"for_":["MediaMetadata"],"level":"","normative":true,"shortname":"mediasession","spec":"mediasession","status":"local","text":"artist","type":"dfn","url":"#mediametadata-artist"},
@@ -3872,6 +3883,7 @@ let refsData = {
 "https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global": {"displayText":"relevant global object","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"relevant global object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object": {"displayText":"entry settings object","export":true,"for_":[],"level":"","normative":true,"shortname":"html","spec":"html","status":"anchor-block","text":"entry settings object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task": {"displayText":"queue a task","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"queue a task","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task"},
+"https://html.spec.whatwg.org/multipage/webappapis.html#task-source": {"displayText":"task source","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"task source","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#task-source"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source": {"displayText":"user interaction task source","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"user interaction task source","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source"},
 "https://infra.spec.whatwg.org/#ascii-case-insensitive": {"displayText":"ASCII case-insensitive","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"ascii case-insensitive","type":"dfn","url":"https://infra.spec.whatwg.org/#ascii-case-insensitive"},
 "https://mimesniff.spec.whatwg.org/#mime-type": {"displayText":"MIME type","export":true,"for_":[],"level":"1","normative":true,"shortname":"mimesniff","spec":"mimesniff","status":"current","text":"mime type","type":"dfn","url":"https://mimesniff.spec.whatwg.org/#mime-type"},
