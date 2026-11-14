@@ -290,13 +290,16 @@ platform UI or media keys, thereby improving the user experience.
         existing algorithm execution instances.
       </li>
       <li>
-        If <var>metadata</var>'s {{MediaMetadata/artwork}} of the <a>active
-        media session</a> is empty, then terminate these steps.
+        Let <var>metadata</var> be the {{MediaSession/metadata}} of the
+        <a>active media session</a>.
       </li>
       <li>
-        If the platform supports displaying media artwork, select a
-        <dfn>preferred artwork image</dfn> from <var>metadata</var>'s
-        {{MediaMetadata/artwork}} of the <a>active media session</a>.
+        If <var>metadata</var>'s [=MediaMetadata/artwork images=] is empty or the
+        platform does not support displaying media artwork, then terminate these steps.
+      </li>
+      <li>
+        Select a <dfn>preferred artwork image</dfn> from <var>metadata</var>'s
+        [=MediaMetadata/artwork images=].
       </li>
       <li>Let <var>request</var> be a new [=request=] whose [=request/URL=] is the
         <a>preferred artwork image</a>'s {{MediaImage/src}}, [=request/destination=]
