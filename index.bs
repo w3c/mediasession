@@ -165,6 +165,11 @@ platform UI or media keys, thereby improving the user experience.
 <section>
   <h2 id='model'>Model</h2>
 
+  <p>
+    This specification defines a new [=task source=], the
+    <dfn>media session task source</dfn>.
+  </p>
+
   <section>
     <h3 id='playback-state-model'>Playback State</h3>
 
@@ -460,9 +465,10 @@ platform UI or media keys, thereby improving the user experience.
     <p>
       When the <a>supported media session actions</a> are changed, the user
       agent SHOULD run the <a>media session actions update algorithm</a>. The
-      user agent MAY <a>queue a task</a> in order to run the <a>media session
-      actions update algorithm</a> in order to avoid UI flickering when multiple
-      actions are modified in the same event loop.
+      user agent MAY <a>queue a task</a>, using the <a>media session task
+      source</a>, to run the <a>media session actions update algorithm</a>.
+      This avoids UI flickering when a page modifies multiple actions in the
+      same event loop.
     </p>
 
     <p>
@@ -1331,7 +1337,8 @@ user agent MUST run the following steps:
     these steps.
   </li>
   <li>
-    Otherwise, <a>queue a task</a> to run the following substeps:
+    Otherwise, <a>queue a task</a>, using the <a>media session task
+    source</a>, to run the following substeps:
     <ol>
       <li>
         If the instance no longer has an associated <a for=MediaMetadata>media
