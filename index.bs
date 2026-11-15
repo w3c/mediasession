@@ -1414,14 +1414,14 @@ dictionary ChapterInformationInit {
     [=duration=], throw a <a exception>TypeError</a>.
   </li>
   <li>
-    Let {{ChapterInformationInit/artwork}} be the result of running the
+    Let <var>artwork</var> be the result of running the
     <a>convert artwork algorithm</a> with <var>init</var>'s
-    {{ChapterInformation/artwork}} as <var>input</var>.
+    {{ChapterInformationInit/artwork}} as <var>input</var>.
   </li>
   <li>
     Set <var>chapterInfo</var>'s <a for="ChapterInformation">artwork
     images</a> to the result of [=Create a frozen array|creating a frozen
-    array=] from {{ChapterInformationInit/artwork}}.
+    array=] from <var>artwork</var>.
   </li>
   <li>
     Return <var>chapterInfo</var>.
