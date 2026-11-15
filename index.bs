@@ -625,31 +625,35 @@ platform UI or media keys, thereby improving the user experience.
         following substeps:
         <ol>
           <li>
+            Let <var>source actions</var> be a copy of <var>available
+            actions</var>.
+          </li>
+          <li>
             Optionally, if the <a>active media session</a> is not null:
             <ol>
               <li>
                 If the <a>active media session</a>'s <a>actual playback
                 state</a> is <a enum-value
                 for="MediaSessionPlaybackState">playing</a>, remove <a
-                enum-value for=MediaSessionAction>play</a> from <var>available
+                enum-value for=MediaSessionAction>play</a> from <var>source
                 actions</var>.
               </li>
               <li>
                 Otherwise, remove <a enum-value
-                for=MediaSessionAction>pause</a> from <var>available
+                for=MediaSessionAction>pause</a> from <var>source
                 actions</var>.
               </li>
             </ol>
           </li>
           <li>
             If the <var>source</var> is a UI element created by the user
-            agent, it MAY remove some elements from <var>available
+            agent, it MAY remove some elements from <var>source
             actions</var> if there are too many of them compared to the
             available space.
           </li>
           <li>
             Notify the <var>source</var> with the updated list of
-            <var>available actions</var>.
+            <var>source actions</var>.
           </li>
         </ol>
       </li>
